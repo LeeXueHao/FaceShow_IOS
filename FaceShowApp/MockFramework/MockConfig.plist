@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>maxTimeUse</key>
+	<integer>2</integer>
+	<key>data</key>
+	<dict>
+		<key>YXExamineRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<false/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>examine_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>

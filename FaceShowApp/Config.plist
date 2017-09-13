@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>mockFrameworkOn</key>
+	<false/>
+	<key>testFrameworkOn</key>
+	<false/>
+	<key>TalkingDataAppID</key>
+	<string>85F5F0D491AE4C4F8E9CC6D091AA8077</string>
+	<key>channel</key>
+	<string>app store</string>
+	<key>YXSSOAuthQQAppid</key>
+	<string>1106015819</string>
+	<key>YXSSOAuthQQAppKey</key>
+	<string>p4pTGalltl9VvQLg</string>
+	<key>YXSSOAuthWeixinAppid</key>
+	<string>wx36496f73c0124b9d</string>
+	<key>YXSSOAuthWeixinAppSecret</key>
+	<string>25b8ae1389e53089c150c51d95fb35bf</string>
+</dict>
+</plist>

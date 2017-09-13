@@ -1,0 +1,7 @@
+{
+    "server":"http://mobile.yanxiu.com/test/api/"
+    "serverList" :{
+        "server":"http://mobile.yanxiu.com/v20/api/",
+        "testServer":"http://u.yanxiu.com/"
+    }
+}
