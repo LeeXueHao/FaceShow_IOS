@@ -232,6 +232,11 @@
 		7C2519B61F690ECB0001B577 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		7C2519B71F690ECB0001B577 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
+		7CBDAB861F6926260096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
+		7CBDAB881F6926310096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
+		7CBDAB8A1F69263A0096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
+		7CBDAB8C1F6926430096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
+		7CBDAB8E1F6926490096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -593,6 +598,11 @@
 		7C25197F1F68FE900001B577 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				7CBDAB851F6925C30096C4BA /* 日程 */,
+				7CBDAB841F6925C00096C4BA /* 课程 */,
+				7CBDAB831F6925BC0096C4BA /* 资源 */,
+				7CBDAB821F6925B90096C4BA /* 考勤 */,
+				7CBDAB811F6925B50096C4BA /* 扫一扫 */,
 				7C2519AD1F690DA00001B577 /* MainPageViewController.h */,
 				7C2519AE1F690DA00001B577 /* MainPageViewController.m */,
 			);
@@ -648,6 +658,46 @@
 				7C2519AB1F690D860001B577 /* LoginViewController.m */,
 			);
 			path = "登录注册";
+			sourceTree = "<group>";
+		};
+		7CBDAB811F6925B50096C4BA /* 扫一扫 */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDAB8E1F6926490096C4BA /* readme.txt */,
+			);
+			name = "扫一扫";
+			sourceTree = "<group>";
+		};
+		7CBDAB821F6925B90096C4BA /* 考勤 */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDAB8C1F6926430096C4BA /* readme.txt */,
+			);
+			name = "考勤";
+			sourceTree = "<group>";
+		};
+		7CBDAB831F6925BC0096C4BA /* 资源 */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDAB8A1F69263A0096C4BA /* readme.txt */,
+			);
+			name = "资源";
+			sourceTree = "<group>";
+		};
+		7CBDAB841F6925C00096C4BA /* 课程 */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDAB881F6926310096C4BA /* readme.txt */,
+			);
+			name = "课程";
+			sourceTree = "<group>";
+		};
+		7CBDAB851F6925C30096C4BA /* 日程 */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDAB861F6926260096C4BA /* readme.txt */,
+			);
+			name = "日程";
 			sourceTree = "<group>";
 		};
 		D8DFE831E489B0079C8DCD93 /* Pods */ = {
