@@ -7,9 +7,17 @@
 //
 
 #import "MainPageViewController.h"
+#import "QuestionnaireViewController.h"
+#import "MainPageTabContainerView.h"
+#import "RefreshDelegate.h"
+#import "CourseListViewController.h"
+#import "ResourceListViewController.h"
+#import "ScheduleViewController.h"
+#import "TaskListViewController.h"
 
 @interface MainPageViewController ()
-
+@property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
+@property (nonatomic, strong) UIView *tabContentView;
 @end
 
 @implementation MainPageViewController
@@ -26,42 +34,44 @@
 }
 
 - (void)setupUI {
-    UIButton *b1 = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 100, 50)];
-    [b1 setTitle:@"button1" forState:UIControlStateNormal];
-    [b1 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [b1 addTarget:self action:@selector(btn1Action) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:b1];
-    
-    UIButton *b2 = [[UIButton alloc]initWithFrame:CGRectMake(10, 100, 100, 50)];
-    [b2 setTitle:@"button2" forState:UIControlStateNormal];
-    [b2 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [b2 addTarget:self action:@selector(btn2Action) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:b2];
-    
-    UIButton *b3 = [[UIButton alloc]initWithFrame:CGRectMake(10, 200, 100, 50)];
-    [b3 setTitle:@"button3" forState:UIControlStateNormal];
-    [b3 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [b3 addTarget:self action:@selector(btn3Action) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:b3];
-    
-    UIButton *b4 = [[UIButton alloc]initWithFrame:CGRectMake(10, 300, 100, 50)];
-    [b4 setTitle:@"button4" forState:UIControlStateNormal];
-    [b4 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [b4 addTarget:self action:@selector(btn4Action) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:b4];
+    MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
+    tabContainerView.tabNameArray = @[@"课程",@"资源",@"任务",@"日程"];
+    WEAK_SELF
+    [tabContainerView setTabClickBlock:^(NSInteger index){
+        STRONG_SELF
+        [self switchToVCWithIndex:index];
+    }];
+    [self.view addSubview:tabContainerView];
+    [tabContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(100);
+        make.height.mas_equalTo(40);
+    }];
+    self.tabControllers = [NSMutableArray array];
+    [self.tabControllers addObject:[[CourseListViewController alloc]init]];
+    [self.tabControllers addObject:[[ResourceListViewController alloc]init]];
+    [self.tabControllers addObject:[[TaskListViewController alloc]init]];
+    [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
+    self.tabContentView = [[UIView alloc]init];
+    [self.view addSubview:self.tabContentView];
+    [self.tabContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
+        make.top.mas_equalTo(tabContainerView.mas_bottom);
+    }];
+    [self switchToVCWithIndex:0];
 }
 
-- (void)btn1Action {
-    
+- (void)switchToVCWithIndex:(NSInteger)index {
+    for (UIView *v in self.tabContentView.subviews) {
+        [v removeFromSuperview];
+    }
+    UIView *v = self.tabControllers[index].view;
+    [self.tabContentView addSubview:v];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    SAFE_CALL(self.tabControllers[index], refreshUI);
 }
-- (void)btn2Action {
-    
-}
-- (void)btn3Action {
-    
-}
-- (void)btn4Action {
-    
-}
+
 
 @end

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
+		7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */; };
+		7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */; };
+		7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB71F6A51A70007AE01 /* FillQuestionCell.m */; };
+		7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DBB1F6A55D70007AE01 /* OptionItemResultView.m */; };
+		7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */; };
+		7C212DC41F6A5CF60007AE01 /* CourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DC31F6A5CF60007AE01 /* CourseListViewController.m */; };
+		7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DC61F6A5D120007AE01 /* ResourceListViewController.m */; };
+		7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */; };
+		7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DCD1F6A60900007AE01 /* MainPageTabContainerView.m */; };
 		7C2518AC1F68E5C70001B577 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AB1F68E5C70001B577 /* main.m */; };
 		7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AE1F68E5C70001B577 /* AppDelegate.m */; };
 		7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518B61F68E5C70001B577 /* Assets.xcassets */; };
@@ -86,7 +96,28 @@
 
 /* Begin PBXFileReference section */
 		153ADFB41C9D1B40A643F8B3 /* Pods-FaceShowApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.release.xcconfig"; sourceTree = "<group>"; };
-		7C2518A71F68E5C70001B577 /* 师训通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "师训通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C212DAD1F6A0D740007AE01 /* OptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemView.h; sourceTree = "<group>"; };
+		7C212DAE1F6A0D740007AE01 /* OptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemView.m; sourceTree = "<group>"; };
+		7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionCell.h; sourceTree = "<group>"; };
+		7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseQuestionCell.m; sourceTree = "<group>"; };
+		7C212DB31F6A1DD90007AE01 /* QuestionnaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionnaireViewController.h; sourceTree = "<group>"; };
+		7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionnaireViewController.m; sourceTree = "<group>"; };
+		7C212DB61F6A51A70007AE01 /* FillQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FillQuestionCell.h; sourceTree = "<group>"; };
+		7C212DB71F6A51A70007AE01 /* FillQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FillQuestionCell.m; sourceTree = "<group>"; };
+		7C212DBA1F6A55D70007AE01 /* OptionItemResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemResultView.h; sourceTree = "<group>"; };
+		7C212DBB1F6A55D70007AE01 /* OptionItemResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemResultView.m; sourceTree = "<group>"; };
+		7C212DBF1F6A599A0007AE01 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		7C212DC21F6A5CF60007AE01 /* CourseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseListViewController.h; sourceTree = "<group>"; };
+		7C212DC31F6A5CF60007AE01 /* CourseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseListViewController.m; sourceTree = "<group>"; };
+		7C212DC51F6A5D120007AE01 /* ResourceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceListViewController.h; sourceTree = "<group>"; };
+		7C212DC61F6A5D120007AE01 /* ResourceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceListViewController.m; sourceTree = "<group>"; };
+		7C212DC81F6A5D5A0007AE01 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
+		7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
+		7C212DCB1F6A5E020007AE01 /* RefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshDelegate.h; sourceTree = "<group>"; };
+		7C212DCC1F6A60900007AE01 /* MainPageTabContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageTabContainerView.h; sourceTree = "<group>"; };
+		7C212DCD1F6A60900007AE01 /* MainPageTabContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageTabContainerView.m; sourceTree = "<group>"; };
+		7C2518A71F68E5C70001B577 /* 培训通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "培训通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C2518AE1F68E5C70001B577 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -232,10 +263,6 @@
 		7C2519B61F690ECB0001B577 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		7C2519B71F690ECB0001B577 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
-		7CBDAB861F6926260096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
-		7CBDAB881F6926310096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
-		7CBDAB8A1F69263A0096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
-		7CBDAB8C1F6926430096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
 		7CBDAB8E1F6926490096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +280,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C212DB91F6A544C0007AE01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C212DBE1F6A58BE0007AE01 /* 问卷结果 */,
+				7C212DBD1F6A58B40007AE01 /* 问卷 */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7C212DBD1F6A58B40007AE01 /* 问卷 */ = {
+			isa = PBXGroup;
+			children = (
+				7C212DAD1F6A0D740007AE01 /* OptionItemView.h */,
+				7C212DAE1F6A0D740007AE01 /* OptionItemView.m */,
+				7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */,
+				7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */,
+				7C212DB61F6A51A70007AE01 /* FillQuestionCell.h */,
+				7C212DB71F6A51A70007AE01 /* FillQuestionCell.m */,
+			);
+			name = "问卷";
+			sourceTree = "<group>";
+		};
+		7C212DBE1F6A58BE0007AE01 /* 问卷结果 */ = {
+			isa = PBXGroup;
+			children = (
+				7C212DBA1F6A55D70007AE01 /* OptionItemResultView.h */,
+				7C212DBB1F6A55D70007AE01 /* OptionItemResultView.m */,
+			);
+			name = "问卷结果";
+			sourceTree = "<group>";
+		};
 		7C25189E1F68E5C70001B577 = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +325,7 @@
 		7C2518A81F68E5C70001B577 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C2518A71F68E5C70001B577 /* 师训通.app */,
+				7C2518A71F68E5C70001B577 /* 培训通.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -601,10 +659,13 @@
 				7CBDAB851F6925C30096C4BA /* 日程 */,
 				7CBDAB841F6925C00096C4BA /* 课程 */,
 				7CBDAB831F6925BC0096C4BA /* 资源 */,
-				7CBDAB821F6925B90096C4BA /* 考勤 */,
+				7CBDAB821F6925B90096C4BA /* 任务 */,
 				7CBDAB811F6925B50096C4BA /* 扫一扫 */,
 				7C2519AD1F690DA00001B577 /* MainPageViewController.h */,
 				7C2519AE1F690DA00001B577 /* MainPageViewController.m */,
+				7C212DCC1F6A60900007AE01 /* MainPageTabContainerView.h */,
+				7C212DCD1F6A60900007AE01 /* MainPageTabContainerView.m */,
+				7C212DCB1F6A5E020007AE01 /* RefreshDelegate.h */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -668,18 +729,20 @@
 			name = "扫一扫";
 			sourceTree = "<group>";
 		};
-		7CBDAB821F6925B90096C4BA /* 考勤 */ = {
+		7CBDAB821F6925B90096C4BA /* 任务 */ = {
 			isa = PBXGroup;
 			children = (
-				7CBDAB8C1F6926430096C4BA /* readme.txt */,
+				7C212DC81F6A5D5A0007AE01 /* TaskListViewController.h */,
+				7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */,
 			);
-			name = "考勤";
+			name = "任务";
 			sourceTree = "<group>";
 		};
 		7CBDAB831F6925BC0096C4BA /* 资源 */ = {
 			isa = PBXGroup;
 			children = (
-				7CBDAB8A1F69263A0096C4BA /* readme.txt */,
+				7C212DC51F6A5D120007AE01 /* ResourceListViewController.h */,
+				7C212DC61F6A5D120007AE01 /* ResourceListViewController.m */,
 			);
 			name = "资源";
 			sourceTree = "<group>";
@@ -687,7 +750,11 @@
 		7CBDAB841F6925C00096C4BA /* 课程 */ = {
 			isa = PBXGroup;
 			children = (
-				7CBDAB881F6926310096C4BA /* readme.txt */,
+				7C212DB91F6A544C0007AE01 /* View */,
+				7C212DC21F6A5CF60007AE01 /* CourseListViewController.h */,
+				7C212DC31F6A5CF60007AE01 /* CourseListViewController.m */,
+				7C212DB31F6A1DD90007AE01 /* QuestionnaireViewController.h */,
+				7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */,
 			);
 			name = "课程";
 			sourceTree = "<group>";
@@ -695,7 +762,8 @@
 		7CBDAB851F6925C30096C4BA /* 日程 */ = {
 			isa = PBXGroup;
 			children = (
-				7CBDAB861F6926260096C4BA /* readme.txt */,
+				7C212DBF1F6A599A0007AE01 /* ScheduleViewController.h */,
+				7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */,
 			);
 			name = "日程";
 			sourceTree = "<group>";
@@ -737,7 +805,7 @@
 			);
 			name = FaceShowApp;
 			productName = FaceShowApp;
-			productReference = 7C2518A71F68E5C70001B577 /* 师训通.app */;
+			productReference = 7C2518A71F68E5C70001B577 /* 培训通.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -847,6 +915,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */,
 				7C2519AF1F690DA00001B577 /* MainPageViewController.m in Sources */,
 				7C2519421F68EB780001B577 /* CollectionViewEqualSpaceFlowLayout.m in Sources */,
 				7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */,
@@ -859,8 +928,12 @@
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
+				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
+				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
+				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
+				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
@@ -876,6 +949,7 @@
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
+				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
 				7C25199F1F69066F0001B577 /* ScrollBaseViewController.m in Sources */,
 				7C2518EB1F68E68D0001B577 /* UIImage+FixOrientation.m in Sources */,
 				7C2518E81F68E68D0001B577 /* UIButton+ExpandHitArea.m in Sources */,
@@ -889,6 +963,8 @@
 				7C2519A51F690C840001B577 /* AppDelegateHelper.m in Sources */,
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				7C25195E1F68EBA90001B577 /* HttpBaseRequestItem_info.m in Sources */,
+				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
+				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
@@ -899,6 +975,7 @@
 				7C2519AC1F690D860001B577 /* LoginViewController.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
+				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
 				7C2519731F68EBCD0001B577 /* UserModel.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
@@ -910,6 +987,7 @@
 				7C2518AC1F68E5C70001B577 /* main.m in Sources */,
 				7C2519621F68EBA90001B577 /* YXPostRequest.m in Sources */,
 				7C2519861F68FF980001B577 /* ErrorView.m in Sources */,
+				7C212DC41F6A5CF60007AE01 /* CourseListViewController.m in Sources */,
 				7C2519161F68EA8A0001B577 /* FileLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1020,7 +1098,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.FaceShowApp;
-				PRODUCT_NAME = "师训通";
+				PRODUCT_NAME = "培训通";
 				PROVISIONING_PROFILE = "3c92e3d0-8cbe-406f-aefe-875c52a73e06";
 				PROVISIONING_PROFILE_SPECIFIER = DevAll;
 			};
@@ -1037,7 +1115,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yanxiu.FaceShowApp;
-				PRODUCT_NAME = "师训通";
+				PRODUCT_NAME = "培训通";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
