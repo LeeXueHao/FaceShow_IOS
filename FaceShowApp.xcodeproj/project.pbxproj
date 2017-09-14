@@ -17,6 +17,8 @@
 		7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DC61F6A5D120007AE01 /* ResourceListViewController.m */; };
 		7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */; };
 		7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DCD1F6A60900007AE01 /* MainPageTabContainerView.m */; };
+		7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DD01F6A75500007AE01 /* ChooseQuestionResultCell.m */; };
+		7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DD31F6A78850007AE01 /* QuestionnaireResultViewController.m */; };
 		7C2518AC1F68E5C70001B577 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AB1F68E5C70001B577 /* main.m */; };
 		7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AE1F68E5C70001B577 /* AppDelegate.m */; };
 		7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518B61F68E5C70001B577 /* Assets.xcassets */; };
@@ -117,6 +119,10 @@
 		7C212DCB1F6A5E020007AE01 /* RefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshDelegate.h; sourceTree = "<group>"; };
 		7C212DCC1F6A60900007AE01 /* MainPageTabContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageTabContainerView.h; sourceTree = "<group>"; };
 		7C212DCD1F6A60900007AE01 /* MainPageTabContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageTabContainerView.m; sourceTree = "<group>"; };
+		7C212DCF1F6A75500007AE01 /* ChooseQuestionResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionResultCell.h; sourceTree = "<group>"; };
+		7C212DD01F6A75500007AE01 /* ChooseQuestionResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseQuestionResultCell.m; sourceTree = "<group>"; };
+		7C212DD21F6A78850007AE01 /* QuestionnaireResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionnaireResultViewController.h; sourceTree = "<group>"; };
+		7C212DD31F6A78850007AE01 /* QuestionnaireResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionnaireResultViewController.m; sourceTree = "<group>"; };
 		7C2518A71F68E5C70001B577 /* 培训通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "培训通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -307,6 +313,8 @@
 			children = (
 				7C212DBA1F6A55D70007AE01 /* OptionItemResultView.h */,
 				7C212DBB1F6A55D70007AE01 /* OptionItemResultView.m */,
+				7C212DCF1F6A75500007AE01 /* ChooseQuestionResultCell.h */,
+				7C212DD01F6A75500007AE01 /* ChooseQuestionResultCell.m */,
 			);
 			name = "问卷结果";
 			sourceTree = "<group>";
@@ -755,6 +763,8 @@
 				7C212DC31F6A5CF60007AE01 /* CourseListViewController.m */,
 				7C212DB31F6A1DD90007AE01 /* QuestionnaireViewController.h */,
 				7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */,
+				7C212DD21F6A78850007AE01 /* QuestionnaireResultViewController.h */,
+				7C212DD31F6A78850007AE01 /* QuestionnaireResultViewController.m */,
 			);
 			name = "课程";
 			sourceTree = "<group>";
@@ -926,6 +936,7 @@
 				7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */,
 				7C2519111F68EA820001B577 /* GlobalUtils.m in Sources */,
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
+				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
@@ -981,6 +992,7 @@
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
 				7C25190A1F68E90C0001B577 /* YXTestViewController.m in Sources */,
+				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,

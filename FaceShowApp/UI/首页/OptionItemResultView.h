@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OptionItemResultView : UIView
+@interface OptionResult : NSObject
+@property (nonatomic, strong) NSString *option;
+@property (nonatomic, assign) CGFloat rate;
+@end
 
+@interface OptionItemResultView : UIView
+@property (nonatomic, strong) OptionResult *option;
 @end

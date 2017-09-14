@@ -7,17 +7,21 @@
 //
 
 #import "YXTestViewController.h"
+#import "QuestionnaireResultViewController.h"
 
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[];
+    self.devTestActions = @[@"问卷结果"];
     [super viewDidLoad];
 }
 
-
+- (void)问卷结果 {
+    QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
 
