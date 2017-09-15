@@ -63,7 +63,11 @@
 
 - (void)setOption:(NSString *)option {
     _option = option;
-    self.optionLabel.text = option;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:option attributes:dic];
+    self.optionLabel.attributedText = attributeStr;
 }
 
 @end

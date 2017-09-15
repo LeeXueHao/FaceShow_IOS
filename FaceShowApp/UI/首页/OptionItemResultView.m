@@ -57,7 +57,11 @@
 
 - (void)setOption:(OptionResult *)option {
     _option = option;
-    self.optionLabel.text = option.option;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:option.option attributes:dic];
+    self.optionLabel.attributedText = attributeStr;
     [self.resultView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.mas_equalTo(0);
         make.width.mas_equalTo(self.resultContainerView.mas_width).multipliedBy(option.rate);

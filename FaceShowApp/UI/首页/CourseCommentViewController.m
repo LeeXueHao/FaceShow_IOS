@@ -23,7 +23,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)firstPageFetch{
+    [self.view nyx_stopLoading];
+}
 /*
 #pragma mark - Navigation
 

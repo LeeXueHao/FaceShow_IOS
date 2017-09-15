@@ -8,6 +8,7 @@
 
 #import "MainPageViewController.h"
 #import "QuestionnaireViewController.h"
+#import "MainPageTopView.h"
 #import "MainPageTabContainerView.h"
 #import "RefreshDelegate.h"
 #import "CourseListViewController.h"
@@ -34,6 +35,11 @@
 }
 
 - (void)setupUI {
+    MainPageTopView *topView = [[MainPageTopView alloc]init];
+    [self.view addSubview:topView];
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+    }];
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     tabContainerView.tabNameArray = @[@"课程",@"资源",@"任务",@"日程"];
     WEAK_SELF
@@ -44,7 +50,7 @@
     [self.view addSubview:tabContainerView];
     [tabContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(100);
+        make.top.mas_equalTo(topView.mas_bottom);
         make.height.mas_equalTo(40);
     }];
     self.tabControllers = [NSMutableArray array];
