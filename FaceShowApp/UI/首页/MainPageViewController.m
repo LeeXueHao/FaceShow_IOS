@@ -52,6 +52,9 @@
     [self.tabControllers addObject:[[ResourceListViewController alloc]init]];
     [self.tabControllers addObject:[[TaskListViewController alloc]init]];
     [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
+    for (UIViewController *vc in self.tabControllers) {
+        [self addChildViewController:vc];
+    }
     self.tabContentView = [[UIView alloc]init];
     [self.view addSubview:self.tabContentView];
     [self.tabContentView mas_makeConstraints:^(MASConstraintMaker *make) {
