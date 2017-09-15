@@ -103,6 +103,14 @@
 		7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B41F690EB50001B577 /* ClassMomentViewController.m */; };
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
+		9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */; };
+		9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */; };
+		9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */; };
+		9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6FE1F6A7613004A1E2B /* CircleSpreadTransition.m */; };
+		9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A7011F6A8467004A1E2B /* PhotosScrollView.m */; };
+		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
+		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
+		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
 		9AE85F0606083656987F93EB /* libPods-FaceShowApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */; };
 /* End PBXBuildFile section */
 
@@ -301,6 +309,22 @@
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
 		7CBDAB8E1F6926490096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9279A6E71F6A5754004A1E2B /* ClassMomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentCell.h; sourceTree = "<group>"; };
+		9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentCell.m; sourceTree = "<group>"; };
+		9279A6EA1F6A5771004A1E2B /* ClassMomentTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentTableHeaderView.h; sourceTree = "<group>"; };
+		9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentTableHeaderView.m; sourceTree = "<group>"; };
+		9279A6ED1F6A578E004A1E2B /* ClassMomentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentHeaderView.h; sourceTree = "<group>"; };
+		9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentHeaderView.m; sourceTree = "<group>"; };
+		9279A6FD1F6A7613004A1E2B /* CircleSpreadTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSpreadTransition.h; sourceTree = "<group>"; };
+		9279A6FE1F6A7613004A1E2B /* CircleSpreadTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSpreadTransition.m; sourceTree = "<group>"; };
+		9279A7001F6A8467004A1E2B /* PhotosScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosScrollView.h; sourceTree = "<group>"; };
+		9279A7011F6A8467004A1E2B /* PhotosScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosScrollView.m; sourceTree = "<group>"; };
+		92A7CAC91F6A84FC0038D6D1 /* PreviewPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPhotosView.h; sourceTree = "<group>"; };
+		92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPhotosView.m; sourceTree = "<group>"; };
+		92A7CACB1F6A84FC0038D6D1 /* ShowPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPhotosViewController.h; sourceTree = "<group>"; };
+		92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPhotosViewController.m; sourceTree = "<group>"; };
+		92A7CACD1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TemplateLayoutHeaderView.h"; sourceTree = "<group>"; };
+		92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TemplateLayoutHeaderView.m"; sourceTree = "<group>"; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -711,6 +735,7 @@
 		7C25197E1F68FE900001B577 /* 班级圈 */ = {
 			isa = PBXGroup;
 			children = (
+				9279A6E31F6A53B5004A1E2B /* view */,
 				7C2519B31F690EB50001B577 /* ClassMomentViewController.h */,
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
 			);
@@ -842,6 +867,37 @@
 				7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */,
 			);
 			name = "日程";
+			sourceTree = "<group>";
+		};
+		9279A6E31F6A53B5004A1E2B /* view */ = {
+			isa = PBXGroup;
+			children = (
+				9279A6F31F6A57D4004A1E2B /* 看看图片 */,
+				9279A6EA1F6A5771004A1E2B /* ClassMomentTableHeaderView.h */,
+				9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */,
+				9279A6E71F6A5754004A1E2B /* ClassMomentCell.h */,
+				9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */,
+				9279A6ED1F6A578E004A1E2B /* ClassMomentHeaderView.h */,
+				9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		9279A6F31F6A57D4004A1E2B /* 看看图片 */ = {
+			isa = PBXGroup;
+			children = (
+				92A7CAC91F6A84FC0038D6D1 /* PreviewPhotosView.h */,
+				92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */,
+				92A7CACB1F6A84FC0038D6D1 /* ShowPhotosViewController.h */,
+				92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */,
+				92A7CACD1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.h */,
+				92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */,
+				9279A7001F6A8467004A1E2B /* PhotosScrollView.h */,
+				9279A7011F6A8467004A1E2B /* PhotosScrollView.m */,
+				9279A6FD1F6A7613004A1E2B /* CircleSpreadTransition.h */,
+				9279A6FE1F6A7613004A1E2B /* CircleSpreadTransition.m */,
+			);
+			name = "看看图片";
 			sourceTree = "<group>";
 		};
 		D8DFE831E489B0079C8DCD93 /* Pods */ = {
@@ -1015,6 +1071,7 @@
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
 				7C212DDD1F6B69010007AE01 /* ResourceDisplayViewController.m in Sources */,
+				9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */,
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
@@ -1029,6 +1086,7 @@
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
+				9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */,
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
 				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
@@ -1039,8 +1097,12 @@
 				7C2518ED1F68E68D0001B577 /* UIImage+YXResize.m in Sources */,
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
+				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
+				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
+				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
+				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,
 				7C25198C1F69003A0001B577 /* SimpleAlertButton.m in Sources */,
@@ -1053,6 +1115,7 @@
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
+				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
 				7C2518E61F68E68D0001B577 /* NSObject+YXNetworkMethod.m in Sources */,
@@ -1064,6 +1127,7 @@
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
+				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,
 				7C2519731F68EBCD0001B577 /* UserModel.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,

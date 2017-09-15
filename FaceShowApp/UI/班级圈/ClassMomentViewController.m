@@ -7,31 +7,76 @@
 //
 
 #import "ClassMomentViewController.h"
-
-@interface ClassMomentViewController ()
-
+#import "UITableView+TemplateLayoutHeaderView.h"
+#import "ClassMomentHeaderView.h"
+@interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @end
 
 @implementation ClassMomentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.dataArray addObject:@"2"];
+    [self.dataArray addObject:@"0"];
+    [self.dataArray addObject:@"1"];
+    [self.dataArray addObject:@"3"];
+    [self.dataArray addObject:@"5"];
+    [self.dataArray addObject:@"7"];
+    [self.dataArray addObject:@"9"];
+    [self.dataArray addObject:@"2"];
+    [self.dataArray addObject:@"4"];
+    [self.dataArray addObject:@"6"];
+    [self.dataArray addObject:@"8"];
+//    [self.dataArray addObject:@"1"];
+//    [self.dataArray addObject:@"1"];
+//    [self.dataArray addObject:@"3"];
+//    [self.dataArray addObject:@"5"];
+//    [self.dataArray addObject:@"7"];
+//    [self.dataArray addObject:@"9"];
+//    [self.dataArray addObject:@"2"];
+//    [self.dataArray addObject:@"4"];
+//    [self.dataArray addObject:@"6"];
+//    [self.dataArray addObject:@"8"];
+//    [self.dataArray addObject:@"1"];
+    [self setupUI];
+
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - setupUI
+- (void)setupUI {
+    [self.view nyx_stopLoading];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"dfe2e6"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[ClassMomentHeaderView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentHeaderView"];
+    
 }
-*/
-
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.dataArray.count;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+#pragma mark - UITableViewDelegate
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    ClassMomentHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentHeaderView"];
+    headerView.testInteger = [self.dataArray[section] integerValue];
+    return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return [tableView yx_heightForHeaderWithIdentifier:@"ClassMomentHeaderView" configuration:^(ClassMomentHeaderView *headerView) {
+        headerView.testInteger = [self.dataArray[section] integerValue];
+    }];
+}
 @end
