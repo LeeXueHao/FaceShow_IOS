@@ -103,6 +103,15 @@
 		7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B41F690EB50001B577 /* ClassMomentViewController.m */; };
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
+		9220840D1F6BA8CE00F8AAC6 /* PostMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PostMomentViewController.m */; };
+		9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */; };
+		9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */; };
+		922084201F6BBEB800F8AAC6 /* MineTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841F1F6BBEB800F8AAC6 /* MineTableFooterView.m */; };
+		922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084221F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m */; };
+		922084261F6BC47600F8AAC6 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084251F6BC47600F8AAC6 /* UserInfoViewController.m */; };
+		922084291F6BC4D200F8AAC6 /* UserInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084281F6BC4D200F8AAC6 /* UserInfoHeaderCell.m */; };
+		9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */; };
+		922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */; };
 		9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */; };
 		9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */; };
 		9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */; };
@@ -309,6 +318,24 @@
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
 		7CBDAB8E1F6926490096C4BA /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.txt; path = ../../../../../../Desktop/readme.txt; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9220840B1F6BA8CE00F8AAC6 /* PostMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMomentViewController.h; sourceTree = "<group>"; };
+		9220840C1F6BA8CE00F8AAC6 /* PostMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMomentViewController.m; sourceTree = "<group>"; };
+		922084181F6BB8D200F8AAC6 /* MineUserHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserHeaderCell.h; sourceTree = "<group>"; };
+		922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineUserHeaderCell.m; sourceTree = "<group>"; };
+		9220841B1F6BB91400F8AAC6 /* MineDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineDefaultCell.h; sourceTree = "<group>"; };
+		9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineDefaultCell.m; sourceTree = "<group>"; };
+		9220841E1F6BBEB800F8AAC6 /* MineTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableFooterView.h; sourceTree = "<group>"; };
+		9220841F1F6BBEB800F8AAC6 /* MineTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTableFooterView.m; sourceTree = "<group>"; };
+		922084211F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDefaultHeaderFooterView.h; sourceTree = "<group>"; };
+		922084221F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDefaultHeaderFooterView.m; sourceTree = "<group>"; };
+		922084241F6BC47600F8AAC6 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		922084251F6BC47600F8AAC6 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		922084271F6BC4D200F8AAC6 /* UserInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoHeaderCell.h; sourceTree = "<group>"; };
+		922084281F6BC4D200F8AAC6 /* UserInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeaderCell.m; sourceTree = "<group>"; };
+		9220842A1F6BC4F000F8AAC6 /* UserInfoDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoDefaultCell.h; sourceTree = "<group>"; };
+		9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDefaultCell.m; sourceTree = "<group>"; };
+		922084361F6BCE6500F8AAC6 /* YXImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXImagePickerController.h; sourceTree = "<group>"; };
+		922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXImagePickerController.m; sourceTree = "<group>"; };
 		9279A6E71F6A5754004A1E2B /* ClassMomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentCell.h; sourceTree = "<group>"; };
 		9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentCell.m; sourceTree = "<group>"; };
 		9279A6EA1F6A5771004A1E2B /* ClassMomentTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentTableHeaderView.h; sourceTree = "<group>"; };
@@ -582,6 +609,8 @@
 		7C2519371F68EB780001B577 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				922084361F6BCE6500F8AAC6 /* YXImagePickerController.h */,
+				922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */,
 				7C2519381F68EB780001B577 /* CollectionViewEqualSpaceFlowLayout.h */,
 				7C2519391F68EB780001B577 /* CollectionViewEqualSpaceFlowLayout.m */,
 				7C25193A1F68EB780001B577 /* ExtendTextField.h */,
@@ -699,8 +728,11 @@
 		7C2519791F68FE900001B577 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				9220840E1F6BB6A700F8AAC6 /* view */,
 				7C2519B61F690ECB0001B577 /* MineViewController.h */,
 				7C2519B71F690ECB0001B577 /* MineViewController.m */,
+				922084241F6BC47600F8AAC6 /* UserInfoViewController.h */,
+				922084251F6BC47600F8AAC6 /* UserInfoViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -738,6 +770,8 @@
 				9279A6E31F6A53B5004A1E2B /* view */,
 				7C2519B31F690EB50001B577 /* ClassMomentViewController.h */,
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
+				9220840B1F6BA8CE00F8AAC6 /* PostMomentViewController.h */,
+				9220840C1F6BA8CE00F8AAC6 /* PostMomentViewController.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -867,6 +901,25 @@
 				7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */,
 			);
 			name = "日程";
+			sourceTree = "<group>";
+		};
+		9220840E1F6BB6A700F8AAC6 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				922084181F6BB8D200F8AAC6 /* MineUserHeaderCell.h */,
+				922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */,
+				9220841B1F6BB91400F8AAC6 /* MineDefaultCell.h */,
+				9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */,
+				9220841E1F6BBEB800F8AAC6 /* MineTableFooterView.h */,
+				9220841F1F6BBEB800F8AAC6 /* MineTableFooterView.m */,
+				922084211F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.h */,
+				922084221F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m */,
+				922084271F6BC4D200F8AAC6 /* UserInfoHeaderCell.h */,
+				922084281F6BC4D200F8AAC6 /* UserInfoHeaderCell.m */,
+				9220842A1F6BC4F000F8AAC6 /* UserInfoDefaultCell.h */,
+				9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		9279A6E31F6A53B5004A1E2B /* view */ = {
@@ -1064,9 +1117,12 @@
 				7C212DE61F6B6DEA0007AE01 /* CourseListHeaderView.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
+				922084261F6BC47600F8AAC6 /* UserInfoViewController.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
+				9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */,
+				9220840D1F6BA8CE00F8AAC6 /* PostMomentViewController.m in Sources */,
 				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
@@ -1103,6 +1159,7 @@
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
+				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,
 				7C25198C1F69003A0001B577 /* SimpleAlertButton.m in Sources */,
@@ -1111,10 +1168,12 @@
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				7C25195E1F68EBA90001B577 /* HttpBaseRequestItem_info.m in Sources */,
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
+				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
+				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
 				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
@@ -1126,9 +1185,11 @@
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
+				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
 				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,
 				7C2519731F68EBCD0001B577 /* UserModel.m in Sources */,
+				922084201F6BBEB800F8AAC6 /* MineTableFooterView.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
 				7C25190A1F68E90C0001B577 /* YXTestViewController.m in Sources */,
@@ -1141,6 +1202,7 @@
 				7C2519861F68FF980001B577 /* ErrorView.m in Sources */,
 				7C212DC41F6A5CF60007AE01 /* CourseListViewController.m in Sources */,
 				7C2519161F68EA8A0001B577 /* FileLogger.m in Sources */,
+				922084291F6BC4D200F8AAC6 /* UserInfoHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

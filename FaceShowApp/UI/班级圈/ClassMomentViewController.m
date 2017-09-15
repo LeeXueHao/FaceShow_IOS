@@ -9,6 +9,7 @@
 #import "ClassMomentViewController.h"
 #import "UITableView+TemplateLayoutHeaderView.h"
 #import "ClassMomentHeaderView.h"
+#import "ClassMomentCell.h"
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @end
 
@@ -27,17 +28,17 @@
     [self.dataArray addObject:@"4"];
     [self.dataArray addObject:@"6"];
     [self.dataArray addObject:@"8"];
-//    [self.dataArray addObject:@"1"];
-//    [self.dataArray addObject:@"1"];
-//    [self.dataArray addObject:@"3"];
-//    [self.dataArray addObject:@"5"];
-//    [self.dataArray addObject:@"7"];
-//    [self.dataArray addObject:@"9"];
-//    [self.dataArray addObject:@"2"];
-//    [self.dataArray addObject:@"4"];
-//    [self.dataArray addObject:@"6"];
-//    [self.dataArray addObject:@"8"];
-//    [self.dataArray addObject:@"1"];
+    [self.dataArray addObject:@"1"];
+    [self.dataArray addObject:@"1"];
+    [self.dataArray addObject:@"3"];
+    [self.dataArray addObject:@"5"];
+    [self.dataArray addObject:@"7"];
+    [self.dataArray addObject:@"9"];
+    [self.dataArray addObject:@"2"];
+    [self.dataArray addObject:@"4"];
+    [self.dataArray addObject:@"6"];
+    [self.dataArray addObject:@"8"];
+    [self.dataArray addObject:@"1"];
     [self setupUI];
 
 
@@ -56,7 +57,7 @@
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[ClassMomentHeaderView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentHeaderView"];
-    
+    [self.tableView registerClass:[ClassMomentCell class] forCellReuseIdentifier:@"ClassMomentCell"];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -66,7 +67,8 @@
     return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    ClassMomentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClassMomentCell" forIndexPath:indexPath];
+    return cell;
 }
 #pragma mark - UITableViewDelegate
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -77,6 +79,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return [tableView yx_heightForHeaderWithIdentifier:@"ClassMomentHeaderView" configuration:^(ClassMomentHeaderView *headerView) {
         headerView.testInteger = [self.dataArray[section] integerValue];
+    }];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [tableView fd_heightForCellWithIdentifier:@"ClassMomentCell" configuration:^(ClassMomentCell *cell) {
+        
     }];
 }
 @end
