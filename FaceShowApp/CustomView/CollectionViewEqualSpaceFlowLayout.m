@@ -10,7 +10,7 @@
 
 @implementation CollectionViewEqualSpaceFlowLayout
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray *answer = [super layoutAttributesForElementsInRect:rect];
+    NSArray *answer =  [super layoutAttributesForElementsInRect:rect];
     if (answer.count > 0) {
         UICollectionViewLayoutAttributes *firstLayoutAttributes = answer[0];
         if (firstLayoutAttributes.representedElementCategory == UICollectionElementCategoryCell) {

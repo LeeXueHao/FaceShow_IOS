@@ -84,6 +84,8 @@
         UserInfoViewController *VC = [[UserInfoViewController alloc] init];
         [self.navigationController pushViewController:VC animated:YES];
     }else {
+        UIViewController *VC = [[NSClassFromString(@"PhotoChooseViewController") alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
         DDLogDebug(@"扫码签到");
     }
 }
