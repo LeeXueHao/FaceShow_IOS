@@ -40,11 +40,6 @@
             [obj removeFromSuperview];
         }
     }];
-    if (self.imageModelMutableArray.count == 0) {
-        
-    }
-    
-    
     NSMutableArray<UIImageView *> *imageViewMutableArray = [[NSMutableArray<UIImageView *> alloc] initWithCapacity:9];
     [self.imageModelMutableArray enumerateObjectsUsingBlock:^(PreviewPhotosModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIImageView *imageView = [[UIImageView alloc] init];
@@ -86,7 +81,17 @@
 }
 
 - (void)setupPhotos:(NSArray<UIImageView *>*)photos {
-    if (self.imageModelMutableArray.count == 4 && self.doubleRow) {
+    if (self.imageModelMutableArray.count == 1) {
+        [photos enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_left);
+                make.right.equalTo(self.mas_right);
+                make.top.equalTo(self.mas_top);
+                make.height.equalTo(obj.mas_width).multipliedBy(348.0f/590.0f).priorityHigh();
+                make.bottom.equalTo(self.mas_bottom);
+            }];
+        }];
+    }else if (self.imageModelMutableArray.count == 4 && self.doubleRow) {
         [photos enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(self.mas_top).offset((self.photoSize.height + self.verticalMargin) * (idx / 2) + self.photoSize.height/2.0f).priorityHigh();
