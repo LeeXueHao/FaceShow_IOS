@@ -1,0 +1,159 @@
+//
+//  ScanCodeViewController.m
+//  FaceShowApp
+//
+//  Created by LiuWenXing on 2017/9/14.
+//  Copyright © 2017年 niuzhaowang. All rights reserved.
+//
+
+#import "ScanCodeViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "ScanCodeMaskView.h"
+#import "ScanCodeResultViewController.h"
+
+@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate> {
+    AVCaptureSession *_session;
+    AVCaptureDevice *_device;
+    AVCaptureDeviceInput *_input;
+    AVCaptureMetadataOutput *_output;
+    AVCaptureVideoPreviewLayer *_preview;
+}
+
+@property (nonatomic, strong) ScanCodeMaskView *scanCodeMaskView;
+
+@end
+
+@implementation ScanCodeViewController
+
+- (void)dealloc {
+    DDLogDebug(@"release=====>%@",[self class]);
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.navigationItem.title = @"签到";
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusDenied) {
+        [self showAlertView];
+    } else if (authStatus == AVAuthorizationStatusNotDetermined) {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (granted) {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        if (!self->_session) {
+                            [self setupCamera];
+                        } else {
+                            [self->_session startRunning];
+                        }
+                    });
+                } else {
+                    [self showAlertView];
+                }
+            });
+        }];
+    } else if (authStatus == AVAuthorizationStatusAuthorized) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if (!self->_session) {
+                [self setupCamera];
+            } else{
+                [self->_session startRunning];
+            }
+        });
+    } else {
+        [self backAction];
+    }
+    self.scanCodeMaskView = [[ScanCodeMaskView alloc] init];
+    [self.view addSubview:self.scanCodeMaskView];
+    self.scanCodeMaskView.backgroundColor = [UIColor clearColor];
+    [self.scanCodeMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.scanCodeMaskView.scanTimer) {
+        [self.scanCodeMaskView.scanTimer invalidate];
+    }
+    if (_session) {
+        [_session stopRunning];
+        _session = nil;
+    }
+    if (_preview) {
+        [_preview removeFromSuperlayer];
+        _preview = nil;
+    }
+}
+
+- (void)showAlertView {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请到“设置->隐私->相机”中设置为允许访问相机！" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+    [alertController addAction:action];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)setupCamera {
+    // Device
+    _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (_device == nil) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"未检测到相机" message:@"请检查相机设备是否正常" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return ;
+    }
+    // Input
+    _input = [AVCaptureDeviceInput deviceInputWithDevice:_device error:nil];
+    // Output
+    _output = [[AVCaptureMetadataOutput alloc] init];
+    [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    //限制扫描区域（上左下右）
+    [ _output setRectOfInterest:CGRectMake(103 * kPhoneHeightRatio / SCREEN_HEIGHT, (SCREEN_WIDTH / 2 - 125) / SCREEN_WIDTH, 250 / SCREEN_HEIGHT, 250 / SCREEN_WIDTH)];
+    // Session
+    _session = [[AVCaptureSession alloc]init];
+    [_session setSessionPreset:AVCaptureSessionPresetHigh];
+    if ([_session canAddInput:_input]) {
+        [_session addInput:_input];
+    }
+    if ([_session canAddOutput:_output]) {
+        [_session addOutput:_output];
+    }
+    // 条码类型 AVMetadataObjectTypeQRCode
+    _output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    _preview = [AVCaptureVideoPreviewLayer layerWithSession:_session];
+    _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    // Preview
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->_preview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        [self.view.layer insertSublayer:self->_preview atIndex:0];
+    });
+    [_session startRunning];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+    [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+}
+
+#pragma mark - AVCaptureMetadataOutputObjectsDelegate
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    NSString *stringValue;
+    if ([metadataObjects count] > 0) {
+        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
+        stringValue = metadataObject.stringValue;
+    }
+    if (!isEmpty(stringValue)) {
+        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+    }
+}
+
+@end

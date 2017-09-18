@@ -7,6 +7,7 @@
 //
 
 #import "ResourceListViewController.h"
+#import "ResourceCell.h"
 
 @interface ResourceListViewController ()
 
@@ -15,19 +16,39 @@
 @implementation ResourceListViewController
 
 - (void)viewDidLoad {
+    self.bNeedHeader = NO;
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    UILabel *lb = [[UILabel alloc]init];
-    lb.text = @"资源";
-    [self.view addSubview:lb];
-    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(0);
-    }];
+    [self setupUI];
+    [self.view nyx_stopLoading];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - setupUI
+- (void)setupUI {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[ResourceCell class] forCellReuseIdentifier:@"ResourceCell"];
+}
+
+#pragma mark - UITableViewDataSource & UITableViewDelegate
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ResourceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResourceCell"];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 50;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
 #pragma mark - RefreshDelegate

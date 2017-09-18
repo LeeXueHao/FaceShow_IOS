@@ -14,6 +14,7 @@
 #import "MineViewController.h"
 #import "YXTestViewController.h"
 #import "FSTabBarController.h"
+#import "UserMessageManager.h"
 
 @implementation AppDelegateHelper_Phone
 
@@ -38,6 +39,7 @@
 }
 
 - (UIViewController *)mainViewController {
+    [[UserMessageManager sharedInstance] resumeHeartbeat];
     FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
     UIViewController *mainVC = [[MainPageViewController alloc]init];
     mainVC.title = @"首页";
@@ -48,6 +50,7 @@
     messageVC.title = @"消息";
     [self configTabbarItem:messageVC.tabBarItem image:@"" selectedImage:@""];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
+    messageNavi.tabBarItem.badgeValue = @"";
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];
     classVC.title = @"班级圈";
@@ -72,10 +75,12 @@
 #pragma mark -
 - (void)handleLoginSuccess {
     self.window.rootViewController = [self mainViewController];
+    [[UserMessageManager sharedInstance] resumeHeartbeat];
 }
 
 - (void)handleLogoutSuccess {
     [self.window.rootViewController presentViewController:[self loginViewController] animated:YES completion:nil];
+    [[UserMessageManager sharedInstance] suspendHeartbeat];
 }
 
 

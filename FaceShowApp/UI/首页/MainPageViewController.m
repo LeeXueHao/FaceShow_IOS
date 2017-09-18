@@ -17,6 +17,7 @@
 #import "TaskListViewController.h"
 #import "EmptyView.h"
 #import "ErrorView.h"
+#import "ScanCodeViewController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -31,6 +32,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupUI];
+    WEAK_SELF
+    [self nyx_setupRightWithTitle:@"扫一扫" action:^{
+        STRONG_SELF
+        ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
+        [self.navigationController pushViewController:scanCodeVC animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

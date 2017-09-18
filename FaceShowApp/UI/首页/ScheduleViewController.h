@@ -6,9 +6,9 @@
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "ScrollBaseViewController.h"
 #import "RefreshDelegate.h"
 
-@interface ScheduleViewController : BaseViewController<RefreshDelegate>
+@interface ScheduleViewController : ScrollBaseViewController<RefreshDelegate>
 
 @end

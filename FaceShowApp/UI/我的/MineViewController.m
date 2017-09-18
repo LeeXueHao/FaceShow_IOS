@@ -13,6 +13,7 @@
 #import "MineTableFooterView.h"
 #import "FSDefaultHeaderFooterView.h"
 #import "UserInfoViewController.h"
+#import "SignInRecordViewController.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -86,7 +87,8 @@
 //        UIViewController *VC = [[NSClassFromString(@"PhotoChooseViewController") alloc] init];
 //        [self.navigationController pushViewController:VC animated:YES];
     }else {
-        DDLogDebug(@"扫码签到");
+        SignInRecordViewController *signInRecordVC = [[SignInRecordViewController alloc] init];
+        [self.navigationController pushViewController:signInRecordVC animated:YES];
     }
 }
 
