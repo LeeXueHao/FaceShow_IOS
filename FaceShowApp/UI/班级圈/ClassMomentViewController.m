@@ -11,14 +11,18 @@
 #import "ClassMomentHeaderView.h"
 #import "ClassMomentCell.h"
 #import "ClassMomentTableHeaderView.h"
-#import "FSDefaultHeaderFooterView.h"
+#import "ClassMomentFooterView.h"
+#import "PostMomentViewController.h"
+#import "ClassMomentFloatingView.h"
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
+@property (nonatomic, strong) ClassMomentFloatingView *floatingView;
 @end
 
 @implementation ClassMomentViewController
 
 - (void)viewDidLoad {
+    self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
     self.title = @"班级圈";
     [self.dataArray addObject:@"1"];
@@ -48,7 +52,13 @@
 
     
 }
-
+#pragma mark - set & get
+- (ClassMomentFloatingView *)floatingView {
+    if (_floatingView == nil) {
+        _floatingView = [[ClassMomentFloatingView alloc] init];
+    }
+    return _floatingView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -62,30 +72,46 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[ClassMomentHeaderView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentHeaderView"];
     [self.tableView registerClass:[ClassMomentCell class] forCellReuseIdentifier:@"ClassMomentCell"];
-    [self.tableView registerClass:[FSDefaultHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"FSDefaultHeaderFooterView"];
+    [self.tableView registerClass:[ClassMomentFooterView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentFooterView"];
     self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
     self.tableView.tableHeaderView = self.headerView;
+    WEAK_SELF
+    [self nyx_setupRightWithImage:[UIImage imageNamed:@"消息动态icon点击态-正常态-拷贝"] action:^{
+        STRONG_SELF
+        PostMomentViewController *VC = [[PostMomentViewController alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+    }];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 2;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ClassMomentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClassMomentCell" forIndexPath:indexPath];
+    [cell reloadName:@"高涛" withComment:@"大开间大家都;卡就是开机是伐啦好蓝非哈伦裤回复拉科技和水电费逻辑哈师大浪费" withLast:indexPath.row];
     return cell;
 }
 #pragma mark - UITableViewDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ClassMomentHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentHeaderView"];
     headerView.testInteger = [self.dataArray[section] integerValue];
+    WEAK_SELF
+    headerView.classMomentLikeCommentBlock = ^(UIButton *sender) {
+        STRONG_SELF
+        CGRect rect = [sender convertRect:sender.bounds toView:self.view];
+        [self showFloatView:rect];
+    };
     return headerView;
 }
+- (void)showFloatView:(CGRect)rect {
+    [self.view addSubview:self.floatingView];
+    self.floatingView.originRect = rect;
+}
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    FSDefaultHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"FSDefaultHeaderFooterView"];
-    footerView.contentView.backgroundColor = [UIColor colorWithHexString:@"d7dde0"];
+    ClassMomentFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentFooterView"];
     return footerView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -94,11 +120,14 @@
     }];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1.0f;
+    return 16.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [tableView fd_heightForCellWithIdentifier:@"ClassMomentCell" configuration:^(ClassMomentCell *cell) {
-        
+        [cell reloadName:@"高涛" withComment:@"大开间大家都;卡就是开机" withLast:indexPath.row];
     }];
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.floatingView removeFromSuperview];
 }
 @end

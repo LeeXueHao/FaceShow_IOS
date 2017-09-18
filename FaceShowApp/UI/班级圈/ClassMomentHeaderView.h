@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ClassMomentHeaderView : UITableViewHeaderFooterView
 @property (nonatomic, assign) NSInteger testInteger;
+@property (nonatomic, copy) void(^classMomentLikeCommentBlock)(UIButton *sender);
 @end

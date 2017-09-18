@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ClassMomentCell : UITableViewCell
-
+- (void)reloadName:(NSString *)nameString
+       withComment:(NSString *)commentString
+          withLast:(BOOL)isLast;
 @end

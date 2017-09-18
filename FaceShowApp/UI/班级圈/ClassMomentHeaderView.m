@@ -8,6 +8,7 @@
 
 #import "ClassMomentHeaderView.h"
 #import "PreviewPhotosView.h"
+#import "ClassMomentLikeView.h"
 @interface ClassMomentHeaderView ()
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *userButton;
@@ -16,8 +17,9 @@
 @property (nonatomic, strong) UIButton *commentButton;
 @property (nonatomic, strong) PreviewPhotosView *photosView;
 
-
 @property (nonatomic, strong) UIButton *openCloseButton;
+@property (nonatomic, strong) ClassMomentLikeView *likeView;
+
 
 @end
 @implementation ClassMomentHeaderView
@@ -68,6 +70,11 @@
     self.commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.commentButton.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.commentButton];
+    WEAK_SELF
+    [[self.commentButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        BLOCK_EXEC(self.classMomentLikeCommentBlock,self.commentButton);
+    }];
     
     self.openCloseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.openCloseButton.clipsToBounds = YES;
@@ -77,6 +84,8 @@
     self.openCloseButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [self.contentView addSubview:self.openCloseButton];
     
+    self.likeView = [[ClassMomentLikeView alloc] init];
+    [self.contentView addSubview:self.likeView];
 }
 - (void)setupLayout {
     [self.userButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,7 +116,6 @@
     [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
         make.size.mas_offset(CGSizeMake(30.0f, 30.0f)).priorityHigh();
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-15.0f);
     }];
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,17 +124,26 @@
         make.top.equalTo(self.photosView.mas_bottom).offset(20.0f);
     }];
     
-    [self.photosView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.photosView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel.mas_left);
         make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
         make.top.equalTo(self.openCloseButton.mas_bottom).offset(10.0f);
         //            make.height.mas_offset(0.0001f);
     }];
     
+    [self.likeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.commentButton.mas_bottom).offset(10.0f);
+        make.left.equalTo(self.nameLabel.mas_left);
+        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-15.0f);
+//        make.height.mas_offset(50.0f);
+    }];
+    
     
 }
 - (void)setTestInteger:(NSInteger)testInteger {
     _testInteger = testInteger;
+    self.likeView.type = ClassMomentLikeType_Double;
     NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
     for (int i = 0; i < MIN(_testInteger, 1); i ++) {
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
@@ -177,6 +194,14 @@
             make.top.equalTo(self.contentLabel.mas_bottom);
         }];
     }
+    
+    
+    [self.likeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.commentButton.mas_bottom).offset(10.0f);
+        make.left.equalTo(self.nameLabel.mas_left);
+        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+        make.bottom.equalTo(self.contentView.mas_bottom);
+    }];
    
     
 
@@ -188,7 +213,6 @@
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],
                                                 NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
-    DDLogDebug(@">>>>%@",NSStringFromCGRect(rect));
     return rect.size.height;
 }
 @end

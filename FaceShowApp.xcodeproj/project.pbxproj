@@ -124,12 +124,15 @@
 		9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */; };
 		9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6FE1F6A7613004A1E2B /* CircleSpreadTransition.m */; };
 		9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A7011F6A8467004A1E2B /* PhotosScrollView.m */; };
+		9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928386191F6FC58700205028 /* ClassMomentFooterView.m */; };
+		9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */; };
 		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
 		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
 		92EF77111F6F633B007C3835 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF770E1F6F633B007C3835 /* 4@2x.png */; };
 		92EF77121F6F633B007C3835 /* 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF770F1F6F633B007C3835 /* 5@2x.png */; };
 		92EF77131F6F633B007C3835 /* 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF77101F6F633B007C3835 /* 6@2x.png */; };
+		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
 		9AE85F0606083656987F93EB /* libPods-FaceShowApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */; };
 /* End PBXBuildFile section */
 
@@ -366,6 +369,10 @@
 		9279A6FE1F6A7613004A1E2B /* CircleSpreadTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSpreadTransition.m; sourceTree = "<group>"; };
 		9279A7001F6A8467004A1E2B /* PhotosScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosScrollView.h; sourceTree = "<group>"; };
 		9279A7011F6A8467004A1E2B /* PhotosScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosScrollView.m; sourceTree = "<group>"; };
+		928386181F6FC58700205028 /* ClassMomentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentFooterView.h; sourceTree = "<group>"; };
+		928386191F6FC58700205028 /* ClassMomentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentFooterView.m; sourceTree = "<group>"; };
+		9283861B1F6FCD2B00205028 /* ClassMomentFloatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentFloatingView.h; sourceTree = "<group>"; };
+		9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentFloatingView.m; sourceTree = "<group>"; };
 		92A7CAC91F6A84FC0038D6D1 /* PreviewPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPhotosView.h; sourceTree = "<group>"; };
 		92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPhotosView.m; sourceTree = "<group>"; };
 		92A7CACB1F6A84FC0038D6D1 /* ShowPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPhotosViewController.h; sourceTree = "<group>"; };
@@ -375,6 +382,8 @@
 		92EF770E1F6F633B007C3835 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
 		92EF770F1F6F633B007C3835 /* 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5@2x.png"; sourceTree = "<group>"; };
 		92EF77101F6F633B007C3835 /* 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6@2x.png"; sourceTree = "<group>"; };
+		92EF77141F6FAA2F007C3835 /* ClassMomentLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentLikeView.h; sourceTree = "<group>"; };
+		92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentLikeView.m; sourceTree = "<group>"; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -984,6 +993,12 @@
 				9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */,
 				9279A6ED1F6A578E004A1E2B /* ClassMomentHeaderView.h */,
 				9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */,
+				92EF77141F6FAA2F007C3835 /* ClassMomentLikeView.h */,
+				92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */,
+				928386181F6FC58700205028 /* ClassMomentFooterView.h */,
+				928386191F6FC58700205028 /* ClassMomentFooterView.m */,
+				9283861B1F6FCD2B00205028 /* ClassMomentFloatingView.h */,
+				9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1207,6 +1222,7 @@
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
 				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
+				92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */,
 				7C25199F1F69066F0001B577 /* ScrollBaseViewController.m in Sources */,
 				7C2518EB1F68E68D0001B577 /* UIImage+FixOrientation.m in Sources */,
 				7C2518E81F68E68D0001B577 /* UIButton+ExpandHitArea.m in Sources */,
@@ -1237,12 +1253,14 @@
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
 				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
+				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
 				7C2518E61F68E68D0001B577 /* NSObject+YXNetworkMethod.m in Sources */,
 				7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */,
 				7C2519AC1F690D860001B577 /* LoginViewController.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
+				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
