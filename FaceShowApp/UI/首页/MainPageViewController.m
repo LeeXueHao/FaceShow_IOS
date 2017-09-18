@@ -15,10 +15,14 @@
 #import "ResourceListViewController.h"
 #import "ScheduleViewController.h"
 #import "TaskListViewController.h"
+#import "EmptyView.h"
+#import "ErrorView.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
+@property (nonatomic, strong) EmptyView *emptyView;
+@property (nonatomic, strong) ErrorView *errorView;
 @end
 
 @implementation MainPageViewController
@@ -39,6 +43,7 @@
     [self.view addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(135);
     }];
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     tabContainerView.tabNameArray = @[@"课程",@"资源",@"任务",@"日程"];
@@ -68,6 +73,24 @@
         make.top.mas_equalTo(tabContainerView.mas_bottom);
     }];
     [self switchToVCWithIndex:0];
+    
+    self.emptyView = [[EmptyView alloc]init];
+//    self.emptyView.title = @"暂无课程";
+    [self.view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.emptyView.hidden = YES;
+    self.errorView = [[ErrorView alloc]init];
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        
+    }];
+    [self.view addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.errorView.hidden = YES;
 }
 
 - (void)switchToVCWithIndex:(NSInteger)index {

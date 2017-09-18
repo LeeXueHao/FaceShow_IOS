@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FillQuestionCell : UITableViewCell
-@property (nonatomic, strong) void(^textChangeBlock) (NSString *text);
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) NSString *stem;
+@property (nonatomic, strong) NSString *comment;
 @property (nonatomic, assign) BOOL bottomLineHidden;
+@property (nonatomic, strong) void(^textChangeBlock) (NSString *text);
+@property (nonatomic, strong) void(^endEdittingBlock) ();
 @end

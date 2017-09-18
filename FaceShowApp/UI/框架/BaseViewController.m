@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     NSArray *vcArray = self.navigationController.viewControllers;
     if (!isEmpty(vcArray)) {

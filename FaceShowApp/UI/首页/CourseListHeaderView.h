@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CourseListHeaderView : UITableViewHeaderFooterView
-
+@property (nonatomic, strong) NSString *title;
 @end

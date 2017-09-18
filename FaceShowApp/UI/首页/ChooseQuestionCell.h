@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ChooseQuestionCell : UITableViewCell
-
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) NSString *stem;
 @property (nonatomic, strong) NSArray *optionArray;
 @property (nonatomic, assign) BOOL bottomLineHidden;
-
+@property (nonatomic, strong) void(^answerChangeBlock) ();
 @end

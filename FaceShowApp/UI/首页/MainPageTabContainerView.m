@@ -24,7 +24,7 @@
 }
 
 - (void)setupUI {
-    
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setTabNameArray:(NSArray *)tabNameArray {
@@ -37,8 +37,9 @@
     [tabNameArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *b = [[UIButton alloc]init];
         [b setTitle:obj forState:UIControlStateNormal];
-        [b setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [b setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [b setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateNormal];
+        [b setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateSelected];
+        b.titleLabel.font = [UIFont boldSystemFontOfSize:13];
         [b addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:b];
         [b mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,7 +53,7 @@
         }
     }];
     self.sliderView = [[UIView alloc]init];
-    self.sliderView.backgroundColor = [UIColor blueColor];
+    self.sliderView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
     [self addSubview:self.sliderView];
     [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.mas_equalTo(0);

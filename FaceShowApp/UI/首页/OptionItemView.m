@@ -9,7 +9,8 @@
 #import "OptionItemView.h"
 
 @interface OptionItemView()
-@property (nonatomic, strong) UIButton *selectButton;
+@property (nonatomic, strong) UIButton *bgButton;
+@property (nonatomic, strong) UIImageView *selectImageView;
 @property (nonatomic, strong) UILabel *optionLabel;
 @end
 
@@ -24,41 +25,62 @@
 }
 
 - (void)setupUI {
-    self.selectButton = [[UIButton alloc]init];
-    [self.selectButton setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    [self.selectButton setBackgroundImage:[UIImage imageWithColor:[UIColor greenColor]] forState:UIControlStateSelected];
-    [self.selectButton addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.selectButton];
-    [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
+    UIButton *bgButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"e4e8eb"]] forState:UIControlStateHighlighted];
+    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"e4e8eb"]] forState:UIControlStateSelected|UIControlStateHighlighted];
+    [bgButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:bgButton];
+    [bgButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.bgButton = bgButton;
+    
+    self.selectImageView = [[UIImageView alloc]init];
+    self.selectImageView.backgroundColor = [UIColor redColor];
+    [self addSubview:self.selectImageView];
+    [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-14);
         make.top.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(24, 24));
         make.bottom.mas_lessThanOrEqualTo(0);
     }];
     self.optionLabel = [[UILabel alloc]init];
-    self.optionLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    self.optionLabel.font = [UIFont systemFontOfSize:15];
+    self.optionLabel.textColor = [UIColor colorWithHexString:@"666666"];
+    self.optionLabel.font = [UIFont systemFontOfSize:14];
     self.optionLabel.numberOfLines = 0;
     [self addSubview:self.optionLabel];
     [self.optionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.selectButton.mas_right).mas_offset(15);
+        make.left.mas_equalTo(34);
         make.top.mas_equalTo(0);
         make.bottom.mas_lessThanOrEqualTo(0);
-        make.right.mas_equalTo(-20);
+        make.right.mas_equalTo(self.selectImageView.mas_left).mas_offset(-14);
     }];
+    self.editable = YES;
 }
 
-- (void)btnAction {
-    self.selectButton.selected = !self.selectButton.selected;
+- (void)btnAction:(UIButton *)sender {
+    [self updateWithSelectedStatus:!sender.selected];
     BLOCK_EXEC(self.clickBlock,self);
 }
 
+- (void)updateWithSelectedStatus:(BOOL)selected {
+    self.bgButton.selected = selected;
+    if (selected) {
+        self.optionLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
+        self.selectImageView.backgroundColor = [UIColor greenColor];
+    }else {
+        self.optionLabel.textColor = [UIColor colorWithHexString:@"666666"];
+        self.selectImageView.backgroundColor = [UIColor redColor];
+    }
+}
+
 - (BOOL)isSelected {
-    return self.selectButton.selected;
+    return self.bgButton.selected;
 }
 
 - (void)setIsSelected:(BOOL)isSelected {
-    self.selectButton.selected = isSelected;
+    [self updateWithSelectedStatus:isSelected];
 }
 
 - (void)setOption:(NSString *)option {
@@ -68,6 +90,11 @@
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:option attributes:dic];
     self.optionLabel.attributedText = attributeStr;
+}
+
+- (void)setEditable:(BOOL)editable {
+    _editable = editable;
+    self.selectImageView.hidden = !editable;
 }
 
 @end

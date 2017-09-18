@@ -24,7 +24,7 @@
     // 标题样式
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                 [UIColor colorWithHexString:@"333333"], NSForegroundColorAttributeName,
-                                                [UIFont systemFontOfSize:17], NSFontAttributeName,
+                                                [UIFont systemFontOfSize:18], NSFontAttributeName,
                                                 nil]];
 }
 

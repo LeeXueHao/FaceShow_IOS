@@ -12,4 +12,5 @@
 @property (nonatomic, strong) void(^clickBlock) (OptionItemView *view);
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, strong) NSString *option;
+@property (nonatomic, assign) BOOL editable;
 @end

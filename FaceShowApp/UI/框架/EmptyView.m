@@ -23,22 +23,24 @@
 }
 
 - (void)setupUI {
-    self.backgroundColor = [UIColor colorWithHexString:@"edf0ee"];
+    self.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     UIImageView *topImageView = [[UIImageView alloc]init];
     topImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:topImageView];
     [topImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
-        make.height.mas_equalTo(250*kPhoneWidthRatio);
+        make.centerX.mas_equalTo(0);
+        make.centerY.mas_equalTo(self.mas_centerY).multipliedBy(0.75);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
     }];
+    
     UILabel *label = [[UILabel alloc]init];
     label.text = @"无内容";
     label.textColor = [UIColor colorWithHexString:@"999999"];
-    label.font = [UIFont boldSystemFontOfSize:14];
+    label.font = [UIFont systemFontOfSize:13];
     label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topImageView.mas_bottom).mas_offset(20);
+        make.top.mas_equalTo(topImageView.mas_bottom).mas_offset(10);
         make.centerX.mas_equalTo(0);
     }];
 

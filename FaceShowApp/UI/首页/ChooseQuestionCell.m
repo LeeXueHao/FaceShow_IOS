@@ -12,6 +12,8 @@
 @interface ChooseQuestionCell()
 @property (nonatomic, strong) NSMutableArray<OptionItemView *> *itemViewArray;
 @property (nonatomic, strong) UIView *bottomLineView;
+@property (nonatomic, strong) UILabel *stemLabel;
+@property (nonatomic, strong) UILabel *indexLabel;
 @end
 
 @implementation ChooseQuestionCell
@@ -26,17 +28,57 @@
 - (void)setupUI {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.bottomLineView = [[UIView alloc]init];
-    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"666666"];
+    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self.contentView addSubview:self.bottomLineView];
     [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
+    self.indexLabel = [[UILabel alloc]init];
+    self.indexLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.indexLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [self.contentView addSubview:self.indexLabel];
+    [self.indexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.top.mas_equalTo(25);
+    }];
+    self.stemLabel = [[UILabel alloc]init];
+    self.stemLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.stemLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.stemLabel.numberOfLines = 0;
+    [self.contentView addSubview:self.stemLabel];
+    [self.stemLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.indexLabel.mas_right);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(25);
+    }];
+    
+    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
     _bottomLineHidden = bottomLineHidden;
     self.bottomLineView.hidden = bottomLineHidden;
+}
+
+- (void)setIndex:(NSInteger)index {
+    _index = index;
+    NSString *indexStr = [NSString stringWithFormat:@"%@、",@(index)];
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:indexStr attributes:dic];
+    self.indexLabel.attributedText = attributeStr;
+}
+
+- (void)setStem:(NSString *)stem {
+    _stem = stem;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:stem attributes:dic];
+    self.stemLabel.attributedText = attributeStr;
 }
 
 - (void)setOptionArray:(NSArray *)optionArray {
@@ -53,7 +95,7 @@
         if (idx == 0) {
             [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.mas_equalTo(0);
-                make.top.mas_equalTo(20);
+                make.top.mas_equalTo(self.stemLabel.mas_bottom).mas_offset(25);
             }];
         }else {
             [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,7 +105,7 @@
         }
         if (idx == optionArray.count-1) {
             [itemView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-20);
+                make.bottom.mas_equalTo(-30);
             }];
         }
         preView = itemView;
@@ -78,6 +120,7 @@
         STRONG_SELF
         if (view.isSelected) {
             [self refreshWithCurrentSelection:view];
+            BLOCK_EXEC(self.answerChangeBlock);
         }
     }];
     return itemView;
