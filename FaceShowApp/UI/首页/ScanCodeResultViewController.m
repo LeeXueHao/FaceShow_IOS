@@ -96,6 +96,7 @@
         make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(50);
         make.centerX.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(112, 40));
+        make.bottom.mas_equalTo(-215 * kPhoneHeightRatio);
     }];
 }
 

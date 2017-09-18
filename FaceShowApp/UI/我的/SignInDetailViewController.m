@@ -7,6 +7,7 @@
 //
 
 #import "SignInDetailViewController.h"
+#import "ScanCodeViewController.h"
 
 @interface SignInDetailViewController ()
 
@@ -110,6 +111,7 @@
     [self.signedInTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.timeTitleLabel.mas_bottom).offset(10);
         make.centerX.mas_equalTo(0);
+        make.bottom.mas_equalTo(-273 * kPhoneHeightRatio);
     }];
     
     self.tipsLabel = [[UILabel alloc] init];
@@ -138,11 +140,13 @@
         make.top.mas_equalTo(self.tipsLabel.mas_bottom).offset(20);
         make.centerX.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(112, 40));
+        make.bottom.mas_equalTo(-178 * kPhoneHeightRatio);
     }];
 }
 
 - (void)signInBtnAction:(UIButton *)sender {
-    
+    ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
+    [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 
 - (void)setModel {

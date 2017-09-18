@@ -36,12 +36,12 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h"]];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"登录背景"]];
     backgroundImageView.userInteractionEnabled = YES;
-    backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:backgroundImageView];
     [backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
     }];
     
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -121,8 +121,7 @@
         make.size.mas_equalTo(CGSizeMake(250, 40));
     }];
     
-    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    logoImageView.backgroundColor = [UIColor redColor];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     logoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {

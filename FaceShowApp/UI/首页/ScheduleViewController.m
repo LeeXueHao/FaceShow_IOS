@@ -55,7 +55,7 @@
 
 - (void)setModel {
     self.titleLabel.text = @"报道用餐时间及地点如图所示";
-    self.detailImageView.image = [UIImage imageNamed:@"Default-568h"];
+    self.detailImageView.image = [UIImage imageNamed:@"登录背景"];
 }
 
 #pragma mark - RefreshDelegate

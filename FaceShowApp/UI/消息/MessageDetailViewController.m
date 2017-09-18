@@ -88,8 +88,16 @@
 - (void)setModel {
     self.titleLabel.text = @"水电费水电费水电费是的水电费水电费水电费是的水电费水电费水电费是的";
     self.timeLabel.text = @"老师的 2011.22.22";
-    self.detailLabel.text = @"水电费类似快递费就是水电费水电费胜多负少\nssdfsdfsdf\n是的发送来的防守打法水电费手势死了贷款聚少离多看风景熟练度会计法熟练度开发就类似快递费就删了快递费就删了快递费就死了框架";
-    UIImage *detailImage = [UIImage imageNamed:@"Default-568h"];
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:@"水电费类似快递费就是水电费水电费胜多负少\nssdfsdfsdf\n是的发送来的防守打法水电费手势死了贷款聚少离多看风景熟练度会计法熟练度开发就类似快递费就删了快递费就删了快递费就死了框架"];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.minimumLineHeight = 21;
+    [attributedStr setAttributes:@{
+                                   NSParagraphStyleAttributeName : style,
+                                   NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                   NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"]
+                                   } range:NSMakeRange(0, attributedStr.length)];
+    self.detailLabel.attributedText = attributedStr;
+    UIImage *detailImage = [UIImage imageNamed:@"登录背景"];
     self.detailImageView.image = detailImage;
 }
 
