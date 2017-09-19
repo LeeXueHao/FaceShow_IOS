@@ -10,6 +10,8 @@
 #import "OptionItemResultView.h"
 
 @interface ChooseQuestionResultCell : UITableViewCell
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) NSString *stem;
 @property (nonatomic, strong) NSArray<OptionResult *> *optionArray;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @end

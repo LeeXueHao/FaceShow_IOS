@@ -29,6 +29,7 @@
 		7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DED1F6B72530007AE01 /* CourseCommentCell.m */; };
 		7C212DF11F6B73830007AE01 /* CourseCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DF01F6B73830007AE01 /* CourseCatalogCell.m */; };
 		7C212DF41F6BA72F0007AE01 /* MainPageTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DF31F6BA72F0007AE01 /* MainPageTopView.m */; };
+		7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E1DC1F70BA8000A6921B /* FillQuestionResultCell.m */; };
 		7C2518AC1F68E5C70001B577 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AB1F68E5C70001B577 /* main.m */; };
 		7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AE1F68E5C70001B577 /* AppDelegate.m */; };
 		7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518B61F68E5C70001B577 /* Assets.xcassets */; };
@@ -170,6 +171,8 @@
 		7C212DF01F6B73830007AE01 /* CourseCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCatalogCell.m; sourceTree = "<group>"; };
 		7C212DF21F6BA72F0007AE01 /* MainPageTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageTopView.h; sourceTree = "<group>"; };
 		7C212DF31F6BA72F0007AE01 /* MainPageTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageTopView.m; sourceTree = "<group>"; };
+		7C24E1DB1F70BA8000A6921B /* FillQuestionResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FillQuestionResultCell.h; sourceTree = "<group>"; };
+		7C24E1DC1F70BA8000A6921B /* FillQuestionResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FillQuestionResultCell.m; sourceTree = "<group>"; };
 		7C2518A71F68E5C70001B577 /* 培训通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "培训通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -402,6 +405,8 @@
 				7C212DBB1F6A55D70007AE01 /* OptionItemResultView.m */,
 				7C212DCF1F6A75500007AE01 /* ChooseQuestionResultCell.h */,
 				7C212DD01F6A75500007AE01 /* ChooseQuestionResultCell.m */,
+				7C24E1DB1F70BA8000A6921B /* FillQuestionResultCell.h */,
+				7C24E1DC1F70BA8000A6921B /* FillQuestionResultCell.m */,
 			);
 			name = "问卷结果";
 			sourceTree = "<group>";
@@ -1157,6 +1162,7 @@
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
 				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
+				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,

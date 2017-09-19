@@ -90,7 +90,7 @@
         }
         NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
         paraStyle.lineHeightMultiple = 1.2;
-        NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+        NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
         NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:self.textView.text attributes:dic];
         self.textView.attributedText = attributeStr;
         BLOCK_EXEC(self.textChangeBlock,self.textView.text);
@@ -128,7 +128,7 @@
     _comment = comment;
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
-    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:comment attributes:dic];
     self.textView.attributedText = attributeStr;
     CGSize size = [self.textView sizeThatFits:CGSizeMake(SCREEN_WIDTH-50, CGFLOAT_MAX)];
