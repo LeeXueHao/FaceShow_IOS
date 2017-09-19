@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CommentInputView : UIView
+
+
 @property (nonatomic, strong) void(^completeBlock) (NSString *text);
 @property (nonatomic, strong) SAMTextView *textView;
 @end
