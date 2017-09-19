@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface PostMomentViewController : BaseViewController
-
+@property (nonatomic, strong) UIImage *publicationImage;
 @end

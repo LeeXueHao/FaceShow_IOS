@@ -11,6 +11,7 @@
 typedef void(^ActionBlock)();
 
 @interface UIViewController (NavigationItem)
+- (void)nyx_setupLeftWithTitle:(NSString *)title action:(ActionBlock)action;
 - (void)nyx_setupLeftWithImage:(UIImage *)image action:(ActionBlock)action;
 - (void)nyx_setupLeftWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action;
 - (void)nyx_setupLeftWithCustomView:(UIView *)view;

@@ -9,6 +9,22 @@
 #import "UIViewController+NavigationItem.h"
 
 @implementation UIViewController (NavigationItem)
+- (void)nyx_setupLeftWithTitle:(NSString *)title action:(ActionBlock)action {
+    UIButton *b = [[UIButton alloc]init];
+    [b setTitle:title forState:UIControlStateNormal];
+    [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
+    b.titleLabel.font = [UIFont systemFontOfSize:14];
+    CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:b.titleLabel.font}];
+    b.frame = CGRectMake(0, 0, ceilf(size.width), ceilf(size.height));
+    [self nyx_adjustFrameForView:b];
+    [[b rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
+        BLOCK_EXEC(action);
+    }];
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:[self nyx_viewForItemView:b]];
+    self.navigationItem.rightBarButtonItems = @[[self nyx_leftNegativeBarButtonItem],leftItem];
+    
+}
 - (void)nyx_setupLeftWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action{
     UIImage *normalImage = [UIImage imageNamed:imageName];
     UIImage *highlightImage = [UIImage imageNamed:highlightImageName];

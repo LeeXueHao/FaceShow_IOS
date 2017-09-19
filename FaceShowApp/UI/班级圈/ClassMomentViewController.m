@@ -14,9 +14,13 @@
 #import "ClassMomentFooterView.h"
 #import "PostMomentViewController.h"
 #import "ClassMomentFloatingView.h"
+#import "YXImagePickerController.h"
+
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
+@property (nonatomic, strong) YXImagePickerController *imagePickerController;
+
 @end
 
 @implementation ClassMomentViewController
@@ -53,6 +57,13 @@
     
 }
 #pragma mark - set & get
+- (YXImagePickerController *)imagePickerController
+{
+    if (_imagePickerController == nil) {
+        _imagePickerController = [[YXImagePickerController alloc] init];
+    }
+    return _imagePickerController;
+}
 - (ClassMomentFloatingView *)floatingView {
     if (_floatingView == nil) {
         _floatingView = [[ClassMomentFloatingView alloc] init];
@@ -76,12 +87,57 @@
     self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
     self.tableView.tableHeaderView = self.headerView;
     WEAK_SELF
-    [self nyx_setupRightWithImage:[UIImage imageNamed:@"消息动态icon点击态-正常态-拷贝"] action:^{
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
+    [rightButton setImage:[UIImage imageNamed:@"消息动态icon点击态-正常态-拷贝"]  forState:UIControlStateNormal];
+    [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        PostMomentViewController *VC = [[PostMomentViewController alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
+        [self showAlertView];
+    }];
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
+    gestureRecognizer.minimumPressDuration = 1.0f;
+    [[gestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
+        if (x.state == UIGestureRecognizerStateBegan) {
+            [self presentNextPostViewController:nil];
+        }
+    }];
+    [rightButton addGestureRecognizer:gestureRecognizer];
+    [self nyx_setupRightWithCustomView:rightButton];
+}
+- (void)showAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    WEAK_SELF
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        STRONG_SELF
+    }];
+    [alertVC addAction:cancleAction];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        STRONG_SELF
+        [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
+            STRONG_SELF
+            [self presentNextPostViewController:selectedImage];
+        }];
+    }];
+    [alertVC addAction:cameraAction];
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        STRONG_SELF
+        [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
+            STRONG_SELF
+            [self presentNextPostViewController:selectedImage];
+        }];
+    }];
+    [alertVC addAction:photoAction];
+    [[self nyx_visibleViewController] presentViewController:alertVC animated:YES completion:nil];
+}
+- (void)presentNextPostViewController:(UIImage *)image {
+    PostMomentViewController *VC = [[PostMomentViewController alloc] init];
+    VC.publicationImage = image;
+    FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:VC];
+    [self presentViewController:nav animated:YES completion:^{
+        
     }];
 }
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataArray.count;
@@ -102,11 +158,17 @@
     headerView.classMomentLikeCommentBlock = ^(UIButton *sender) {
         STRONG_SELF
         CGRect rect = [sender convertRect:sender.bounds toView:self.view];
-        [self showFloatView:rect];
+        [self showFloatView:rect withSection:section];
     };
     return headerView;
 }
-- (void)showFloatView:(CGRect)rect {
+- (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:section];
+    WEAK_SELF
+    self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
+        STRONG_SELF
+         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    };
     [self.view addSubview:self.floatingView];
     self.floatingView.originRect = rect;
 }

@@ -14,4 +14,5 @@ typedef NS_ENUM(NSInteger, ClassMomentClickStatus) {
 
 @interface ClassMomentFloatingView : UIView
 @property (nonatomic, assign) CGRect originRect;
+@property (nonatomic, copy) void(^classMomentFloatingBlock)(ClassMomentClickStatus status);
 @end

@@ -57,12 +57,12 @@
 
 - (void)completionImagePick:(UIImagePickerController *)picker image:(UIImage *)image
 {
-    if (image && self.completion) {
-        self.completion(image);
-    }
     if (picker) {
-        [picker dismissViewControllerAnimated:YES
-                                   completion:nil];
+        [picker dismissViewControllerAnimated:YES completion:^{
+            if (image && self.completion) {
+                self.completion(image);
+            }
+        }];
     }
 }
 

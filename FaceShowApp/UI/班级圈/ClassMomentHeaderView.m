@@ -143,7 +143,6 @@
 }
 - (void)setTestInteger:(NSInteger)testInteger {
     _testInteger = testInteger;
-    self.likeView.type = ClassMomentLikeType_Double;
     NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
     for (int i = 0; i < MIN(_testInteger, 1); i ++) {
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
@@ -177,7 +176,7 @@
             make.left.equalTo(self.nameLabel.mas_left);
             make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-            make.height.mas_offset(108.0f).priorityHigh();
+            make.height.mas_offset(85.0f).priorityHigh();
         }];
         [self.openCloseButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_offset(14.0f);
@@ -194,17 +193,21 @@
             make.top.equalTo(self.contentLabel.mas_bottom);
         }];
     }
-    
-    
+    self.likeView.type = ClassMomentLikeType_Double;
     [self.likeView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.commentButton.mas_bottom).offset(10.0f);
+        make.top.equalTo(self.commentButton.mas_bottom);
         make.left.equalTo(self.nameLabel.mas_left);
         make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
         make.bottom.equalTo(self.contentView.mas_bottom);
     }];
-   
     
-
+//    [self.likeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.commentButton.mas_bottom).offset(10.0f);
+//        make.left.equalTo(self.nameLabel.mas_left);
+//        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+//        make.bottom.equalTo(self.contentView.mas_bottom);
+//        make.height.mas_offset(0.0001f);
+//    }];
 }
 - (CGFloat)sizeForTitle:(NSString *)title {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
