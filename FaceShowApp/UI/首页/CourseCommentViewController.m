@@ -45,11 +45,17 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     [self.tableView registerClass:[CourseCommentCell class] forCellReuseIdentifier:@"CourseCommentCell"];
     [self.tableView registerClass:[CourseCommentHeaderView class] forHeaderFooterViewReuseIdentifier:@"CourseCommentHeaderView"];
     
     self.inputView = [[CommentInputView alloc]init];
+    WEAK_SELF
+    [self.inputView setCompleteBlock:^(NSString *text){
+        STRONG_SELF
+        [self submitComment:text];
+    }];
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(0);
@@ -75,6 +81,10 @@
             [self.view layoutIfNeeded];
         }];
     }];
+}
+
+- (void)submitComment:(NSString *)text {
+    
 }
 
 - (void)favorCommentWithIndex:(NSInteger)index {
