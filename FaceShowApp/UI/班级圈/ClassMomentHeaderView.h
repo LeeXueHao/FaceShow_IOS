@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ClassMomentListRequest.h"
 @interface ClassMomentHeaderView : UITableViewHeaderFooterView
-@property (nonatomic, assign) NSInteger testInteger;
 @property (nonatomic, copy) void(^classMomentLikeCommentBlock)(UIButton *sender);
+@property (nonatomic, copy) void(^classMomentOpenCloseBlock)(BOOL isOpen);
+@property (nonatomic, strong) ClassMomentListRequestItem_Data_Moment *moment;
 @end

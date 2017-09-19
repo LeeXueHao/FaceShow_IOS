@@ -27,10 +27,36 @@
     }
     return self;
 }
-#pragma mark - set
-- (void)setType:(ClassMomentLikeType)type {
-    _type = type;
-    switch (_type) {
+- (void)reloadLikes:(NSArray *)likes withType:(ClassMomentLikeType)type{
+    switch (type) {
+        case ClassMomentLikeType_Not:{
+            self.lineView.hidden = YES;
+            self.bottomView.layer.mask = nil;
+            [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self);
+                make.height.mas_offset(0.0001f);
+
+            }];
+            
+            [self.middleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self);
+                make.height.mas_offset(0.0001f);
+
+            }];
+            
+            [self.likeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_left);
+                make.edges.equalTo(self);
+                make.height.mas_offset(0.0001f);
+
+            }];
+            
+            [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self);
+                make.height.mas_offset(0.0001f);
+            }];
+        }
+            break;
         case ClassMomentLikeType_Like:
         {
             self.lineView.hidden = YES;
@@ -38,7 +64,7 @@
             [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.mas_left);
                 make.right.equalTo(self.mas_right);
-                make.height.mas_offset(10.0f);
+                make.height.mas_offset(10.0f).priorityLow();
                 make.top.equalTo(self.sharpImageView.mas_centerY);
             }];
             
@@ -49,16 +75,13 @@
             }];
             
             [self.likeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.heartImageView.mas_right).offset(6.0f);
-                make.right.equalTo(self.middleView.mas_right).offset(-15.0f);
-                make.top.equalTo(self.middleView.mas_top);
-                make.bottom.equalTo(self.middleView.mas_bottom);
+                make.edges.equalTo(self.middleView);
             }];
             
             [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.mas_left);
                 make.right.equalTo(self.mas_right);
-                make.height.mas_offset(10.0f);
+                make.height.mas_offset(10.0f).priorityLow();
                 make.bottom.equalTo(self.mas_bottom);
                 make.top.equalTo(self.middleView.mas_bottom);
             }];
@@ -70,9 +93,28 @@
             [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.mas_left);
                 make.right.equalTo(self.mas_right);
-                make.height.mas_offset(10.0f);
+                make.height.mas_offset(10.0f).priorityLow();
                 make.top.equalTo(self.sharpImageView.mas_centerY);
                 make.bottom.equalTo(self.mas_bottom);
+            }];
+            [self.middleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_left);
+                make.top.equalTo(self.topView.mas_bottom);
+                make.right.equalTo(self.mas_right);
+            }];
+            
+            [self.likeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.heartImageView.mas_right).offset(6.0f);
+                make.right.equalTo(self.middleView.mas_right).offset(-15.0f);
+                make.top.equalTo(self.heartImageView.mas_top).offset(-5.0f);
+                make.height.mas_offset(0.0001f);
+            }];
+            
+            [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_left);
+                make.right.equalTo(self.mas_right);
+                make.height.mas_offset(0.0001f);
+                make.top.equalTo(self.middleView.mas_bottom);
             }];
         }
             break;
@@ -83,7 +125,7 @@
             [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.mas_left);
                 make.right.equalTo(self.mas_right);
-                make.height.mas_offset(10.0f);
+                make.height.mas_offset(10.0f).priorityLow();
                 make.top.equalTo(self.sharpImageView.mas_centerY);
             }];
             
@@ -96,19 +138,35 @@
             [self.likeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.heartImageView.mas_right).offset(6.0f);
                 make.right.equalTo(self.middleView.mas_right).offset(-15.0f);
-                make.top.equalTo(self.middleView.mas_top);
+                make.top.equalTo(self.heartImageView.mas_top).offset(-5.0f);
                 make.bottom.equalTo(self.middleView.mas_bottom);
             }];
             
             [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.mas_left);
                 make.right.equalTo(self.mas_right);
-                make.height.mas_offset(20.0f);
+                make.height.mas_offset(20.0f).priorityLow();
                 make.bottom.equalTo(self.mas_bottom);
                 make.top.equalTo(self.middleView.mas_bottom);
             }];            
         }
             break;
+    }
+    if (likes.count > 0) {
+        NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
+        [likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [mutableArrray addObject:obj.publisher.realName?:@""];
+        }];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineHeightMultiple = 1.2f;
+        NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:[mutableArrray componentsJoinedByString:@","] attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
+        self.likeLabel.attributedText = attributedString;
+//        if ([self.likeLabel sizeThatFits:CGSizeMake(self.likeLabel.bounds.size.width, 100.0f)].width < SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 12.0f - 6.0f - 16.0f) {
+//            [self.likeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+//            }];
+//        }
+    }else {
+        self.likeLabel.attributedText = nil;
     }
 }
 
@@ -141,7 +199,7 @@
     self.likeLabel = [[UILabel alloc] init];
     self.likeLabel.font = [UIFont systemFontOfSize:14.0f];
     self.likeLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.likeLabel.text = @"放假,按揭房,啊,离开房间啊看,风景阿发空间啊,附近,放假,按揭房,啊,离开房间啊看,风景阿发空间啊,附近";
+    self.likeLabel.text = @"";
     self.likeLabel.numberOfLines = 0;
     [self.middleView addSubview:self.likeLabel];
     
@@ -164,7 +222,7 @@
     [self.sharpImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(15.0f);
         make.top.equalTo(self.mas_top);
-        make.size.mas_offset(CGSizeMake(28.0f, 28.0f));
+        make.size.mas_offset(CGSizeMake(28.0f, 28.0f)).priorityLow();
     }];
     
     [self.heartImageView mas_makeConstraints:^(MASConstraintMaker *make) {

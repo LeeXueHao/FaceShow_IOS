@@ -144,6 +144,9 @@
 		9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A7011F6A8467004A1E2B /* PhotosScrollView.m */; };
 		9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928386191F6FC58700205028 /* ClassMomentFooterView.m */; };
 		9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */; };
+		928386201F71053400205028 /* ClassMomentListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9283861F1F71053400205028 /* ClassMomentListRequest.m */; };
+		928386221F7123ED00205028 /* classMomentList_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 928386211F7123ED00205028 /* classMomentList_mock.json */; };
+		928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 928386241F7124F300205028 /* ClassMomentListFetcher.m */; };
 		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
 		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
@@ -426,6 +429,11 @@
 		928386191F6FC58700205028 /* ClassMomentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentFooterView.m; sourceTree = "<group>"; };
 		9283861B1F6FCD2B00205028 /* ClassMomentFloatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentFloatingView.h; sourceTree = "<group>"; };
 		9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentFloatingView.m; sourceTree = "<group>"; };
+		9283861E1F71053400205028 /* ClassMomentListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentListRequest.h; sourceTree = "<group>"; };
+		9283861F1F71053400205028 /* ClassMomentListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentListRequest.m; sourceTree = "<group>"; };
+		928386211F7123ED00205028 /* classMomentList_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentList_mock.json; sourceTree = "<group>"; };
+		928386231F7124F300205028 /* ClassMomentListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentListFetcher.h; sourceTree = "<group>"; };
+		928386241F7124F300205028 /* ClassMomentListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentListFetcher.m; sourceTree = "<group>"; };
 		92A7CAC91F6A84FC0038D6D1 /* PreviewPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPhotosView.h; sourceTree = "<group>"; };
 		92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPhotosView.m; sourceTree = "<group>"; };
 		92A7CACB1F6A84FC0038D6D1 /* ShowPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPhotosViewController.h; sourceTree = "<group>"; };
@@ -827,6 +835,12 @@
 				4376E7401F711A2D003E2057 /* QAFileUploadFirstStepRequest.m */,
 				4376E7411F711A2D003E2057 /* QAFileUploadSecondStepRequest.h */,
 				4376E7421F711A2D003E2057 /* QAFileUploadSecondStepRequest.m */,
+				7C25196D1F68EBCD0001B577 /* readme.txt */,
+				928386211F7123ED00205028 /* classMomentList_mock.json */,
+				9283861E1F71053400205028 /* ClassMomentListRequest.h */,
+				9283861F1F71053400205028 /* ClassMomentListRequest.m */,
+				928386231F7124F300205028 /* ClassMomentListFetcher.h */,
+				928386241F7124F300205028 /* ClassMomentListFetcher.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1231,6 +1245,7 @@
 				7C2518F41F68E8000001B577 /* Config.plist in Resources */,
 				7C2519341F68EB2A0001B577 /* neterror_mock.json in Resources */,
 				92EF77121F6F633B007C3835 /* 5@2x.png in Resources */,
+				928386221F7123ED00205028 /* classMomentList_mock.json in Resources */,
 				7C2519321F68EB2A0001B577 /* errorcode_mock.json in Resources */,
 				7C2519A21F690BA70001B577 /* readme.txt in Resources */,
 				92EF77111F6F633B007C3835 /* 4@2x.png in Resources */,
@@ -1315,6 +1330,7 @@
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
+				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PostMomentViewController.m in Sources */,
@@ -1367,6 +1383,7 @@
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
+				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,

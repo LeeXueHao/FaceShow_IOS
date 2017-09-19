@@ -72,12 +72,9 @@
 }
 
 - (void)reloadName:(NSString *)nameString withComment:(NSString *)commentString withLast:(BOOL)isLast {
-    if (isLast) {
-        commentString = @"的发酒疯流口水的积分蓝思科技的;付了款加上了;看风景;了会计师了副科级是凉快点积分蓝思科技傅雷家书敦伦尽分";
-    }
     NSString *tempString = [NSString stringWithFormat:@"%@: %@",nameString,commentString];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 6.0f;
+    paragraphStyle.lineHeightMultiple = 1.2f;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:tempString];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, tempString.length)];
     [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14.0f] range:NSMakeRange(0, nameString.length)];

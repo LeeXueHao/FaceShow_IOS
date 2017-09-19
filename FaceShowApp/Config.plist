@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>mockFrameworkOn</key>
-	<false/>
+	<true/>
 	<key>testFrameworkOn</key>
 	<false/>
 	<key>TalkingDataAppID</key>

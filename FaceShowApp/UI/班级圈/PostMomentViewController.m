@@ -116,7 +116,7 @@
 #pragma mark - UITextViewDelegates
 -(void)textViewDidChange:(UITextView *)textView {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 6;
+    paragraphStyle.lineHeightMultiple = 1.2f;
     textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:@{                                                                                                    NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:paragraphStyle}];
 }
 @end

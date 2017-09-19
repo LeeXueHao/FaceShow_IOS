@@ -16,6 +16,8 @@
 #import "ClassMomentFloatingView.h"
 #import "YXImagePickerController.h"
 #import "CommentInputView.h"
+#import "ClassMomentListFetcher.h"
+
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
@@ -30,31 +32,13 @@
     DDLogDebug(@"release========>>%@",[self class]);
 }
 - (void)viewDidLoad {
+    ClassMomentListFetcher *fetcher = [[ClassMomentListFetcher alloc] init];
+    fetcher.pagesize = 20;
+    fetcher.claszId = @"12";
+    self.dataFetcher = fetcher;
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
     self.title = @"班级圈";
-    [self.dataArray addObject:@"1"];
-    [self.dataArray addObject:@"0"];
-    [self.dataArray addObject:@"2"];
-    [self.dataArray addObject:@"3"];
-    [self.dataArray addObject:@"4"];
-    [self.dataArray addObject:@"1"];
-//    [self.dataArray addObject:@"9"];
-//    [self.dataArray addObject:@"2"];
-//    [self.dataArray addObject:@"4"];
-//    [self.dataArray addObject:@"6"];
-//    [self.dataArray addObject:@"8"];
-//    [self.dataArray addObject:@"1"];
-//    [self.dataArray addObject:@"1"];
-//    [self.dataArray addObject:@"3"];
-//    [self.dataArray addObject:@"5"];
-//    [self.dataArray addObject:@"7"];
-//    [self.dataArray addObject:@"9"];
-//    [self.dataArray addObject:@"2"];
-//    [self.dataArray addObject:@"4"];
-//    [self.dataArray addObject:@"6"];
-//    [self.dataArray addObject:@"8"];
-//    [self.dataArray addObject:@"1"];
     [self setupUI];
     [self setupObservers];
 }
@@ -78,7 +62,6 @@
 }
 #pragma mark - setupUI
 - (void)setupUI {
-    [self.view nyx_stopLoading];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -183,22 +166,33 @@
     return self.dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    return moment.comments.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ClassMomentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClassMomentCell" forIndexPath:indexPath];
-    [cell reloadName:@"高涛" withComment:@"大开间大家都;卡就是开机是伐啦好蓝非哈伦裤回复拉科技和水电费逻辑哈师大浪费" withLast:indexPath.row];
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
+    ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
+    [cell reloadName:comment.publisher.realName withComment:comment.content withLast:indexPath.row + 1 == moment.comments.count];
     return cell;
 }
 #pragma mark - UITableViewDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ClassMomentHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentHeaderView"];
-    headerView.testInteger = [self.dataArray[section] integerValue];
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    headerView.moment = moment;
     WEAK_SELF
     headerView.classMomentLikeCommentBlock = ^(UIButton *sender) {
         STRONG_SELF
         CGRect rect = [sender convertRect:sender.bounds toView:self.view];
         [self showFloatView:rect withSection:section];
+    };
+    headerView.classMomentOpenCloseBlock = ^(BOOL isOpen) {
+        STRONG_SELF
+        moment.isOpen = [NSString stringWithFormat:@"%@",@(!isOpen)];
+//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:section];
+//        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadData];
     };
     return headerView;
 }
@@ -221,7 +215,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return [tableView yx_heightForHeaderWithIdentifier:@"ClassMomentHeaderView" configuration:^(ClassMomentHeaderView *headerView) {
-        headerView.testInteger = [self.dataArray[section] integerValue];
+        headerView.moment = self.dataArray[section];
     }];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -229,16 +223,12 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [tableView fd_heightForCellWithIdentifier:@"ClassMomentCell" configuration:^(ClassMomentCell *cell) {
-        [cell reloadName:@"高涛" withComment:@"大开间大家都;卡就是开机" withLast:indexPath.row];
+        ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
+        ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
+        [cell reloadName:comment.publisher.realName withComment:comment.content withLast:indexPath.row];
     }];
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.floatingView removeFromSuperview];
 }
-//- (void)showCommentInputView {
-//    [self.inputView becomeFirstResponder];
-//}
-//- (void)hiddenCommentInputView {
-//    [self.inputView resignFirstResponder];
-//}
 @end
