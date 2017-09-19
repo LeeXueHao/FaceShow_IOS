@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CourseCommentHeaderView : UITableViewHeaderFooterView
-
+@property (nonatomic, strong) NSString *countStr;
 @end

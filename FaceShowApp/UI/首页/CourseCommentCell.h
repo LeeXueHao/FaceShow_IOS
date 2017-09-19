@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CourseCommentCell : UITableViewCell
-
+@property (nonatomic, assign) BOOL bottomLineHidden;
+@property (nonatomic, strong) void(^favorBlock)();
 @end
