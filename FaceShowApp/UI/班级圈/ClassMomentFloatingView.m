@@ -34,6 +34,8 @@
     self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(0, -2.5f, 0.0f, 2.5f);
     self.likeButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     [self.likeButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1a90d9"]] forState:UIControlStateHighlighted];
+    [self.likeButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateNormal];
+
     WEAK_SELF
     [[self.likeButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
@@ -45,6 +47,7 @@
     self.commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.commentButton setImage:[UIImage imageNamed:@"选择"] forState:UIControlStateNormal];
     [self.commentButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1a90d9"]] forState:UIControlStateHighlighted];
+    [self.commentButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateNormal];
     self.commentButton.imageEdgeInsets = UIEdgeInsetsMake(0, -2.5f, 0.0f, 2.5f);
     [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
     self.commentButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -66,14 +69,14 @@
         make.left.equalTo(self.mas_left);
         make.height.equalTo(self.mas_height);
         make.top.equalTo(self.mas_top);
-        make.right.equalTo(self.mas_centerX);
+        make.width.mas_offset(80.0f);
     }];
     
     [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_centerX);
         make.height.equalTo(self.mas_height);
         make.top.equalTo(self.mas_top);
         make.right.equalTo(self.mas_right);
+        make.width.mas_offset(80.0f);
     }];
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,11 +85,13 @@
     }];
     
 }
-- (void)setOriginRect:(CGRect)originRect{
+- (void)reloadFloatingView:(CGRect)originRect withStyle:(ClassMomentFloatingStyle)style {
     [self mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_offset(CGSizeMake(160.0f, 40.0f));
+        make.size.mas_offset(style == ClassMomentFloatingStyle_Comment ? CGSizeMake(80.0f, 40.0f) : CGSizeMake(160.0f, 40.0f));
         make.right.equalTo(self.superview.mas_left).offset(originRect.origin.x - 10.0f);
         make.top.equalTo(self.superview.mas_top).offset(originRect.origin.y  - 5.0f);
     }];
+    self.likeButton.hidden = style == ClassMomentFloatingStyle_Comment ? YES : NO;
+    self.lineView.hidden = style == ClassMomentFloatingStyle_Comment ? YES : NO;
 }
 @end

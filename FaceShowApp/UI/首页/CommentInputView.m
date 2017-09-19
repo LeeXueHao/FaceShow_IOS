@@ -10,7 +10,6 @@
 #import <SAMTextView.h>
 
 @interface CommentInputView()<UITextViewDelegate>
-@property (nonatomic, strong) SAMTextView *textView;
 @end
 
 @implementation CommentInputView

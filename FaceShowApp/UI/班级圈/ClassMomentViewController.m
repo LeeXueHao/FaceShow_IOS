@@ -15,16 +15,20 @@
 #import "PostMomentViewController.h"
 #import "ClassMomentFloatingView.h"
 #import "YXImagePickerController.h"
-
+#import "CommentInputView.h"
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
-
+@property (nonatomic, strong) CommentInputView *inputView
+;
 @end
 
 @implementation ClassMomentViewController
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    DDLogDebug(@"release========>>%@",[self class]);
+}
 - (void)viewDidLoad {
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
@@ -52,9 +56,7 @@
 //    [self.dataArray addObject:@"8"];
 //    [self.dataArray addObject:@"1"];
     [self setupUI];
-
-
-    
+    [self setupObservers];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -86,7 +88,15 @@
     [self.tableView registerClass:[ClassMomentFooterView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentFooterView"];
     self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
     self.tableView.tableHeaderView = self.headerView;
-    WEAK_SELF
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+     WEAK_SELF
+    [[tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
+        STRONG_SELF
+        [self.inputView.textView resignFirstResponder];
+    }];
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+    
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
     [rightButton setImage:[UIImage imageNamed:@"消息动态icon点击态-正常态-拷贝"]  forState:UIControlStateNormal];
@@ -103,6 +113,14 @@
     }];
     [rightButton addGestureRecognizer:gestureRecognizer];
     [self nyx_setupRightWithCustomView:rightButton];
+    
+    self.inputView = [[CommentInputView alloc]init];
+    [self.view addSubview:self.inputView];
+    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(100);
+        make.bottom.mas_equalTo(100.0f);
+    }];
 }
 - (void)showAlertView {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -138,6 +156,28 @@
     }];
 }
 
+- (void)setupObservers {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSValue *keyboardFrameValue = [dic valueForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
+        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
+        [UIView animateWithDuration:duration.floatValue animations:^{
+            [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+                if (SCREEN_HEIGHT == keyboardFrame.origin.y) {
+                    make.bottom.mas_equalTo(-(SCREEN_HEIGHT -keyboardFrame.origin.y) + 100.0f);
+                }else {
+                    make.bottom.mas_equalTo(-(SCREEN_HEIGHT -keyboardFrame.origin.y) + 50.0f);
+                }
+            }];
+            [self.view layoutIfNeeded];
+        }];
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataArray.count;
@@ -168,9 +208,12 @@
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
          [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        if (status == ClassMomentClickStatus_Comment) {
+            [self.inputView.textView becomeFirstResponder];
+        }
     };
     [self.view addSubview:self.floatingView];
-    self.floatingView.originRect = rect;
+    [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     ClassMomentFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentFooterView"];
@@ -192,4 +235,10 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.floatingView removeFromSuperview];
 }
+//- (void)showCommentInputView {
+//    [self.inputView becomeFirstResponder];
+//}
+//- (void)hiddenCommentInputView {
+//    [self.inputView resignFirstResponder];
+//}
 @end
