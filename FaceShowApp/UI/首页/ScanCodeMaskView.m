@@ -59,7 +59,6 @@
     }];
     
     self.scanLineImageView = [[UIImageView alloc] init];
-    self.scanLineImageView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
     self.scanLineImageView.image = [UIImage imageNamed:@"扫描"];
     [self addSubview:self.scanLineImageView];
     _scanTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(scanAnimation) userInfo:nil repeats:YES];
