@@ -30,19 +30,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setupNavRightView];
     [self setupUI];
-    WEAK_SELF
-    [self nyx_setupRightWithTitle:@"扫一扫" action:^{
-        STRONG_SELF
-        ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
-        [self.navigationController pushViewController:scanCodeVC animated:YES];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupNavRightView {
+    UIButton *navRightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    navRightBtn.frame = CGRectMake(0, 0, 75, 30);
+    navRightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [navRightBtn setTitle:@"签到" forState:UIControlStateNormal];
+    [navRightBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    [navRightBtn setImage:[[UIImage imageNamed:@"登录背景"] nyx_aspectFillImageWithSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+    navRightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -37, 0, 37);
+    navRightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 37, 0, -37);
+    [navRightBtn addTarget:self action:@selector(navRightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self nyx_setupRightWithCustomView:navRightBtn];
+}
+
+- (void)navRightBtnAction:(UIButton *)sender {
+    ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
+    [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 
 - (void)setupUI {

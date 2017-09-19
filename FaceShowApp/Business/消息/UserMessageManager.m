@@ -32,7 +32,7 @@
 
 - (void)resumeHeartbeat {
     WEAK_SELF
-    self.timer = [[GCDTimer alloc] initWithInterval:5 repeats:YES triggerBlock:^{
+    self.timer = [[GCDTimer alloc] initWithInterval:300 repeats:YES triggerBlock:^{
         STRONG_SELF
         [self fetchUserMessage];
     }];

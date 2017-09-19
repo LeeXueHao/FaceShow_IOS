@@ -33,8 +33,8 @@
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 5)];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    self.tableView.tableHeaderView = headerView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableHeaderView = headerView;
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:@"MessageCell"];
 }
 

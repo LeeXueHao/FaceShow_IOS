@@ -29,6 +29,7 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[TaskCell class] forCellReuseIdentifier:@"TaskCell"];
 }

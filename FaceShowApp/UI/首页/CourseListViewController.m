@@ -11,6 +11,7 @@
 #import "CourseListHeaderView.h"
 #import "EmptyView.h"
 #import "ErrorView.h"
+#import "CourseDetailViewController.h"
 
 @interface CourseListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -98,7 +99,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
+    [self.navigationController pushViewController:courseDetailVC animated:YES];
 }
 
 

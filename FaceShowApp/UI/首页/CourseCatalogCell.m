@@ -10,6 +10,9 @@
 
 @interface CourseCatalogCell()
 
+@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UILabel *titleLabel;
+
 @end
 
 @implementation CourseCatalogCell
@@ -17,19 +20,45 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
+        [self setModel];
     }
     return self;
 }
 
 - (void)setupUI {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    //    self.bottomLineView = [[UIView alloc]init];
-    //    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"666666"];
-    //    [self.contentView addSubview:self.bottomLineView];
-    //    [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.left.right.bottom.mas_equalTo(0);
-    //        make.height.mas_equalTo(1);
-    //    }];
+    
+    self.iconImageView = [[UIImageView alloc] init];
+    self.iconImageView.backgroundColor = [UIColor redColor];
+    [self.contentView addSubview:self.iconImageView];
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.centerY.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
+    
+    self.titleLabel = [[UILabel alloc] init];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [self.contentView addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
+        make.centerY.mas_equalTo(0);
+        make.right.mas_equalTo(-15);
+    }];
+    
+    UIView *bottomLineView = [[UIView alloc] init];
+    bottomLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.contentView addSubview:bottomLineView];
+    [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(1);
+    }];
+}
+
+- (void)setModel {
+    self.titleLabel.text = @"水电费水电费水电费水电费水电费";
 }
 
 @end

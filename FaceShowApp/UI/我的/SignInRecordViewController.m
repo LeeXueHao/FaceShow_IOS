@@ -18,6 +18,7 @@
 @implementation SignInRecordViewController
 
 - (void)viewDidLoad {
+    self.bNeedHeader = NO;
     [super viewDidLoad];
     [self setupUI];
     
@@ -35,8 +36,8 @@
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 5)];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    self.tableView.tableHeaderView = headerView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableHeaderView = headerView;
     [self.tableView registerClass:[SignInRecordCell class] forCellReuseIdentifier:@"SignInRecordCell"];
 }
 

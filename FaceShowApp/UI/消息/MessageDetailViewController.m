@@ -98,6 +98,7 @@
                                    } range:NSMakeRange(0, attributedStr.length)];
     self.detailLabel.attributedText = attributedStr;
     UIImage *detailImage = [UIImage imageNamed:@"登录背景"];
+    detailImage = [detailImage nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / detailImage.size.width * detailImage.size.height)];
     self.detailImageView.image = detailImage;
 }
 
