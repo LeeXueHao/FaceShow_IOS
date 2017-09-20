@@ -20,7 +20,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -57,8 +56,14 @@
     }];
 }
 
-- (void)setModel {
-    self.titleLabel.text = @"水电费水电费水电费水电费水电费";
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLabel.text = title;
+}
+
+- (void)setIconUrl:(NSString *)iconUrl {
+    _iconUrl = iconUrl;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:iconUrl] placeholderImage:[UIImage imageNamed:@""]];
 }
 
 @end

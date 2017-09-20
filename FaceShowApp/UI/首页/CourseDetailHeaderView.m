@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, strong) UILabel *briefLabel;
 @property (nonatomic, strong) UIButton *viewAllBtn;
+@property (nonatomic, strong) UIView *bottomBandView;
 
 @end
 
@@ -169,9 +170,9 @@
         make.size.mas_equalTo(CGSizeMake(85, 31));
     }];
 
-    UIView *bottomBandView = [middleBandView clone];
-    [self addSubview:bottomBandView];
-    [bottomBandView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.bottomBandView = [middleBandView clone];
+    [self addSubview:self.bottomBandView];
+    [self.bottomBandView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.viewAllBtn.mas_bottom).offset(20);
         make.height.mas_equalTo(5);
@@ -182,14 +183,14 @@
     [self addSubview:contentsTitleLabel];
     [contentsTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.centerY.mas_equalTo(bottomBandView.mas_bottom).offset(21.5f);
+        make.centerY.mas_equalTo(self.bottomBandView.mas_bottom).offset(21.5f);
     }];
     
     UIView *bottomLineView = [middleLineView clone];
     [self addSubview:bottomLineView];
     [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(bottomBandView.mas_bottom).offset(43);
+        make.top.mas_equalTo(self.bottomBandView.mas_bottom).offset(43);
         make.height.mas_equalTo(1);
         make.bottom.mas_equalTo(0);
     }];
@@ -197,6 +198,19 @@
 
 - (void)viewAllBtnAction:(UIButton *)sender {
     BLOCK_EXEC(self.viewAllBlock);
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.briefLabel.bounds.size.height < 105) {
+        self.viewAllBtn.hidden = YES;
+        [self.bottomBandView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.briefLabel.mas_bottom).offset(20);
+            make.height.mas_equalTo(5);
+        }];
+        [self.superview layoutIfNeeded];
+    }
 }
 
 - (void)setModel {

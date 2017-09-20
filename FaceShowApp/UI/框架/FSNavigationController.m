@@ -21,6 +21,7 @@
     // 导航背景
     [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.translucent = YES;
+    self.navigationBar.shadowImage = [UIImage new];
     // 标题样式
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                 [UIColor colorWithHexString:@"333333"], NSForegroundColorAttributeName,

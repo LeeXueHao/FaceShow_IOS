@@ -16,7 +16,9 @@
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
 		4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7371F70D146003E2057 /* CourseBriefViewController.m */; };
 		4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */; };
-		4376E73E1F70FC62003E2057 /* ScanCodeNaviRigthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E73D1F70FC62003E2057 /* ScanCodeNaviRigthView.m */; };
+		4376E7431F711A2D003E2057 /* QAFileUploadFirstStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7401F711A2D003E2057 /* QAFileUploadFirstStepRequest.m */; };
+		4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7421F711A2D003E2057 /* QAFileUploadSecondStepRequest.m */; };
+		4376E7471F712DE9003E2057 /* QADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7461F712DE9003E2057 /* QADataManager.m */; };
 		4378DF941F6F62F9005CFE56 /* SignInRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4378DF931F6F62F9005CFE56 /* SignInRecordViewController.m */; };
 		4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4378DF9D1F6F6F57005CFE56 /* SignInDetailViewController.m */; };
 		4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4378DFA11F6F7C45005CFE56 /* ResourceCell.m */; };
@@ -172,8 +174,12 @@
 		4376E7371F70D146003E2057 /* CourseBriefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseBriefViewController.m; sourceTree = "<group>"; };
 		4376E7391F70D4A8003E2057 /* ProfessorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessorDetailViewController.h; sourceTree = "<group>"; };
 		4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessorDetailViewController.m; sourceTree = "<group>"; };
-		4376E73C1F70FC62003E2057 /* ScanCodeNaviRigthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeNaviRigthView.h; sourceTree = "<group>"; };
-		4376E73D1F70FC62003E2057 /* ScanCodeNaviRigthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeNaviRigthView.m; sourceTree = "<group>"; };
+		4376E73F1F711A2D003E2057 /* QAFileUploadFirstStepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileUploadFirstStepRequest.h; sourceTree = "<group>"; };
+		4376E7401F711A2D003E2057 /* QAFileUploadFirstStepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileUploadFirstStepRequest.m; sourceTree = "<group>"; };
+		4376E7411F711A2D003E2057 /* QAFileUploadSecondStepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAFileUploadSecondStepRequest.h; sourceTree = "<group>"; };
+		4376E7421F711A2D003E2057 /* QAFileUploadSecondStepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAFileUploadSecondStepRequest.m; sourceTree = "<group>"; };
+		4376E7451F712DE9003E2057 /* QADataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QADataManager.h; sourceTree = "<group>"; };
+		4376E7461F712DE9003E2057 /* QADataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QADataManager.m; sourceTree = "<group>"; };
 		4378DF921F6F62F9005CFE56 /* SignInRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInRecordViewController.h; sourceTree = "<group>"; };
 		4378DF931F6F62F9005CFE56 /* SignInRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInRecordViewController.m; sourceTree = "<group>"; };
 		4378DF9C1F6F6F57005CFE56 /* SignInDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInDetailViewController.h; sourceTree = "<group>"; };
@@ -340,7 +346,6 @@
 		7C2519671F68EBCD0001B577 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		7C2519681F68EBCD0001B577 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		7C2519691F68EBCD0001B577 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
-		7C25196D1F68EBCD0001B577 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C25196F1F68EBCD0001B577 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C2519711F68EBCD0001B577 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C25197B1F68FE900001B577 /* FSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNavigationController.h; sourceTree = "<group>"; };
@@ -452,8 +457,6 @@
 			children = (
 				43510A961F6B63FA006B2645 /* ScanCodeMaskView.h */,
 				43510A951F6B63FA006B2645 /* ScanCodeMaskView.m */,
-				4376E73C1F70FC62003E2057 /* ScanCodeNaviRigthView.h */,
-				4376E73D1F70FC62003E2057 /* ScanCodeNaviRigthView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -818,7 +821,12 @@
 		7C25196C1F68EBCD0001B577 /* 班级圈 */ = {
 			isa = PBXGroup;
 			children = (
-				7C25196D1F68EBCD0001B577 /* readme.txt */,
+				4376E7451F712DE9003E2057 /* QADataManager.h */,
+				4376E7461F712DE9003E2057 /* QADataManager.m */,
+				4376E73F1F711A2D003E2057 /* QAFileUploadFirstStepRequest.h */,
+				4376E7401F711A2D003E2057 /* QAFileUploadFirstStepRequest.m */,
+				4376E7411F711A2D003E2057 /* QAFileUploadSecondStepRequest.h */,
+				4376E7421F711A2D003E2057 /* QAFileUploadSecondStepRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1319,6 +1327,7 @@
 				9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */,
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
+				4376E7471F712DE9003E2057 /* QADataManager.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
@@ -1355,7 +1364,6 @@
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
-				4376E73E1F70FC62003E2057 /* ScanCodeNaviRigthView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
@@ -1368,6 +1376,7 @@
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */,
 				7C25195E1F68EBA90001B577 /* HttpBaseRequestItem_info.m in Sources */,
+				4376E7431F711A2D003E2057 /* QAFileUploadFirstStepRequest.m in Sources */,
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
@@ -1396,6 +1405,7 @@
 				922084201F6BBEB800F8AAC6 /* MineTableFooterView.m in Sources */,
 				4378DF941F6F62F9005CFE56 /* SignInRecordViewController.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
+				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
 				7C25190A1F68E90C0001B577 /* YXTestViewController.m in Sources */,

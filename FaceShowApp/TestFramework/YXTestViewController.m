@@ -10,13 +10,14 @@
 #import "QuestionnaireResultViewController.h"
 #import "CourseCommentViewController.h"
 #import "QuestionnaireViewController.h"
+#import "QADataManager.h"
 
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"问卷",@"问卷结果",@"comment"];
+    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片"];
     [super viewDidLoad];
 }
 
@@ -33,6 +34,20 @@
 - (void)comment {
     CourseCommentViewController *vc = [[CourseCommentViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)上传图片 {
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [QADataManager uploadFile:[UIImage imageNamed:@"登录背景"] fileName:@"登录背景.jpg" completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        [self.view nyx_showToast:[NSString stringWithFormat:@"上传成功\n资源ID是：%@", item.result.resid]];
+    }];
 }
 
 @end
