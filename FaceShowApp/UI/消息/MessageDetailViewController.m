@@ -7,22 +7,40 @@
 //
 
 #import "MessageDetailViewController.h"
+#import "GetNoticeDetailRequest.h"
+#import "ErrorView.h"
 
 @interface MessageDetailViewController ()
 
+@property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
 @property (nonatomic, strong) UIImageView *detailImageView;
-
+@property (nonatomic, strong) GetNoticeDetailRequest *request;
+@property (nonatomic, strong) GetNoticeDetailRequestItem_Data *data;
 @end
 
 @implementation MessageDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupUI];
-    [self setModel];
+    
+    self.title = @"通知详情";
+    
+    self.errorView = [[ErrorView alloc] init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self setupNoticeData];
+    }];
+    [self.view addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.errorView.hidden = YES;
+    
+    [self setupNoticeData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,10 +48,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setupNoticeData {
+    [self.view nyx_startLoading];
+    [self.request stopRequest];
+    self.request = [[GetNoticeDetailRequest alloc] init];
+    WEAK_SELF
+    [self.request startRequestWithRetClass:[GetNoticeDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            self.errorView.hidden = NO;
+            return;
+        }
+        GetNoticeDetailRequestItem *item = (GetNoticeDetailRequestItem *)retItem;
+        self.data = item.data;
+        [self setupUI];
+    }];
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
-    self.title = @"通知详情";
-    
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self.contentView addSubview:headerView];
@@ -83,12 +117,13 @@
         make.left.mas_equalTo(15);
         make.right.bottom.mas_equalTo(-15);
     }];
+    [self setModel];
 }
 
 - (void)setModel {
-    self.titleLabel.text = @"水电费水电费水电费是的水电费水电费水电费是的水电费水电费水电费是的";
-    self.timeLabel.text = @"老师的 2011.22.22";
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:@"水电费类似快递费就是水电费水电费胜多负少\nssdfsdfsdf\n是的发送来的防守打法水电费手势死了贷款聚少离多看风景熟练度会计法熟练度开发就类似快递费就删了快递费就删了快递费就死了框架"];
+    self.titleLabel.text = self.data.title;
+    self.timeLabel.text = self.data.createTime;
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.data.content];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 21;
     [attributedStr setAttributes:@{

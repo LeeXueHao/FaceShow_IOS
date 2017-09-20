@@ -9,5 +9,5 @@
 #import "ScrollBaseViewController.h"
 
 @interface MessageDetailViewController : ScrollBaseViewController
-
+@property (nonatomic, strong) NSString *noticeId;
 @end

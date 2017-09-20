@@ -7,6 +7,7 @@
 //
 
 #import "MessageCell.h"
+#import "GetNoticeListRequest.h"
 
 @interface MessageCell ()
 
@@ -22,7 +23,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -81,9 +81,12 @@
     }];
 }
 
-- (void)setModel {
-    self.titleLabel.text = @"水电费莱克斯顿见风使舵的福克斯的交付数量的反馈技术";
-    self.timeLabel.text = @"2011.09.09 12:23";
+- (void)setNotice:(GetNoticeListRequestItem_Notice *)notice {
+    _notice = notice;
+    self.titleLabel.text = notice.title;
+    self.timeLabel.text = notice.createTime;
+    self.bedgeImageView.hidden = notice.viewed;
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:notice.attachUrl] placeholderImage:[UIImage imageNamed:@""]];
 }
 
 @end

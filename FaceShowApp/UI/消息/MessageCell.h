@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetNoticeListRequestItem_Notice;
 
 @interface MessageCell : UITableViewCell
+
+@property (nonatomic, strong) GetNoticeListRequestItem_Notice *notice;
 
 @end

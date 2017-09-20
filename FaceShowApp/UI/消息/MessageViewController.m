@@ -9,6 +9,8 @@
 #import "MessageViewController.h"
 #import "MessageCell.h"
 #import "MessageDetailViewController.h"
+#import "NoticeListFetcher.h"
+#import "GetNoticeListRequest.h"
 
 @interface MessageViewController ()
 
@@ -17,6 +19,9 @@
 @implementation MessageViewController
 
 - (void)viewDidLoad {
+    NoticeListFetcher *fetcher = [[NoticeListFetcher alloc] init];
+    fetcher.clazzId = @"";
+    self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
 }
@@ -28,9 +33,6 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.bNeedHeader = NO;
-    [self.view nyx_stopLoading];
-    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 5)];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -41,6 +43,8 @@
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+    GetNoticeListRequestItem_Notice *notice = self.dataArray[indexPath.row];
+    cell.notice = notice;
     return cell;
 }
 
@@ -49,11 +53,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 50;
+    return self.dataArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GetNoticeListRequestItem_Notice *notice = self.dataArray[indexPath.row];
     MessageDetailViewController *messageDetailVC = [[MessageDetailViewController alloc] init];
+    messageDetailVC.noticeId = notice.noticeId;
     [self.navigationController pushViewController:messageDetailVC animated:YES];
 }
 
