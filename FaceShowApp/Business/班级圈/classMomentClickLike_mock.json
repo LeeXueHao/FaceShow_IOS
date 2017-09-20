@@ -1,0 +1,17 @@
+{
+    "code": 0, 
+    "message": "", 
+    "data": {
+        "id": 22, 
+        "claszId": 33, 
+        "momentId": 22, 
+        "createTime": "2017-09-15 10:54:12", 
+        "publisher": {
+            "userId": 123456, 
+            "realName": "霸天虎", 
+            "avatar": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505901045175&di=a2e90e1362c5a092b193e56b86136004&imgtype=0&src=http%3A%2F%2Fimg01.skqkw.cn%3A888%2Ftouxiang%2F2014%2F06%2F20%2F12%2F2014062012163656042.jpg"
+        }
+    }, 
+    "currentUser": { }, 
+    "error": null
+}

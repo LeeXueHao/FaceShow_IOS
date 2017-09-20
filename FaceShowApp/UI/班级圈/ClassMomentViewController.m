@@ -17,13 +17,14 @@
 #import "YXImagePickerController.h"
 #import "CommentInputView.h"
 #import "ClassMomentListFetcher.h"
+#import "ClassMomentClickLikeRequest.h"
 
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
-@property (nonatomic, strong) CommentInputView *inputView
-;
+@property (nonatomic, strong) CommentInputView *inputView;
+
 @end
 
 @implementation ClassMomentViewController
@@ -211,13 +212,15 @@
         [self.floatingView removeFromSuperview];
         return;
     }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:section];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
     WEAK_SELF
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
          [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         if (status == ClassMomentClickStatus_Comment) {
             [self.inputView.textView becomeFirstResponder];
+        }else {
+            [self requestForClickLike:section];
         }
     };
     [self.view addSubview:self.floatingView];
@@ -252,5 +255,22 @@
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.floatingView removeFromSuperview];
+}
+
+#pragma mark - request
+- (void)requestForClickLike:(NSInteger)section {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    ClassMomentClickLikeRequest *request = [[ClassMomentClickLikeRequest alloc] init];
+    request.claszId = @"";
+    request.momentId = moment.momentID;
+    WEAK_SELF
+    [request startRequestWithRetClass:[ClassMomentClickLikeRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        ClassMomentClickLikeRequestItem *item = retItem;
+        if (item.data != nil) {
+            [moment.likes addObject:item.data];
+            [self.tableView reloadData];
+        }
+    }];
 }
 @end

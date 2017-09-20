@@ -14,12 +14,13 @@
 @property (nonatomic, strong) UIView *publicationMomentView;
 @property (nonatomic, strong) SAMTextView *publicationMomentTextView;
 @property (nonatomic, strong) UIImageView *publicationImageView;
-
-@property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
 @end
 
 @implementation PublishMomentViewController
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    DDLogDebug(@"release========>>%@",[self class]);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
@@ -174,6 +175,5 @@
             [self dismiss];
         }
     }];
-    
 }
 @end

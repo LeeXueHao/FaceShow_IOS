@@ -39,8 +39,8 @@
     WEAK_SELF
     [[self.likeButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        [self removeFromSuperview];
         BLOCK_EXEC(self.classMomentFloatingBlock,ClassMomentClickStatus_Like);
+        [self removeFromSuperview];
     }];
     [self addSubview:self.likeButton];
     
@@ -55,8 +55,8 @@
 
     [[self.commentButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        [self removeFromSuperview];
         BLOCK_EXEC(self.classMomentFloatingBlock,ClassMomentClickStatus_Comment);
+        [self removeFromSuperview];
     }];
     [self addSubview:self.commentButton];
     
