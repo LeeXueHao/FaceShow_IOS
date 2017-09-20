@@ -140,6 +140,8 @@
 		923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */; };
 		923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */; };
 		923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F73821F7256DB00D7EA6F /* classMomentClickLike_mock.json */; };
+		923F73871F725C4700D7EA6F /* ClassMomentCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923F73861F725C4700D7EA6F /* ClassMomentCommentRequest.m */; };
+		923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F73881F725DDF00D7EA6F /* classMomentComment_mock.json */; };
 		924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */; };
 		9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */; };
 		9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */; };
@@ -423,6 +425,9 @@
 		923F737F1F72552500D7EA6F /* ClassMomentClickLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentClickLikeRequest.h; sourceTree = "<group>"; };
 		923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentClickLikeRequest.m; sourceTree = "<group>"; };
 		923F73821F7256DB00D7EA6F /* classMomentClickLike_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentClickLike_mock.json; sourceTree = "<group>"; };
+		923F73851F725C4700D7EA6F /* ClassMomentCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentCommentRequest.h; sourceTree = "<group>"; };
+		923F73861F725C4700D7EA6F /* ClassMomentCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentCommentRequest.m; sourceTree = "<group>"; };
+		923F73881F725DDF00D7EA6F /* classMomentComment_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentComment_mock.json; sourceTree = "<group>"; };
 		924ABA491F72403D00ABD453 /* ClassMomentPublishRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentPublishRequest.h; sourceTree = "<group>"; };
 		924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentPublishRequest.m; sourceTree = "<group>"; };
 		9279A6E71F6A5754004A1E2B /* ClassMomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentCell.h; sourceTree = "<group>"; };
@@ -856,6 +861,9 @@
 				923F73821F7256DB00D7EA6F /* classMomentClickLike_mock.json */,
 				923F737F1F72552500D7EA6F /* ClassMomentClickLikeRequest.h */,
 				923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */,
+				923F73881F725DDF00D7EA6F /* classMomentComment_mock.json */,
+				923F73851F725C4700D7EA6F /* ClassMomentCommentRequest.h */,
+				923F73861F725C4700D7EA6F /* ClassMomentCommentRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1250,6 +1258,7 @@
 			files = (
 				922084481F6BD87600F8AAC6 /* 1@2x.png in Resources */,
 				92EF77131F6F633B007C3835 /* 6@2x.png in Resources */,
+				923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */,
 				9220844A1F6BD87600F8AAC6 /* 3@2x.png in Resources */,
 				7C2518F61F68E8130001B577 /* Empty.xib in Resources */,
 				9220844E1F6BD87600F8AAC6 /* 7@2x.png in Resources */,
@@ -1390,6 +1399,7 @@
 				7C2518E81F68E68D0001B577 /* UIButton+ExpandHitArea.m in Sources */,
 				7C212DF11F6B73830007AE01 /* CourseCatalogCell.m in Sources */,
 				4378DFAB1F6FA4CB005CFE56 /* SignInRecordCell.m in Sources */,
+				923F73871F725C4700D7EA6F /* ClassMomentCommentRequest.m in Sources */,
 				7C2518ED1F68E68D0001B577 /* UIImage+YXResize.m in Sources */,
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,

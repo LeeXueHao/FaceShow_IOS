@@ -18,6 +18,7 @@
 #import "CommentInputView.h"
 #import "ClassMomentListFetcher.h"
 #import "ClassMomentClickLikeRequest.h"
+#import "ClassMomentCommentRequest.h"
 
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) CommentInputView *inputView;
 
+@property (nonatomic, assign) NSInteger commtentInteger;
 @end
 
 @implementation ClassMomentViewController
@@ -103,6 +105,10 @@
     [self nyx_setupRightWithCustomView:rightButton];
     
     self.inputView = [[CommentInputView alloc]init];
+    self.inputView.completeBlock = ^(NSString *text) {
+        STRONG_SELF
+        [self requstForPublishComment:text];
+    };
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
@@ -218,6 +224,7 @@
         STRONG_SELF
          [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         if (status == ClassMomentClickStatus_Comment) {
+            self.commtentInteger = section;
             [self.inputView.textView becomeFirstResponder];
         }else {
             [self requestForClickLike:section];
@@ -268,7 +275,36 @@
         STRONG_SELF
         ClassMomentClickLikeRequestItem *item = retItem;
         if (item.data != nil) {
-            [moment.likes addObject:item.data];
+            if (moment.likes.count == 0) {
+                NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like> *mutableArray = [[NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like> alloc] init];
+                [mutableArray addObject:item.data];
+                moment.likes = mutableArray;
+            }else {
+                [moment.likes addObject:item.data];
+            }
+            [self.tableView reloadData];
+        }
+    }];
+}
+- (void)requstForPublishComment:(NSString *)content {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
+    ClassMomentCommentRequest *request = [[ClassMomentCommentRequest alloc] init];
+    request.claszId = @"";
+    request.momentId = moment.momentID;
+    request.content = content;
+    WEAK_SELF
+    [request startRequestWithRetClass:[ClassMomentCommentRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        ClassMomentCommentRequestItem *item = retItem;
+        if (item.data != nil) {
+            item.data.content = content;
+            if (moment.likes.count == 0) {
+                NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment> *mutableArray = [[NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment> alloc] init];
+                [mutableArray addObject:item.data];
+                moment.comments = mutableArray;
+            }else {
+                [moment.comments addObject:item.data];
+            }
             [self.tableView reloadData];
         }
     }];
