@@ -18,12 +18,15 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "ScanCodeViewController.h"
+#import "GetCurrentClazsRequest.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) GetCurrentClazsRequest *request;
+@property (nonatomic, strong) GetCurrentClazsRequestItem *requestItem;
 @end
 
 @implementation MainPageViewController
@@ -31,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavRightView];
-    [self setupUI];
+    [self requestProjectClassInfo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,8 +60,33 @@
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 
+- (void)requestProjectClassInfo {
+    [self.request stopRequest];
+    self.request = [[GetCurrentClazsRequest alloc]init];
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [self.request startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        self.errorView.hidden = YES;
+        self.emptyView.hidden = YES;
+        if (error) {
+            self.errorView.hidden = NO;
+            return;
+        }
+        GetCurrentClazsRequestItem *item = (GetCurrentClazsRequestItem *)retItem;
+        if (!item.data.projectInfo) {
+            self.emptyView.hidden = NO;
+            return;
+        }
+        self.requestItem = item;
+        [self setupUI];
+    }];
+}
+
 - (void)setupUI {
     MainPageTopView *topView = [[MainPageTopView alloc]init];
+    topView.item = self.requestItem;
     [self.view addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
@@ -78,7 +106,7 @@
         make.height.mas_equalTo(40);
     }];
     self.tabControllers = [NSMutableArray array];
-    [self.tabControllers addObject:[[CourseListViewController alloc]init]];
+    [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:self.requestItem.data.clazsInfo.clazsId]];
     [self.tabControllers addObject:[[ResourceListViewController alloc]init]];
     [self.tabControllers addObject:[[TaskListViewController alloc]init]];
     [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
@@ -103,7 +131,7 @@
     self.errorView = [[ErrorView alloc]init];
     [self.errorView setRetryBlock:^{
         STRONG_SELF
-        
+        [self requestProjectClassInfo];
     }];
     [self.view addSubview:self.errorView];
     [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {

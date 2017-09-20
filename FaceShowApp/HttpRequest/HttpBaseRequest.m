@@ -64,6 +64,13 @@
 @end
 
 @implementation HttpBaseRequest
+- (instancetype)init {
+    if (self = [super init]) {
+        self.urlHead = [ConfigManager sharedInstance].server;
+        self.token = [UserManager sharedInstance].userModel.token;
+    }
+    return self;
+}
 - (ASIHTTPRequest *)request {
     return nil; // 子类实现, GET / POST / UPLOAD
 }
@@ -145,7 +152,7 @@
     
     // 业务逻辑错误
     if (item.code.integerValue != 0 || !item.code) {
-        error = [NSError errorWithDomain:@"数据错误" code:-2 userInfo:@{NSLocalizedDescriptionKey:item.desc.length==0? @"数据错误":item.desc}];
+        error = [NSError errorWithDomain:@"数据错误" code:-2 userInfo:@{NSLocalizedDescriptionKey:item.error.message.length==0? @"数据错误":item.error.message}];
         _completeBlock(item, error, self->_isMock);
         return;
     }

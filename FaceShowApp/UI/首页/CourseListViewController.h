@@ -10,5 +10,5 @@
 #import "RefreshDelegate.h"
 
 @interface CourseListViewController : BaseViewController<RefreshDelegate>
-
+- (instancetype)initWithClazsId:(NSString *)clazsId;
 @end

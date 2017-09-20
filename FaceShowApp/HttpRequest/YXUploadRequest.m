@@ -10,12 +10,12 @@
 
 @implementation YXUploadRequest
 
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.token = [UserManager sharedInstance].userModel.token;
-    }
-    return self;
-}
+//- (instancetype)init
+//{
+//    if (self = [super init]) {
+//        self.token = [UserManager sharedInstance].userModel.token;
+//    }
+//    return self;
+//}
 
 @end

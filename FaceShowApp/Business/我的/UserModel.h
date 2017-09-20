@@ -7,7 +7,6 @@
 //
 
 #import <JSONModel/JSONModel.h>
-#import "HttpBaseRequestItem_info.h"
 
 @interface UserModel : JSONModel
 @property (nonatomic, strong) NSString<Optional> *backgroundImageUrl;
@@ -31,5 +30,5 @@
 @property (nonatomic, assign) BOOL isSankeUser;  // YES--是三科用户
 @property (nonatomic, assign) BOOL isAnonymous;
 
-+ (UserModel *)modelFromRawData:(HttpBaseRequestItem_info *)rawData;
+//+ (UserModel *)modelFromRawData:(HttpBaseRequestItem_info *)rawData;
 @end

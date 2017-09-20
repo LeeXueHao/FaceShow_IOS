@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "FSDataMappingTable.h"
 
 @interface QuestionnaireViewController : BaseViewController
-
+- (instancetype)initWithStepId:(NSString *)stepId interactType:(InteractType)type;
 @end

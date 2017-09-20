@@ -104,14 +104,15 @@
         make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(placeTagLabel.mas_centerY);
     }];
-    [self initData];
 }
 
-- (void)initData {
-    self.titleLabel.text = @"国培计划教育信息化管理教育培训";
-    self.timeLabel.text = @"上午 8：30";
-    self.teacherLabel.text = @"蒋大为";
-    self.placeLabel.text = @"北广大厦1018";
+- (void)setItem:(GetCourseListRequestItem_coursesList *)item {
+    _item = item;
+    self.titleLabel.text = item.courseName;
+    self.timeLabel.text = item.startTime;
+    self.teacherLabel.text = item.lecturer;
+    self.placeLabel.text = item.site;
 }
+
 
 @end

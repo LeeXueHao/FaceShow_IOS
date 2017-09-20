@@ -12,14 +12,25 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "CourseDetailViewController.h"
+#import "GetCourseListRequest.h"
 
 @interface CourseListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) NSString *clazsId;
+@property (nonatomic, strong) GetCourseListRequest *request;
+@property (nonatomic, strong) GetCourseListRequestItem *requestItem;
 @end
 
 @implementation CourseListViewController
+
+- (instancetype)initWithClazsId:(NSString *)clazsId {
+    if (self = [super init]) {
+        self.clazsId = clazsId;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +41,31 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)requestCoursesInfo {
+    [self.request stopRequest];
+    self.request = [[GetCourseListRequest alloc]init];
+    self.request.clazsId = self.clazsId;
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [self.request startRequestWithRetClass:[GetCourseListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        self.errorView.hidden = YES;
+        self.emptyView.hidden = YES;
+        if (error) {
+            self.errorView.hidden = NO;
+            return;
+        }
+        GetCourseListRequestItem *item = (GetCourseListRequestItem *)retItem;
+        if (isEmpty(item.data.courses)) {
+            self.emptyView.hidden = NO;
+            return;
+        }
+        self.requestItem = item;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)setupUI {
@@ -58,7 +94,7 @@
     WEAK_SELF
     [self.errorView setRetryBlock:^{
         STRONG_SELF
-        [self refreshUI];
+        [self requestCoursesInfo];
     }];
     [self.view addSubview:self.errorView];
     [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,27 +105,31 @@
 
 #pragma mark - RefreshDelegate
 - (void)refreshUI {
-    NSLog(@"refresh called!");
+    [self requestCoursesInfo];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.requestItem.data.courses.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[section];
+    return courses.coursesList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CourseListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseListCell"];
+    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[indexPath.section];
+    cell.item = courses.coursesList[indexPath.row];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CourseListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CourseListHeaderView"];
-    header.title = @"2017-08-27";
+    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[section];
+    header.title = courses.date;
     return header;
 }
 

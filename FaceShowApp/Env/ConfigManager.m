@@ -42,13 +42,13 @@
 }
 
 #pragma mark - properties
-- (NSString *)server {
-    if ([_server hasSuffix:@"/"]) {
-        return _server;
-    } else {
-        return [_server stringByAppendingString:@"/"];
-    }
-}
+//- (NSString *)server {
+//    if ([_server hasSuffix:@"/"]) {
+//        return _server;
+//    } else {
+//        return [_server stringByAppendingString:@"/"];
+//    }
+//}
 
 - (NSString *)appName {
     if (!_appName) {

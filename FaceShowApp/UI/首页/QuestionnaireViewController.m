@@ -9,24 +9,86 @@
 #import "QuestionnaireViewController.h"
 #import "ChooseQuestionCell.h"
 #import "FillQuestionCell.h"
+#import "GetVoteRequest.h"
+#import "GetQuestionnaireRequest.h"
+#import "QuestionRequestItem.h"
+#import "ErrorView.h"
 
 @interface QuestionnaireViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *submitButton;
+@property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) NSString *stepId;
+@property (nonatomic, assign) InteractType interactType;
+@property (nonatomic, strong) GetVoteRequest *voteRequest;
+@property (nonatomic, strong) GetQuestionnaireRequest *questionnaireRequest;
+@property (nonatomic, strong) QuestionRequestItem *requestItem;
 @end
 
 @implementation QuestionnaireViewController
+
+- (instancetype)initWithStepId:(NSString *)stepId interactType:(InteractType)type {
+    if (self = [super init]) {
+        self.stepId = stepId;
+        self.interactType = type;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupUI];
     [self setupObservers];
+    [self requestPaperInfo];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)requestPaperInfo {
+    if (self.interactType == InteractType_Vote) {
+        [self.voteRequest stopRequest];
+        self.voteRequest = [[GetVoteRequest alloc]init];
+        self.voteRequest.stepId = self.stepId;
+        [self.view nyx_startLoading];
+        WEAK_SELF
+        [self.voteRequest startRequestWithRetClass:[QuestionRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            self.errorView.hidden = YES;
+            if (error) {
+                self.errorView.hidden = NO;
+                return;
+            }
+            [self refreshUIWithItem:retItem];
+        }];
+    }else {
+        [self.questionnaireRequest stopRequest];
+        self.questionnaireRequest = [[GetQuestionnaireRequest alloc]init];
+        self.questionnaireRequest.stepId = self.stepId;
+        [self.view nyx_startLoading];
+        WEAK_SELF
+        [self.questionnaireRequest startRequestWithRetClass:[QuestionRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            self.errorView.hidden = YES;
+            if (error) {
+                self.errorView.hidden = NO;
+                return;
+            }
+            [self refreshUIWithItem:retItem];
+        }];
+    }
+}
+
+- (void)refreshUIWithItem:(QuestionRequestItem *)item {
+    self.requestItem = item;
+    [self.tableView reloadData];
+    self.submitButton.hidden = NO;
+    self.submitButton.enabled = !item.data.isAnswer.boolValue;
 }
 
 - (void)setupUI {
@@ -62,6 +124,19 @@
         make.left.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(49);
     }];
+    self.submitButton.hidden = YES;
+    
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestPaperInfo];
+    }];
+    [self.view addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.errorView.hidden = YES;
 }
 
 - (void)setupObservers {
@@ -90,31 +165,29 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.requestItem.data.questionGroup.questions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row<5) {
+    QuestionRequestItem_question *question = self.requestItem.data.questionGroup.questions[indexPath.row];
+    QuestionType type = [FSDataMappingTable QuestionTypeWithKey:question.questionType];
+    if (type==QuestionType_SingleChoose || type==QuestionType_MultiChoose) {
         ChooseQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChooseQuestionCell"];
-        cell.stem = @"请选择下面这个题";
         cell.index = indexPath.row+1;
-        cell.optionArray = @[@"aaaaaaaaaaaaa111",
-                             @"bbbbbdbfoifoegnoegnognowengoewngowenogwenogewnognoewgnowengiowegoweng222",
-                             @"方便发你哦 供你热工农了333",
-                             @"费二狗我个人弄内购gingNo工农人个人饿哦工日 个还给你N割肉给根荣格尼尔 盖聂弄个人 工农而个侬玩偶尔发我444"];
-        cell.bottomLineHidden = indexPath.row==9;
+        cell.item = question;
+        cell.bottomLineHidden = indexPath.row==self.requestItem.data.questionGroup.questions.count;
         WEAK_SELF
         [cell setAnswerChangeBlock:^{
             STRONG_SELF
             [self refreshSubmitButton];
         }];
         return cell;
-    }else {
+    }
+    if (type == QuestionType_Fill) {
         FillQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FillQuestionCell"];
-        cell.stem = @"请谈谈你对这个问题的看法请谈谈你对这个问题的看法请谈谈你对这个问题的看法";
         cell.index = indexPath.row+1;
-        cell.comment = @"";
-        cell.bottomLineHidden = indexPath.row==9;
+        cell.item = question;
+        cell.bottomLineHidden = indexPath.row==self.requestItem.data.questionGroup.questions.count;
         WEAK_SELF
         [cell setTextChangeBlock:^(NSString *text){
             STRONG_SELF
@@ -126,6 +199,7 @@
         }];
         return cell;
     }
+    return nil;
 }
 
 @end

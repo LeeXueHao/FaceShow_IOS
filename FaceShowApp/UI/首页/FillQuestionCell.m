@@ -14,6 +14,9 @@
 @property (nonatomic, strong) UILabel *stemLabel;
 @property (nonatomic, strong) UILabel *indexLabel;
 @property (nonatomic, strong) SAMTextView *textView;
+
+@property (nonatomic, strong) NSString *stem;
+@property (nonatomic, strong) NSString *comment;
 @end
 
 @implementation FillQuestionCell
@@ -75,10 +78,11 @@
         make.right.mas_equalTo(-15);
         make.top.mas_equalTo(self.stemLabel.mas_bottom).mas_offset(20);
         make.bottom.mas_equalTo(-25);
+        make.height.mas_equalTo(180);
     }];
     
-    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setupObserver {
@@ -102,15 +106,6 @@
     self.bottomLineView.hidden = bottomLineHidden;
 }
 
-- (void)setStem:(NSString *)stem {
-    _stem = stem;
-    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    paraStyle.lineHeightMultiple = 1.2;
-    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
-    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:stem attributes:dic];
-    self.stemLabel.attributedText = attributeStr;
-}
-
 - (void)setIndex:(NSInteger)index {
     _index = index;
     NSString *indexStr = [NSString stringWithFormat:@"%@、",@(index)];
@@ -119,6 +114,23 @@
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:indexStr attributes:dic];
     self.indexLabel.attributedText = attributeStr;
+}
+
+- (void)setItem:(QuestionRequestItem_question *)item {
+    _item = item;
+    self.stem = item.title;
+    if (item.userAnswer.questionAnswers.count > 0) {
+        self.comment = item.userAnswer.questionAnswers.firstObject;
+    }
+}
+
+- (void)setStem:(NSString *)stem {
+    _stem = stem;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:stem attributes:dic];
+    self.stemLabel.attributedText = attributeStr;
 }
 
 - (void)setComment:(NSString *)comment {

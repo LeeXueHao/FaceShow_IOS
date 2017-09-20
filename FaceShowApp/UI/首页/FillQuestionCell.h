@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuestionRequestItem.h"
 
 @interface FillQuestionCell : UITableViewCell
 @property (nonatomic, assign) NSInteger index;
-@property (nonatomic, strong) NSString *stem;
-@property (nonatomic, strong) NSString *comment;
+@property (nonatomic, strong) QuestionRequestItem_question *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @property (nonatomic, strong) void(^textChangeBlock) (NSString *text);
 @property (nonatomic, strong) void(^endEdittingBlock) ();

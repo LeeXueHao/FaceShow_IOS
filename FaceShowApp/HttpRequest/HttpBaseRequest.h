@@ -7,15 +7,15 @@
 //
 
 #import "JSONModel.h"
-#import "HttpBaseRequestItem_info.h"
+#import "HttpBaseRequestItem_Error.h"
 
 static NSString *const YXTokenInValidNotification = @"kYXTokenInValidNotification";
 
 @interface HttpBaseRequestItem : JSONModel
 
 @property (nonatomic, copy) NSString<Optional> *code;
-@property (nonatomic, copy) NSString<Optional> *desc;
-@property (nonatomic, strong) HttpBaseRequestItem_info<Optional> *info;
+@property (nonatomic, copy) NSString<Optional> *message;
+@property (nonatomic, strong) HttpBaseRequestItem_Error<Optional> *error;
 
 @end
 
@@ -29,6 +29,8 @@ typedef void(^HttpRequestCompleteBlock)(id retItem, NSError *error, BOOL isMock)
     BOOL _isMock;
 }
 @property (nonatomic, copy) NSString<Ignore> *urlHead;
+@property (nonatomic, copy) NSString<Optional> *token;
+@property (nonatomic, copy) NSString<Optional> *method;
 - (ASIHTTPRequest *)request;
 - (void)updateRequestUrlAndParams;
 

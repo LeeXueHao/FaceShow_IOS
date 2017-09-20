@@ -6,21 +6,7 @@
 	<integer>2</integer>
 	<key>data</key>
 	<dict>
-		<key>YXExamineRequest</key>
-		<dict>
-			<key>mockEnable</key>
-			<false/>
-			<key>mockFile</key>
-			<array>
-				<dict>
-					<key>fileName</key>
-					<string>examine_mock.json</string>
-					<key>percent</key>
-					<integer>100</integer>
-				</dict>
-			</array>
-		</dict>
-		<key>ClassMomentListRequest</key>
+		<key>ClassMomentCommentRequest</key>
 		<dict>
 			<key>mockEnable</key>
 			<true/>
@@ -28,21 +14,7 @@
 			<array>
 				<dict>
 					<key>fileName</key>
-					<string>classMomentList_mock.json</string>
-					<key>percent</key>
-					<integer>100</integer>
-				</dict>
-			</array>
-		</dict>
-		<key>ClassMomentPublishRequest</key>
-		<dict>
-			<key>mockEnable</key>
-			<true/>
-			<key>mockFile</key>
-			<array>
-				<dict>
-					<key>fileName</key>
-					<string>classMomentPublish_mock.json</string>
+					<string>classMomentComment_mock.json</string>
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>
@@ -62,7 +34,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>ClassMomentCommentRequest</key>
+		<key>ClassMomentPublishRequest</key>
 		<dict>
 			<key>mockEnable</key>
 			<true/>
@@ -70,7 +42,77 @@
 			<array>
 				<dict>
 					<key>fileName</key>
-					<string>classMomentComment_mock.json</string>
+					<string>classMomentPublish_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>ClassMomentListRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>classMomentList_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>GetCurrentClazsRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>GetCurrentClazsRequest_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>GetCourseListRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>GetCourseListRequest_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>GetVoteRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>QuestionRequestItem_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>GetQuestionnaireRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>QuestionRequestItem_mock.json</string>
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>

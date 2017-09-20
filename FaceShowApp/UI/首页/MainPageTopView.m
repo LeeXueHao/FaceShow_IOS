@@ -79,19 +79,19 @@
         make.centerX.mas_equalTo(0);
         make.height.mas_equalTo(26);
     }];
-    [self initData];
 }
 
-- (void)initData {
+- (void)setItem:(GetCurrentClazsRequestItem *)item {
+    _item = item;
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
     paraStyle.alignment = NSTextAlignmentCenter;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
-    NSString *project = @"国培计划-专职培训团队研修-这是第一个项目啦啦啦啦啦啦啦啦啦";
+    NSString *project = item.data.projectInfo.projectName;
     NSAttributedString *projectAttributeStr = [[NSAttributedString alloc] initWithString:project attributes:dic];
     self.projectLabel.attributedText = projectAttributeStr;
     
-    self.classLabel.text = @"一年级二班";
+    self.classLabel.text = item.data.clazsInfo.clazsName;
     [self.classLabel sizeToFit];
     [self.classLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.classLabel.width+20);

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GetCurrentClazsRequest.h"
 
 @interface MainPageTopView : UIView
-
+@property (nonatomic, strong) GetCurrentClazsRequestItem *item;
 @end

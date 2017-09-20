@@ -8,12 +8,16 @@
 
 #import "ChooseQuestionCell.h"
 #import "OptionItemView.h"
+#import "FSDataMappingTable.h"
 
 @interface ChooseQuestionCell()
 @property (nonatomic, strong) NSMutableArray<OptionItemView *> *itemViewArray;
 @property (nonatomic, strong) UIView *bottomLineView;
 @property (nonatomic, strong) UILabel *stemLabel;
 @property (nonatomic, strong) UILabel *indexLabel;
+
+@property (nonatomic, strong) NSString *stem;
+@property (nonatomic, strong) NSArray *optionArray;
 @end
 
 @implementation ChooseQuestionCell
@@ -53,8 +57,8 @@
         make.top.mas_equalTo(25);
     }];
     
-    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
@@ -70,6 +74,16 @@
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:indexStr attributes:dic];
     self.indexLabel.attributedText = attributeStr;
+}
+
+- (void)setItem:(QuestionRequestItem_question *)item {
+    _item = item;
+    self.stem = [NSString stringWithFormat:@"%@(%@)",item.title,item.questionTypeName];
+    NSMutableArray *optionArray = [NSMutableArray array];
+    for (QuestionRequestItem_voteItems *voteItem in item.voteInfo.voteItems) {
+        [optionArray addObject:voteItem.itemName];
+    }
+    self.optionArray = optionArray;
 }
 
 - (void)setStem:(NSString *)stem {
@@ -118,10 +132,11 @@
     WEAK_SELF
     [itemView setClickBlock:^(OptionItemView *view){
         STRONG_SELF
-        if (view.isSelected) {
+        QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
+        if (view.isSelected && type==QuestionType_SingleChoose) {
             [self refreshWithCurrentSelection:view];
-            BLOCK_EXEC(self.answerChangeBlock);
         }
+        BLOCK_EXEC(self.answerChangeBlock);
     }];
     return itemView;
 }

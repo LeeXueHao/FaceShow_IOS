@@ -1,7 +1,7 @@
 {
-    "server":"http://mobile.yanxiu.com/test/api/"
+    "server":"http://orz.yanxiu.com/pxt/platform/data.api"
     "serverList" :{
-        "server":"http://mobile.yanxiu.com/v20/api/",
-        "testServer":"http://u.yanxiu.com/"
+        "server":"http://orz.yanxiu.com/pxt/platform/data.api",
+        "testServer":"http://orz.yanxiu.com/pxt/platform/data.api"
     }
 }
