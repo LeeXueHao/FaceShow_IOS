@@ -122,7 +122,7 @@
 		7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B41F690EB50001B577 /* ClassMomentViewController.m */; };
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
-		9220840D1F6BA8CE00F8AAC6 /* PostMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PostMomentViewController.m */; };
+		9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */; };
 		9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */; };
 		9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */; };
 		922084201F6BBEB800F8AAC6 /* MineTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841F1F6BBEB800F8AAC6 /* MineTableFooterView.m */; };
@@ -137,6 +137,8 @@
 		922084491F6BD87600F8AAC6 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084421F6BD87600F8AAC6 /* 2@2x.png */; };
 		9220844A1F6BD87600F8AAC6 /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084431F6BD87600F8AAC6 /* 3@2x.png */; };
 		9220844E1F6BD87600F8AAC6 /* 7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084471F6BD87600F8AAC6 /* 7@2x.png */; };
+		923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */; };
+		924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */; };
 		9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */; };
 		9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */; };
 		9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */; };
@@ -389,8 +391,8 @@
 		7C2519B71F690ECB0001B577 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9220840B1F6BA8CE00F8AAC6 /* PostMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMomentViewController.h; sourceTree = "<group>"; };
-		9220840C1F6BA8CE00F8AAC6 /* PostMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMomentViewController.m; sourceTree = "<group>"; };
+		9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishMomentViewController.h; sourceTree = "<group>"; };
+		9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishMomentViewController.m; sourceTree = "<group>"; };
 		922084181F6BB8D200F8AAC6 /* MineUserHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserHeaderCell.h; sourceTree = "<group>"; };
 		922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineUserHeaderCell.m; sourceTree = "<group>"; };
 		9220841B1F6BB91400F8AAC6 /* MineDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineDefaultCell.h; sourceTree = "<group>"; };
@@ -415,6 +417,9 @@
 		922084421F6BD87600F8AAC6 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
 		922084431F6BD87600F8AAC6 /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
 		922084471F6BD87600F8AAC6 /* 7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7@2x.png"; sourceTree = "<group>"; };
+		923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentPublish_mock.json; sourceTree = "<group>"; };
+		924ABA491F72403D00ABD453 /* ClassMomentPublishRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentPublishRequest.h; sourceTree = "<group>"; };
+		924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentPublishRequest.m; sourceTree = "<group>"; };
 		9279A6E71F6A5754004A1E2B /* ClassMomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentCell.h; sourceTree = "<group>"; };
 		9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentCell.m; sourceTree = "<group>"; };
 		9279A6EA1F6A5771004A1E2B /* ClassMomentTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentTableHeaderView.h; sourceTree = "<group>"; };
@@ -835,12 +840,14 @@
 				4376E7401F711A2D003E2057 /* QAFileUploadFirstStepRequest.m */,
 				4376E7411F711A2D003E2057 /* QAFileUploadSecondStepRequest.h */,
 				4376E7421F711A2D003E2057 /* QAFileUploadSecondStepRequest.m */,
-				7C25196D1F68EBCD0001B577 /* readme.txt */,
 				928386211F7123ED00205028 /* classMomentList_mock.json */,
 				9283861E1F71053400205028 /* ClassMomentListRequest.h */,
 				9283861F1F71053400205028 /* ClassMomentListRequest.m */,
 				928386231F7124F300205028 /* ClassMomentListFetcher.h */,
 				928386241F7124F300205028 /* ClassMomentListFetcher.m */,
+				923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */,
+				924ABA491F72403D00ABD453 /* ClassMomentPublishRequest.h */,
+				924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -927,8 +934,8 @@
 				9279A6E31F6A53B5004A1E2B /* view */,
 				7C2519B31F690EB50001B577 /* ClassMomentViewController.h */,
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
-				9220840B1F6BA8CE00F8AAC6 /* PostMomentViewController.h */,
-				9220840C1F6BA8CE00F8AAC6 /* PostMomentViewController.m */,
+				9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */,
+				9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1250,6 +1257,7 @@
 				7C2519A21F690BA70001B577 /* readme.txt in Resources */,
 				92EF77111F6F633B007C3835 /* 4@2x.png in Resources */,
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
+				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,
 				7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1317,6 +1325,7 @@
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
 				7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */,
+				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
 				7C212DDA1F6B68BD0007AE01 /* CourseDetailViewController.m in Sources */,
 				7C2519111F68EA820001B577 /* GlobalUtils.m in Sources */,
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
@@ -1333,7 +1342,7 @@
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */,
-				9220840D1F6BA8CE00F8AAC6 /* PostMomentViewController.m in Sources */,
+				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,
 				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
 				43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */,

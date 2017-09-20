@@ -12,7 +12,7 @@
 #import "ClassMomentCell.h"
 #import "ClassMomentTableHeaderView.h"
 #import "ClassMomentFooterView.h"
-#import "PostMomentViewController.h"
+#import "PublishMomentViewController.h"
 #import "ClassMomentFloatingView.h"
 #import "YXImagePickerController.h"
 #import "CommentInputView.h"
@@ -41,6 +41,10 @@
     self.title = @"班级圈";
     [self setupUI];
     [self setupObservers];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.floatingView removeFromSuperview];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -91,7 +95,7 @@
     gestureRecognizer.minimumPressDuration = 1.0f;
     [[gestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
         if (x.state == UIGestureRecognizerStateBegan) {
-            [self presentNextPostViewController:nil];
+            [self presentNextPublishViewController:nil];
         }
     }];
     [rightButton addGestureRecognizer:gestureRecognizer];
@@ -116,7 +120,7 @@
         STRONG_SELF
         [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
             STRONG_SELF
-            [self presentNextPostViewController:selectedImage];
+            [self presentNextPublishViewController:selectedImage];
         }];
     }];
     [alertVC addAction:cameraAction];
@@ -124,15 +128,21 @@
         STRONG_SELF
         [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
             STRONG_SELF
-            [self presentNextPostViewController:selectedImage];
+            [self presentNextPublishViewController:selectedImage];
         }];
     }];
     [alertVC addAction:photoAction];
     [[self nyx_visibleViewController] presentViewController:alertVC animated:YES completion:nil];
 }
-- (void)presentNextPostViewController:(UIImage *)image {
-    PostMomentViewController *VC = [[PostMomentViewController alloc] init];
-    VC.publicationImage = image;
+- (void)presentNextPublishViewController:(UIImage *)image {
+    PublishMomentViewController *VC = [[PublishMomentViewController alloc] init];
+    VC.imageArray = @[image];
+    WEAK_SELF
+    VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
+        STRONG_SELF
+        [self.dataArray insertObject:moment atIndex:0];
+        [self.tableView reloadData];
+    };
     FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:^{
         
@@ -197,6 +207,10 @@
     return headerView;
 }
 - (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
+    if (self.floatingView.superview != nil) {
+        [self.floatingView removeFromSuperview];
+        return;
+    }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:section];
     WEAK_SELF
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
@@ -207,7 +221,15 @@
         }
     };
     [self.view addSubview:self.floatingView];
-    [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment];
+     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    __block BOOL isLike = NO;
+    [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.publisher.userID.integerValue == 123456) {
+            isLike = YES;
+            *stop = YES;
+        }
+    }];
+    [self.floatingView reloadFloatingView:rect withStyle:isLike ? ClassMomentFloatingStyle_Comment : ClassMomentFloatingStyle_Double];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     ClassMomentFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentFooterView"];

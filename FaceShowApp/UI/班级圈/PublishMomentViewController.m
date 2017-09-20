@@ -6,16 +6,19 @@
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "PostMomentViewController.h"
+#import "PublishMomentViewController.h"
 #import <SAMTextView.h>
-@interface PostMomentViewController ()<UITextViewDelegate>
+#import "QADataManager.h"
+@interface PublishMomentViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *publicationMomentView;
 @property (nonatomic, strong) SAMTextView *publicationMomentTextView;
 @property (nonatomic, strong) UIImageView *publicationImageView;
+
+@property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
 @end
 
-@implementation PostMomentViewController
+@implementation PublishMomentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,7 +59,7 @@
     
     
     self.publicationImageView = [[UIImageView alloc] init];
-    self.publicationImageView.image = self.publicationImage;
+    self.publicationImageView.image = self.imageArray[0];
     [self.publicationMomentView addSubview:self.publicationImageView];
     
     
@@ -68,9 +71,11 @@
     WEAK_SELF
     [[leftButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        if (self.imageArray.count == 0) {
+            [self dismiss];
+        }else {
+            [self showAlertView];
+        }
     }];
     [self nyx_setupLeftWithCustomView:leftButton];
     
@@ -81,12 +86,29 @@
     rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        [self.view nyx_startLoading];
+        if (self.imageArray.count == 0) {
+            [self requestForPublishMoment:nil];
+        }else {
+            [self requestForUploadImage];
+        }
     }];
     [self nyx_setupRightWithCustomView:rightButton];
-    
+}
+- (void)showAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退出此次编辑" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    WEAK_SELF
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        STRONG_SELF
+        
+    }];
+    [alertVC addAction:cancleAction];
+    UIAlertAction *backAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        STRONG_SELF
+        [self dismiss];
+    }];
+    [alertVC addAction:backAction];
+    [[self nyx_visibleViewController] presentViewController:alertVC animated:YES completion:nil];
 }
 - (void)setupLayout {
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,10 +135,45 @@
         make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
     }];
 }
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 #pragma mark - UITextViewDelegates
 -(void)textViewDidChange:(UITextView *)textView {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;
     textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:@{                                                                                                    NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:paragraphStyle}];
+}
+#pragma mark - request
+- (void)requestForUploadImage{
+    WEAK_SELF
+    [QADataManager uploadFile:self.imageArray[0] fileName:@"发布" completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+        STRONG_SELF
+         if (item.result.resid == nil){
+            [self.view nyx_showToast:@"发布失败请重试"];
+        }else {
+            [self requestForPublishMoment:item.result.resid];
+        }
+    }];
+}
+- (void)requestForPublishMoment:(NSString *)resourceIds{
+    ClassMomentPublishRequest *request = [[ClassMomentPublishRequest alloc] init];
+    request.claszId = self.claszId;
+    request.content = self.publicationMomentTextView.text;
+    request.resourceIds = resourceIds;
+    WEAK_SELF
+    [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        ClassMomentPublishRequestItem *item = retItem;
+        if (item.data == nil) {
+            [self.view nyx_showToast:@"发布失败请重试"];
+        }else {
+            BLOCK_EXEC(self.publishMomentDataBlock,item.data);
+            [self dismiss];
+        }
+    }];
+    
 }
 @end
