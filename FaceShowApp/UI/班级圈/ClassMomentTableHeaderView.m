@@ -46,7 +46,7 @@
         make.left.equalTo(self.mas_left);
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.mas_bottom).offset(-21.0f);
-        make.height.mas_offset(270.0f);
+        make.height.mas_offset(135.0f);
     }];
     
     [self.userHeaderButton mas_makeConstraints:^(MASConstraintMaker *make) {

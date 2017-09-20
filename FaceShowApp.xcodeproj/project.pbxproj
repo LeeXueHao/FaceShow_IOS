@@ -174,6 +174,7 @@
 		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
 		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
+		92C569971F735B540025815B /* UserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C569961F735B540025815B /* UserInfoRequest.m */; };
 		92EF77111F6F633B007C3835 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF770E1F6F633B007C3835 /* 4@2x.png */; };
 		92EF77121F6F633B007C3835 /* 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF770F1F6F633B007C3835 /* 5@2x.png */; };
 		92EF77131F6F633B007C3835 /* 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF77101F6F633B007C3835 /* 6@2x.png */; };
@@ -501,6 +502,8 @@
 		92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPhotosViewController.m; sourceTree = "<group>"; };
 		92A7CACD1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TemplateLayoutHeaderView.h"; sourceTree = "<group>"; };
 		92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TemplateLayoutHeaderView.m"; sourceTree = "<group>"; };
+		92C569951F735B540025815B /* UserInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoRequest.h; sourceTree = "<group>"; };
+		92C569961F735B540025815B /* UserInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoRequest.m; sourceTree = "<group>"; };
 		92EF770E1F6F633B007C3835 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
 		92EF770F1F6F633B007C3835 /* 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5@2x.png"; sourceTree = "<group>"; };
 		92EF77101F6F633B007C3835 /* 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6@2x.png"; sourceTree = "<group>"; };
@@ -900,6 +903,8 @@
 				7C2519671F68EBCD0001B577 /* UserManager.m */,
 				7C2519681F68EBCD0001B577 /* UserModel.h */,
 				7C2519691F68EBCD0001B577 /* UserModel.m */,
+				92C569951F735B540025815B /* UserInfoRequest.h */,
+				92C569961F735B540025815B /* UserInfoRequest.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1490,6 +1495,7 @@
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
 				9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */,
+				92C569971F735B540025815B /* UserInfoRequest.m in Sources */,
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
 				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
@@ -1523,7 +1529,6 @@
 				7C212DF41F6BA72F0007AE01 /* MainPageTopView.m in Sources */,
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */,
-				7C25195E1F68EBA90001B577 /* HttpBaseRequestItem_info.m in Sources */,
 				4376E7431F711A2D003E2057 /* QAFileUploadFirstStepRequest.m in Sources */,
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,

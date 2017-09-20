@@ -87,7 +87,9 @@
     NSString *key = NSStringFromClass([self class]);
     if ([[YXMockManager sharedInstance] hasMockDataForKey:key]) {
         self->_isMock = YES;
+        WEAK_SELF
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([YXMockManager sharedInstance].requestDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            STRONG_SELF
             NSString *json = [[YXMockManager sharedInstance] mockDataForKey:key];
             [self dealWithResponseJson:json];
         });

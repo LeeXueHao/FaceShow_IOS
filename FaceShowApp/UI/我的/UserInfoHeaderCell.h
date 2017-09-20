@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UserInfoHeaderCell : UITableViewCell
-@property (nonatomic, strong) UIImage *testImage;
+- (void)reload;
 @end

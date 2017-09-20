@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface UserInfoViewController : BaseViewController
-
+@property (nonatomic, copy) void(^userInfoReloadBlock)(void);
 @end

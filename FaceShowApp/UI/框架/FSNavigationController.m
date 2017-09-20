@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     self.interactivePopGestureRecognizer.enabled = NO;
     // 导航背景
-    [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[[UIColor whiteColor] colorWithAlphaComponent:0.9f]] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.translucent = YES;
     self.navigationBar.shadowImage = [UIImage new];
     // 标题样式

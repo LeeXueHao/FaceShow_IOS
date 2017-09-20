@@ -39,6 +39,7 @@
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
     NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:_moment.content?:@"" attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
     self.contentLabel.attributedText = attributedString;
     if ([self sizeForTitle:_moment.content?:@""] >= 85.0f) {
@@ -59,7 +60,7 @@
         self.openCloseButton.selected = _moment.isOpen.boolValue;
         [self.openCloseButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_offset(14.0f);
-            make.top.equalTo(self.contentLabel.mas_bottom).offset(15.0f);
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(10.0f);
         }];
     }else {
         self.openCloseButton.selected = _moment.isOpen.boolValue;
@@ -245,74 +246,6 @@
     
     
 }
-//- (void)setTestInteger:(NSInteger)testInteger {
-//    _testInteger = testInteger;
-//    NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
-//    for (int i = 0; i < MIN(_testInteger, 1); i ++) {
-//        PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-//        model.thumbnail = @"http://scc.jsyxw.cn/course/89/8489.jpg";
-//        model.original = @"http://scc.jsyxw.cn/course/89/8489.jpg";
-//        [mutableArray addObject:model];
-//    }
-//    self.photosView.imageModelMutableArray = mutableArray;
-//    [self.photosView reloadData];
-//    if (testInteger == 0) {
-//        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.photosView.mas_bottom).offset(10.0f);
-//        }];
-//    }else {
-//        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.photosView.mas_bottom).offset(20.0f);
-//        }];
-//    }
-//    NSString *tempString = @"";
-//    if (_testInteger == 2 || _testInteger == 4) {
-//        tempString = @"撒撒娇发空间发骄傲看了房间阿发了空间啊洛克菲勒卡离开房间拉风的卡发发德哈卡就回复拉科技回复路口就哈的咖啡机红辣椒客户分类江安河类释放几哈垃圾的回复来看是的哈卡就的士速递";
-//    }else {
-//        tempString = @"撒撒娇发空间发骄傲看了房间阿发了空间啊洛克菲勒卡离开房间拉风的卡发发德哈卡就回复拉科技回复路口就哈的咖啡机红辣椒客户分类江安河";
-//    }
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    paragraphStyle.lineHeightMultiple = 1.2f;
-//    NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:tempString attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
-//    self.contentLabel.attributedText = attributedString;
-//    if ([self sizeForTitle:tempString] >= 85.0f) {
-//        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.nameLabel.mas_left);
-//            make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
-//            make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-//            make.height.mas_offset(85.0f).priorityHigh();
-//        }];
-//        [self.openCloseButton mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.height.mas_offset(14.0f);
-//            make.top.equalTo(self.contentLabel.mas_bottom).offset(15.0f);
-//        }];
-//    }else {
-//        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.nameLabel.mas_left);
-//            make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
-//            make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-//        }];
-//        [self.openCloseButton mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.height.mas_offset(0.0001f);
-//            make.top.equalTo(self.contentLabel.mas_bottom);
-//        }];
-//    }
-//    self.likeView.type = ClassMomentLikeType_Double;
-//    [self.likeView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.commentButton.mas_bottom);
-//        make.left.equalTo(self.nameLabel.mas_left);
-//        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-//        make.bottom.equalTo(self.contentView.mas_bottom);
-//    }];
-//    
-//    [self.likeView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.commentButton.mas_bottom).offset(10.0f);
-//        make.left.equalTo(self.nameLabel.mas_left);
-//        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-//        make.bottom.equalTo(self.contentView.mas_bottom);
-//        make.height.mas_offset(0.0001f);
-//    }];
-//}
 - (CGFloat)sizeForTitle:(NSString *)title {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;

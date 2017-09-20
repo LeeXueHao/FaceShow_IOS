@@ -14,9 +14,12 @@
 #import "FSDefaultHeaderFooterView.h"
 #import "UserInfoViewController.h"
 #import "SignInRecordViewController.h"
+#import "UserModel.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titleArray;
+
+@property (nonatomic, strong) UserInfoRequest *userInfoRequest;
 
 @end
 
@@ -28,6 +31,9 @@
     self.titleArray = @[@{@"image":@"sas",@"title":@"签到记录"}];
     [self setupUI];
     [self setupLayout];
+    if ([UserManager sharedInstance].userModel == nil) {
+        [self requestForUserInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,6 +90,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         UserInfoViewController *VC = [[UserInfoViewController alloc] init];
+        WEAK_SELF
+        VC.userInfoReloadBlock = ^{
+            STRONG_SELF
+            [self.tableView reloadData];
+        };
         [self.navigationController pushViewController:VC animated:YES];
 //        UIViewController *VC = [[NSClassFromString(@"PhotoChooseViewController") alloc] init];
 //        [self.navigationController pushViewController:VC animated:YES];
@@ -103,6 +114,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         MineUserHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineUserHeaderCell" forIndexPath:indexPath];
+        [cell reload];
         return cell;
     }else {
         MineDefaultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineDefaultCell" forIndexPath:indexPath];
@@ -110,5 +122,21 @@
         return cell;
     }
 }
-
+#pragma mark - request
+- (void)requestForUserInfo{
+    UserInfoRequest *request = [[UserInfoRequest alloc] init];
+//    request.userId = @"";
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [request startRequestWithRetClass:[UserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        UserInfoRequestItem *item = retItem;
+        if (item.data != nil) {
+            [UserManager sharedInstance].userModel = [UserModel modelFromRawData:item.data];
+            [self.tableView reloadData];
+        }
+    }];
+    self.userInfoRequest = request;
+}
 @end

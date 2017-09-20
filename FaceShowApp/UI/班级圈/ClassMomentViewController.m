@@ -27,6 +27,9 @@
 @property (nonatomic, strong) CommentInputView *inputView;
 
 @property (nonatomic, assign) NSInteger commtentInteger;
+
+@property (nonatomic, strong) ClassMomentClickLikeRequest *clickLikeRequest;
+@property (nonatomic, strong) ClassMomentCommentRequest *commentRequest;
 @end
 
 @implementation ClassMomentViewController
@@ -44,6 +47,8 @@
     self.title = @"班级圈";
     [self setupUI];
     [self setupObservers];
+//    self.edgesForExtendedLayout = UIRectEdgeAll;
+
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -77,6 +82,7 @@
     [self.tableView registerClass:[ClassMomentCell class] forCellReuseIdentifier:@"ClassMomentCell"];
     [self.tableView registerClass:[ClassMomentFooterView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentFooterView"];
     self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
+    self.headerView.hidden = YES;
     self.tableView.tableHeaderView = self.headerView;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
@@ -116,6 +122,10 @@
         make.bottom.mas_equalTo(100.0f);
     }];
 }
+- (void)stopAnimation {
+    [super stopAnimation];
+    self.headerView.hidden = NO;
+}
 - (void)showAlertView {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     WEAK_SELF
@@ -143,7 +153,9 @@
 }
 - (void)presentNextPublishViewController:(UIImage *)image {
     PublishMomentViewController *VC = [[PublishMomentViewController alloc] init];
-    VC.imageArray = @[image];
+    if (image != nil) {
+        VC.imageArray = @[image];
+    }
     WEAK_SELF
     VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
         STRONG_SELF
@@ -285,6 +297,7 @@
             [self.tableView reloadData];
         }
     }];
+    self.clickLikeRequest = request;
 }
 - (void)requstForPublishComment:(NSString *)content {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
@@ -305,8 +318,10 @@
             }else {
                 [moment.comments addObject:item.data];
             }
+            self.inputView.textView.text = nil;
             [self.tableView reloadData];
         }
     }];
+    self.commentRequest = request;
 }
 @end

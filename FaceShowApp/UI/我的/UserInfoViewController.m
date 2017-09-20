@@ -12,10 +12,13 @@
 #import "UserInfoDefaultCell.h"
 #import "FSDefaultHeaderFooterView.h"
 #import "YXImagePickerController.h"
+#import "UserModel.h"
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
+
+@property (nonatomic, strong) UserInfoRequest *userInfoRequest;
 @end
 
 @implementation UserInfoViewController
@@ -23,13 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我";
-    self.contentMutableArray = [@[@{@"title":@"姓名",@"content":@"孙长龙"},
-                                  @{@"title":@"联系电话",@"content":@"13910102038"},
-                                  @{@"title":@"性别",@"content":@"男"},
-                                  @{@"title":@"学段",@"content":@"高中"},
-                                  @{@"title":@"学科",@"content":@"数学"}] mutableCopy];
+    self.contentMutableArray =
+    [@[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无"},
+       @{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"},
+       @{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sex?:@"暂无"},
+       @{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stage?:@"暂无"},
+       @{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subject?:@"暂无"}] mutableCopy];
     [self setupUI];
     [self setupLayout];
+    if ([UserManager sharedInstance].userModel == nil) {
+        [self requestForUserInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,6 +129,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         UserInfoHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoHeaderCell" forIndexPath:indexPath];
+        [cell reload];
         return cell;
     }else {
         UserInfoDefaultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoDefaultCell" forIndexPath:indexPath];
@@ -129,9 +137,38 @@
         return cell;
     }
 }
-#pragma mark - request 
+#pragma mark - request
 - (void)requestForUpdateHeaderImage:(UIImage *)image {
     UserInfoHeaderCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.testImage = image;
+    [cell reload];
+    BLOCK_EXEC(self.userInfoReloadBlock);
+}
+#pragma mark - request
+- (void)requestForUserInfo{
+    UserInfoRequest *request = [[UserInfoRequest alloc] init];
+    //    request.userId = @"";
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [request startRequestWithRetClass:[UserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        UserInfoRequestItem *item = retItem;
+        if (item.data != nil) {
+            [UserManager sharedInstance].userModel = [UserModel modelFromRawData:item.data];
+            self.contentMutableArray = [@[@{@"title":@"姓名",@"content":@"孙长龙"},
+                                          @{@"title":@"联系电话",@"content":@"13910102038"},
+                                          @{@"title":@"性别",@"content":@"男"},
+                                          @{@"title":@"学段",@"content":@"高中"},
+                                          @{@"title":@"学科",@"content":@"数学"}] mutableCopy];
+            
+            self.contentMutableArray[0][@"content"] = [UserManager sharedInstance].userModel.realName?:@"暂无";
+            self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";
+            self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sex?:@"暂无";
+            self.contentMutableArray[3][@"content"] = [UserManager sharedInstance].userModel.stage?:@"暂无";
+            self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.subject?:@"暂无";
+            [self.tableView reloadData];
+        }
+    }];
+    self.userInfoRequest = request;
 }
 @end

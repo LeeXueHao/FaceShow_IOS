@@ -23,18 +23,17 @@
 }
 #pragma mark - setupUI
 - (void)setupUI {
-//    UIView *selectedBgView = [[UIView alloc]init];
-//    selectedBgView.backgroundColor = [UIColor colorWithHexString:@"f2f6fa"];
-//    self.selectedBackgroundView = selectedBgView;
+    //    UIView *selectedBgView = [[UIView alloc]init];
+    //    selectedBgView.backgroundColor = [UIColor colorWithHexString:@"f2f6fa"];
+    //    self.selectedBackgroundView = selectedBgView;
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.userHeaderImageView = [[UIImageView alloc] init];
     self.userHeaderImageView.backgroundColor = [UIColor redColor];
+    
     self.userHeaderImageView.clipsToBounds = YES;
     self.userHeaderImageView.layer.cornerRadius = 6.0f;
     [self.contentView addSubview:self.userHeaderImageView];
-    
     self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.text = @"孙长龙";
     self.nameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self.contentView addSubview:self.nameLabel];
@@ -82,5 +81,9 @@
         self.nextImageView.image = [UIImage imageNamed:@"wei"];
     }
 }
-
+- (void)reload {
+    [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"默认头像"]];
+    self.nameLabel.text = [UserManager sharedInstance].userModel.realName?:@"暂无";
+    
+}
 @end

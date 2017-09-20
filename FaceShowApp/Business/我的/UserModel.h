@@ -7,28 +7,25 @@
 //
 
 #import <JSONModel/JSONModel.h>
-
+#import "UserInfoRequest.h"
 @interface UserModel : JSONModel
-@property (nonatomic, strong) NSString<Optional> *backgroundImageUrl;
-@property (nonatomic, strong) NSString<Optional> *portraitUrl;
-@property (nonatomic, strong) NSString<Optional> *name;
-@property (nonatomic, strong) NSString<Optional> *nickname;
-@property (nonatomic, strong) NSString<Optional> *districtID;
-@property (nonatomic, strong) NSString<Optional> *provinceID;
-@property (nonatomic, strong) NSString<Optional> *cityID;
-@property (nonatomic, strong) NSString<Optional> *stageID;
-@property (nonatomic, strong) NSString<Optional> *subjectID;
-@property (nonatomic, strong) NSString<Optional> *truename;
-@property (nonatomic, strong) NSString<Optional> *oldUserId;//用户中心id
-@property (nonatomic, strong) NSString<Optional> *userID;
-@property (nonatomic, strong) NSString<Optional> *experience;//工作年限
-@property (nonatomic, strong) NSString<Optional> *role;//角色
-@property (nonatomic, strong) NSString<Optional> *gender;//性别
+@property (nonatomic, copy) NSString<Optional> *userID;
+@property (nonatomic, copy) NSString<Optional> *realName;
+@property (nonatomic, copy) NSString<Optional> *mobilePhone;
+@property (nonatomic, copy) NSString<Optional> *email;
 
-@property (nonatomic, strong) NSString<Optional> *token;
-@property (nonatomic, assign) BOOL isTaged;  //NO--未设置学段学科，YES--已设置
-@property (nonatomic, assign) BOOL isSankeUser;  // YES--是三科用户
-@property (nonatomic, assign) BOOL isAnonymous;
+@property (nonatomic, copy) NSString<Optional> *stageID;
+@property (nonatomic, copy) NSString<Optional> *stage;
+@property (nonatomic, copy) NSString<Optional> *subjectID;
+@property (nonatomic, copy) NSString<Optional> *subject;
+@property (nonatomic, copy) NSString<Optional> *userStatus;
+@property (nonatomic, copy) NSString<Optional> *ucnterID;
+@property (nonatomic, copy) NSString<Optional> *sexID;
+@property (nonatomic, copy) NSString<Optional> *sex;
+@property (nonatomic, copy) NSString<Optional> *school;
+@property (nonatomic, copy) NSString<Optional> *avatarUrl;
 
-//+ (UserModel *)modelFromRawData:(HttpBaseRequestItem_info *)rawData;
+@property (nonatomic, copy) NSString<Optional> *token;
+
++ (UserModel *)modelFromRawData:(UserInfoRequestItem_Data *)rawData;
 @end

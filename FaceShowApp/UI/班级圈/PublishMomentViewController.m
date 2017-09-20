@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIView *publicationMomentView;
 @property (nonatomic, strong) SAMTextView *publicationMomentTextView;
 @property (nonatomic, strong) UIImageView *publicationImageView;
+
+@property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
 @end
 
 @implementation PublishMomentViewController
@@ -60,7 +62,9 @@
     
     
     self.publicationImageView = [[UIImageView alloc] init];
-    self.publicationImageView.image = self.imageArray[0];
+    if (self.imageArray.count > 0) {
+        self.publicationImageView.image = self.imageArray[0];
+    }
     [self.publicationMomentView addSubview:self.publicationImageView];
     
     
@@ -175,5 +179,6 @@
             [self dismiss];
         }
     }];
+    self.publishRequest = request;
 }
 @end
