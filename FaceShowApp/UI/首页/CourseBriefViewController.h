@@ -10,4 +10,6 @@
 
 @interface CourseBriefViewController : ScrollBaseViewController
 
+@property (nonatomic, strong) NSString *courseBrief;
+
 @end

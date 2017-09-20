@@ -1,0 +1,22 @@
+{
+    "code": 0,
+    "message": "",
+    "data": {
+        "id": 1,
+        "title": "测试消息",
+        "content": "这是一条测试消息",
+        "authorId": 1,
+        "clazzId": 1,
+        "createTime": "2017-09-15 10:54:12",
+        "updateTime": "2017-09-15 10:54:12",
+        "state": 1,
+        "attachUrl": "http://www.yanxiu.com",
+        "readNum": 9,
+        "authorName": null,
+        "createTimeStr": null,
+        "updateTimeStr": null,
+        "viewed": true
+    },
+    "currentUser": "",
+    "error": null
+}

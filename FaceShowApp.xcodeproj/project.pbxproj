@@ -10,6 +10,15 @@
 		431D758F1F6E171700E0073B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431D758E1F6E171700E0073B /* MessageCell.m */; };
 		431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 431D75911F6E2D9300E0073B /* MessageDetailViewController.m */; };
 		431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 431D75971F6EB43E00E0073B /* ScanCodeResultViewController.m */; };
+		43210E541F7226220049C381 /* GetCourseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E531F7226220049C381 /* GetCourseRequest.m */; };
+		43210E581F724B3D0049C381 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E571F724B3D0049C381 /* LoginRequest.m */; };
+		43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E5A1F724ECE0049C381 /* LoginDataManager.m */; };
+		43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 43210E5C1F7256880049C381 /* GetCourse_Mock.json */; };
+		43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E601F726A070049C381 /* GetNoticeListRequest.m */; };
+		43210E631F726DF00049C381 /* GetNoticeList_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 43210E621F726DF00049C381 /* GetNoticeList_Mock.json */; };
+		43210E661F726E3D0049C381 /* NoticeListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E651F726E3D0049C381 /* NoticeListFetcher.m */; };
+		43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */; };
+		43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */; };
 		43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A941F6B63FA006B2645 /* ScanCodeViewController.m */; };
 		43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A951F6B63FA006B2645 /* ScanCodeMaskView.m */; };
 		43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A9F1F6B7CF8006B2645 /* UserMessageManager.m */; };
@@ -180,6 +189,21 @@
 		431D75911F6E2D9300E0073B /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
 		431D75961F6EB43E00E0073B /* ScanCodeResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeResultViewController.h; sourceTree = "<group>"; };
 		431D75971F6EB43E00E0073B /* ScanCodeResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeResultViewController.m; sourceTree = "<group>"; };
+		43210E521F7226220049C381 /* GetCourseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCourseRequest.h; sourceTree = "<group>"; };
+		43210E531F7226220049C381 /* GetCourseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCourseRequest.m; sourceTree = "<group>"; };
+		43210E561F724B3D0049C381 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
+		43210E571F724B3D0049C381 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
+		43210E591F724ECE0049C381 /* LoginDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginDataManager.h; path = "登录注册/LoginDataManager.h"; sourceTree = "<group>"; };
+		43210E5A1F724ECE0049C381 /* LoginDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginDataManager.m; path = "登录注册/LoginDataManager.m"; sourceTree = "<group>"; };
+		43210E5C1F7256880049C381 /* GetCourse_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetCourse_Mock.json; sourceTree = "<group>"; };
+		43210E5F1F726A070049C381 /* GetNoticeListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNoticeListRequest.h; sourceTree = "<group>"; };
+		43210E601F726A070049C381 /* GetNoticeListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNoticeListRequest.m; sourceTree = "<group>"; };
+		43210E621F726DF00049C381 /* GetNoticeList_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetNoticeList_Mock.json; sourceTree = "<group>"; };
+		43210E641F726E3D0049C381 /* NoticeListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListFetcher.h; sourceTree = "<group>"; };
+		43210E651F726E3D0049C381 /* NoticeListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListFetcher.m; sourceTree = "<group>"; };
+		43210E671F7271D30049C381 /* GetNoticeDetailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNoticeDetailRequest.h; sourceTree = "<group>"; };
+		43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNoticeDetailRequest.m; sourceTree = "<group>"; };
+		43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetNoticeDetail_Mock.json; sourceTree = "<group>"; };
 		43510A931F6B63FA006B2645 /* ScanCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewController.h; sourceTree = "<group>"; };
 		43510A941F6B63FA006B2645 /* ScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewController.m; sourceTree = "<group>"; };
 		43510A951F6B63FA006B2645 /* ScanCodeMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeMaskView.m; sourceTree = "<group>"; };
@@ -379,7 +403,6 @@
 		7C2519671F68EBCD0001B577 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		7C2519681F68EBCD0001B577 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		7C2519691F68EBCD0001B577 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
-		7C25196F1F68EBCD0001B577 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		7C25197B1F68FE900001B577 /* FSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNavigationController.h; sourceTree = "<group>"; };
 		7C25197C1F68FE900001B577 /* FSNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNavigationController.m; sourceTree = "<group>"; };
 		7C2519811F68FF7F0001B577 /* EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
@@ -498,6 +521,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43210E551F724B050049C381 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				43210E561F724B3D0049C381 /* LoginRequest.h */,
+				43210E571F724B3D0049C381 /* LoginRequest.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		43210E5E1F7269E10049C381 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				43210E5F1F726A070049C381 /* GetNoticeListRequest.h */,
+				43210E601F726A070049C381 /* GetNoticeListRequest.m */,
+				43210E621F726DF00049C381 /* GetNoticeList_Mock.json */,
+				43210E671F7271D30049C381 /* GetNoticeDetailRequest.h */,
+				43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */,
+				43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
 		43510A991F6B6407006B2645 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +884,8 @@
 				7C25196A1F68EBCD0001B577 /* 消息 */,
 				7C25196C1F68EBCD0001B577 /* 班级圈 */,
 				7C25196E1F68EBCD0001B577 /* 登录注册 */,
+				43210E591F724ECE0049C381 /* LoginDataManager.h */,
+				43210E5A1F724ECE0049C381 /* LoginDataManager.m */,
 				7C2519701F68EBCD0001B577 /* 首页 */,
 				7C24E1F11F72494A00A6921B /* FSDataMappingTable.h */,
 				7C24E1F21F72494A00A6921B /* FSDataMappingTable.m */,
@@ -860,8 +907,11 @@
 		7C25196A1F68EBCD0001B577 /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
+				43210E5E1F7269E10049C381 /* Request */,
 				43510A9E1F6B7CF8006B2645 /* UserMessageManager.h */,
 				43510A9F1F6B7CF8006B2645 /* UserMessageManager.m */,
+				43210E641F726E3D0049C381 /* NoticeListFetcher.h */,
+				43210E651F726E3D0049C381 /* NoticeListFetcher.m */,
 			);
 			path = "消息";
 			sourceTree = "<group>";
@@ -896,7 +946,7 @@
 		7C25196E1F68EBCD0001B577 /* 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
-				7C25196F1F68EBCD0001B577 /* readme.txt */,
+				43210E551F724B050049C381 /* Request */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -917,6 +967,9 @@
 				7C24E1FA1F72575E00A6921B /* GetVoteRequest.m */,
 				7C24E1FC1F72582B00A6921B /* GetQuestionnaireRequest.h */,
 				7C24E1FD1F72582B00A6921B /* GetQuestionnaireRequest.m */,
+				43210E5C1F7256880049C381 /* GetCourse_Mock.json */,
+				43210E521F7226220049C381 /* GetCourseRequest.h */,
+				43210E531F7226220049C381 /* GetCourseRequest.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -1311,12 +1364,15 @@
 				7C24E1F01F7241B300A6921B /* GetCourseListRequest_mock.json in Resources */,
 				7C2519321F68EB2A0001B577 /* errorcode_mock.json in Resources */,
 				7C2519A21F690BA70001B577 /* readme.txt in Resources */,
+				43210E631F726DF00049C381 /* GetNoticeList_Mock.json in Resources */,
 				92EF77111F6F633B007C3835 /* 4@2x.png in Resources */,
 				923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */,
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
 				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,
 				7C24E1EB1F72262F00A6921B /* GetCurrentClazsRequest_mock.json in Resources */,
 				7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */,
+				43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */,
+				43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1394,6 +1450,7 @@
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
 				4378DFAC1F6FA4CB005CFE56 /* SignInRecordHeaderView.m in Sources */,
 				922084261F6BC47600F8AAC6 /* UserInfoViewController.m in Sources */,
+				43210E581F724B3D0049C381 /* LoginRequest.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
@@ -1414,8 +1471,10 @@
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
+				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
 				9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */,
+				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
@@ -1457,6 +1516,7 @@
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
+				43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,
 				7C25198C1F69003A0001B577 /* SimpleAlertButton.m in Sources */,
 				7C2519A51F690C840001B577 /* AppDelegateHelper.m in Sources */,
@@ -1504,6 +1564,7 @@
 				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
+				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */,
 				7C2518AC1F68E5C70001B577 /* main.m in Sources */,
@@ -1511,6 +1572,7 @@
 				7C2519861F68FF980001B577 /* ErrorView.m in Sources */,
 				431D758F1F6E171700E0073B /* MessageCell.m in Sources */,
 				7C212DC41F6A5CF60007AE01 /* CourseListViewController.m in Sources */,
+				43210E661F726E3D0049C381 /* NoticeListFetcher.m in Sources */,
 				7C2519161F68EA8A0001B577 /* FileLogger.m in Sources */,
 				922084291F6BC4D200F8AAC6 /* UserInfoHeaderCell.m in Sources */,
 				7C24E1E91F721C7B00A6921B /* HttpBaseRequestItem_Error.m in Sources */,

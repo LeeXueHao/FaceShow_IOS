@@ -7,7 +7,8 @@
 //
 
 #import "ScrollBaseViewController.h"
+@class GetCourseRequestItem_LecturerInfo;
 
 @interface ProfessorDetailViewController : ScrollBaseViewController
-
+@property (nonatomic, strong) GetCourseRequestItem_LecturerInfo *lecturerInfo;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CourseDetailHeaderView.h"
+#import "GetCourseRequest.h"
 
 @interface CourseDetailHeaderView ()
 
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *authorLabel;
 @property (nonatomic, strong) UILabel *addressLabel;
+@property (nonatomic, strong) UIView *middleLineView;
 @property (nonatomic, strong) UILabel *briefLabel;
 @property (nonatomic, strong) UIButton *viewAllBtn;
 @property (nonatomic, strong) UIView *bottomBandView;
@@ -26,7 +28,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -133,9 +134,9 @@
         make.centerY.mas_equalTo(middleBandView.mas_bottom).offset(21.5f);
     }];
     
-    UIView *middleLineView = [middleBandView clone];
-    [self addSubview:middleLineView];
-    [middleLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.middleLineView = [middleBandView clone];
+    [self addSubview:self.middleLineView];
+    [self.middleLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(middleBandView.mas_bottom).offset(43);
         make.height.mas_equalTo(1);
@@ -146,9 +147,8 @@
     [self addSubview:self.briefLabel];
     [self.briefLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(middleLineView.mas_bottom).offset(15);
+        make.top.mas_equalTo(self.middleLineView.mas_bottom).offset(15);
         make.right.mas_equalTo(-15);
-        make.height.mas_lessThanOrEqualTo(105);
     }];
     
     self.viewAllBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -163,6 +163,7 @@
     self.viewAllBtn.titleLabel.font = [UIFont boldSystemFontOfSize:11];
     [self.viewAllBtn setTitle:@"查看全部" forState:UIControlStateNormal];
     [self.viewAllBtn addTarget:self action:@selector(viewAllBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.viewAllBtn.hidden = YES;
     [self addSubview:self.viewAllBtn];
     [self.viewAllBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.briefLabel.mas_bottom).offset(20);
@@ -174,7 +175,7 @@
     [self addSubview:self.bottomBandView];
     [self.bottomBandView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.viewAllBtn.mas_bottom).offset(20);
+        make.top.mas_equalTo(self.briefLabel.mas_bottom).offset(20);
         make.height.mas_equalTo(5);
     }];
     
@@ -186,7 +187,7 @@
         make.centerY.mas_equalTo(self.bottomBandView.mas_bottom).offset(21.5f);
     }];
     
-    UIView *bottomLineView = [middleLineView clone];
+    UIView *bottomLineView = [self.middleLineView clone];
     [self addSubview:bottomLineView];
     [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
@@ -202,33 +203,43 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.briefLabel.bounds.size.height < 105) {
-        self.viewAllBtn.hidden = YES;
+    if (self.briefLabel.bounds.size.height > 105) {
+        self.viewAllBtn.hidden = NO;
+        [self.briefLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.mas_equalTo(self.middleLineView.mas_bottom).offset(15);
+            make.right.mas_equalTo(-15);
+            make.height.mas_equalTo(105);
+        }];
         [self.bottomBandView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.briefLabel.mas_bottom).offset(20);
+            make.top.mas_equalTo(self.viewAllBtn.mas_bottom).offset(20);
             make.height.mas_equalTo(5);
         }];
         [self.superview layoutIfNeeded];
     }
 }
 
-- (void)setModel {
+- (void)setCourse:(GetCourseRequestItem_Course *)course {
+    _course = course;
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 24;
+    style.alignment = NSTextAlignmentCenter;
     style.lineBreakMode = NSLineBreakByTruncatingTail;
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:@"水电费水电费水电费水电费水电费是水电费水电费水电费水电费是的水电费水电费水电费水电费水电费水电费水电费水电费水电费" attributes:@{
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:course.courseName attributes:@{
                                                                                                                   NSFontAttributeName : [UIFont systemFontOfSize:18],
                                                                                                                   NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
                                                                                                                   NSParagraphStyleAttributeName : style
                                                                                                                   }];
     self.courseTitleLabel.attributedText = attributedStr;
-    self.timeLabel.text = @"上午 20:00";
-    self.authorLabel.text = @"水电费";
-    self.addressLabel.text = @"水电费水电费水电费是";
+    self.timeLabel.text = course.startTime;
+    self.authorLabel.text = course.lecturer;
+    self.addressLabel.text = course.site;
     
+    style = [[NSMutableParagraphStyle alloc] init];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
     style.minimumLineHeight = 21;
-    attributedStr = [[NSMutableAttributedString alloc] initWithString:@"水电费水电费水电费水电费水电费是水电费水电费水电费水电费水电费是水电费水电费水电费水电费水电费是地方胜多负少的水电费水电费水电费水电费水电费水电费水电费水电费水电费水电费水电费是地方水电费水电费水电费水电费水电费是地方是的水电费水电费水电费是水电费水电费水电费水电费水电费是地方水电费水电费水电费水电费水电费是地方水电费水电费水电费水电费水电费是地方是水电费水电费水电费aaaaaaaaaaaaaaaaa" attributes:@{
+    attributedStr = [[NSMutableAttributedString alloc] initWithString:course.briefing attributes:@{
                                                                                       NSFontAttributeName : [UIFont systemFontOfSize:14],
                                                                                       NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
                                                                                       NSParagraphStyleAttributeName : style

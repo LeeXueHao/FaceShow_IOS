@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetCourseRequestItem_Course;
 
 @interface CourseDetailHeaderView : UIView
 
+@property (nonatomic, strong) GetCourseRequestItem_Course *course;
 @property (nonatomic, copy) void (^viewAllBlock)();
 
 @end

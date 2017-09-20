@@ -1,0 +1,56 @@
+{
+    "code": 0,
+    "message": "",
+    "data": [
+             {
+             "id": 3,
+             "title": "12314",
+             "content": "testceshi",
+             "authorId": 1,
+             "clazzId": 1,
+             "createTime": "2017-09-15 12:03:52",
+             "updateTime": "2017-09-15 12:03:52",
+             "state": 1,
+             "attachUrl": null,
+             "readNum": 0,
+             "authorName": "111",
+             "createTimeStr": "2017-09-15",
+             "updateTimeStr": "2017-09-15",
+             "viewed": false
+             },
+             {
+             "id": 2,
+             "title": "12314",
+             "content": "testceshi",
+             "authorId": 1,
+             "clazzId": 1,
+             "createTime": "2017-09-15 12:03:42",
+             "updateTime": "2017-09-15 12:03:42",
+             "state": 1,
+             "attachUrl": null,
+             "readNum": 0,
+             "authorName": "111",
+             "createTimeStr": "2017-09-15",
+             "updateTimeStr": "2017-09-15",
+             "viewed": false
+             },
+             {
+             "id": 1,
+             "title": "测试消息",
+             "content": "这是一条测试消息",
+             "authorId": 1,
+             "clazzId": 1,
+             "createTime": "2017-09-15 10:54:12",
+             "updateTime": "2017-09-15 10:54:12",
+             "state": 1,
+             "attachUrl": "http://www.yanxiu.com",
+             "readNum": 6,
+             "authorName": "111",
+             "createTimeStr": "2017-09-15",
+             "updateTimeStr": "2017-09-15",
+             "viewed": false
+             }
+             ],
+    "currentUser": "",
+    "error": null
+}
