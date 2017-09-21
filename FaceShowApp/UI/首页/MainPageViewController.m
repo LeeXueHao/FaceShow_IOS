@@ -33,6 +33,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.emptyView = [[EmptyView alloc]init];
+    [self.view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.emptyView.hidden = YES;
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestProjectClassInfo];
+    }];
+    [self.view addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.errorView.hidden = YES;
+    
     [self setupNavRightView];
     [self requestProjectClassInfo];
 }
@@ -120,24 +138,6 @@
         make.top.mas_equalTo(tabContainerView.mas_bottom);
     }];
     [self switchToVCWithIndex:0];
-    
-    self.emptyView = [[EmptyView alloc]init];
-//    self.emptyView.title = @"暂无课程";
-    [self.view addSubview:self.emptyView];
-    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    self.emptyView.hidden = YES;
-    self.errorView = [[ErrorView alloc]init];
-    [self.errorView setRetryBlock:^{
-        STRONG_SELF
-        [self requestProjectClassInfo];
-    }];
-    [self.view addSubview:self.errorView];
-    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    self.errorView.hidden = YES;
 }
 
 - (void)switchToVCWithIndex:(NSInteger)index {
