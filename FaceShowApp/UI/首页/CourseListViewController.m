@@ -140,7 +140,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
-    courseDetailVC.courseId = @"";
+    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[indexPath.section];
+    GetCourseListRequestItem_coursesList *course = courses.coursesList[indexPath.row];
+    courseDetailVC.courseId = course.courseId;
     [self.navigationController pushViewController:courseDetailVC animated:YES];
 }
 

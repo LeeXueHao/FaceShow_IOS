@@ -12,7 +12,7 @@
 @interface MessageCell ()
 
 @property (nonatomic, strong) UIImageView *avatarImageView;
-@property (nonatomic, strong) UIView *bedgeImageView;
+//@property (nonatomic, strong) UIView *bedgeImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 
@@ -40,16 +40,16 @@
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     
-    self.bedgeImageView = [[UIView alloc] init];
-    self.bedgeImageView.clipsToBounds = YES;
-    self.bedgeImageView.layer.cornerRadius = 3.5;
-    self.bedgeImageView.backgroundColor = [UIColor redColor];
-    [self.avatarImageView addSubview:self.bedgeImageView];
-    [self.bedgeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(15);
-        make.centerY.mas_equalTo(-15);
-        make.size.mas_equalTo(CGSizeMake(7, 7));
-    }];
+//    self.bedgeImageView = [[UIView alloc] init];
+//    self.bedgeImageView.clipsToBounds = YES;
+//    self.bedgeImageView.layer.cornerRadius = 3.5;
+//    self.bedgeImageView.backgroundColor = [UIColor redColor];
+//    [self.avatarImageView addSubview:self.bedgeImageView];
+//    [self.bedgeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(15);
+//        make.centerY.mas_equalTo(-15);
+//        make.size.mas_equalTo(CGSizeMake(7, 7));
+//    }];
     
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -86,7 +86,7 @@
     _notice = notice;
     self.titleLabel.text = notice.title;
     self.timeLabel.text = notice.createTime;
-    self.bedgeImageView.hidden = notice.viewed;
+//    self.bedgeImageView.hidden = notice.viewed;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:notice.attachUrl] placeholderImage:[UIImage imageNamed:@""]];
 }
 

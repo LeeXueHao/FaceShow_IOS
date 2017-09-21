@@ -39,6 +39,7 @@
 		438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A701F73762D00800020 /* MessageHasUnViewRequest.m */; };
 		438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */; };
 		438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A761F739B8800800020 /* GetUserInfoRequest.m */; };
+		438E2A7A1F73C1F400800020 /* GetTaskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A791F73C1F400800020 /* GetTaskRequest.m */; };
 		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
 		7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */; };
 		7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */; };
@@ -257,6 +258,8 @@
 		438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSignInRecordListFetcher.m; sourceTree = "<group>"; };
 		438E2A751F739B8800800020 /* GetUserInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetUserInfoRequest.h; sourceTree = "<group>"; };
 		438E2A761F739B8800800020 /* GetUserInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetUserInfoRequest.m; sourceTree = "<group>"; };
+		438E2A781F73C1F400800020 /* GetTaskRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskRequest.h; sourceTree = "<group>"; };
+		438E2A791F73C1F400800020 /* GetTaskRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskRequest.m; sourceTree = "<group>"; };
 		7C212DAD1F6A0D740007AE01 /* OptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemView.h; sourceTree = "<group>"; };
 		7C212DAE1F6A0D740007AE01 /* OptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemView.m; sourceTree = "<group>"; };
 		7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionCell.h; sourceTree = "<group>"; };
@@ -1028,6 +1031,8 @@
 				43210E5C1F7256880049C381 /* GetCourse_Mock.json */,
 				43210E521F7226220049C381 /* GetCourseRequest.h */,
 				43210E531F7226220049C381 /* GetCourseRequest.m */,
+				438E2A781F73C1F400800020 /* GetTaskRequest.h */,
+				438E2A791F73C1F400800020 /* GetTaskRequest.m */,
 				7C24E1FF1F73695B00A6921B /* GetCourseCommentRequest.h */,
 				7C24E2001F73695B00A6921B /* GetCourseCommentRequest.m */,
 				7C24E2021F736B6A00A6921B /* GetCourseCommentRequest_mock.json */,
@@ -1049,7 +1054,6 @@
 		7C2519781F68FE900001B577 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				7C25197A1F68FE900001B577 /* 框架 */,
 				7C2519A91F690D550001B577 /* 登录注册 */,
 				7C25197F1F68FE900001B577 /* 首页 */,
 				7C25197D1F68FE900001B577 /* 消息 */,
@@ -1090,7 +1094,8 @@
 				7C25199D1F69066F0001B577 /* ScrollBaseViewController.h */,
 				7C25199E1F69066F0001B577 /* ScrollBaseViewController.m */,
 			);
-			path = "框架";
+			name = "框架";
+			path = "../框架";
 			sourceTree = "<group>";
 		};
 		7C25197D1F68FE900001B577 /* 消息 */ = {
@@ -1224,6 +1229,7 @@
 			isa = PBXGroup;
 			children = (
 				7C212DB91F6A544C0007AE01 /* View */,
+				7C25197A1F68FE900001B577 /* 框架 */,
 				7C212DC21F6A5CF60007AE01 /* CourseListViewController.h */,
 				7C212DC31F6A5CF60007AE01 /* CourseListViewController.m */,
 				7C212DD81F6B68BD0007AE01 /* CourseDetailViewController.h */,
@@ -1605,6 +1611,7 @@
 				4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */,
 				4376E7431F711A2D003E2057 /* QAFileUploadFirstStepRequest.m in Sources */,
 				7C24E2121F739EA500A6921B /* LikeCommentRequest.m in Sources */,
+				438E2A7A1F73C1F400800020 /* GetTaskRequest.m in Sources */,
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,

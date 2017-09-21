@@ -23,7 +23,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -57,7 +56,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.top.mas_equalTo(self.statusImageView.mas_top).offset(-2);
-        make.right.mas_equalTo(self.statusImageView.mas_left).offset(-5);
+        make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
     }];
     
     self.timeLabel = [[UILabel alloc] init];
@@ -80,10 +79,11 @@
     }];
 }
 
-- (void)setModel {
-    self.titleLabel.text = @"水电费水电费水电费水电费水电费水电费斯蒂芬斯蒂芬";
-    self.timeLabel.text = @"2012.23.32 8:09";
-    self.statusLabel.text = @"已签到";
+- (void)setTask:(GetTaskRequestItem_Task *)task {
+    _task = task;
+    self.titleLabel.text = task.interactName;
+    self.timeLabel.text = task.createTime;
+    self.statusLabel.text = task.stepFinished.boolValue ? @"已完成" : @"未完成";
 }
 
 @end
