@@ -10,4 +10,5 @@
 
 @interface QuestionnaireResultViewController : BaseViewController
 - (instancetype)initWithStepId:(NSString *)stepId;
+@property (nonatomic, strong) NSString *name;
 @end

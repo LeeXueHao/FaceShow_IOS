@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"课程投票结果";
+    self.navigationItem.title = self.name;
     [self setupUI];
     [self requestVoteInfo];
 }

@@ -13,6 +13,11 @@
 #import "CourseBriefViewController.h"
 #import "ProfessorDetailViewController.h"
 #import "GetCourseRequest.h"
+#import "FSDataMappingTable.h"
+#import "ResourceDisplayViewController.h"
+#import "QuestionnaireViewController.h"
+#import "QuestionnaireResultViewController.h"
+#import "CourseCommentViewController.h"
 
 @interface CourseDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -154,10 +159,37 @@
         [self.navigationController pushViewController:professorDetailVC animated:NO];
     } else if (indexPath.section == 1) {
         GetCourseRequestItem_AttachmentInfo *info = self.dataArray[1][indexPath.row];
-        
+        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
+        vc.urlString = info.previewUrl;
+        vc.name = info.resName;
+        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 2) {
         GetCourseRequestItem_InteractStep *info = self.dataArray[2][indexPath.row];
-        
+        InteractType type = [FSDataMappingTable InteractTypeWithKey:info.interactType];
+        if (type == InteractType_Vote) {
+            if (info.stepFinished.boolValue) {
+                QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:info.stepId];
+                vc.name = info.interactName;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:info.stepId interactType:type];
+                vc.name = info.interactName;
+                WEAK_SELF
+                [vc setCompleteBlock:^{
+                    STRONG_SELF
+                    info.stepFinished = @"1";
+                }];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else if (type == InteractType_Questionare) {
+            QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:info.stepId interactType:type];
+            vc.name = info.interactName;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (type == InteractType_Comment) {
+            CourseCommentViewController *vc = [[CourseCommentViewController alloc]initWithStepId:info.stepId];
+            vc.questionTitle = info.interactName;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

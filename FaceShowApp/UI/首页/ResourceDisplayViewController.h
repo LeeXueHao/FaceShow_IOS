@@ -10,4 +10,5 @@
 
 @interface ResourceDisplayViewController : BaseViewController
 @property (nonatomic, strong) NSString *urlString;
+@property (nonatomic, strong) NSString *name;
 @end

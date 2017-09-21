@@ -43,6 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = self.name;
     [self setupUI];
     [self setupObservers];
     [self requestPaperInfo];
@@ -177,6 +178,7 @@
                 return;
             }
             [self.view.window nyx_showToast:@"提交成功"];
+            BLOCK_EXEC(self.completeBlock);
             [self backAction];
         }];
     }else {
@@ -194,6 +196,7 @@
                 return;
             }
             [self.view.window nyx_showToast:@"提交成功"];
+            BLOCK_EXEC(self.completeBlock);
             [self backAction];
         }];
     }

@@ -11,4 +11,6 @@
 
 @interface QuestionnaireViewController : BaseViewController
 - (instancetype)initWithStepId:(NSString *)stepId interactType:(InteractType)type;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) void(^completeBlock) ();
 @end
