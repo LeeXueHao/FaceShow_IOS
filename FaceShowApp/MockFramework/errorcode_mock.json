@@ -1,1 +1,7 @@
-{"status":{"desc":"mock：您的某些权限过期，请找某人解决","code":2}}
+{
+    "code": 0,
+    "message": "",
+    "data": "",
+    "currentUser": "",
+    "error": null
+}

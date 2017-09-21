@@ -9,23 +9,58 @@
 #import "QuestionnaireResultViewController.h"
 #import "ChooseQuestionResultCell.h"
 #import "FillQuestionResultCell.h"
+#import "GetVoteRequest.h"
+#import "QuestionRequestItem.h"
+#import "ErrorView.h"
+#import "FSDataMappingTable.h"
 
 @interface QuestionnaireResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) NSString *stepId;
+@property (nonatomic, strong) GetVoteRequest *voteRequest;
+@property (nonatomic, strong) QuestionRequestItem *requestItem;
 @end
 
 @implementation QuestionnaireResultViewController
+
+- (instancetype)initWithStepId:(NSString *)stepId {
+    if (self = [super init]) {
+        self.stepId = stepId;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"课程投票结果";
     [self setupUI];
+    [self requestVoteInfo];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)requestVoteInfo {
+    [self.voteRequest stopRequest];
+    self.voteRequest = [[GetVoteRequest alloc]init];
+    self.voteRequest.stepId = self.stepId;
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [self.voteRequest startRequestWithRetClass:[QuestionRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        self.errorView.hidden = YES;
+        if (error) {
+            self.errorView.hidden = NO;
+            return;
+        }
+        self.requestItem = retItem;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)setupUI {
@@ -45,37 +80,43 @@
     }];
     [self.tableView registerClass:[ChooseQuestionResultCell class] forCellReuseIdentifier:@"ChooseQuestionResultCell"];
     [self.tableView registerClass:[FillQuestionResultCell class] forCellReuseIdentifier:@"FillQuestionResultCell"];
+    
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestVoteInfo];
+    }];
+    [self.view addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.errorView.hidden = YES;
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.requestItem.data.questionGroup.questions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row<5) {
+    QuestionRequestItem_question *question = self.requestItem.data.questionGroup.questions[indexPath.row];
+    QuestionType type = [FSDataMappingTable QuestionTypeWithKey:question.questionType];
+    if (type==QuestionType_SingleChoose || type==QuestionType_MultiChoose) {
         ChooseQuestionResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChooseQuestionResultCell"];
-        OptionResult *r1 = [self optionResultWithOption:@"aaaaaaaaaaaaa111" rate:0.1];
-        OptionResult *r2 = [self optionResultWithOption:@"bbbbbdbfoifoegnoegnognowengoewngowenogwenogewnognoewgnowengiowegoweng222" rate:0.2];
-        OptionResult *r3 = [self optionResultWithOption:@"方便发你哦 供你热工农了333" rate:0.3];
-        OptionResult *r4 = [self optionResultWithOption:@"费二狗我个人弄内购gingNo工农人个人饿哦工日 个还给你N割肉给根荣格尼尔 盖聂弄个人 工农而个侬玩偶尔发我444" rate:0.4];
-        cell.optionArray = @[r1,r2,r3,r4];
-        cell.bottomLineHidden = indexPath.row==9;
         cell.index = indexPath.row+1;
-        cell.stem = @"请选择下面这个题";
-        return cell;
-    }else {
-        FillQuestionResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FillQuestionResultCell"];
-        cell.index = indexPath.row+1;
+        cell.item = question;
+        cell.bottomLineHidden = indexPath.row==self.requestItem.data.questionGroup.questions.count;
         return cell;
     }
-}
-
-- (OptionResult *)optionResultWithOption:(NSString *)option rate:(CGFloat)rate {
-    OptionResult *r = [[OptionResult alloc]init];
-    r.option = option;
-    r.rate = rate;
-    return r;
+    if (type == QuestionType_Fill) {
+        FillQuestionResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FillQuestionResultCell"];
+        cell.index = indexPath.row+1;
+        cell.item = question;
+        cell.bottomLineHidden = indexPath.row==self.requestItem.data.questionGroup.questions.count;
+        return cell;
+    }
+    return nil;
 }
 
 @end

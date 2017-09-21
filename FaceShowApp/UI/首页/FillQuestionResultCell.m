@@ -107,32 +107,8 @@
         make.bottom.mas_equalTo(-15);
     }];
     
-    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    
-    [self initData];
-}
-
-- (void)initData {
-    self.timeLabel.text = @"2017.08.09 13:24";
-    self.attendLabel.text = @"参与人数：123";
-    
-    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    paraStyle.lineHeightMultiple = 1.2;
-    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
-    
-    NSString *stem = @"请谈谈你对这个问题的看法请谈谈你对这个问题的看法请谈谈你对这个问题的看法";
-    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:stem attributes:dic];
-    self.stemLabel.attributedText = attributeStr;
-    
-    NSString *comment = @"我22这是什么啊 阿佛嗯我饭呢我给你噢鞥个人股人热高二狗我认为该偶尔跟二哥荣辱观日如果日如果比尔隔壁IE人跟i热播个IE如不够\n\n\n\n\n\n\n\n\nfewigierngioengo3ngo3b4go34副本五个\n\ndhwiufhiweaaaa";
-    attributeStr = [[NSAttributedString alloc] initWithString:comment attributes:dic];
-    self.replyTextView.attributedText = attributeStr;
-    CGSize size = [self.replyTextView sizeThatFits:CGSizeMake(SCREEN_WIDTH-35-15-12-12, CGFLOAT_MAX)];
-    CGFloat height = MAX(size.height, 180.f);
-    [self.replyTextView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(height);
-    }];
+    [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
@@ -150,5 +126,27 @@
     self.indexLabel.attributedText = attributeStr;
 }
 
+- (void)setItem:(QuestionRequestItem_question *)item {
+    _item = item;
+    self.timeLabel.text = self.item.createTime;
+    self.attendLabel.text = [NSString stringWithFormat:@"参与人数：%@",self.item.answerUserNum];
+    
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    
+    NSString *stem = self.item.title;
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:stem attributes:dic];
+    self.stemLabel.attributedText = attributeStr;
+    
+    NSString *comment = self.item.myAnswers.firstObject;
+    attributeStr = [[NSAttributedString alloc] initWithString:comment attributes:dic];
+    self.replyTextView.attributedText = attributeStr;
+    CGSize size = [self.replyTextView sizeThatFits:CGSizeMake(SCREEN_WIDTH-35-15-12-12, CGFLOAT_MAX)];
+    CGFloat height = MAX(size.height, 180.f);
+    [self.replyTextView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(height);
+    }];
+}
 
 @end

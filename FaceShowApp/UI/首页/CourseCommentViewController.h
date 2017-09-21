@@ -9,5 +9,6 @@
 #import "PagedListViewControllerBase.h"
 
 @interface CourseCommentViewController : PagedListViewControllerBase
-
+- (instancetype)initWithStepId:(NSString *)stepId;
+@property (nonatomic, strong) NSString *questionTitle;
 @end

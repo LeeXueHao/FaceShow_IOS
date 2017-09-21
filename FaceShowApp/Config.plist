@@ -5,7 +5,7 @@
 	<key>mockFrameworkOn</key>
 	<true/>
 	<key>testFrameworkOn</key>
-	<false/>
+	<true/>
 	<key>TalkingDataAppID</key>
 	<string>85F5F0D491AE4C4F8E9CC6D091AA8077</string>
 	<key>channel</key>

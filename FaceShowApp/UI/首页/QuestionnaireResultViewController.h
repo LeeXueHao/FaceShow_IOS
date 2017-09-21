@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface QuestionnaireResultViewController : BaseViewController
-
+- (instancetype)initWithStepId:(NSString *)stepId;
 @end

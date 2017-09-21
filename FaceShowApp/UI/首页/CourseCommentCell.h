@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GetCourseCommentRequest.h"
 
 @interface CourseCommentCell : UITableViewCell
+@property (nonatomic, strong) GetCourseCommentRequestItem_element *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @property (nonatomic, strong) void(^favorBlock)();
 @end

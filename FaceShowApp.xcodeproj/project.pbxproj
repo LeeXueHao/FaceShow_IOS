@@ -68,6 +68,14 @@
 		7C24E1F81F72568D00A6921B /* QuestionRequestItem_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24E1F71F72568900A6921B /* QuestionRequestItem_mock.json */; };
 		7C24E1FB1F72575E00A6921B /* GetVoteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E1FA1F72575E00A6921B /* GetVoteRequest.m */; };
 		7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E1FD1F72582B00A6921B /* GetQuestionnaireRequest.m */; };
+		7C24E2011F73695B00A6921B /* GetCourseCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2001F73695B00A6921B /* GetCourseCommentRequest.m */; };
+		7C24E2031F736B6E00A6921B /* GetCourseCommentRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24E2021F736B6A00A6921B /* GetCourseCommentRequest_mock.json */; };
+		7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2051F736BF400A6921B /* CourseCommentDataFetcher.m */; };
+		7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2081F7390E200A6921B /* SaveUserVoteRequest.m */; };
+		7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E20B1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m */; };
+		7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E20E1F7398AA00A6921B /* SaveUserCommentRequest.m */; };
+		7C24E2121F739EA500A6921B /* LikeCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2111F739EA500A6921B /* LikeCommentRequest.m */; };
+		7C24E2141F739F8A00A6921B /* LikeCommentRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */; };
 		7C2518AC1F68E5C70001B577 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AB1F68E5C70001B577 /* main.m */; };
 		7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AE1F68E5C70001B577 /* AppDelegate.m */; };
 		7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518B61F68E5C70001B577 /* Assets.xcassets */; };
@@ -301,6 +309,20 @@
 		7C24E1FA1F72575E00A6921B /* GetVoteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetVoteRequest.m; sourceTree = "<group>"; };
 		7C24E1FC1F72582B00A6921B /* GetQuestionnaireRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetQuestionnaireRequest.h; sourceTree = "<group>"; };
 		7C24E1FD1F72582B00A6921B /* GetQuestionnaireRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetQuestionnaireRequest.m; sourceTree = "<group>"; };
+		7C24E1FF1F73695B00A6921B /* GetCourseCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCourseCommentRequest.h; sourceTree = "<group>"; };
+		7C24E2001F73695B00A6921B /* GetCourseCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCourseCommentRequest.m; sourceTree = "<group>"; };
+		7C24E2021F736B6A00A6921B /* GetCourseCommentRequest_mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetCourseCommentRequest_mock.json; sourceTree = "<group>"; };
+		7C24E2041F736BF400A6921B /* CourseCommentDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCommentDataFetcher.h; sourceTree = "<group>"; };
+		7C24E2051F736BF400A6921B /* CourseCommentDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCommentDataFetcher.m; sourceTree = "<group>"; };
+		7C24E2071F7390E200A6921B /* SaveUserVoteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveUserVoteRequest.h; sourceTree = "<group>"; };
+		7C24E2081F7390E200A6921B /* SaveUserVoteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveUserVoteRequest.m; sourceTree = "<group>"; };
+		7C24E20A1F7390FE00A6921B /* SaveUserQuestionnaireRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveUserQuestionnaireRequest.h; sourceTree = "<group>"; };
+		7C24E20B1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveUserQuestionnaireRequest.m; sourceTree = "<group>"; };
+		7C24E20D1F7398AA00A6921B /* SaveUserCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveUserCommentRequest.h; sourceTree = "<group>"; };
+		7C24E20E1F7398AA00A6921B /* SaveUserCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveUserCommentRequest.m; sourceTree = "<group>"; };
+		7C24E2101F739EA500A6921B /* LikeCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeCommentRequest.h; sourceTree = "<group>"; };
+		7C24E2111F739EA500A6921B /* LikeCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeCommentRequest.m; sourceTree = "<group>"; };
+		7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LikeCommentRequest_mock.json; sourceTree = "<group>"; };
 		7C2518A71F68E5C70001B577 /* 培训通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "培训通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -975,6 +997,20 @@
 				43210E5C1F7256880049C381 /* GetCourse_Mock.json */,
 				43210E521F7226220049C381 /* GetCourseRequest.h */,
 				43210E531F7226220049C381 /* GetCourseRequest.m */,
+				7C24E1FF1F73695B00A6921B /* GetCourseCommentRequest.h */,
+				7C24E2001F73695B00A6921B /* GetCourseCommentRequest.m */,
+				7C24E2021F736B6A00A6921B /* GetCourseCommentRequest_mock.json */,
+				7C24E2041F736BF400A6921B /* CourseCommentDataFetcher.h */,
+				7C24E2051F736BF400A6921B /* CourseCommentDataFetcher.m */,
+				7C24E2071F7390E200A6921B /* SaveUserVoteRequest.h */,
+				7C24E2081F7390E200A6921B /* SaveUserVoteRequest.m */,
+				7C24E20A1F7390FE00A6921B /* SaveUserQuestionnaireRequest.h */,
+				7C24E20B1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m */,
+				7C24E20D1F7398AA00A6921B /* SaveUserCommentRequest.h */,
+				7C24E20E1F7398AA00A6921B /* SaveUserCommentRequest.m */,
+				7C24E2101F739EA500A6921B /* LikeCommentRequest.h */,
+				7C24E2111F739EA500A6921B /* LikeCommentRequest.m */,
+				7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -1352,6 +1388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				922084481F6BD87600F8AAC6 /* 1@2x.png in Resources */,
+				7C24E2141F739F8A00A6921B /* LikeCommentRequest_mock.json in Resources */,
 				92EF77131F6F633B007C3835 /* 6@2x.png in Resources */,
 				923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */,
 				9220844A1F6BD87600F8AAC6 /* 3@2x.png in Resources */,
@@ -1372,6 +1409,7 @@
 				43210E631F726DF00049C381 /* GetNoticeList_Mock.json in Resources */,
 				92EF77111F6F633B007C3835 /* 4@2x.png in Resources */,
 				923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */,
+				7C24E2031F736B6E00A6921B /* GetCourseCommentRequest_mock.json in Resources */,
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
 				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,
 				7C24E1EB1F72262F00A6921B /* GetCurrentClazsRequest_mock.json in Resources */,
@@ -1465,6 +1503,7 @@
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,
 				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
+				7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */,
 				43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */,
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
@@ -1499,6 +1538,7 @@
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
 				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
+				7C24E2011F73695B00A6921B /* GetCourseCommentRequest.m in Sources */,
 				92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */,
 				7C25199F1F69066F0001B577 /* ScrollBaseViewController.m in Sources */,
 				7C2518EB1F68E68D0001B577 /* UIImage+FixOrientation.m in Sources */,
@@ -1520,6 +1560,7 @@
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
+				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
 				43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */,
@@ -1530,6 +1571,7 @@
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */,
 				4376E7431F711A2D003E2057 /* QAFileUploadFirstStepRequest.m in Sources */,
+				7C24E2121F739EA500A6921B /* LikeCommentRequest.m in Sources */,
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
@@ -1540,6 +1582,7 @@
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
 				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
 				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
+				7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
 				7C2518E61F68E68D0001B577 /* NSObject+YXNetworkMethod.m in Sources */,
@@ -1569,6 +1612,7 @@
 				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
+				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
 				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */,

@@ -1,0 +1,15 @@
+{
+    "code": 0,
+    "message": "",
+    "data": {
+        "id": 327,
+        "userNum": 1,
+        "totalScore": 0,
+        "bizId": 2,
+        "bizSource": "interact_comment_record",
+        "createTime": null,
+        "avgScores": null
+    },
+    "currentUser": "",
+    "error": null
+}

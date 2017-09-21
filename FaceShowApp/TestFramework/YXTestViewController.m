@@ -22,7 +22,7 @@
 }
 
 - (void)问卷 {
-    QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]init];
+    QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:nil interactType:InteractType_Vote];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -33,6 +33,7 @@
 
 - (void)comment {
     CourseCommentViewController *vc = [[CourseCommentViewController alloc]init];
+    vc.questionTitle = @"请讨论这个问题";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

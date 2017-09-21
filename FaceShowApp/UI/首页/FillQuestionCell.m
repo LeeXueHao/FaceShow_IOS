@@ -97,6 +97,7 @@
         NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
         NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:self.textView.text attributes:dic];
         self.textView.attributedText = attributeStr;
+        [self.item.myAnswers replaceObjectAtIndex:0 withObject:self.textView.text];
         BLOCK_EXEC(self.textChangeBlock,self.textView.text);
     }];
 }

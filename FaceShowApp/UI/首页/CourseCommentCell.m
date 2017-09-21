@@ -93,7 +93,6 @@
         make.left.mas_equalTo(self.commentLabel.mas_left);
         make.centerY.mas_equalTo(self.favorButton.mas_centerY);
     }];
-    [self initData];
 }
 
 - (void)favorAction {
@@ -105,17 +104,19 @@
     self.bottomLine.hidden = bottomLineHidden;
 }
 
-- (void)initData {
-    self.headImageView.backgroundColor = [UIColor redColor];
-    self.nameLabel.text = @"郭涛";
-    NSString *comment = @"访问二班跟i惹不过个人一个人关闭瑞尔给我给给我改为郭文贵问改为郭文贵问给我给问个问过问改为改为改为跟i为跟i问过访问二班跟i惹不过个人一个人关闭瑞尔给我给给我改为郭文贵问改为郭文贵问给我给问个问过问改为改为改为跟i为跟i问过1";
+- (void)setItem:(GetCourseCommentRequestItem_element *)item {
+    _item = item;
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
+    self.nameLabel.text = item.userName;
+    NSString *comment = item.content;
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:comment attributes:dic];
     self.commentLabel.attributedText = attributeStr;
-    self.favorLabel.text = @"赞";
-    self.timeLabel.text = @"3分钟前";
+    self.favorLabel.text = item.likeNum.integerValue==0? @"赞":item.likeNum;
+    self.timeLabel.text = item.createTime;
 }
+
 
 @end

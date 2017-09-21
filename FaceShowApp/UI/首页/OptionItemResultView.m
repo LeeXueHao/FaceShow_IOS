@@ -8,10 +8,6 @@
 
 #import "OptionItemResultView.h"
 
-@implementation OptionResult
-
-@end
-
 @interface OptionItemResultView()
 @property (nonatomic, strong) UIView *resultContainerView;
 @property (nonatomic, strong) UIView *resultView;
@@ -70,19 +66,21 @@
     }];
 }
 
-- (void)setOption:(OptionResult *)option {
-    _option = option;
+- (void)setItem:(QuestionRequestItem_voteItems *)item {
+    _item = item;
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
-    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:option.option attributes:dic];
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:item.itemName attributes:dic];
     self.optionLabel.attributedText = attributeStr;
     [self.resultView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(self.resultContainerView.mas_width).multipliedBy(option.rate);
+        make.width.mas_equalTo(self.resultContainerView.mas_width).multipliedBy(item.percent.floatValue);
     }];
     
-    self.countLabel.text = @"15";
+    self.countLabel.text = item.selectedNum;
+
 }
+
 
 @end

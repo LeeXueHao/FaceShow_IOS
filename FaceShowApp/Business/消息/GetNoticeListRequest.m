@@ -18,7 +18,6 @@
 @end
 
 @interface GetNoticeListRequest ()
-@property (nonatomic, strong) NSString *method;
 @end
 
 @implementation GetNoticeListRequest

@@ -38,12 +38,17 @@
 @property (nonatomic, strong) NSString<Optional> *questionData;
 @property (nonatomic, strong) NSString<Optional> *answerNum;
 @property (nonatomic, strong) NSString<Optional> *answerUserNum;
+@property (nonatomic, strong) NSString<Optional> *createTime;
 @property (nonatomic, strong) NSString<Optional> *groupId;
 @property (nonatomic, strong) NSString<Optional> *questionStatus;
 @property (nonatomic, strong) NSString<Optional> *bizId;
 @property (nonatomic, strong) NSString<Optional> *questionTypeName;
 @property (nonatomic, strong) QuestionRequestItem_voteInfo<Optional> *voteInfo;
 @property (nonatomic, strong) QuestionRequestItem_userAnswer<Optional> *userAnswer;
+
+@property (nonatomic, strong) NSMutableArray<Ignore> *myAnswers;
+@property (nonatomic, strong) NSDictionary<Ignore> *answerDict;
+- (BOOL)hasAnswer;
 @end
 
 @interface QuestionRequestItem_questionGroup : JSONModel
@@ -59,6 +64,8 @@
 @property (nonatomic, strong) NSString<Optional> *answerUserNum;
 @property (nonatomic, strong) NSString<Optional> *bizId;
 @property (nonatomic, strong) NSArray<Optional,QuestionRequestItem_question> *questions;
+
+- (NSString *)answerString;
 @end
 
 @interface QuestionRequestItem_data : JSONModel

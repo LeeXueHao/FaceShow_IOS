@@ -104,6 +104,7 @@
     __block UIView *preView = nil;
     [optionArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         OptionItemView *itemView = [self itemViewWithOption:obj];
+        itemView.isSelected = ((NSNumber *)self.item.myAnswers[idx]).boolValue;
         [self.itemViewArray addObject:itemView];
         [self.contentView addSubview:itemView];
         if (idx == 0) {
@@ -132,8 +133,15 @@
     WEAK_SELF
     [itemView setClickBlock:^(OptionItemView *view){
         STRONG_SELF
+        NSInteger index = [self.itemViewArray indexOfObject:view];
+        [self.item.myAnswers replaceObjectAtIndex:index withObject:@(view.isSelected)];
+        
         QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
         if (view.isSelected && type==QuestionType_SingleChoose) {
+            for (int i=0; i<self.item.myAnswers.count; i++) {
+                self.item.myAnswers[i] = @(NO);
+            }
+            self.item.myAnswers[index] = @(YES);
             [self refreshWithCurrentSelection:view];
         }
         BLOCK_EXEC(self.answerChangeBlock);
@@ -145,7 +153,7 @@
     for (OptionItemView *item in self.itemViewArray) {
         item.isSelected = NO;
     }
-    itemView.isSelected = YES;
+    itemView.isSelected = YES;    
 }
 
 @end

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "OptionItemResultView.h"
+#import "QuestionRequestItem.h"
 
 @interface ChooseQuestionResultCell : UITableViewCell
 @property (nonatomic, assign) NSInteger index;
-@property (nonatomic, strong) NSString *stem;
-@property (nonatomic, strong) NSArray<OptionResult *> *optionArray;
+@property (nonatomic, strong) QuestionRequestItem_question *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @end

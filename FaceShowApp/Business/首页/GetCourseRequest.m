@@ -30,7 +30,6 @@
 @end
 
 @interface GetCourseRequest ()
-@property (nonatomic, strong) NSString *method;
 @end
 
 @implementation GetCourseRequest

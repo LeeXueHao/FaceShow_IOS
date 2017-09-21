@@ -13,6 +13,9 @@
 @property (nonatomic, strong) UIView *bottomLineView;
 @property (nonatomic, strong) UILabel *stemLabel;
 @property (nonatomic, strong) UILabel *indexLabel;
+
+@property (nonatomic, strong) NSString *stem;
+@property (nonatomic, strong) NSArray<QuestionRequestItem_voteItems *> *optionArray;
 @end
 
 @implementation ChooseQuestionResultCell
@@ -53,8 +56,8 @@
         make.top.mas_equalTo(25);
     }];
     
-    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
@@ -70,6 +73,12 @@
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:indexStr attributes:dic];
     self.indexLabel.attributedText = attributeStr;
+}
+
+- (void)setItem:(QuestionRequestItem_question *)item {
+    _item = item;
+    self.stem = [NSString stringWithFormat:@"%@(%@)",item.title,item.questionTypeName];
+    self.optionArray = item.voteInfo.voteItems;
 }
 
 - (void)setStem:(NSString *)stem {
@@ -88,7 +97,7 @@
     }
     self.itemViewArray = [NSMutableArray array];
     __block UIView *preView = nil;
-    [optionArray enumerateObjectsUsingBlock:^(OptionResult *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [optionArray enumerateObjectsUsingBlock:^(QuestionRequestItem_voteItems *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         OptionItemResultView *itemView = [self itemViewWithOption:obj];
         [self.itemViewArray addObject:itemView];
         [self.contentView addSubview:itemView];
@@ -112,9 +121,9 @@
     }];
 }
 
-- (OptionItemResultView *)itemViewWithOption:(OptionResult *)option {
+- (OptionItemResultView *)itemViewWithOption:(QuestionRequestItem_voteItems *)option {
     OptionItemResultView *itemView = [[OptionItemResultView alloc]init];
-    itemView.option = option;
+    itemView.item = option;
     return itemView;
 }
 

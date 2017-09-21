@@ -13,6 +13,8 @@
 #import "GetQuestionnaireRequest.h"
 #import "QuestionRequestItem.h"
 #import "ErrorView.h"
+#import "SaveUserVoteRequest.h"
+#import "SaveUserQuestionnaireRequest.h"
 
 @interface QuestionnaireViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -23,6 +25,9 @@
 @property (nonatomic, strong) GetVoteRequest *voteRequest;
 @property (nonatomic, strong) GetQuestionnaireRequest *questionnaireRequest;
 @property (nonatomic, strong) QuestionRequestItem *requestItem;
+
+@property (nonatomic, strong) SaveUserVoteRequest *saveVoteRequest;
+@property (nonatomic, strong) SaveUserQuestionnaireRequest *saveQuestionnaireRequest;
 @end
 
 @implementation QuestionnaireViewController
@@ -118,7 +123,7 @@
     [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateNormal];
     [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateDisabled];
     self.submitButton.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-    [self.submitButton addTarget:self action:@selector(submitButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.submitButton addTarget:self action:@selector(submitAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.submitButton];
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
@@ -156,11 +161,53 @@
 }
 
 - (void)submitAction {
-    
+    NSString *answer = [self.requestItem.data.questionGroup answerString];
+    if (self.interactType == InteractType_Vote) {
+        [self.saveVoteRequest stopRequest];
+        self.saveVoteRequest = [[SaveUserVoteRequest alloc]init];
+        self.saveVoteRequest.stepId = self.stepId;
+        self.saveVoteRequest.answers = answer;
+        [self.view nyx_startLoading];
+        WEAK_SELF
+        [self.saveVoteRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
+            [self.view.window nyx_showToast:@"提交成功"];
+            [self backAction];
+        }];
+    }else {
+        [self.saveQuestionnaireRequest stopRequest];
+        self.saveQuestionnaireRequest = [[SaveUserQuestionnaireRequest alloc]init];
+        self.saveQuestionnaireRequest.stepId = self.stepId;
+        self.saveQuestionnaireRequest.answers = answer;
+        [self.view nyx_startLoading];
+        WEAK_SELF
+        [self.saveQuestionnaireRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
+            [self.view.window nyx_showToast:@"提交成功"];
+            [self backAction];
+        }];
+    }
 }
 
 - (void)refreshSubmitButton {
-    
+    BOOL allAnswered = YES;
+    for (QuestionRequestItem_question *question in self.requestItem.data.questionGroup.questions) {
+        if (![question hasAnswer]) {
+            allAnswered = NO;
+            break;
+        }
+    }
+    self.submitButton.enabled = allAnswered;
 }
 
 #pragma mark - UITableViewDataSource
@@ -181,6 +228,9 @@
             STRONG_SELF
             [self refreshSubmitButton];
         }];
+        if (self.requestItem.data.isAnswer.boolValue) {
+            cell.userInteractionEnabled = NO;
+        }
         return cell;
     }
     if (type == QuestionType_Fill) {
@@ -197,6 +247,9 @@
             STRONG_SELF
             [self.tableView reloadData];
         }];
+        if (self.requestItem.data.isAnswer.boolValue) {
+            cell.userInteractionEnabled = NO;
+        }
         return cell;
     }
     return nil;

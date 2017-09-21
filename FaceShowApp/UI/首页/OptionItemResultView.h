@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface OptionResult : NSObject
-@property (nonatomic, strong) NSString *option;
-@property (nonatomic, assign) CGFloat rate;
-@end
+#import "QuestionRequestItem.h"
 
 @interface OptionItemResultView : UIView
-@property (nonatomic, strong) OptionResult *option;
+@property (nonatomic, strong) QuestionRequestItem_voteItems *item;
 @end
