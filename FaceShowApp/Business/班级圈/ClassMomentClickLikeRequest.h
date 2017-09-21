@@ -9,11 +9,11 @@
 #import "YXGetRequest.h"
 #import "ClassMomentListRequest.h"
 @interface ClassMomentClickLikeRequestItem : HttpBaseRequestItem
-@property (nonatomic,strong) ClassMomentListRequestItem_Data_Moment_Like *data;
+@property (nonatomic,strong) ClassMomentListRequestItem_Data_Moment_Like<Optional> *data;
 @end
 
 @interface ClassMomentClickLikeRequest : YXGetRequest
-@property (nonatomic, copy) NSString<Optional> *claszId;
+@property (nonatomic, copy) NSString<Optional> *clazsId;
 @property (nonatomic, copy) NSString<Optional> *momentId;
 
 @end

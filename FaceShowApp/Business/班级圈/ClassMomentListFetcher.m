@@ -17,6 +17,7 @@
     self.request = [[ClassMomentListRequest alloc] init];
     self.request.limit = [NSString stringWithFormat:@"%@", @(self.pagesize)];
     self.request.offset = [NSString stringWithFormat:@"%@", @(self.lastID)];
+    self.request.clazsId = self.clazsId;
     WEAK_SELF
     [self.request startRequestWithRetClass:[ClassMomentListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -26,12 +27,10 @@
         }
         ClassMomentListRequestItem *item = retItem;
         BLOCK_EXEC(aCompleteBlock,0,item.data.moments,nil);
-
-        BOOL isLastPage = item.data.moments.count < self.pagesize;
-        if (isLastPage) {
-            BLOCK_EXEC(aCompleteBlock,0,item.data.moments,nil);
-        }else {
+        if (item.data.hasNextPage.boolValue) {
             BLOCK_EXEC(aCompleteBlock,(int)NSIntegerMax,item.data.moments,nil);
+        }else {
+            BLOCK_EXEC(aCompleteBlock,0,item.data.moments,nil);
         }
     }];
 }

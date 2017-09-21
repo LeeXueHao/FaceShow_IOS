@@ -10,6 +10,6 @@
 #import "ClassMomentPublishRequest.h"
 @interface PublishMomentViewController : BaseViewController
 @property (nonatomic, strong) NSArray *imageArray;
-@property (nonatomic, strong) NSString *claszId;
+@property (nonatomic, strong) NSString *clazsId;
 @property (nonatomic, copy) void(^publishMomentDataBlock)(ClassMomentListRequestItem_Data_Moment *moment);
 @end

@@ -150,6 +150,10 @@
                                                             object:nil];
         return;
     }
+    if (item.code == nil) {
+        _completeBlock(item, nil, self->_isMock);
+        return;
+    }
     
     
     // 业务逻辑错误

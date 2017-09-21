@@ -13,7 +13,7 @@
 @implementation ClassMomentCommentRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = @"";
+        self.method = @"moment.comment";
     }
     return self;
 }

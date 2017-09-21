@@ -115,8 +115,8 @@
     NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
     [albums enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Album *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-        model.thumbnail = obj.attachment.previewUrl;
-        model.original = obj.attachment.previewUrl;
+        model.thumbnail = obj.attachment.resThumb;
+        model.original = obj.attachment.resThumb;
         [mutableArray addObject:model];
     }];
     self.photosView.imageModelMutableArray = mutableArray;
@@ -158,7 +158,7 @@
     [self.contentView addSubview:self.contentLabel];
     
     self.photosView = [[PreviewPhotosView alloc] init];
-    self.photosView.widthFloat = SCREEN_WIDTH - 50.0f;
+    self.photosView.widthFloat = SCREEN_WIDTH - 15.0f - 60.0f - 10.0f - 15.0f;
     [self.contentView addSubview:self.photosView];
     
     

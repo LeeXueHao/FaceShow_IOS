@@ -9,5 +9,5 @@
 #import "PagedListFetcherBase.h"
 #import "ClassMomentListRequest.h"
 @interface ClassMomentListFetcher : PagedListFetcherBase
-@property (nonatomic, copy) NSString<Optional> *claszId;
+@property (nonatomic, copy) NSString<Optional> *clazsId;
 @end

@@ -66,8 +66,10 @@
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        BLOCK_EXEC(self.completeBlock,textView.text);
+        if ([[self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]!=0) {
+            [textView resignFirstResponder];
+            BLOCK_EXEC(self.completeBlock,textView.text);
+        }
         return NO;
     }
     return YES;

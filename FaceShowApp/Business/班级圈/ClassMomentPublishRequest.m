@@ -13,7 +13,7 @@
 @implementation ClassMomentPublishRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = @"";
+        self.method = @"moment.publishMoment";
     }
     return self;
 }

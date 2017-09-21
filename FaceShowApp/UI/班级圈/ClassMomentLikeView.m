@@ -75,7 +75,10 @@
             }];
             
             [self.likeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(self.middleView);
+                make.left.equalTo(self.heartImageView.mas_right).offset(6.0f);
+                make.right.equalTo(self.middleView.mas_right).offset(-15.0f);
+                make.top.equalTo(self.heartImageView.mas_top).offset(-5.0f);
+                make.bottom.equalTo(self.middleView.mas_bottom);
             }];
             
             [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -161,10 +164,6 @@
         paragraphStyle.lineHeightMultiple = 1.2f;
         NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:[mutableArrray componentsJoinedByString:@","] attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
         self.likeLabel.attributedText = attributedString;
-//        if ([self.likeLabel sizeThatFits:CGSizeMake(self.likeLabel.bounds.size.width, 100.0f)].width < SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 12.0f - 6.0f - 16.0f) {
-//            [self.likeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            }];
-//        }
     }else {
         self.likeLabel.attributedText = nil;
     }

@@ -13,10 +13,18 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @end
 @implementation ClassMomentTableHeaderView
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
         [self setupLayout];
+        WEAK_SELF
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kYXUploadUserPicSuccessNotification" object:nil] subscribeNext:^(id x) {
+            STRONG_SELF
+            [self reload];
+        }];
     }
     return self;
 }
@@ -27,7 +35,7 @@
     [self addSubview:self.backgroundImageView];
     
     self.userHeaderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.userHeaderButton.backgroundColor = [UIColor blueColor];
+    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认头像"]];
     self.userHeaderButton.clipsToBounds = YES;
     self.userHeaderButton.layer.cornerRadius = 5.0f;
     self.userHeaderButton.layer.shadowColor = [[UIColor colorWithHexString:@"000000"] colorWithAlphaComponent:0.2f].CGColor;
@@ -38,7 +46,7 @@
     self.nameLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
     self.nameLabel.textAlignment = NSTextAlignmentRight;
-    self.nameLabel.text = @"孙长龙拉拉";
+    self.nameLabel.text = [UserManager sharedInstance].userModel.realName?:@"暂无";
     [self addSubview:self.nameLabel];
 }
 - (void)setupLayout {
@@ -60,6 +68,11 @@
         make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-15.0f);
         make.left.equalTo(self.mas_left).offset(15.0f);
     }];
+}
+
+- (void)reload {
+    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认头像"]];
+    self.nameLabel.text = [UserManager sharedInstance].userModel.realName?:@"暂无";
 }
 
 @end

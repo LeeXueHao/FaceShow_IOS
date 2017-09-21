@@ -6,7 +6,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -28,7 +28,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -49,7 +49,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -60,7 +60,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -71,7 +71,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -82,7 +82,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -93,7 +93,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -104,7 +104,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -115,7 +115,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -126,7 +126,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -145,7 +145,7 @@
                     {
                     "id": 1,
                     "content": "我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过_我已经赞过",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -156,7 +156,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -177,7 +177,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -188,7 +188,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -199,7 +199,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -210,7 +210,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -221,7 +221,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -232,7 +232,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -243,7 +243,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -254,7 +254,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -273,7 +273,7 @@
                     {
                     "id": 1,
                     "content": "无赞无评论_无赞无评论_无赞无评论_无赞无评论_无赞无评论",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -306,7 +306,7 @@
                     {
                     "id": 1,
                     "content": "多赞多评论_多赞多评论多赞多评论多赞多评论多赞多评论多赞多评论多赞多评论多赞多评论",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -328,7 +328,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "我到点哦啊扫地机杀戮空间按时发达了空间啊是",
@@ -347,7 +347,7 @@
                                  },
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "我到点哦啊扫地机杀戮空间按时发达了空间啊是我到点哦啊扫地机杀戮空间按时发达了空间啊是我到点哦啊扫地机杀戮空间按时发达了空间啊是",
@@ -366,7 +366,7 @@
                                  },
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "我到点哦啊扫地机杀戮空间按时发达了空间啊是我到点哦啊扫地机杀戮空间按时发达了空间啊是",
@@ -385,7 +385,7 @@
                                  },
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -406,7 +406,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -417,7 +417,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -428,7 +428,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -439,7 +439,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -450,7 +450,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -461,7 +461,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -472,7 +472,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -483,7 +483,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -502,7 +502,7 @@
                     {
                     "id": 1,
                     "content": "没有点赞_没有点赞没有点赞没有点赞没有点赞没有点赞",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -524,7 +524,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -543,7 +543,7 @@
                                  },
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -573,7 +573,7 @@
                     {
                     "id": 1,
                     "content": "点赞过点赞过___这是一条测试消息,点赞过点赞过___这是一条测试消息,点赞过点赞过___这是一条测试消息,点赞过点赞过___这是一条测试消息,点赞过点赞过___这是一条测试消息,点赞过点赞过___这是一条测试消息,点赞过点赞过___这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -595,7 +595,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -616,7 +616,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -627,7 +627,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -638,7 +638,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -649,7 +649,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -660,7 +660,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -671,7 +671,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -682,7 +682,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -693,7 +693,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -712,7 +712,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -734,7 +734,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -755,7 +755,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -766,7 +766,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -777,7 +777,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -788,7 +788,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -799,7 +799,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -810,7 +810,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -821,7 +821,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -832,7 +832,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -851,7 +851,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -873,7 +873,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -894,7 +894,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -905,7 +905,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -916,7 +916,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -927,7 +927,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -938,7 +938,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -949,7 +949,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -960,7 +960,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -971,7 +971,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -990,7 +990,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -1012,7 +1012,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -1033,7 +1033,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1044,7 +1044,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1055,7 +1055,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1066,7 +1066,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1077,7 +1077,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1088,7 +1088,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1099,7 +1099,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1110,7 +1110,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1129,7 +1129,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -1151,7 +1151,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -1172,7 +1172,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1183,7 +1183,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1194,7 +1194,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1205,7 +1205,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1216,7 +1216,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1227,7 +1227,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1238,7 +1238,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1249,7 +1249,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1268,7 +1268,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -1290,7 +1290,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -1311,7 +1311,7 @@
                     "likes": [
                               {
                               "id": 123456,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1322,7 +1322,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1333,7 +1333,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1344,7 +1344,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1355,7 +1355,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1366,7 +1366,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1377,7 +1377,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1388,7 +1388,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1407,7 +1407,7 @@
                     {
                     "id": 1,
                     "content": "这是一条测试消息",
-                    "claszId": 1,
+                    "clazsId": 1,
                     "readedNum": 0,
                     "likedNum": 0,
                     "commentedNum": 0,
@@ -1429,7 +1429,7 @@
                     "comments": [
                                  {
                                  "id": 22,
-                                 "claszId": 33,
+                                 "clazsId": 33,
                                  "momentId": 22,
                                  "parentId": 22,
                                  "content": "222",
@@ -1450,7 +1450,7 @@
                     "likes": [
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1461,7 +1461,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1472,7 +1472,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1483,7 +1483,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1494,7 +1494,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1505,7 +1505,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1516,7 +1516,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {
@@ -1527,7 +1527,7 @@
                               },
                               {
                               "id": 22,
-                              "claszId": 33,
+                              "clazsId": 33,
                               "momentId": 22,
                               "createTime": "2017-09-15 10:54:12",
                               "publisher": {

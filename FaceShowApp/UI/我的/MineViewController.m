@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titleArray;
 
-@property (nonatomic, strong) UserInfoRequest *userInfoRequest;
+@property (nonatomic, strong) GetUserInfoRequest *userInfoRequest;
 
 @end
 
@@ -90,11 +90,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         UserInfoViewController *VC = [[UserInfoViewController alloc] init];
-        WEAK_SELF
-        VC.userInfoReloadBlock = ^{
-            STRONG_SELF
-            [self.tableView reloadData];
-        };
         [self.navigationController pushViewController:VC animated:YES];
 //        UIViewController *VC = [[NSClassFromString(@"PhotoChooseViewController") alloc] init];
 //        [self.navigationController pushViewController:VC animated:YES];
@@ -124,16 +119,17 @@
 }
 #pragma mark - request
 - (void)requestForUserInfo{
-    UserInfoRequest *request = [[UserInfoRequest alloc] init];
-//    request.userId = @"";
+    GetUserInfoRequest *request = [[GetUserInfoRequest alloc] init];
     [self.view nyx_startLoading];
     WEAK_SELF
-    [request startRequestWithRetClass:[UserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [request startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self.view nyx_stopLoading];
-        UserInfoRequestItem *item = retItem;
+        GetUserInfoRequestItem *item = retItem;
         if (item.data != nil) {
-            [UserManager sharedInstance].userModel = [UserModel modelFromRawData:item.data];
+            UserModel *model = [UserModel modelFromUserInfo:item.data];
+            model.token = [UserManager sharedInstance].userModel.token;
+            [UserManager sharedInstance].userModel = model;
             [self.tableView reloadData];
         }
     }];

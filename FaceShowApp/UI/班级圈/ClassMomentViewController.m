@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     ClassMomentListFetcher *fetcher = [[ClassMomentListFetcher alloc] init];
     fetcher.pagesize = 20;
-    fetcher.claszId = @"12";
+    fetcher.clazsId = @"7";
     self.dataFetcher = fetcher;
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
@@ -113,7 +113,13 @@
     self.inputView = [[CommentInputView alloc]init];
     self.inputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
-        [self requstForPublishComment:text];
+        if (text.length == 0) {
+            
+        }else if (text.length > 250) {
+            [self.view nyx_showToast:@"评论最多支持250字"];
+        }else {
+            [self requstForPublishComment:text];
+        }
     };
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -156,6 +162,7 @@
     if (image != nil) {
         VC.imageArray = @[image];
     }
+    VC.clazsId = @"7";
     WEAK_SELF
     VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
         STRONG_SELF
@@ -234,8 +241,8 @@
     WEAK_SELF
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
-         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         if (status == ClassMomentClickStatus_Comment) {
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
             self.commtentInteger = section;
             [self.inputView.textView becomeFirstResponder];
         }else {
@@ -246,7 +253,7 @@
      ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     __block BOOL isLike = NO;
     [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.publisher.userID.integerValue == 123456) {
+        if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
             isLike = YES;
             *stop = YES;
         }
@@ -280,7 +287,7 @@
 - (void)requestForClickLike:(NSInteger)section {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     ClassMomentClickLikeRequest *request = [[ClassMomentClickLikeRequest alloc] init];
-    request.claszId = @"";
+    request.clazsId = @"7";
     request.momentId = moment.momentID;
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentClickLikeRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -295,6 +302,8 @@
                 [moment.likes addObject:item.data];
             }
             [self.tableView reloadData];
+        }else {
+            [self.view nyx_showToast:item.message];
         }
     }];
     self.clickLikeRequest = request;
@@ -302,7 +311,7 @@
 - (void)requstForPublishComment:(NSString *)content {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
     ClassMomentCommentRequest *request = [[ClassMomentCommentRequest alloc] init];
-    request.claszId = @"";
+    request.clazsId = @"7";
     request.momentId = moment.momentID;
     request.content = content;
     WEAK_SELF
@@ -320,6 +329,8 @@
             }
             self.inputView.textView.text = nil;
             [self.tableView reloadData];
+        }else {
+            [self.view nyx_showToast:item.message];
         }
     }];
     self.commentRequest = request;

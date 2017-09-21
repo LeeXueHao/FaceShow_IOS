@@ -14,10 +14,18 @@
 @end
 
 @implementation MineUserHeaderCell
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
         [self setupLayout];
+        WEAK_SELF
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kYXUploadUserPicSuccessNotification" object:nil] subscribeNext:^(id x) {
+            STRONG_SELF
+            [self reload];
+        }];
     }
     return self;
 }

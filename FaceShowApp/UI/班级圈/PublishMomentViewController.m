@@ -86,6 +86,9 @@
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:@"发表" forState:UIControlStateNormal];
+    if (self.imageArray.count == 0) {
+        rightButton.enabled = NO;
+    }
     rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
     [rightButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -99,7 +102,20 @@
         }
     }];
     [self nyx_setupRightWithCustomView:rightButton];
+    
+    
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UITextViewTextDidChangeNotification object:nil] subscribeNext:^(NSNotification *x) {
+        STRONG_SELF
+        if (self.imageArray.count != 0) {
+            rightButton.enabled = YES;
+            return;
+        }
+        UITextView *tempTextView = (UITextView *)x.object;
+        rightButton.enabled = tempTextView.text.length != 0;
+    }];
 }
+
+
 - (void)showAlertView {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退出此次编辑" message:nil preferredStyle:UIAlertControllerStyleAlert];
     WEAK_SELF
@@ -165,7 +181,7 @@
 }
 - (void)requestForPublishMoment:(NSString *)resourceIds{
     ClassMomentPublishRequest *request = [[ClassMomentPublishRequest alloc] init];
-    request.claszId = self.claszId;
+    request.clazsId = self.clazsId;
     request.content = self.publicationMomentTextView.text;
     request.resourceIds = resourceIds;
     WEAK_SELF

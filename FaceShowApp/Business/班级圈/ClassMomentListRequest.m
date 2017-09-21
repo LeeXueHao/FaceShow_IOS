@@ -12,7 +12,7 @@
 @implementation ClassMomentListRequestItem_Data_Moment_Comment
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"commentID",
-                                                       @"claszId":@"claszID",
+                                                       @"clazsId":@"clazsID",
                                                        @"momentId":@"momentID",
                                                        @"parentId":@"parentID"}];
 }
@@ -33,7 +33,7 @@
 @implementation ClassMomentListRequestItem_Data_Moment_Like
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"likeID",
-                                                       @"claszId":@"claszID",
+                                                       @"clazsId":@"clazsID",
                                                        @"momentId":@"momentID"}];
 }
 @end
@@ -41,7 +41,7 @@
 @implementation ClassMomentListRequestItem_Data_Moment
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"momentID",
-                                                       @"claszId":@"claszID",
+                                                       @"clazsId":@"clazsID",
                                                        @"album":@"albums"}];
 }
 - (NSString<Optional> *)isOpen {
@@ -65,7 +65,7 @@
 @implementation ClassMomentListRequest
 - (instancetype)init {
     if (self = [super init]) {
-       self.urlHead = @"";
+        self.method = @"app.moment.getMoments";
     }
     return self;
 }

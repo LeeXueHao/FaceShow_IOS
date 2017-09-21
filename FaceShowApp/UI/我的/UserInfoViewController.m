@@ -13,12 +13,16 @@
 #import "FSDefaultHeaderFooterView.h"
 #import "YXImagePickerController.h"
 #import "UserModel.h"
+#import "UploadHeadImgRequest.h"
+#import "UpdateAvatarRequest.h"
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
-@property (nonatomic, strong) UserInfoRequest *userInfoRequest;
+@property (nonatomic, strong) GetUserInfoRequest *userInfoRequest;
+@property (nonatomic, strong) UploadHeadImgRequest *uploadHeadImgRequest;
+@property (nonatomic, strong) UpdateAvatarRequest *avatarRequest;
 @end
 
 @implementation UserInfoViewController
@@ -27,16 +31,14 @@
     [super viewDidLoad];
     self.title = @"我";
     self.contentMutableArray =
-    [@[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无"},
-       @{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"},
-       @{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sex?:@"暂无"},
-       @{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stage?:@"暂无"},
-       @{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subject?:@"暂无"}] mutableCopy];
+    [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无"} mutableCopy],
+       [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
+       [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无"} mutableCopy],
+       [@{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stageName?:@"暂无"} mutableCopy],
+       [@{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subjectName?:@"暂无"} mutableCopy]] mutableCopy];
     [self setupUI];
     [self setupLayout];
-    if ([UserManager sharedInstance].userModel == nil) {
-        [self requestForUserInfo];
-    }
+    [self requestForUserInfo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,7 +90,8 @@
         STRONG_SELF
         [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
             STRONG_SELF
-            [self requestForUpdateHeaderImage:selectedImage];
+            [self updateWithHeaderImage:selectedImage];
+            //[self requestForUpdateHeaderImage:selectedImage];
         }];
     }];
     [alertVC addAction:photoAction];
@@ -141,34 +144,73 @@
 - (void)requestForUpdateHeaderImage:(UIImage *)image {
     UserInfoHeaderCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [cell reload];
-    BLOCK_EXEC(self.userInfoReloadBlock);
 }
 #pragma mark - request
 - (void)requestForUserInfo{
-    UserInfoRequest *request = [[UserInfoRequest alloc] init];
-    //    request.userId = @"";
+   GetUserInfoRequest *request = [[GetUserInfoRequest alloc] init];
     [self.view nyx_startLoading];
     WEAK_SELF
-    [request startRequestWithRetClass:[UserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [request startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self.view nyx_stopLoading];
-        UserInfoRequestItem *item = retItem;
+        GetUserInfoRequestItem *item = retItem;
         if (item.data != nil) {
-            [UserManager sharedInstance].userModel = [UserModel modelFromRawData:item.data];
-            self.contentMutableArray = [@[@{@"title":@"姓名",@"content":@"孙长龙"},
-                                          @{@"title":@"联系电话",@"content":@"13910102038"},
-                                          @{@"title":@"性别",@"content":@"男"},
-                                          @{@"title":@"学段",@"content":@"高中"},
-                                          @{@"title":@"学科",@"content":@"数学"}] mutableCopy];
-            
+            UserModel *model = [UserModel modelFromUserInfo:item.data];
+            model.token = [UserManager sharedInstance].userModel.token;
+            [UserManager sharedInstance].userModel = model;
             self.contentMutableArray[0][@"content"] = [UserManager sharedInstance].userModel.realName?:@"暂无";
             self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";
-            self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sex?:@"暂无";
-            self.contentMutableArray[3][@"content"] = [UserManager sharedInstance].userModel.stage?:@"暂无";
-            self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.subject?:@"暂无";
+            self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sexName?:@"暂无";
+            self.contentMutableArray[3][@"content"] = [UserManager sharedInstance].userModel.stageName?:@"暂无";
+            self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.subjectName?:@"暂无";
             [self.tableView reloadData];
         }
     }];
     self.userInfoRequest = request;
 }
+- (void)updateWithHeaderImage:(UIImage *)image
+{
+    if (!image) {
+        return;
+    }
+    NSData *data = [UIImage compressionImage:image limitSize:2*1024*1024];
+    [self.uploadHeadImgRequest stopRequest];
+    self.uploadHeadImgRequest = [[UploadHeadImgRequest alloc] init];
+    [self.uploadHeadImgRequest.request setData:data
+                                  withFileName:@"head.jpg"
+                                andContentType:nil
+                                        forKey:@"easyfile"];
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [self.uploadHeadImgRequest startRequestWithRetClass:[UploadHeadImgItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        UploadHeadImgItem *item = retItem;
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        if (item.tplData.data.count != 0) {
+            UploadHeadImgItem_TplData_Data *data = item.tplData.data[0];
+            [self requestForUploadAvatar:data.url?:data.shortUrl];
+        } else {
+            [self.view nyx_showToast:item.tplData.message];
+        }
+    }];
+}
+- (void)requestForUploadAvatar:(NSString *)url {
+    UpdateAvatarRequest *request = [[UpdateAvatarRequest alloc] init];
+    request.avatar = url;
+    WEAK_SELF
+    [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (!error) {
+            [UserManager sharedInstance].userModel.avatarUrl = url;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    self.avatarRequest = request;
+}
+
 @end

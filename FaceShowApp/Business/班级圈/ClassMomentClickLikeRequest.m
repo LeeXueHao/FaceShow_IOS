@@ -12,7 +12,7 @@
 @implementation ClassMomentClickLikeRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = @"";
+        self.method = @"moment.like";
     }
     return self;
 }

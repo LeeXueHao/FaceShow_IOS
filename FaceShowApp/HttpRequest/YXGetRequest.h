@@ -10,8 +10,8 @@
 
 @interface YXGetRequest : GetRequest
 
-//@property (nonatomic, strong) NSString<Optional> *token;
-//@property (nonatomic, strong) NSString<Optional> *ver;
-//@property (nonatomic, strong) NSString<Optional> *os;
+@property (nonatomic, strong) NSString<Optional> *token;
+@property (nonatomic, strong) NSString<Optional> *ver;
+@property (nonatomic, strong) NSString<Optional> *os;
 
 @end

@@ -20,6 +20,8 @@
 @property (nonatomic, copy) NSString<Optional> *sex;
 @property (nonatomic, copy) NSString<Optional> *school;
 @property (nonatomic, copy) NSString<Optional> *avatar;
+@property (nonatomic, copy) NSString<Optional> *stageName;
+@property (nonatomic, copy) NSString<Optional> *subjectName;
 @end
 
 @interface GetUserInfoRequestItem : HttpBaseRequestItem

@@ -9,11 +9,11 @@
 #import "YXGetRequest.h"
 #import "ClassMomentListRequest.h"
 @interface ClassMomentPublishRequestItem : HttpBaseRequestItem
-@property (nonatomic, strong) ClassMomentListRequestItem_Data_Moment *data;
+@property (nonatomic, strong) ClassMomentListRequestItem_Data_Moment<Optional> *data;
 @end
 
 @interface ClassMomentPublishRequest : YXGetRequest
-@property (nonatomic, copy) NSString<Optional> *claszId;
+@property (nonatomic, copy) NSString<Optional> *clazsId;
 @property (nonatomic, copy) NSString<Optional> *content;
 @property (nonatomic, copy) NSString<Optional> *resourceIds;//上传资源id集合,逗号分隔，e.g:22,33,55
 @end

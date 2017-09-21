@@ -9,10 +9,10 @@
 #import "YXGetRequest.h"
 #import "ClassMomentListRequest.h"
 @interface ClassMomentCommentRequestItem :  HttpBaseRequestItem
-@property (nonatomic, strong) ClassMomentListRequestItem_Data_Moment_Comment *data;
+@property (nonatomic, strong) ClassMomentListRequestItem_Data_Moment_Comment<Optional> *data;
 @end
 @interface ClassMomentCommentRequest : YXGetRequest
-@property (nonatomic, copy) NSString<Optional> *claszId;
+@property (nonatomic, copy) NSString<Optional> *clazsId;
 @property (nonatomic, copy) NSString<Optional> *momentId;
 @property (nonatomic, copy) NSString<Optional> *content;
 @end

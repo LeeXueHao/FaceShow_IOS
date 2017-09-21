@@ -4,7 +4,7 @@
     "data": {
         "id": 1, 
         "content": "这是我自己发布的动态_这是我自己发布的动态这是我自己发布的动态_这是我自己发布的动态,这是我自己发布的动态-这是我自己发布的动态",
-        "claszId": 1, 
+        "clazsId": 1, 
         "readedNum": 0, 
         "likedNum": 0, 
         "commentedNum": 0, 
@@ -26,7 +26,7 @@
         "comments": [
             {
                 "id": 22, 
-                "claszId": 33, 
+                "clazsId": 33, 
                 "momentId": 22, 
                 "parentId": 22, 
                 "content": "222", 
@@ -47,7 +47,7 @@
         "likes": [
             {
                 "id": 22, 
-                "claszId": 33, 
+                "clazsId": 33, 
                 "momentId": 22, 
                 "createTime": "2017-09-15 10:54:12", 
                 "publisher": {
