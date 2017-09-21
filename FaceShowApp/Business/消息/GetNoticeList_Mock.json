@@ -11,7 +11,7 @@
              "createTime": "2017-09-15 12:03:52",
              "updateTime": "2017-09-15 12:03:52",
              "state": 1,
-             "attachUrl": null,
+             "attachUrl": "http://s1.jsyxw.cn/yanxiu/u/68/74/Img917468_80.jpg",
              "readNum": 0,
              "authorName": "111",
              "createTimeStr": "2017-09-15",
@@ -27,12 +27,12 @@
              "createTime": "2017-09-15 12:03:42",
              "updateTime": "2017-09-15 12:03:42",
              "state": 1,
-             "attachUrl": null,
+             "attachUrl": "http://s1.jsyxw.cn/yanxiu/u/68/74/Img917468_80.jpg",
              "readNum": 0,
              "authorName": "111",
              "createTimeStr": "2017-09-15",
              "updateTimeStr": "2017-09-15",
-             "viewed": false
+             "viewed": true
              },
              {
              "id": 1,
@@ -43,7 +43,7 @@
              "createTime": "2017-09-15 10:54:12",
              "updateTime": "2017-09-15 10:54:12",
              "state": 1,
-             "attachUrl": "http://www.yanxiu.com",
+             "attachUrl": "http://s1.jsyxw.cn/yanxiu/u/68/74/Img917468_80.jpg",
              "readNum": 6,
              "authorName": "111",
              "createTimeStr": "2017-09-15",

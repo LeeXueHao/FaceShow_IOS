@@ -29,14 +29,10 @@
 @implementation GetCourseRequestItem
 @end
 
-@interface GetCourseRequest ()
-@end
-
 @implementation GetCourseRequest
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = @"http://orz.yanxiu.com/pxt/platform/data.api";
         self.method = @"app.course.getCourse";
     }
     return self;

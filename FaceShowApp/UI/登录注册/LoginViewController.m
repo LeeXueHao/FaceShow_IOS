@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "LoginDataManager.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -156,7 +157,18 @@
 
 #pragma mark - actions
 - (void)loginBtnAction:(UIButton *)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUserDidLoginNotification object:nil];
+    [self.view endEditing:YES];
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [LoginDataManager loginWithName:self.usernameTF.text password:self.passwordTF.text completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserDidLoginNotification object:nil];
+    }];
 }
 
 - (void)securityBtnAction:(UIButton *)sender {

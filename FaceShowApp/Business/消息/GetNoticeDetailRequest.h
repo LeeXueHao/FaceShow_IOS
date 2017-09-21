@@ -30,5 +30,5 @@
 @end
 
 @interface GetNoticeDetailRequest : YXGetRequest
-@property (nonatomic, strong) NSString *noticeId;
+@property (nonatomic, strong) NSString<Optional> *noticeId;
 @end

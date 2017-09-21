@@ -55,9 +55,11 @@
 
 - (void)setModel {
     self.titleLabel.text = @"报道用餐时间及地点如图所示";
-    UIImage *detailImage = [UIImage imageNamed:@"登录背景"];
-    detailImage = [detailImage nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / detailImage.size.width * detailImage.size.height)];
-    self.detailImageView.image = detailImage;
+    [self.detailImageView sd_setImageWithURL:[NSURL URLWithString:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            self.detailImageView.image = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / image.size.width * image.size.height)];
+        }
+    }];
 }
 
 #pragma mark - RefreshDelegate

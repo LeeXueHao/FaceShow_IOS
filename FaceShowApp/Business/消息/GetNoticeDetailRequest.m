@@ -17,13 +17,9 @@
 @implementation GetNoticeDetailRequestItem
 @end
 
-@interface GetNoticeDetailRequest ()
-@end
-
 @implementation GetNoticeDetailRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = @"http://orz.yanxiu.com/pxt/platform/data.api";
         self.method = @"notice.detail";
     }
     return self;

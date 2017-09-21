@@ -10,4 +10,5 @@
 
 @interface MessageDetailViewController : ScrollBaseViewController
 @property (nonatomic, strong) NSString *noticeId;
+@property (nonatomic, strong) void (^fetchNoticeDetailSucceedBlock)();
 @end

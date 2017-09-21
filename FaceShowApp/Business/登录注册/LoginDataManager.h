@@ -10,4 +10,6 @@
 
 @interface LoginDataManager : NSObject
 
++ (void)loginWithName:(NSString *)name password:(NSString *)password completeBlock:(void(^)(NSError *error))completeBlock;
+
 @end

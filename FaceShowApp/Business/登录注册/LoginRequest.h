@@ -8,6 +8,10 @@
 
 #import "YXGetRequest.h"
 
+@interface LoginRequestItem : HttpBaseRequestItem
+@property (nonatomic, strong) NSString<Optional> *token;
+@end
+
 @interface LoginRequest : YXGetRequest
 @property (nonatomic, strong) NSString *loginName;
 @property (nonatomic, strong) NSString *password;

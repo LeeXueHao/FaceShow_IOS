@@ -63,6 +63,7 @@
         GetNoticeDetailRequestItem *item = (GetNoticeDetailRequestItem *)retItem;
         self.data = item.data;
         [self setupUI];
+        BLOCK_EXEC(self.fetchNoticeDetailSucceedBlock);
     }];
 }
 
@@ -132,9 +133,12 @@
                                    NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"]
                                    } range:NSMakeRange(0, attributedStr.length)];
     self.detailLabel.attributedText = attributedStr;
-    UIImage *detailImage = [UIImage imageNamed:@"登录背景"];
-    detailImage = [detailImage nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / detailImage.size.width * detailImage.size.height)];
-    self.detailImageView.image = detailImage;
+    
+    [self.detailImageView sd_setImageWithURL:[NSURL URLWithString:self.data.attachUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            self.detailImageView.image = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / image.size.width * image.size.height)];
+        }
+    }];
 }
 
 @end

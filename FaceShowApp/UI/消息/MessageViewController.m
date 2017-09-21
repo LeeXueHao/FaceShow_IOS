@@ -60,6 +60,11 @@
     GetNoticeListRequestItem_Notice *notice = self.dataArray[indexPath.row];
     MessageDetailViewController *messageDetailVC = [[MessageDetailViewController alloc] init];
     messageDetailVC.noticeId = notice.noticeId;
+    WEAK_SELF
+    messageDetailVC.fetchNoticeDetailSucceedBlock = ^{
+        STRONG_SELF
+        [self firstPageFetch];
+    };
     [self.navigationController pushViewController:messageDetailVC animated:YES];
 }
 

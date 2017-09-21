@@ -12,7 +12,7 @@
 @interface MessageCell ()
 
 @property (nonatomic, strong) UIImageView *avatarImageView;
-@property (nonatomic, strong) UIImageView *bedgeImageView;
+@property (nonatomic, strong) UIView *bedgeImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 
@@ -32,8 +32,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.avatarImageView = [[UIImageView alloc] init];
-    self.avatarImageView.backgroundColor = [UIColor redColor];
-    self.avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:self.avatarImageView];
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -41,13 +40,15 @@
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     
-    self.bedgeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    self.bedgeImageView.backgroundColor = [UIColor greenColor];
+    self.bedgeImageView = [[UIView alloc] init];
+    self.bedgeImageView.clipsToBounds = YES;
+    self.bedgeImageView.layer.cornerRadius = 3.5;
+    self.bedgeImageView.backgroundColor = [UIColor redColor];
     [self.avatarImageView addSubview:self.bedgeImageView];
     [self.bedgeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(15);
         make.centerY.mas_equalTo(-15);
-        make.size.mas_equalTo(CGSizeMake(6, 7));
+        make.size.mas_equalTo(CGSizeMake(7, 7));
     }];
     
     self.titleLabel = [[UILabel alloc] init];
