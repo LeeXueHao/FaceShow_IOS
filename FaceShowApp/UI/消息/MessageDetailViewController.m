@@ -52,6 +52,7 @@
     [self.view nyx_startLoading];
     [self.request stopRequest];
     self.request = [[GetNoticeDetailRequest alloc] init];
+    self.request.noticeId = self.noticeId;
     WEAK_SELF
     [self.request startRequestWithRetClass:[GetNoticeDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -69,6 +70,8 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self.contentView addSubview:headerView];
@@ -123,7 +126,7 @@
 
 - (void)setModel {
     self.titleLabel.text = self.data.title;
-    self.timeLabel.text = self.data.createTime;
+    self.timeLabel.text = [NSString stringWithFormat:@"%@%@", isEmpty(self.data.authorName) ? @"" : [NSString stringWithFormat:@"%@ ", self.data.authorName], [self.data.createTime componentsSeparatedByString:@" "].firstObject];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.data.content];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 21;

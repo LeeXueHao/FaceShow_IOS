@@ -53,11 +53,11 @@
 @property (nonatomic, strong) NSString<Optional> *briefing;
 @property (nonatomic, strong) NSArray<GetCourseRequestItem_LecturerInfo, Optional> *lecturerInfos;
 @property (nonatomic, strong) NSArray<GetCourseRequestItem_AttachmentInfo, Optional> *attachmentInfos;
-@property (nonatomic, strong) NSArray<GetCourseRequestItem_InteractStep, Optional> *interactSteps;
 @end
 
 @interface GetCourseRequestItem_Data : JSONModel
 @property (nonatomic, strong) GetCourseRequestItem_Course<Optional> *course;
+@property (nonatomic, strong) NSArray<GetCourseRequestItem_InteractStep, Optional> *interactSteps;
 @end
 
 @interface GetCourseRequestItem : HttpBaseRequestItem

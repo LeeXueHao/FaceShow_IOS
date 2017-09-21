@@ -10,4 +10,7 @@
 
 @interface SignInRecordHeaderView : UIView
 
+@property (nonatomic, strong) NSString *projectName;
+@property (nonatomic, strong) NSString *clazzName;
+
 @end

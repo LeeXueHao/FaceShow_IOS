@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CourseDetailHeaderView *headerView;
 @property (nonatomic, strong) GetCourseRequest *request;
-@property (nonatomic, strong) GetCourseRequestItem_Course *course;
+@property (nonatomic, strong) GetCourseRequestItem_Data *data;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *dataArray;
 @end
 
@@ -59,13 +59,13 @@
             self.errorView.hidden = NO;
             return;
         }
-        self.course = retItem.data.course;
+        self.data = retItem.data;
         self.dataArray = [NSMutableArray array];
-        [self.dataArray addObject:!isEmpty(self.course.lecturerInfos) ? self.course.lecturerInfos : [NSArray array]];
-        [self.dataArray addObject:!isEmpty(self.course.attachmentInfos) ? self.course.attachmentInfos : [NSArray array]];
-        [self.dataArray addObject:!isEmpty(self.course.interactSteps) ? self.course.interactSteps : [NSArray array]];
+        [self.dataArray addObject:!isEmpty(self.data.course.lecturerInfos) ? self.data.course.lecturerInfos : [NSArray array]];
+        [self.dataArray addObject:!isEmpty(self.data.course.attachmentInfos) ? self.data.course.attachmentInfos : [NSArray array]];
+        [self.dataArray addObject:!isEmpty(self.data.interactSteps) ? self.data.interactSteps : [NSArray array]];
         self.tableView.hidden = NO;
-        self.headerView.course = self.course;
+        self.headerView.course = self.data.course;
         [self.tableView layoutIfNeeded];
         [self.tableView reloadData];
     }];
@@ -93,7 +93,7 @@
     self.headerView.viewAllBlock = ^{
         STRONG_SELF
         CourseBriefViewController *courseBriefVC = [[CourseBriefViewController alloc] init];
-        courseBriefVC.courseBrief = self.course.briefing;
+        courseBriefVC.courseBrief = self.data.course.briefing;
         [self.navigationController pushViewController:courseBriefVC animated:NO];
     };
     self.tableView.tableHeaderView = self.headerView;

@@ -167,7 +167,7 @@
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserDidLoginNotification object:nil];
+        [UserManager sharedInstance].loginStatus = YES;
     }];
 }
 
@@ -176,7 +176,23 @@
 }
 
 - (void)touristBtnAction:(UIButton *)sender {
-    
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [LoginDataManager loginWithName:@"18610583576" password:@"123456" completeBlock:^(NSError *error) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        [UserManager sharedInstance].loginStatus = YES;
+    }];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
+    return YES;
 }
 
 @end

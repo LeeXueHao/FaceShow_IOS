@@ -7,6 +7,7 @@
 //
 
 #import "SignInRecordCell.h"
+#import "GetSignInRecordListRequest.h"
 
 @interface SignInRecordCell ()
 
@@ -23,7 +24,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -57,7 +57,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(15);
-        make.right.mas_equalTo(self.statusImageView.mas_left).offset(-5);
+        make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
     }];
     
     self.timeLabel = [[UILabel alloc] init];
@@ -80,10 +80,16 @@
     }];
 }
 
-- (void)setModel {
-    self.titleLabel.text = @"水电费水电费水电费水电费水电费水电费水电费";
-    self.timeLabel.text = @"签到时间：2017.08.09 13:22";
-    self.statusLabel.text = @"已签到";
+- (void)setSignIn:(GetSignInRecordListRequestItem_SignIn *)signIn {
+    _signIn = signIn;
+    self.titleLabel.text = signIn.title;
+    self.timeLabel.text = isEmpty(signIn.userSignIn) ? @"" : signIn.userSignIn.signinTime;
+    self.statusLabel.text = isEmpty(signIn.userSignIn) ? @"未签到" : @"已签到";
+}
+
+- (void)setHasBottomLine:(BOOL)hasBottomLine {
+    _hasBottomLine = hasBottomLine;
+    self.lineView.hidden = !hasBottomLine;
 }
 
 @end

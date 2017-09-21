@@ -4,6 +4,7 @@
     "data": {
         "elements": [
                      {
+                     "projectName":"测试项目1",
                      "clazs": {
                      "id": 6,
                      "platId": 1,

@@ -10,6 +10,8 @@
 
 @interface UserMessageManager : NSObject
 
+@property (nonatomic, strong) UITabBarItem *messageItem;
+
 + (UserMessageManager *)sharedInstance;
 
 - (void)fetchUserMessage;

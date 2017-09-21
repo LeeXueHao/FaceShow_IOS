@@ -8,6 +8,7 @@
 
 #import "SignInDetailViewController.h"
 #import "ScanCodeViewController.h"
+#import "GetSignInRecordListRequest.h"
 
 @interface SignInDetailViewController ()
 
@@ -37,6 +38,7 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.title = @"签到详情";
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
@@ -98,6 +100,7 @@
     self.timeTitleLabel.font = [UIFont systemFontOfSize:13];
     self.timeTitleLabel.textColor = [UIColor colorWithHexString:@"999999"];
     self.timeTitleLabel.text = @"签到时间";
+    self.timeTitleLabel.hidden = YES;
     [self.contentView addSubview:self.timeTitleLabel];
     [self.timeTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.statusLabel.mas_bottom).offset(29);
@@ -107,6 +110,7 @@
     self.signedInTimeLabel = [[UILabel alloc] init];
     self.signedInTimeLabel.font = [UIFont boldSystemFontOfSize:14];
     self.signedInTimeLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
+    self.signedInTimeLabel.hidden = YES;
     [self.contentView addSubview:self.signedInTimeLabel];
     [self.signedInTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.timeTitleLabel.mas_bottom).offset(10);
@@ -118,6 +122,7 @@
     self.tipsLabel.font = [UIFont systemFontOfSize:13];
     self.tipsLabel.textColor = [UIColor colorWithHexString:@"999999"];
     self.tipsLabel.text = @"请点击下面按钮，扫描二维码进行现场签到";
+    self.tipsLabel.hidden = YES;
     [self.contentView addSubview:self.tipsLabel];
     [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.statusLabel.mas_bottom).offset(60);
@@ -135,6 +140,7 @@
     [self.signInBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [self.signInBtn setTitle:@"签 到" forState:UIControlStateNormal];
     [self.signInBtn addTarget:self action:@selector(signInBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.signInBtn.hidden = YES;
     [self.contentView addSubview:self.signInBtn];
     [self.signInBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.tipsLabel.mas_bottom).offset(20);
@@ -150,7 +156,7 @@
 }
 
 - (void)setModel {
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:@"水电费水电费沙发斯蒂芬水电费水电费水电费水电费是打发斯蒂芬"];
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.signIn.title];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 27;
     style.alignment = NSTextAlignmentCenter;
@@ -160,9 +166,16 @@
                                    NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"]
                                    } range:NSMakeRange(0, attributedStr.length)];
     self.titleLabel.attributedText = attributedStr;
-    self.timeScheduleLabel.text = @"2014.8.24 8:00 - 2017.3.3 8:30";
-    self.statusLabel.text = @"您还未签到";
-    self.signedInTimeLabel.text = @"2017.8.8 8:00";
+    self.timeScheduleLabel.text = [NSString stringWithFormat:@"%@ - %@", self.signIn.startTime, self.signIn.endTime];
+    self.statusLabel.text = isEmpty(self.signIn.userSignIn) ? @"您还未签到" : @"您已成功签到";
+    if (isEmpty(self.signIn.userSignIn)) {
+        self.tipsLabel.hidden = NO;
+        self.signInBtn.hidden = NO;
+    } else {
+        self.timeTitleLabel.hidden = NO;
+        self.signedInTimeLabel.hidden = NO;
+        self.signedInTimeLabel.text = self.signIn.userSignIn.signinTime;
+    }
 }
 
 @end

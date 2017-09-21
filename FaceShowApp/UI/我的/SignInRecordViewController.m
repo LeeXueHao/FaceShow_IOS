@@ -10,19 +10,19 @@
 #import "SignInRecordCell.h"
 #import "SignInRecordHeaderView.h"
 #import "SignInDetailViewController.h"
+#import "GetSignInRecordListFetcher.h"
+#import "GetSignInRecordListRequest.h"
 
 @interface SignInRecordViewController ()
-
 @end
 
 @implementation SignInRecordViewController
 
 - (void)viewDidLoad {
-    self.bNeedHeader = NO;
+    GetSignInRecordListFetcher *fetcher = [[GetSignInRecordListFetcher alloc] init];
+    self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
-    
-    [self.view nyx_stopLoading];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +33,7 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.title = @"签到记录";
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 5)];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
@@ -44,15 +45,19 @@
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SignInRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SignInRecordCell"];
+    GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
+    cell.hasBottomLine = indexPath.row != element.signIns.count - 1;
+    cell.signIn = element.signIns[indexPath.row];
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    GetSignInRecordListRequestItem_Element *element = self.dataArray[section];
+    return element.signIns.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,12 +69,17 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    GetSignInRecordListRequestItem_Element *element = self.dataArray[section];
     SignInRecordHeaderView *headerView = [[SignInRecordHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 75)];
+    headerView.projectName = element.projectName;
+    headerView.clazzName = element.clazs.clazsName;
     return headerView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SignInDetailViewController *signInDetailVC = [[SignInDetailViewController alloc] init];
+    GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
+    signInDetailVC.signIn = element.signIns[indexPath.row];
     [self.navigationController pushViewController:signInDetailVC animated:YES];
 }
 

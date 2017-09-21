@@ -36,6 +36,9 @@
 		4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4378DFA51F6F8217005CFE56 /* TaskCell.m */; };
 		4378DFAB1F6FA4CB005CFE56 /* SignInRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4378DFA81F6FA4CB005CFE56 /* SignInRecordCell.m */; };
 		4378DFAC1F6FA4CB005CFE56 /* SignInRecordHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4378DFAA1F6FA4CB005CFE56 /* SignInRecordHeaderView.m */; };
+		438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A701F73762D00800020 /* MessageHasUnViewRequest.m */; };
+		438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */; };
+		438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A761F739B8800800020 /* GetUserInfoRequest.m */; };
 		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
 		7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */; };
 		7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */; };
@@ -248,6 +251,12 @@
 		4378DFA81F6FA4CB005CFE56 /* SignInRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInRecordCell.m; sourceTree = "<group>"; };
 		4378DFA91F6FA4CB005CFE56 /* SignInRecordHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInRecordHeaderView.h; sourceTree = "<group>"; };
 		4378DFAA1F6FA4CB005CFE56 /* SignInRecordHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInRecordHeaderView.m; sourceTree = "<group>"; };
+		438E2A6F1F73762D00800020 /* MessageHasUnViewRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageHasUnViewRequest.h; sourceTree = "<group>"; };
+		438E2A701F73762D00800020 /* MessageHasUnViewRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageHasUnViewRequest.m; sourceTree = "<group>"; };
+		438E2A721F738CAB00800020 /* GetSignInRecordListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSignInRecordListFetcher.h; sourceTree = "<group>"; };
+		438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSignInRecordListFetcher.m; sourceTree = "<group>"; };
+		438E2A751F739B8800800020 /* GetUserInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetUserInfoRequest.h; sourceTree = "<group>"; };
+		438E2A761F739B8800800020 /* GetUserInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetUserInfoRequest.m; sourceTree = "<group>"; };
 		7C212DAD1F6A0D740007AE01 /* OptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemView.h; sourceTree = "<group>"; };
 		7C212DAE1F6A0D740007AE01 /* OptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemView.m; sourceTree = "<group>"; };
 		7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionCell.h; sourceTree = "<group>"; };
@@ -556,6 +565,8 @@
 			children = (
 				43210E561F724B3D0049C381 /* LoginRequest.h */,
 				43210E571F724B3D0049C381 /* LoginRequest.m */,
+				438E2A751F739B8800800020 /* GetUserInfoRequest.h */,
+				438E2A761F739B8800800020 /* GetUserInfoRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -569,6 +580,8 @@
 				43210E671F7271D30049C381 /* GetNoticeDetailRequest.h */,
 				43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */,
 				43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */,
+				438E2A6F1F73762D00800020 /* MessageHasUnViewRequest.h */,
+				438E2A701F73762D00800020 /* MessageHasUnViewRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -943,6 +956,8 @@
 				7C2519691F68EBCD0001B577 /* UserModel.m */,
 				92C569951F735B540025815B /* UserInfoRequest.h */,
 				92C569961F735B540025815B /* UserInfoRequest.m */,
+				438E2A721F738CAB00800020 /* GetSignInRecordListFetcher.h */,
+				438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1503,6 +1518,7 @@
 				7C212DDA1F6B68BD0007AE01 /* CourseDetailViewController.m in Sources */,
 				7C2519111F68EA820001B577 /* GlobalUtils.m in Sources */,
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
+				438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */,
 				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
 				7C212DE61F6B6DEA0007AE01 /* CourseListHeaderView.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
@@ -1623,6 +1639,7 @@
 				4378DF941F6F62F9005CFE56 /* SignInRecordViewController.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
 				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
+				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
 				7C25190A1F68E90C0001B577 /* YXTestViewController.m in Sources */,
@@ -1643,6 +1660,7 @@
 				7C2519161F68EA8A0001B577 /* FileLogger.m in Sources */,
 				922084291F6BC4D200F8AAC6 /* UserInfoHeaderCell.m in Sources */,
 				7C24E1E91F721C7B00A6921B /* HttpBaseRequestItem_Error.m in Sources */,
+				438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

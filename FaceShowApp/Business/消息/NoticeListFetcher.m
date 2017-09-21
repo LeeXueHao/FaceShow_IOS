@@ -19,7 +19,7 @@
     self.request = [[GetNoticeListRequest alloc] init];
     self.request.offset = [NSString stringWithFormat:@"%@",@(self.lastID)];
     self.request.pageSize = [NSString stringWithFormat:@"%@",@(self.pagesize)];
-    self.request.clazzId = self.clazzId;
+    self.request.clazsId = self.clazzId;
     self.request.title = self.title;
     WEAK_SELF
     [self.request startRequestWithRetClass:[GetNoticeListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {

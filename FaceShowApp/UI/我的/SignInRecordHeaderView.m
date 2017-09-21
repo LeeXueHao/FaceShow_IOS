@@ -20,7 +20,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -37,12 +36,12 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.top.mas_equalTo(19);
+        make.top.mas_equalTo(16);
         make.centerX.mas_equalTo(0);
     }];
     
     self.classLabel = [[UILabel alloc] init];
-    self.classLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.classLabel.font = [UIFont systemFontOfSize:14];
     self.classLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.classLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.classLabel];
@@ -54,9 +53,14 @@
     }];
 }
 
-- (void)setModel {
-    self.titleLabel.text = @"水电费水电费水电费是";
-    self.classLabel.text = @"19号一班";
+- (void)setProjectName:(NSString *)projectName {
+    _projectName = projectName;
+    self.titleLabel.text = projectName;
+}
+
+- (void)setClazzName:(NSString *)clazzName {
+    _clazzName = clazzName;
+    self.classLabel.text = clazzName;
 }
 
 @end

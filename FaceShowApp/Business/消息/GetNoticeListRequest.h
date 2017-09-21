@@ -32,7 +32,7 @@
 @end
 
 @interface GetNoticeListRequest : YXGetRequest
-@property (nonatomic, strong) NSString *clazzId;
+@property (nonatomic, strong) NSString *clazsId;
 @property (nonatomic, strong) NSString<Optional> *offset;
 @property (nonatomic, strong) NSString<Optional> *pageSize;
 @property (nonatomic, strong) NSString<Optional> *title;

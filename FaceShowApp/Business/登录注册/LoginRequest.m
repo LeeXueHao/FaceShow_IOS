@@ -12,6 +12,7 @@
 @end
 
 @interface LoginRequest ()
+@property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *appKey;
 @end
 
@@ -20,6 +21,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.urlHead = @"http://orz.yanxiu.com/uc/appLogin";
+        self.type = @"MOBILE";
         self.appKey = @"f749edf6-bc39-6ef9-8f81-158se5fds842";
     }
     return self;

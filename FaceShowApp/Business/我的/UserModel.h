@@ -8,6 +8,7 @@
 
 #import <JSONModel/JSONModel.h>
 #import "UserInfoRequest.h"
+#import "GetUserInfoRequest.h"
 @interface UserModel : JSONModel
 @property (nonatomic, copy) NSString<Optional> *userID;
 @property (nonatomic, copy) NSString<Optional> *realName;
@@ -28,4 +29,5 @@
 @property (nonatomic, copy) NSString<Optional> *token;
 
 + (UserModel *)modelFromRawData:(UserInfoRequestItem_Data *)rawData;
++ (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo;
 @end

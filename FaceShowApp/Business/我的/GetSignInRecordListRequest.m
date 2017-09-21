@@ -8,15 +8,21 @@
 
 #import "GetSignInRecordListRequest.h"
 
+@implementation GetSignInRecordListRequestItem_UserSignIn
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"userSignInId"}];
+}
+@end
+
 @implementation GetSignInRecordListRequestItem_SignIn
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"signInId" : @"id"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"signInId"}];
 }
 @end
 
 @implementation GetSignInRecordListRequestItem_Clazs
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"clazsId" : @"id", @"descriptionStr" : @"description"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"clazsId", @"description" : @"descriptionStr"}];
 }
 @end
 

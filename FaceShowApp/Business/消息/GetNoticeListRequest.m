@@ -10,7 +10,7 @@
 
 @implementation GetNoticeListRequestItem_Notice
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"noticeId" : @"id"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"noticeId"}];
 }
 @end
 

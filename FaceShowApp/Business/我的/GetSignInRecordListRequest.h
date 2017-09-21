@@ -8,6 +8,18 @@
 
 #import "YXGetRequest.h"
 
+@interface GetSignInRecordListRequestItem_UserSignIn : JSONModel
+@property (nonatomic, strong) NSString<Optional> *userSignInId;
+@property (nonatomic, strong) NSString<Optional> *userId;
+@property (nonatomic, strong) NSString<Optional> *signinId;
+@property (nonatomic, strong) NSString<Optional> *signinStatus;
+@property (nonatomic, strong) NSString<Optional> *signinTime;
+@property (nonatomic, strong) NSString<Optional> *signinRemark;
+@property (nonatomic, strong) NSString<Optional> *signinDevice;
+@property (nonatomic, strong) NSString<Optional> *userName;
+@property (nonatomic, strong) NSString<Optional> *avatar;
+@end
+
 @protocol GetSignInRecordListRequestItem_SignIn <NSObject>
 @end
 @interface GetSignInRecordListRequestItem_SignIn : JSONModel
@@ -26,7 +38,7 @@
 @property (nonatomic, strong) NSString<Optional> *signInUserNum;
 @property (nonatomic, strong) NSString<Optional> *opentStatusName;
 @property (nonatomic, strong) NSString<Optional> *percent;
-@property (nonatomic, strong) NSString<Optional> *userSignIn;
+@property (nonatomic, strong) GetSignInRecordListRequestItem_UserSignIn<Optional> *userSignIn;
 @end
 
 @interface GetSignInRecordListRequestItem_Clazs : JSONModel
@@ -46,6 +58,7 @@
 @protocol GetSignInRecordListRequestItem_Element <NSObject>
 @end
 @interface GetSignInRecordListRequestItem_Element : JSONModel
+@property (nonatomic, strong) NSString<Optional> *projectName;
 @property (nonatomic, strong) GetSignInRecordListRequestItem_Clazs<Optional> *clazs;
 @property (nonatomic, strong) NSArray<GetSignInRecordListRequestItem_SignIn,Optional> *signIns;
 @end

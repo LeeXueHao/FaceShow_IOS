@@ -8,9 +8,11 @@
 
 #import "LoginDataManager.h"
 #import "LoginRequest.h"
+#import "GetUserInfoRequest.h"
 
 @interface LoginDataManager()
 @property (nonatomic, strong) LoginRequest *loginRequest;
+@property (nonatomic, strong) GetUserInfoRequest *getUserInfoRequest;
 @end
 
 @implementation LoginDataManager
@@ -34,13 +36,27 @@
     [manager.loginRequest startRequestWithRetClass:[LoginRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         if (error) {
-            BLOCK_EXEC(completeBlock,error);
+            BLOCK_EXEC(completeBlock, error);
             return;
         }
         LoginRequestItem *item = (LoginRequestItem *)retItem;
-        [UserManager sharedInstance].userModel.token = item.token;
-        [UserManager sharedInstance].loginStatus = YES;
-        BLOCK_EXEC(completeBlock, nil);
+        UserModel *userModel = [[UserModel alloc] init];
+        userModel.token = item.token;
+        [UserManager sharedInstance].userModel = userModel;
+        
+        [manager.getUserInfoRequest stopRequest];
+        manager.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
+        [manager.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            if (error) {
+                BLOCK_EXEC(completeBlock, error);
+                return;
+            }
+            GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
+            UserModel *model = [UserModel modelFromUserInfo:userInfo.data];
+            model.token = item.token;
+            [UserManager sharedInstance].userModel = model;
+            BLOCK_EXEC(completeBlock, nil);
+        }];
     }];
 }
 

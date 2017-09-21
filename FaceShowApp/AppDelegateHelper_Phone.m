@@ -50,7 +50,7 @@
     messageVC.title = @"消息";
     [self configTabbarItem:messageVC.tabBarItem image:@"" selectedImage:@""];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
-    messageNavi.tabBarItem.badgeValue = @"";
+    [UserMessageManager sharedInstance].messageItem = messageNavi.tabBarItem;
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];
     classVC.title = @"班级圈";

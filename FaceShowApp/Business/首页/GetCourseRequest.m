@@ -19,7 +19,7 @@
 
 @implementation GetCourseRequestItem_Course
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"courseId" : @"id"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"courseId"}];
 }
 @end
 

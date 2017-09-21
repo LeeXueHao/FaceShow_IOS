@@ -10,7 +10,7 @@
 
 @implementation GetNoticeDetailRequestItem_Data
 + (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"noticeId" : @"id"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"noticeId"}];
 }
 @end
 

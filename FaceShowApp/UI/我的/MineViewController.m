@@ -57,7 +57,7 @@
     [[footerView.logoutButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
         DDLogDebug(@"登出");
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserDidLogoutNotification object:nil];
+        [UserManager sharedInstance].loginStatus = NO;
     }];
     self.tableView.tableFooterView = footerView;
     

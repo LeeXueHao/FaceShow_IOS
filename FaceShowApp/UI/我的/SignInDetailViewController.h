@@ -7,7 +7,8 @@
 //
 
 #import "ScrollBaseViewController.h"
+@class GetSignInRecordListRequestItem_SignIn;
 
 @interface SignInDetailViewController : ScrollBaseViewController
-
+@property (nonatomic, strong) GetSignInRecordListRequestItem_SignIn *signIn;
 @end
