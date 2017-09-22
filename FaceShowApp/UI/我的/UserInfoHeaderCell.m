@@ -11,6 +11,8 @@
 @property (nonatomic, strong) UIImageView *userHeaderImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *nextImageView;
+@property (nonatomic, strong) UIView *lineView;
+
 @end
 @implementation UserInfoHeaderCell
 - (void)dealloc {
@@ -49,6 +51,9 @@
     
     self.nextImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.nextImageView];
+    self.lineView = [[UIView alloc] init];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.contentView addSubview:self.lineView];
     
 }
 - (void)setupLayout {
@@ -65,6 +70,12 @@
         make.right.equalTo(self.contentView.mas_right).offset(-5.0f);
         make.centerY.equalTo(self.userHeaderImageView.mas_centerY);
         make.size.mas_offset(CGSizeMake(30.0f, 30.0f));
+    }];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView.mas_bottom);
+        make.left.equalTo(self.contentView.mas_left);
+        make.right.equalTo(self.contentView.mas_right);
+        make.height.mas_offset(1.0f);
     }];
 }
 
