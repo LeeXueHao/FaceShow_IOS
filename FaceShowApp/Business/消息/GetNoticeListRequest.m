@@ -14,6 +14,9 @@
 }
 @end
 
+@implementation GetNoticeListRequestItem_Data
+@end
+
 @implementation GetNoticeListRequestItem
 @end
 

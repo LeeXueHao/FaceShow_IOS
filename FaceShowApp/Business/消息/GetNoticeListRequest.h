@@ -27,8 +27,13 @@
 @property (nonatomic, assign) BOOL viewed;
 @end
 
+@interface GetNoticeListRequestItem_Data : JSONModel
+@property (nonatomic, strong) NSArray<GetNoticeListRequestItem_Notice, Optional> *elements;
+@property (nonatomic, strong) NSString<Optional> *totalElements;
+@end
+
 @interface GetNoticeListRequestItem : HttpBaseRequestItem
-@property (nonatomic, strong) NSArray<GetNoticeListRequestItem_Notice, Optional> *data;
+@property (nonatomic, strong) GetNoticeListRequestItem_Data<Optional> *data;
 @end
 
 @interface GetNoticeListRequest : YXGetRequest
