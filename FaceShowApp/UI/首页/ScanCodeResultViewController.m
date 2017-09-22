@@ -82,7 +82,7 @@
     [self.confirmBtn setBackgroundImage:[UIImage yx_createImageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateHighlighted];
     [self.confirmBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     [self.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self.confirmBtn addTarget:self action:@selector(confirmBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.confirmBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.confirmBtn];
 }
 
@@ -100,7 +100,7 @@
             make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(8);
             make.centerX.mas_equalTo(0);
         }];
-        [self.confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [self.confirmBtn setTitle:@"确 定" forState:UIControlStateNormal];
         [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.blackLabel.mas_bottom).offset(50);
             make.centerX.mas_equalTo(0);
@@ -137,12 +137,12 @@
     }
 }
 
-- (void)confirmBtnAction:(UIButton *)sender {
-    [self backAction];
-    if ([sender.titleLabel.text isEqualToString:@"重新签到"]) {
-        BLOCK_EXEC(self.reScanCodeBlock);
-    } else {
+- (void)backAction {
+    if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [super backAction];
+        BLOCK_EXEC(self.reScanCodeBlock);
     }
 }
 
