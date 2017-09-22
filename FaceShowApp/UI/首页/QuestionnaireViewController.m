@@ -94,7 +94,7 @@
     self.requestItem = item;
     [self.tableView reloadData];
     self.submitButton.hidden = NO;
-    self.submitButton.enabled = !item.data.isAnswer.boolValue;
+    self.submitButton.enabled = NO;
 }
 
 - (void)setupUI {

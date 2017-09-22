@@ -123,12 +123,19 @@
             [vc setCompleteBlock:^{
                 STRONG_SELF
                 task.stepFinished = @"1";
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (type == InteractType_Questionare) {
         QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
         vc.name = task.interactName;
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            task.stepFinished = @"1";
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

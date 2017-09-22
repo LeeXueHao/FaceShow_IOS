@@ -341,7 +341,7 @@
 		7C24E2101F739EA500A6921B /* LikeCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeCommentRequest.h; sourceTree = "<group>"; };
 		7C24E2111F739EA500A6921B /* LikeCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeCommentRequest.m; sourceTree = "<group>"; };
 		7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LikeCommentRequest_mock.json; sourceTree = "<group>"; };
-		7C2518A71F68E5C70001B577 /* 培训通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "培训通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C2518A71F68E5C70001B577 /* 研修宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "研修宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C2518AE1F68E5C70001B577 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -719,7 +719,7 @@
 		7C2518A81F68E5C70001B577 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C2518A71F68E5C70001B577 /* 培训通.app */,
+				7C2518A71F68E5C70001B577 /* 研修宝.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1059,6 +1059,7 @@
 		7C2519781F68FE900001B577 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7C25197A1F68FE900001B577 /* 框架 */,
 				7C2519A91F690D550001B577 /* 登录注册 */,
 				7C25197F1F68FE900001B577 /* 首页 */,
 				7C25197D1F68FE900001B577 /* 消息 */,
@@ -1099,8 +1100,7 @@
 				7C25199D1F69066F0001B577 /* ScrollBaseViewController.h */,
 				7C25199E1F69066F0001B577 /* ScrollBaseViewController.m */,
 			);
-			name = "框架";
-			path = "../框架";
+			path = "框架";
 			sourceTree = "<group>";
 		};
 		7C25197D1F68FE900001B577 /* 消息 */ = {
@@ -1234,7 +1234,6 @@
 			isa = PBXGroup;
 			children = (
 				7C212DB91F6A544C0007AE01 /* View */,
-				7C25197A1F68FE900001B577 /* 框架 */,
 				7C212DC21F6A5CF60007AE01 /* CourseListViewController.h */,
 				7C212DC31F6A5CF60007AE01 /* CourseListViewController.m */,
 				7C212DD81F6B68BD0007AE01 /* CourseDetailViewController.h */,
@@ -1387,7 +1386,7 @@
 			);
 			name = FaceShowApp;
 			productName = FaceShowApp;
-			productReference = 7C2518A71F68E5C70001B577 /* 培训通.app */;
+			productReference = 7C2518A71F68E5C70001B577 /* 研修宝.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1783,7 +1782,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
-				PRODUCT_NAME = "培训通";
+				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "63da2c0d-a4ba-43e8-9b6e-24890fad34ec";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 			};
@@ -1801,7 +1800,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
-				PRODUCT_NAME = "培训通";
+				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "a6181b17-8a32-4005-b45d-b62c960aad78";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Rel;
 			};

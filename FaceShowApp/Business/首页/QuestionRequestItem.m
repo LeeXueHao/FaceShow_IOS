@@ -36,8 +36,13 @@
         for (int i=0; i<self.voteInfo.voteItems.count; i++) {
             [_myAnswers addObject:@(NO)];
         }
+        NSMutableArray *itemIdArray = [NSMutableArray array];
+        for (QuestionRequestItem_voteItems *item in self.voteInfo.voteItems) {
+            [itemIdArray addObject:item.itemId];
+        }
         for (NSString *answer in self.userAnswer.questionAnswers) {
-            [_myAnswers replaceObjectAtIndex:answer.integerValue withObject:@(YES)];
+            NSInteger index = [itemIdArray indexOfObject:answer];
+            [_myAnswers replaceObjectAtIndex:index withObject:@(YES)];
         }
     }else if (type == QuestionType_Fill) {
         [_myAnswers addObjectsFromArray:self.userAnswer.questionAnswers];
@@ -55,7 +60,8 @@
         NSMutableArray *array = [NSMutableArray array];
         [self.myAnswers enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.boolValue) {
-                [array addObject:[NSString stringWithFormat:@"%@",@(idx)]];
+                QuestionRequestItem_voteItems *item = self.voteInfo.voteItems[idx];
+                [array addObject:item.itemId];
             }
         }];
         answerStr = [array componentsJoinedByString:@","];
