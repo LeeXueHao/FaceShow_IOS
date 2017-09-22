@@ -150,7 +150,7 @@
                                                             object:nil];
         return;
     }
-    if (item.code == nil) {
+    if ([NSStringFromClass(_retClass) isEqualToString:@"UploadHeadImgItem"]) {//
         _completeBlock(item, nil, self->_isMock);
         return;
     }
