@@ -92,13 +92,7 @@
      WEAK_SELF
     [[tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
         STRONG_SELF
-        ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
-        moment.draftModel = self.inputView.textView.text;
-        self.inputView.textView.text = nil;
-        [self.inputView.textView resignFirstResponder];
-        if (self.floatingView.superview != nil) {
-            [self.floatingView removeFromSuperview];
-        }
+        [self hiddenInputTextView];
     }];
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
@@ -138,6 +132,15 @@
         make.height.mas_equalTo(100);
         make.bottom.mas_equalTo(100.0f);
     }];
+}
+- (void)hiddenInputTextView {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
+    moment.draftModel = self.inputView.textView.text;
+    self.inputView.textView.text = nil;
+    [self.inputView.textView resignFirstResponder];
+    if (self.floatingView.superview != nil) {
+        [self.floatingView removeFromSuperview];
+    }
 }
 - (void)stopAnimation {
     [super stopAnimation];
@@ -190,7 +193,6 @@
         
     }];
 }
-
 - (void)setupObservers {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
@@ -253,8 +255,11 @@
         [self.floatingView removeFromSuperview];
         return;
     }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
+    if (moment.comments.count > 0) {
+        indexPath = [NSIndexPath indexPathForRow:moment.comments.count - 1 inSection:section];
+    }
     WEAK_SELF
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
@@ -299,7 +304,7 @@
     }];
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.floatingView removeFromSuperview];
+    [self hiddenInputTextView];
 }
 
 #pragma mark - request

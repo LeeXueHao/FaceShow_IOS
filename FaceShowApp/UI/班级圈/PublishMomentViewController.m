@@ -149,7 +149,7 @@
         make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
         make.right.equalTo(self.publicationMomentView.mas_right).offset(-15.0f);
         make.top.equalTo(self.publicationMomentView.mas_top).offset(20.0f);
-        make.height.mas_offset(90.0f);
+        make.height.mas_offset(self.imageArray.count > 0 ? 90.0f : 140.0f);
     }];
     
     [self.publicationImageView mas_makeConstraints:^(MASConstraintMaker *make) {

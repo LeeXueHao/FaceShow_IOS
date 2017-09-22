@@ -37,6 +37,7 @@
     [self.userButton sd_setImageWithURL:[NSURL URLWithString:_moment.publisher.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"]];
     self.userButton.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
     self.nameLabel.text = _moment.publisher.realName;
+    self.timeLabel.text = _moment.publishTimeDesc;
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;

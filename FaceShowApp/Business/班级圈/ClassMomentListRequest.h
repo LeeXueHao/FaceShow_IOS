@@ -65,6 +65,7 @@
 @property (nonatomic, copy) NSString<Optional> *clazsID;
 @property (nonatomic, copy) NSString<Optional> *commentedNum;//评论数，包括一级评论和回复
 @property (nonatomic, copy) NSString<Optional> *publishTime;//发布时间
+@property (nonatomic, copy) NSString<Optional> *publishTimeDesc;//发布时间
 @property (nonatomic, strong) NSMutableArray<ClassMomentListRequestItem_Data_Moment_Album,Optional> *albums;
 @property (nonatomic, strong) NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment,Optional> *comments;
 @property (nonatomic, strong) NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like,Optional> *likes;
