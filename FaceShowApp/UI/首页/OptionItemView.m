@@ -37,7 +37,6 @@
     self.bgButton = bgButton;
     
     self.selectImageView = [[UIImageView alloc]init];
-    self.selectImageView.backgroundColor = [UIColor redColor];
     [self addSubview:self.selectImageView];
     [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-14);
@@ -56,7 +55,6 @@
         make.bottom.mas_lessThanOrEqualTo(0);
         make.right.mas_equalTo(self.selectImageView.mas_left).mas_offset(-14);
     }];
-    self.editable = YES;
 }
 
 - (void)btnAction:(UIButton *)sender {
@@ -68,10 +66,18 @@
     self.bgButton.selected = selected;
     if (selected) {
         self.optionLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
-        self.selectImageView.backgroundColor = [UIColor greenColor];
+        if (self.isMulti) {
+            self.selectImageView.image = [UIImage imageNamed:@"多选已选择"];
+        }else{
+            self.selectImageView.image = [UIImage imageNamed:@"单选已选择"];
+        }
     }else {
         self.optionLabel.textColor = [UIColor colorWithHexString:@"666666"];
-        self.selectImageView.backgroundColor = [UIColor redColor];
+        if (self.isMulti) {
+            self.selectImageView.image = [UIImage imageNamed:@"多选未选择"];
+        }else{
+            self.selectImageView.image = [UIImage imageNamed:@"单选未选择"];
+        }
     }
 }
 
@@ -92,9 +98,5 @@
     self.optionLabel.attributedText = attributeStr;
 }
 
-- (void)setEditable:(BOOL)editable {
-    _editable = editable;
-    self.selectImageView.hidden = !editable;
-}
 
 @end

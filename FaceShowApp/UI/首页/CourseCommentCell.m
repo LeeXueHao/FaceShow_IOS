@@ -68,7 +68,8 @@
         make.top.mas_equalTo(self.nameLabel.mas_bottom).mas_offset(8);
     }];
     self.favorButton = [[UIButton alloc]init];
-    [self.favorButton setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
+    [self.favorButton setBackgroundImage:[UIImage imageNamed:@"课程讨论点赞icon"] forState:UIControlStateNormal];
+    [self.favorButton setBackgroundImage:[UIImage imageNamed:@"课程讨论点赞icon的点击"] forState:UIControlStateHighlighted];
     [self.favorButton addTarget:self action:@selector(favorAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.favorButton];
     [self.favorButton mas_makeConstraints:^(MASConstraintMaker *make) {

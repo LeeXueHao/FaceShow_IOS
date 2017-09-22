@@ -20,7 +20,7 @@
 - (void)setupUI {
     self.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     UIImageView *topImageView = [[UIImageView alloc]init];
-    topImageView.image = [UIImage imageNamed:@"页面加载失败插图"];
+    topImageView.image = [UIImage imageNamed:@"网络异常插画"];
     topImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:topImageView];
     [topImageView mas_makeConstraints:^(MASConstraintMaker *make) {

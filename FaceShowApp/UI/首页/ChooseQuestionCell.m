@@ -104,6 +104,8 @@
     __block UIView *preView = nil;
     [optionArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         OptionItemView *itemView = [self itemViewWithOption:obj];
+        QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
+        itemView.isMulti = type==QuestionType_MultiChoose;
         itemView.isSelected = ((NSNumber *)self.item.myAnswers[idx]).boolValue;
         [self.itemViewArray addObject:itemView];
         [self.contentView addSubview:itemView];

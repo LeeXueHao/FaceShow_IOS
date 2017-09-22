@@ -25,6 +25,7 @@
 - (void)setupUI {
     self.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     UIImageView *topImageView = [[UIImageView alloc]init];
+    topImageView.image = [UIImage imageNamed:@"空插画-"];
     topImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:topImageView];
     [topImageView mas_makeConstraints:^(MASConstraintMaker *make) {

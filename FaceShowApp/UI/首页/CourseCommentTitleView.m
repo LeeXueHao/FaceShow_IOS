@@ -40,7 +40,7 @@
     }];
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.image = [UIImage imageWithColor:[UIColor redColor]];
+    imageView.image = [UIImage imageNamed:@"课程讨论的问题图标"];
     [bgView addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(5);

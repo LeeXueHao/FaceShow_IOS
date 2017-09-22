@@ -43,23 +43,23 @@
     FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
     UIViewController *mainVC = [[MainPageViewController alloc]init];
     mainVC.title = @"首页";
-    [self configTabbarItem:mainVC.tabBarItem image:@"" selectedImage:@""];
+    [self configTabbarItem:mainVC.tabBarItem image:@"首页icon" selectedImage:@"首页icon选择"];
     FSNavigationController *mainNavi = [[FSNavigationController alloc] initWithRootViewController:mainVC];
     
     UIViewController *messageVC = [[MessageViewController alloc]init];
-    messageVC.title = @"消息";
-    [self configTabbarItem:messageVC.tabBarItem image:@"" selectedImage:@""];
+    messageVC.title = @"通知";
+    [self configTabbarItem:messageVC.tabBarItem image:@"通知icon" selectedImage:@"通知icon选择"];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
     [UserMessageManager sharedInstance].messageItem = messageNavi.tabBarItem;
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];
     classVC.title = @"班级圈";
-    [self configTabbarItem:classVC.tabBarItem image:@"" selectedImage:@""];
+    [self configTabbarItem:classVC.tabBarItem image:@"朋友圈icon" selectedImage:@"朋友圈icon选择"];
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
     UIViewController *mineVC = [[MineViewController alloc]init];
     mineVC.title = @"我的";
-    [self configTabbarItem:mineVC.tabBarItem image:@"" selectedImage:@""];
+    [self configTabbarItem:mineVC.tabBarItem image:@"我的icon" selectedImage:@"我的icon选择"];
     FSNavigationController *mineNavi = [[FSNavigationController alloc] initWithRootViewController:mineVC];
     
     tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, mineNavi];
