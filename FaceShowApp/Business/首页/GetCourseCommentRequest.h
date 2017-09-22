@@ -27,11 +27,9 @@
 
 @interface GetCourseCommentRequestItem_data : JSONModel
 @property (nonatomic, strong) NSArray<Optional,GetCourseCommentRequestItem_element> *elements;
-@property (nonatomic, strong) NSString<Optional> *pageSize;
-@property (nonatomic, strong) NSString<Optional> *pageNum;
-@property (nonatomic, strong) NSString<Optional> *offset;
+@property (nonatomic, strong) NSString<Optional> *callbackParam;
+@property (nonatomic, strong) NSString<Optional> *callbackValue;
 @property (nonatomic, strong) NSString<Optional> *totalElements;
-@property (nonatomic, strong) NSString<Optional> *lastPageNumber;
 @end
 
 @interface GetCourseCommentRequestItem : HttpBaseRequestItem
@@ -40,7 +38,7 @@
 
 @interface GetCourseCommentRequest : YXGetRequest
 @property (nonatomic, strong) NSString<Optional> *stepId;
-@property (nonatomic, strong) NSString<Optional> *offset;
-@property (nonatomic, strong) NSString<Optional> *pageSize;
-@property (nonatomic, strong) NSString<Optional> *orderBy;
+@property (nonatomic, strong) NSString<Optional> *callbackValue;
+@property (nonatomic, strong) NSString<Optional> *limit;
+@property (nonatomic, strong) NSString<Optional> *order;
 @end

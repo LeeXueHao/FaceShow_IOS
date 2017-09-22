@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我";
+    self.navigationItem.title = @"我";
     self.titleArray = @[@{@"image":@"sas",@"title":@"签到记录"}];
     [self setupUI];
     [self setupLayout];

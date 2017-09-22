@@ -25,6 +25,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"班级圈";
     [self setupUI];
     [self setupLayout];
 }
@@ -91,6 +92,7 @@
     }
     rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
     [rightButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    [rightButton setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
     rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
@@ -111,7 +113,7 @@
             return;
         }
         UITextView *tempTextView = (UITextView *)x.object;
-        rightButton.enabled = tempTextView.text.length != 0;
+        rightButton.enabled = [tempTextView.text yx_stringByTrimmingCharacters].length != 0;
     }];
 }
 
@@ -161,11 +163,42 @@
         
     }];
 }
-#pragma mark - UITextViewDelegates
+#pragma mark - UITextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;
     textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:@{                                                                                                    NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:paragraphStyle}];
+}
+#pragma mark - UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([[[textView textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textView textInputMode] primaryLanguage] || [self stringContainsEmoji:text]) {
+        return NO;
+    }
+    return YES;
+}
+- (BOOL)stringContainsEmoji:(NSString *)string {
+    __block BOOL returnValue = NO;
+    [string enumerateSubstringsInRange:NSMakeRange(0, [string length])
+                               options:NSStringEnumerationByComposedCharacterSequences
+                            usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                const unichar high = [substring characterAtIndex: 0];
+                                // Surrogate pair (U+1D000-1F9FF)
+                                if (0xD800 <= high && high <= 0xDBFF) {
+                                    const unichar low = [substring characterAtIndex: 1];
+                                    const int codepoint = ((high - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
+                                    if (0x1D000 <= codepoint && codepoint <= 0x1F9FF){
+                                        returnValue = YES;
+                                    }
+                                    // Not surrogate pair (U+2100-27BF)
+                                } else {
+                                    
+                                    //                                    if (0x2100 <= high && high <= 0x27BF){
+                                    //                                        returnValue = YES;
+                                    //                                    }
+                                }
+                            }];
+    
+    return returnValue;
 }
 #pragma mark - request
 - (void)requestForUploadImage{

@@ -23,6 +23,9 @@
 @end
 
 @implementation GetCourseCommentRequest
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"callbackValue"}];
+}
 - (instancetype)init {
     if (self = [super init]) {
         self.method = @"app.interact.commentRecords";

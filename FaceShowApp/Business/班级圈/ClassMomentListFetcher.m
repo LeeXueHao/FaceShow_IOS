@@ -26,11 +26,14 @@
             return;
         }
         ClassMomentListRequestItem *item = retItem;
-        BLOCK_EXEC(aCompleteBlock,0,item.data.moments,nil);
         if (item.data.hasNextPage.boolValue) {
             BLOCK_EXEC(aCompleteBlock,(int)NSIntegerMax,item.data.moments,nil);
         }else {
             BLOCK_EXEC(aCompleteBlock,0,item.data.moments,nil);
+        }
+        if (item.data.moments.count > 0) {
+            ClassMomentListRequestItem_Data_Moment *moment = [item.data.moments lastObject];
+            self.lastID = moment.momentID.integerValue;
         }
     }];
 }

@@ -35,6 +35,7 @@
     self.bIsGroupedTableViewStyle = YES;
     CourseCommentDataFetcher *fetcher = [[CourseCommentDataFetcher alloc]init];
     fetcher.stepId = self.stepId;
+    fetcher.lastID = 0;
     WEAK_SELF
     [fetcher setFinishBlock:^(GetCourseCommentRequestItem *item){
         STRONG_SELF
@@ -126,6 +127,7 @@
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
+        self.inputView.textView.text = nil;
         [self.view nyx_showToast:@"提交成功"];
     }];
 }

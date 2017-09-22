@@ -44,7 +44,7 @@
     self.dataFetcher = fetcher;
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
-    self.title = @"班级圈";
+    self.navigationItem.title = @"班级圈";
     [self setupUI];
     [self setupObservers];
 //    self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -68,6 +68,9 @@
     }
     return _floatingView;
 }
+- (void)setCommtentInteger:(NSInteger)commtentInteger {
+    _commtentInteger = commtentInteger;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -89,7 +92,13 @@
      WEAK_SELF
     [[tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
         STRONG_SELF
+        ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
+        moment.draftModel = self.inputView.textView.text;
+        self.inputView.textView.text = nil;
         [self.inputView.textView resignFirstResponder];
+        if (self.floatingView.superview != nil) {
+            [self.floatingView removeFromSuperview];
+        }
     }];
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
@@ -166,8 +175,13 @@
     WEAK_SELF
     VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
         STRONG_SELF
-        [self.dataArray insertObject:moment atIndex:0];
-        [self.tableView reloadData];
+        if (moment != nil) {
+            self.emptyView.hidden = YES;
+            self.errorView.hidden = YES;
+            [self.dataArray insertObject:moment atIndex:0];
+            [self.tableView reloadData];
+        }
+
     };
     FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:^{
@@ -238,19 +252,22 @@
         return;
     }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     WEAK_SELF
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
         if (status == ClassMomentClickStatus_Comment) {
             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
             self.commtentInteger = section;
+            if (moment.draftModel != nil) {
+                self.inputView.textView.text = moment.draftModel;
+            }
             [self.inputView.textView becomeFirstResponder];
         }else {
             [self requestForClickLike:section];
         }
     };
     [self.view addSubview:self.floatingView];
-     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     __block BOOL isLike = NO;
     [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
@@ -320,13 +337,14 @@
         ClassMomentCommentRequestItem *item = retItem;
         if (item.data != nil) {
             item.data.content = content;
-            if (moment.likes.count == 0) {
+            if (moment.comments.count == 0) {
                 NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment> *mutableArray = [[NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment> alloc] init];
                 [mutableArray addObject:item.data];
                 moment.comments = mutableArray;
             }else {
                 [moment.comments addObject:item.data];
             }
+            moment.draftModel = nil;
             self.inputView.textView.text = nil;
             [self.tableView reloadData];
         }else {

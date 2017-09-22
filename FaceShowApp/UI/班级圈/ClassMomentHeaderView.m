@@ -115,9 +115,13 @@
     NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
     [albums enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Album *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-        model.thumbnail = obj.attachment.resThumb;
-        model.original = obj.attachment.resThumb;
+        model.thumbnail = obj.attachment.resThumb?:@"http://scc.jsyxw.cn/course/89/8489.jpg";
+        model.original = obj.attachment.resThumb?:@"http://scc.jsyxw.cn/course/89/8489.jpg";
         [mutableArray addObject:model];
+#warning 暂时只显示一张图片
+        if (idx == 0) {
+            *stop = YES;
+        }
     }];
     self.photosView.imageModelMutableArray = mutableArray;
     [self.photosView reloadData];

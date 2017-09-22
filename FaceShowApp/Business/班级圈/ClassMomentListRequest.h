@@ -70,6 +70,7 @@
 @property (nonatomic, strong) NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like,Optional> *likes;
 @property (nonatomic, strong) ClassMomentListRequestItem_UserInfo<Optional> *publisher;
 @property (nonatomic, copy) NSString<Optional> *isOpen;//自定义展开折叠使用 0 折叠 1展开
+@property (nonatomic, copy) NSString<Optional> *draftModel;
 @end
 
 

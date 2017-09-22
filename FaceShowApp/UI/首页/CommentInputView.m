@@ -66,13 +66,39 @@
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
-        if ([[self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]!=0) {
+        if ([[self.textView.text yx_stringByTrimmingCharacters] length]!=0) {
             [textView resignFirstResponder];
             BLOCK_EXEC(self.completeBlock,textView.text);
         }
         return NO;
     }
+    if ([[[textView textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textView textInputMode] primaryLanguage] || [self stringContainsEmoji:text]) {
+        return NO;
+    }
     return YES;
 }
-
+- (BOOL)stringContainsEmoji:(NSString *)string {
+    __block BOOL returnValue = NO;
+    [string enumerateSubstringsInRange:NSMakeRange(0, [string length])
+                               options:NSStringEnumerationByComposedCharacterSequences
+                            usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                const unichar high = [substring characterAtIndex: 0];
+                                // Surrogate pair (U+1D000-1F9FF)
+                                if (0xD800 <= high && high <= 0xDBFF) {
+                                    const unichar low = [substring characterAtIndex: 1];
+                                    const int codepoint = ((high - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
+                                    if (0x1D000 <= codepoint && codepoint <= 0x1F9FF){
+                                        returnValue = YES;
+                                    }
+                                    // Not surrogate pair (U+2100-27BF)
+                                } else {
+                                    
+                                    //                                    if (0x2100 <= high && high <= 0x27BF){
+                                    //                                        returnValue = YES;
+                                    //                                    }
+                                }
+                            }];
+    
+    return returnValue;
+}
 @end
