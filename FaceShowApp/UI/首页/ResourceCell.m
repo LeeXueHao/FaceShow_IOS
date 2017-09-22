@@ -22,7 +22,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setModel];
     }
     return self;
 }
@@ -32,7 +31,7 @@
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     self.iconImageView = [[UIImageView alloc] init];
-    self.iconImageView.backgroundColor = [UIColor redColor];
+    self.iconImageView.image = [UIImage imageNamed:@"资源"];
     [self.contentView addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -70,9 +69,10 @@
     }];
 }
 
-- (void)setModel {
-    self.titleLabel.text = @"是的冯绍峰水电费水电费水电费水电费";
-    self.timeLabel.text = @"2017.08.08 13:24";
+- (void)setElement:(GetResourceRequestItem_Element *)element {
+    _element = element;
+    self.titleLabel.text = element.resName;
+    self.timeLabel.text = element.createTime;
 }
 
 @end

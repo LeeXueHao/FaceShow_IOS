@@ -6,9 +6,9 @@
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "PagedListViewControllerBase.h"
+#import "BaseViewController.h"
 #import "RefreshDelegate.h"
 
-@interface ResourceListViewController : PagedListViewControllerBase<RefreshDelegate>
+@interface ResourceListViewController : BaseViewController<RefreshDelegate>
 
 @end

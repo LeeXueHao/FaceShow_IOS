@@ -65,6 +65,7 @@
 
 @interface GetSignInRecordListRequestItem_Data : JSONModel
 @property (nonatomic, strong) NSArray<GetSignInRecordListRequestItem_Element, Optional> *elements;
+@property (nonatomic, strong) NSString<Optional> *totalElements;
 @end
 
 @interface GetSignInRecordListRequestItem : HttpBaseRequestItem
