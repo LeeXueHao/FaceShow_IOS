@@ -19,6 +19,7 @@
 		43210E661F726E3D0049C381 /* NoticeListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E651F726E3D0049C381 /* NoticeListFetcher.m */; };
 		43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */; };
 		43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */; };
+		432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F90B81F74DF4600FCF655 /* UserSignInRequest.m */; };
 		43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A941F6B63FA006B2645 /* ScanCodeViewController.m */; };
 		43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A951F6B63FA006B2645 /* ScanCodeMaskView.m */; };
 		43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A9F1F6B7CF8006B2645 /* UserMessageManager.m */; };
@@ -220,6 +221,8 @@
 		43210E671F7271D30049C381 /* GetNoticeDetailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNoticeDetailRequest.h; sourceTree = "<group>"; };
 		43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNoticeDetailRequest.m; sourceTree = "<group>"; };
 		43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetNoticeDetail_Mock.json; sourceTree = "<group>"; };
+		432F90B71F74DF4600FCF655 /* UserSignInRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSignInRequest.h; sourceTree = "<group>"; };
+		432F90B81F74DF4600FCF655 /* UserSignInRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSignInRequest.m; sourceTree = "<group>"; };
 		43510A931F6B63FA006B2645 /* ScanCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewController.h; sourceTree = "<group>"; };
 		43510A941F6B63FA006B2645 /* ScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewController.m; sourceTree = "<group>"; };
 		43510A951F6B63FA006B2645 /* ScanCodeMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeMaskView.m; sourceTree = "<group>"; };
@@ -1052,6 +1055,8 @@
 				7C24E2101F739EA500A6921B /* LikeCommentRequest.h */,
 				7C24E2111F739EA500A6921B /* LikeCommentRequest.m */,
 				7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */,
+				432F90B71F74DF4600FCF655 /* UserSignInRequest.h */,
+				432F90B81F74DF4600FCF655 /* UserSignInRequest.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -1641,6 +1646,7 @@
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
 				7C24E1FB1F72575E00A6921B /* GetVoteRequest.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
+				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
 				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
 				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,

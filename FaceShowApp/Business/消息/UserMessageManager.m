@@ -45,7 +45,7 @@
         STRONG_SELF
         [self fetchUserMessage];
     }];
-    [self.timer resume];
+//    [self.timer resume];
 }
 
 - (void)suspendHeartbeat {

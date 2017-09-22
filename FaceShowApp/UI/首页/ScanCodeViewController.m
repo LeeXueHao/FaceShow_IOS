@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ScanCodeMaskView.h"
 #import "ScanCodeResultViewController.h"
+#import "UserSignInRequest.h"
 
 @interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate> {
     AVCaptureSession *_session;
@@ -20,13 +21,34 @@
 }
 
 @property (nonatomic, strong) ScanCodeMaskView *scanCodeMaskView;
-
+@property (nonatomic, strong) UserSignInRequest *request;
 @end
 
 @implementation ScanCodeViewController
 
 - (void)dealloc {
     DDLogDebug(@"release=====>%@",[self class]);
+    if (self.scanCodeMaskView.scanTimer) {
+        [self.scanCodeMaskView.scanTimer invalidate];
+    }
+    if (_session) {
+        [_session stopRunning];
+        _session = nil;
+    }
+    if (_preview) {
+        [_preview removeFromSuperlayer];
+        _preview = nil;
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.scanCodeMaskView.scanTimer) {
+        [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+    }
+    if (_session) {
+        [_session startRunning];
+    }
 }
 
 - (void)viewDidLoad {
@@ -76,21 +98,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    if (self.scanCodeMaskView.scanTimer) {
-        [self.scanCodeMaskView.scanTimer invalidate];
-    }
-    if (_session) {
-        [_session stopRunning];
-        _session = nil;
-    }
-    if (_preview) {
-        [_preview removeFromSuperlayer];
-        _preview = nil;
-    }
-}
-
 - (void)showAlertView {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请到“设置->隐私->相机”中设置为允许访问相机！" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -138,11 +145,6 @@
     [_session startRunning];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
-    [self.navigationController pushViewController:scanCodeResultVC animated:YES];
-}
-
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     NSString *stringValue;
@@ -150,9 +152,23 @@
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
     }
-    if (!isEmpty(stringValue)) {
-        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
-        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+    if ([stringValue containsString:@"stepId="] && !isEmpty([stringValue substringFromIndex:7])) {
+        [_session stopRunning];
+        [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
+        [self.view nyx_startLoading];
+        [self.request stopRequest];
+        self.request = [[UserSignInRequest alloc] init];
+        self.request.stepId = [stringValue substringFromIndex:7];
+        WEAK_SELF
+        [self.request startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
+            ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+            scanCodeResultVC.data = item.data;
+            scanCodeResultVC.error = error;
+            [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+        }];
     }
 }
 

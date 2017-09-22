@@ -67,20 +67,12 @@
     self.blackLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.blackLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.blackLabel];
-    [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
-        make.centerX.mas_equalTo(0);
-    }];
     
     self.grayLabel = [[UILabel alloc] init];
     self.grayLabel.font = [UIFont systemFontOfSize:13];
     self.grayLabel.textColor = [UIColor colorWithHexString:@"999999"];
     self.grayLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.grayLabel];
-    [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.blackLabel.mas_bottom).offset(8);
-        make.centerX.mas_equalTo(0);
-    }];
     
     self.confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.confirmBtn.clipsToBounds = YES;
@@ -91,20 +83,61 @@
     [self.confirmBtn setBackgroundImage:[UIImage yx_createImageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateHighlighted];
     [self.confirmBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     [self.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self.confirmBtn addTarget:self action:@selector(confirmBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.confirmBtn];
-    [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(50);
-        make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(112, 40));
-        make.bottom.mas_equalTo(-215 * kPhoneHeightRatio);
-    }];
 }
 
 - (void)setModel {
-    self.titleLabel.text = @"签到失败";
-    self.blackLabel.text = @"签到二维码已过期";
-    self.grayLabel.text = @"请扫描最新二维码";
-    [self.confirmBtn setTitle:@"重新签到" forState:UIControlStateNormal];
+    if (!isEmpty(self.data)) {
+        self.titleLabel.text = @"签到成功";
+        self.grayLabel.text = @"签到时间";
+        [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
+            make.centerX.mas_equalTo(0);
+        }];
+        self.blackLabel.text = self.data.signinTime;
+        [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(8);
+            make.centerX.mas_equalTo(0);
+        }];
+        [self.confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.blackLabel.mas_bottom).offset(50);
+            make.centerX.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(112, 40));
+            make.bottom.mas_equalTo(-215 * kPhoneHeightRatio);
+        }];
+    }
+    if (!isEmpty(self.error)) {
+        if (self.error.code == 210413) {
+            self.blackLabel.text = @"签到已结束";
+        } else if (self.error.code == 2104132) {
+            self.blackLabel.text = @"签到未开始";
+        } else {
+            self.blackLabel.text = @"签到失败";
+        }
+        self.titleLabel.text = @"签到失败";
+        self.grayLabel.text = @"请扫描最新二维码";
+        [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
+            make.centerX.mas_equalTo(0);
+        }];
+        [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.blackLabel.mas_bottom).offset(8);
+            make.centerX.mas_equalTo(0);
+        }];
+        [self.confirmBtn setTitle:@"重新签到" forState:UIControlStateNormal];
+        [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(50);
+            make.centerX.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(112, 40));
+            make.bottom.mas_equalTo(-215 * kPhoneHeightRatio);
+        }];
+    }
+}
+
+- (void)confirmBtnAction:(UIButton *)sender {
+    [self backAction];
 }
 
 @end

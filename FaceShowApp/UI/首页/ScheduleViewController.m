@@ -7,6 +7,7 @@
 //
 
 #import "ScheduleViewController.h"
+#import "ShowPhotosViewController.h"
 
 @interface ScheduleViewController ()
 
@@ -45,12 +46,16 @@
     }];
     
     self.detailImageView = [[UIImageView alloc] init];
+    self.detailImageView.userInteractionEnabled = YES;
     [self.contentView addSubview:self.detailImageView];
     [self.detailImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(20);
         make.left.mas_equalTo(15);
         make.right.bottom.mas_equalTo(-15);
     }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    [self.detailImageView addGestureRecognizer:tap];
 }
 
 - (void)setModel {
@@ -60,6 +65,17 @@
             self.detailImageView.image = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / image.size.width * image.size.height)];
         }
     }];
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)sender {
+    ShowPhotosViewController *showPhotosVC = [[ShowPhotosViewController alloc] init];
+    PreviewPhotosModel *model = [[PreviewPhotosModel alloc] init];
+//    model.original = self.data.attachUrl;
+    NSMutableArray *photoArr = [NSMutableArray arrayWithObject:model];
+    showPhotosVC.animateRect = [self.view convertRect:self.detailImageView.frame toView:self.view.window.rootViewController.view];
+    showPhotosVC.imageModelMutableArray = photoArr;
+    showPhotosVC.startInteger = 0;
+    [self.view.window.rootViewController presentViewController:showPhotosVC animated:YES completion:nil];
 }
 
 #pragma mark - RefreshDelegate
