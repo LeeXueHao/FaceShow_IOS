@@ -14,6 +14,9 @@
 }
 @end
 
+@implementation GetScheduleListRequestItem_Data_Schedule
+@end
+
 @implementation GetScheduleListRequestItem_Data
 @end
 

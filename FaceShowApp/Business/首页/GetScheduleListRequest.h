@@ -21,9 +21,12 @@
 @property (nonatomic, strong) NSString<Optional> *imageUrl;
 @end
 
+@interface GetScheduleListRequestItem_Data_Schedule : JSONModel
+@property (nonatomic, strong) NSArray<GetScheduleListRequestItem_Schedule, Optional> *elements;
+@end
+
 @interface GetScheduleListRequestItem_Data : JSONModel
-@property (nonatomic, strong) NSArray<GetScheduleListRequestItem_Schedule, Optional> *schedules;
-@property (nonatomic, strong) NSString<Optional> *totalElements;
+@property (nonatomic, strong) GetScheduleListRequestItem_Data_Schedule<Optional> *schedules;
 @end
 
 @interface GetScheduleListRequestItem : HttpBaseRequestItem

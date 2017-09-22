@@ -56,7 +56,8 @@
             self.emptyView.hidden = NO;
             return;
         }
-        self.schedule = item.data.schedules[0];
+        self.schedule = item.data.schedules.elements[0];
+        [self setModel];
     }];
 }
 

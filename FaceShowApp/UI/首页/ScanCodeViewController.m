@@ -41,16 +41,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.scanCodeMaskView.scanTimer) {
-        [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
-    }
-    if (_session) {
-        [_session startRunning];
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
@@ -167,6 +157,10 @@
             ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
             scanCodeResultVC.data = item.data;
             scanCodeResultVC.error = error;
+            scanCodeResultVC.reScanCodeBlock = ^{
+                [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+                [_session startRunning];
+            };
             [self.navigationController pushViewController:scanCodeResultVC animated:YES];
         }];
     }

@@ -139,6 +139,11 @@
 
 - (void)confirmBtnAction:(UIButton *)sender {
     [self backAction];
+    if ([sender.titleLabel.text isEqualToString:@"重新签到"]) {
+        BLOCK_EXEC(self.reScanCodeBlock);
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 @end
