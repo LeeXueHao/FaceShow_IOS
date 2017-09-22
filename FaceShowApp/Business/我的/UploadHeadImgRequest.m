@@ -23,7 +23,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.urlHead = @"http://orz.yanxiu.com/easygo/multiUpload";
+        self.urlHead = [ConfigManager sharedInstance].easygo;
         self.urlHead = [NSString stringWithFormat:@"%@?token=%@", self.urlHead, self.token];
     }
     return self;

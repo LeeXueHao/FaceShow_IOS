@@ -39,6 +39,7 @@
     NSData *envData = [NSData dataWithContentsOfFile:envPath];
     NSDictionary *envDic = [NSJSONSerialization JSONObjectWithData:envData options:kNilOptions error:nil];
     self.server = [envDic valueForKey:@"server"];
+    self.easygo = [envDic valueForKey:@"easygo"];
 }
 
 #pragma mark - properties

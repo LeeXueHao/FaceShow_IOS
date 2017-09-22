@@ -150,7 +150,7 @@
                                                             object:nil];
         return;
     }
-    if ([NSStringFromClass(_retClass) isEqualToString:@"UploadHeadImgItem"]) {//
+    if ([NSStringFromClass(_retClass) isEqualToString:@"UploadHeadImgItem"]) {//头像上传接口特殊
         _completeBlock(item, nil, self->_isMock);
         return;
     }

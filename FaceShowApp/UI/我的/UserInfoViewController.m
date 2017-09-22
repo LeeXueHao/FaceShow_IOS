@@ -206,6 +206,7 @@
         STRONG_SELF
         if (!error) {
             [UserManager sharedInstance].userModel.avatarUrl = url;
+            [[UserManager sharedInstance] saveData];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
