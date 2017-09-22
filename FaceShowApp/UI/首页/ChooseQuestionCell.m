@@ -107,6 +107,7 @@
         QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
         itemView.isMulti = type==QuestionType_MultiChoose;
         itemView.isSelected = ((NSNumber *)self.item.myAnswers[idx]).boolValue;
+        itemView.editable = self.editable;
         [self.itemViewArray addObject:itemView];
         [self.contentView addSubview:itemView];
         if (idx == 0) {

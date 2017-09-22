@@ -130,6 +130,9 @@
     CourseListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CourseListHeaderView"];
     GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[section];
     header.title = courses.date;
+    if (courses.isToday.boolValue) {
+        header.title = [NSString stringWithFormat:@"%@ 今日课程",courses.date];
+    }
     return header;
 }
 

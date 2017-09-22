@@ -107,7 +107,7 @@
 
 - (void)setItem:(GetCourseCommentRequestItem_element *)item {
     _item = item;
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:nil];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"]];
     self.nameLabel.text = item.userName;
     NSString *comment = item.content;
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];

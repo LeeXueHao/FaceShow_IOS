@@ -93,8 +93,10 @@
 - (void)refreshUIWithItem:(QuestionRequestItem *)item {
     self.requestItem = item;
     [self.tableView reloadData];
-    self.submitButton.hidden = NO;
     self.submitButton.enabled = NO;
+    if (!item.data.isAnswer.boolValue) {
+        self.submitButton.hidden = NO;
+    }
 }
 
 - (void)setupUI {
@@ -233,6 +235,7 @@
         }];
         if (self.requestItem.data.isAnswer.boolValue) {
             cell.userInteractionEnabled = NO;
+            cell.editable = NO;
         }
         return cell;
     }

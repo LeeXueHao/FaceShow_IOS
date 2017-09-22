@@ -14,4 +14,5 @@
 @property (nonatomic, strong) QuestionRequestItem_question *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @property (nonatomic, strong) void(^answerChangeBlock) ();
+@property (nonatomic, assign) BOOL editable;
 @end

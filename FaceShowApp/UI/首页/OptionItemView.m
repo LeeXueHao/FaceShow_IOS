@@ -55,6 +55,8 @@
         make.bottom.mas_lessThanOrEqualTo(0);
         make.right.mas_equalTo(self.selectImageView.mas_left).mas_offset(-14);
     }];
+    
+    self.editable = YES;
 }
 
 - (void)btnAction:(UIButton *)sender {
@@ -98,5 +100,9 @@
     self.optionLabel.attributedText = attributeStr;
 }
 
+- (void)setEditable:(BOOL)editable {
+    _editable = editable;
+    self.selectImageView.hidden = !editable;
+}
 
 @end

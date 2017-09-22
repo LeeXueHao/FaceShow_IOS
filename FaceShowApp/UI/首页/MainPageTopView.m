@@ -55,17 +55,6 @@
     [topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
-    self.projectLabel = [[UILabel alloc]init];
-    self.projectLabel.textColor = [UIColor whiteColor];
-    self.projectLabel.font = [UIFont boldSystemFontOfSize:18];
-    self.projectLabel.textAlignment = NSTextAlignmentCenter;
-    self.projectLabel.numberOfLines = 2;
-    [self addSubview:self.projectLabel];
-    [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(30);
-        make.right.mas_equalTo(-30);
-        make.top.mas_equalTo(topView.mas_bottom).mas_offset(5);
-    }];
     self.classLabel = [[UILabel alloc]init];
     self.classLabel.textColor = [UIColor whiteColor];
     self.classLabel.font = [UIFont boldSystemFontOfSize:13];
@@ -78,6 +67,18 @@
         make.top.mas_equalTo(topView.mas_bottom).mas_offset(67);
         make.centerX.mas_equalTo(0);
         make.height.mas_equalTo(26);
+    }];
+    self.projectLabel = [[UILabel alloc]init];
+    self.projectLabel.textColor = [UIColor whiteColor];
+    self.projectLabel.font = [UIFont boldSystemFontOfSize:18];
+    self.projectLabel.textAlignment = NSTextAlignmentCenter;
+    self.projectLabel.numberOfLines = 2;
+    [self addSubview:self.projectLabel];
+    [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(30);
+        make.right.mas_equalTo(-30);
+        make.top.mas_equalTo(topView.mas_bottom);
+        make.bottom.mas_equalTo(self.classLabel.mas_top);
     }];
 }
 
