@@ -30,7 +30,6 @@
 #pragma mark - setupUI 
 - (void)setupUI {
     self.logoImageView = [[UIImageView alloc] init];
-    self.logoImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.logoImageView];
     
     self.titleLabel = [[UILabel alloc] init];
@@ -39,7 +38,6 @@
     [self.contentView addSubview:self.titleLabel];
     
     self.nextImageView = [[UIImageView alloc] init];
-    self.nextImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.nextImageView];
 }
 - (void)setupLayout {
@@ -70,16 +68,16 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     if (!selected) {
-        self.nextImageView.image = [UIImage imageNamed:@"wei"];
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮正常态"];
     }
 }
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     [super setHighlighted:highlighted animated:animated];
     if (highlighted) {
-        self.nextImageView.image = [UIImage imageNamed:@"dianji"];
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮点击态"];
     }
     else{
-        self.nextImageView.image = [UIImage imageNamed:@"wei"];
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮正常态"];
     }
 }
 

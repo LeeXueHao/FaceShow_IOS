@@ -34,7 +34,8 @@
 #pragma mark - set 
 - (void)setMoment:(ClassMomentListRequestItem_Data_Moment *)moment {
     _moment = moment;
-    [self.userButton sd_setImageWithURL:[NSURL URLWithString:_moment.publisher.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@""]];
+    [self.userButton sd_setImageWithURL:[NSURL URLWithString:_moment.publisher.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"]];
+    self.userButton.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
     self.nameLabel.text = _moment.publisher.realName;
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -142,7 +143,6 @@
         make.edges.equalTo(self);
     }];
     self.userButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.userButton.backgroundColor = [UIColor redColor];
     self.userButton.layer.cornerRadius = 5.0f;
     self.userButton.clipsToBounds = YES;
     self.userButton.userInteractionEnabled = NO;
@@ -156,7 +156,6 @@
     
     self.contentLabel = [[UILabel alloc] init];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
-
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.numberOfLines = 0;
     [self.contentView addSubview:self.contentLabel];
@@ -173,7 +172,8 @@
     [self.contentView addSubview:self.timeLabel];
     
     self.commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.commentButton.backgroundColor = [UIColor redColor];
+    [self.commentButton setBackgroundImage:[UIImage imageNamed:@"赞评论展开按钮-点击态"] forState:UIControlStateNormal];
+    [self.commentButton setBackgroundImage:[UIImage imageNamed:@"赞评论展开按钮张常态"] forState:UIControlStateNormal];
     [self.contentView addSubview:self.commentButton];
     WEAK_SELF
     [[self.commentButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {

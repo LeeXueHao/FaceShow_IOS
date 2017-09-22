@@ -104,7 +104,9 @@
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
-    [rightButton setImage:[UIImage imageNamed:@"消息动态icon点击态-正常态-拷贝"]  forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"上传内容图标正常态"] forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"上传内容图标点击态"] forState:UIControlStateHighlighted];
+
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
         [self showAlertView];

@@ -18,6 +18,7 @@
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setupUI];
         [self setupLayout];
         WEAK_SELF
@@ -35,7 +36,7 @@
     //    self.selectedBackgroundView = selectedBgView;
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.userHeaderImageView = [[UIImageView alloc] init];
-    self.userHeaderImageView.backgroundColor = [UIColor redColor];
+    self.userHeaderImageView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
     self.userHeaderImageView.clipsToBounds = YES;
     self.userHeaderImageView.layer.cornerRadius = 6.0f;
     [self.contentView addSubview:self.userHeaderImageView];
@@ -47,7 +48,6 @@
     [self.contentView addSubview:self.nameLabel];
     
     self.nextImageView = [[UIImageView alloc] init];
-    self.nextImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.nextImageView];
     
 }
@@ -76,16 +76,16 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     if (!selected) {
-        self.nextImageView.image = [UIImage imageNamed:@"wei"];
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮正常态"];
     }
 }
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     [super setHighlighted:highlighted animated:animated];
     if (highlighted) {
-        self.nextImageView.image = [UIImage imageNamed:@"dianji"];
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮点击态"];
     }
     else{
-        self.nextImageView.image = [UIImage imageNamed:@"wei"];
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮正常态"];
     }
 }
 - (void)reload {

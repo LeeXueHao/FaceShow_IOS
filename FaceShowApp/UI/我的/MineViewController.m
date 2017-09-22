@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我";
-    self.titleArray = @[@{@"image":@"sas",@"title":@"签到记录"}];
+    self.titleArray = @[@{@"image":@"签到记录icon",@"title":@"签到记录"}];
     [self setupUI];
     [self setupLayout];
     if ([UserManager sharedInstance].userModel == nil) {

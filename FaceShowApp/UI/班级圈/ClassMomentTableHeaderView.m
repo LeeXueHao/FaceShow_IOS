@@ -31,11 +31,12 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.backgroundImageView = [[UIImageView alloc] init];
-    self.backgroundImageView.backgroundColor = [UIColor redColor];
+    self.backgroundImageView.image = [UIImage imageNamed:@"背景图片"];
     [self addSubview:self.backgroundImageView];
     
     self.userHeaderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认头像"]];
+    self.userHeaderButton.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
+    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"]];
     self.userHeaderButton.clipsToBounds = YES;
     self.userHeaderButton.layer.cornerRadius = 5.0f;
     self.userHeaderButton.layer.shadowColor = [[UIColor colorWithHexString:@"000000"] colorWithAlphaComponent:0.2f].CGColor;

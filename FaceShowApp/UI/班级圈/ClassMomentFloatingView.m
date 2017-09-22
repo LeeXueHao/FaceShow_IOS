@@ -28,7 +28,8 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.likeButton setImage:[UIImage imageNamed:@"选择"] forState:UIControlStateNormal];
+    [self.likeButton setImage:[UIImage imageNamed:@"赞icon正常态"] forState:UIControlStateNormal];
+    [self.likeButton setImage:[UIImage imageNamed:@"赞icon-点击态"] forState:UIControlStateHighlighted];
     [self.likeButton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
     [self.likeButton setTitle:@"赞" forState:UIControlStateNormal];
     self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(0, -2.5f, 0.0f, 2.5f);
@@ -45,7 +46,8 @@
     [self addSubview:self.likeButton];
     
     self.commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.commentButton setImage:[UIImage imageNamed:@"选择"] forState:UIControlStateNormal];
+    [self.commentButton setImage:[UIImage imageNamed:@"评论icon正常态"] forState:UIControlStateNormal];
+    [self.commentButton setImage:[UIImage imageNamed:@"评论icon点击态"] forState:UIControlStateHighlighted];
     [self.commentButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1a90d9"]] forState:UIControlStateHighlighted];
     [self.commentButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateNormal];
     self.commentButton.imageEdgeInsets = UIEdgeInsetsMake(0, -2.5f, 0.0f, 2.5f);

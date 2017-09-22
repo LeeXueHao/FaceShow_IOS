@@ -192,7 +192,7 @@
     [self addSubview:self.middleView];
     
     self.heartImageView = [[UIImageView alloc] init];
-    self.heartImageView.backgroundColor = [UIColor redColor];
+    self.heartImageView.image = [UIImage imageNamed:@"赞点后的小标签"];
     [self.middleView addSubview:self.heartImageView];
     
     self.likeLabel = [[UILabel alloc] init];
