@@ -109,7 +109,8 @@
     self.tableView.hidden = YES;
 
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.backgroundColor = [UIColor greenColor];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"返回页面按钮正常态-"] forState:UIControlStateNormal];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"返回页面按钮点击态"] forState:UIControlStateHighlighted];
     [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];
     [self.view bringSubviewToFront:backBtn];
@@ -126,15 +127,22 @@
     if (indexPath.section == 0) {
         GetCourseRequestItem_LecturerInfo *info = self.dataArray[0][indexPath.row];
         cell.title = info.lecturerName;
-        cell.iconUrl = info.lecturerAvatar;
+        cell.iconName = @"专家";
     } else if (indexPath.section == 1) {
         GetCourseRequestItem_AttachmentInfo *info = self.dataArray[1][indexPath.row];
         cell.title = info.resName;
-        cell.iconUrl = info.resThumb;
+        cell.iconName = @"资源";
     } else if (indexPath.section == 2) {
         GetCourseRequestItem_InteractStep *info = self.dataArray[2][indexPath.row];
         cell.title = info.interactName;
-//        cell.iconUrl = info.
+        InteractType type = [FSDataMappingTable InteractTypeWithKey:info.interactType];
+        if (type == InteractType_Vote) {
+            cell.iconName = @"投票icon";
+        } else if (type == InteractType_Questionare) {
+            cell.iconName = @"问卷";
+        } else if (type == InteractType_Comment) {
+            cell.iconName = @"评论icon";
+        }
     }
     return cell;
 }

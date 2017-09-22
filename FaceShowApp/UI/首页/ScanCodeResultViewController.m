@@ -44,7 +44,6 @@
     }];
     
     self.signInImageView = [[UIImageView alloc] init];
-    self.signInImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.signInImageView];
     [self.signInImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(headerView.mas_bottom).offset(95 * kPhoneHeightRatio);
@@ -89,6 +88,7 @@
 
 - (void)setModel {
     if (!isEmpty(self.data)) {
+        self.signInImageView.image = [UIImage imageNamed:@"签到成功图标"];
         self.titleLabel.text = @"签到成功";
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,6 +116,7 @@
         } else {
             self.blackLabel.text = @"签到失败";
         }
+        self.signInImageView.image = [UIImage imageNamed:@"签到失败图标"];
         self.titleLabel.text = @"签到失败";
         self.grayLabel.text = @"请扫描最新二维码";
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {

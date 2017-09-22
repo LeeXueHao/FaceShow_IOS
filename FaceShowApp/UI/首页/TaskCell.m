@@ -41,7 +41,6 @@
     }];
     
     self.statusImageView = [[UIImageView alloc] init];
-    self.statusImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.statusImageView];
     [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.statusLabel.mas_left).offset(-5);
@@ -84,6 +83,7 @@
     self.titleLabel.text = task.interactName;
     self.timeLabel.text = task.createTime;
     self.statusLabel.text = task.stepFinished.boolValue ? @"已完成" : @"未完成";
+    self.statusImageView.image = [UIImage imageNamed:task.stepFinished.boolValue ? @"已完成" : @"未完成"];
 }
 
 @end

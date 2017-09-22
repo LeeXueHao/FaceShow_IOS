@@ -36,7 +36,7 @@
 - (void)setupUI {
     self.headerImageView = [[UIImageView alloc] init];
     self.headerImageView.userInteractionEnabled = YES;
-    self.headerImageView.backgroundColor = [UIColor redColor];
+    self.headerImageView.image = [UIImage imageNamed:@"课程详情头图"];
     [self addSubview:self.headerImageView];
     [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
@@ -62,8 +62,7 @@
         make.right.mas_equalTo(-15);
     }];
     
-    UIImageView *timeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    timeIcon.backgroundColor = [UIColor redColor];
+    UIImageView *timeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"课程详情时间"]];
     [self addSubview:timeIcon];
     [timeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -81,8 +80,7 @@
         make.right.mas_equalTo(-15);
     }];
     
-    UIImageView *authorIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    authorIcon.backgroundColor = [UIColor redColor];
+    UIImageView *authorIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"课程详情专家"]];
     [self addSubview:authorIcon];
     [authorIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -98,8 +96,7 @@
         make.right.mas_equalTo(-15);
     }];
     
-    UIImageView *addressIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    addressIcon.backgroundColor = [UIColor redColor];
+    UIImageView *addressIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"课程详情地点"]];
     [self addSubview:addressIcon];
     [addressIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);

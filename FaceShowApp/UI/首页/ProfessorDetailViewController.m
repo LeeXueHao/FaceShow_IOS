@@ -36,7 +36,7 @@
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     self.backgroundImageView = [[UIImageView alloc] init];
-    self.backgroundImageView.backgroundColor = [UIColor greenColor];
+    self.backgroundImageView.image = [UIImage imageNamed:@"背景图片"];
     [self.contentView addSubview:self.backgroundImageView];
     [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
@@ -59,8 +59,7 @@
     self.avatarImageView = [[UIImageView alloc] init];
     self.avatarImageView.layer.cornerRadius = 5;
     self.avatarImageView.clipsToBounds = YES;
-    self.avatarImageView.backgroundColor = [UIColor redColor];
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.lecturerInfo.lecturerAvatar] placeholderImage:[UIImage imageNamed:@""]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.lecturerInfo.lecturerAvatar] placeholderImage:[UIImage imageNamed:@"空插画-"]];
     [self.contentView addSubview:self.avatarImageView];
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);

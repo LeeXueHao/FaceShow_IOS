@@ -92,7 +92,10 @@
     }];
     
     UIButton  *securityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    securityBtn.backgroundColor = [UIColor redColor];
+    [securityBtn setBackgroundImage:[UIImage imageNamed:@"显示密码正常态"] forState:UIControlStateNormal];
+    [securityBtn setBackgroundImage:[UIImage imageNamed:@"显示密码点击态"] forState:UIControlStateHighlighted];
+    [securityBtn setBackgroundImage:[UIImage imageNamed:@"隐藏秘密正常态"] forState:UIControlStateSelected];
+    [securityBtn setBackgroundImage:[UIImage imageNamed:@"隐藏秘密点击态"] forState:UIControlStateSelected | UIControlStateHighlighted];
     [securityBtn addTarget:self action:@selector(securityBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:securityBtn];
     [securityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -173,6 +176,7 @@
 
 - (void)securityBtnAction:(UIButton *)sender {
     self.passwordTF.secureTextEntry = !self.passwordTF.secureTextEntry;
+    sender.selected = !sender.selected;
 }
 
 - (void)touristBtnAction:(UIButton *)sender {

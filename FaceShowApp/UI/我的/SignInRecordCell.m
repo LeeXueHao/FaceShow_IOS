@@ -42,7 +42,6 @@
     }];
     
     self.statusImageView = [[UIImageView alloc] init];
-    self.statusImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.statusImageView];
     [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.statusLabel.mas_left).offset(-5);
@@ -85,6 +84,7 @@
     self.titleLabel.text = signIn.title;
     self.timeLabel.text = isEmpty(signIn.userSignIn) ? @"" : signIn.userSignIn.signinTime;
     self.statusLabel.text = isEmpty(signIn.userSignIn) ? @"未签到" : @"已签到";
+    self.statusImageView.image = [UIImage imageNamed:isEmpty(signIn.userSignIn) ? @"未签到图标-我的" : @"已签到图标-我的"];
 }
 
 - (void)setHasBottomLine:(BOOL)hasBottomLine {

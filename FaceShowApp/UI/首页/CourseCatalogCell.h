@@ -11,6 +11,6 @@
 @interface CourseCatalogCell : UITableViewCell
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *iconUrl;
+@property (nonatomic, strong) NSString *iconName;
 
 @end

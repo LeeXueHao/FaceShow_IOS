@@ -28,7 +28,6 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.iconImageView = [[UIImageView alloc] init];
-    self.iconImageView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -61,9 +60,9 @@
     self.titleLabel.text = title;
 }
 
-- (void)setIconUrl:(NSString *)iconUrl {
-    _iconUrl = iconUrl;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:iconUrl] placeholderImage:[UIImage imageNamed:@""]];
+- (void)setIconName:(NSString *)iconName {
+    _iconName = iconName;
+    self.imageView.image = [UIImage imageNamed:iconName];
 }
 
 @end
