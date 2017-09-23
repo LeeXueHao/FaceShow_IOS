@@ -166,7 +166,7 @@
                                    NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"]
                                    } range:NSMakeRange(0, attributedStr.length)];
     self.titleLabel.attributedText = attributedStr;
-    self.timeScheduleLabel.text = [NSString stringWithFormat:@"%@ - %@", self.signIn.startTime, self.signIn.endTime];
+    self.timeScheduleLabel.text = [NSString stringWithFormat:@"%@ - %@", [self.signIn.startTime omitSecondOfFullDateString], [self.signIn.endTime omitSecondOfFullDateString]];
     self.statusLabel.text = isEmpty(self.signIn.userSignIn) ? @"您还未签到" : @"您已成功签到";
     if (isEmpty(self.signIn.userSignIn)) {
         self.tipsLabel.hidden = NO;
@@ -174,7 +174,7 @@
     } else {
         self.timeTitleLabel.hidden = NO;
         self.signedInTimeLabel.hidden = NO;
-        self.signedInTimeLabel.text = self.signIn.userSignIn.signinTime;
+        self.signedInTimeLabel.text = [self.signIn.userSignIn.signinTime omitSecondOfFullDateString];
     }
 }
 

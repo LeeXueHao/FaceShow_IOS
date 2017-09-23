@@ -155,4 +155,29 @@
     return dic;
 }
 
+- (BOOL)includeChinese {
+    for (int i = 0; i < [self length]; i++) {
+        int a =[self characterAtIndex:i];
+        if (a > 0x4e00 && a < 0x9fff) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+@end
+
+@implementation NSString (YXTextFormatConvert)
+
+- (NSString *)omitSecondOfFullDateString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = [dateFormatter dateFromString:self];
+    if (isEmpty(date)) {
+        return self;
+    }
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    return [dateFormatter stringFromDate:date];
+}
+
 @end

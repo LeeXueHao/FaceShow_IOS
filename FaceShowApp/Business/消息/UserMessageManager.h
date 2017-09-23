@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern  NSString * const kHasNewMessageNotification;
+
 @interface UserMessageManager : NSObject
 
 @property (nonatomic, strong) UIView *redPointView;

@@ -72,7 +72,7 @@
 - (void)setElement:(GetResourceRequestItem_Element *)element {
     _element = element;
     self.titleLabel.text = element.resName;
-    self.timeLabel.text = element.createTime;
+    self.timeLabel.text = [element.createTime omitSecondOfFullDateString];
 }
 
 @end

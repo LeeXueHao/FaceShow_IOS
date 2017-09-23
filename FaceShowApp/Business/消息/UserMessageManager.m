@@ -10,6 +10,8 @@
 #import "GCDTimer.h"
 #import "MessageHasUnViewRequest.h"
 
+NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
+
 @interface UserMessageManager ()
 @property (nonatomic, strong) GCDTimer *timer;
 @property (nonatomic, strong) MessageHasUnViewRequest *messageHasUnViewRequest;
@@ -35,6 +37,9 @@
             return;
         }
         MessageHasUnViewRequestItem *item = (MessageHasUnViewRequestItem *)retItem;
+        if (item.data.hasUnView) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHasNewMessageNotification object:nil];
+        }
         self.redPointView.hidden = !item.data.hasUnView;
     }];
 }

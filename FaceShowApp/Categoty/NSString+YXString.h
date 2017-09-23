@@ -51,4 +51,13 @@
 
 - (BOOL)nyx_isPureInt;
 
+- (BOOL)includeChinese;
+
+@end
+
+@interface NSString (YXTextFormatConvert)
+
+// FullDateStringFormat: yyyy-MM-dd HH:mm:ss
+- (NSString *)omitSecondOfFullDateString;
+
 @end

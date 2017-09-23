@@ -11,6 +11,7 @@
 #import "MessageDetailViewController.h"
 #import "NoticeListFetcher.h"
 #import "GetNoticeListRequest.h"
+#import "UserMessageManager.h"
 
 @interface MessageViewController ()
 
@@ -24,6 +25,7 @@
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
+    [self setupObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +40,15 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:@"MessageCell"];
+}
+
+#pragma mark - setupObserver
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewMessageNotification object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self firstPageFetch];
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate

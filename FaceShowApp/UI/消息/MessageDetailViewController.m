@@ -10,6 +10,7 @@
 #import "GetNoticeDetailRequest.h"
 #import "ErrorView.h"
 #import "ShowPhotosViewController.h"
+#import "UserMessageManager.h"
 
 @interface MessageDetailViewController ()
 
@@ -62,6 +63,7 @@
             self.errorView.hidden = NO;
             return;
         }
+        [[UserMessageManager sharedInstance] fetchUserMessage];
         GetNoticeDetailRequestItem *item = (GetNoticeDetailRequestItem *)retItem;
         self.data = item.data;
         [self setupUI];

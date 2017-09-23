@@ -66,6 +66,7 @@
     UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8, 4, 12, 12)];
     redPointView.layer.cornerRadius = 6;
     redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    redPointView.hidden = YES;
     [tabBarController.tabBar addSubview:redPointView];
     [tabBarController.tabBar bringSubviewToFront:redPointView];
     [UserMessageManager sharedInstance].redPointView = redPointView;

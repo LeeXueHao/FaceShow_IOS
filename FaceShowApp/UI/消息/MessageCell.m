@@ -73,7 +73,7 @@
 - (void)setNotice:(GetNoticeListRequestItem_Notice *)notice {
     _notice = notice;
     self.titleLabel.text = notice.title;
-    self.timeLabel.text = notice.createTime;
+    self.timeLabel.text = [notice.updateTime omitSecondOfFullDateString];
     self.avatarImageView.image = [UIImage imageNamed:notice.viewed ? @"已查看消息" : @"未查看消息"];
 }
 

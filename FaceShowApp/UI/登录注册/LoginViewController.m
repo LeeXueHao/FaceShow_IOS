@@ -161,6 +161,10 @@
 #pragma mark - actions
 - (void)loginBtnAction:(UIButton *)sender {
     [self.view endEditing:YES];
+    if ([self.passwordTF.text includeChinese]) {
+        [self.view nyx_showToast:@"密码不能包含汉字"];
+        return;
+    }
     [self.view nyx_startLoading];
     WEAK_SELF
     [LoginDataManager loginWithName:self.usernameTF.text password:self.passwordTF.text completeBlock:^(NSError *error) {

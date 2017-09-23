@@ -229,9 +229,9 @@
                                                                                                                   NSParagraphStyleAttributeName : style
                                                                                                                   }];
     self.courseTitleLabel.attributedText = attributedStr;
-    self.timeLabel.text = course.startTime;
-    self.authorLabel.text = course.lecturer;
-    self.addressLabel.text = course.site;
+    self.timeLabel.text = [course.startTime omitSecondOfFullDateString];
+    self.authorLabel.text = [self lecturesName];
+    self.addressLabel.text = isEmpty(course.site) ? @"无" : course.site;
     
     style = [[NSMutableParagraphStyle alloc] init];
     style.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -242,6 +242,21 @@
                                                                                       NSParagraphStyleAttributeName : style
                                                                                       }];
     self.briefLabel.attributedText = attributedStr;
+}
+
+- (NSString *)lecturesName {
+    if (!isEmpty(self.course.lecturerInfos)) {
+        NSMutableString *lecturesName = [NSMutableString string];
+        for (GetCourseRequestItem_LecturerInfo *info in self.course.lecturerInfos) {
+            if (!isEmpty(lecturesName)) {
+                [lecturesName appendString:@","];
+            }
+            [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
+        }
+        return lecturesName;
+    } else {
+        return @"无";
+    }
 }
 
 @end

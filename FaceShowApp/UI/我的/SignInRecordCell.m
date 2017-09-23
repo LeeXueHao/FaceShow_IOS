@@ -82,7 +82,7 @@
 - (void)setSignIn:(GetSignInRecordListRequestItem_SignIn *)signIn {
     _signIn = signIn;
     self.titleLabel.text = signIn.title;
-    self.timeLabel.text = isEmpty(signIn.userSignIn) ? @"" : signIn.userSignIn.signinTime;
+    self.timeLabel.text = isEmpty(signIn.userSignIn) ? @"" : [signIn.userSignIn.signinTime omitSecondOfFullDateString];
     self.statusLabel.text = isEmpty(signIn.userSignIn) ? @"未签到" : @"已签到";
     self.statusImageView.image = [UIImage imageNamed:isEmpty(signIn.userSignIn) ? @"未签到图标-我的" : @"已签到图标-我的"];
 }

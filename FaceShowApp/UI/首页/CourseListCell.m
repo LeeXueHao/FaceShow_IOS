@@ -109,7 +109,7 @@
 - (void)setItem:(GetCourseListRequestItem_coursesList *)item {
     _item = item;
     self.titleLabel.text = item.courseName;
-    self.timeLabel.text = item.startTime;
+    self.timeLabel.text = [item.startTime omitSecondOfFullDateString];
     self.teacherLabel.text = item.lecturer;
     self.placeLabel.text = item.site;
 }
