@@ -82,7 +82,7 @@
         STRONG_SELF
         [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
             STRONG_SELF
-            [self requestForUpdateHeaderImage:selectedImage];
+            [self updateWithHeaderImage:selectedImage];
         }];
     }];
     [alertVC addAction:cameraAction];
@@ -91,7 +91,6 @@
         [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
             STRONG_SELF
             [self updateWithHeaderImage:selectedImage];
-            //[self requestForUpdateHeaderImage:selectedImage];
         }];
     }];
     [alertVC addAction:photoAction];
@@ -155,10 +154,7 @@
         [self.view nyx_stopLoading];
         GetUserInfoRequestItem *item = retItem;
         if (item.data != nil) {
-            UserModel *model = [UserModel modelFromUserInfo:item.data];
-            model.token = [UserManager sharedInstance].userModel.token;
-            model.passport = [UserManager sharedInstance].userModel.passport;
-            [UserManager sharedInstance].userModel = model;
+            [[UserManager sharedInstance].userModel updateFromUserInfo:item.data];
             self.contentMutableArray[0][@"content"] = [UserManager sharedInstance].userModel.realName?:@"暂无";
             self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";
             self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sexName?:@"暂无";

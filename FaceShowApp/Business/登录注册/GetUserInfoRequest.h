@@ -22,6 +22,8 @@
 @property (nonatomic, copy) NSString<Optional> *avatar;
 @property (nonatomic, copy) NSString<Optional> *stageName;
 @property (nonatomic, copy) NSString<Optional> *subjectName;
+@property (nonatomic, copy) NSString<Optional> *sexName;
+
 @end
 
 @interface GetUserInfoRequestItem : HttpBaseRequestItem

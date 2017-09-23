@@ -214,7 +214,7 @@
 }
 - (void)requestForPublishMoment:(NSString *)resourceIds{
     ClassMomentPublishRequest *request = [[ClassMomentPublishRequest alloc] init];
-    request.clazsId = self.clazsId;
+    request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.content = self.publicationMomentTextView.text;
     request.resourceIds = resourceIds;
     WEAK_SELF

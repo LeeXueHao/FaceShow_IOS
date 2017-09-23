@@ -116,6 +116,7 @@
     [self nyx_setupRightWithCustomView:rightButton];
     
     self.inputView = [[CommentInputView alloc]init];
+    self.inputView.textView.returnKeyType = UIReturnKeySend;
     self.inputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
         if (text.length == 0) {
@@ -177,7 +178,6 @@
     if (image != nil) {
         VC.imageArray = @[image];
     }
-    VC.clazsId = @"7";
     WEAK_SELF
     VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
         STRONG_SELF
@@ -313,11 +313,13 @@
 - (void)requestForClickLike:(NSInteger)section {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     ClassMomentClickLikeRequest *request = [[ClassMomentClickLikeRequest alloc] init];
-    request.clazsId = @"7";
+    request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.momentId = moment.momentID;
+    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentClickLikeRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self.view nyx_stopLoading];
         ClassMomentClickLikeRequestItem *item = retItem;
         if (item.data != nil) {
             if (moment.likes.count == 0) {
@@ -337,12 +339,14 @@
 - (void)requstForPublishComment:(NSString *)content {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
     ClassMomentCommentRequest *request = [[ClassMomentCommentRequest alloc] init];
-    request.clazsId = @"7";
+    request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.momentId = moment.momentID;
     request.content = content;
+    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentCommentRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self.view nyx_stopLoading];
         ClassMomentCommentRequestItem *item = retItem;
         if (item.data != nil) {
             item.data.content = content;

@@ -127,10 +127,7 @@
         [self.view nyx_stopLoading];
         GetUserInfoRequestItem *item = retItem;
         if (item.data != nil) {
-            UserModel *model = [UserModel modelFromUserInfo:item.data];
-            model.token = [UserManager sharedInstance].userModel.token;
-            model.passport = [UserManager sharedInstance].userModel.passport;
-            [UserManager sharedInstance].userModel = model;
+            [[UserManager sharedInstance].userModel updateFromUserInfo:item.data];
             [self.tableView reloadData];
         }
     }];

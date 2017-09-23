@@ -33,4 +33,5 @@
 @property (nonatomic, strong) GetCurrentClazsRequestItem<Optional> *projectClassInfo;
 
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo;
+- (void)updateFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo;
 @end
