@@ -161,6 +161,7 @@
             self.contentMutableArray[3][@"content"] = [UserManager sharedInstance].userModel.stageName?:@"暂无";
             self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.subjectName?:@"暂无";
             [self.tableView reloadData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
         }
     }];
     self.userInfoRequest = request;
