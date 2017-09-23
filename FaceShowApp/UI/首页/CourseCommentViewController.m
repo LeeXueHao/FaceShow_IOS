@@ -55,7 +55,7 @@
         if (self.dataArray.count == 0) {
             [self.view nyx_showToast:@"暂无评论"];
         }else {
-            [self.view nyx_showToast:@"没有评论了"];
+            [self.view performSelector:@selector(nyx_showToast:) withObject:@"暂无更多" afterDelay:1];
         }
     }];
     self.dataFetcher = fetcher;

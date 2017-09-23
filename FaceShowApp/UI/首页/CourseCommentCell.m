@@ -132,6 +132,8 @@
     NSTimeInterval interval = [currentDate timeIntervalSinceDate:date];
     if (interval >= 24*60*60) {
         return oriStr;
+    }else if (interval < 60) {
+        return @"刚刚";
     }else if (interval < 60*60) {
         NSInteger min = interval/60;
         return [NSString stringWithFormat:@"%@分钟前",@(min)];

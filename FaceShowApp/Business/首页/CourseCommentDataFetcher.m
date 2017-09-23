@@ -52,7 +52,7 @@
         GetCourseCommentRequestItem *item = (GetCourseCommentRequestItem *)retItem;
         item.data.title = self.title;
         BLOCK_EXEC(self.finishBlock,retItem);
-        BLOCK_EXEC(aCompleteBlock,item.data.totalElements.intValue,item.data.elements,nil);
+        BLOCK_EXEC(aCompleteBlock,999999,item.data.elements,nil);
         if (item.data.elements.count > 0) {
             GetCourseCommentRequestItem_element *element = [item.data.elements lastObject];
             self.lastID = element.elementId.integerValue;
