@@ -123,7 +123,7 @@
     [backView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(5);
-        make.centerY.mas_equalTo(10);
+        make.centerY.mas_equalTo(self.view.mas_topMargin).offset(42);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
 }

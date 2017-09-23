@@ -97,6 +97,7 @@
     [securityBtn setBackgroundImage:[UIImage imageNamed:@"隐藏秘密正常态"] forState:UIControlStateSelected];
     [securityBtn setBackgroundImage:[UIImage imageNamed:@"隐藏秘密点击态"] forState:UIControlStateSelected | UIControlStateHighlighted];
     [securityBtn addTarget:self action:@selector(securityBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    securityBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:securityBtn];
     [securityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.passwordTF.mas_centerY);
