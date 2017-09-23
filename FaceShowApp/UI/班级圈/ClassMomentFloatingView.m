@@ -89,11 +89,36 @@
 }
 - (void)reloadFloatingView:(CGRect)originRect withStyle:(ClassMomentFloatingStyle)style {
     [self mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_offset(style == ClassMomentFloatingStyle_Comment ? CGSizeMake(80.0f, 40.0f) : CGSizeMake(160.0f, 40.0f));
+        make.width.mas_offset(2.0f);
+        make.height.mas_offset(40.0f);
         make.right.equalTo(self.superview.mas_left).offset(originRect.origin.x - 10.0f);
         make.top.equalTo(self.superview.mas_top).offset(originRect.origin.y  - 5.0f);
     }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.2f animations:^{
+            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_offset(style == ClassMomentFloatingStyle_Comment ? 80.0f: 160.0f);
+            }];
+            [self.superview layoutIfNeeded];
+        }];
+    });
+
     self.likeButton.hidden = style == ClassMomentFloatingStyle_Comment ? YES : NO;
     self.lineView.hidden = style == ClassMomentFloatingStyle_Comment ? YES : NO;
 }
+- (void)hiddenView {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.2f animations:^{
+            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_offset(2.0f);
+            }];
+            [self.superview layoutIfNeeded];
+
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    });
+    
+}
+
 @end

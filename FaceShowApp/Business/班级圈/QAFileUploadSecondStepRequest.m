@@ -35,7 +35,9 @@
     
     NSMutableDictionary *cp2 = [NSMutableDictionary dictionary];
     [cp2 setObject:@"passport" forKey:NSHTTPCookieName];
-    NSString *name = @"18333646084"; // [UserManager sharedInstance].userModel.name;
+#warning 测试
+    NSString *name = @"18910037053";
+//    NSString *name = [UserManager sharedInstance].userModel.passport; // [UserManager sharedInstance].userModel.name;
     [cp2 setObject:name forKey:NSHTTPCookieValue];
     [cp2 setObject:@"newupload.yanxiu.com" forKey:NSHTTPCookieDomain];
     [cp2 setObject:@"/" forKey:NSHTTPCookiePath];
@@ -48,7 +50,7 @@
     self.isexist = @"0";
 //    NSString *reserve = @"{\"typeId\":1000,\"title\":\"iosTestFile\",\"username\":\"研修网崔志伟\",\"uid\":20103549,\"shareType\":0,\"from\":6,\"source\":\"pc\",\"description\":\"\"}";
     NSString *reserve = [NSString stringWithFormat:@"{\"typeId\":1000,\"title\":\"%@\",\"username\":\"%@\",\"uid\":\"%@\",\"shareType\":0,\"from\":6,\"source\":\"ios\",\"description\":\"\"}",self.filename,name,
-                         @"22597026" // [UserManager sharedInstance].userModel.oldUserId
+                         [UserManager sharedInstance].userModel.userID 
                          ];
 
     self.reserve = reserve;

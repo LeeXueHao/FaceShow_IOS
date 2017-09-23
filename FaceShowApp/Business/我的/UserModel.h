@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString<Optional> *avatarUrl;
 
 @property (nonatomic, copy) NSString<Optional> *token;
+@property (nonatomic, copy) NSString<Optional> *passport;
 
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo;
 @end

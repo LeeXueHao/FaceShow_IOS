@@ -10,6 +10,7 @@
 
 @interface LoginRequestItem : HttpBaseRequestItem
 @property (nonatomic, strong) NSString<Optional> *token;
+@property (nonatomic, strong) NSString<Optional> *passport;
 @end
 
 @interface LoginRequest : YXGetRequest

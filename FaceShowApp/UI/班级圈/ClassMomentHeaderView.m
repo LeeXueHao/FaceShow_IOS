@@ -192,6 +192,7 @@
     [self.contentView addSubview:self.openCloseButton];
     [[self.openCloseButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
+        NSLog(@"2324");
         BLOCK_EXEC(self.classMomentOpenCloseBlock,self.openCloseButton.selected);
     }];
     

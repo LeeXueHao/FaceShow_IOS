@@ -100,7 +100,7 @@
     }
 }
 - (void)reload {
-      [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"默认头像"]];
+      [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
 }
 
 @end

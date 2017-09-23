@@ -129,6 +129,7 @@
         if (item.data != nil) {
             UserModel *model = [UserModel modelFromUserInfo:item.data];
             model.token = [UserManager sharedInstance].userModel.token;
+            model.passport = [UserManager sharedInstance].userModel.passport;
             [UserManager sharedInstance].userModel = model;
             [self.tableView reloadData];
         }

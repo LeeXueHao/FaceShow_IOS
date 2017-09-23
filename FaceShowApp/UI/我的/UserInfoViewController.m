@@ -157,6 +157,7 @@
         if (item.data != nil) {
             UserModel *model = [UserModel modelFromUserInfo:item.data];
             model.token = [UserManager sharedInstance].userModel.token;
+            model.passport = [UserManager sharedInstance].userModel.passport;
             [UserManager sharedInstance].userModel = model;
             self.contentMutableArray[0][@"content"] = [UserManager sharedInstance].userModel.realName?:@"暂无";
             self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";

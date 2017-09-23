@@ -52,7 +52,7 @@
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.floatingView removeFromSuperview];
+    [self.floatingView hiddenView];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -139,7 +139,7 @@
     self.inputView.textView.text = nil;
     [self.inputView.textView resignFirstResponder];
     if (self.floatingView.superview != nil) {
-        [self.floatingView removeFromSuperview];
+        [self.floatingView hiddenView];
     }
 }
 - (void)stopAnimation {
@@ -243,6 +243,7 @@
     };
     headerView.classMomentOpenCloseBlock = ^(BOOL isOpen) {
         STRONG_SELF
+        NSLog(@"123");
         moment.isOpen = [NSString stringWithFormat:@"%@",@(!isOpen)];
 //        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:section];
 //        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
@@ -252,7 +253,7 @@
 }
 - (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
     if (self.floatingView.superview != nil) {
-        [self.floatingView removeFromSuperview];
+        [self.floatingView hiddenView];
         return;
     }
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];

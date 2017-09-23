@@ -40,7 +40,7 @@
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval time=[date timeIntervalSince1970];
     NSString*dateStr = [NSString stringWithFormat:@"%0.f", time];
-    NSString *userId = @"22597026"; // [UserManager sharedInstance].userModel.oldUserId; // 22597026
+    NSString *userId = [UserManager sharedInstance].userModel.userID;
     NSString *infoStr = [NSString stringWithFormat:@"%@%@%@",userId,dateStr,sizeStr];
     NSString *md5 = [infoStr yx_md5];
     manager.fileUploadFirstStepRequest.md5 = md5;

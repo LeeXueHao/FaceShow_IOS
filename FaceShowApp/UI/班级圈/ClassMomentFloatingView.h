@@ -21,4 +21,6 @@ typedef NS_ENUM(NSInteger,ClassMomentFloatingStyle){
 
 @property (nonatomic, copy) void(^classMomentFloatingBlock)(ClassMomentClickStatus status);
 - (void)reloadFloatingView:(CGRect)originRect withStyle:(ClassMomentFloatingStyle)style;
+- (void)hiddenView;
+
 @end

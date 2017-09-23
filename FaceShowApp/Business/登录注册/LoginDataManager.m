@@ -42,6 +42,7 @@
         LoginRequestItem *item = (LoginRequestItem *)retItem;
         UserModel *userModel = [[UserModel alloc] init];
         userModel.token = item.token;
+        userModel.passport = item.passport;
         [UserManager sharedInstance].userModel = userModel;
         
         [manager.getUserInfoRequest stopRequest];
