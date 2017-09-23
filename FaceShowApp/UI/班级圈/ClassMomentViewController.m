@@ -119,12 +119,8 @@
     self.inputView.textView.returnKeyType = UIReturnKeySend;
     self.inputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
-        if (text.length == 0) {
-            
-        }else if (text.length > 250) {
-            [self.view nyx_showToast:@"评论最多支持250字"];
-        }else {
-            [self requstForPublishComment:text];
+        if (text.length != 0) {
+            [self requstForPublishComment:text];            
         }
     };
     [self.view addSubview:self.inputView];
