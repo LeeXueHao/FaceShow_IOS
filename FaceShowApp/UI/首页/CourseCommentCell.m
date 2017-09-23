@@ -116,7 +116,29 @@
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:comment attributes:dic];
     self.commentLabel.attributedText = attributeStr;
     self.favorLabel.text = item.likeNum.integerValue==0? @"赞":item.likeNum;
-    self.timeLabel.text = item.createTime;
+    self.timeLabel.text = [self dateStringFromOriString:item.createTime];
+    if (item.userLiked.boolValue) {
+        [self.favorButton setBackgroundImage:[UIImage imageNamed:@"课程讨论点赞icon的点击"] forState:UIControlStateNormal];
+    }else {
+        [self.favorButton setBackgroundImage:[UIImage imageNamed:@"课程讨论点赞icon"] forState:UIControlStateNormal];
+    }
+}
+
+- (NSString *)dateStringFromOriString:(NSString *)oriStr {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [formatter dateFromString:oriStr];
+    NSDate *currentDate = [NSDate dateWithTimeIntervalSince1970:self.currentTime.doubleValue/1000];
+    NSTimeInterval interval = [currentDate timeIntervalSinceDate:date];
+    if (interval >= 24*60*60) {
+        return oriStr;
+    }else if (interval < 60*60) {
+        NSInteger min = interval/60;
+        return [NSString stringWithFormat:@"%@分钟前",@(min)];
+    }else {
+        NSInteger hour = interval/60/60;
+        return [NSString stringWithFormat:@"%@小时前",@(hour)];
+    }
 }
 
 

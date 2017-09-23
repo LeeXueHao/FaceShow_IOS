@@ -13,6 +13,7 @@
 #import "QuestionRequestItem.h"
 #import "ErrorView.h"
 #import "FSDataMappingTable.h"
+#import "QuestionnaireViewController.h"
 
 @interface QuestionnaireResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -42,6 +43,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)backAction {
+    NSArray *array = self.navigationController.viewControllers;
+    UIViewController *preVC = array[array.count-2];
+    if ([preVC isKindOfClass:[QuestionnaireViewController class]]) {
+        [self.navigationController popToViewController:array[array.count-3] animated:YES];
+    }else {
+        [super backAction];
+    }
 }
 
 - (void)requestVoteInfo {
@@ -112,6 +123,7 @@
     if (type == QuestionType_Fill) {
         FillQuestionResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FillQuestionResultCell"];
         cell.index = indexPath.row+1;
+        cell.currentTime = self.requestItem.currentTime;
         cell.item = question;
         cell.bottomLineHidden = indexPath.row==self.requestItem.data.questionGroup.questions.count;
         return cell;

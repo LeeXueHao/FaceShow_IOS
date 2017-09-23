@@ -11,6 +11,7 @@
 
 @interface FillQuestionResultCell : UITableViewCell
 @property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) NSString *currentTime;
 @property (nonatomic, strong) QuestionRequestItem_question *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @end

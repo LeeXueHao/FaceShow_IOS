@@ -42,7 +42,7 @@
     self.textView.backgroundColor = [UIColor colorWithHexString:@"fcfcfc"];
     self.textView.font = [UIFont systemFontOfSize:14];
     self.textView.textColor = [UIColor colorWithHexString:@"333333"];
-    self.textView.returnKeyType = UIReturnKeyDone;
+    self.textView.returnKeyType = UIReturnKeySend;
     NSString *placeholderStr = @"评论";
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"666666"] range:NSMakeRange(0, placeholderStr.length)];

@@ -76,4 +76,5 @@
 
 @interface QuestionRequestItem : HttpBaseRequestItem
 @property (nonatomic, strong) QuestionRequestItem_data<Optional> *data;
+@property (nonatomic, strong) NSString<Optional> *currentTime;
 @end

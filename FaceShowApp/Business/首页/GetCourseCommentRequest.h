@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString<Optional> *userName;
 @property (nonatomic, strong) NSString<Optional> *avatar;
 @property (nonatomic, strong) NSString<Optional> *replays;
+@property (nonatomic, strong) NSString<Optional> *userLiked;
 @end
 
 @interface GetCourseCommentRequestItem_data : JSONModel
@@ -36,6 +37,7 @@
 
 @interface GetCourseCommentRequestItem : HttpBaseRequestItem
 @property (nonatomic, strong) GetCourseCommentRequestItem_data<Optional> *data;
+@property (nonatomic, strong) NSString<Optional> *currentTime;
 @end
 
 @interface GetCourseCommentRequest : YXGetRequest

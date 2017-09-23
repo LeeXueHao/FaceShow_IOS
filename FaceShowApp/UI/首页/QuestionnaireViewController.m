@@ -15,6 +15,7 @@
 #import "ErrorView.h"
 #import "SaveUserVoteRequest.h"
 #import "SaveUserQuestionnaireRequest.h"
+#import "QuestionnaireResultViewController.h"
 
 @interface QuestionnaireViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -164,6 +165,17 @@
 }
 
 - (void)submitAction {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提交后内容不可修改，是否继续提交？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *submit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self goSubmit];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancel];
+    [alert addAction:submit];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)goSubmit {
     NSString *answer = [self.requestItem.data.questionGroup answerString];
     if (self.interactType == InteractType_Vote) {
         [self.saveVoteRequest stopRequest];
@@ -181,7 +193,9 @@
             }
             [self.view.window nyx_showToast:@"提交成功"];
             BLOCK_EXEC(self.completeBlock);
-            [self backAction];
+            QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:self.stepId];
+            vc.name = self.name;
+            [self.navigationController pushViewController:vc animated:YES];
         }];
     }else {
         [self.saveQuestionnaireRequest stopRequest];
@@ -199,7 +213,9 @@
             }
             [self.view.window nyx_showToast:@"提交成功"];
             BLOCK_EXEC(self.completeBlock);
-            [self backAction];
+            QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:self.stepId];
+            vc.name = self.name;
+            [self.navigationController pushViewController:vc animated:YES];
         }];
     }
 }
@@ -252,6 +268,10 @@
         [cell setEndEdittingBlock:^{
             STRONG_SELF
             [self.tableView reloadData];
+        }];
+        [cell setBeginEdittingBlock:^{
+            STRONG_SELF
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         }];
         if (self.requestItem.data.isAnswer.boolValue) {
             cell.userInteractionEnabled = NO;

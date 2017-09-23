@@ -109,6 +109,8 @@
     
     [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
@@ -128,7 +130,7 @@
 
 - (void)setItem:(QuestionRequestItem_question *)item {
     _item = item;
-    self.timeLabel.text = self.item.createTime;
+    self.timeLabel.text = [self dateStringFromOriString:self.item.createTime];
     self.attendLabel.text = [NSString stringWithFormat:@"参与人数：%@",self.item.answerUserNum];
     
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
@@ -147,6 +149,23 @@
     [self.replyTextView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(height);
     }];
+}
+
+- (NSString *)dateStringFromOriString:(NSString *)oriStr {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [formatter dateFromString:oriStr];
+    NSDate *currentDate = [NSDate dateWithTimeIntervalSince1970:self.currentTime.doubleValue/1000];
+    NSTimeInterval interval = [currentDate timeIntervalSinceDate:date];
+    if (interval >= 24*60*60) {
+        return oriStr;
+    }else if (interval < 60*60) {
+        NSInteger min = interval/60;
+        return [NSString stringWithFormat:@"%@分钟前",@(min)];
+    }else {
+        NSInteger hour = interval/60/60;
+        return [NSString stringWithFormat:@"%@小时前",@(hour)];
+    }
 }
 
 @end

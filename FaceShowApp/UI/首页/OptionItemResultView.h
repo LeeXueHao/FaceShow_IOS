@@ -10,5 +10,6 @@
 #import "QuestionRequestItem.h"
 
 @interface OptionItemResultView : UIView
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) QuestionRequestItem_voteItems *item;
 @end

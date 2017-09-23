@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSString *stepId;
 @property (nonatomic, strong) SaveUserCommentRequest *saveCommentRequest;
 @property (nonatomic, strong) LikeCommentRequest *likeRequest;
+@property (nonatomic, strong) NSString *currentTime;
+@property (nonatomic, strong) GetCourseCommentRequestItem *commentRequestItem;
 @end
 
 @implementation CourseCommentViewController
@@ -39,6 +41,7 @@
     WEAK_SELF
     [fetcher setFinishBlock:^(GetCourseCommentRequestItem *item){
         STRONG_SELF
+        self.commentRequestItem = item;
         if (!self.tableView.tableHeaderView) {
             NSString *title = item.data.title;
             CGFloat height = [CourseCommentTitleView heightForTitle:title];
@@ -131,6 +134,7 @@
         }
         self.inputView.textView.text = nil;
         [self.view nyx_showToast:@"提交成功"];
+        [self firstPageFetch];
     }];
 }
 
@@ -151,6 +155,7 @@
         [self.view nyx_showToast:@"提交成功"];
         LikeCommentRequestItem *item = (LikeCommentRequestItem *)retItem;
         element.likeNum = item.data.userNum;
+        element.userLiked = @"1";
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
@@ -160,6 +165,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CourseCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCommentCell"];
     cell.bottomLineHidden = indexPath.row==self.dataArray.count-1;
+    cell.currentTime = self.commentRequestItem.currentTime;
     cell.item = self.dataArray[indexPath.row];
     WEAK_SELF
     [cell setFavorBlock:^{
@@ -172,7 +178,7 @@
 #pragma mark - UITableViewDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CourseCommentHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CourseCommentHeaderView"];
-    header.countStr = [NSString stringWithFormat:@"%@",@(self.dataArray.count)];
+    header.countStr = self.commentRequestItem.data.totalElements;
     return header;
 }
 

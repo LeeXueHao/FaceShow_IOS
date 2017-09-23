@@ -59,6 +59,8 @@
     
     [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     self.editable = YES;
 }
 
@@ -104,7 +106,7 @@
     self.itemViewArray = [NSMutableArray array];
     __block UIView *preView = nil;
     [optionArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        OptionItemView *itemView = [self itemViewWithOption:obj];
+        OptionItemView *itemView = [self itemViewWithOption:obj index:idx];
         QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
         itemView.isMulti = type==QuestionType_MultiChoose;
         itemView.isSelected = ((NSNumber *)self.item.myAnswers[idx]).boolValue;
@@ -131,9 +133,11 @@
     }];
 }
 
-- (OptionItemView *)itemViewWithOption:(NSString *)option {
+- (OptionItemView *)itemViewWithOption:(NSString *)option index:(NSInteger)index{
+    char c = 'A' + index;
+    NSString *cString = [NSString stringWithFormat:@"%c. ", c];
     OptionItemView *itemView = [[OptionItemView alloc]init];
-    itemView.option = option;
+    itemView.option = [cString stringByAppendingString:option];
     WEAK_SELF
     [itemView setClickBlock:^(OptionItemView *view){
         STRONG_SELF

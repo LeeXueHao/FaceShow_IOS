@@ -83,6 +83,8 @@
     
     [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setupObserver {
@@ -120,9 +122,7 @@
 - (void)setItem:(QuestionRequestItem_question *)item {
     _item = item;
     self.stem = item.title;
-    if (item.userAnswer.questionAnswers.count > 0) {
-        self.comment = item.userAnswer.questionAnswers.firstObject;
-    }
+    self.comment = item.myAnswers.firstObject;
 }
 
 - (void)setStem:(NSString *)stem {
@@ -154,6 +154,18 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView {
     BLOCK_EXEC(self.endEdittingBlock);
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    BLOCK_EXEC(self.beginEdittingBlock);
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSString *finalString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (finalString.length > 250) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -58,6 +58,8 @@
     
     [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
@@ -98,7 +100,7 @@
     self.itemViewArray = [NSMutableArray array];
     __block UIView *preView = nil;
     [optionArray enumerateObjectsUsingBlock:^(QuestionRequestItem_voteItems *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        OptionItemResultView *itemView = [self itemViewWithOption:obj];
+        OptionItemResultView *itemView = [self itemViewWithOption:obj index:idx];
         [self.itemViewArray addObject:itemView];
         [self.contentView addSubview:itemView];
         if (idx == 0) {
@@ -121,8 +123,9 @@
     }];
 }
 
-- (OptionItemResultView *)itemViewWithOption:(QuestionRequestItem_voteItems *)option {
+- (OptionItemResultView *)itemViewWithOption:(QuestionRequestItem_voteItems *)option index:(NSInteger)index{
     OptionItemResultView *itemView = [[OptionItemResultView alloc]init];
+    itemView.index = index;
     itemView.item = option;
     return itemView;
 }

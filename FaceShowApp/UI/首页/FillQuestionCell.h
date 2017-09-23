@@ -15,4 +15,5 @@
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @property (nonatomic, strong) void(^textChangeBlock) (NSString *text);
 @property (nonatomic, strong) void(^endEdittingBlock) ();
+@property (nonatomic, strong) void(^beginEdittingBlock) ();
 @end

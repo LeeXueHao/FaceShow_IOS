@@ -68,10 +68,13 @@
 
 - (void)setItem:(QuestionRequestItem_voteItems *)item {
     _item = item;
+    char c = 'A' + self.index;
+    NSString *cString = [NSString stringWithFormat:@"%c. ", c];
+    NSString *option = [cString stringByAppendingString:item.itemName];
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
-    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:item.itemName attributes:dic];
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:option attributes:dic];
     self.optionLabel.attributedText = attributeStr;
     [self.resultView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.mas_equalTo(0);
