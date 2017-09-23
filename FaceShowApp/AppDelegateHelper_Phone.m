@@ -82,6 +82,7 @@
 #pragma mark -
 - (void)handleLoginSuccess {
     [self.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+    self.window.rootViewController.view.hidden = YES;
     self.window.rootViewController = [self mainViewController];
     [[UserMessageManager sharedInstance] resumeHeartbeat];
 }
