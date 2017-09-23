@@ -8,6 +8,8 @@
 
 #import <JSONModel/JSONModel.h>
 #import "GetUserInfoRequest.h"
+#import "GetCurrentClazsRequest.h"
+
 @interface UserModel : JSONModel
 @property (nonatomic, copy) NSString<Optional> *userID;
 @property (nonatomic, copy) NSString<Optional> *realName;
@@ -27,6 +29,8 @@
 
 @property (nonatomic, copy) NSString<Optional> *token;
 @property (nonatomic, copy) NSString<Optional> *passport;
+
+@property (nonatomic, strong) GetCurrentClazsRequestItem<Optional> *projectClassInfo;
 
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo;
 @end

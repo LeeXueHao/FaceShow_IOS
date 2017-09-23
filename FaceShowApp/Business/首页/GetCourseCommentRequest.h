@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSString<Optional> *callbackParam;
 @property (nonatomic, strong) NSString<Optional> *callbackValue;
 @property (nonatomic, strong) NSString<Optional> *totalElements;
+
+@property (nonatomic, strong) NSString<Ignore> *title;
 @end
 
 @interface GetCourseCommentRequestItem : HttpBaseRequestItem

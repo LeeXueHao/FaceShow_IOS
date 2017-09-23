@@ -33,7 +33,6 @@
 
 - (void)comment {
     CourseCommentViewController *vc = [[CourseCommentViewController alloc]init];
-    vc.questionTitle = @"请讨论这个问题";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

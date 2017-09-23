@@ -85,6 +85,7 @@
 		7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E20E1F7398AA00A6921B /* SaveUserCommentRequest.m */; };
 		7C24E2121F739EA500A6921B /* LikeCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2111F739EA500A6921B /* LikeCommentRequest.m */; };
 		7C24E2141F739F8A00A6921B /* LikeCommentRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */; };
+		7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2191F75F91F00A6921B /* GetCourseCommentTitleRequest.m */; };
 		7C2518AC1F68E5C70001B577 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AB1F68E5C70001B577 /* main.m */; };
 		7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AE1F68E5C70001B577 /* AppDelegate.m */; };
 		7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518B61F68E5C70001B577 /* Assets.xcassets */; };
@@ -350,6 +351,8 @@
 		7C24E2101F739EA500A6921B /* LikeCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeCommentRequest.h; sourceTree = "<group>"; };
 		7C24E2111F739EA500A6921B /* LikeCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeCommentRequest.m; sourceTree = "<group>"; };
 		7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LikeCommentRequest_mock.json; sourceTree = "<group>"; };
+		7C24E2181F75F91F00A6921B /* GetCourseCommentTitleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCourseCommentTitleRequest.h; sourceTree = "<group>"; };
+		7C24E2191F75F91F00A6921B /* GetCourseCommentTitleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCourseCommentTitleRequest.m; sourceTree = "<group>"; };
 		7C2518A71F68E5C70001B577 /* 研修宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "研修宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1052,6 +1055,8 @@
 				7C24E2021F736B6A00A6921B /* GetCourseCommentRequest_mock.json */,
 				7C24E2041F736BF400A6921B /* CourseCommentDataFetcher.h */,
 				7C24E2051F736BF400A6921B /* CourseCommentDataFetcher.m */,
+				7C24E2181F75F91F00A6921B /* GetCourseCommentTitleRequest.h */,
+				7C24E2191F75F91F00A6921B /* GetCourseCommentTitleRequest.m */,
 				7C24E2071F7390E200A6921B /* SaveUserVoteRequest.h */,
 				7C24E2081F7390E200A6921B /* SaveUserVoteRequest.m */,
 				7C24E20A1F7390FE00A6921B /* SaveUserQuestionnaireRequest.h */,
@@ -1579,6 +1584,7 @@
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
+				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
 				7C2519431F68EB780001B577 /* ExtendTextField.m in Sources */,
 				7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */,

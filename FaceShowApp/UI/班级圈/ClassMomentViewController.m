@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     ClassMomentListFetcher *fetcher = [[ClassMomentListFetcher alloc] init];
     fetcher.pagesize = 20;
-    fetcher.clazsId = @"7";
+    fetcher.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     self.dataFetcher = fetcher;
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];

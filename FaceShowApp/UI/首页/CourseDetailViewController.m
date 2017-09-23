@@ -195,7 +195,6 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (type == InteractType_Comment) {
             CourseCommentViewController *vc = [[CourseCommentViewController alloc]initWithStepId:info.stepId];
-            vc.questionTitle = info.interactName;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

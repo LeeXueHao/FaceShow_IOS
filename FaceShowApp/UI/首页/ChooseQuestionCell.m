@@ -59,6 +59,7 @@
     
     [self.indexLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    self.editable = YES;
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {

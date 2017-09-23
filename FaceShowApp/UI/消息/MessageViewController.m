@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     NoticeListFetcher *fetcher = [[NoticeListFetcher alloc] init];
-    fetcher.clazzId = @"1";
+    fetcher.clazzId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];

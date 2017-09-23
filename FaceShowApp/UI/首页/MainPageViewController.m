@@ -79,14 +79,53 @@
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 
+//- (void)requestProjectClassInfo {
+//    [self.request stopRequest];
+//    self.request = [[GetCurrentClazsRequest alloc]init];
+//    [self.view nyx_startLoading];
+//    WEAK_SELF
+//    [self.request startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+//        STRONG_SELF
+//        [self.view nyx_stopLoading];
+//        self.errorView.hidden = YES;
+//        self.emptyView.hidden = YES;
+//        if (error) {
+//            self.errorView.hidden = NO;
+//            return;
+//        }
+//        GetCurrentClazsRequestItem *item = (GetCurrentClazsRequestItem *)retItem;
+//        if (!item.data.projectInfo) {
+//            self.emptyView.hidden = NO;
+//            return;
+//        }
+//        self.requestItem = item;
+//        [self setupUI];
+//    }];
+//}
+
+// 先这么搞一下，下版流程优化的时候再说
 - (void)requestProjectClassInfo {
+    if ([UserManager sharedInstance].userModel.projectClassInfo) {
+        self.requestItem = [UserManager sharedInstance].userModel.projectClassInfo;
+        [self setupUI];
+        return;
+    }
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    [window addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     [self.request stopRequest];
     self.request = [[GetCurrentClazsRequest alloc]init];
-    [self.view nyx_startLoading];
+    [window nyx_startLoading];
     WEAK_SELF
     [self.request startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self.view nyx_stopLoading];
+        [window nyx_stopLoading];
         self.errorView.hidden = YES;
         self.emptyView.hidden = YES;
         if (error) {
@@ -98,6 +137,8 @@
             self.emptyView.hidden = NO;
             return;
         }
+        [UserManager sharedInstance].userModel.projectClassInfo = item;
+        [[UserManager sharedInstance] saveData];
         self.requestItem = item;
         [self setupUI];
     }];

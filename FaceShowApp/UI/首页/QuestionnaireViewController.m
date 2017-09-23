@@ -226,6 +226,10 @@
     if (type==QuestionType_SingleChoose || type==QuestionType_MultiChoose) {
         ChooseQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChooseQuestionCell"];
         cell.index = indexPath.row+1;
+        if (self.requestItem.data.isAnswer.boolValue) {
+            cell.userInteractionEnabled = NO;
+            cell.editable = NO;
+        }
         cell.item = question;
         cell.bottomLineHidden = indexPath.row==self.requestItem.data.questionGroup.questions.count;
         WEAK_SELF
@@ -233,10 +237,6 @@
             STRONG_SELF
             [self refreshSubmitButton];
         }];
-        if (self.requestItem.data.isAnswer.boolValue) {
-            cell.userInteractionEnabled = NO;
-            cell.editable = NO;
-        }
         return cell;
     }
     if (type == QuestionType_Fill) {

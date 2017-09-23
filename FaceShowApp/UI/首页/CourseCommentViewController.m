@@ -39,6 +39,13 @@
     WEAK_SELF
     [fetcher setFinishBlock:^(GetCourseCommentRequestItem *item){
         STRONG_SELF
+        if (!self.tableView.tableHeaderView) {
+            NSString *title = item.data.title;
+            CGFloat height = [CourseCommentTitleView heightForTitle:title];
+            CourseCommentTitleView *headerView = [[CourseCommentTitleView alloc]initWithFrame:CGRectMake(0, 0, 100, height)];
+            headerView.title = title;
+            self.tableView.tableHeaderView = headerView;
+        }
         if (item.data.elements.count > 0) {
             return;
         }
@@ -63,12 +70,7 @@
 }
 
 - (void)setupUI {
-    NSString *title = self.questionTitle;
-    CGFloat height = [CourseCommentTitleView heightForTitle:title];
-    CourseCommentTitleView *headerView = [[CourseCommentTitleView alloc]initWithFrame:CGRectMake(0, 0, 100, height)];
-    headerView.title = title;
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    self.tableView.tableHeaderView = headerView;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
