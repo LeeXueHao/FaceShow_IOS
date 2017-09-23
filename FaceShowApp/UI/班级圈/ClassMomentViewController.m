@@ -144,6 +144,7 @@
 }
 - (void)stopAnimation {
     [super stopAnimation];
+    [self.headerView reload];
     self.headerView.hidden = NO;
 }
 - (void)showAlertView {

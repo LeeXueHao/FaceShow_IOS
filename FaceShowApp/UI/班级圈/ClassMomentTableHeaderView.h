@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ClassMomentTableHeaderView : UIView
-
+- (void)reload;
 @end
