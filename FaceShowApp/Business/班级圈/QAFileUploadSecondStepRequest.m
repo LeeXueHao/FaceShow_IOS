@@ -36,8 +36,8 @@
     NSMutableDictionary *cp2 = [NSMutableDictionary dictionary];
     [cp2 setObject:@"passport" forKey:NSHTTPCookieName];
 #warning 测试
-    NSString *name = @"18910037053";
-//    NSString *name = [UserManager sharedInstance].userModel.passport; // [UserManager sharedInstance].userModel.name;
+//    NSString *name = @"18910037053";
+    NSString *name = [UserManager sharedInstance].userModel.passport;
     [cp2 setObject:name forKey:NSHTTPCookieValue];
     [cp2 setObject:@"newupload.yanxiu.com" forKey:NSHTTPCookieDomain];
     [cp2 setObject:@"/" forKey:NSHTTPCookiePath];
@@ -55,6 +55,41 @@
 
     self.reserve = reserve;
     [super startRequestWithRetClass:retClass andCompleteBlock:completeBlock];
+}
+- (NSString *)typeForImageData:(NSData *)data {
+    
+    
+    
+    uint8_t c;
+    
+    [data getBytes:&c length:1];
+    
+    
+    
+    switch (c) {
+            
+        case 0xFF:
+            
+            return @"image/jpeg";
+            
+        case 0x89:
+            
+            return @"image/png";
+            
+        case 0x47:
+            
+            return @"image/gif";
+            
+        case 0x49:
+            
+        case 0x4D:
+            
+            return @"image/tiff";
+            
+    }
+    
+    return nil;
+    
 }
 
 @end

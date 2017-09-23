@@ -321,6 +321,10 @@
         STRONG_SELF
         [self.view nyx_stopLoading];
         ClassMomentClickLikeRequestItem *item = retItem;
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
         if (item.data != nil) {
             if (moment.likes.count == 0) {
                 NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like> *mutableArray = [[NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like> alloc] init];
@@ -348,6 +352,10 @@
         STRONG_SELF
         [self.view nyx_stopLoading];
         ClassMomentCommentRequestItem *item = retItem;
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
         if (item.data != nil) {
             item.data.content = content;
             if (moment.comments.count == 0) {

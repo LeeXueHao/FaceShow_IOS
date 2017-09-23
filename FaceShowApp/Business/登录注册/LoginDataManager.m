@@ -53,9 +53,7 @@
                 return;
             }
             GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
-            UserModel *model = [UserModel modelFromUserInfo:userInfo.data];
-            model.token = item.token;
-            [UserManager sharedInstance].userModel = model;
+            [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
             BLOCK_EXEC(completeBlock, nil);
         }];
     }];

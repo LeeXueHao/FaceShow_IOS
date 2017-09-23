@@ -202,8 +202,10 @@
 }
 #pragma mark - request
 - (void)requestForUploadImage{
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
+    NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[UserManager sharedInstance].userModel.userID, (int)interval];
     WEAK_SELF
-    [QADataManager uploadFile:self.imageArray[0] fileName:@"发布" completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+    [QADataManager uploadFile:self.imageArray[0] fileName:fileName completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
         STRONG_SELF
          if (item.result.resid == nil){
             [self.view nyx_showToast:@"发布失败请重试"];

@@ -117,8 +117,8 @@
     NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
     [albums enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Album *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-        model.thumbnail = obj.attachment.resThumb?:@"http://scc.jsyxw.cn/course/89/8489.jpg";
-        model.original = obj.attachment.resThumb?:@"http://scc.jsyxw.cn/course/89/8489.jpg";
+        model.thumbnail = obj.attachment.resThumb;
+        model.original = obj.attachment.resThumb;
         [mutableArray addObject:model];
 #warning 暂时只显示一张图片
         if (idx == 0) {
@@ -131,7 +131,9 @@
         [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.photosView.mas_bottom).offset(10.0f);
         }];
+        self.photosView.hidden = YES;
     }else {
+        self.photosView.hidden = NO;
         [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.photosView.mas_bottom).offset(20.0f);
         }];
@@ -163,6 +165,8 @@
     
     self.photosView = [[PreviewPhotosView alloc] init];
     self.photosView.widthFloat = SCREEN_WIDTH - 15.0f - 60.0f - 10.0f - 15.0f;
+    self.photosView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
+
     [self.contentView addSubview:self.photosView];
     
     
