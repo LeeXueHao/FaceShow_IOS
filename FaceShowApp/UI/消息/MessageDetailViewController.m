@@ -63,6 +63,7 @@
             self.errorView.hidden = NO;
             return;
         }
+        self.errorView.hidden = YES;
         [[UserMessageManager sharedInstance] fetchUserMessage];
         GetNoticeDetailRequestItem *item = (GetNoticeDetailRequestItem *)retItem;
         self.data = item.data;

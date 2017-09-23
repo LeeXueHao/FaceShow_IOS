@@ -160,6 +160,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         GetCourseRequestItem_LecturerInfo *info = self.dataArray[0][indexPath.row];
         ProfessorDetailViewController *professorDetailVC = [[ProfessorDetailViewController alloc] init];

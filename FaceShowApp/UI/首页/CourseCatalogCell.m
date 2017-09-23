@@ -24,9 +24,7 @@
     return self;
 }
 
-- (void)setupUI {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+- (void)setupUI {    
     self.iconImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {

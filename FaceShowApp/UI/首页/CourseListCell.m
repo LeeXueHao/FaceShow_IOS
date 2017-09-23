@@ -110,9 +110,23 @@
     _item = item;
     self.titleLabel.text = item.courseName;
     self.timeLabel.text = [item.startTime omitSecondOfFullDateString];
-    self.teacherLabel.text = item.lecturer;
-    self.placeLabel.text = item.site;
+    self.teacherLabel.text = [self lecturesName];
+    self.placeLabel.text = isEmpty(item.site) ? @"待定" : item.site;
 }
 
+- (NSString *)lecturesName {
+    if (isEmpty(self.item.lecturerInfos)) {
+        return @"暂无";
+    } else {
+        NSMutableString *lecturesName = [NSMutableString string];
+        for (GetCourseListRequestItem_LecturerInfo *info in self.item.lecturerInfos) {
+            if (!isEmpty(lecturesName)) {
+                [lecturesName appendString:@","];
+            }
+            [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
+        }
+        return lecturesName;
+    }
+}
 
 @end

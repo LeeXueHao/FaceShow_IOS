@@ -231,12 +231,12 @@
     self.courseTitleLabel.attributedText = attributedStr;
     self.timeLabel.text = [course.startTime omitSecondOfFullDateString];
     self.authorLabel.text = [self lecturesName];
-    self.addressLabel.text = isEmpty(course.site) ? @"无" : course.site;
+    self.addressLabel.text = isEmpty(course.site) ? @"待定" : course.site;
     
     style = [[NSMutableParagraphStyle alloc] init];
     style.lineBreakMode = NSLineBreakByTruncatingTail;
     style.minimumLineHeight = 21;
-    attributedStr = [[NSMutableAttributedString alloc] initWithString:course.briefing attributes:@{
+    attributedStr = [[NSMutableAttributedString alloc] initWithString:isEmpty(course.briefing) ? @"暂无" : course.briefing attributes:@{
                                                                                       NSFontAttributeName : [UIFont systemFontOfSize:14],
                                                                                       NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
                                                                                       NSParagraphStyleAttributeName : style
@@ -245,7 +245,9 @@
 }
 
 - (NSString *)lecturesName {
-    if (!isEmpty(self.course.lecturerInfos)) {
+    if (isEmpty(self.course.lecturerInfos)) {
+        return @"暂无";
+    } else {
         NSMutableString *lecturesName = [NSMutableString string];
         for (GetCourseRequestItem_LecturerInfo *info in self.course.lecturerInfos) {
             if (!isEmpty(lecturesName)) {
@@ -254,8 +256,6 @@
             [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
         }
         return lecturesName;
-    } else {
-        return @"无";
     }
 }
 

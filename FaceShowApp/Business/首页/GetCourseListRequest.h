@@ -8,6 +8,14 @@
 
 #import "YXGetRequest.h"
 
+@protocol GetCourseListRequestItem_LecturerInfo <NSObject>
+@end
+@interface GetCourseListRequestItem_LecturerInfo : JSONModel
+@property (nonatomic, strong) NSString<Optional> *lecturerName;
+@property (nonatomic, strong) NSString<Optional> *lecturerBriefing;
+@property (nonatomic, strong) NSString<Optional> *lecturerAvatar;
+@end
+
 @protocol GetCourseListRequestItem_coursesList <NSObject>
 @end
 @interface GetCourseListRequestItem_coursesList : JSONModel
@@ -20,6 +28,7 @@
 @property (nonatomic, strong) NSString<Optional> *endTime;
 @property (nonatomic, strong) NSString<Optional> *courseStatus;
 @property (nonatomic, strong) NSString<Optional> *lecturer;
+@property (nonatomic, strong) NSArray<GetCourseListRequestItem_LecturerInfo,  Optional> *lecturerInfos;
 @end
 
 @protocol GetCourseListRequestItem_courses <NSObject>

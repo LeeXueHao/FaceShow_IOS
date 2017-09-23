@@ -109,6 +109,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GetTaskRequestItem_Task *task = self.dataArray[indexPath.row];
     InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
     if (type == InteractType_Vote) {

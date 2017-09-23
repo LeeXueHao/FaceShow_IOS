@@ -109,15 +109,9 @@
         }];
     }
     if (!isEmpty(self.error)) {
-        if (self.error.code == 210413) {
-            self.blackLabel.text = @"签到已结束";
-        } else if (self.error.code == 2104132) {
-            self.blackLabel.text = @"签到未开始";
-        } else {
-            self.blackLabel.text = @"签到失败";
-        }
         self.signInImageView.image = [UIImage imageNamed:@"签到失败图标"];
         self.titleLabel.text = @"签到失败";
+        self.blackLabel.text = self.error.localizedDescription;
         self.grayLabel.text = @"请扫描最新二维码";
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);

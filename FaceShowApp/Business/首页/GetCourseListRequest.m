@@ -8,6 +8,9 @@
 
 #import "GetCourseListRequest.h"
 
+@implementation GetCourseListRequestItem_LecturerInfo
+@end
+
 @implementation GetCourseListRequestItem_coursesList
 + (JSONKeyMapper *)keyMapper{
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"courseId"}];
