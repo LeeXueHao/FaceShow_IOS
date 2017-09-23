@@ -30,7 +30,7 @@
         }
         GetNoticeListRequestItem *item = (GetNoticeListRequestItem *)retItem;
         self.lastID += item.data.elements.count;
-        BLOCK_EXEC(aCompleteBlock, item.data.totalElements.integerValue, item.data.elements, nil)
+        BLOCK_EXEC(aCompleteBlock, item.data.totalElements.intValue, item.data.elements, nil)
     }];
 }
 @end

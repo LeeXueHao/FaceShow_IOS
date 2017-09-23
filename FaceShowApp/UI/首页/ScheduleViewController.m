@@ -52,7 +52,7 @@
             return;
         }
         GetScheduleListRequestItem *item = (GetScheduleListRequestItem *)retItem;
-        if (isEmpty(item.data.schedules)) {
+        if (isEmpty(item.data.schedules.elements)) {
             self.emptyView.hidden = NO;
             return;
         }

@@ -50,7 +50,6 @@
     messageVC.title = @"通知";
     [self configTabbarItem:messageVC.tabBarItem image:@"通知icon" selectedImage:@"通知icon选择"];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
-    [UserMessageManager sharedInstance].messageItem = messageNavi.tabBarItem;
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];
     classVC.title = @"班级圈";
@@ -63,6 +62,13 @@
     FSNavigationController *mineNavi = [[FSNavigationController alloc] initWithRootViewController:mineVC];
     
     tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, mineNavi];
+    
+    UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8, 4, 12, 12)];
+    redPointView.layer.cornerRadius = 6;
+    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    [tabBarController.tabBar addSubview:redPointView];
+    [tabBarController.tabBar bringSubviewToFront:redPointView];
+    [UserMessageManager sharedInstance].redPointView = redPointView;
     return tabBarController;
 }
 

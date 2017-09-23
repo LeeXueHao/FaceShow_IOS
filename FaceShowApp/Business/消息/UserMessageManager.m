@@ -35,7 +35,7 @@
             return;
         }
         MessageHasUnViewRequestItem *item = (MessageHasUnViewRequestItem *)retItem;
-        self.messageItem.badgeValue = item.data.hasUnView ? @"" : nil;
+        self.redPointView.hidden = !item.data.hasUnView;
     }];
 }
 

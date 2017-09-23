@@ -10,7 +10,7 @@
 
 @interface UserMessageManager : NSObject
 
-@property (nonatomic, strong) UITabBarItem *messageItem;
+@property (nonatomic, strong) UIView *redPointView;
 
 + (UserMessageManager *)sharedInstance;
 
