@@ -41,7 +41,7 @@
     WEAK_SELF
     [self.request stopRequest];
     self.request = [[GetTaskRequest alloc] init];
-    self.request.clazsId = @"1";
+    self.request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     [self.request startRequestWithRetClass:[GetTaskRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self.view nyx_stopLoading];
