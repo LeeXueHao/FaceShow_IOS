@@ -132,8 +132,8 @@
     [self.contentView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
-        make.centerY.mas_equalTo(self.usernameTF.mas_top).multipliedBy(.456f);
-        make.size.mas_equalTo(CGSizeMake(90, 145));
+        make.centerY.mas_equalTo(self.usernameTF.mas_top).multipliedBy(.37f);
+        make.size.mas_equalTo(CGSizeMake(175, 75));
     }];
     
     UIButton *touristBtn = [UIButton buttonWithType:UIButtonTypeCustom];
