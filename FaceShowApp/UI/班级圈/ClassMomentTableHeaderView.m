@@ -72,7 +72,7 @@
 }
 
 - (void)reload {
-    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"默认头像"]];
+    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"]];
     self.nameLabel.text = [UserManager sharedInstance].userModel.realName?:@"暂无";
 }
 
