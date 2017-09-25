@@ -108,9 +108,6 @@
         make.edges.mas_equalTo(0);
     }];
     self.tableView.hidden = YES;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
 
     UIView *backView = [[UIView alloc]init];
     [self.view addSubview:backView];

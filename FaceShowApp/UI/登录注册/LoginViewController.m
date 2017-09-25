@@ -38,9 +38,6 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.scrollView.bounces = NO;
-    if (@available(iOS 11.0, *)) {
-        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"登录背景"]];
     backgroundImageView.userInteractionEnabled = YES;
     [self.contentView addSubview:backgroundImageView];
