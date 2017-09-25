@@ -78,7 +78,7 @@
     self.tableView.estimatedRowHeight = 100;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     [self.tableView registerClass:[CourseCommentCell class] forCellReuseIdentifier:@"CourseCommentCell"];
     [self.tableView registerClass:[CourseCommentHeaderView class] forHeaderFooterViewReuseIdentifier:@"CourseCommentHeaderView"];
     
@@ -91,7 +91,7 @@
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(0);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(44);
     }];
 }
 
@@ -105,12 +105,14 @@
         CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
-            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y+self.inputView.height, 0);
-            
+//            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y+self.inputView.height, 0);
+            CGFloat inputHieght = [UIScreen mainScreen].bounds.size.height==keyboardFrame.origin.y? 44:100;
             [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                make.height.mas_equalTo(inputHieght);
             }];
             [self.view layoutIfNeeded];
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y+inputHieght, 0);
         }];
     }];
 }

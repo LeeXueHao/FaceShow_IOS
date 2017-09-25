@@ -48,7 +48,7 @@
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"666666"] range:NSMakeRange(0, placeholderStr.length)];
     [attrStr addAttribute:NSFontAttributeName value:self.textView.font range:NSMakeRange(0, placeholderStr.length)];
     self.textView.attributedPlaceholder = attrStr;
-    self.textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.textView.textContainerInset = UIEdgeInsetsMake(8, 8, 8, 8);
     self.textView.layer.cornerRadius = 6;
     self.textView.layer.borderColor = [UIColor colorWithHexString:@"dddddd"].CGColor;
     self.textView.layer.borderWidth = 1;
@@ -56,10 +56,10 @@
     self.textView.clipsToBounds = YES;
     [self addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(25);
-        make.right.mas_equalTo(-25);
-        make.top.mas_equalTo(15);
-        make.bottom.mas_equalTo(-15);
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(5);
+        make.bottom.mas_equalTo(-5);
     }];
 }
 
