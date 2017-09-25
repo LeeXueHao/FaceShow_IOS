@@ -94,7 +94,8 @@
 - (void)refreshUIWithItem:(QuestionRequestItem *)item {
     self.requestItem = item;
     [self.tableView reloadData];
-    self.submitButton.enabled = NO;
+    [self.submitButton setTitleColor:[UIColor colorWithHexString:@"e2e2e2"] forState:UIControlStateNormal];
+    [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateNormal];
     if (!item.data.isAnswer.boolValue) {
         self.submitButton.hidden = NO;
     }
@@ -165,6 +166,10 @@
 }
 
 - (void)submitAction {
+    if (![self allAnswered]) {
+        [self.view nyx_showToast:@"请您填写完整"];
+        return;
+    }
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提交后内容不可修改，是否继续提交？" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *submit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self goSubmit];
@@ -213,7 +218,7 @@
             }
             [self.view.window nyx_showToast:@"提交成功"];
             BLOCK_EXEC(self.completeBlock);
-            QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:self.stepId];
+            QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:self.stepId interactType:self.interactType];
             vc.name = self.name;
             [self.navigationController pushViewController:vc animated:YES];
         }];
@@ -221,6 +226,17 @@
 }
 
 - (void)refreshSubmitButton {
+    BOOL allAnswered = [self allAnswered];
+    if (allAnswered) {
+        [self.submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateNormal];
+    }else {
+        [self.submitButton setTitleColor:[UIColor colorWithHexString:@"e2e2e2"] forState:UIControlStateNormal];
+        [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateNormal];
+    }
+}
+
+- (BOOL)allAnswered {
     BOOL allAnswered = YES;
     for (QuestionRequestItem_question *question in self.requestItem.data.questionGroup.questions) {
         if (![question hasAnswer]) {
@@ -228,7 +244,7 @@
             break;
         }
     }
-    self.submitButton.enabled = allAnswered;
+    return allAnswered;
 }
 
 #pragma mark - UITableViewDataSource
