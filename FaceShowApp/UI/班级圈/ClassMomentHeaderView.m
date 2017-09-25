@@ -42,7 +42,7 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:_moment.content?:@"" attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
+    NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:_moment.content?:@"\n" attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
     self.contentLabel.attributedText = attributedString;
     if ([self sizeForTitle:_moment.content?:@""] >= 85.0f) {
         if (!_moment.isOpen.boolValue) {
@@ -70,6 +70,8 @@
             make.left.equalTo(self.nameLabel.mas_left);
             make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+            make.height.mas_greaterThanOrEqualTo(14.0f);
+
         }];
         [self.openCloseButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_offset(0.00001f);
@@ -83,7 +85,7 @@
             make.top.equalTo(self.commentButton.mas_bottom).offset(10.0f);
             make.left.equalTo(self.nameLabel.mas_left);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-            make.bottom.equalTo(self.contentView.mas_bottom);
+            make.bottom.equalTo(self.contentView.mas_bottom).priorityHigh();
         }];
     }else if (_moment.likes.count != 0 && _moment.comments.count != 0) {
         [self.likeView reloadLikes:_moment.likes withType:ClassMomentLikeType_Double];
@@ -91,7 +93,7 @@
             make.top.equalTo(self.commentButton.mas_bottom);
             make.left.equalTo(self.nameLabel.mas_left);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-            make.bottom.equalTo(self.contentView.mas_bottom);
+            make.bottom.equalTo(self.contentView.mas_bottom).priorityHigh();
         }];
 
     }else if (_moment.likes.count != 0) {
@@ -100,7 +102,7 @@
             make.top.equalTo(self.commentButton.mas_bottom);
             make.left.equalTo(self.nameLabel.mas_left);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-            make.bottom.equalTo(self.contentView.mas_bottom);
+            make.bottom.equalTo(self.contentView.mas_bottom).priorityHigh();
         }];
         
     }else {
@@ -109,7 +111,7 @@
             make.top.equalTo(self.commentButton.mas_bottom);
             make.left.equalTo(self.nameLabel.mas_left);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-            make.bottom.equalTo(self.contentView.mas_bottom);
+            make.bottom.equalTo(self.contentView.mas_bottom).priorityHigh();
         }];
     } 
 }

@@ -286,11 +286,7 @@
     ClassMomentFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentFooterView"];
     return footerView;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return [tableView yx_heightForHeaderWithIdentifier:@"ClassMomentHeaderView" configuration:^(ClassMomentHeaderView *headerView) {
-        headerView.moment = self.dataArray[section];
-    }];
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 16.0f;
 }
@@ -304,6 +300,73 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hiddenInputTextView];
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return [self tableHeightForHeaderInSection:section];
+}
+- (CGFloat)tableHeightForHeaderInSection:(NSInteger)section {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    CGFloat photoHeight = (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f) * 348.0f/590.0f;
+    CGFloat contentHeight = [self sizeForTitle:moment.content?:@""];
+    CGFloat height = 15.0f + 6.0f + 14.0f + 8.0f;
+    if (contentHeight >= 85.0f) {
+        if (!moment.isOpen.boolValue) {
+            height += 85.0f;
+        }else {
+            height += contentHeight;
+        }
+        height += 14.0 + 10.0f;
+    }else {
+        height += contentHeight + 1.0f;
+    }
+    if (moment.albums.count > 0) {
+        height += photoHeight + 10.0f;
+    }
+    height = height + 10.0f + 30.0f;
+    if (moment.likes.count == 0 && moment.comments.count == 0) {
+        height = height + 5.0f;
+        
+    }else if (moment.likes.count != 0 && moment.comments.count != 0) {
+        NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
+        [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [mutableArrray addObject:obj.publisher.realName?:@""];
+        }];
+        height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
+        
+    }else if (moment.likes.count != 0) {
+        NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
+        [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [mutableArrray addObject:obj.publisher.realName?:@""];
+        }];
+        height = height + 7.0f + 7.0f + 10.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f;
+    }else {
+        NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
+        [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [mutableArrray addObject:obj.publisher.realName?:@""];
+        }];
+        height = height + 7.0f + 10.0f + 10.0f;
+    }
+    return ceil(height);
+}
+- (CGFloat)sizeForLikes:(NSString *)title {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineHeightMultiple = 1.2f;
+    CGRect rect = [title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 8.0f - 12.0f - 6.0f - 25.0f, 999)
+                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                   attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                                NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
+    return rect.size.height;
+}
+
+- (CGFloat)sizeForTitle:(NSString *)title {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineHeightMultiple = 1.2f;
+    CGRect rect = [title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f, 1999)
+                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                   attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                                NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
+    return rect.size.height;
+}
+
 
 #pragma mark - request
 - (void)requestForClickLike:(NSInteger)section {
@@ -311,7 +374,7 @@
     ClassMomentClickLikeRequest *request = [[ClassMomentClickLikeRequest alloc] init];
     request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.momentId = moment.momentID;
-    [self.view nyx_startLoading];
+//    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentClickLikeRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -342,7 +405,7 @@
     request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.momentId = moment.momentID;
     request.content = content;
-    [self.view nyx_startLoading];
+//    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentCommentRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
