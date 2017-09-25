@@ -198,7 +198,6 @@
     [self.contentView addSubview:self.openCloseButton];
     [[self.openCloseButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        NSLog(@"2324");
         BLOCK_EXEC(self.classMomentOpenCloseBlock,self.openCloseButton.selected);
     }];
     
@@ -261,7 +260,7 @@
 - (CGFloat)sizeForTitle:(NSString *)title {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;
-    CGRect rect = [title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f, 999)
+    CGRect rect = [title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f, 1999)
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],
                                                 NSParagraphStyleAttributeName :paragraphStyle} context:NULL];

@@ -240,11 +240,21 @@
     };
     headerView.classMomentOpenCloseBlock = ^(BOOL isOpen) {
         STRONG_SELF
-        NSLog(@"123");
         moment.isOpen = [NSString stringWithFormat:@"%@",@(!isOpen)];
+//        [tableView beginUpdates];
 //        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:section];
 //        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+//        [tableView endUpdates];
+        
+//        [tableView beginUpdates];
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
+//        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//        [tableView endUpdates];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
         [self.tableView reloadData];
+
     };
     return headerView;
 }

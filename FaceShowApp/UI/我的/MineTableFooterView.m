@@ -23,6 +23,8 @@
     self.logoutButton.backgroundColor = [UIColor whiteColor];
     [self.logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [self.logoutButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+    [self.logoutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self.logoutButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"2AA3EF"]] forState:UIControlStateHighlighted];
     self.logoutButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     [self addSubview:self.logoutButton];
 }
