@@ -23,6 +23,7 @@
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CourseDetailHeaderView *headerView;
+@property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) GetCourseRequest *request;
 @property (nonatomic, strong) GetCourseRequestItem_Data *data;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *dataArray;
@@ -108,15 +109,21 @@
     }];
     self.tableView.hidden = YES;
 
+    UIView *backView = [[UIView alloc]init];
+    [self.view addSubview:backView];
+    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(64);
+    }];
+    self.backView = backView;
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"返回页面按钮正常态-"] forState:UIControlStateNormal];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"返回页面按钮点击态"] forState:UIControlStateHighlighted];
     [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backBtn];
-    [self.view bringSubviewToFront:backBtn];
+    [backView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(5);
-        make.centerY.mas_equalTo(self.view.mas_top).offset(42);
+        make.centerY.mas_equalTo(10);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
 }
@@ -199,6 +206,12 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetY = MAX(scrollView.contentOffset.y, 0);
+    offsetY = MIN(offsetY, 135-64);
+    self.backView.backgroundColor = [[UIColor colorWithHexString:@"1da1f2"]colorWithAlphaComponent:offsetY/(135-64)];
 }
 
 @end
