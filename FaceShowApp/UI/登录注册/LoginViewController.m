@@ -186,7 +186,7 @@
 - (void)touristBtnAction:(UIButton *)sender {
     [self.view nyx_startLoading];
     WEAK_SELF
-    [LoginDataManager loginWithName:@"13708163659" password:@"123456" completeBlock:^(NSError *error) {
+    [LoginDataManager loginWithName:@"13708163665" password:@"123456" completeBlock:^(NSError *error) {
         STRONG_SELF
         [self.view nyx_stopLoading];
         if (error) {

@@ -35,8 +35,6 @@
     
     NSMutableDictionary *cp2 = [NSMutableDictionary dictionary];
     [cp2 setObject:@"passport" forKey:NSHTTPCookieName];
-#warning 测试
-//    NSString *name = @"18910037053";
     NSString *name = [UserManager sharedInstance].userModel.passport;
     [cp2 setObject:name forKey:NSHTTPCookieValue];
     [cp2 setObject:@"newupload.yanxiu.com" forKey:NSHTTPCookieDomain];
