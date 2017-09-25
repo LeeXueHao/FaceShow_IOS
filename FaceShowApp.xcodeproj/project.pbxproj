@@ -87,6 +87,7 @@
 		7C24E2121F739EA500A6921B /* LikeCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2111F739EA500A6921B /* LikeCommentRequest.m */; };
 		7C24E2141F739F8A00A6921B /* LikeCommentRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */; };
 		7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E2191F75F91F00A6921B /* GetCourseCommentTitleRequest.m */; };
+		7C24E21D1F78F25000A6921B /* QuestionnaireHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C24E21C1F78F25000A6921B /* QuestionnaireHeaderView.m */; };
 		7C2518AC1F68E5C70001B577 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AB1F68E5C70001B577 /* main.m */; };
 		7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518AE1F68E5C70001B577 /* AppDelegate.m */; };
 		7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518B61F68E5C70001B577 /* Assets.xcassets */; };
@@ -355,6 +356,8 @@
 		7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LikeCommentRequest_mock.json; sourceTree = "<group>"; };
 		7C24E2181F75F91F00A6921B /* GetCourseCommentTitleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCourseCommentTitleRequest.h; sourceTree = "<group>"; };
 		7C24E2191F75F91F00A6921B /* GetCourseCommentTitleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCourseCommentTitleRequest.m; sourceTree = "<group>"; };
+		7C24E21B1F78F25000A6921B /* QuestionnaireHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionnaireHeaderView.h; sourceTree = "<group>"; };
+		7C24E21C1F78F25000A6921B /* QuestionnaireHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionnaireHeaderView.m; sourceTree = "<group>"; };
 		7C2518A71F68E5C70001B577 /* 研修宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "研修宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -676,6 +679,8 @@
 				7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */,
 				7C212DB61F6A51A70007AE01 /* FillQuestionCell.h */,
 				7C212DB71F6A51A70007AE01 /* FillQuestionCell.m */,
+				7C24E21B1F78F25000A6921B /* QuestionnaireHeaderView.h */,
+				7C24E21C1F78F25000A6921B /* QuestionnaireHeaderView.m */,
 			);
 			name = "问卷";
 			sourceTree = "<group>";
@@ -1579,6 +1584,7 @@
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
 				4376E7471F712DE9003E2057 /* QADataManager.m in Sources */,
+				7C24E21D1F78F25000A6921B /* QuestionnaireHeaderView.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,

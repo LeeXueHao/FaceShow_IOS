@@ -14,6 +14,7 @@
 #import "ErrorView.h"
 #import "FSDataMappingTable.h"
 #import "QuestionnaireViewController.h"
+#import "QuestionnaireHeaderView.h"
 
 @interface QuestionnaireResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -35,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = self.name;
+    self.navigationItem.title = @"投票";
     [self setupUI];
     [self requestVoteInfo];
 }
@@ -75,8 +76,9 @@
 }
 
 - (void)setupUI {
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 5)];
-    headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    CGFloat height = [QuestionnaireHeaderView heightForTitle:self.name];
+    QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+    headerView.title = self.name;
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.tableHeaderView = headerView;

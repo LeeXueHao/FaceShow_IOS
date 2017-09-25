@@ -16,6 +16,7 @@
 #import "SaveUserVoteRequest.h"
 #import "SaveUserQuestionnaireRequest.h"
 #import "QuestionnaireResultViewController.h"
+#import "QuestionnaireHeaderView.h"
 
 @interface QuestionnaireViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -44,7 +45,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = self.name;
+    if (self.interactType == InteractType_Vote) {
+        self.navigationItem.title = @"投票";
+    }else {
+        self.navigationItem.title = @"问卷";
+    }
     [self setupUI];
     [self setupObservers];
     [self requestPaperInfo];
@@ -102,8 +107,9 @@
 }
 
 - (void)setupUI {
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 5)];
-    headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    CGFloat height = [QuestionnaireHeaderView heightForTitle:self.name];
+    QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+    headerView.title = self.name;
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.tableHeaderView = headerView;
