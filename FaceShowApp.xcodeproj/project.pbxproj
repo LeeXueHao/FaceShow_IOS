@@ -27,6 +27,7 @@
 		43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A9F1F6B7CF8006B2645 /* UserMessageManager.m */; };
 		435274F91F7355800050B177 /* GetSignInRecordListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435274F81F7355800050B177 /* GetSignInRecordListRequest.m */; };
 		435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */; };
+		435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435550701F78DBCD00264C5B /* UserSignIn_Mock.json */; };
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
 		4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7371F70D146003E2057 /* CourseBriefViewController.m */; };
 		4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */; };
@@ -239,6 +240,7 @@
 		435274F71F7355800050B177 /* GetSignInRecordListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSignInRecordListRequest.h; sourceTree = "<group>"; };
 		435274F81F7355800050B177 /* GetSignInRecordListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSignInRecordListRequest.m; sourceTree = "<group>"; };
 		435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignInRecordList_Mock.json; sourceTree = "<group>"; };
+		435550701F78DBCD00264C5B /* UserSignIn_Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSignIn_Mock.json; sourceTree = "<group>"; };
 		4376E7301F70B5C8003E2057 /* CourseDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailHeaderView.h; sourceTree = "<group>"; };
 		4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailHeaderView.m; sourceTree = "<group>"; };
 		4376E7361F70D146003E2057 /* CourseBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseBriefViewController.h; sourceTree = "<group>"; };
@@ -1068,6 +1070,7 @@
 				7C24E2131F739F8500A6921B /* LikeCommentRequest_mock.json */,
 				432F90B71F74DF4600FCF655 /* UserSignInRequest.h */,
 				432F90B81F74DF4600FCF655 /* UserSignInRequest.m */,
+				435550701F78DBCD00264C5B /* UserSignIn_Mock.json */,
 				432F90BA1F74FDB700FCF655 /* GetResourceRequest.h */,
 				432F90BB1F74FDB700FCF655 /* GetResourceRequest.m */,
 				432F90BD1F75050700FCF655 /* GetScheduleListRequest.h */,
@@ -1461,6 +1464,7 @@
 				7C2519331F68EB2A0001B577 /* MockConfig.plist in Resources */,
 				7C2518F81F68E8510001B577 /* Default-568h@2x.png in Resources */,
 				7C2518F41F68E8000001B577 /* Config.plist in Resources */,
+				435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */,
 				7C24E1F81F72568D00A6921B /* QuestionRequestItem_mock.json in Resources */,
 				7C2519341F68EB2A0001B577 /* neterror_mock.json in Resources */,
 				92EF77121F6F633B007C3835 /* 5@2x.png in Resources */,

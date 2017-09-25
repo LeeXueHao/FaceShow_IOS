@@ -1,0 +1,29 @@
+{
+    "currentUser": "",
+    "code": 210000,
+    "message": "signin 75 is ended",
+    "data": null,
+    "error": {
+        "code": 210413,
+        "title": "signin 75 is ended",
+        "message": "签到已结束",
+        "data": {
+            "id": 75,
+            "title": "面授1班签到",
+            "startTime": "2017-09-23 04:00:00",
+            "endTime": "2017-09-23 23:00:00",
+            "antiCheat": 0,
+            "successPrompt": "签到成功",
+            "openStatus": 7,
+            "bizId": 4,
+            "bizSource": "course",
+            "createTime": "2017-09-23 09:55:36",
+            "stepId": null,
+            "totalUserNum": 0,
+            "signInUserNum": 0,
+            "opentStatusName": "已结束",
+            "percent": 0.0,
+            "userSignIn": null
+        }
+    }
+}

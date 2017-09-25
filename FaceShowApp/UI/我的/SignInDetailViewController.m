@@ -152,6 +152,7 @@
 
 - (void)signInBtnAction:(UIButton *)sender {
     ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
+    scanCodeVC.isFromSignInRecord = YES;
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 

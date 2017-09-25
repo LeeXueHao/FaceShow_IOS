@@ -70,7 +70,7 @@
     }];
     
     self.lineView = [[UIView alloc] init];
-    self.lineView.backgroundColor = [UIColor colorWithHexString:@"ced3d6"];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"d7dde0"];
     [self.contentView addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -82,6 +82,19 @@
 - (void)setSignIn:(GetSignInRecordListRequestItem_SignIn *)signIn {
     _signIn = signIn;
     self.titleLabel.text = signIn.title;
+    if (isEmpty(signIn.userSignIn)) {
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(0);
+            make.left.mas_equalTo(15);
+            make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
+        }];
+    } else {
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(20);
+            make.left.mas_equalTo(15);
+            make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
+        }];
+    }
     self.timeLabel.text = isEmpty(signIn.userSignIn) ? @"" : [signIn.userSignIn.signinTime omitSecondOfFullDateString];
     self.statusLabel.text = isEmpty(signIn.userSignIn) ? @"未签到" : @"已签到";
     self.statusImageView.image = [UIImage imageNamed:isEmpty(signIn.userSignIn) ? @"未签到图标-我的" : @"已签到图标-我的"];

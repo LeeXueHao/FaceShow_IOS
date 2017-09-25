@@ -75,7 +75,7 @@
         make.centerY.mas_equalTo(timeTagLabel.mas_centerY);
     }];
     UILabel *teacherTagLabel = [timeTagLabel clone];
-    teacherTagLabel.text = @"授课";
+    teacherTagLabel.text = @"专家";
     [self.contentView addSubview:teacherTagLabel];
     [teacherTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(timeTagLabel.mas_left);

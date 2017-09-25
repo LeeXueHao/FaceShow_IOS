@@ -25,6 +25,10 @@
 
 @implementation MessageDetailViewController
 
+- (void)dealloc {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -64,11 +68,13 @@
             return;
         }
         self.errorView.hidden = YES;
-        [[UserMessageManager sharedInstance] fetchUserMessage];
         GetNoticeDetailRequestItem *item = (GetNoticeDetailRequestItem *)retItem;
         self.data = item.data;
         [self setupUI];
-        BLOCK_EXEC(self.fetchNoticeDetailSucceedBlock);
+        if (!self.viewed) {
+            BLOCK_EXEC(self.fetchNoticeDetailSucceedBlock);
+            [[UserMessageManager sharedInstance] fetchUserMessage];
+        }
     }];
 }
 
@@ -134,7 +140,7 @@
 
 - (void)setModel {
     self.titleLabel.text = self.data.title;
-    self.timeLabel.text = [NSString stringWithFormat:@"%@%@", isEmpty(self.data.authorName) ? @"" : [NSString stringWithFormat:@"%@ ", self.data.authorName], [self.data.createTime componentsSeparatedByString:@" "].firstObject];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@%@", isEmpty(self.data.authorName) ? @"" : [NSString stringWithFormat:@"%@ ", self.data.authorName], [self.data.updateTime omitSecondOfFullDateString]];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.data.content];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 21;

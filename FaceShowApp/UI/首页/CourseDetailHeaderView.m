@@ -221,10 +221,9 @@
     _course = course;
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 24;
-    style.alignment = NSTextAlignmentCenter;
     style.lineBreakMode = NSLineBreakByTruncatingTail;
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:course.courseName attributes:@{
-                                                                                                                  NSFontAttributeName : [UIFont systemFontOfSize:18],
+                                                                                                                  NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
                                                                                                                   NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
                                                                                                                   NSParagraphStyleAttributeName : style
                                                                                                                   }];
@@ -233,8 +232,6 @@
     self.authorLabel.text = [self lecturesName];
     self.addressLabel.text = isEmpty(course.site) ? @"待定" : course.site;
     
-    style = [[NSMutableParagraphStyle alloc] init];
-    style.lineBreakMode = NSLineBreakByTruncatingTail;
     style.minimumLineHeight = 21;
     attributedStr = [[NSMutableAttributedString alloc] initWithString:isEmpty(course.briefing) ? @"暂无" : course.briefing attributes:@{
                                                                                       NSFontAttributeName : [UIFont systemFontOfSize:14],

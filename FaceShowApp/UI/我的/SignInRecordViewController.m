@@ -23,6 +23,7 @@
     self.dataFetcher = fetcher;
     [super viewDidLoad];
     [self setupUI];
+    [self setupObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +41,15 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
     [self.tableView registerClass:[SignInRecordCell class] forCellReuseIdentifier:@"SignInRecordCell"];
+}
+
+#pragma mark - setupObserver
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kReloadSignInRecordNotification" object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self firstPageFetch];
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -64,7 +74,7 @@
     return 75;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
     return 75;
 }
 

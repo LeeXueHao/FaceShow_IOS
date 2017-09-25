@@ -228,24 +228,36 @@
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>
-
 			</array>
 		</dict>
-        <key>GetSignInRecordListRequest</key>
-        <dict>
-            <key>mockEnable</key>
-            <true/>
-            <key>mockFile</key>
-            <array>
-                <dict>
-                    <key>fileName</key>
-                    <string>GetSignInRecordList_Mock.json</string>
-                    <key>percent</key>
-                    <integer>100</integer>
-                </dict>
-                
-            </array>
-        </dict>
+		<key>GetSignInRecordListRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>GetSignInRecordList_Mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>UserSignInRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>UserSignIn_Mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>

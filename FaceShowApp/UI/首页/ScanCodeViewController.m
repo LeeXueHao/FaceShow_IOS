@@ -155,8 +155,9 @@
             [self.view nyx_stopLoading];
             UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
             ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
-            scanCodeResultVC.data = item.data;
-            scanCodeResultVC.error = error;
+            scanCodeResultVC.isFromSignInRecord = self.isFromSignInRecord;
+            scanCodeResultVC.data = error ? nil : item.data;
+            scanCodeResultVC.error = error ? item.error : nil;
             scanCodeResultVC.reScanCodeBlock = ^{
                 [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
                 [_session startRunning];

@@ -8,6 +8,11 @@
 
 #import "HttpBaseRequestItem_Error.h"
 
-@implementation HttpBaseRequestItem_Error
+@implementation HttpBaseRequestItem_Error_UserSignIn
+@end
 
+@implementation HttpBaseRequestItem_Error_Data
+@end
+
+@implementation HttpBaseRequestItem_Error
 @end

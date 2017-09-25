@@ -8,10 +8,6 @@
 
 #import "ScrollBaseViewController.h"
 
-@interface ScrollBaseViewController ()
-@property (nonatomic, strong) UIScrollView *scrollView;
-@end
-
 @implementation ScrollBaseViewController
 
 - (void)viewDidLoad {

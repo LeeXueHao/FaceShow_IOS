@@ -30,7 +30,7 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [[[UIColor blackColor] colorWithAlphaComponent:.6f] setFill];
     CGContextFillRect(ctx, rect);
-    CGContextClearRect(ctx, CGRectMake(SCREEN_WIDTH / 2 - 125, 103 * kPhoneHeightRatio, 250, 250));
+    CGContextClearRect(ctx, CGRectMake(SCREEN_WIDTH / 2 - 121, 107 * kPhoneHeightRatio, 243, 243));
 }
 
 #pragma mark - setupUI

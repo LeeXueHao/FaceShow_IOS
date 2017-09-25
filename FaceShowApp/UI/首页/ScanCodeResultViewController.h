@@ -12,5 +12,6 @@
 @interface ScanCodeResultViewController : ScrollBaseViewController
 @property (nonatomic, copy) void (^reScanCodeBlock)();
 @property (nonatomic, strong) UserSignInRequestItem_Data *data;
-@property (nonatomic, strong) NSError *error;
+@property (nonatomic, strong) HttpBaseRequestItem_Error *error;
+@property (nonatomic, assign) BOOL isFromSignInRecord;
 @end

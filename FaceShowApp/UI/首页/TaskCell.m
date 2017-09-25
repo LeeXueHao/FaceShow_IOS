@@ -69,7 +69,7 @@
     }];
     
     self.lineView = [[UIView alloc] init];
-    self.lineView.backgroundColor = [UIColor colorWithHexString:@"ced3d6"];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"d7dde0"];
     [self.contentView addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);

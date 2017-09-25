@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface ScrollBaseViewController : BaseViewController
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
 @end

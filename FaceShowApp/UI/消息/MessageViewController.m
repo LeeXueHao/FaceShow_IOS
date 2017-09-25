@@ -71,6 +71,7 @@
     GetNoticeListRequestItem_Notice *notice = self.dataArray[indexPath.row];
     MessageDetailViewController *messageDetailVC = [[MessageDetailViewController alloc] init];
     messageDetailVC.noticeId = notice.noticeId;
+    messageDetailVC.viewed = notice.viewed;
     WEAK_SELF
     messageDetailVC.fetchNoticeDetailSucceedBlock = ^{
         STRONG_SELF

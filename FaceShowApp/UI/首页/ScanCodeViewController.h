@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ScanCodeViewController : BaseViewController
-
+@property (nonatomic, assign) BOOL isFromSignInRecord;
 @end

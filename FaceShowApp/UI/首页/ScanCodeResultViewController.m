@@ -87,15 +87,15 @@
 }
 
 - (void)setModel {
-    if (!isEmpty(self.data)) {
+    if (!isEmpty(self.data) || (!isEmpty(self.error) && self.error.code.integerValue == 210414)) {
         self.signInImageView.image = [UIImage imageNamed:@"签到成功图标"];
-        self.titleLabel.text = @"签到成功";
+        self.titleLabel.text = self.error.code.integerValue == 210414 ? @"已签到" : @"签到成功";
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
             make.centerX.mas_equalTo(0);
         }];
-        self.blackLabel.text = self.data.signinTime;
+        self.blackLabel.text = [self.error.code.integerValue == 210414 ? self.error.data.userSignIn.signinTime : self.data.signinTime omitSecondOfFullDateString];
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(8);
             make.centerX.mas_equalTo(0);
@@ -107,12 +107,11 @@
             make.size.mas_equalTo(CGSizeMake(112, 40));
             make.bottom.mas_equalTo(-215 * kPhoneHeightRatio);
         }];
-    }
-    if (!isEmpty(self.error)) {
+    } else if (!isEmpty(self.error)) {
         self.signInImageView.image = [UIImage imageNamed:@"签到失败图标"];
         self.titleLabel.text = @"签到失败";
-        self.blackLabel.text = self.error.localizedDescription;
-        self.grayLabel.text = @"请扫描最新二维码";
+        self.blackLabel.text = self.error.message;
+        self.grayLabel.text = (self.error.code.integerValue == 210412 || self.error.code.integerValue == 210413) ? [NSString stringWithFormat:@"%@ - %@", [self.error.data.startTime omitSecondOfFullDateString], [self.error.data.endTime omitSecondOfFullDateString]] : @"请扫描最新签到二维码";
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
             make.centerX.mas_equalTo(0);
@@ -133,7 +132,12 @@
 
 - (void)backAction {
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        if (self.isFromSignInRecord) {
+            [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:nil];
+        } else {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     } else {
         [super backAction];
         BLOCK_EXEC(self.reScanCodeBlock);

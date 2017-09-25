@@ -9,6 +9,7 @@
 #import "ScrollBaseViewController.h"
 
 @interface MessageDetailViewController : ScrollBaseViewController
+@property (nonatomic, assign) BOOL viewed;
 @property (nonatomic, strong) NSString *noticeId;
 @property (nonatomic, strong) void (^fetchNoticeDetailSucceedBlock)();
 @end
