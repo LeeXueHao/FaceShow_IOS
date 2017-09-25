@@ -43,31 +43,16 @@
     
     self.statusImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.statusImageView];
-    [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.statusLabel.mas_left).offset(-5);
-        make.centerY.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-    }];
     
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self.contentView addSubview:self.titleLabel];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
-        make.left.mas_equalTo(15);
-        make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
-    }];
     
     self.timeLabel = [[UILabel alloc] init];
     self.timeLabel.font = [UIFont systemFontOfSize:11];
     self.timeLabel.textColor = [UIColor colorWithHexString:@"999999"];
     [self.contentView addSubview:self.timeLabel];
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(7);
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(self.titleLabel.mas_right);
-    }];
     
     self.lineView = [[UIView alloc] init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"d7dde0"];
@@ -82,22 +67,27 @@
 - (void)setSignIn:(GetSignInRecordListRequestItem_SignIn *)signIn {
     _signIn = signIn;
     self.titleLabel.text = signIn.title;
-    if (isEmpty(signIn.userSignIn)) {
-        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(15);
-            make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
-        }];
-    } else {
-        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(20);
-            make.left.mas_equalTo(15);
-            make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
-        }];
-    }
-    self.timeLabel.text = isEmpty(signIn.userSignIn) ? @"" : [signIn.userSignIn.signinTime omitSecondOfFullDateString];
-    self.statusLabel.text = isEmpty(signIn.userSignIn) ? @"未签到" : @"已签到";
-    self.statusImageView.image = [UIImage imageNamed:isEmpty(signIn.userSignIn) ? @"未签到图标-我的" : @"已签到图标-我的"];
+    BOOL hasSignedIn = !isEmpty(signIn.userSignIn);
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(hasSignedIn ? -10.5f : 0);
+        make.left.mas_equalTo(15);
+        make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
+    }];
+    self.timeLabel.text = hasSignedIn ? [signIn.userSignIn.signinTime omitSecondOfFullDateString] : @"";
+    [self.timeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(7);
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(self.titleLabel.mas_right);
+    }];
+    self.statusLabel.text = hasSignedIn ? @"已签到" : @"未签到";
+    self.statusLabel.textColor = [UIColor colorWithHexString:hasSignedIn ? @"333333" : @"999999"];
+    self.statusImageView.image = [UIImage imageNamed:hasSignedIn ? @"已签到图标-我的" : @"未签到图标-我的"];
+    [self.statusImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.statusLabel.mas_left).offset(-5);
+        make.top.mas_equalTo(hasSignedIn ? 22.5f : 15);
+        make.bottom.mas_equalTo(hasSignedIn ? -22.5f : -15);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
 }
 
 - (void)setHasBottomLine:(BOOL)hasBottomLine {

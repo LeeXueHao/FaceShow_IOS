@@ -51,7 +51,7 @@
             return;
         }
         GetResourceRequestItem *item = (GetResourceRequestItem *)retItem;
-        if (isEmpty(item.data)) {
+        if (isEmpty(item.data.elements)) {
             self.emptyView.hidden = NO;
             return;
         }

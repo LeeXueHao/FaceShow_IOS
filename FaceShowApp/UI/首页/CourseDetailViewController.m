@@ -108,6 +108,9 @@
         make.edges.mas_equalTo(0);
     }];
     self.tableView.hidden = YES;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
     UIView *backView = [[UIView alloc]init];
     [self.view addSubview:backView];
@@ -123,7 +126,7 @@
     [backView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(5);
-        make.centerY.mas_equalTo(self.view.mas_topMargin).offset(42);
+        make.centerY.mas_equalTo(self.view.mas_top).offset(42);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
 }
