@@ -209,7 +209,7 @@
             STRONG_SELF
             [self.view nyx_stopLoading];
             if (error) {
-                [self.view nyx_showToast:error.localizedDescription];
+                [self dealWithError:error];
                 return;
             }
             [self.view.window nyx_showToast:@"提交成功"];
@@ -229,7 +229,7 @@
             STRONG_SELF
             [self.view nyx_stopLoading];
             if (error) {
-                [self.view nyx_showToast:error.localizedDescription];
+                [self dealWithError:error];
                 return;
             }
             [self.view.window nyx_showToast:@"提交成功"];
@@ -238,6 +238,14 @@
             vc.name = self.name;
             [self.navigationController pushViewController:vc animated:YES];
         }];
+    }
+}
+
+- (void)dealWithError:(NSError *)error {
+    if ([self isNetworkReachable]) {
+        [self.view nyx_showToast:@"你的输入内容中可能存在表情，请修改后再次提交!"];
+    }else {
+        [self.view nyx_showToast:error.localizedDescription];
     }
 }
 
