@@ -116,6 +116,7 @@
     [self nyx_setupRightWithCustomView:rightButton];
     
     self.inputView = [[CommentInputView alloc]init];
+    self.inputView.isChangeBool = YES;
     self.inputView.textView.returnKeyType = UIReturnKeySend;
     self.inputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
@@ -123,17 +124,24 @@
             [self requstForPublishComment:text];            
         }
     };
+    self.inputView.textHeightChangeBlock = ^(CGFloat textHeight) {
+        STRONG_SELF
+        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(textHeight + 12.0f);
+        }];
+    };
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(45.0f);
         make.bottom.mas_equalTo(100.0f);
     }];
+
 }
 - (void)hiddenInputTextView {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
     moment.draftModel = self.inputView.textView.text;
-    self.inputView.textView.text = nil;
+    self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
     if (self.floatingView.superview != nil) {
         [self.floatingView hiddenView];
@@ -275,7 +283,7 @@
             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
             self.commtentInteger = section;
             if (moment.draftModel != nil) {
-                self.inputView.textView.text = moment.draftModel;
+                self.inputView.textString = moment.draftModel;
             }
             [self.inputView.textView becomeFirstResponder];
         }else {
@@ -317,7 +325,7 @@
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     CGFloat photoHeight = (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f) * 348.0f/590.0f;
     CGFloat contentHeight = [self sizeForTitle:moment.content?:@""];
-    CGFloat height = 15.0f + 6.0f + 14.0f + 8.0f;
+    CGFloat height = 15.0f + 1.0f + 14.0f + 6.0f;
     if (contentHeight >= 85.0f) {
         if (!moment.isOpen.boolValue) {
             height += 85.0f;
@@ -435,7 +443,7 @@
                 [moment.comments addObject:item.data];
             }
             moment.draftModel = nil;
-            self.inputView.textView.text = nil;
+            self.inputView.textString = nil;
             [self.tableView reloadData];
         }else {
             [self.view nyx_showToast:item.message];

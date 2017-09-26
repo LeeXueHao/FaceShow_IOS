@@ -10,15 +10,23 @@
 #import <SAMTextView.h>
 
 @interface CommentInputView()<UITextViewDelegate>
+@property (nonatomic, assign) CGFloat textMaxHeight;
+@property (nonatomic, assign) CGFloat textHeight;
+
 @end
 
 @implementation CommentInputView
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.textMaxHeight = 83.0f;
         [self setupUI];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     }
     return self;
 }
@@ -100,5 +108,25 @@
                             }];
     
     return returnValue;
+}
+- (void)setTextString:(NSString *)textString {
+    _textString = textString;
+    self.textView.text = _textString;
+    [self textDidChange];
+}
+- (void)textDidChange {
+    if (!self.isChangeBool) {
+        return;
+    }
+    NSInteger height = ceilf([self.textView sizeThatFits:CGSizeMake(self.textView.bounds.size.width, MAXFLOAT)].height);    
+    if (self.textHeight != height) { // 高度不一样，就改变了高度
+        // 最大高度，可以滚动
+        self.textView.scrollEnabled = height > self.textMaxHeight && self.textMaxHeight > 0;
+        self.textHeight = height;
+        if (self.textHeightChangeBlock && self.textView.scrollEnabled == NO) {
+            self.textHeightChangeBlock(height);
+            [self.superview layoutIfNeeded];
+        }
+    }
 }
 @end

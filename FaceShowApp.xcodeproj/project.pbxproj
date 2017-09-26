@@ -171,10 +171,6 @@
 		922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */; };
 		9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220843A1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m */; };
 		9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220843E1F6BD66600F8AAC6 /* PhotoChooseCell.m */; };
-		922084481F6BD87600F8AAC6 /* 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084411F6BD87600F8AAC6 /* 1@2x.png */; };
-		922084491F6BD87600F8AAC6 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084421F6BD87600F8AAC6 /* 2@2x.png */; };
-		9220844A1F6BD87600F8AAC6 /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084431F6BD87600F8AAC6 /* 3@2x.png */; };
-		9220844E1F6BD87600F8AAC6 /* 7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 922084471F6BD87600F8AAC6 /* 7@2x.png */; };
 		923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */; };
 		923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */; };
 		923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F73821F7256DB00D7EA6F /* classMomentClickLike_mock.json */; };
@@ -196,9 +192,6 @@
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
 		92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C569991F738D180025815B /* UploadHeadImgRequest.m */; };
 		92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */; };
-		92EF77111F6F633B007C3835 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF770E1F6F633B007C3835 /* 4@2x.png */; };
-		92EF77121F6F633B007C3835 /* 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF770F1F6F633B007C3835 /* 5@2x.png */; };
-		92EF77131F6F633B007C3835 /* 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92EF77101F6F633B007C3835 /* 6@2x.png */; };
 		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
 		9AE85F0606083656987F93EB /* libPods-FaceShowApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */; };
 /* End PBXBuildFile section */
@@ -521,10 +514,6 @@
 		9220843A1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoChooseViewController.m; sourceTree = "<group>"; };
 		9220843D1F6BD66600F8AAC6 /* PhotoChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoChooseCell.h; sourceTree = "<group>"; };
 		9220843E1F6BD66600F8AAC6 /* PhotoChooseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoChooseCell.m; sourceTree = "<group>"; };
-		922084411F6BD87600F8AAC6 /* 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@2x.png"; sourceTree = "<group>"; };
-		922084421F6BD87600F8AAC6 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
-		922084431F6BD87600F8AAC6 /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
-		922084471F6BD87600F8AAC6 /* 7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7@2x.png"; sourceTree = "<group>"; };
 		923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentPublish_mock.json; sourceTree = "<group>"; };
 		923F737F1F72552500D7EA6F /* ClassMomentClickLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentClickLikeRequest.h; sourceTree = "<group>"; };
 		923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentClickLikeRequest.m; sourceTree = "<group>"; };
@@ -563,9 +552,6 @@
 		92C569991F738D180025815B /* UploadHeadImgRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadHeadImgRequest.m; sourceTree = "<group>"; };
 		92C5699B1F73AF780025815B /* UpdateAvatarRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAvatarRequest.h; sourceTree = "<group>"; };
 		92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAvatarRequest.m; sourceTree = "<group>"; };
-		92EF770E1F6F633B007C3835 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
-		92EF770F1F6F633B007C3835 /* 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5@2x.png"; sourceTree = "<group>"; };
-		92EF77101F6F633B007C3835 /* 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6@2x.png"; sourceTree = "<group>"; };
 		92EF77141F6FAA2F007C3835 /* ClassMomentLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentLikeView.h; sourceTree = "<group>"; };
 		92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentLikeView.m; sourceTree = "<group>"; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1329,13 +1315,6 @@
 		922084401F6BD81200F8AAC6 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
-				922084411F6BD87600F8AAC6 /* 1@2x.png */,
-				922084421F6BD87600F8AAC6 /* 2@2x.png */,
-				922084431F6BD87600F8AAC6 /* 3@2x.png */,
-				92EF770E1F6F633B007C3835 /* 4@2x.png */,
-				92EF770F1F6F633B007C3835 /* 5@2x.png */,
-				92EF77101F6F633B007C3835 /* 6@2x.png */,
-				922084471F6BD87600F8AAC6 /* 7@2x.png */,
 			);
 			name = "图片";
 			sourceTree = "<group>";
@@ -1456,29 +1435,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				922084481F6BD87600F8AAC6 /* 1@2x.png in Resources */,
 				7C24E2141F739F8A00A6921B /* LikeCommentRequest_mock.json in Resources */,
-				92EF77131F6F633B007C3835 /* 6@2x.png in Resources */,
 				923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */,
-				9220844A1F6BD87600F8AAC6 /* 3@2x.png in Resources */,
 				7C2518F61F68E8130001B577 /* Empty.xib in Resources */,
 				435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */,
-				9220844E1F6BD87600F8AAC6 /* 7@2x.png in Resources */,
 				7C2519BA1F6917960001B577 /* env_config.json in Resources */,
-				922084491F6BD87600F8AAC6 /* 2@2x.png in Resources */,
 				7C2519331F68EB2A0001B577 /* MockConfig.plist in Resources */,
 				7C2518F81F68E8510001B577 /* Default-568h@2x.png in Resources */,
 				7C2518F41F68E8000001B577 /* Config.plist in Resources */,
 				435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */,
 				7C24E1F81F72568D00A6921B /* QuestionRequestItem_mock.json in Resources */,
 				7C2519341F68EB2A0001B577 /* neterror_mock.json in Resources */,
-				92EF77121F6F633B007C3835 /* 5@2x.png in Resources */,
 				928386221F7123ED00205028 /* classMomentList_mock.json in Resources */,
 				7C24E1F01F7241B300A6921B /* GetCourseListRequest_mock.json in Resources */,
 				7C2519321F68EB2A0001B577 /* errorcode_mock.json in Resources */,
 				7C2519A21F690BA70001B577 /* readme.txt in Resources */,
 				43210E631F726DF00049C381 /* GetNoticeList_Mock.json in Resources */,
-				92EF77111F6F633B007C3835 /* 4@2x.png in Resources */,
 				923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */,
 				7C24E2031F736B6E00A6921B /* GetCourseCommentRequest_mock.json in Resources */,
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,

@@ -48,14 +48,14 @@
         if (!_moment.isOpen.boolValue) {
             [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.nameLabel.mas_left);
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(3.0f);
                 make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
                 make.height.mas_offset(85.0f).priorityHigh();
             }];
         }else {
             [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.nameLabel.mas_left);
-                make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
+                make.top.equalTo(self.nameLabel.mas_bottom).offset(3.0f);
                 make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
             }];
         }
@@ -68,7 +68,7 @@
         self.openCloseButton.selected = _moment.isOpen.boolValue;
         [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.nameLabel.mas_left);
-            make.top.equalTo(self.nameLabel.mas_bottom).offset(8.0f);
+            make.top.equalTo(self.nameLabel.mas_bottom).offset(3.0f);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
             make.height.mas_greaterThanOrEqualTo(14.0f);
 
@@ -244,7 +244,7 @@
     [self.photosView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel.mas_left);
         make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-        make.top.equalTo(self.openCloseButton.mas_bottom).offset(10.0f);
+        make.top.equalTo(self.openCloseButton.mas_bottom).offset(8.0f);
         //            make.height.mas_offset(0.0001f);
     }];
     

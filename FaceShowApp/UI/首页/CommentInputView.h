@@ -13,4 +13,10 @@
 @property (nonatomic, strong) SAMTextView *textView;
 @property (nonatomic, assign) NSInteger maxTextNumber;
 
+
+//TBD: 暂时实现自动改变输入框 
+@property (nonatomic, assign) BOOL isChangeBool;
+@property (nonatomic, strong) void(^textHeightChangeBlock)(CGFloat textHeight);
+@property (nonatomic, copy) NSString *textString;
+
 @end
