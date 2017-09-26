@@ -16,7 +16,7 @@ extern  NSString * const kHasNewMessageNotification;
 
 + (UserMessageManager *)sharedInstance;
 
-- (void)fetchUserMessage;
+- (void)fetchUserMessageWithNeedRefreshList:(BOOL)needRefresh;
 
 - (void)resumeHeartbeat;
 - (void)suspendHeartbeat;

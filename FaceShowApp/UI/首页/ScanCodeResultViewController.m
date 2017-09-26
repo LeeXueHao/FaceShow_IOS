@@ -34,6 +34,7 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.title = @"签到";
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
@@ -88,8 +89,8 @@
 
 - (void)setModel {
     if (!isEmpty(self.data) || (!isEmpty(self.error) && self.error.code.integerValue == 210414)) {
-        self.signInImageView.image = [UIImage imageNamed:@"签到成功图标"];
-        self.titleLabel.text = self.error.code.integerValue == 210414 ? @"已签到" : @"签到成功";
+        self.signInImageView.image = [UIImage imageNamed:self.error.code.integerValue == 210414 ? @"签到失败图标" : @"签到成功图标"];
+        self.titleLabel.text = self.error.code.integerValue == 210414 ? self.error.message : @"签到成功";
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
@@ -132,9 +133,10 @@
 
 - (void)backAction {
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
-        if (self.isFromSignInRecord) {
+        if (self.currentIndexPath) {
             [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:@{
+                                                                                                                   @"kSignInRecordCurrentIndexPath" : self.currentIndexPath, @"kCurrentIndexPathSucceedSigninTime" : self.data.signinTime}];
         } else {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

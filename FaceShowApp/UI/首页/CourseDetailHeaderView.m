@@ -229,7 +229,7 @@
                                                                                                                   }];
     self.courseTitleLabel.attributedText = attributedStr;
     self.timeLabel.text = [course.startTime omitSecondOfFullDateString];
-    self.authorLabel.text = [self lecturesName];
+    self.authorLabel.text = isEmpty([self lecturesName]) ? @"暂无" : [self lecturesName];
     self.addressLabel.text = isEmpty(course.site) ? @"待定" : course.site;
     
     style.minimumLineHeight = 21;
@@ -242,18 +242,14 @@
 }
 
 - (NSString *)lecturesName {
-    if (isEmpty(self.course.lecturerInfos)) {
-        return @"暂无";
-    } else {
-        NSMutableString *lecturesName = [NSMutableString string];
-        for (GetCourseRequestItem_LecturerInfo *info in self.course.lecturerInfos) {
-            if (!isEmpty(lecturesName)) {
-                [lecturesName appendString:@","];
-            }
-            [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
+    NSMutableString *lecturesName = [NSMutableString string];
+    for (GetCourseRequestItem_LecturerInfo *info in self.course.lecturerInfos) {
+        if (!isEmpty(lecturesName)) {
+            [lecturesName appendString:@","];
         }
-        return lecturesName;
+        [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
     }
+    return lecturesName;
 }
 
 @end

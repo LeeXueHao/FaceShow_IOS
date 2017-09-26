@@ -13,5 +13,5 @@
 @property (nonatomic, copy) void (^reScanCodeBlock)();
 @property (nonatomic, strong) UserSignInRequestItem_Data *data;
 @property (nonatomic, strong) HttpBaseRequestItem_Error *error;
-@property (nonatomic, assign) BOOL isFromSignInRecord;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @end

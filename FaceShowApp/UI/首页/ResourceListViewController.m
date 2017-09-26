@@ -12,14 +12,15 @@
 #import "ResourceCell.h"
 #import "GetResourceRequest.h"
 #import "ResourceDisplayViewController.h"
+#import "GetResourceDetailRequest.h"
 
 @interface ResourceListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) GetResourceRequest *request;
+@property (nonatomic, strong) GetResourceDetailRequest *detailRequest;
 @property (nonatomic, strong) NSArray *dataArray;
-
 @end
 
 @implementation ResourceListViewController
@@ -57,6 +58,27 @@
         }
         self.dataArray = [NSArray arrayWithArray:item.data.elements];
         [self.tableView reloadData];
+    }];
+}
+
+- (void)requestResourceDetailWithResId:(NSString *)resId {
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [self.detailRequest stopRequest];
+    self.detailRequest = [[GetResourceDetailRequest alloc] init];
+    self.detailRequest.resId = resId;
+    [self.detailRequest startRequestWithRetClass:[GetResourceDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];;
+            return;
+        }
+        GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
+        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
+        vc.urlString = item.data.type.integerValue ? item.data.url : item.data.ai.previewUrl;
+        vc.name = item.data.resName;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 
@@ -110,10 +132,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GetResourceRequestItem_Element *element = self.dataArray[indexPath.row];
-    ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
-    vc.urlString = element.url;
-    vc.name = element.resName;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self requestResourceDetailWithResId:element.resId];
 }
 
 #pragma mark - RefreshDelegate

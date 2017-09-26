@@ -53,7 +53,7 @@
     [self.loginBtn setBackgroundImage:[UIImage yx_createImageWithColor:[[UIColor colorWithHexString:@"ffffff"] colorWithAlphaComponent:.7f]] forState:UIControlStateDisabled];
     [self.loginBtn setTitle:@"登 录" forState:UIControlStateNormal];
     [self.loginBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
-    self.loginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+    self.loginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [self.loginBtn addTarget:self action:@selector(loginBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {

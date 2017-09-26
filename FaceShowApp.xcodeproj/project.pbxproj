@@ -28,6 +28,7 @@
 		435274F91F7355800050B177 /* GetSignInRecordListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435274F81F7355800050B177 /* GetSignInRecordListRequest.m */; };
 		435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */; };
 		435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435550701F78DBCD00264C5B /* UserSignIn_Mock.json */; };
+		435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */; };
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
 		4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7371F70D146003E2057 /* CourseBriefViewController.m */; };
 		4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */; };
@@ -235,6 +236,8 @@
 		435274F81F7355800050B177 /* GetSignInRecordListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSignInRecordListRequest.m; sourceTree = "<group>"; };
 		435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignInRecordList_Mock.json; sourceTree = "<group>"; };
 		435550701F78DBCD00264C5B /* UserSignIn_Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSignIn_Mock.json; sourceTree = "<group>"; };
+		435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetResourceDetailRequest.h; sourceTree = "<group>"; };
+		435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetResourceDetailRequest.m; sourceTree = "<group>"; };
 		4376E7301F70B5C8003E2057 /* CourseDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailHeaderView.h; sourceTree = "<group>"; };
 		4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailHeaderView.m; sourceTree = "<group>"; };
 		4376E7361F70D146003E2057 /* CourseBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseBriefViewController.h; sourceTree = "<group>"; };
@@ -1064,6 +1067,8 @@
 				435550701F78DBCD00264C5B /* UserSignIn_Mock.json */,
 				432F90BA1F74FDB700FCF655 /* GetResourceRequest.h */,
 				432F90BB1F74FDB700FCF655 /* GetResourceRequest.m */,
+				435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */,
+				435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */,
 				432F90BD1F75050700FCF655 /* GetScheduleListRequest.h */,
 				432F90BE1F75050700FCF655 /* GetScheduleListRequest.m */,
 			);
@@ -1524,6 +1529,7 @@
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
+				435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */,
 				7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */,
 				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
 				7C212DDA1F6B68BD0007AE01 /* CourseDetailViewController.m in Sources */,

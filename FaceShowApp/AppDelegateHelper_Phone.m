@@ -63,8 +63,8 @@
     
     tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, mineNavi];
     
-    UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8, 4, 12, 12)];
-    redPointView.layer.cornerRadius = 6;
+    UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 2, 6, 9, 9)];
+    redPointView.layer.cornerRadius = 4.5f;
     redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
     redPointView.hidden = YES;
     [tabBarController.tabBar addSubview:redPointView];

@@ -75,7 +75,8 @@
     WEAK_SELF
     messageDetailVC.fetchNoticeDetailSucceedBlock = ^{
         STRONG_SELF
-        [self firstPageFetch];
+        notice.viewed = YES;
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     };
     [self.navigationController pushViewController:messageDetailVC animated:YES];
 }

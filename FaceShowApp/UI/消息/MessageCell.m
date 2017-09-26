@@ -44,7 +44,7 @@
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.avatarImageView.mas_top);
+        make.top.mas_equalTo(self.avatarImageView.mas_top).offset(-2);
         make.left.mas_equalTo(self.avatarImageView.mas_right).offset(15);
         make.right.mas_equalTo(-15);
     }];
@@ -54,7 +54,7 @@
     self.timeLabel.textColor = [UIColor colorWithHexString:@"999999"];
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(8);
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(5);
         make.left.mas_equalTo(self.titleLabel.mas_left);
         make.right.mas_equalTo(-15);
     }];

@@ -11,4 +11,5 @@
 
 @interface SignInDetailViewController : ScrollBaseViewController
 @property (nonatomic, strong) GetSignInRecordListRequestItem_SignIn *signIn;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @end

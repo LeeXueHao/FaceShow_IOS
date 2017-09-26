@@ -46,9 +46,17 @@
 #pragma mark - setupObserver
 - (void)setupObserver {
     WEAK_SELF
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kReloadSignInRecordNotification" object:nil] subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kReloadSignInRecordNotification" object:nil] subscribeNext:^(NSNotification *x) {
         STRONG_SELF
-        [self firstPageFetch];
+        NSDictionary *dic = (NSDictionary *)x.object;
+        NSIndexPath *currentIndex = [dic objectForKey:@"kSignInRecordCurrentIndexPath"];
+        NSString *signInTime = @"kCurrentIndexPathSucceedSigninTime";
+        GetSignInRecordListRequestItem_Element *element = self.dataArray[currentIndex.section];
+        GetSignInRecordListRequestItem_SignIn *signIn = element.signIns[currentIndex.row];
+        GetSignInRecordListRequestItem_UserSignIn *userSignIn = [GetSignInRecordListRequestItem_UserSignIn new];
+        userSignIn.signinTime = signInTime;
+        signIn.userSignIn = userSignIn;
+        [self.tableView reloadRowsAtIndexPaths:@[currentIndex] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
@@ -90,6 +98,7 @@
     SignInDetailViewController *signInDetailVC = [[SignInDetailViewController alloc] init];
     GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
     signInDetailVC.signIn = element.signIns[indexPath.row];
+    signInDetailVC.currentIndexPath = indexPath;
     [self.navigationController pushViewController:signInDetailVC animated:YES];
 }
 

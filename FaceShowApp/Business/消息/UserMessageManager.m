@@ -29,7 +29,7 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
     return manager;
 }
 
-- (void)fetchUserMessage {
+- (void)fetchUserMessageWithNeedRefreshList:(BOOL)needRefresh {
     [self.messageHasUnViewRequest stopRequest];
     self.messageHasUnViewRequest = [[MessageHasUnViewRequest alloc] init];
     [self.messageHasUnViewRequest startRequestWithRetClass:[MessageHasUnViewRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -37,7 +37,7 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
             return;
         }
         MessageHasUnViewRequestItem *item = (MessageHasUnViewRequestItem *)retItem;
-        if (item.data.hasUnView) {
+        if (item.data.hasUnView && needRefresh) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kHasNewMessageNotification object:nil];
         }
         self.redPointView.hidden = !item.data.hasUnView;
@@ -48,7 +48,7 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
     WEAK_SELF
     self.timer = [[GCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
         STRONG_SELF
-        [self fetchUserMessage];
+        [self fetchUserMessageWithNeedRefreshList:YES];
     }];
     [self.timer resume];
 }

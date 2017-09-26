@@ -47,11 +47,15 @@
         [self.view nyx_stopLoading];
         self.errorView.hidden = YES;
         self.emptyView.hidden = YES;
+        GetScheduleListRequestItem *item = (GetScheduleListRequestItem *)retItem;
+        if (item.error.code.integerValue == 210025) {
+            self.emptyView.hidden = NO;
+            return;
+        }
         if (error) {
             self.errorView.hidden = NO;
             return;
         }
-        GetScheduleListRequestItem *item = (GetScheduleListRequestItem *)retItem;
         if (isEmpty(item.data.schedules.elements)) {
             self.emptyView.hidden = NO;
             return;

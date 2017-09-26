@@ -73,7 +73,7 @@
         [self setupUI];
         if (!self.viewed) {
             BLOCK_EXEC(self.fetchNoticeDetailSucceedBlock);
-            [[UserMessageManager sharedInstance] fetchUserMessage];
+            [[UserMessageManager sharedInstance] fetchUserMessageWithNeedRefreshList:NO];
         }
     }];
 }
