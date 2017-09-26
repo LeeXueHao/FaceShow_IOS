@@ -142,9 +142,9 @@
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
     }
+    [_session stopRunning];
+    [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
     if ([stringValue containsString:@"stepId="] && !isEmpty([stringValue substringFromIndex:7])) {
-        [_session stopRunning];
-        [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
         [self.view nyx_startLoading];
         [self.request stopRequest];
         self.request = [[UserSignInRequest alloc] init];
@@ -153,6 +153,12 @@
         [self.request startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
             [self.view nyx_stopLoading];
+            if (error && error.code == 1) {
+                [self.view nyx_showToast:error.localizedDescription];
+                [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+                [_session startRunning];
+                return;
+            }
             UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
             ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
             scanCodeResultVC.currentIndexPath = self.currentIndexPath;
@@ -164,6 +170,17 @@
             };
             [self.navigationController pushViewController:scanCodeResultVC animated:YES];
         }];
+    } else {
+        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+        scanCodeResultVC.currentIndexPath = self.currentIndexPath;
+        HttpBaseRequestItem_Error *error = [HttpBaseRequestItem_Error new];
+        error.message = @"无效二维码";
+        scanCodeResultVC.error = error;
+        scanCodeResultVC.reScanCodeBlock = ^{
+            [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+            [_session startRunning];
+        };
+        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
     }
 }
 
