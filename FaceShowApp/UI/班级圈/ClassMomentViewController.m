@@ -325,7 +325,7 @@
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     CGFloat photoHeight = (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f) * 348.0f/590.0f;
     CGFloat contentHeight = [self sizeForTitle:moment.content?:@""];
-    CGFloat height = 15.0f + 1.0f + 14.0f + 6.0f;
+    CGFloat height = 15.0f + 5.0f + 14.0f + 6.0f;
     if (contentHeight >= 85.0f) {
         if (!moment.isOpen.boolValue) {
             height += 85.0f;
@@ -337,7 +337,7 @@
         height += contentHeight + 1.0f;
     }
     if (moment.albums.count > 0) {
-        height += photoHeight + 10.0f;
+        height += photoHeight + 15.0f;
     }
     height = height + 10.0f + 30.0f;
     if (moment.likes.count == 0 && moment.comments.count == 0) {

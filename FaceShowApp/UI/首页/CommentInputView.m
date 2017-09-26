@@ -123,8 +123,8 @@
         // 最大高度，可以滚动
         self.textView.scrollEnabled = height > self.textMaxHeight && self.textMaxHeight > 0;
         self.textHeight = height;
-        if (self.textHeightChangeBlock && self.textView.scrollEnabled == NO) {
-            self.textHeightChangeBlock(height);
+        if (self.textView.scrollEnabled == NO) {
+            BLOCK_EXEC(self.textHeightChangeBlock,height);
             [self.superview layoutIfNeeded];
         }
     }
