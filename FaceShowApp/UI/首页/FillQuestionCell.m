@@ -72,6 +72,7 @@
     self.textView.layer.cornerRadius = 9;
     self.textView.clipsToBounds = YES;
     self.textView.delegate = self;
+    self.textView.returnKeyType = UIReturnKeyDone;
     [self.contentView addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(35);
@@ -161,6 +162,10 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
     NSString *finalString = [textView.text stringByReplacingCharactersInRange:range withString:text];
     if (finalString.length > 250) {
         return NO;
