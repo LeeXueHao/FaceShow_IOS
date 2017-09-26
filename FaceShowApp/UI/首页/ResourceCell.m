@@ -7,6 +7,7 @@
 //
 
 #import "ResourceCell.h"
+#import "ResourceTypeMapping.h"
 
 @interface ResourceCell ()
 
@@ -31,7 +32,6 @@
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     self.iconImageView = [[UIImageView alloc] init];
-    self.iconImageView.image = [UIImage imageNamed:@"资源"];
     [self.contentView addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -71,6 +71,7 @@
 
 - (void)setElement:(GetResourceRequestItem_Element *)element {
     _element = element;
+    self.iconImageView.image = [UIImage imageNamed:element.type.integerValue ? @"html" : [ResourceTypeMapping resourceTypeWithString:element.suffix]];
     self.titleLabel.text = element.resName;
     self.timeLabel.text = [element.createTime omitSecondOfFullDateString];
 }

@@ -70,13 +70,10 @@
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.numberOfLines = 0;
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(25);
-        make.centerX.mas_equalTo(0);
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
     }];
@@ -113,7 +110,15 @@
 }
 
 - (void)setModel {
-    self.titleLabel.text = self.schedule.subject;
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.minimumLineHeight = 22;
+    style.alignment = NSTextAlignmentCenter;
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.schedule.subject attributes:@{
+                                                                                                                                NSFontAttributeName : [UIFont boldSystemFontOfSize:16],
+                                                                                                                                NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
+                                                                                                                                NSParagraphStyleAttributeName : style
+                                                                                                                                }];
+    self.titleLabel.attributedText = attributedStr;
     [self.detailImageView sd_setImageWithURL:[NSURL URLWithString:self.schedule.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image) {
             self.detailImageView.image = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / image.size.width * image.size.height)];

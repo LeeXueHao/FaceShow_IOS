@@ -172,6 +172,10 @@
     if (isEmpty(self.signIn.userSignIn)) {
         self.tipsLabel.hidden = NO;
         self.signInBtn.hidden = NO;
+        if (self.signIn.openStatus.integerValue != 6) {
+            self.tipsLabel.hidden = YES;
+            self.signInBtn.hidden = YES;
+        }
     } else {
         self.timeTitleLabel.hidden = NO;
         self.signedInTimeLabel.hidden = NO;

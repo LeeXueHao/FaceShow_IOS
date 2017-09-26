@@ -50,7 +50,7 @@
         STRONG_SELF
         NSDictionary *dic = (NSDictionary *)x.object;
         NSIndexPath *currentIndex = [dic objectForKey:@"kSignInRecordCurrentIndexPath"];
-        NSString *signInTime = @"kCurrentIndexPathSucceedSigninTime";
+        NSString *signInTime = [dic valueForKey:@"kCurrentIndexPathSucceedSigninTime"];
         GetSignInRecordListRequestItem_Element *element = self.dataArray[currentIndex.section];
         GetSignInRecordListRequestItem_SignIn *signIn = element.signIns[currentIndex.row];
         GetSignInRecordListRequestItem_UserSignIn *userSignIn = [GetSignInRecordListRequestItem_UserSignIn new];

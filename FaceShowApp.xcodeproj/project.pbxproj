@@ -29,6 +29,7 @@
 		435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */; };
 		435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435550701F78DBCD00264C5B /* UserSignIn_Mock.json */; };
 		435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */; };
+		435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */; };
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
 		4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7371F70D146003E2057 /* CourseBriefViewController.m */; };
 		4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */; };
@@ -238,6 +239,8 @@
 		435550701F78DBCD00264C5B /* UserSignIn_Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSignIn_Mock.json; sourceTree = "<group>"; };
 		435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetResourceDetailRequest.h; sourceTree = "<group>"; };
 		435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetResourceDetailRequest.m; sourceTree = "<group>"; };
+		435F77B71F7A61C400247BD8 /* ResourceTypeMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceTypeMapping.h; sourceTree = "<group>"; };
+		435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourceTypeMapping.m; sourceTree = "<group>"; };
 		4376E7301F70B5C8003E2057 /* CourseDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailHeaderView.h; sourceTree = "<group>"; };
 		4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailHeaderView.m; sourceTree = "<group>"; };
 		4376E7361F70D146003E2057 /* CourseBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseBriefViewController.h; sourceTree = "<group>"; };
@@ -1245,6 +1248,8 @@
 				4378DF9F1F6F7C22005CFE56 /* View */,
 				7C212DC51F6A5D120007AE01 /* ResourceListViewController.h */,
 				7C212DC61F6A5D120007AE01 /* ResourceListViewController.m */,
+				435F77B71F7A61C400247BD8 /* ResourceTypeMapping.h */,
+				435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */,
 			);
 			name = "资源";
 			sourceTree = "<group>";
@@ -1560,6 +1565,7 @@
 				7C212DDD1F6B69010007AE01 /* ResourceDisplayViewController.m in Sources */,
 				9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */,
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
+				435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */,
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
 				4376E7471F712DE9003E2057 /* QADataManager.m in Sources */,
 				7C24E21D1F78F25000A6921B /* QuestionnaireHeaderView.m in Sources */,

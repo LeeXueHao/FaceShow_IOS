@@ -18,6 +18,7 @@
 #import "QuestionnaireViewController.h"
 #import "QuestionnaireResultViewController.h"
 #import "CourseCommentViewController.h"
+#import "ResourceTypeMapping.h"
 
 @interface CourseDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -67,11 +68,6 @@
         [self.dataArray addObject:!isEmpty(self.data.interactSteps) ? self.data.interactSteps : [NSArray array]];
         self.tableView.hidden = NO;
         self.headerView.course = self.data.course;
-        NSLayoutConstraint *widthFenceConstraint = [NSLayoutConstraint constraintWithItem:self.headerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:SCREEN_WIDTH];
-        [self.headerView addConstraint:widthFenceConstraint];
-        [self.headerView removeConstraint:widthFenceConstraint];
-        CGSize fittingSize = [self.headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-        self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, fittingSize.height);
         self.tableView.tableHeaderView = self.headerView;
         [self.tableView layoutIfNeeded];
         [self.tableView reloadData];
@@ -103,7 +99,11 @@
         courseBriefVC.courseBrief = self.data.course.briefing;
         [self.navigationController pushViewController:courseBriefVC animated:NO];
     };
-    
+    self.tableView.tableHeaderView = self.headerView;
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+    }];
     [self.tableView registerClass:[CourseCatalogCell class] forCellReuseIdentifier:@"CourseCatalogCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -140,7 +140,7 @@
     } else if (indexPath.section == 1) {
         GetCourseRequestItem_AttachmentInfo *info = self.dataArray[1][indexPath.row];
         cell.title = info.resName;
-        cell.iconName = @"资源";
+        cell.iconName = [ResourceTypeMapping resourceTypeWithString:info.resType];
     } else if (indexPath.section == 2) {
         GetCourseRequestItem_InteractStep *info = self.dataArray[2][indexPath.row];
         cell.title = info.interactName;
