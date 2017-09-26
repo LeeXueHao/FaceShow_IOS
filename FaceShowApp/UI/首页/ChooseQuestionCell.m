@@ -116,17 +116,17 @@
         if (idx == 0) {
             [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.mas_equalTo(0);
-                make.top.mas_equalTo(self.stemLabel.mas_bottom).mas_offset(25);
+                make.top.mas_equalTo(self.stemLabel.mas_bottom).mas_offset(10);
             }];
         }else {
             [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.mas_equalTo(0);
-                make.top.mas_equalTo(preView.mas_bottom).mas_offset(10);
+                make.top.mas_equalTo(preView.mas_bottom).mas_offset(0);
             }];
         }
         if (idx == optionArray.count-1) {
             [itemView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-30);
+                make.bottom.mas_equalTo(-15);
             }];
         }
         preView = itemView;

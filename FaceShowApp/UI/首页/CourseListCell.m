@@ -20,7 +20,7 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     if (highlighted) {
-        self.contentView.backgroundColor = [UIColor colorWithHexString:@"e4e8eb"];
+        self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     }else {
         self.contentView.backgroundColor = [UIColor whiteColor];
     }

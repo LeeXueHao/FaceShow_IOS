@@ -27,8 +27,8 @@
 - (void)setupUI {
     UIButton *bgButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"e4e8eb"]] forState:UIControlStateHighlighted];
-    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"e4e8eb"]] forState:UIControlStateSelected|UIControlStateHighlighted];
+    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"ebeff2"]] forState:UIControlStateHighlighted];
+    [bgButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"ebeff2"]] forState:UIControlStateSelected|UIControlStateHighlighted];
     [bgButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:bgButton];
     [bgButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -38,12 +38,6 @@
     
     self.selectImageView = [[UIImageView alloc]init];
     [self addSubview:self.selectImageView];
-    [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-14);
-        make.top.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.bottom.mas_lessThanOrEqualTo(0);
-    }];
     self.optionLabel = [[UILabel alloc]init];
     self.optionLabel.textColor = [UIColor colorWithHexString:@"666666"];
     self.optionLabel.font = [UIFont systemFontOfSize:14];
@@ -51,9 +45,14 @@
     [self addSubview:self.optionLabel];
     [self.optionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(34);
-        make.top.mas_equalTo(0);
-        make.bottom.mas_lessThanOrEqualTo(0);
+        make.top.mas_equalTo(15);
+        make.bottom.mas_lessThanOrEqualTo(-15);
         make.right.mas_equalTo(self.selectImageView.mas_left).mas_offset(-14);
+    }];
+    [self.selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-14);
+        make.top.mas_equalTo(self.optionLabel.mas_top);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
     
     self.editable = YES;

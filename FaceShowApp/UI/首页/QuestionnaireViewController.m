@@ -60,6 +60,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)backAction {
+    NSArray *array = self.navigationController.viewControllers;
+    UIViewController *preVC = array[array.count-2];
+    if ([preVC isKindOfClass:[QuestionnaireViewController class]]) {
+        [self.navigationController popToViewController:array[array.count-3] animated:YES];
+    }else {
+        [super backAction];
+    }
+}
+
 - (void)requestPaperInfo {
     if (self.interactType == InteractType_Vote) {
         [self.voteRequest stopRequest];
@@ -177,10 +187,10 @@
         return;
     }
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提交后内容不可修改，是否继续提交？" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *submit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *submit = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self goSubmit];
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancel];
     [alert addAction:submit];
     [self presentViewController:alert animated:YES completion:nil];
