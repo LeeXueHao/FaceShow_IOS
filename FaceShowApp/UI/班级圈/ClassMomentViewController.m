@@ -77,6 +77,7 @@
 }
 #pragma mark - setupUI
 - (void)setupUI {
+    self.emptyView.backgroundColor = [UIColor clearColor];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -306,7 +307,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 16.0f;
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    if (moment.likes.count > 0 || moment.comments.count > 0) {
+        return 16.0f;
+    }
+    return 1.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [tableView fd_heightForCellWithIdentifier:@"ClassMomentCell" configuration:^(ClassMomentCell *cell) {
