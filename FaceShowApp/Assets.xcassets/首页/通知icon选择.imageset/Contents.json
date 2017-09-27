@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "通知icon选择.png",
+      "filename" : "通知icon当前态.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "通知icon选择@2x.png",
+      "filename" : "通知icon当前态@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "通知icon选择@3x.png",
+      "filename" : "通知icon当前态@3x.png",
       "scale" : "3x"
     }
   ],
