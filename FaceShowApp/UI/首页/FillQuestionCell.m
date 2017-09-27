@@ -24,7 +24,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setupObserver];
     }
     return self;
 }
@@ -73,6 +72,10 @@
     self.textView.clipsToBounds = YES;
     self.textView.delegate = self;
     self.textView.returnKeyType = UIReturnKeyDone;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    self.textView.typingAttributes = dic;
     [self.contentView addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(35);
@@ -86,23 +89,6 @@
     [self.indexLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     [self.stemLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self.stemLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-}
-
-- (void)setupObserver {
-    WEAK_SELF
-    [[self.textView rac_textSignal]subscribeNext:^(NSString *text) {
-        STRONG_SELF
-        if (text.length>250) {
-            self.textView.text = [text substringWithRange:NSMakeRange(0, 250)];
-        }
-        NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-        paraStyle.lineHeightMultiple = 1.2;
-        NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
-        NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:self.textView.text attributes:dic];
-        self.textView.attributedText = attributeStr;
-        [self.item.myAnswers replaceObjectAtIndex:0 withObject:self.textView.text];
-        BLOCK_EXEC(self.textChangeBlock,self.textView.text);
-    }];
 }
 
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {
