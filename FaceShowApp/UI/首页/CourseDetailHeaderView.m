@@ -46,7 +46,7 @@
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont boldSystemFontOfSize:21];
     titleLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
-    titleLabel.text = @"课l程l详l情";
+    titleLabel.text = @"课 l 程 l 详 l 情";
     [self.headerImageView addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-45);
