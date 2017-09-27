@@ -62,12 +62,19 @@
         make.right.mas_equalTo(-15);
     }];
     
-    UIImageView *timeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"课程详情时间"]];
-    [self addSubview:timeIcon];
-    [timeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *timeTagLabel = [[UILabel alloc]init];
+    timeTagLabel.font = [UIFont systemFontOfSize:11];
+    timeTagLabel.textColor = [UIColor whiteColor];
+    timeTagLabel.textAlignment = NSTextAlignmentCenter;
+    timeTagLabel.backgroundColor = [UIColor colorWithHexString:@"979fad"];
+    timeTagLabel.text = @"时间";
+    timeTagLabel.layer.cornerRadius = 3;
+    timeTagLabel.clipsToBounds = YES;
+    [self addSubview:timeTagLabel];
+    [timeTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(self.courseTitleLabel.mas_bottom).offset(20);
-        make.size.mas_equalTo(CGSizeMake(22, 22));
+        make.top.mas_equalTo(self.courseTitleLabel.mas_bottom).mas_equalTo(20);
+        make.size.mas_equalTo(CGSizeMake(34, 15));
     }];
     
     self.timeLabel = [[UILabel alloc] init];
@@ -75,40 +82,42 @@
     self.timeLabel.textColor = [UIColor colorWithHexString:@"666666"];
     [self addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(timeIcon.mas_right).offset(7);
-        make.centerY.mas_equalTo(timeIcon.mas_centerY);
+        make.left.mas_equalTo(timeTagLabel.mas_right).offset(7);
+        make.centerY.mas_equalTo(timeTagLabel.mas_centerY);
         make.right.mas_equalTo(-15);
     }];
     
-    UIImageView *authorIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"课程详情专家"]];
-    [self addSubview:authorIcon];
-    [authorIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.top.mas_equalTo(timeIcon.mas_bottom).offset(1.5f);
-        make.size.mas_equalTo(CGSizeMake(22, 22));
+    UILabel *teacherTagLabel = [timeTagLabel clone];
+    teacherTagLabel.text = @"专家";
+    [self addSubview:teacherTagLabel];
+    [teacherTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(timeTagLabel.mas_left);
+        make.top.mas_equalTo(timeTagLabel.mas_bottom).mas_offset(9);
+        make.size.mas_equalTo(CGSizeMake(34, 15));
     }];
     
     self.authorLabel = [self.timeLabel clone];
     [self addSubview:self.authorLabel];
     [self.authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(authorIcon.mas_right).offset(7);
-        make.centerY.mas_equalTo(authorIcon.mas_centerY);
+        make.left.mas_equalTo(teacherTagLabel.mas_right).offset(7);
+        make.centerY.mas_equalTo(teacherTagLabel.mas_centerY);
         make.right.mas_equalTo(-15);
     }];
     
-    UIImageView *addressIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"课程详情地点"]];
-    [self addSubview:addressIcon];
-    [addressIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.top.mas_equalTo(authorIcon.mas_bottom).offset(1.5f);
-        make.size.mas_equalTo(CGSizeMake(22, 22));
+    UILabel *placeTagLabel = [timeTagLabel clone];
+    placeTagLabel.text = @"地点";
+    [self addSubview:placeTagLabel];
+    [placeTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(teacherTagLabel.mas_left);
+        make.top.mas_equalTo(teacherTagLabel.mas_bottom).mas_offset(9);
+        make.size.mas_equalTo(CGSizeMake(34, 15));
     }];
     
     self.addressLabel = [self.timeLabel clone];
     [self addSubview:self.addressLabel];
     [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(addressIcon.mas_right).offset(7);
-        make.centerY.mas_equalTo(addressIcon.mas_centerY);
+        make.left.mas_equalTo(placeTagLabel.mas_right).offset(7);
+        make.centerY.mas_equalTo(placeTagLabel.mas_centerY);
         make.right.mas_equalTo(-15);
     }];
     
@@ -117,7 +126,7 @@
     [self addSubview:middleBandView];
     [middleBandView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.addressLabel.mas_bottom).offset(26);
+        make.top.mas_equalTo(self.addressLabel.mas_bottom).offset(24);
         make.height.mas_equalTo(5);
     }];
     
