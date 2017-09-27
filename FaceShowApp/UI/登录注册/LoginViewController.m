@@ -174,6 +174,8 @@
         [self.view nyx_stopLoading];
         if (error) {
             [self.view nyx_showToast:error.localizedDescription];
+            self.passwordTF.text = @"";
+            self.loginBtn.enabled = NO;
             return;
         }
         [UserManager sharedInstance].loginStatus = YES;
