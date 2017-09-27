@@ -135,8 +135,10 @@
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
         if (self.currentIndexPath) {
             [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:@{
-                                                                                                                   @"kSignInRecordCurrentIndexPath" : self.currentIndexPath, @"kCurrentIndexPathSucceedSigninTime" : self.data.signinTime}];
+            if (self.error.code.integerValue != 210414) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:@{
+                                                                                                                       @"kSignInRecordCurrentIndexPath" : self.currentIndexPath, @"kCurrentIndexPathSucceedSigninTime" : self.data.signinTime}];
+            }
         } else {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
