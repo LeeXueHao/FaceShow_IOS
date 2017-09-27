@@ -32,6 +32,7 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
 - (void)fetchUserMessageWithNeedRefreshList:(BOOL)needRefresh {
     [self.messageHasUnViewRequest stopRequest];
     self.messageHasUnViewRequest = [[MessageHasUnViewRequest alloc] init];
+    self.messageHasUnViewRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     [self.messageHasUnViewRequest startRequestWithRetClass:[MessageHasUnViewRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         if (error) {
             return;

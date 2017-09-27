@@ -17,5 +17,5 @@
 @end
 
 @interface MessageHasUnViewRequest : YXGetRequest
-
+@property (nonatomic, strong) NSString *clazsId;
 @end
