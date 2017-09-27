@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppDelegateHelper.h"
+#import "UserMessageManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -19,6 +20,9 @@
     [GlobalUtils setupCore];    
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    if ([UserManager sharedInstance].loginStatus) {
+        [[UserMessageManager sharedInstance] resumeHeartbeat];
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -33,10 +37,12 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLoginNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [self.appDelegateHelper handleLoginSuccess];
+        [[UserMessageManager sharedInstance] resumeHeartbeat];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [self.appDelegateHelper handleLogoutSuccess];
+        [[UserMessageManager sharedInstance] suspendHeartbeat];
     }];
 }
 

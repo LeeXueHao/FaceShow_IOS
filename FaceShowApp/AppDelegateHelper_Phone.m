@@ -39,7 +39,6 @@
 }
 
 - (UIViewController *)mainViewController {
-    [[UserMessageManager sharedInstance] resumeHeartbeat];
     FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
     UIViewController *mainVC = [[MainPageViewController alloc]init];
     mainVC.title = @"首页";
@@ -85,12 +84,10 @@
     [self.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
     self.window.rootViewController.view.hidden = YES;
     self.window.rootViewController = [self mainViewController];
-    [[UserMessageManager sharedInstance] resumeHeartbeat];
 }
 
 - (void)handleLogoutSuccess {
     [self.window.rootViewController presentViewController:[self loginViewController] animated:YES completion:nil];
-    [[UserMessageManager sharedInstance] suspendHeartbeat];
 }
 
 

@@ -47,10 +47,12 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
 
 - (void)resumeHeartbeat {
     WEAK_SELF
-    self.timer = [[GCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
-        STRONG_SELF
-        [self fetchUserMessageWithNeedRefreshList:YES];
-    }];
+    if (!self.timer) {
+        self.timer = [[GCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
+            STRONG_SELF
+            [self fetchUserMessageWithNeedRefreshList:YES];
+        }];
+    }
     [self.timer resume];
 }
 

@@ -41,6 +41,10 @@
         STRONG_SELF
         [self sendTriggerEvent];
     });
+    __block dispatch_source_t timerSource = self.timerSource;
+    dispatch_source_set_cancel_handler(timerSource, ^{
+        timerSource = nil;
+    });
 }
 
 - (void)sendTriggerEvent {
