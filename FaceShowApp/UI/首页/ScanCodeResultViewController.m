@@ -90,7 +90,7 @@
 - (void)setModel {
     if (!isEmpty(self.data) || (!isEmpty(self.error) && self.error.code.integerValue == 210414)) {
         self.signInImageView.image = [UIImage imageNamed:self.error.code.integerValue == 210414 ? @"签到失败图标" : @"签到成功图标"];
-        self.titleLabel.text = self.error.code.integerValue == 210414 ? self.error.message : @"签到成功";
+        self.titleLabel.text = self.error.code.integerValue == 210414 ? self.error.message : self.data.successPrompt;
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);

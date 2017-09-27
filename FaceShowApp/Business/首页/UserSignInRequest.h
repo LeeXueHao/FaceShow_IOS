@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString<Optional> *signinDevice;
 @property (nonatomic, strong) NSString<Optional> *userName;
 @property (nonatomic, strong) NSString<Optional> *avatar;
+@property (nonatomic, strong) NSString<Optional> *successPrompt;
 @end
 
 @interface UserSignInRequestItem : HttpBaseRequestItem
