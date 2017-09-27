@@ -14,4 +14,5 @@
 @property (nonatomic, strong) GetCourseRequestItem_Course *course;
 @property (nonatomic, copy) void (^viewAllBlock)();
 
++ (CGFloat)heightForCourse:(GetCourseRequestItem_Course *)course;
 @end

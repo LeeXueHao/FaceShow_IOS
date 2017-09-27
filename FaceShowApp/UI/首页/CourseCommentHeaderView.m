@@ -42,7 +42,7 @@
 
 - (void)setCountStr:(NSString *)countStr {
     _countStr = countStr;
-    self.countLabel.text = [NSString stringWithFormat:@"回复 (%@)",countStr];
+    self.countLabel.text = [NSString stringWithFormat:@"回复 (%@)",countStr? :@""];
 }
 
 @end

@@ -135,7 +135,7 @@
     [self addSubview:self.middleLineView];
     [self.middleLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(middleBandView.mas_bottom).offset(43);
+        make.top.mas_equalTo(briefTitleLabel.mas_bottom).offset(12);
         make.height.mas_equalTo(1);
     }];
     
@@ -188,7 +188,7 @@
     [self addSubview:bottomLineView];
     [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.bottomBandView.mas_bottom).offset(43);
+        make.top.mas_equalTo(contentsTitleLabel.mas_bottom).offset(12);
         make.height.mas_equalTo(1);
         make.bottom.mas_equalTo(0);
     }];
@@ -196,25 +196,6 @@
 
 - (void)viewAllBtnAction:(UIButton *)sender {
     BLOCK_EXEC(self.viewAllBlock);
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    if (self.briefLabel.bounds.size.height > 105) {
-        self.viewAllBtn.hidden = NO;
-        [self.briefLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.top.mas_equalTo(self.middleLineView.mas_bottom).offset(15);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(105);
-        }];
-        [self.bottomBandView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.viewAllBtn.mas_bottom).offset(20);
-            make.height.mas_equalTo(5);
-        }];
-        [self.superview layoutIfNeeded];
-    }
 }
 
 - (void)setCourse:(GetCourseRequestItem_Course *)course {
@@ -239,6 +220,19 @@
                                                                                       NSParagraphStyleAttributeName : style
                                                                                       }];
     self.briefLabel.attributedText = attributedStr;
+    
+    CGSize size = [self.briefLabel sizeThatFits:CGSizeMake(SCREEN_WIDTH-30, CGFLOAT_MAX)];
+    if (size.height > 105) {
+        self.viewAllBtn.hidden = NO;
+        [self.briefLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(105);
+        }];
+        [self.bottomBandView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.viewAllBtn.mas_bottom).offset(20);
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(5);
+        }];
+    }
 }
 
 - (NSString *)lecturesName {
@@ -250,6 +244,17 @@
         [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
     }
     return lecturesName;
+}
+
++ (CGFloat)heightForCourse:(GetCourseRequestItem_Course *)course {
+    CourseDetailHeaderView *view = [[CourseDetailHeaderView alloc]init];
+    view.course = course;
+    NSLayoutConstraint *widthFenceConstraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:SCREEN_WIDTH];
+    [view addConstraint:widthFenceConstraint];
+    // Auto layout engine does its math
+    CGSize fittingSize = [view systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    [view removeConstraint:widthFenceConstraint];
+    return ceil(fittingSize.height);
 }
 
 @end

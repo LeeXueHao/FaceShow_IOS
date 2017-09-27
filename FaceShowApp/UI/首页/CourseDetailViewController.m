@@ -67,11 +67,23 @@
         [self.dataArray addObject:!isEmpty(self.data.course.attachmentInfos) ? self.data.course.attachmentInfos : [NSArray array]];
         [self.dataArray addObject:!isEmpty(self.data.interactSteps) ? self.data.interactSteps : [NSArray array]];
         self.tableView.hidden = NO;
-        self.headerView.course = self.data.course;
-        self.tableView.tableHeaderView = self.headerView;
-        [self.tableView layoutIfNeeded];
+        self.tableView.tableHeaderView = [self headerViewWithCourse:self.data.course];
         [self.tableView reloadData];
     }];
+}
+
+- (CourseDetailHeaderView *)headerViewWithCourse:(GetCourseRequestItem_Course *)course {
+    CGFloat height = [CourseDetailHeaderView heightForCourse:course];
+    CourseDetailHeaderView *headerView = [[CourseDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, 100, height)];
+    headerView.course = course;
+    WEAK_SELF
+    headerView.viewAllBlock = ^{
+        STRONG_SELF
+        CourseBriefViewController *courseBriefVC = [[CourseBriefViewController alloc] init];
+        courseBriefVC.courseBrief = course.briefing;
+        [self.navigationController pushViewController:courseBriefVC animated:NO];
+    };
+    return headerView;
 }
 
 #pragma mark - setupUI
@@ -92,18 +104,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.headerView = [[CourseDetailHeaderView alloc] init];
-    self.headerView.viewAllBlock = ^{
-        STRONG_SELF
-        CourseBriefViewController *courseBriefVC = [[CourseBriefViewController alloc] init];
-        courseBriefVC.courseBrief = self.data.course.briefing;
-        [self.navigationController pushViewController:courseBriefVC animated:NO];
-    };
-    self.tableView.tableHeaderView = self.headerView;
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-    }];
     [self.tableView registerClass:[CourseCatalogCell class] forCellReuseIdentifier:@"CourseCatalogCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
