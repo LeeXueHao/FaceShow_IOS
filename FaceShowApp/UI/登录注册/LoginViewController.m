@@ -85,6 +85,7 @@
     self.passwordTF.secureTextEntry = YES;
     self.passwordTF.returnKeyType = UIReturnKeyDone;
     self.passwordTF.delegate = self;
+    self.passwordTF.keyboardType = UIKeyboardTypeASCIICapable;
     [self.contentView addSubview:self.passwordTF];
     [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-20);
@@ -163,10 +164,6 @@
 #pragma mark - actions
 - (void)loginBtnAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    if ([self.passwordTF.text includeChinese]) {
-        [self.view nyx_showToast:@"密码不能包含汉字"];
-        return;
-    }
     [self.view nyx_startLoading];
     WEAK_SELF
     [LoginDataManager loginWithName:self.usernameTF.text password:self.passwordTF.text completeBlock:^(NSError *error) {
