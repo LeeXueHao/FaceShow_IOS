@@ -67,8 +67,8 @@
         make.top.mas_equalTo(topView.mas_bottom).mas_offset(67);
         make.centerX.mas_equalTo(0);
         make.height.mas_equalTo(26);
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
+        make.left.mas_greaterThanOrEqualTo(15);
+        make.right.mas_lessThanOrEqualTo(-15);
     }];
     self.projectLabel = [[UILabel alloc]init];
     self.projectLabel.textColor = [UIColor whiteColor];
