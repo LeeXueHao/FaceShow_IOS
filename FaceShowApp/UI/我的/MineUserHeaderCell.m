@@ -8,7 +8,7 @@
 
 #import "MineUserHeaderCell.h"
 @interface MineUserHeaderCell ()
-@property (nonatomic, strong) UIImageView *userHeaderImageView;
+@property (nonatomic, strong) UIButton *userHeaderButton;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *nextImageView;
 @end
@@ -36,12 +36,12 @@
     //    selectedBgView.backgroundColor = [UIColor colorWithHexString:@"f2f6fa"];
     //    self.selectedBackgroundView = selectedBgView;
     self.contentView.backgroundColor = [UIColor whiteColor];
-    self.userHeaderImageView = [[UIImageView alloc] init];
-    self.userHeaderImageView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
-    
-    self.userHeaderImageView.clipsToBounds = YES;
-    self.userHeaderImageView.layer.cornerRadius = 6.0f;
-    [self.contentView addSubview:self.userHeaderImageView];
+    self.userHeaderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.userHeaderButton.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
+        self.userHeaderButton.clipsToBounds = YES;
+    self.userHeaderButton.userInteractionEnabled = NO;
+    self.userHeaderButton.layer.cornerRadius = 6.0f;
+    [self.contentView addSubview:self.userHeaderButton];
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
@@ -52,19 +52,19 @@
     
 }
 - (void)setupLayout {
-    [self.userHeaderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.userHeaderButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(15.0f);
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.size.mas_offset(CGSizeMake(55.0f, 55.0f));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.userHeaderImageView.mas_right).offset(14.0f);
-        make.centerY.equalTo(self.userHeaderImageView.mas_centerY);
+        make.left.equalTo(self.userHeaderButton.mas_right).offset(14.0f);
+        make.centerY.equalTo(self.userHeaderButton.mas_centerY);
         make.right.lessThanOrEqualTo(self.nextImageView.mas_left).offset(-15.0f);
     }];
     [self.nextImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-5.0f);
-        make.centerY.equalTo(self.userHeaderImageView.mas_centerY);
+        make.centerY.equalTo(self.userHeaderButton.mas_centerY);
         make.size.mas_offset(CGSizeMake(30.0f, 30.0f));
     }];
 }
@@ -90,7 +90,7 @@
     }
 }
 - (void)reload {
-    [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
+    [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
     self.nameLabel.text = [UserManager sharedInstance].userModel.realName?:@"暂无";
     
 }
