@@ -147,6 +147,11 @@
     BLOCK_EXEC(self.beginEdittingBlock);
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    [self.item.myAnswers replaceObjectAtIndex:0 withObject:textView.text];
+    BLOCK_EXEC(self.textChangeBlock,textView.text);
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
