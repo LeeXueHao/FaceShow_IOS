@@ -59,6 +59,10 @@
     self.publicationMomentTextView.font = [UIFont systemFontOfSize:14.0f];
     self.publicationMomentTextView.textColor = [UIColor colorWithHexString:@"333333"];
     self.publicationMomentTextView.placeholder = @"这一刻的想法......";
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    self.publicationMomentTextView.typingAttributes = dic;
     [self.publicationMomentView addSubview:self.publicationMomentTextView];
     
     
