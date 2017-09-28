@@ -30,7 +30,6 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     self.statusLabel = [[UILabel alloc] init];

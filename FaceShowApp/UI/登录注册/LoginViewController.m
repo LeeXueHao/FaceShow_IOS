@@ -35,6 +35,10 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
     self.scrollView.bounces = NO;

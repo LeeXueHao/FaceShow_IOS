@@ -86,6 +86,10 @@
     return headerView;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
     self.errorView = [[ErrorView alloc] init];

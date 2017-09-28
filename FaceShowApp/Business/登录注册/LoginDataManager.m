@@ -8,10 +8,12 @@
 
 #import "LoginDataManager.h"
 #import "LoginRequest.h"
+#import "GetCurrentClazsRequest.h"
 #import "GetUserInfoRequest.h"
 
 @interface LoginDataManager()
 @property (nonatomic, strong) LoginRequest *loginRequest;
+@property (nonatomic, strong) GetCurrentClazsRequest *getClassRequest;
 @property (nonatomic, strong) GetUserInfoRequest *getUserInfoRequest;
 @end
 
@@ -45,16 +47,25 @@
         userModel.passport = item.passport;
         [UserManager sharedInstance].userModel = userModel;
         
-        [manager.getUserInfoRequest stopRequest];
-        manager.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
-        [manager.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        [manager.getClassRequest stopRequest];
+        manager.getClassRequest = [[GetCurrentClazsRequest alloc] init];
+        [manager.getClassRequest startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             if (error) {
                 BLOCK_EXEC(completeBlock, error);
                 return;
             }
-            GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
-            [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
-            BLOCK_EXEC(completeBlock, nil);
+            
+            [manager.getUserInfoRequest stopRequest];
+            manager.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
+            [manager.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                if (error) {
+                    BLOCK_EXEC(completeBlock, error);
+                    return;
+                }
+                GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
+                [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
+                BLOCK_EXEC(completeBlock, nil);
+            }];
         }];
     }];
 }

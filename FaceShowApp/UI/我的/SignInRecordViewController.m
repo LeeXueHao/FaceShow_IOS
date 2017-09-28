@@ -95,6 +95,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SignInDetailViewController *signInDetailVC = [[SignInDetailViewController alloc] init];
     GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
     signInDetailVC.signIn = element.signIns[indexPath.row];

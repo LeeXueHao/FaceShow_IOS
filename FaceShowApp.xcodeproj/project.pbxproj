@@ -210,8 +210,8 @@
 		43210E531F7226220049C381 /* GetCourseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCourseRequest.m; sourceTree = "<group>"; };
 		43210E561F724B3D0049C381 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
 		43210E571F724B3D0049C381 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
-		43210E591F724ECE0049C381 /* LoginDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginDataManager.h; path = "登录注册/LoginDataManager.h"; sourceTree = "<group>"; };
-		43210E5A1F724ECE0049C381 /* LoginDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginDataManager.m; path = "登录注册/LoginDataManager.m"; sourceTree = "<group>"; };
+		43210E591F724ECE0049C381 /* LoginDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDataManager.h; sourceTree = "<group>"; };
+		43210E5A1F724ECE0049C381 /* LoginDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDataManager.m; sourceTree = "<group>"; };
 		43210E5C1F7256880049C381 /* GetCourse_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetCourse_Mock.json; sourceTree = "<group>"; };
 		43210E5F1F726A070049C381 /* GetNoticeListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNoticeListRequest.h; sourceTree = "<group>"; };
 		43210E601F726A070049C381 /* GetNoticeListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNoticeListRequest.m; sourceTree = "<group>"; };
@@ -954,8 +954,6 @@
 				7C25196A1F68EBCD0001B577 /* 消息 */,
 				7C25196C1F68EBCD0001B577 /* 班级圈 */,
 				7C25196E1F68EBCD0001B577 /* 登录注册 */,
-				43210E591F724ECE0049C381 /* LoginDataManager.h */,
-				43210E5A1F724ECE0049C381 /* LoginDataManager.m */,
 				7C2519701F68EBCD0001B577 /* 首页 */,
 				7C24E1F11F72494A00A6921B /* FSDataMappingTable.h */,
 				7C24E1F21F72494A00A6921B /* FSDataMappingTable.m */,
@@ -1024,6 +1022,8 @@
 			isa = PBXGroup;
 			children = (
 				43210E551F724B050049C381 /* Request */,
+				43210E591F724ECE0049C381 /* LoginDataManager.h */,
+				43210E5A1F724ECE0049C381 /* LoginDataManager.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
