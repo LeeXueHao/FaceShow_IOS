@@ -59,7 +59,8 @@
     self.avatarImageView = [[UIImageView alloc] init];
     self.avatarImageView.layer.cornerRadius = 5;
     self.avatarImageView.clipsToBounds = YES;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.lecturerInfo.lecturerAvatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"]];
+    self.avatarImageView.contentMode = UIViewContentModeCenter;
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.lecturerInfo.lecturerAvatar] placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"]];
     [self.contentView addSubview:self.avatarImageView];
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
