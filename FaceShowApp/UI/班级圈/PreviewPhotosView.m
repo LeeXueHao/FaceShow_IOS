@@ -43,15 +43,13 @@
     NSMutableArray<UIImageView *> *imageViewMutableArray = [[NSMutableArray<UIImageView *> alloc] initWithCapacity:9];
     [self.imageModelMutableArray enumerateObjectsUsingBlock:^(PreviewPhotosModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:obj.thumbnail] placeholderImage:[UIImage imageNamed:@"朋友圈一张图加载失败图片"]];
         UIImageView *placeholderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"朋友圈一张图加载失败图片"]];
         [imageView addSubview:placeholderImageView];
         [placeholderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(imageView);
         }];
         WEAK_SELF
-        [imageView sd_setImageWithURL:[NSURL URLWithString:obj.thumbnail] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            STRONG_SELF
+        [imageView sd_setImageWithURL:[NSURL URLWithString:obj.thumbnail] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image != nil && error == nil) {
                 [placeholderImageView removeFromSuperview];
             }
