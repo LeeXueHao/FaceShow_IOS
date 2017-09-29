@@ -24,7 +24,7 @@
 {
     if (self = [super init]) {
         self.urlHead = [ConfigManager sharedInstance].easygo;
-        self.urlHead = [NSString stringWithFormat:@"%@?token=%@", self.urlHead, self.token];
+        self.urlHead = [NSString stringWithFormat:@"%@?token=%@&width=110&height=110", self.urlHead, self.token];
     }
     return self;
 }
