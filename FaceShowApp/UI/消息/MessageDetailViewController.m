@@ -140,7 +140,7 @@
 
 - (void)setModel {
     self.titleLabel.text = self.data.title;
-    self.timeLabel.text = [NSString stringWithFormat:@"专家:%@ %@", isEmpty(self.data.authorName) ? @"无" : self.data.authorName, [self.data.updateTime omitSecondOfFullDateString]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@", self.data.authorName, [self.data.updateTime omitSecondOfFullDateString]];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.data.content];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.minimumLineHeight = 21;
