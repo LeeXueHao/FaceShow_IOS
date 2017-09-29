@@ -228,14 +228,17 @@
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self.view nyx_stopLoading];
         ClassMomentPublishRequestItem *item = retItem;
         if (item.data == nil) {
             [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"发布失败请重试"];
         }else {
-            BLOCK_EXEC(self.publishMomentDataBlock,item.data);
-            [self dismiss];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
+                [self.view nyx_stopLoading];
+                BLOCK_EXEC(self.publishMomentDataBlock,item.data);
+                [self dismiss];
+            });
+            
         }
     }];
     self.publishRequest = request;
