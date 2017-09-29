@@ -71,7 +71,6 @@
             make.top.equalTo(self.nameLabel.mas_bottom).offset(3.0f);
             make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
             make.height.mas_greaterThanOrEqualTo(14.0f);
-
         }];
         [self.openCloseButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_offset(0.00001f);

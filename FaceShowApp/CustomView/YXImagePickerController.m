@@ -21,6 +21,9 @@
 @end
 
 @implementation YXImagePickerController
+- (void)dealloc {
+    DDLogDebug(@"release========>>%@",[self class]);
+}
 
 - (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)sourceType
                      completion:(void (^)(UIImage *))completion
@@ -58,7 +61,9 @@
 - (void)completionImagePick:(UIImagePickerController *)picker image:(UIImage *)image
 {
     if (picker) {
+        WEAK_SELF
         [picker dismissViewControllerAnimated:YES completion:^{
+            STRONG_SELF
             if (image && self.completion) {
                 self.completion(image);
             }

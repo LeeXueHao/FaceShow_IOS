@@ -208,10 +208,12 @@
 - (void)requestForUploadImage{
     NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
     NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[UserManager sharedInstance].userModel.userID, (int)interval];
+    [self.view nyx_startLoading];
     WEAK_SELF
     [QADataManager uploadFile:self.imageArray[0] fileName:fileName completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
         STRONG_SELF
          if (item.result.resid == nil){
+             [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"发布失败请重试"];
         }else {
             [self requestForPublishMoment:item.result.resid];
@@ -226,8 +228,10 @@
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self.view nyx_stopLoading];
         ClassMomentPublishRequestItem *item = retItem;
         if (item.data == nil) {
+            [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"发布失败请重试"];
         }else {
             BLOCK_EXEC(self.publishMomentDataBlock,item.data);

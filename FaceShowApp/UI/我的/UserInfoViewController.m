@@ -26,7 +26,9 @@
 @end
 
 @implementation UserInfoViewController
-
+- (void)dealloc {
+    DDLogDebug(@"release========>>%@",[self class]);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我";
@@ -80,21 +82,22 @@
     [alertVC addAction:cancleAction];
     UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         STRONG_SELF
-        [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
-            STRONG_SELF
-            [self updateWithHeaderImage:selectedImage];
-        }];
+        [self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera];
     }];
     [alertVC addAction:cameraAction];
     UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         STRONG_SELF
-        [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
-            STRONG_SELF
-            [self updateWithHeaderImage:selectedImage];
-        }];
+        [self pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     [alertVC addAction:photoAction];
     [self presentViewController:alertVC animated:YES completion:nil];
+}
+- (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)sourceType{
+    WEAK_SELF
+    [self.imagePickerController pickImageWithSourceType:sourceType completion:^(UIImage *selectedImage) {
+        STRONG_SELF
+        [self updateWithHeaderImage:selectedImage];
+    }];
 }
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,11 +143,6 @@
     }
 }
 #pragma mark - request
-- (void)requestForUpdateHeaderImage:(UIImage *)image {
-    UserInfoHeaderCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell reload];
-}
-#pragma mark - request
 - (void)requestForUserInfo{
    GetUserInfoRequest *request = [[GetUserInfoRequest alloc] init];
     [self.view nyx_startLoading];
@@ -182,9 +180,10 @@
     WEAK_SELF
     [self.uploadHeadImgRequest startRequestWithRetClass:[UploadHeadImgItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self.view nyx_stopLoading];
         UploadHeadImgItem *item = retItem;
         if (error) {
+            [self.view nyx_stopLoading];
+
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
@@ -192,6 +191,7 @@
             UploadHeadImgItem_TplData_Data *data = item.tplData.data[0];
             [self requestForUploadAvatar:data.url?:data.shortUrl];
         } else {
+            [self.view nyx_stopLoading];
             [self.view nyx_showToast:item.tplData.message];
         }
     }];
@@ -202,6 +202,7 @@
     WEAK_SELF
     [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self.view nyx_stopLoading];
         if (!error) {
             [UserManager sharedInstance].userModel.avatarUrl = url;
             [[UserManager sharedInstance] saveData];
