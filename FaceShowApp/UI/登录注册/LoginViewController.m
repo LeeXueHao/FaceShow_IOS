@@ -151,6 +151,7 @@
         make.centerX.mas_equalTo(0);
         make.bottom.mas_equalTo(-44);
     }];
+    touristBtn.hidden = YES;
 }
 
 #pragma mark - setupObserver
@@ -191,7 +192,7 @@
 - (void)touristBtnAction:(UIButton *)sender {
     [self.view nyx_startLoading];
     WEAK_SELF
-    [LoginDataManager loginWithName:@"18708167000" password:@"123456" completeBlock:^(NSError *error) {
+    [LoginDataManager loginWithName:@"15810653916" password:@"123456" completeBlock:^(NSError *error) {
         STRONG_SELF
         [self.view nyx_stopLoading];
         if (error) {
