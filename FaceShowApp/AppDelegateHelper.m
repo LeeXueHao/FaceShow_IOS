@@ -20,7 +20,7 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             return [AppDelegateHelper_Phone alloc];
         }
-        return nil;
+        return [AppDelegateHelper_Phone alloc];
     }
     return [super alloc];
 }
