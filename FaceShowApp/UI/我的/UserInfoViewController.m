@@ -90,6 +90,11 @@
         [self pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     [alertVC addAction:photoAction];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        alertVC.popoverPresentationController.sourceView = self.view;
+        alertVC.popoverPresentationController.sourceRect = CGRectMake(200,100,200,200);
+    }
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 - (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)sourceType{

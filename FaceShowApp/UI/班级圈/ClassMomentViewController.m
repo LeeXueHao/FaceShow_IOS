@@ -176,7 +176,14 @@
         }];
     }];
     [alertVC addAction:photoAction];
-    [[self nyx_visibleViewController] presentViewController:alertVC animated:YES completion:nil];
+    
+    UIViewController *visibleVC = [self nyx_visibleViewController];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        alertVC.popoverPresentationController.sourceView = visibleVC.view;
+        alertVC.popoverPresentationController.sourceRect = CGRectMake(200,100,200,200);
+    }
+
+    [visibleVC presentViewController:alertVC animated:YES completion:nil];
 }
 - (void)presentNextPublishViewController:(UIImage *)image {
     PublishMomentViewController *VC = [[PublishMomentViewController alloc] init];
