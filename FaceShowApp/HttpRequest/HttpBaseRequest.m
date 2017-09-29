@@ -9,6 +9,7 @@
 #import "HttpBaseRequest.h"
 #import "YXMockManager.h"
 #import "AppDelegate.h"
+#import <NSString+HTML.h>
 #pragma mark - Url Arguments Category : NSString & NSDictionary
 @interface NSDictionary (UrlArgumentsAdditions)
 - (NSString *)httpArgumentsString;
@@ -103,6 +104,7 @@
     [[self request] setCompletionBlock:^{
         @strongify(self); if (!self) return;
         NSString *json = [[NSString alloc] initWithData:[self request].responseData encoding:NSUTF8StringEncoding];
+        json = [json stringByReplacingHTMLEntities];
         [self dealWithResponseJson:json];
     }];
     [[self request] setFailedBlock:^{
