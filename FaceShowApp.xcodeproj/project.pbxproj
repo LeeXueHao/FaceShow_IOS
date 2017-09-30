@@ -1804,6 +1804,7 @@
 				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "63da2c0d-a4ba-43e8-9b6e-24890fad34ec";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1823,6 +1824,7 @@
 				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "a6181b17-8a32-4005-b45d-b62c960aad78";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Rel;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
