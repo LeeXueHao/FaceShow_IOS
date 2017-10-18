@@ -162,6 +162,13 @@
 		7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B41F690EB50001B577 /* ClassMomentViewController.m */; };
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
+		7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54151F9729230053DB12 /* YXGeTuiManager.m */; };
+		7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54141F9729230053DB12 /* YXApnsContentModel.m */; };
+		7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */; };
+		7C4D54491F972D620053DB12 /* libGeTuiSdk-1.6.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54421F972B040053DB12 /* libGeTuiSdk-1.6.2.0.a */; };
+		7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */; };
+		7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544C1F972DFD0053DB12 /* libz.tbd */; };
+		7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544E1F972E070053DB12 /* libc++.tbd */; };
 		9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */; };
 		9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */; };
 		9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */; };
@@ -497,6 +504,18 @@
 		7C2519B61F690ECB0001B577 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		7C2519B71F690ECB0001B577 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
+		7C4D54121F970B280053DB12 /* 研修宝.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "研修宝.entitlements"; sourceTree = "<group>"; };
+		7C4D54141F9729230053DB12 /* YXApnsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXApnsContentModel.m; sourceTree = "<group>"; };
+		7C4D54151F9729230053DB12 /* YXGeTuiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXGeTuiManager.m; sourceTree = "<group>"; };
+		7C4D54161F9729230053DB12 /* YXApnsContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXApnsContentModel.h; sourceTree = "<group>"; };
+		7C4D54171F9729230053DB12 /* YXGeTuiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXGeTuiManager.h; sourceTree = "<group>"; };
+		7C4D54401F972B040053DB12 /* GeTuiExtSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeTuiExtSdk.h; sourceTree = "<group>"; };
+		7C4D54411F972B040053DB12 /* GeTuiSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeTuiSdk.h; sourceTree = "<group>"; };
+		7C4D54421F972B040053DB12 /* libGeTuiSdk-1.6.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGeTuiSdk-1.6.2.0.a"; sourceTree = "<group>"; };
+		7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGtExtensionSdk-1.1.0.a"; sourceTree = "<group>"; };
+		7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7C4D544C1F972DFD0053DB12 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		7C4D544E1F972E070053DB12 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishMomentViewController.h; sourceTree = "<group>"; };
 		9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishMomentViewController.m; sourceTree = "<group>"; };
@@ -568,7 +587,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */,
+				7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */,
+				7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */,
+				7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */,
 				9AE85F0606083656987F93EB /* libPods-FaceShowApp.a in Frameworks */,
+				7C4D54491F972D620053DB12 /* libGeTuiSdk-1.6.2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,7 +762,9 @@
 		7C2518A91F68E5C70001B577 /* FaceShowApp */ = {
 			isa = PBXGroup;
 			children = (
+				7C4D54121F970B280053DB12 /* 研修宝.entitlements */,
 				7C2519781F68FE900001B577 /* UI */,
+				7C4D54131F9728DA0053DB12 /* Push */,
 				7C2519641F68EBCD0001B577 /* Business */,
 				7C2518C11F68E67B0001B577 /* Categoty */,
 				7C2519371F68EB780001B577 /* CustomView */,
@@ -860,6 +886,7 @@
 		7C2519191F68EACF0001B577 /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				7C4D543F1F972B040053DB12 /* 个推 */,
 				7C25191A1F68EACF0001B577 /* MJRefresh */,
 			);
 			path = 3rdLib;
@@ -1220,6 +1247,28 @@
 			path = "登录注册";
 			sourceTree = "<group>";
 		};
+		7C4D54131F9728DA0053DB12 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				7C4D54171F9729230053DB12 /* YXGeTuiManager.h */,
+				7C4D54151F9729230053DB12 /* YXGeTuiManager.m */,
+				7C4D54161F9729230053DB12 /* YXApnsContentModel.h */,
+				7C4D54141F9729230053DB12 /* YXApnsContentModel.m */,
+			);
+			path = Push;
+			sourceTree = "<group>";
+		};
+		7C4D543F1F972B040053DB12 /* 个推 */ = {
+			isa = PBXGroup;
+			children = (
+				7C4D54401F972B040053DB12 /* GeTuiExtSdk.h */,
+				7C4D54411F972B040053DB12 /* GeTuiSdk.h */,
+				7C4D54421F972B040053DB12 /* libGeTuiSdk-1.6.2.0.a */,
+				7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */,
+			);
+			path = "个推";
+			sourceTree = "<group>";
+		};
 		7CBDAB811F6925B50096C4BA /* 扫一扫 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,6 +1427,9 @@
 		E07FF1E38E78A513F51FA97A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C4D544E1F972E070053DB12 /* libc++.tbd */,
+				7C4D544C1F972DFD0053DB12 /* libz.tbd */,
+				7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */,
 				8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */,
 			);
 			name = Frameworks;
@@ -1419,6 +1471,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = P8ZS8UUN27;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1541,6 +1601,7 @@
 				7C2519111F68EA820001B577 /* GlobalUtils.m in Sources */,
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
 				438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */,
+				7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */,
 				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
 				7C212DE61F6B6DEA0007AE01 /* CourseListHeaderView.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
@@ -1590,6 +1651,7 @@
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
+				7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */,
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
 				9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */,
@@ -1795,14 +1857,102 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "FaceShowApp/研修宝.entitlements";
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FaceShowApp/PrefixHeader.pch";
 				INFOPLIST_FILE = FaceShowApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FaceShowApp/3rdLib/个推",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-w",
+					"-l\"AFNetworking\"",
+					"-l\"AJNotificationView\"",
+					"-l\"ASIHTTPRequest\"",
+					"-l\"Aspects\"",
+					"-l\"Base64\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"CommonCrypto\"",
+					"-l\"DTCoreText\"",
+					"-l\"DTFoundation\"",
+					"-l\"FCUUID\"",
+					"-l\"FLAnimatedImage\"",
+					"-l\"FileMD5Hash\"",
+					"-l\"HappyDNS\"",
+					"-l\"IBActionSheet\"",
+					"-l\"IQKeyboardManager\"",
+					"-l\"JSONModel\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MDRadialProgress\"",
+					"-l\"MSDynamicsDrawerViewController\"",
+					"-l\"MagicalRecord\"",
+					"-l\"Masonry\"",
+					"-l\"NSData+MD5Digest\"",
+					"-l\"NSString-Hashes\"",
+					"-l\"OpenUDID\"",
+					"-l\"PhotoTweaks\"",
+					"-l\"Qiniu\"",
+					"-l\"RATreeView\"",
+					"-l\"RMDateSelectionViewController\"",
+					"-l\"Reachability\"",
+					"-l\"ReactiveCocoa\"",
+					"-l\"SAMTextView\"",
+					"-l\"SCRecorder\"",
+					"-l\"SDWebImage\"",
+					"-l\"SocketRocket\"",
+					"-l\"StyledPageControl\"",
+					"-l\"UICKeyChainStore\"",
+					"-l\"UIColor-Utilities\"",
+					"-l\"UIDevice+HardwareName\"",
+					"-l\"UITableView+FDTemplateLayoutCell\"",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"pop\"",
+					"-l\"resolv\"",
+					"-l\"uiview-frame-helpers\"",
+					"-l\"xml2\"",
+					"-l\"xml2.2\"",
+					"-l\"z\"",
+					"-l\"z.1\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"GLKit\"",
+					"-weak_framework",
+					"\"Metal\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
 				PRODUCT_NAME = "研修宝";
-				PROVISIONING_PROFILE = "63da2c0d-a4ba-43e8-9b6e-24890fad34ec";
+				PROVISIONING_PROFILE = "f54bd88c-e14c-4d85-a882-a106ff414244";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1814,12 +1964,100 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "FaceShowApp/研修宝.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FaceShowApp/PrefixHeader.pch";
 				INFOPLIST_FILE = FaceShowApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FaceShowApp/3rdLib/个推",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-w",
+					"-l\"AFNetworking\"",
+					"-l\"AJNotificationView\"",
+					"-l\"ASIHTTPRequest\"",
+					"-l\"Aspects\"",
+					"-l\"Base64\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"CommonCrypto\"",
+					"-l\"DTCoreText\"",
+					"-l\"DTFoundation\"",
+					"-l\"FCUUID\"",
+					"-l\"FLAnimatedImage\"",
+					"-l\"FileMD5Hash\"",
+					"-l\"HappyDNS\"",
+					"-l\"IBActionSheet\"",
+					"-l\"IQKeyboardManager\"",
+					"-l\"JSONModel\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MDRadialProgress\"",
+					"-l\"MSDynamicsDrawerViewController\"",
+					"-l\"MagicalRecord\"",
+					"-l\"Masonry\"",
+					"-l\"NSData+MD5Digest\"",
+					"-l\"NSString-Hashes\"",
+					"-l\"OpenUDID\"",
+					"-l\"PhotoTweaks\"",
+					"-l\"Qiniu\"",
+					"-l\"RATreeView\"",
+					"-l\"RMDateSelectionViewController\"",
+					"-l\"Reachability\"",
+					"-l\"ReactiveCocoa\"",
+					"-l\"SAMTextView\"",
+					"-l\"SCRecorder\"",
+					"-l\"SDWebImage\"",
+					"-l\"SocketRocket\"",
+					"-l\"StyledPageControl\"",
+					"-l\"UICKeyChainStore\"",
+					"-l\"UIColor-Utilities\"",
+					"-l\"UIDevice+HardwareName\"",
+					"-l\"UITableView+FDTemplateLayoutCell\"",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"pop\"",
+					"-l\"resolv\"",
+					"-l\"uiview-frame-helpers\"",
+					"-l\"xml2\"",
+					"-l\"xml2.2\"",
+					"-l\"z\"",
+					"-l\"z.1\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"GLKit\"",
+					"-weak_framework",
+					"\"Metal\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
 				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "a6181b17-8a32-4005-b45d-b62c960aad78";

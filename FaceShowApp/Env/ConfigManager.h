@@ -38,4 +38,12 @@
 @property (nonatomic, strong) NSString<Optional> *YXSSOAuthQQAppKey;
 @property (nonatomic, strong) NSString<Optional> *YXSSOAuthWeixinAppid;
 @property (nonatomic, strong) NSString<Optional> *YXSSOAuthWeixinAppSecret;
+#pragma mark - 个推
+@property (nonatomic, strong) NSString<Optional> *GeTuiAppId_Dev;
+@property (nonatomic, strong) NSString<Optional> *GeTuiAppKey_Dev;
+@property (nonatomic, strong) NSString<Optional> *GeTuiAppSecret_Dev;
+
+@property (nonatomic, strong) NSString<Optional> *GeTuiAppId_Rel;
+@property (nonatomic, strong) NSString<Optional> *GeTuiAppKey_Rel;
+@property (nonatomic, strong) NSString<Optional> *GeTuiAppSecret_Rel;
 @end

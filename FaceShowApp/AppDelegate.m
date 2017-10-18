@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AppDelegateHelper.h"
 #import "UserMessageManager.h"
+#import "YXGeTuiManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -17,7 +18,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [GlobalUtils setupCore];    
+    [GlobalUtils setupCore];
+    [[YXGeTuiManager sharedInstance] registerGeTuiWithDelegate:self];
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     if ([UserManager sharedInstance].loginStatus) {
@@ -68,6 +70,32 @@
     [GlobalUtils clearCore];
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [GeTuiSdk resume]; // 后台恢复SDK 运行
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[YXGeTuiManager sharedInstance] registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    DDLogError(@"%@",[NSString stringWithFormat: @"Error: %@",err]);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    [[YXGeTuiManager sharedInstance] handleApnsContent:userInfo];
+    application.applicationIconBadgeNumber -= 1;
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark - Apns Delegate
+//- (void)apnsHomeworkList:(YXApnsContentModel *)apns {
+//    [self.appDelegateHelper apnsGoHomeworkList:apns];
+//}
+//
+//- (void)apnsHomework:(YXApnsContentModel *)apns {
+//    [self.appDelegateHelper apnsGoHomework:apns];
+//}
 
 @end
