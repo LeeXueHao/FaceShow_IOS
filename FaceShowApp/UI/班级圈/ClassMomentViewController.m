@@ -334,6 +334,7 @@
     return [self tableHeightForHeaderInSection:section];
 }
 - (CGFloat)tableHeightForHeaderInSection:(NSInteger)section {
+    //
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     CGFloat photoHeight = (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f) * 348.0f/590.0f;
     CGFloat contentHeight = [self sizeForTitle:moment.content?:@""];
@@ -351,6 +352,17 @@
     if (moment.albums.count > 0) {
         height += photoHeight + 15.0f;
     }
+#warning 只显示一张图片
+//    if (moment.albums.count > 0 && moment.albums.count < 2) {
+//        height += photoHeight + 15.0f;
+//    }else if (moment.albums.count >= 2 && moment.albums.count < 4 ){
+//        height = height + (SCREEN_WIDTH - 15.0f - 60.0f - 10.0f - 15.0f - 10.0f)/3.0f;
+//    }else if(moment.albums.count >= 4 && moment.albums.count <= 6){
+//        height = height + (SCREEN_WIDTH - 15.0f - 60.0f - 10.0f - 15.0f - 10.0f)/3.0f * 2.0f + 5.0f;
+//    }else {
+//        height = height + SCREEN_WIDTH - 15.0f - 60.0f - 10.0f - 15.0f - 10.0f + 10.0f;
+//    }
+
     height = height + 10.0f + 30.0f;
     if (moment.likes.count == 0 && moment.comments.count == 0) {
         height = height + 5.0f;

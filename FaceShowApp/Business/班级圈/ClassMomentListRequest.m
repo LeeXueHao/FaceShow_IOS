@@ -50,7 +50,6 @@
     }
     return _isOpen;
 }
-
 @end
 @implementation ClassMomentListRequestItem_Data
 @end
