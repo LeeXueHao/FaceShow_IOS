@@ -101,7 +101,7 @@
     } else if (type == InteractType_Comment) {
         self.iconImageView.image = [UIImage imageNamed:@"评论icon"];
     } else if (type == InteractType_SignIn) {
-        self.iconImageView.image = [UIImage imageNamed:@"评论icon"];
+        self.iconImageView.image = [UIImage imageNamed:@"签到icon"];
     }
 }
 

@@ -90,12 +90,9 @@
 }
 
 #pragma mark - Apns Delegate
-//- (void)apnsHomeworkList:(YXApnsContentModel *)apns {
-//    [self.appDelegateHelper apnsGoHomeworkList:apns];
-//}
-//
-//- (void)apnsHomework:(YXApnsContentModel *)apns {
-//    [self.appDelegateHelper apnsGoHomework:apns];
-//}
+- (void)handleApnsData:(YXApnsContentModel *)apns {
+    [self.appDelegateHelper handleApnsData:apns];
+}
+
 
 @end

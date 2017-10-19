@@ -11,6 +11,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) UIImageView *nextImageView;
 @end
 @implementation UserInfoDefaultCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -26,6 +27,27 @@
     _contenDictionary = contenDictionary;
     self.titleLabel.text = _contenDictionary[@"title"];
     self.contentLabel.text = _contenDictionary[@"content"];
+    id next = [contenDictionary valueForKey:@"next"];
+    if (next) {
+        self.nextImageView.hidden = NO;        
+        [self.nextImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_right).offset(-5.0f);
+            make.centerY.equalTo(self.contentView.mas_centerY);
+            make.size.mas_offset(CGSizeMake(30.0f, 30.0f));
+        }];
+        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.nextImageView.mas_left).offset(-5.0f);
+            make.centerY.equalTo(self.contentView.mas_centerY);
+            make.left.greaterThanOrEqualTo(self.titleLabel.mas_right).offset(15.0f);
+        }];
+    }else {
+        self.nextImageView.hidden = YES;
+        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+            make.centerY.equalTo(self.contentView.mas_centerY);
+            make.left.greaterThanOrEqualTo(self.titleLabel.mas_right).offset(15.0f);
+        }];
+    }
 }
 #pragma mark - setupUI
 - (void)setupUI {
@@ -43,6 +65,9 @@
     self.lineView = [[UIView alloc] init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self.contentView addSubview:self.lineView];
+    
+    self.nextImageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.nextImageView];
 }
 - (void)setupLayout {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,10 +87,33 @@
         make.height.mas_offset(1.0f);
     }];
     
+    [self.nextImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).offset(-5.0f);
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.size.mas_offset(CGSizeMake(30.0f, 30.0f));
+    }];
+    
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    if (!selected) {
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮正常态"];
+    }
+}
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    [super setHighlighted:highlighted animated:animated];
+    if (highlighted) {
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮点击态"];
+    }
+    else{
+        self.nextImageView.image = [UIImage imageNamed:@"进入页面按钮正常态"];
+    }
+}
+
 @end

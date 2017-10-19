@@ -17,14 +17,14 @@
 #pragma mark - set
 - (void)setChooseInteger:(NSInteger)chooseInteger{
     _chooseInteger = chooseInteger;
-    self.title = [NSString stringWithFormat:@"%ld/7",_chooseInteger];
+    self.title = [NSString stringWithFormat:@"%@/7",@(self.chooseInteger)];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
     [self setupLayout];
-    self.title = [NSString stringWithFormat:@"%ld/7",self.chooseInteger + 1];
+    self.title = [NSString stringWithFormat:@"%@/7",@(self.chooseInteger + 1)];
 
 }
 
@@ -70,7 +70,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PhotoChooseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoChooseCell" forIndexPath:indexPath];
-    cell.photoImage = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",(indexPath.row + 1)]];
+    cell.photoImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@",@(indexPath.row + 1)]];
     WEAK_SELF
     cell.photoChooseBlock = ^{
         STRONG_SELF

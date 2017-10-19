@@ -218,7 +218,9 @@
                                                                                                                   NSParagraphStyleAttributeName : style
                                                                                                                   }];
     self.courseTitleLabel.attributedText = attributedStr;
-    self.timeLabel.text = [course.startTime omitSecondOfFullDateString];
+    NSString *startTime = [course.startTime omitSecondOfFullDateString];
+    NSString *endTime = [course.endTime omitSecondOfFullDateString];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",startTime,endTime];
     self.authorLabel.text = isEmpty([self lecturesName]) ? @"暂无" : [self lecturesName];
     self.addressLabel.text = isEmpty(course.site) ? @"待定" : course.site;
     

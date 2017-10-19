@@ -9,4 +9,5 @@
 #import "BaseViewController.h"
 
 @interface UserInfoViewController : BaseViewController
+@property (nonatomic, strong) void(^completeBlock) (void);
 @end

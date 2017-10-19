@@ -50,6 +50,7 @@
 @property (nonatomic, strong) NSString<Optional> *lecturer;
 @property (nonatomic, strong) NSString<Optional> *site;
 @property (nonatomic, strong) NSString<Optional> *startTime;
+@property (nonatomic, strong) NSString<Optional> *endTime;
 @property (nonatomic, strong) NSString<Optional> *briefing;
 @property (nonatomic, strong) NSArray<GetCourseRequestItem_LecturerInfo, Optional> *lecturerInfos;
 @property (nonatomic, strong) NSArray<GetCourseRequestItem_AttachmentInfo, Optional> *attachmentInfos;

@@ -11,8 +11,7 @@
 #import "YXApnsContentModel.h"
 
 @protocol YXApnsDelegate <NSObject>
-- (void)apnsHomeworkList:(YXApnsContentModel *)apns;    // 某学科作业列表
-- (void)apnsHomework:(YXApnsContentModel *)apns;        // 作业Tab首页
+- (void)handleApnsData:(YXApnsContentModel *)apns;
 @end
 
 @interface YXGeTuiManager : NSObject <GeTuiSdkDelegate>

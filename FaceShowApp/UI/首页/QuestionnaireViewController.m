@@ -22,8 +22,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *submitButton;
 @property (nonatomic, strong) ErrorView *errorView;
-@property (nonatomic, strong) NSString *stepId;
-@property (nonatomic, assign) InteractType interactType;
 @property (nonatomic, strong) GetVoteRequest *voteRequest;
 @property (nonatomic, strong) GetQuestionnaireRequest *questionnaireRequest;
 @property (nonatomic, strong) QuestionRequestItem *requestItem;
@@ -214,9 +212,7 @@
             }
             [self.view.window nyx_showToast:@"提交成功"];
             BLOCK_EXEC(self.completeBlock);
-            QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:self.stepId];
-            vc.name = self.name;
-            [self.navigationController pushViewController:vc animated:YES];
+            [self goVoteResult];
         }];
     }else {
         [self.saveQuestionnaireRequest stopRequest];
@@ -234,9 +230,7 @@
             }
             [self.view.window nyx_showToast:@"提交成功"];
             BLOCK_EXEC(self.completeBlock);
-            QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:self.stepId interactType:self.interactType];
-            vc.name = self.name;
-            [self.navigationController pushViewController:vc animated:YES];
+            [self goQuestionnaireResult];
         }];
     }
 }
@@ -247,6 +241,18 @@
     }else {
         [self.view nyx_showToast:error.localizedDescription];
     }
+}
+
+- (void)goVoteResult {
+    QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:self.stepId];
+    vc.name = self.name;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)goQuestionnaireResult {
+    QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:self.stepId interactType:self.interactType];
+    vc.name = self.name;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)refreshSubmitButton {

@@ -94,8 +94,8 @@
 - (void)nyx_setupRightWithTitle:(NSString *)title action:(ActionBlock)action{
     UIButton *b = [[UIButton alloc]init];
     [b setTitle:title forState:UIControlStateNormal];
-    [b setTitleColor:[UIColor colorWithHexString:@"4691a6"] forState:UIControlStateNormal];
-    b.titleLabel.font = [UIFont systemFontOfSize:14];
+    [b setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    b.titleLabel.font = [UIFont systemFontOfSize:15];
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:b.titleLabel.font}];
     b.frame = CGRectMake(0, 0, ceilf(size.width), ceilf(size.height));
     [self nyx_adjustFrameForView:b];
@@ -136,7 +136,7 @@
 
 - (UIBarButtonItem *)nyx_rightNegativeBarButtonItem{
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -16;
+    negativeSpacer.width = -11;
     return negativeSpacer;
 }
 

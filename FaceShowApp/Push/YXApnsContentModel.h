@@ -8,17 +8,11 @@
 
 #import "JSONModel.h"
 
+//定义详见 http://wiki.yanxiu.com/pages/viewpage.action?pageId=12324155
+
 @interface YXApnsContentModel : JSONModel
-@property (nonatomic, copy) NSString<Optional> *msg_type;
-@property (nonatomic, copy) NSString<Optional> *name;
-@property (nonatomic, copy) NSString<Optional> *uid;
-@property (nonatomic, copy) NSString<Optional> *msg_title;
-@property (nonatomic, copy) NSString<Optional> *payload;
-
-//@property (nonatomic, copy) NSString<Ignore> *groupId;
-//
-//@property (nonatomic, copy) NSString<Ignore> *paperId;
-//@property (nonatomic, copy) NSString<Ignore> *paperTitle;
-
-
+@property (nonatomic, copy) NSString<Optional> *content;
+@property (nonatomic, copy) NSString<Optional> *objectId;
+@property (nonatomic, copy) NSString<Optional> *type;
+@property (nonatomic, copy) NSString<Optional> *title;
 @end

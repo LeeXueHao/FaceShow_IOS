@@ -169,6 +169,24 @@
 		7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */; };
 		7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544C1F972DFD0053DB12 /* libz.tbd */; };
 		7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544E1F972E070053DB12 /* libc++.tbd */; };
+		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
+		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
+		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
+		7CEFC7B21F98926B001D8C84 /* MineActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7AA1F98926A001D8C84 /* MineActionView.m */; };
+		7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7AE1F98926B001D8C84 /* MinePasswordInputView.m */; };
+		7CEFC7B61F989C1C001D8C84 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7B51F989C1C001D8C84 /* ForgotPasswordViewController.m */; };
+		7CEFC7BA1F998E20001D8C84 /* SexItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7B91F998E20001D8C84 /* SexItemView.m */; };
+		7CEFC7BD1F9990CF001D8C84 /* ModifySexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7BC1F9990CF001D8C84 /* ModifySexViewController.m */; };
+		7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7BF1F999A88001D8C84 /* ModifyNameViewController.m */; };
+		7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7C21F99A267001D8C84 /* UpdateUserInfoRequest.m */; };
+		7CEFC7E81F99EE70001D8C84 /* GetSigninRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7E71F99EE70001D8C84 /* GetSigninRequest.m */; };
+		7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7EA1F9D78FF001D8C84 /* GetVerifyCodeRequest.m */; };
+		7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7ED1F9D7CCF001D8C84 /* ResetPasswordRequest.m */; };
+		7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7F11F9DA351001D8C84 /* ApnsSignInDetailViewController.m */; };
+		7CEFC7F51F9DA514001D8C84 /* ApnsQuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7F41F9DA514001D8C84 /* ApnsQuestionnaireViewController.m */; };
+		7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7F71F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m */; };
+		7CEFC7FB1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7FA1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m */; };
+		7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */; };
 		9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */; };
 		9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */; };
 		9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */; };
@@ -516,6 +534,42 @@
 		7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7C4D544C1F972DFD0053DB12 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7C4D544E1F972E070053DB12 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
+		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
+		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
+		7CEFC7A81F98926A001D8C84 /* MinePasswordInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinePasswordInputView.h; sourceTree = "<group>"; };
+		7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineVerifyCodeInputView.m; sourceTree = "<group>"; };
+		7CEFC7AA1F98926A001D8C84 /* MineActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineActionView.m; sourceTree = "<group>"; };
+		7CEFC7AB1F98926A001D8C84 /* MineActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineActionView.h; sourceTree = "<group>"; };
+		7CEFC7AC1F98926B001D8C84 /* MinePhoneInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinePhoneInputView.h; sourceTree = "<group>"; };
+		7CEFC7AD1F98926B001D8C84 /* MineVerifyCodeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineVerifyCodeInputView.h; sourceTree = "<group>"; };
+		7CEFC7AE1F98926B001D8C84 /* MinePasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePasswordInputView.m; sourceTree = "<group>"; };
+		7CEFC7B41F989C1C001D8C84 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		7CEFC7B51F989C1C001D8C84 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		7CEFC7B81F998E20001D8C84 /* SexItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SexItemView.h; sourceTree = "<group>"; };
+		7CEFC7B91F998E20001D8C84 /* SexItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SexItemView.m; sourceTree = "<group>"; };
+		7CEFC7BB1F9990CF001D8C84 /* ModifySexViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifySexViewController.h; sourceTree = "<group>"; };
+		7CEFC7BC1F9990CF001D8C84 /* ModifySexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifySexViewController.m; sourceTree = "<group>"; };
+		7CEFC7BE1F999A88001D8C84 /* ModifyNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyNameViewController.h; sourceTree = "<group>"; };
+		7CEFC7BF1F999A88001D8C84 /* ModifyNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyNameViewController.m; sourceTree = "<group>"; };
+		7CEFC7C11F99A267001D8C84 /* UpdateUserInfoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoRequest.h; sourceTree = "<group>"; };
+		7CEFC7C21F99A267001D8C84 /* UpdateUserInfoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateUserInfoRequest.m; sourceTree = "<group>"; };
+		7CEFC7E61F99EE70001D8C84 /* GetSigninRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetSigninRequest.h; sourceTree = "<group>"; };
+		7CEFC7E71F99EE70001D8C84 /* GetSigninRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetSigninRequest.m; sourceTree = "<group>"; };
+		7CEFC7E91F9D78FF001D8C84 /* GetVerifyCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetVerifyCodeRequest.h; sourceTree = "<group>"; };
+		7CEFC7EA1F9D78FF001D8C84 /* GetVerifyCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetVerifyCodeRequest.m; sourceTree = "<group>"; };
+		7CEFC7EC1F9D7CCF001D8C84 /* ResetPasswordRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordRequest.h; sourceTree = "<group>"; };
+		7CEFC7ED1F9D7CCF001D8C84 /* ResetPasswordRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordRequest.m; sourceTree = "<group>"; };
+		7CEFC7F01F9DA351001D8C84 /* ApnsSignInDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsSignInDetailViewController.h; sourceTree = "<group>"; };
+		7CEFC7F11F9DA351001D8C84 /* ApnsSignInDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsSignInDetailViewController.m; sourceTree = "<group>"; };
+		7CEFC7F31F9DA514001D8C84 /* ApnsQuestionnaireViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsQuestionnaireViewController.h; sourceTree = "<group>"; };
+		7CEFC7F41F9DA514001D8C84 /* ApnsQuestionnaireViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsQuestionnaireViewController.m; sourceTree = "<group>"; };
+		7CEFC7F61F9DBE7B001D8C84 /* ApnsMessageDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsMessageDetailViewController.h; sourceTree = "<group>"; };
+		7CEFC7F71F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsMessageDetailViewController.m; sourceTree = "<group>"; };
+		7CEFC7F91F9DC36D001D8C84 /* ApnsCourseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsCourseDetailViewController.h; sourceTree = "<group>"; };
+		7CEFC7FA1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsCourseDetailViewController.m; sourceTree = "<group>"; };
+		7CEFC7FC1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsQuestionnaireResultViewController.h; sourceTree = "<group>"; };
+		7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsQuestionnaireResultViewController.m; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishMomentViewController.h; sourceTree = "<group>"; };
 		9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishMomentViewController.m; sourceTree = "<group>"; };
@@ -606,6 +660,10 @@
 				43210E571F724B3D0049C381 /* LoginRequest.m */,
 				438E2A751F739B8800800020 /* GetUserInfoRequest.h */,
 				438E2A761F739B8800800020 /* GetUserInfoRequest.m */,
+				7CEFC7E91F9D78FF001D8C84 /* GetVerifyCodeRequest.h */,
+				7CEFC7EA1F9D78FF001D8C84 /* GetVerifyCodeRequest.m */,
+				7CEFC7EC1F9D7CCF001D8C84 /* ResetPasswordRequest.h */,
+				7CEFC7ED1F9D7CCF001D8C84 /* ResetPasswordRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1002,6 +1060,10 @@
 				92C569991F738D180025815B /* UploadHeadImgRequest.m */,
 				92C5699B1F73AF780025815B /* UpdateAvatarRequest.h */,
 				92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */,
+				7CEFC7C11F99A267001D8C84 /* UpdateUserInfoRequest.h */,
+				7CEFC7C21F99A267001D8C84 /* UpdateUserInfoRequest.m */,
+				7CEFC7E61F99EE70001D8C84 /* GetSigninRequest.h */,
+				7CEFC7E71F99EE70001D8C84 /* GetSigninRequest.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1108,6 +1170,7 @@
 		7C2519781F68FE900001B577 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7CEFC7EF1F9DA31A001D8C84 /* 推送 */,
 				7C25197A1F68FE900001B577 /* 框架 */,
 				7C2519A91F690D550001B577 /* 登录注册 */,
 				7C25197F1F68FE900001B577 /* 首页 */,
@@ -1130,6 +1193,10 @@
 				4378DF931F6F62F9005CFE56 /* SignInRecordViewController.m */,
 				4378DF9C1F6F6F57005CFE56 /* SignInDetailViewController.h */,
 				4378DF9D1F6F6F57005CFE56 /* SignInDetailViewController.m */,
+				7CEFC7BB1F9990CF001D8C84 /* ModifySexViewController.h */,
+				7CEFC7BC1F9990CF001D8C84 /* ModifySexViewController.m */,
+				7CEFC7BE1F999A88001D8C84 /* ModifyNameViewController.h */,
+				7CEFC7BF1F999A88001D8C84 /* ModifyNameViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1241,8 +1308,11 @@
 		7C2519A91F690D550001B577 /* 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
+				7CEFC7B71F989F41001D8C84 /* View */,
 				7C2519AA1F690D850001B577 /* LoginViewController.h */,
 				7C2519AB1F690D860001B577 /* LoginViewController.m */,
+				7CEFC7B41F989C1C001D8C84 /* ForgotPasswordViewController.h */,
+				7CEFC7B51F989C1C001D8C84 /* ForgotPasswordViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1336,6 +1406,40 @@
 			name = "日程";
 			sourceTree = "<group>";
 		};
+		7CEFC7B71F989F41001D8C84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CEFC7AB1F98926A001D8C84 /* MineActionView.h */,
+				7CEFC7AA1F98926A001D8C84 /* MineActionView.m */,
+				7CEFC7A71F98926A001D8C84 /* MineInputView.h */,
+				7CEFC7A51F98926A001D8C84 /* MineInputView.m */,
+				7CEFC7AC1F98926B001D8C84 /* MinePhoneInputView.h */,
+				7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */,
+				7CEFC7AD1F98926B001D8C84 /* MineVerifyCodeInputView.h */,
+				7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */,
+				7CEFC7A81F98926A001D8C84 /* MinePasswordInputView.h */,
+				7CEFC7AE1F98926B001D8C84 /* MinePasswordInputView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7CEFC7EF1F9DA31A001D8C84 /* 推送 */ = {
+			isa = PBXGroup;
+			children = (
+				7CEFC7F01F9DA351001D8C84 /* ApnsSignInDetailViewController.h */,
+				7CEFC7F11F9DA351001D8C84 /* ApnsSignInDetailViewController.m */,
+				7CEFC7F31F9DA514001D8C84 /* ApnsQuestionnaireViewController.h */,
+				7CEFC7F41F9DA514001D8C84 /* ApnsQuestionnaireViewController.m */,
+				7CEFC7FC1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.h */,
+				7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */,
+				7CEFC7F61F9DBE7B001D8C84 /* ApnsMessageDetailViewController.h */,
+				7CEFC7F71F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m */,
+				7CEFC7F91F9DC36D001D8C84 /* ApnsCourseDetailViewController.h */,
+				7CEFC7FA1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m */,
+			);
+			path = "推送";
+			sourceTree = "<group>";
+		};
 		9220840E1F6BB6A700F8AAC6 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,6 +1459,8 @@
 				922084281F6BC4D200F8AAC6 /* UserInfoHeaderCell.m */,
 				9220842A1F6BC4F000F8AAC6 /* UserInfoDefaultCell.h */,
 				9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */,
+				7CEFC7B81F998E20001D8C84 /* SexItemView.h */,
+				7CEFC7B91F998E20001D8C84 /* SexItemView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1594,6 +1700,7 @@
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
+				7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */,
 				435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */,
 				7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */,
 				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
@@ -1607,19 +1714,24 @@
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
 				9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
+				7CEFC7FB1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m in Sources */,
 				4378DFAC1F6FA4CB005CFE56 /* SignInRecordHeaderView.m in Sources */,
 				922084261F6BC47600F8AAC6 /* UserInfoViewController.m in Sources */,
 				43210E581F724B3D0049C381 /* LoginRequest.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
+				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */,
+				7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */,
+				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,
 				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
 				7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */,
+				7CEFC7BA1F998E20001D8C84 /* SexItemView.m in Sources */,
 				43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */,
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
@@ -1639,15 +1751,19 @@
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
+				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
 				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
 				7C2519431F68EB780001B577 /* ExtendTextField.m in Sources */,
 				7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */,
 				7C212DEB1F6B72330007AE01 /* CourseCommentHeaderView.m in Sources */,
 				7C2519931F6900610001B577 /* PagedListFetcherBase.m in Sources */,
+				7CEFC7E81F99EE70001D8C84 /* GetSigninRequest.m in Sources */,
 				43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */,
 				92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */,
 				923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */,
+				7CEFC7B21F98926B001D8C84 /* MineActionView.m in Sources */,
+				7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */,
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
@@ -1670,10 +1786,14 @@
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
+				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
+				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
+				7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */,
 				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
 				7C24E1E61F72041D00A6921B /* GetCurrentClazsRequest.m in Sources */,
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
+				7CEFC7B61F989C1C001D8C84 /* ForgotPasswordViewController.m in Sources */,
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
@@ -1682,11 +1802,13 @@
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
+				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
 				43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,
 				7C25198C1F69003A0001B577 /* SimpleAlertButton.m in Sources */,
 				7C2519A51F690C840001B577 /* AppDelegateHelper.m in Sources */,
+				7CEFC7F51F9DA514001D8C84 /* ApnsQuestionnaireViewController.m in Sources */,
 				7C212DF41F6BA72F0007AE01 /* MainPageTopView.m in Sources */,
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */,
@@ -1717,6 +1839,7 @@
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
 				7C24E1FB1F72575E00A6921B /* GetVoteRequest.m in Sources */,
+				7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
 				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
 				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
@@ -1729,6 +1852,7 @@
 				432F90BF1F75050700FCF655 /* GetScheduleListRequest.m in Sources */,
 				4378DF941F6F62F9005CFE56 /* SignInRecordViewController.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
+				7CEFC7BD1F9990CF001D8C84 /* ModifySexViewController.m in Sources */,
 				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,

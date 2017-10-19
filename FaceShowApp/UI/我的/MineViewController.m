@@ -90,6 +90,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         UserInfoViewController *VC = [[UserInfoViewController alloc] init];
+        WEAK_SELF
+        [VC setCompleteBlock:^{
+            STRONG_SELF
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
         [self.navigationController pushViewController:VC animated:YES];
 //        UIViewController *VC = [[NSClassFromString(@"PhotoChooseViewController") alloc] init];
 //        [self.navigationController pushViewController:VC animated:YES];

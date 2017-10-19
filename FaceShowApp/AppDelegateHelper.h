@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YXApnsContentModel.h"
 
 @interface AppDelegateHelper : NSObject
 
@@ -19,5 +20,8 @@
 // 登录成功/失败的UI处理
 - (void)handleLoginSuccess;
 - (void)handleLogoutSuccess;
+
+// Apns
+- (void)handleApnsData:(YXApnsContentModel *)apns;
 
 @end

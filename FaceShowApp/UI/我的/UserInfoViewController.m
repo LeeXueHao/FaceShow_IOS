@@ -15,6 +15,8 @@
 #import "UserModel.h"
 #import "UploadHeadImgRequest.h"
 #import "UpdateAvatarRequest.h"
+#import "ModifySexViewController.h"
+#import "ModifyNameViewController.h"
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
@@ -33,9 +35,9 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我";
     self.contentMutableArray =
-    [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无"} mutableCopy],
+    [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
-       [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无"} mutableCopy],
+       [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stageName?:@"暂无"} mutableCopy],
        [@{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subjectName?:@"暂无"} mutableCopy]] mutableCopy];
     [self setupUI];
@@ -126,6 +128,25 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         [self showAlertView];
+    }else if (indexPath.section == 3) {
+        ModifySexViewController *vc = [[ModifySexViewController alloc]init];
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            [self.contentMutableArray[2] setValue:[UserManager sharedInstance].userModel.sexName forKey:@"content"];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.section == 1) {
+        ModifyNameViewController *vc = [[ModifyNameViewController alloc]init];
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            [self.contentMutableArray[0] setValue:[UserManager sharedInstance].userModel.realName forKey:@"content"];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            BLOCK_EXEC(self.completeBlock);
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

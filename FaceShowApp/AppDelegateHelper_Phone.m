@@ -15,6 +15,15 @@
 #import "YXTestViewController.h"
 #import "FSTabBarController.h"
 #import "UserMessageManager.h"
+#import "GetSigninRequest.h"
+#import "ApnsSignInDetailViewController.h"
+#import "ApnsQuestionnaireViewController.h"
+#import "ApnsMessageDetailViewController.h"
+#import "ApnsCourseDetailViewController.h"
+
+@interface AppDelegateHelper_Phone()
+@property (nonatomic, strong) GetSigninRequest *getSigninRequest;
+@end
 
 @implementation AppDelegateHelper_Phone
 
@@ -90,5 +99,89 @@
     [self.window.rootViewController presentViewController:[self loginViewController] animated:YES completion:nil];
 }
 
+#pragma mark - Apns
+- (void)handleApnsData:(YXApnsContentModel *)apns {
+    NSInteger type = apns.type.integerValue;
+    if (type == 100) {
+        [self goSignInWithData:apns];
+    }else if (type == 101) {
+        [self goVoteWithData:apns];
+    }else if (type == 102) {
+        [self goQuestionnaireWithData:apns];
+    }else if (type == 120) {
+        [self goNoticeDetailWithData:apns];
+    }else if (type == 130) {
+        [self goClassWithData:apns];
+    }else if (type == 131) {
+        [self goResourceWithData:apns];
+    }else if (type == 140) {
+        [self goCourseDetailWithData:apns];
+    }
+}
+
+- (void)goSignInWithData:(YXApnsContentModel *)data {
+    [self.getSigninRequest stopRequest];
+    self.getSigninRequest = [[GetSigninRequest alloc]init];
+    self.getSigninRequest.stepId = data.objectId;
+    WEAK_SELF
+    [self.getSigninRequest startRequestWithRetClass:[GetSigninRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            return;
+        }
+        GetSigninRequestItem *item = retItem;
+        ApnsSignInDetailViewController *signInDetailVC = [[ApnsSignInDetailViewController alloc] init];
+        signInDetailVC.signIn = item.data.signIn;
+        FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:signInDetailVC];
+        [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+    }];
+}
+
+- (void)goVoteWithData:(YXApnsContentModel *)data {
+    ApnsQuestionnaireViewController *vc = [[ApnsQuestionnaireViewController alloc]initWithStepId:data.objectId interactType:InteractType_Vote];
+    vc.name = data.title;
+    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)goQuestionnaireWithData:(YXApnsContentModel *)data {
+    ApnsQuestionnaireViewController *vc = [[ApnsQuestionnaireViewController alloc]initWithStepId:data.objectId interactType:InteractType_Questionare];
+    vc.name = data.title;
+    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)goNoticeDetailWithData:(YXApnsContentModel *)data {
+    ApnsMessageDetailViewController *vc = [[ApnsMessageDetailViewController alloc]init];
+    vc.noticeId = data.objectId;
+    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)goClassWithData:(YXApnsContentModel *)data {
+    FSTabBarController *tabBarController = (FSTabBarController *)self.window.rootViewController;
+    if ([tabBarController isKindOfClass:[FSTabBarController class]]) {
+        tabBarController.selectedIndex = 0;
+    }
+}
+
+- (void)goResourceWithData:(YXApnsContentModel *)data {
+    
+}
+
+- (void)goCourseDetailWithData:(YXApnsContentModel *)data {
+    ApnsCourseDetailViewController *vc = [[ApnsCourseDetailViewController alloc]init];
+    vc.courseId = data.objectId;
+    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (UIViewController *)lastPresentedViewController {
+    UIViewController *vc = self.window.rootViewController;
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+    }
+    return vc;
+}
 
 @end

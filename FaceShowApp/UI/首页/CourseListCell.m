@@ -109,7 +109,9 @@
 - (void)setItem:(GetCourseListRequestItem_coursesList *)item {
     _item = item;
     self.titleLabel.text = item.courseName;
-    self.timeLabel.text = [item.startTime omitSecondOfFullDateString];
+    NSString *startTime = [item.startTime omitSecondOfFullDateString];
+    NSString *endTime = [item.endTime omitSecondOfFullDateString];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",startTime,endTime];
     self.teacherLabel.text = isEmpty([self lecturesName]) ? @"暂无" : [self lecturesName];
     self.placeLabel.text = isEmpty(item.site) ? @"待定" : item.site;
 }

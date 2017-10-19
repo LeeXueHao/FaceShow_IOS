@@ -155,14 +155,7 @@
     self.handleddByAPNS = YES;
     
     YXApnsContentModel *apns = [[YXApnsContentModel alloc]initWithString:[dict valueForKey:@"payload"] error:nil];
-    // 跳转科目作业列表页
-    if ([apns.msg_type intValue] == 1) {
-        SAFE_CALL_OneParam(self.delegate, apnsHomeworkList, apns);
-    }
-    // 跳转作业首页
-    if ([apns.msg_type intValue] == 2) {
-        SAFE_CALL_OneParam(self.delegate, apnsHomework, apns);
-    }
+    SAFE_CALL_OneParam(self.delegate, handleApnsData, apns);
 }
 
 - (void)showNotificationView:(YXApnsContentModel *)apns {
@@ -173,12 +166,12 @@
     CGFloat textWidth = width - 30 - 4;
     
     UILabel *alertTitle = [[UILabel alloc] init];
-    alertTitle.text = apns.msg_title;
+    alertTitle.text = apns.content;
     alertTitle.textColor = [UIColor whiteColor];
     alertTitle.font = [UIFont systemFontOfSize:16];
     alertTitle.numberOfLines = 0;
     alertTitle.textAlignment = NSTextAlignmentCenter;
-    CGSize titleSize = [apns.msg_title boundingRectWithSize:CGSizeMake(textWidth , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:alertTitle.font} context:nil].size;
+    CGSize titleSize = [apns.content boundingRectWithSize:CGSizeMake(textWidth , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:alertTitle.font} context:nil].size;
     self.notificationViewHeight = titleSize.height + 50;
     
     UIView *notificationView = [[UIView alloc] init];
@@ -208,14 +201,7 @@
     [[tapRecognizer rac_gestureSignal] subscribeNext:^(UIPanGestureRecognizer *paramSender) {
         STRONG_SELF;
         [self hideNotificationView:notificationView];
-        // 跳转科目作业列表页
-        if ([apns.msg_type intValue] == 1) {
-            SAFE_CALL_OneParam(self.delegate, apnsHomeworkList, apns);
-        }
-        // 跳转作业首页
-        if ([apns.msg_type intValue] == 2) {
-            SAFE_CALL_OneParam(self.delegate, apnsHomework, apns);
-        }
+        SAFE_CALL_OneParam(self.delegate, handleApnsData, apns);
     }];
     
     // auto hide after 2 seconds

@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "LoginDataManager.h"
+#import "ForgotPasswordViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -143,7 +144,7 @@
     
     UIButton *touristBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     touristBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    [touristBtn setTitle:@"游客登录" forState:UIControlStateNormal];
+    [touristBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
     [touristBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
     [touristBtn addTarget:self action:@selector(touristBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:touristBtn];
@@ -151,7 +152,7 @@
         make.centerX.mas_equalTo(0);
         make.bottom.mas_equalTo(-44);
     }];
-    touristBtn.hidden = YES;
+//    touristBtn.hidden = YES;
 }
 
 #pragma mark - setupObserver
@@ -190,17 +191,19 @@
 }
 
 - (void)touristBtnAction:(UIButton *)sender {
-    [self.view nyx_startLoading];
-    WEAK_SELF
-    [LoginDataManager loginWithName:@"15810653916" password:@"123456" completeBlock:^(NSError *error) {
-        STRONG_SELF
-        [self.view nyx_stopLoading];
-        if (error) {
-            [self.view nyx_showToast:error.localizedDescription];
-            return;
-        }
-        [UserManager sharedInstance].loginStatus = YES;
-    }];
+    ForgotPasswordViewController *vc = [[ForgotPasswordViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+//    [self.view nyx_startLoading];
+//    WEAK_SELF
+//    [LoginDataManager loginWithName:@"15810653916" password:@"123456" completeBlock:^(NSError *error) {
+//        STRONG_SELF
+//        [self.view nyx_stopLoading];
+//        if (error) {
+//            [self.view nyx_showToast:error.localizedDescription];
+//            return;
+//        }
+//        [UserManager sharedInstance].loginStatus = YES;
+//    }];
 }
 
 #pragma mark - UITextFieldDelegate
