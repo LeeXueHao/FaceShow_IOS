@@ -32,7 +32,7 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.title = @"专家介绍";
+    self.title = @"讲师介绍";
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
     self.backgroundImageView = [[UIImageView alloc] init];

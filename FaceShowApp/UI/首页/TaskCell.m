@@ -7,6 +7,7 @@
 //
 
 #import "TaskCell.h"
+#import "FSDataMappingTable.h"
 
 @interface TaskCell ()
 
@@ -15,7 +16,7 @@
 @property (nonatomic, strong) UIImageView *statusImageView;
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) UIView *lineView;
-
+@property (nonatomic, strong) UIImageView *iconImageView;
 @end
 
 @implementation TaskCell
@@ -48,12 +49,20 @@
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     
+    self.iconImageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.iconImageView];
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.centerY.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
+    
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(self.iconImageView.mas_right).mas_offset(15);
         make.top.mas_equalTo(self.statusImageView.mas_top).offset(-2);
         make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
     }];
@@ -84,6 +93,16 @@
     self.timeLabel.text = [task.createTime omitSecondOfFullDateString];
     self.statusLabel.text = task.stepFinished.boolValue ? @"已完成" : @"未完成";
     self.statusImageView.image = [UIImage imageNamed:task.stepFinished.boolValue ? @"已完成" : @"未完成"];
+    InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
+    if (type == InteractType_Vote) {
+        self.iconImageView.image = [UIImage imageNamed:@"投票icon"];
+    } else if (type == InteractType_Questionare) {
+        self.iconImageView.image = [UIImage imageNamed:@"问卷"];
+    } else if (type == InteractType_Comment) {
+        self.iconImageView.image = [UIImage imageNamed:@"评论icon"];
+    } else if (type == InteractType_SignIn) {
+        self.iconImageView.image = [UIImage imageNamed:@"评论icon"];
+    }
 }
 
 @end

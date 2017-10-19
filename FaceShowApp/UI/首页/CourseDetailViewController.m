@@ -140,7 +140,7 @@
     if (indexPath.section == 0) {
         GetCourseRequestItem_LecturerInfo *info = self.dataArray[0][indexPath.row];
         cell.title = info.lecturerName;
-        cell.iconName = @"专家";
+        cell.iconName = @"讲师";
     } else if (indexPath.section == 1) {
         GetCourseRequestItem_AttachmentInfo *info = self.dataArray[1][indexPath.row];
         cell.title = info.resName;

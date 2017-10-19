@@ -88,7 +88,7 @@
     }];
     
     UILabel *teacherTagLabel = [timeTagLabel clone];
-    teacherTagLabel.text = @"专家";
+    teacherTagLabel.text = @"讲师";
     [self addSubview:teacherTagLabel];
     [teacherTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(timeTagLabel.mas_left);
