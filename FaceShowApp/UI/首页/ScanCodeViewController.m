@@ -148,7 +148,9 @@
         [self.view nyx_startLoading];
         [self.request stopRequest];
         self.request = [[UserSignInRequest alloc] init];
-        self.request.stepId = [stringValue substringFromIndex:7];
+        NSArray *array = [stringValue componentsSeparatedByString:@"&"];
+        NSString *step = array.firstObject;
+        self.request.stepId = [step substringFromIndex:7];
         WEAK_SELF
         [self.request startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
