@@ -151,6 +151,10 @@
         NSArray *array = [stringValue componentsSeparatedByString:@"&"];
         NSString *step = array.firstObject;
         self.request.stepId = [step substringFromIndex:7];
+        if ([stringValue containsString:@"timestamp="]) {
+            NSString *timestamp = array[1];
+            self.request.timestamp = [timestamp substringFromIndex:10];
+        }
         WEAK_SELF
         [self.request startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
