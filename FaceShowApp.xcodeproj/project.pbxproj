@@ -223,6 +223,7 @@
 		92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */; };
 		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
 		9AE85F0606083656987F93EB /* libPods-FaceShowApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */; };
+		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -640,6 +641,8 @@
 		92EF77141F6FAA2F007C3835 /* ClassMomentLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentLikeView.h; sourceTree = "<group>"; };
 		92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentLikeView.m; sourceTree = "<group>"; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F7F982551F9F3F0C00282572 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		F7F982571F9F3F1C00282572 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -647,6 +650,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */,
 				7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */,
 				7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */,
 				7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */,
@@ -1543,6 +1547,8 @@
 		E07FF1E38E78A513F51FA97A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F7F982571F9F3F1C00282572 /* UserNotificationsUI.framework */,
+				F7F982551F9F3F0C00282572 /* UserNotifications.framework */,
 				7C4D544E1F972E070053DB12 /* libc++.tbd */,
 				7C4D544C1F972DFD0053DB12 /* libz.tbd */,
 				7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */,
@@ -1936,7 +1942,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1979,7 +1985,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
