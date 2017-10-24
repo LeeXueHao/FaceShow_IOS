@@ -105,11 +105,13 @@
         STRONG_SELF
         NSDictionary *dic = (NSDictionary *)x.object;
         NSIndexPath *currentIndex = [dic objectForKey:@"kSignInRecordCurrentIndexPath"];
-        NSString *signInTime = [dic valueForKey:@"kCurrentIndexPathSucceedSigninTime"];
-        GetSignInRecordListRequestItem_SignIn *signIn = self.signIn;
-        GetSignInRecordListRequestItem_UserSignIn *userSignIn = [GetSignInRecordListRequestItem_UserSignIn new];
-        userSignIn.signinTime = signInTime;
-        signIn.userSignIn = userSignIn;
+//        NSString *signInTime = [dic valueForKey:@"kCurrentIndexPathSucceedSigninTime"];
+//        GetSignInRecordListRequestItem_SignIn *signIn = self.signIn;
+//        GetSignInRecordListRequestItem_UserSignIn *userSignIn = [GetSignInRecordListRequestItem_UserSignIn new];
+//        userSignIn.signinTime = signInTime;
+//        signIn.userSignIn = userSignIn;
+        GetTaskRequestItem_Task *task = self.dataArray[currentIndex.row];
+        task.stepFinished = @"1";
         [self.tableView reloadRowsAtIndexPaths:@[currentIndex] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }

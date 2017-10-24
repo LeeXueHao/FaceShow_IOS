@@ -7,6 +7,7 @@
 //
 
 #import "ScanCodeResultViewController.h"
+#import "SignInDetailViewController.h"
 
 @interface ScanCodeResultViewController ()
 
@@ -134,7 +135,11 @@
 - (void)backAction {
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
         if (self.currentIndexPath) {
-            [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+            if ([self.navigationController.viewControllers[1] isKindOfClass:[SignInDetailViewController class]]) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else {
+                [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+            }
             if (self.error.code.integerValue != 210414) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:@{
                                                                                                                        @"kSignInRecordCurrentIndexPath" : self.currentIndexPath, @"kCurrentIndexPathSucceedSigninTime" : self.data.signinTime}];

@@ -188,6 +188,7 @@
 		7CEFC7FB1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7FA1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m */; };
 		7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */; };
 		7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC8001F9ED915001D8C84 /* ApnsResourceDisplayViewController.m */; };
+		7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC8021F9F2598001D8C84 /* LoginUtils.m */; };
 		9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */; };
 		9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */; };
 		9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */; };
@@ -573,6 +574,8 @@
 		7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsQuestionnaireResultViewController.m; sourceTree = "<group>"; };
 		7CEFC7FF1F9ED915001D8C84 /* ApnsResourceDisplayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsResourceDisplayViewController.h; sourceTree = "<group>"; };
 		7CEFC8001F9ED915001D8C84 /* ApnsResourceDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsResourceDisplayViewController.m; sourceTree = "<group>"; };
+		7CEFC8021F9F2598001D8C84 /* LoginUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginUtils.m; sourceTree = "<group>"; };
+		7CEFC8031F9F2598001D8C84 /* LoginUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginUtils.h; sourceTree = "<group>"; };
 		8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishMomentViewController.h; sourceTree = "<group>"; };
 		9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishMomentViewController.m; sourceTree = "<group>"; };
@@ -1116,6 +1119,8 @@
 				43210E551F724B050049C381 /* Request */,
 				43210E591F724ECE0049C381 /* LoginDataManager.h */,
 				43210E5A1F724ECE0049C381 /* LoginDataManager.m */,
+				7CEFC8031F9F2598001D8C84 /* LoginUtils.h */,
+				7CEFC8021F9F2598001D8C84 /* LoginUtils.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1823,6 +1828,7 @@
 				438E2A7A1F73C1F400800020 /* GetTaskRequest.m in Sources */,
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
+				7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,

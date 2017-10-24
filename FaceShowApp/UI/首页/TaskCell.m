@@ -42,6 +42,7 @@
     }];
     
     self.statusImageView = [[UIImageView alloc] init];
+    self.statusImageView.hidden = YES;
     [self.contentView addSubview:self.statusImageView];
     [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.statusLabel.mas_left).offset(-5);

@@ -13,6 +13,7 @@
 #import "MinePasswordInputView.h"
 #import "GetVerifyCodeRequest.h"
 #import "ResetPasswordRequest.h"
+#import "LoginUtils.h"
 
 @interface ForgotPasswordViewController ()
 @property (nonatomic, strong) MinePhoneInputView *accountView;
@@ -140,10 +141,10 @@
 }
 
 - (void)gotoGetVerifyCode {
-//    if (![LoginUtils isPhoneNumberValid:self.accountView.text]) {
-//        [self.view nyx_showToast:@"请输入正确的手机号码"];
-//        return;
-//    }
+    if (![LoginUtils isPhoneNumberValid:self.accountView.text]) {
+        [self.view nyx_showToast:@"请输入正确的手机号码"];
+        return;
+    }
     WEAK_SELF
     [self.view nyx_startLoading];
     [self.verifyCodeView startTimer];
@@ -163,14 +164,14 @@
 }
 
 - (void)gotoNextStep {
-//    if (![LoginUtils isPhoneNumberValid:self.accountView.text]) {
-//        [self.view nyx_showToast:@"请输入正确的手机号码"];
-//        return;
-//    }
-//    if (![LoginUtils isVerifyCodeValid:self.verifyCodeView.text]) {
-//        [self.view nyx_showToast:@"请输入正确的验证码"];
-//        return;
-//    }
+    if (![LoginUtils isPhoneNumberValid:self.accountView.text]) {
+        [self.view nyx_showToast:@"请输入正确的手机号码"];
+        return;
+    }
+    if (![LoginUtils isPasswordValid:self.passwordView.text]) {
+        [self.view nyx_showToast:@"请输入正确的密码"];
+        return;
+    }
     WEAK_SELF
     [self.view nyx_startLoading];
     [self.resetPasswordRequest stopRequest];
