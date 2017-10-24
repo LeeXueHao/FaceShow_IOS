@@ -38,11 +38,13 @@
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLoginNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
+        [[YXGeTuiManager sharedInstance] loginSuccess];
         [self.appDelegateHelper handleLoginSuccess];
         [[UserMessageManager sharedInstance] resumeHeartbeat];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
+        [[YXGeTuiManager sharedInstance] logoutSuccess];
         [self.appDelegateHelper handleLogoutSuccess];
         [[UserMessageManager sharedInstance] suspendHeartbeat];
     }];
