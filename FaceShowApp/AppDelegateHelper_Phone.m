@@ -20,9 +20,12 @@
 #import "ApnsQuestionnaireViewController.h"
 #import "ApnsMessageDetailViewController.h"
 #import "ApnsCourseDetailViewController.h"
+#import "ApnsResourceDisplayViewController.h"
+#import "GetResourceDetailRequest.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
+@property (nonatomic, strong) GetResourceDetailRequest *resourceDetailRequest;
 @end
 
 @implementation AppDelegateHelper_Phone
@@ -166,7 +169,22 @@
 }
 
 - (void)goResourceWithData:(YXApnsContentModel *)data {
-    
+    [self.resourceDetailRequest stopRequest];
+    self.resourceDetailRequest = [[GetResourceDetailRequest alloc] init];
+    self.resourceDetailRequest.resId = data.objectId;
+    WEAK_SELF
+    [self.resourceDetailRequest startRequestWithRetClass:[GetResourceDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            return;
+        }
+        GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
+        ApnsResourceDisplayViewController *vc = [[ApnsResourceDisplayViewController alloc] init];
+        vc.urlString = item.data.type.integerValue ? item.data.url : item.data.ai.previewUrl;
+        vc.name = item.data.resName;
+        FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+        [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+    }];
 }
 
 - (void)goCourseDetailWithData:(YXApnsContentModel *)data {
