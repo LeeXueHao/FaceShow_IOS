@@ -169,7 +169,7 @@
         return;
     }
     if (![LoginUtils isPasswordValid:self.passwordView.text]) {
-        [self.view nyx_showToast:@"请输入正确的密码"];
+        [self.view nyx_showToast:@"密码长度需要在6-20位之间"];
         return;
     }
     WEAK_SELF
