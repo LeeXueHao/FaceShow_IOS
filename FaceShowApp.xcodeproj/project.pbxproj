@@ -385,7 +385,7 @@
 		7C24E2191F75F91F00A6921B /* GetCourseCommentTitleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCourseCommentTitleRequest.m; sourceTree = "<group>"; };
 		7C24E21B1F78F25000A6921B /* QuestionnaireHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionnaireHeaderView.h; sourceTree = "<group>"; };
 		7C24E21C1F78F25000A6921B /* QuestionnaireHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionnaireHeaderView.m; sourceTree = "<group>"; };
-		7C2518A71F68E5C70001B577 /* 研修宝(学员端).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "研修宝(学员端).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C2518A71F68E5C70001B577 /* 研修宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "研修宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2518AB1F68E5C70001B577 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C2518AD1F68E5C70001B577 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C2518AE1F68E5C70001B577 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -822,7 +822,7 @@
 		7C2518A81F68E5C70001B577 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C2518A71F68E5C70001B577 /* 研修宝(学员端).app */,
+				7C2518A71F68E5C70001B577 /* 研修宝.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1577,7 +1577,7 @@
 			);
 			name = FaceShowApp;
 			productName = FaceShowApp;
-			productReference = 7C2518A71F68E5C70001B577 /* 研修宝(学员端).app */;
+			productReference = 7C2518A71F68E5C70001B577 /* 研修宝.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2093,7 +2093,7 @@
 					"\"Metal\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
-				PRODUCT_NAME = "研修宝(学员端)";
+				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "f54bd88c-e14c-4d85-a882-a106ff414244";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2201,7 +2201,7 @@
 					"\"Metal\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
-				PRODUCT_NAME = "研修宝(学员端)";
+				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "a6181b17-8a32-4005-b45d-b62c960aad78";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Rel;
 				TARGETED_DEVICE_FAMILY = 1;
