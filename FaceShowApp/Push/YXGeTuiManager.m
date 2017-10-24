@@ -39,7 +39,8 @@
 
 #pragma mark - 注册
 - (void)registerGeTuiWithDelegate:(id)delegate {
-    if ([UserManager sharedInstance].loginStatus) {
+//    if ([UserManager sharedInstance].loginStatus)
+    {
         
         self.sdkResumedMessage = NO;
         self.handleddByAPNS = NO;
