@@ -12,12 +12,18 @@
 #import "ScanCodeResultViewController.h"
 #import "UserSignInRequest.h"
 
-@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate> {
+#import "BlackAndWhiteThresholdFilter.h"
+
+@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, AVCaptureDataOutputSynchronizerDelegate> {
     AVCaptureSession *_session;
     AVCaptureDevice *_device;
     AVCaptureDeviceInput *_input;
     AVCaptureMetadataOutput *_output;
+    AVCaptureVideoDataOutput *_dataoutput;
     AVCaptureVideoPreviewLayer *_preview;
+    
+    CFAbsoluteTime _lastScanTime;
+    CIDetector *_qrDetector;
 }
 
 @property (nonatomic, strong) ScanCodeMaskView *scanCodeMaskView;
@@ -98,6 +104,13 @@
 }
 
 - (void)setupCamera {
+    // qrdetector
+    if (!_qrDetector) {
+        _qrDetector = [CIDetector detectorOfType: CIDetectorTypeQRCode
+                                         context: nil
+                                         options: nil];
+    }
+    
     // Device
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (_device == nil) {
@@ -107,6 +120,15 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return ;
     }
+    
+    [_device lockForConfiguration:nil];
+    [_device setVideoZoomFactor:1.1];
+    [_device setExposureTargetBias:-0.5 completionHandler:nil];
+    
+    // Session
+    _session = [[AVCaptureSession alloc]init];
+    [_session setSessionPreset:AVCaptureSessionPresetMedium];
+    
     // Input
     _input = [AVCaptureDeviceInput deviceInputWithDevice:_device error:nil];
     // Output
@@ -114,9 +136,6 @@
     [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     //限制扫描区域（上左下右）
     [ _output setRectOfInterest:CGRectMake(103 * kPhoneHeightRatio / SCREEN_HEIGHT, (SCREEN_WIDTH / 2 - 125) / SCREEN_WIDTH, 250 / SCREEN_HEIGHT, 250 / SCREEN_WIDTH)];
-    // Session
-    _session = [[AVCaptureSession alloc]init];
-    [_session setSessionPreset:AVCaptureSessionPresetHigh];
     if ([_session canAddInput:_input]) {
         [_session addInput:_input];
     }
@@ -124,7 +143,8 @@
         [_session addOutput:_output];
     }
     // 条码类型 AVMetadataObjectTypeQRCode
-    _output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    _output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code];
+    
     _preview = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
     // Preview
@@ -132,16 +152,76 @@
         self->_preview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         [self.view.layer insertSublayer:self->_preview atIndex:0];
     });
+    
+    _dataoutput = [AVCaptureVideoDataOutput new];
+    _dataoutput.videoSettings = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
+                                                            forKey:(NSString *)kCVPixelBufferPixelFormatTypeKey];
+    
+    [_dataoutput setAlwaysDiscardsLateVideoFrames:YES];
+    
+    if ( [_session canAddOutput:_dataoutput] )
+        [_session addOutput:_dataoutput];
+    [_session commitConfiguration];
+    dispatch_queue_t queue = dispatch_queue_create("VideoQueue", DISPATCH_QUEUE_SERIAL);
+    [_dataoutput setSampleBufferDelegate:self queue:queue];
+    
     [_session startRunning];
 }
 
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    NSString *stringValue;
-    if ([metadataObjects count] > 0) {
-        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
-        stringValue = metadataObject.stringValue;
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput
+didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+       fromConnection:(AVCaptureConnection *)connection
+{
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CVPixelBufferLockBaseAddress(imageBuffer, 0);
+    size_t width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0);
+    size_t height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
+    
+    CIImage* input = [CIImage imageWithCVImageBuffer: imageBuffer];
+    CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
+    if (time - _lastScanTime >= 1) {
+        _lastScanTime = time;
+        NSString *qrcode = [self stringWithImage:input];
+        if (qrcode) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self dealWithQrcode:qrcode];
+            });
+        }
     }
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+}
+
+- (CIImage *)change:(CIImage *)input threshold:(CGFloat)threshold {
+    [BlackAndWhiteThresholdFilter registerFilter];
+    CIImage *output = [CIFilter filterWithName:@"BlackAndWhiteThreshold"
+                                 keysAndValues:@"inputImage", input,
+                       @"inputThreshold", [NSNumber numberWithFloat:threshold],
+                       nil].outputImage;
+    return output;
+}
+
+- (NSString *)stringWithImage:(CIImage *)img {
+    CGFloat threhold = 0.0;
+    NSString *ret = nil;
+    while ((ret == nil) && (threhold < 1.0)) {
+        CIImage *output = [self change:img threshold:threhold];
+        NSArray *arr = [_qrDetector featuresInImage:output];
+        for (CIQRCodeFeature *feature in [_qrDetector featuresInImage:output]) {
+            ret = feature.messageString;
+            break;
+        }
+        threhold += 0.1;
+    }
+    
+    return ret;
+}
+
+- (void)dealWithQrcode:(NSString *)code {
+    NSString *stringValue = code;
+    printf("%s , %s\n", "我扫到的结果是: ", [stringValue cStringUsingEncoding:kCFStringEncodingUTF8]);
     [_session stopRunning];
     [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
     if ([stringValue containsString:@"stepId="] && !isEmpty([stringValue substringFromIndex:7])) {
@@ -162,7 +242,7 @@
             if (error && error.code == 1) {
                 [self.view nyx_showToast:error.localizedDescription];
                 [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
-                [_session startRunning];
+                [self->_session startRunning];
                 return;
             }
             UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
@@ -172,7 +252,7 @@
             scanCodeResultVC.error = error ? item.error : nil;
             scanCodeResultVC.reScanCodeBlock = ^{
                 [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
-                [_session startRunning];
+                [self->_session startRunning];
             };
             [self.navigationController pushViewController:scanCodeResultVC animated:YES];
         }];
@@ -184,10 +264,22 @@
         scanCodeResultVC.error = error;
         scanCodeResultVC.reScanCodeBlock = ^{
             [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
-            [_session startRunning];
+            [self->_session startRunning];
         };
         [self.navigationController pushViewController:scanCodeResultVC animated:YES];
     }
 }
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    NSString *stringValue;
+    if ([metadataObjects count] > 0) {
+        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
+        stringValue = metadataObject.stringValue;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dealWithQrcode:stringValue];
+    });
+}
+
 
 @end

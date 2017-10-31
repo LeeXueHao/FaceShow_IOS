@@ -223,6 +223,7 @@
 		92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */; };
 		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
 		9AE85F0606083656987F93EB /* libPods-FaceShowApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */; };
+		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -641,6 +642,8 @@
 		92EF77141F6FAA2F007C3835 /* ClassMomentLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentLikeView.h; sourceTree = "<group>"; };
 		92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentLikeView.m; sourceTree = "<group>"; };
 		C015C5388139BB5E70260392 /* Pods-FaceShowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
+		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
 		F7F982551F9F3F0C00282572 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		F7F982571F9F3F1C00282572 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -1354,6 +1357,7 @@
 		7CBDAB811F6925B50096C4BA /* 扫一扫 */ = {
 			isa = PBXGroup;
 			children = (
+				F7524D491FA851EC00CC6793 /* OpenGL */,
 				43510A991F6B6407006B2645 /* View */,
 				43510A931F6B63FA006B2645 /* ScanCodeViewController.h */,
 				43510A941F6B63FA006B2645 /* ScanCodeViewController.m */,
@@ -1555,6 +1559,15 @@
 				8C59C162678BF225B46766B4 /* libPods-FaceShowApp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7524D491FA851EC00CC6793 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */,
+				F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */,
+			);
+			name = OpenGL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1873,6 +1886,7 @@
 				7CEFC7BD1F9990CF001D8C84 /* ModifySexViewController.m in Sources */,
 				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
+				F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */,
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
