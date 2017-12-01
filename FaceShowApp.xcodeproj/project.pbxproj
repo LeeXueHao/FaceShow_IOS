@@ -28,6 +28,9 @@
 		435274F91F7355800050B177 /* GetSignInRecordListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435274F81F7355800050B177 /* GetSignInRecordListRequest.m */; };
 		435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */; };
 		435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435550701F78DBCD00264C5B /* UserSignIn_Mock.json */; };
+		435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */; };
+		435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */; };
+		435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCFA1FD0FAE100CEA9C2 /* ReportRequest.m */; };
 		435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */; };
 		435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */; };
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
@@ -266,6 +269,12 @@
 		435274F81F7355800050B177 /* GetSignInRecordListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSignInRecordListRequest.m; sourceTree = "<group>"; };
 		435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignInRecordList_Mock.json; sourceTree = "<group>"; };
 		435550701F78DBCD00264C5B /* UserSignIn_Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSignIn_Mock.json; sourceTree = "<group>"; };
+		435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
+		435DFCF51FD0FAAF00CEA9C2 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportTableViewCell.m; sourceTree = "<group>"; };
+		435DFCF81FD0FABD00CEA9C2 /* ReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportTableViewCell.h; sourceTree = "<group>"; };
+		435DFCFA1FD0FAE100CEA9C2 /* ReportRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportRequest.m; sourceTree = "<group>"; };
+		435DFCFB1FD0FAE100CEA9C2 /* ReportRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportRequest.h; sourceTree = "<group>"; };
 		435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetResourceDetailRequest.h; sourceTree = "<group>"; };
 		435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetResourceDetailRequest.m; sourceTree = "<group>"; };
 		435F77B71F7A61C400247BD8 /* ResourceTypeMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceTypeMapping.h; sourceTree = "<group>"; };
@@ -1116,6 +1125,8 @@
 				923F73881F725DDF00D7EA6F /* classMomentComment_mock.json */,
 				923F73851F725C4700D7EA6F /* ClassMomentCommentRequest.h */,
 				923F73861F725C4700D7EA6F /* ClassMomentCommentRequest.m */,
+				435DFCFB1FD0FAE100CEA9C2 /* ReportRequest.h */,
+				435DFCFA1FD0FAE100CEA9C2 /* ReportRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1255,6 +1266,8 @@
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
 				9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */,
 				9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */,
+				435DFCF51FD0FAAF00CEA9C2 /* ReportViewController.h */,
+				435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1518,6 +1531,8 @@
 				928386191F6FC58700205028 /* ClassMomentFooterView.m */,
 				9283861B1F6FCD2B00205028 /* ClassMomentFloatingView.h */,
 				9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */,
+				435DFCF81FD0FABD00CEA9C2 /* ReportTableViewCell.h */,
+				435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1829,6 +1844,7 @@
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
+				435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */,
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
@@ -1848,8 +1864,10 @@
 				7C212DCA1F6A5D5A0007AE01 /* TaskListViewController.m in Sources */,
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
 				7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */,
+				435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
+				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,

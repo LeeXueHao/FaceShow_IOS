@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIButton *userButton;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIButton *reportButton;
 @property (nonatomic, strong) UIButton *commentButton;
 @property (nonatomic, strong) PreviewPhotosView *photosView;
 
@@ -177,11 +178,22 @@
     self.timeLabel.text = @"3分钟前";
     [self.contentView addSubview:self.timeLabel];
     
+    self.reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.reportButton setImage:[UIImage imageNamed:@"投诉举报icon正常态"] forState:UIControlStateNormal];
+//    [self.reportButton setImage:[UIImage imageNamed:@"投诉举报icon点击态"] forState:UIControlStateHighlighted];
+    self.reportButton.backgroundColor = [UIColor redColor];
+    self.reportButton.imageView.contentMode = UIViewContentModeCenter;
+    [self.contentView addSubview:self.reportButton];
+    WEAK_SELF
+    [[self.reportButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        BLOCK_EXEC(self.classMomentReportBlock);
+    }];
+    
     self.commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.commentButton setBackgroundImage:[UIImage imageNamed:@"赞评论展开按钮-点击态"] forState:UIControlStateNormal];
     [self.commentButton setBackgroundImage:[UIImage imageNamed:@"赞评论展开按钮张常态"] forState:UIControlStateNormal];
     [self.contentView addSubview:self.commentButton];
-    WEAK_SELF
     [[self.commentButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
         BLOCK_EXEC(self.classMomentLikeCommentBlock,self.commentButton);
@@ -238,6 +250,12 @@
         make.left.equalTo(self.nameLabel.mas_left);
         make.centerY.equalTo(self.commentButton.mas_centerY);
         make.top.equalTo(self.photosView.mas_bottom).offset(20.0f);
+    }];
+    
+    [self.reportButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.timeLabel.mas_right);
+        make.centerY.equalTo(self.timeLabel.mas_centerY);
+        make.size.mas_offset(CGSizeMake(30.0f, 30.0f)).priorityHigh();
     }];
     
     [self.photosView mas_makeConstraints:^(MASConstraintMaker *make) {

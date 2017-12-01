@@ -19,6 +19,7 @@
 #import "ClassMomentListFetcher.h"
 #import "ClassMomentClickLikeRequest.h"
 #import "ClassMomentCommentRequest.h"
+#import "ReportViewController.h"
 
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
@@ -253,6 +254,13 @@
         STRONG_SELF
         CGRect rect = [sender convertRect:sender.bounds toView:self.view];
         [self showFloatView:rect withSection:section];
+    };
+    headerView.classMomentReportBlock = ^{
+        STRONG_SELF
+        ReportViewController *vc = [[ReportViewController alloc] init];
+        vc.userId = moment.publisher.userID;
+        vc.objectId = moment.momentID;
+        [self.navigationController pushViewController:vc animated:YES];
     };
     headerView.classMomentOpenCloseBlock = ^(BOOL isOpen) {
         STRONG_SELF
