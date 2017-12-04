@@ -58,6 +58,15 @@
 		438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */; };
 		438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A761F739B8800800020 /* GetUserInfoRequest.m */; };
 		438E2A7A1F73C1F400800020 /* GetTaskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E2A791F73C1F400800020 /* GetTaskRequest.m */; };
+		438FFC741FD4E1B9006F3FB3 /* YXFileDownloadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC341FD4E1B8006F3FB3 /* YXFileDownloadProgressView.m */; };
+		438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC3D1FD4E1B8006F3FB3 /* FileDownloadHelper.m */; };
+		438FFC871FD4E1B9006F3FB3 /* BaseDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC641FD4E1B9006F3FB3 /* BaseDownloader.m */; };
+		438FFC881FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC661FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel */; };
+		438FFC891FD4E1B9006F3FB3 /* PersistentUrlDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC691FD4E1B9006F3FB3 /* PersistentUrlDownloader.m */; };
+		438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6A1FD4E1B9006F3FB3 /* DownloadManager.m */; };
+		438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */; };
+		438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */; };
+		438FFCA01FD4F83F006F3FB3 /* PDFBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC9F1FD4F83F006F3FB3 /* PDFBrowser.m */; };
 		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
 		7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */; };
 		7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */; };
@@ -330,6 +339,23 @@
 		438E2A761F739B8800800020 /* GetUserInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetUserInfoRequest.m; sourceTree = "<group>"; };
 		438E2A781F73C1F400800020 /* GetTaskRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskRequest.h; sourceTree = "<group>"; };
 		438E2A791F73C1F400800020 /* GetTaskRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskRequest.m; sourceTree = "<group>"; };
+		438FFC341FD4E1B8006F3FB3 /* YXFileDownloadProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXFileDownloadProgressView.m; sourceTree = "<group>"; };
+		438FFC3D1FD4E1B8006F3FB3 /* FileDownloadHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDownloadHelper.m; sourceTree = "<group>"; };
+		438FFC4D1FD4E1B8006F3FB3 /* YXFileDownloadProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXFileDownloadProgressView.h; sourceTree = "<group>"; };
+		438FFC541FD4E1B8006F3FB3 /* FileDownloadHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDownloadHelper.h; sourceTree = "<group>"; };
+		438FFC631FD4E1B9006F3FB3 /* PersistentUrlDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentUrlDownloader.h; sourceTree = "<group>"; };
+		438FFC641FD4E1B9006F3FB3 /* BaseDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDownloader.m; sourceTree = "<group>"; };
+		438FFC651FD4E1B9006F3FB3 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
+		438FFC661FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DownloadModel.xcdatamodel; sourceTree = "<group>"; };
+		438FFC671FD4E1B9006F3FB3 /* DownloaderEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloaderEntity.h; sourceTree = "<group>"; };
+		438FFC681FD4E1B9006F3FB3 /* UrlDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlDownloader.h; sourceTree = "<group>"; };
+		438FFC691FD4E1B9006F3FB3 /* PersistentUrlDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentUrlDownloader.m; sourceTree = "<group>"; };
+		438FFC6A1FD4E1B9006F3FB3 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
+		438FFC6B1FD4E1B9006F3FB3 /* BaseDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDownloader.h; sourceTree = "<group>"; };
+		438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlDownloader.m; sourceTree = "<group>"; };
+		438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloaderEntity.m; sourceTree = "<group>"; };
+		438FFC9E1FD4F83F006F3FB3 /* PDFBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFBrowser.h; sourceTree = "<group>"; };
+		438FFC9F1FD4F83F006F3FB3 /* PDFBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFBrowser.m; sourceTree = "<group>"; };
 		7C212DAD1F6A0D740007AE01 /* OptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemView.h; sourceTree = "<group>"; };
 		7C212DAE1F6A0D740007AE01 /* OptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemView.m; sourceTree = "<group>"; };
 		7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionCell.h; sourceTree = "<group>"; };
@@ -795,6 +821,39 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		438FFC2C1FD4E1B8006F3FB3 /* PDFBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				7C212DDB1F6B69010007AE01 /* ResourceDisplayViewController.h */,
+				7C212DDC1F6B69010007AE01 /* ResourceDisplayViewController.m */,
+				438FFC9E1FD4F83F006F3FB3 /* PDFBrowser.h */,
+				438FFC9F1FD4F83F006F3FB3 /* PDFBrowser.m */,
+				438FFC541FD4E1B8006F3FB3 /* FileDownloadHelper.h */,
+				438FFC3D1FD4E1B8006F3FB3 /* FileDownloadHelper.m */,
+				438FFC4D1FD4E1B8006F3FB3 /* YXFileDownloadProgressView.h */,
+				438FFC341FD4E1B8006F3FB3 /* YXFileDownloadProgressView.m */,
+			);
+			path = PDFBrowser;
+			sourceTree = "<group>";
+		};
+		438FFC621FD4E1B9006F3FB3 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				438FFC631FD4E1B9006F3FB3 /* PersistentUrlDownloader.h */,
+				438FFC691FD4E1B9006F3FB3 /* PersistentUrlDownloader.m */,
+				438FFC6B1FD4E1B9006F3FB3 /* BaseDownloader.h */,
+				438FFC641FD4E1B9006F3FB3 /* BaseDownloader.m */,
+				438FFC651FD4E1B9006F3FB3 /* DownloadManager.h */,
+				438FFC6A1FD4E1B9006F3FB3 /* DownloadManager.m */,
+				438FFC671FD4E1B9006F3FB3 /* DownloaderEntity.h */,
+				438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */,
+				438FFC661FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel */,
+				438FFC681FD4E1B9006F3FB3 /* UrlDownloader.h */,
+				438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
 		7C212DB91F6A544C0007AE01 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -896,6 +955,8 @@
 				7C2519471F68EB900001B577 /* Utils */,
 				7C25194B1F68EBA90001B577 /* HttpRequest */,
 				7C25190B1F68EA640001B577 /* Env */,
+				438FFC621FD4E1B9006F3FB3 /* Download */,
+				438FFC2C1FD4E1B8006F3FB3 /* PDFBrowser */,
 				7C2519191F68EACF0001B577 /* 3rdLib */,
 				7C25192A1F68EB1D0001B577 /* MockFramework */,
 				7C2519041F68E90C0001B577 /* TestFramework */,
@@ -1460,8 +1521,6 @@
 				4376E7371F70D146003E2057 /* CourseBriefViewController.m */,
 				4376E7391F70D4A8003E2057 /* ProfessorDetailViewController.h */,
 				4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */,
-				7C212DDB1F6B69010007AE01 /* ResourceDisplayViewController.h */,
-				7C212DDC1F6B69010007AE01 /* ResourceDisplayViewController.m */,
 				7C212DB31F6A1DD90007AE01 /* QuestionnaireViewController.h */,
 				7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */,
 				7C212DD21F6A78850007AE01 /* QuestionnaireResultViewController.h */,
@@ -1793,6 +1852,7 @@
 				7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */,
 				7C2519AF1F690DA00001B577 /* MainPageViewController.m in Sources */,
 				7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */,
+				438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */,
 				7C2518E71F68E68D0001B577 /* NSString+YXString.m in Sources */,
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
@@ -1843,6 +1903,7 @@
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
+				438FFC871FD4E1B9006F3FB3 /* BaseDownloader.m in Sources */,
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
 				9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */,
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
@@ -1853,6 +1914,7 @@
 				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
 				7C2519431F68EB780001B577 /* ExtendTextField.m in Sources */,
+				438FFC741FD4E1B9006F3FB3 /* YXFileDownloadProgressView.m in Sources */,
 				7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */,
 				7C212DEB1F6B72330007AE01 /* CourseCommentHeaderView.m in Sources */,
 				7C2519931F6900610001B577 /* PagedListFetcherBase.m in Sources */,
@@ -1862,12 +1924,15 @@
 				923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */,
 				7CEFC7B21F98926B001D8C84 /* MineActionView.m in Sources */,
 				7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */,
+				438FFC881FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel in Sources */,
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
+				438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */,
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
 				7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */,
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
+				438FFC891FD4E1B9006F3FB3 /* PersistentUrlDownloader.m in Sources */,
 				9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */,
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
@@ -1887,6 +1952,7 @@
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
 				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
+				438FFCA01FD4F83F006F3FB3 /* PDFBrowser.m in Sources */,
 				7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */,
 				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
 				7C24E1E61F72041D00A6921B /* GetCurrentClazsRequest.m in Sources */,
@@ -1901,6 +1967,7 @@
 				435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */,
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
+				438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
@@ -1944,6 +2011,7 @@
 				7C24E1FB1F72575E00A6921B /* GetVoteRequest.m in Sources */,
 				7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
+				438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */,
 				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
 				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,

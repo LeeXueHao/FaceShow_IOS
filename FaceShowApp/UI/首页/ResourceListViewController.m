@@ -13,6 +13,7 @@
 #import "GetResourceRequest.h"
 #import "ResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
+#import "PDFBrowser.h"
 
 @interface ResourceListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) GetResourceRequest *request;
 @property (nonatomic, strong) GetResourceDetailRequest *detailRequest;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) PDFBrowser *pdfBrowser;
 @end
 
 @implementation ResourceListViewController
@@ -75,10 +77,18 @@
             return;
         }
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
-        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
-        vc.urlString = item.data.type.integerValue ? item.data.url : item.data.ai.previewUrl;
-        vc.name = item.data.resName;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (item.data.type.integerValue > 0) {
+            ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
+            vc.urlString = item.data.url;
+            vc.name = item.data.resName;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            self.pdfBrowser = [[PDFBrowser alloc] init];
+            self.pdfBrowser.urlString = item.data.ai.previewUrl;
+            self.pdfBrowser.name = item.data.ai.resName;
+            self.pdfBrowser.baseViewController = self;
+            [self.pdfBrowser browseFile];
+        }
     }];
 }
 

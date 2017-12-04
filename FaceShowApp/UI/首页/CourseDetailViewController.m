@@ -14,11 +14,11 @@
 #import "ProfessorDetailViewController.h"
 #import "GetCourseRequest.h"
 #import "FSDataMappingTable.h"
-#import "ResourceDisplayViewController.h"
 #import "QuestionnaireViewController.h"
 #import "QuestionnaireResultViewController.h"
 #import "CourseCommentViewController.h"
 #import "ResourceTypeMapping.h"
+#import "PDFBrowser.h"
 
 @interface CourseDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -28,6 +28,7 @@
 @property (nonatomic, strong) GetCourseRequest *request;
 @property (nonatomic, strong) GetCourseRequestItem_Data *data;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *dataArray;
+@property (nonatomic, strong) PDFBrowser *pdfBrowser;
 @end
 
 @implementation CourseDetailViewController
@@ -181,10 +182,11 @@
         [self.navigationController pushViewController:professorDetailVC animated:NO];
     } else if (indexPath.section == 1) {
         GetCourseRequestItem_AttachmentInfo *info = self.dataArray[1][indexPath.row];
-        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
-        vc.urlString = info.previewUrl;
-        vc.name = info.resName;
-        [self.navigationController pushViewController:vc animated:YES];
+        self.pdfBrowser = [[PDFBrowser alloc] init];
+        self.pdfBrowser.urlString = info.previewUrl;
+        self.pdfBrowser.name = info.resName;
+        self.pdfBrowser.baseViewController = self;
+        [self.pdfBrowser browseFile];
     } else if (indexPath.section == 2) {
         GetCourseRequestItem_InteractStep *info = self.dataArray[2][indexPath.row];
         InteractType type = [FSDataMappingTable InteractTypeWithKey:info.interactType];
