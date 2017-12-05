@@ -49,15 +49,15 @@
     radialView.label.font = [UIFont systemFontOfSize:14];
     radialView.label.text  =@"0%";
     
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setImage:[UIImage imageNamed:@"进度条-关闭"] forState:UIControlStateNormal];
-    [self addSubview:closeButton];
-    [closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(@20);
-        make.right.mas_equalTo(@0);
-        make.size.mas_equalTo(CGSizeMake(44, 44));
-    }];
-    [closeButton addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [closeButton setImage:[UIImage imageNamed:@"进度条-关闭"] forState:UIControlStateNormal];
+//    [self addSubview:closeButton];
+//    [closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(@20);
+//        make.right.mas_equalTo(@0);
+//        make.size.mas_equalTo(CGSizeMake(44, 44));
+//    }];
+//    [closeButton addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -71,10 +71,10 @@
     _radialView = radialView;
 }
 
-- (void)closeAction {
-    [self removeFromSuperview];
-    self.closeBlock();
-}
+//- (void)closeAction {
+//    [self removeFromSuperview];
+//    self.closeBlock();
+//}
 
 - (void)setProgress:(CGFloat)progress {
     _progress = MIN(MAX(0, progress), 1);

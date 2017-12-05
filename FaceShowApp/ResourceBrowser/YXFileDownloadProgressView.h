@@ -10,7 +10,7 @@
 
 @interface YXFileDownloadProgressView : UIView
 @property (nonatomic, assign) CGFloat progress;
-@property (nonatomic, copy) void(^closeBlock)();
+//@property (nonatomic, copy) void(^closeBlock)();
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @end

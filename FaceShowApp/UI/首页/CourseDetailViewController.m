@@ -18,7 +18,8 @@
 #import "QuestionnaireResultViewController.h"
 #import "CourseCommentViewController.h"
 #import "ResourceTypeMapping.h"
-#import "PDFBrowser.h"
+#import "GetResourceDetailRequest.h"
+#import "ResourceDisplayViewController.h"
 
 @interface CourseDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -26,9 +27,9 @@
 @property (nonatomic, strong) CourseDetailHeaderView *headerView;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) GetCourseRequest *request;
+@property (nonatomic, strong) GetResourceDetailRequest *detailRequest;
 @property (nonatomic, strong) GetCourseRequestItem_Data *data;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *dataArray;
-@property (nonatomic, strong) PDFBrowser *pdfBrowser;
 @end
 
 @implementation CourseDetailViewController
@@ -89,6 +90,29 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+- (void)requestResourceDetailWithResId:(NSString *)resId {
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [self.detailRequest stopRequest];
+    self.detailRequest = [[GetResourceDetailRequest alloc] init];
+    self.detailRequest.resId = resId;
+    [self.detailRequest startRequestWithRetClass:[GetResourceDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];;
+            return;
+        }
+        GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
+        BOOL isAttachment = item.data.type.integerValue == 0;
+        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
+        vc.urlString = isAttachment ? item.data.ai.previewUrl : item.data.url;
+        vc.name = item.data.resName;
+        vc.needDownload = isAttachment;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 #pragma mark - setupUI
@@ -182,11 +206,7 @@
         [self.navigationController pushViewController:professorDetailVC animated:NO];
     } else if (indexPath.section == 1) {
         GetCourseRequestItem_AttachmentInfo *info = self.dataArray[1][indexPath.row];
-        self.pdfBrowser = [[PDFBrowser alloc] init];
-        self.pdfBrowser.urlString = info.previewUrl;
-        self.pdfBrowser.name = info.resName;
-        self.pdfBrowser.baseViewController = self;
-        [self.pdfBrowser browseFile];
+        [self requestResourceDetailWithResId:info.resId];
     } else if (indexPath.section == 2) {
         GetCourseRequestItem_InteractStep *info = self.dataArray[2][indexPath.row];
         InteractType type = [FSDataMappingTable InteractTypeWithKey:info.interactType];

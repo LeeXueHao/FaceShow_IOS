@@ -15,7 +15,6 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
 @interface UserMessageManager ()
 @property (nonatomic, strong) GCDTimer *timer;
 @property (nonatomic, strong) MessageHasUnViewRequest *messageHasUnViewRequest;
-@property (nonatomic, assign) int num;
 @end
 
 @implementation UserMessageManager

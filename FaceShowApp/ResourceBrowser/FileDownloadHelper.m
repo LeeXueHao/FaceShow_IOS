@@ -19,6 +19,10 @@
 
 @implementation FileDownloadHelper
 
+- (void)dealloc {
+    [self.downloader stop];
+}
+
 - (instancetype)init {
     return [self initWithURLString:nil baseViewController:nil];
 }
@@ -89,10 +93,6 @@
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
-    self.progressView.closeBlock = ^() {
-        STRONG_SELF
-        [self.downloader stop];
-    };
     
     [self.downloader start];
 }

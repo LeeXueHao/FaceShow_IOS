@@ -7,18 +7,23 @@
 //
 
 #import "ResourceDisplayViewController.h"
+#import "FileDownloadHelper.h"
 
 @interface ResourceDisplayViewController ()<UIWebViewDelegate>
-
+@property (nonatomic, strong) FileDownloadHelper *downloadHelper;
 @end
 
 @implementation ResourceDisplayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.title = self.name;
-    [self setupUI];
+    
+    if (self.needDownload) {
+        [self downloadFile];
+    } else {
+        [self setupUI];
+    }
 }
 
 - (void)setupUI {
@@ -30,6 +35,16 @@
     [self.view addSubview:webview];
     [webview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
+    }];
+}
+
+- (void)downloadFile {
+    self.downloadHelper = [[FileDownloadHelper alloc] initWithURLString:self.urlString baseViewController:self];
+    WEAK_SELF
+    [self.downloadHelper startDownloadWithCompleteBlock:^(NSString *path) {
+        STRONG_SELF
+        self.urlString = path;
+        [self setupUI];
     }];
 }
 

@@ -11,4 +11,5 @@
 @interface ResourceDisplayViewController : BaseViewController
 @property (nonatomic, strong) NSString *urlString;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) BOOL needDownload;
 @end

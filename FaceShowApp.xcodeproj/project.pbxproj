@@ -66,7 +66,6 @@
 		438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6A1FD4E1B9006F3FB3 /* DownloadManager.m */; };
 		438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */; };
 		438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */; };
-		438FFCA01FD4F83F006F3FB3 /* PDFBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC9F1FD4F83F006F3FB3 /* PDFBrowser.m */; };
 		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
 		7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */; };
 		7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */; };
@@ -354,8 +353,6 @@
 		438FFC6B1FD4E1B9006F3FB3 /* BaseDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDownloader.h; sourceTree = "<group>"; };
 		438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlDownloader.m; sourceTree = "<group>"; };
 		438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloaderEntity.m; sourceTree = "<group>"; };
-		438FFC9E1FD4F83F006F3FB3 /* PDFBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFBrowser.h; sourceTree = "<group>"; };
-		438FFC9F1FD4F83F006F3FB3 /* PDFBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFBrowser.m; sourceTree = "<group>"; };
 		7C212DAD1F6A0D740007AE01 /* OptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemView.h; sourceTree = "<group>"; };
 		7C212DAE1F6A0D740007AE01 /* OptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemView.m; sourceTree = "<group>"; };
 		7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionCell.h; sourceTree = "<group>"; };
@@ -821,19 +818,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		438FFC2C1FD4E1B8006F3FB3 /* PDFBrowser */ = {
+		438FFC2C1FD4E1B8006F3FB3 /* ResourceBrowser */ = {
 			isa = PBXGroup;
 			children = (
 				7C212DDB1F6B69010007AE01 /* ResourceDisplayViewController.h */,
 				7C212DDC1F6B69010007AE01 /* ResourceDisplayViewController.m */,
-				438FFC9E1FD4F83F006F3FB3 /* PDFBrowser.h */,
-				438FFC9F1FD4F83F006F3FB3 /* PDFBrowser.m */,
 				438FFC541FD4E1B8006F3FB3 /* FileDownloadHelper.h */,
 				438FFC3D1FD4E1B8006F3FB3 /* FileDownloadHelper.m */,
 				438FFC4D1FD4E1B8006F3FB3 /* YXFileDownloadProgressView.h */,
 				438FFC341FD4E1B8006F3FB3 /* YXFileDownloadProgressView.m */,
 			);
-			path = PDFBrowser;
+			path = ResourceBrowser;
 			sourceTree = "<group>";
 		};
 		438FFC621FD4E1B9006F3FB3 /* Download */ = {
@@ -956,7 +951,7 @@
 				7C25194B1F68EBA90001B577 /* HttpRequest */,
 				7C25190B1F68EA640001B577 /* Env */,
 				438FFC621FD4E1B9006F3FB3 /* Download */,
-				438FFC2C1FD4E1B8006F3FB3 /* PDFBrowser */,
+				438FFC2C1FD4E1B8006F3FB3 /* ResourceBrowser */,
 				7C2519191F68EACF0001B577 /* 3rdLib */,
 				7C25192A1F68EB1D0001B577 /* MockFramework */,
 				7C2519041F68E90C0001B577 /* TestFramework */,
@@ -1952,7 +1947,6 @@
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
 				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
-				438FFCA01FD4F83F006F3FB3 /* PDFBrowser.m in Sources */,
 				7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */,
 				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
 				7C24E1E61F72041D00A6921B /* GetCurrentClazsRequest.m in Sources */,
