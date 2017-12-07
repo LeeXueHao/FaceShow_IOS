@@ -10,9 +10,13 @@
 #import "AppDelegateHelper.h"
 #import "UserMessageManager.h"
 #import "YXGeTuiManager.h"
+#import <BMKLocationKit/BMKLocationAuth.h>
+#import "UserSignInRequest.h"
+#import "ScanCodeResultViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
+@property (nonatomic, strong) UserSignInRequest *request;
 @end
 
 @implementation AppDelegate
@@ -20,6 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [GlobalUtils setupCore];
     [[YXGeTuiManager sharedInstance] registerGeTuiWithDelegate:self];
+    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:[ConfigManager sharedInstance].BaiduLocAppKey authDelegate:self];
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     if ([UserManager sharedInstance].loginStatus) {
@@ -91,10 +96,47 @@
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    [self.window nyx_startLoading];
+    self.request = [[UserSignInRequest alloc] init];
+    self.request.stepId = @"";
+    //    if ([stringValue containsString:@"timestamp="]) {
+    //        NSString *timestamp = array[1];
+    //        self.request.timestamp = [timestamp substringFromIndex:10];
+    //    }
+    WEAK_SELF
+    [self.request startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.window nyx_stopLoading];
+        if (error && error.code == 1) {
+            [self.window nyx_showToast:error.localizedDescription];
+            return;
+        }
+        UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
+        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+        scanCodeResultVC.data = error ? nil : item.data;
+        scanCodeResultVC.error = error ? item.error : nil;
+        FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:scanCodeResultVC];
+        [scanCodeResultVC nyx_setupLeftWithImageName:@"返回页面按钮正常态-" highlightImageName:@"返回页面按钮点击态" action:^{
+            [scanCodeResultVC dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+    }];
+    
+    return YES;
+}
+
 #pragma mark - Apns Delegate
 - (void)handleApnsData:(YXApnsContentModel *)apns {
     [self.appDelegateHelper handleApnsData:apns];
 }
 
+#pragma mark - BMKLocationAuthDelegate
+- (void)onCheckPermissionState:(BMKLocationAuthErrorCode)iError {
+    if (iError != BMKLocationAuthErrorSuccess) {
+        NSLog(@"BaiduLoc鉴权失败 errorCode: %ld", (long)iError);
+    }
+}
 
 @end

@@ -46,4 +46,6 @@
 @property (nonatomic, strong) NSString<Optional> *GeTuiAppId_Rel;
 @property (nonatomic, strong) NSString<Optional> *GeTuiAppKey_Rel;
 @property (nonatomic, strong) NSString<Optional> *GeTuiAppSecret_Rel;
+#pragma mark - 百度定位
+@property (nonatomic, strong) NSString *BaiduLocAppKey;
 @end

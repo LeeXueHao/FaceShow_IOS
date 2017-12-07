@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *publicationMomentView;
 @property (nonatomic, strong) SAMTextView *publicationMomentTextView;
-@property (nonatomic, strong) UIImageView *publicationImageView;
 
 @property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
 @end
@@ -65,13 +64,19 @@
     self.publicationMomentTextView.typingAttributes = dic;
     [self.publicationMomentView addSubview:self.publicationMomentTextView];
     
-    
-    self.publicationImageView = [[UIImageView alloc] init];
-    if (self.imageArray.count > 0) {
-        self.publicationImageView.image = self.imageArray[0];
+    if (!isEmpty(self.imageArray)) {
+//        for (int i = 0; i < self.imageArray.count; i++) {
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setImage:self.imageArray[0] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(imageBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.publicationMomentView addSubview:btn];
+            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
+                make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
+                make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
+            }];
+//        }
     }
-    [self.publicationMomentView addSubview:self.publicationImageView];
-    
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
@@ -121,6 +126,9 @@
     }];
 }
 
+- (void)imageBtnAction:(UIButton *)sender {
+    
+}
 
 - (void)showAlertView {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退出此次编辑" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -154,12 +162,6 @@
         make.right.equalTo(self.publicationMomentView.mas_right).offset(-15.0f);
         make.top.equalTo(self.publicationMomentView.mas_top).offset(20.0f);
         make.height.mas_offset(self.imageArray.count > 0 ? 90.0f : 140.0f);
-    }];
-    
-    [self.publicationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
-        make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
-        make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
     }];
 }
 - (void)dismiss {

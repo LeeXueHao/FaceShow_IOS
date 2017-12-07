@@ -39,7 +39,6 @@
 		435DFD091FD1057500CEA9C2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435DFD081FD1056300CEA9C2 /* CoreTelephony.framework */; };
 		435DFD0B1FD1059100CEA9C2 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 435DFD0A1FD1059100CEA9C2 /* libstdc++.6.0.9.tbd */; };
 		435DFD0D1FD105DC00CEA9C2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435DFD0C1FD1059E00CEA9C2 /* AdSupport.framework */; };
-		435DFD121FD10C4500CEA9C2 /* YXLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFD111FD10C4500CEA9C2 /* YXLocationManager.m */; };
 		435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */; };
 		435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */; };
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
@@ -300,8 +299,6 @@
 		435DFD081FD1056300CEA9C2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		435DFD0A1FD1059100CEA9C2 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		435DFD0C1FD1059E00CEA9C2 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		435DFD101FD10C4500CEA9C2 /* YXLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXLocationManager.h; sourceTree = "<group>"; };
-		435DFD111FD10C4500CEA9C2 /* YXLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXLocationManager.m; sourceTree = "<group>"; };
 		435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetResourceDetailRequest.h; sourceTree = "<group>"; };
 		435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetResourceDetailRequest.m; sourceTree = "<group>"; };
 		435F77B71F7A61C400247BD8 /* ResourceTypeMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceTypeMapping.h; sourceTree = "<group>"; };
@@ -791,15 +788,6 @@
 			path = "百度定位";
 			sourceTree = "<group>";
 		};
-		435DFD0F1FD10C1000CEA9C2 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				435DFD101FD10C4500CEA9C2 /* YXLocationManager.h */,
-				435DFD111FD10C4500CEA9C2 /* YXLocationManager.m */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
 		4378DF9F1F6F7C22005CFE56 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -943,7 +931,6 @@
 				7C4D54121F970B280053DB12 /* 研修宝.entitlements */,
 				7C2519781F68FE900001B577 /* UI */,
 				7C4D54131F9728DA0053DB12 /* Push */,
-				435DFD0F1FD10C1000CEA9C2 /* Location */,
 				7C2519641F68EBCD0001B577 /* Business */,
 				7C2518C11F68E67B0001B577 /* Categoty */,
 				7C2519371F68EB780001B577 /* CustomView */,
@@ -1902,7 +1889,6 @@
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
 				9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */,
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
-				435DFD121FD10C4500CEA9C2 /* YXLocationManager.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,

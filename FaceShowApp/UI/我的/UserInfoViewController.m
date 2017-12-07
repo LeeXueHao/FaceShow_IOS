@@ -38,8 +38,8 @@
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
        [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stageName?:@"暂无"} mutableCopy],
-       [@{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subjectName?:@"暂无"} mutableCopy]] mutableCopy];
+       [@{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stageName?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subjectName?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
     [self setupUI];
     [self setupLayout];
     [self requestForUserInfo];
@@ -147,6 +147,10 @@
             BLOCK_EXEC(self.completeBlock);
         }];
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 4) {
+        // 修改学段
+    } else if (indexPath.section == 5) {
+        // 修改学科
     }
 }
 

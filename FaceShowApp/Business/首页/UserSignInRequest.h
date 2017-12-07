@@ -28,4 +28,6 @@
 @interface UserSignInRequest : YXGetRequest
 @property (nonatomic, strong) NSString<Optional> *stepId;
 @property (nonatomic, strong) NSString<Optional> *timestamp;
+@property (nonatomic, strong) NSString<Optional> *position;
+@property (nonatomic, strong) NSString<Optional> *site;
 @end
