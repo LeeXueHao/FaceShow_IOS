@@ -30,7 +30,7 @@ typedef NS_ENUM(int, BMKLocationProvider) {
 @property(nonatomic, copy, readonly) CLLocation * _Nullable location;
 
 ///BMKLocation 地址数据
-@property(nonatomic, copy, readonly) BMKLocationReGeocode *rgcData;
+@property(nonatomic, copy, readonly) BMKLocationReGeocode * _Nullable rgcData;
 
 ///BMKLocation 位置来源
 @property(nonatomic, assign) BMKLocationProvider provider;
@@ -42,7 +42,7 @@ typedef NS_ENUM(int, BMKLocationProvider) {
  *  @param rgc BMKLocationReGeocode对象
  *  @return BMKLocation id
  */
-- (id)initWithLocation:(CLLocation * _Nullable)loc withRgcData:(BMKLocationReGeocode * _Nullable)rgc;
+- (id _Nullable)initWithLocation:(CLLocation * _Nullable)loc withRgcData:(BMKLocationReGeocode * _Nullable)rgc;
 
 
 @end
