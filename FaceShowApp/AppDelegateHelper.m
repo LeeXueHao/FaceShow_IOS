@@ -48,4 +48,8 @@
     
 }
 
+- (void)handleOpenUrl:(NSURL *)url {
+    
+}
+
 @end

@@ -51,6 +51,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     self.navigationItem.title = @"签到";
+    if (!isEmpty(self.presentingViewController)) {
+        [self nyx_setupLeftWithTitle:@"返回" action:^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+    }
+    
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusDenied) {
         [self showAlertView];
@@ -224,17 +230,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     printf("%s , %s\n", "我扫到的结果是: ", [stringValue cStringUsingEncoding:kCFStringEncodingUTF8]);
     [_session stopRunning];
     [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
-    if ([stringValue containsString:@"stepId="] && !isEmpty([stringValue substringFromIndex:7])) {
+    
+    NSDictionary *parametersDic = [UserSignInHelper getParametersFromUrlString:stringValue];
+    if (!isEmpty(parametersDic)) {
         [self.view nyx_startLoading];
         [self.request stopRequest];
         self.request = [[UserSignInRequest alloc] init];
-        NSArray *array = [stringValue componentsSeparatedByString:@"&"];
-        NSString *step = array.firstObject;
-        self.request.stepId = [step substringFromIndex:7];
-        if ([stringValue containsString:@"timestamp="]) {
-            NSString *timestamp = array[1];
-            self.request.timestamp = [timestamp substringFromIndex:10];
-        }
+        self.request.stepId = parametersDic[kStepId];
+        self.request.timestamp = parametersDic[kTimestamp];
         WEAK_SELF
         [self.request startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF

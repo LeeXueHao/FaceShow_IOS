@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "LoginDataManager.h"
 #import "ForgotPasswordViewController.h"
+#import "ClassEmptyViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -176,9 +177,15 @@
         STRONG_SELF
         [self.view nyx_stopLoading];
         if (error) {
-            [self.view nyx_showToast:error.localizedDescription];
+            [UserManager sharedInstance].userModel = nil;
             self.passwordTF.text = @"";
             self.loginBtn.enabled = NO;
+            if (error.code != 10086) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
+            ClassEmptyViewController *vc = [[ClassEmptyViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             return;
         }
         [UserManager sharedInstance].loginStatus = YES;

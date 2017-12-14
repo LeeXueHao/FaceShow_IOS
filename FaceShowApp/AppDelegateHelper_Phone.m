@@ -22,10 +22,13 @@
 #import "ApnsCourseDetailViewController.h"
 #import "ApnsResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
+#import "UserSignInRequest.h"
+#import "SubScanCodeResultViewController.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
 @property (nonatomic, strong) GetResourceDetailRequest *resourceDetailRequest;
+@property (nonatomic, strong) UserSignInRequest *userSignInRequest;
 @end
 
 @implementation AppDelegateHelper_Phone
@@ -100,6 +103,36 @@
 
 - (void)handleLogoutSuccess {
     [self.window.rootViewController presentViewController:[self loginViewController] animated:YES completion:nil];
+}
+
+#pragma mark -
+- (void)handleOpenUrl:(NSURL *)url {
+    NSDictionary *parametersDic = [UserSignInHelper getParametersFromUrlString:url.absoluteString];
+    if (isEmpty(parametersDic) ||
+        [UserManager sharedInstance].loginStatus == NO) {
+        return;
+    }
+    [self.window nyx_startLoading];
+    [self.userSignInRequest stopRequest];
+    self.userSignInRequest = [[UserSignInRequest alloc] init];
+    self.userSignInRequest.stepId = parametersDic[kStepId];
+    self.userSignInRequest.timestamp = parametersDic[kTimestamp];
+    WEAK_SELF
+    [self.userSignInRequest startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.window nyx_stopLoading];
+        if (error && error.code == 1) {
+            [self.window nyx_showToast:error.localizedDescription];
+            return;
+        }
+        UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
+        SubScanCodeResultViewController *scanCodeResultVC = [[SubScanCodeResultViewController alloc] init];
+        scanCodeResultVC.data = error ? nil : item.data;
+        scanCodeResultVC.error = error ? item.error : nil;
+        
+        FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:scanCodeResultVC];
+        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+    }];
 }
 
 #pragma mark - Apns

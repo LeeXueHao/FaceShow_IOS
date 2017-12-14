@@ -17,6 +17,8 @@
 #import "UpdateAvatarRequest.h"
 #import "ModifySexViewController.h"
 #import "ModifyNameViewController.h"
+#import "StageSubjectViewController.h"
+
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
@@ -38,8 +40,7 @@
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
        [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学段",@"content":[UserManager sharedInstance].userModel.stageName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学科",@"content":[UserManager sharedInstance].userModel.subjectName?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
+       [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
     [self setupUI];
     [self setupLayout];
     [self requestForUserInfo];
@@ -49,6 +50,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (NSString *)stageSubjectString {
+    if (isEmpty([UserManager sharedInstance].userModel.stageName) || isEmpty([UserManager sharedInstance].userModel.subjectName)) {
+        return nil;
+    }
+    return [NSString stringWithFormat:@"%@-%@", [UserManager sharedInstance].userModel.stageName, [UserManager sharedInstance].userModel.subjectName];
+}
+
 #pragma  mark - get
 - (YXImagePickerController *)imagePickerController
 {
@@ -148,9 +157,14 @@
         }];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 4) {
-        // 修改学段
-    } else if (indexPath.section == 5) {
-        // 修改学科
+        StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
+        WEAK_SELF
+        vc.completeBlock = ^{
+            STRONG_SELF
+            [self.contentMutableArray[3] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -186,8 +200,7 @@
             self.contentMutableArray[0][@"content"] = [UserManager sharedInstance].userModel.realName?:@"暂无";
             self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";
             self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sexName?:@"暂无";
-            self.contentMutableArray[3][@"content"] = [UserManager sharedInstance].userModel.stageName?:@"暂无";
-            self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.subjectName?:@"暂无";
+            self.contentMutableArray[3][@"content"] = [self stageSubjectString]?:@"暂无";
             [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
         }

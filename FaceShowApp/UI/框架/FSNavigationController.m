@@ -34,6 +34,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.visibleViewController;
+}
+
 - (BOOL)shouldAutorotate{
     return [self.topViewController shouldAutorotate];
 }

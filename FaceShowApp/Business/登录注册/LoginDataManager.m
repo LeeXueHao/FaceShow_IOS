@@ -55,6 +55,14 @@
                 return;
             }
             
+            GetCurrentClazsRequestItem *item = (GetCurrentClazsRequestItem *)retItem;
+            if (!item.data.projectInfo) {
+                NSError *emptyError = [NSError errorWithDomain:@"班级为空" code:10086 userInfo:nil];
+                BLOCK_EXEC(completeBlock, emptyError);
+                return;
+            }
+            [UserManager sharedInstance].userModel.projectClassInfo = item;
+            
             [manager.getUserInfoRequest stopRequest];
             manager.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
             [manager.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -64,6 +72,7 @@
                 }
                 GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
                 [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
+                [[UserManager sharedInstance] saveData];
                 BLOCK_EXEC(completeBlock, nil);
             }];
         }];

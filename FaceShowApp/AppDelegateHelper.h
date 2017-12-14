@@ -21,6 +21,8 @@
 - (void)handleLoginSuccess;
 - (void)handleLogoutSuccess;
 
+- (void)handleOpenUrl:(NSURL *)url;
+
 // Apns
 - (void)handleApnsData:(YXApnsContentModel *)apns;
 

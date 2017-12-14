@@ -7,6 +7,7 @@
 //
 
 #import "UserManager.h"
+#import "StageSubjectItem.h"
 
 NSString * const kUserDidLoginNotification = @"kUserDidLoginNotification";
 NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
@@ -57,6 +58,11 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
     NSString *json = [[NSUserDefaults standardUserDefaults]valueForKey:@"user_model_key"];
     if (json) {
         self.userModel = [[UserModel alloc]initWithString:json error:nil];
+    }
+    NSData *stageSubjectData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"StageSubject" ofType:@"json"]];
+    if (stageSubjectData) {
+        StageSubjectItem *item = [[StageSubjectItem alloc] initWithData:stageSubjectData error:NULL];
+        self.stages = item.data;
     }
 }
 

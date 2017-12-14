@@ -9,6 +9,14 @@
 #import "ScanCodeResultViewController.h"
 #import "SignInDetailViewController.h"
 
+typedef NS_ENUM(NSUInteger, SignInError) {
+    SignInErrorInvaildQRcode = 210411, // 签到不存在或已停用（二维码非法）
+    SignInErrorUnstart, // 签到未开始
+    SignInErrorHasFinished, // 签到已结束
+    SignInErrorHasSignedIn, // 用户已签到（已经签过到，重复扫码）
+    SignInErrorInvaildClass = 210305 // 您不是班级成员
+};
+
 @interface ScanCodeResultViewController ()
 
 @property (nonatomic, strong) UIImageView *signInImageView;
@@ -89,15 +97,16 @@
 }
 
 - (void)setModel {
-    if (!isEmpty(self.data) || (!isEmpty(self.error) && self.error.code.integerValue == 210414)) {
-        self.signInImageView.image = [UIImage imageNamed:self.error.code.integerValue == 210414 ? @"签到失败图标" : @"签到成功图标"];
-        self.titleLabel.text = self.error.code.integerValue == 210414 ? self.error.message : self.data.successPrompt;
+    BOOL hasSignedIn = !isEmpty(self.error) && self.error.code.integerValue == SignInErrorHasSignedIn;
+    if (!isEmpty(self.data) || hasSignedIn) {
+        self.signInImageView.image = [UIImage imageNamed:hasSignedIn ? @"签到失败图标" : @"签到成功图标"];
+        self.titleLabel.text = hasSignedIn ? self.error.message : self.data.successPrompt;
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
             make.centerX.mas_equalTo(0);
         }];
-        self.blackLabel.text = [self.error.code.integerValue == 210414 ? self.error.data.userSignIn.signinTime : self.data.signinTime omitSecondOfFullDateString];
+        self.blackLabel.text = [hasSignedIn ? self.error.data.userSignIn.signinTime : self.data.signinTime omitSecondOfFullDateString];
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(8);
             make.centerX.mas_equalTo(0);
@@ -113,7 +122,7 @@
         self.signInImageView.image = [UIImage imageNamed:@"签到失败图标"];
         self.titleLabel.text = @"签到失败";
         self.blackLabel.text = self.error.message;
-        self.grayLabel.text = (self.error.code.integerValue == 210412 || self.error.code.integerValue == 210413) ? [NSString stringWithFormat:@"%@ - %@", [self.error.data.startTime omitSecondOfFullDateString], [self.error.data.endTime omitSecondOfFullDateString]] : @"请扫描最新签到二维码";
+        self.grayLabel.text = (self.error.code.integerValue == SignInErrorUnstart || self.error.code.integerValue == SignInErrorHasFinished) ? [NSString stringWithFormat:@"%@ - %@", [self.error.data.startTime omitSecondOfFullDateString], [self.error.data.endTime omitSecondOfFullDateString]] : @"请扫描最新签到二维码";
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
             make.centerX.mas_equalTo(0);
@@ -137,15 +146,19 @@
         if (self.currentIndexPath) {
             if ([self.navigationController.viewControllers[1] isKindOfClass:[SignInDetailViewController class]]) {
                 [self.navigationController popToRootViewControllerAnimated:YES];
-            }else {
+            } else {
                 [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
             }
-            if (self.error.code.integerValue != 210414) {
+            if (self.error.code.integerValue != SignInErrorHasSignedIn) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadSignInRecordNotification" object:@{
                                                                                                                        @"kSignInRecordCurrentIndexPath" : self.currentIndexPath, @"kCurrentIndexPathSucceedSigninTime" : self.data.signinTime}];
             }
         } else {
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            if (self.presentingViewController) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
         }
     } else {
         [super backAction];

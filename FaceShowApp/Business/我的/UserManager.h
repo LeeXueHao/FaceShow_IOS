@@ -16,6 +16,7 @@ extern NSString * const kUserDidLogoutNotification;
 
 + (UserManager *)sharedInstance;
 
+@property (nonatomic, strong) NSArray *stages;
 @property (nonatomic, strong) UserModel *userModel;
 @property (nonatomic, assign) BOOL loginStatus;
 - (void)saveData ;

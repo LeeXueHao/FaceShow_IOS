@@ -189,7 +189,7 @@
 - (void)presentNextPublishViewController:(UIImage *)image {
     PublishMomentViewController *VC = [[PublishMomentViewController alloc] init];
     if (image != nil) {
-        VC.imageArray = @[image];
+        VC.imageArray = [@[image] mutableCopy];
     }
     WEAK_SELF
     VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {

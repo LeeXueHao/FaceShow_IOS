@@ -9,10 +9,18 @@
 #import "PublishMomentViewController.h"
 #import <SAMTextView.h>
 #import "QADataManager.h"
+#import "PhotoBrowserController.h"
+#import "YXImagePickerController.h"
+#import "AlertView.h"
+#import "FDActionSheetView.h"
+
 @interface PublishMomentViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *publicationMomentView;
 @property (nonatomic, strong) SAMTextView *publicationMomentTextView;
+@property (nonatomic, strong) UIButton *addImageBtn;
+@property (nonatomic, strong) UIButton *deleteBtn;
+@property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
 @property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
 @end
@@ -33,6 +41,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark - setupUI
 - (void)setupUI {
     self.scrollView = [[UIScrollView alloc] init];
@@ -63,20 +72,6 @@
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
     self.publicationMomentTextView.typingAttributes = dic;
     [self.publicationMomentView addSubview:self.publicationMomentTextView];
-    
-    if (!isEmpty(self.imageArray)) {
-//        for (int i = 0; i < self.imageArray.count; i++) {
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn setImage:self.imageArray[0] forState:UIControlStateNormal];
-            [btn addTarget:self action:@selector(imageBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.publicationMomentView addSubview:btn];
-            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
-                make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
-                make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
-            }];
-//        }
-    }
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
@@ -124,10 +119,67 @@
         UITextView *tempTextView = (UITextView *)x.object;
         rightButton.enabled = [tempTextView.text yx_stringByTrimmingCharacters].length != 0;
     }];
+    
+    UIView *containerView = [[UIView alloc] init];
+    [self.publicationMomentView addSubview:containerView];
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
+        make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
+        make.size.mas_offset(CGSizeMake(70.0f, 70.0f));
+    }];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTarget:self action:@selector(imageBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [containerView addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
+        make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
+        make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
+    }];
+    self.addImageBtn = btn;
+    
+    UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [deleteBtn setImage:[UIImage imageNamed:@"小图片删除按钮正常态"] forState:UIControlStateNormal];
+    [deleteBtn setImage:[UIImage imageNamed:@"小图片删除按钮点击态"] forState:UIControlStateHighlighted];
+    [deleteBtn addTarget:self action:@selector(deleteBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [containerView addSubview:deleteBtn];
+    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(CGPointMake(30, -25));
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    }];
+    self.deleteBtn = deleteBtn;
+    [self refreshImages];
+}
+
+- (void)deleteBtnAction {
+    [self.imageArray removeObjectAtIndex:0];
+    [self refreshImages];
 }
 
 - (void)imageBtnAction:(UIButton *)sender {
-    
+    if (isEmpty(self.imageArray)) {
+        [self showImagePicker];
+    } else {
+        PhotoBrowserController *vc = [[PhotoBrowserController alloc] init];
+        vc.images = self.imageArray;
+        vc.currentIndex = 0;
+        WEAK_SELF
+        vc.didDeleteImage = ^{
+            STRONG_SELF
+            [self refreshImages];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)refreshImages {
+    if (!isEmpty(self.imageArray)) {
+        [self.addImageBtn setImage:self.imageArray[0] forState:UIControlStateNormal];
+        self.deleteBtn.hidden = NO;
+    } else {
+        [self.addImageBtn setImage:[UIImage imageWithColor:[UIColor redColor] rect:CGRectMake(0, 0, 60, 60)] forState:UIControlStateNormal];
+        self.deleteBtn.hidden = YES;
+    }
 }
 
 - (void)showAlertView {
@@ -169,6 +221,71 @@
         
     }];
 }
+
+#pragma mark - imagePicker
+- (YXImagePickerController *)imagePickerController
+{
+    if (_imagePickerController == nil) {
+        _imagePickerController = [[YXImagePickerController alloc] init];
+    }
+    return _imagePickerController;
+}
+
+- (void)showImagePicker {
+    FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    actionSheetView.titleArray = @[@{@"title":@"拍照"}, @{@"title":@"相册"}];
+    AlertView *alertView = [[AlertView alloc] init];
+    alertView.backgroundColor = [UIColor clearColor];
+    alertView.hideWhenMaskClicked = YES;
+    alertView.contentView = actionSheetView;
+    WEAK_SELF
+    [alertView setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3 animations:^{
+            [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(view.mas_left);
+                make.right.equalTo(view.mas_right);
+                make.top.equalTo(view.mas_bottom);
+                make.height.mas_offset(155.0f);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [alertView showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(view.mas_left);
+            make.right.equalTo(view.mas_right);
+            make.top.equalTo(view.mas_bottom);
+            make.height.mas_offset(155.0f );
+        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3 animations:^{
+                [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(view.mas_left);
+                    make.right.equalTo(view.mas_right);
+                    make.bottom.equalTo(view.mas_bottom);
+                    make.height.mas_offset(155.0f);
+                }];
+                [view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+        });
+    }];
+    actionSheetView.actionSheetBlock = ^(NSInteger integer) {
+        STRONG_SELF
+        [self.imagePickerController pickImageWithSourceType:integer == 1 ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
+            STRONG_SELF
+            [self.imageArray addObject:selectedImage];
+            [self refreshImages];
+        }];
+        [alertView hide];
+    };
+}
+
 #pragma mark - UITextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView {
 //    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

@@ -15,49 +15,20 @@
 #import "ResourceListViewController.h"
 #import "ScheduleViewController.h"
 #import "TaskListViewController.h"
-#import "EmptyView.h"
-#import "ErrorView.h"
 #import "ScanCodeViewController.h"
-#import "GetCurrentClazsRequest.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
-@property (nonatomic, strong) EmptyView *emptyView;
-@property (nonatomic, strong) ErrorView *errorView;
-@property (nonatomic, strong) GetCurrentClazsRequest *request;
-@property (nonatomic, strong) GetCurrentClazsRequestItem *requestItem;
 @end
 
 @implementation MainPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.emptyView = [[EmptyView alloc]init];
-    [self.view addSubview:self.emptyView];
-    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    self.emptyView.hidden = YES;
-    self.errorView = [[ErrorView alloc]init];
-    WEAK_SELF
-    [self.errorView setRetryBlock:^{
-        STRONG_SELF
-        [self requestProjectClassInfo];
-    }];
-    [self.view addSubview:self.errorView];
-    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    self.errorView.hidden = YES;
     
     [self setupNavRightView];
-    [self requestProjectClassInfo];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self setupUI];
 }
 
 - (void)setupNavRightView {
@@ -79,74 +50,9 @@
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 
-//- (void)requestProjectClassInfo {
-//    [self.request stopRequest];
-//    self.request = [[GetCurrentClazsRequest alloc]init];
-//    [self.view nyx_startLoading];
-//    WEAK_SELF
-//    [self.request startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-//        STRONG_SELF
-//        [self.view nyx_stopLoading];
-//        self.errorView.hidden = YES;
-//        self.emptyView.hidden = YES;
-//        if (error) {
-//            self.errorView.hidden = NO;
-//            return;
-//        }
-//        GetCurrentClazsRequestItem *item = (GetCurrentClazsRequestItem *)retItem;
-//        if (!item.data.projectInfo) {
-//            self.emptyView.hidden = NO;
-//            return;
-//        }
-//        self.requestItem = item;
-//        [self setupUI];
-//    }];
-//}
-
-// 先这么搞一下，下版流程优化的时候再说
-- (void)requestProjectClassInfo {
-    if ([UserManager sharedInstance].userModel.projectClassInfo) {
-        self.requestItem = [UserManager sharedInstance].userModel.projectClassInfo;
-        [self setupUI];
-        return;
-    }
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:self.errorView];
-    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    [window addSubview:self.emptyView];
-    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    [self.request stopRequest];
-    self.request = [[GetCurrentClazsRequest alloc]init];
-    [window nyx_startLoading];
-    WEAK_SELF
-    [self.request startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [window nyx_stopLoading];
-        self.errorView.hidden = YES;
-        self.emptyView.hidden = YES;
-        if (error) {
-            self.errorView.hidden = NO;
-            return;
-        }
-        GetCurrentClazsRequestItem *item = (GetCurrentClazsRequestItem *)retItem;
-        if (!item.data.projectInfo) {
-            self.emptyView.hidden = NO;
-            return;
-        }
-        [UserManager sharedInstance].userModel.projectClassInfo = item;
-        [[UserManager sharedInstance] saveData];
-        self.requestItem = item;
-        [self setupUI];
-    }];
-}
-
 - (void)setupUI {
     MainPageTopView *topView = [[MainPageTopView alloc]init];
-    topView.item = self.requestItem;
+    topView.item = [UserManager sharedInstance].userModel.projectClassInfo;
     [self.view addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
@@ -166,7 +72,7 @@
         make.height.mas_equalTo(40);
     }];
     self.tabControllers = [NSMutableArray array];
-    [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:self.requestItem.data.clazsInfo.clazsId]];
+    [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]];
     [self.tabControllers addObject:[[ResourceListViewController alloc]init]];
     [self.tabControllers addObject:[[TaskListViewController alloc]init]];
     [self.tabControllers addObject:[[ScheduleViewController alloc]init]];

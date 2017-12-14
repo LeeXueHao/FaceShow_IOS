@@ -31,3 +31,9 @@
 @property (nonatomic, strong) NSString<Optional> *position;
 @property (nonatomic, strong) NSString<Optional> *site;
 @end
+
+#define kStepId @"stepId"
+#define kTimestamp @"timestamp"
+@interface UserSignInHelper : NSObject
++ (NSDictionary *)getParametersFromUrlString:(NSString *)urlString;
+@end

@@ -30,7 +30,7 @@
 {
     
     self.isPublish = NO;
-    UIViewController *viewController = ((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController;
+    UIViewController *viewController = [((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController nyx_visibleViewController];
     if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
         ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
         if (author == kCLAuthorizationStatusRestricted || author ==kCLAuthorizationStatusDenied){

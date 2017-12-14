@@ -19,6 +19,12 @@
 		43210E661F726E3D0049C381 /* NoticeListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E651F726E3D0049C381 /* NoticeListFetcher.m */; };
 		43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */; };
 		43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */; };
+		4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322CA381FD941D700E7B565 /* StageSubjectViewController.m */; };
+		4322CA3C1FD941F500E7B565 /* StageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322CA3B1FD941F500E7B565 /* StageSubjectCell.m */; };
+		4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322CA3E1FD9529700E7B565 /* PhotoBrowserController.m */; };
+		4322CA491FD9531600E7B565 /* QASlideItemBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322CA411FD9531500E7B565 /* QASlideItemBaseView.m */; };
+		4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322CA471FD9531600E7B565 /* QASlideView.m */; };
+		4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322CA4D1FD9535700E7B565 /* SlideImageView.m */; };
 		432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F90B81F74DF4600FCF655 /* UserSignInRequest.m */; };
 		432F90BC1F74FDB700FCF655 /* GetResourceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F90BB1F74FDB700FCF655 /* GetResourceRequest.m */; };
 		432F90BF1F75050700FCF655 /* GetScheduleListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F90BE1F75050700FCF655 /* GetScheduleListRequest.m */; };
@@ -27,7 +33,10 @@
 		43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43510A9F1F6B7CF8006B2645 /* UserMessageManager.m */; };
 		435274F91F7355800050B177 /* GetSignInRecordListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435274F81F7355800050B177 /* GetSignInRecordListRequest.m */; };
 		435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */; };
+		43538D2E1FDFB7C40052A9D3 /* StageSubject.json in Resources */ = {isa = PBXBuildFile; fileRef = 43538D2D1FDFB7C40052A9D3 /* StageSubject.json */; };
+		43538D311FDFBD2D0052A9D3 /* StageSubjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43538D301FDFBD2D0052A9D3 /* StageSubjectItem.m */; };
 		435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435550701F78DBCD00264C5B /* UserSignIn_Mock.json */; };
+		43578CC51FE2295E00D37B72 /* SubScanCodeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43578CC41FE2295E00D37B72 /* SubScanCodeResultViewController.m */; };
 		435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */; };
 		435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */; };
 		435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCFA1FD0FAE100CEA9C2 /* ReportRequest.m */; };
@@ -41,6 +50,11 @@
 		435DFD0D1FD105DC00CEA9C2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435DFD0C1FD1059E00CEA9C2 /* AdSupport.framework */; };
 		435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */; };
 		435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */; };
+		4369597F1FDE27B5009E5C43 /* ClassEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4369597E1FDE27B5009E5C43 /* ClassEmptyViewController.m */; };
+		436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 436959801FDE83E6009E5C43 /* FDActionSheetCell.m */; };
+		436959881FDE83E7009E5C43 /* FDActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 436959811FDE83E6009E5C43 /* FDActionSheetView.m */; };
+		4369598A1FDE83E7009E5C43 /* FDActionSheetFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 436959841FDE83E7009E5C43 /* FDActionSheetFooterView.m */; };
+		4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4369598D1FDE8899009E5C43 /* FDActionSheetHeaderView.m */; };
 		4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */; };
 		4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E7371F70D146003E2057 /* CourseBriefViewController.m */; };
 		4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376E73A1F70D4A8003E2057 /* ProfessorDetailViewController.m */; };
@@ -269,6 +283,18 @@
 		43210E671F7271D30049C381 /* GetNoticeDetailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNoticeDetailRequest.h; sourceTree = "<group>"; };
 		43210E681F7271D30049C381 /* GetNoticeDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNoticeDetailRequest.m; sourceTree = "<group>"; };
 		43210E6A1F7273380049C381 /* GetNoticeDetail_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetNoticeDetail_Mock.json; sourceTree = "<group>"; };
+		4322CA371FD941D700E7B565 /* StageSubjectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StageSubjectViewController.h; sourceTree = "<group>"; };
+		4322CA381FD941D700E7B565 /* StageSubjectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StageSubjectViewController.m; sourceTree = "<group>"; };
+		4322CA3A1FD941F500E7B565 /* StageSubjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StageSubjectCell.h; sourceTree = "<group>"; };
+		4322CA3B1FD941F500E7B565 /* StageSubjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StageSubjectCell.m; sourceTree = "<group>"; };
+		4322CA3D1FD9529700E7B565 /* PhotoBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserController.h; sourceTree = "<group>"; };
+		4322CA3E1FD9529700E7B565 /* PhotoBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserController.m; sourceTree = "<group>"; };
+		4322CA411FD9531500E7B565 /* QASlideItemBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QASlideItemBaseView.m; sourceTree = "<group>"; };
+		4322CA441FD9531500E7B565 /* QASlideItemBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QASlideItemBaseView.h; sourceTree = "<group>"; };
+		4322CA451FD9531500E7B565 /* QASlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QASlideView.h; sourceTree = "<group>"; };
+		4322CA471FD9531600E7B565 /* QASlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QASlideView.m; sourceTree = "<group>"; };
+		4322CA4C1FD9535600E7B565 /* SlideImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideImageView.h; sourceTree = "<group>"; };
+		4322CA4D1FD9535700E7B565 /* SlideImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideImageView.m; sourceTree = "<group>"; };
 		432F90B71F74DF4600FCF655 /* UserSignInRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSignInRequest.h; sourceTree = "<group>"; };
 		432F90B81F74DF4600FCF655 /* UserSignInRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSignInRequest.m; sourceTree = "<group>"; };
 		432F90BA1F74FDB700FCF655 /* GetResourceRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetResourceRequest.h; sourceTree = "<group>"; };
@@ -284,7 +310,12 @@
 		435274F71F7355800050B177 /* GetSignInRecordListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetSignInRecordListRequest.h; sourceTree = "<group>"; };
 		435274F81F7355800050B177 /* GetSignInRecordListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetSignInRecordListRequest.m; sourceTree = "<group>"; };
 		435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetSignInRecordList_Mock.json; sourceTree = "<group>"; };
+		43538D2D1FDFB7C40052A9D3 /* StageSubject.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StageSubject.json; sourceTree = "<group>"; };
+		43538D2F1FDFBD2D0052A9D3 /* StageSubjectItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StageSubjectItem.h; sourceTree = "<group>"; };
+		43538D301FDFBD2D0052A9D3 /* StageSubjectItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StageSubjectItem.m; sourceTree = "<group>"; };
 		435550701F78DBCD00264C5B /* UserSignIn_Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSignIn_Mock.json; sourceTree = "<group>"; };
+		43578CC31FE2295E00D37B72 /* SubScanCodeResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubScanCodeResultViewController.h; sourceTree = "<group>"; };
+		43578CC41FE2295E00D37B72 /* SubScanCodeResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubScanCodeResultViewController.m; sourceTree = "<group>"; };
 		435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		435DFCF51FD0FAAF00CEA9C2 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportTableViewCell.m; sourceTree = "<group>"; };
@@ -303,6 +334,17 @@
 		435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetResourceDetailRequest.m; sourceTree = "<group>"; };
 		435F77B71F7A61C400247BD8 /* ResourceTypeMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceTypeMapping.h; sourceTree = "<group>"; };
 		435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourceTypeMapping.m; sourceTree = "<group>"; };
+		4369597D1FDE27B5009E5C43 /* ClassEmptyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassEmptyViewController.h; sourceTree = "<group>"; };
+		4369597E1FDE27B5009E5C43 /* ClassEmptyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassEmptyViewController.m; sourceTree = "<group>"; };
+		436959801FDE83E6009E5C43 /* FDActionSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDActionSheetCell.m; sourceTree = "<group>"; };
+		436959811FDE83E6009E5C43 /* FDActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDActionSheetView.m; sourceTree = "<group>"; };
+		436959831FDE83E7009E5C43 /* FDActionSheetFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDActionSheetFooterView.h; sourceTree = "<group>"; };
+		436959841FDE83E7009E5C43 /* FDActionSheetFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDActionSheetFooterView.m; sourceTree = "<group>"; };
+		436959851FDE83E7009E5C43 /* FDActionSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDActionSheetCell.h; sourceTree = "<group>"; };
+		436959861FDE83E7009E5C43 /* FDActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDActionSheetView.h; sourceTree = "<group>"; };
+		4369598B1FDE84B5009E5C43 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		4369598C1FDE8899009E5C43 /* FDActionSheetHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDActionSheetHeaderView.h; sourceTree = "<group>"; };
+		4369598D1FDE8899009E5C43 /* FDActionSheetHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDActionSheetHeaderView.m; sourceTree = "<group>"; };
 		4376E7301F70B5C8003E2057 /* CourseDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailHeaderView.h; sourceTree = "<group>"; };
 		4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailHeaderView.m; sourceTree = "<group>"; };
 		4376E7361F70D146003E2057 /* CourseBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseBriefViewController.h; sourceTree = "<group>"; };
@@ -476,7 +518,6 @@
 		7C2518F31F68E8000001B577 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		7C2518F51F68E8130001B577 /* Empty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Empty.xib; sourceTree = "<group>"; };
 		7C2518F71F68E8510001B577 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		7C2518FA1F68E8A80001B577 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		7C2518FB1F68E8A80001B577 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		7C2519051F68E90C0001B577 /* TestsRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsRootViewController.h; sourceTree = "<group>"; };
 		7C2519061F68E90C0001B577 /* TestsRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsRootViewController.m; sourceTree = "<group>"; };
@@ -955,6 +996,7 @@
 				7C2518F31F68E8000001B577 /* Config.plist */,
 				7C2518F51F68E8130001B577 /* Empty.xib */,
 				7C2519B91F6917960001B577 /* env_config.json */,
+				43538D2D1FDFB7C40052A9D3 /* StageSubject.json */,
 				7C2518F21F68E6BC0001B577 /* PrefixHeader.pch */,
 				7C2518AA1F68E5C70001B577 /* Supporting Files */,
 			);
@@ -1011,8 +1053,16 @@
 		7C2518F91F68E8A80001B577 /* AlertFramework */ = {
 			isa = PBXGroup;
 			children = (
-				7C2518FA1F68E8A80001B577 /* AlertView.h */,
+				4369598B1FDE84B5009E5C43 /* AlertView.h */,
 				7C2518FB1F68E8A80001B577 /* AlertView.m */,
+				436959851FDE83E7009E5C43 /* FDActionSheetCell.h */,
+				436959801FDE83E6009E5C43 /* FDActionSheetCell.m */,
+				4369598C1FDE8899009E5C43 /* FDActionSheetHeaderView.h */,
+				4369598D1FDE8899009E5C43 /* FDActionSheetHeaderView.m */,
+				436959831FDE83E7009E5C43 /* FDActionSheetFooterView.h */,
+				436959841FDE83E7009E5C43 /* FDActionSheetFooterView.m */,
+				436959861FDE83E7009E5C43 /* FDActionSheetView.h */,
+				436959811FDE83E6009E5C43 /* FDActionSheetView.m */,
 			);
 			path = AlertFramework;
 			sourceTree = "<group>";
@@ -1095,6 +1145,10 @@
 		7C2519371F68EB780001B577 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				4322CA441FD9531500E7B565 /* QASlideItemBaseView.h */,
+				4322CA411FD9531500E7B565 /* QASlideItemBaseView.m */,
+				4322CA451FD9531500E7B565 /* QASlideView.h */,
+				4322CA471FD9531600E7B565 /* QASlideView.m */,
 				922084361F6BCE6500F8AAC6 /* YXImagePickerController.h */,
 				922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */,
 				7C2519381F68EB780001B577 /* CollectionViewEqualSpaceFlowLayout.h */,
@@ -1165,6 +1219,8 @@
 				7C2519671F68EBCD0001B577 /* UserManager.m */,
 				7C2519681F68EBCD0001B577 /* UserModel.h */,
 				7C2519691F68EBCD0001B577 /* UserModel.m */,
+				43538D2F1FDFBD2D0052A9D3 /* StageSubjectItem.h */,
+				43538D301FDFBD2D0052A9D3 /* StageSubjectItem.m */,
 				438E2A721F738CAB00800020 /* GetSignInRecordListFetcher.h */,
 				438E2A731F738CAB00800020 /* GetSignInRecordListFetcher.m */,
 				92C569981F738D180025815B /* UploadHeadImgRequest.h */,
@@ -1304,6 +1360,8 @@
 				7C2519B71F690ECB0001B577 /* MineViewController.m */,
 				922084241F6BC47600F8AAC6 /* UserInfoViewController.h */,
 				922084251F6BC47600F8AAC6 /* UserInfoViewController.m */,
+				4322CA371FD941D700E7B565 /* StageSubjectViewController.h */,
+				4322CA381FD941D700E7B565 /* StageSubjectViewController.m */,
 				4378DF921F6F62F9005CFE56 /* SignInRecordViewController.h */,
 				4378DF931F6F62F9005CFE56 /* SignInRecordViewController.m */,
 				4378DF9C1F6F6F57005CFE56 /* SignInDetailViewController.h */,
@@ -1355,6 +1413,8 @@
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
 				9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */,
 				9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */,
+				4322CA3D1FD9529700E7B565 /* PhotoBrowserController.h */,
+				4322CA3E1FD9529700E7B565 /* PhotoBrowserController.m */,
 				435DFCF51FD0FAAF00CEA9C2 /* ReportViewController.h */,
 				435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */,
 			);
@@ -1430,6 +1490,8 @@
 				7C2519AB1F690D860001B577 /* LoginViewController.m */,
 				7CEFC7B41F989C1C001D8C84 /* ForgotPasswordViewController.h */,
 				7CEFC7B51F989C1C001D8C84 /* ForgotPasswordViewController.m */,
+				4369597D1FDE27B5009E5C43 /* ClassEmptyViewController.h */,
+				4369597E1FDE27B5009E5C43 /* ClassEmptyViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -1465,6 +1527,8 @@
 				43510A941F6B63FA006B2645 /* ScanCodeViewController.m */,
 				431D75961F6EB43E00E0073B /* ScanCodeResultViewController.h */,
 				431D75971F6EB43E00E0073B /* ScanCodeResultViewController.m */,
+				43578CC31FE2295E00D37B72 /* SubScanCodeResultViewController.h */,
+				43578CC41FE2295E00D37B72 /* SubScanCodeResultViewController.m */,
 			);
 			name = "扫一扫";
 			sourceTree = "<group>";
@@ -1579,6 +1643,8 @@
 				9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */,
 				7CEFC7B81F998E20001D8C84 /* SexItemView.h */,
 				7CEFC7B91F998E20001D8C84 /* SexItemView.m */,
+				4322CA3A1FD941F500E7B565 /* StageSubjectCell.h */,
+				4322CA3B1FD941F500E7B565 /* StageSubjectCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1618,6 +1684,8 @@
 				928386191F6FC58700205028 /* ClassMomentFooterView.m */,
 				9283861B1F6FCD2B00205028 /* ClassMomentFloatingView.h */,
 				9283861C1F6FCD2B00205028 /* ClassMomentFloatingView.m */,
+				4322CA4C1FD9535600E7B565 /* SlideImageView.h */,
+				4322CA4D1FD9535700E7B565 /* SlideImageView.m */,
 				435DFCF81FD0FABD00CEA9C2 /* ReportTableViewCell.h */,
 				435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */,
 			);
@@ -1771,6 +1839,7 @@
 				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,
 				7C24E1EB1F72262F00A6921B /* GetCurrentClazsRequest_mock.json in Resources */,
 				7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */,
+				43538D2E1FDFB7C40052A9D3 /* StageSubject.json in Resources */,
 				43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */,
 				43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */,
 			);
@@ -1889,9 +1958,11 @@
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
 				9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */,
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
+				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
+				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
 				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
 				7C2519431F68EB780001B577 /* ExtendTextField.m in Sources */,
@@ -1926,11 +1997,14 @@
 				7C212DF11F6B73830007AE01 /* CourseCatalogCell.m in Sources */,
 				4378DFAB1F6FA4CB005CFE56 /* SignInRecordCell.m in Sources */,
 				923F73871F725C4700D7EA6F /* ClassMomentCommentRequest.m in Sources */,
+				43538D311FDFBD2D0052A9D3 /* StageSubjectItem.m in Sources */,
 				7C2518ED1F68E68D0001B577 /* UIImage+YXResize.m in Sources */,
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
+				4322CA3C1FD941F500E7B565 /* StageSubjectCell.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
+				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
 				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
 				7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */,
@@ -1944,12 +2018,16 @@
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
+				436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */,
 				435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */,
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
+				4369598A1FDE83E7009E5C43 /* FDActionSheetFooterView.m in Sources */,
 				438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */,
+				436959881FDE83E7009E5C43 /* FDActionSheetView.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
+				4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
 				43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,
@@ -2006,6 +2084,8 @@
 				7CEFC7BD1F9990CF001D8C84 /* ModifySexViewController.m in Sources */,
 				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
+				43578CC51FE2295E00D37B72 /* SubScanCodeResultViewController.m in Sources */,
+				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
 				F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */,
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
@@ -2014,6 +2094,8 @@
 				7C24E1F61F72514C00A6921B /* QuestionRequestItem.m in Sources */,
 				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
+				4369597F1FDE27B5009E5C43 /* ClassEmptyViewController.m in Sources */,
+				4322CA491FD9531600E7B565 /* QASlideItemBaseView.m in Sources */,
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
 				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
 				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,

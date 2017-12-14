@@ -26,6 +26,7 @@
 @end
 
 @implementation UserSignInRequest
+
 - (instancetype)init {
     if (self = [super init]) {
         self.method = @"interact.userSignIn";
@@ -66,5 +67,27 @@
         }
         [super startRequestWithRetClass:retClass andCompleteBlock:completeBlock];
     }];
+}
+@end
+
+@implementation UserSignInHelper
++ (NSDictionary *)getParametersFromUrlString:(NSString *)urlString {
+    if (![urlString containsString:@"stepId="]) {
+        return nil;
+    }
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSArray *paraStrings = [[urlString componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];
+    for (NSString *paraString in paraStrings) {
+        NSString *name = [paraString componentsSeparatedByString:@"="].firstObject;
+        NSString *value = [paraString componentsSeparatedByString:@"="].lastObject;
+        if (([name isEqualToString:kStepId] && !isEmpty(value)) ||
+            ([name isEqualToString:kTimestamp] && !isEmpty(value))) {
+            [parameters setObject:value forKey:name];
+        }
+    }
+    if (isEmpty([parameters objectForKey:kStepId])) {
+        return nil;
+    }
+    return parameters;
 }
 @end
