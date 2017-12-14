@@ -151,6 +151,7 @@
 }
 
 - (void)signInBtnAction:(UIButton *)sender {
+    [TalkingData trackEvent:@"点击签到详情中的签到按钮"];
     ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
     scanCodeVC.currentIndexPath = self.currentIndexPath;
     [self.navigationController pushViewController:scanCodeVC animated:YES];

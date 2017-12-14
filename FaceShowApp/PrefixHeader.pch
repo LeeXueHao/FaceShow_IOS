@@ -80,6 +80,6 @@ extern int ddLogLevel;
 #import "GlobalUtils.h"
 #import "ConfigManager.h"
 #import "UserManager.h"
-
+#import "TalkingData.h"
 
 #endif /* PrefixHeader_pch */

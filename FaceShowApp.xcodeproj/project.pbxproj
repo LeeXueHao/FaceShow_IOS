@@ -38,6 +38,9 @@
 		43538D311FDFBD2D0052A9D3 /* StageSubjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43538D301FDFBD2D0052A9D3 /* StageSubjectItem.m */; };
 		435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 435550701F78DBCD00264C5B /* UserSignIn_Mock.json */; };
 		43578CC51FE2295E00D37B72 /* SubScanCodeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43578CC41FE2295E00D37B72 /* SubScanCodeResultViewController.m */; };
+		43578CC91FE25EA100D37B72 /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43578CC81FE25EA100D37B72 /* libTalkingData.a */; };
+		43578CCB1FE25F3700D37B72 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43578CCA1FE25F3700D37B72 /* CoreMotion.framework */; };
+		43578CCE1FE262C100D37B72 /* PageNameMappingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 43578CCD1FE262C100D37B72 /* PageNameMappingTable.m */; };
 		435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */; };
 		435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */; };
 		435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435DFCFA1FD0FAE100CEA9C2 /* ReportRequest.m */; };
@@ -316,6 +319,11 @@
 		435550701F78DBCD00264C5B /* UserSignIn_Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSignIn_Mock.json; sourceTree = "<group>"; };
 		43578CC31FE2295E00D37B72 /* SubScanCodeResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubScanCodeResultViewController.h; sourceTree = "<group>"; };
 		43578CC41FE2295E00D37B72 /* SubScanCodeResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubScanCodeResultViewController.m; sourceTree = "<group>"; };
+		43578CC71FE25EA100D37B72 /* TalkingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingData.h; sourceTree = "<group>"; };
+		43578CC81FE25EA100D37B72 /* libTalkingData.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTalkingData.a; sourceTree = "<group>"; };
+		43578CCA1FE25F3700D37B72 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		43578CCC1FE262C100D37B72 /* PageNameMappingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageNameMappingTable.h; sourceTree = "<group>"; };
+		43578CCD1FE262C100D37B72 /* PageNameMappingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageNameMappingTable.m; sourceTree = "<group>"; };
 		435DFCF41FD0FAAE00CEA9C2 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		435DFCF51FD0FAAF00CEA9C2 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportTableViewCell.m; sourceTree = "<group>"; };
@@ -742,6 +750,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43578CCB1FE25F3700D37B72 /* CoreMotion.framework in Frameworks */,
 				435DFD0D1FD105DC00CEA9C2 /* AdSupport.framework in Frameworks */,
 				435DFD091FD1057500CEA9C2 /* CoreTelephony.framework in Frameworks */,
 				435DFD051FD1053A00CEA9C2 /* Security.framework in Frameworks */,
@@ -752,6 +761,7 @@
 				435DFCFF1FD1034900CEA9C2 /* BMKLocationKit.framework in Frameworks */,
 				F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */,
 				7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */,
+				43578CC91FE25EA100D37B72 /* libTalkingData.a in Frameworks */,
 				7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */,
 				7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */,
 				7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */,
@@ -819,6 +829,15 @@
 				435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */,
 			);
 			name = Request;
+			sourceTree = "<group>";
+		};
+		43578CC61FE25EA100D37B72 /* TalkingData */ = {
+			isa = PBXGroup;
+			children = (
+				43578CC71FE25EA100D37B72 /* TalkingData.h */,
+				43578CC81FE25EA100D37B72 /* libTalkingData.a */,
+			);
+			path = TalkingData;
 			sourceTree = "<group>";
 		};
 		435DFCFD1FD1034900CEA9C2 /* 百度定位 */ = {
@@ -1107,6 +1126,7 @@
 				435DFCFD1FD1034900CEA9C2 /* 百度定位 */,
 				7C4D543F1F972B040053DB12 /* 个推 */,
 				7C25191A1F68EACF0001B577 /* MJRefresh */,
+				43578CC61FE25EA100D37B72 /* TalkingData */,
 			);
 			path = 3rdLib;
 			sourceTree = "<group>";
@@ -1207,6 +1227,8 @@
 				7C2519701F68EBCD0001B577 /* 首页 */,
 				7C24E1F11F72494A00A6921B /* FSDataMappingTable.h */,
 				7C24E1F21F72494A00A6921B /* FSDataMappingTable.m */,
+				43578CCC1FE262C100D37B72 /* PageNameMappingTable.h */,
+				43578CCD1FE262C100D37B72 /* PageNameMappingTable.m */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -1721,6 +1743,7 @@
 		E07FF1E38E78A513F51FA97A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43578CCA1FE25F3700D37B72 /* CoreMotion.framework */,
 				435DFD0C1FD1059E00CEA9C2 /* AdSupport.framework */,
 				435DFD0A1FD1059100CEA9C2 /* libstdc++.6.0.9.tbd */,
 				435DFD081FD1056300CEA9C2 /* CoreTelephony.framework */,
@@ -2033,6 +2056,7 @@
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				4369598A1FDE83E7009E5C43 /* FDActionSheetFooterView.m in Sources */,
+				43578CCE1FE262C100D37B72 /* PageNameMappingTable.m in Sources */,
 				438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */,
 				436959881FDE83E7009E5C43 /* FDActionSheetView.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
@@ -2251,6 +2275,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FaceShowApp/3rdLib/个推",
+					"$(PROJECT_DIR)/FaceShowApp/3rdLib/TalkingData",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2364,6 +2389,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FaceShowApp/3rdLib/个推",
+					"$(PROJECT_DIR)/FaceShowApp/3rdLib/TalkingData",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

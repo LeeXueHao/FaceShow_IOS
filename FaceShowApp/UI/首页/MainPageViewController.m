@@ -46,6 +46,7 @@
 }
 
 - (void)navRightBtnAction:(UIButton *)sender {
+    [TalkingData trackEvent:@"点击首页中签到"];
     ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
@@ -59,10 +60,12 @@
         make.height.mas_equalTo(135);
     }];
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
-    tabContainerView.tabNameArray = @[@"课程",@"资源",@"任务",@"日程"];
+    NSArray *tabNames = @[@"课程",@"资源",@"任务",@"日程"];
+    tabContainerView.tabNameArray = tabNames;
     WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
+        [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
         [self switchToVCWithIndex:index];
     }];
     [self.view addSubview:tabContainerView];

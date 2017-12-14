@@ -20,6 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [GlobalUtils setupCore];
+    // Talking Data统计
+    [TalkingData setExceptionReportEnabled:YES];
+    [TalkingData setSignalReportEnabled:YES];
+    [TalkingData sessionStarted:[ConfigManager sharedInstance].TalkingDataAppID withChannelId:[ConfigManager sharedInstance].channel];
     [[YXGeTuiManager sharedInstance] registerGeTuiWithDelegate:self];
     [[BMKLocationAuth sharedInstance] checkPermisionWithKey:[ConfigManager sharedInstance].BaiduLocAppKey authDelegate:self];
     [self registerNotifications];

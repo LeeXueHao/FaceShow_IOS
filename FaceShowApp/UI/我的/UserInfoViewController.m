@@ -157,6 +157,7 @@
         }];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 4) {
+        [TalkingData trackEvent:@"点击修改学段学科"];
         StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
         WEAK_SELF
         vc.completeBlock = ^{
