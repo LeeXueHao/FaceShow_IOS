@@ -10,7 +10,7 @@
 #import "UserSignInRequest.h"
 
 @interface ScanCodeResultViewController : ScrollBaseViewController
-@property (nonatomic, copy) void (^reScanCodeBlock)();
+@property (nonatomic, copy) void (^reScanCodeBlock)(void);
 @property (nonatomic, strong) UserSignInRequestItem_Data *data;
 @property (nonatomic, strong) HttpBaseRequestItem_Error *error;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;

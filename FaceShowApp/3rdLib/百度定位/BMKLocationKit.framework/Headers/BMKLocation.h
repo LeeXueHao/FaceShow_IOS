@@ -27,7 +27,7 @@ typedef NS_ENUM(int, BMKLocationProvider) {
 @interface BMKLocation : NSObject
 
 ///BMKLocation 位置数据
-@property(nonatomic, copy, readonly) CLLocation *location;
+@property(nonatomic, copy, readonly) CLLocation * _Nullable location;
 
 ///BMKLocation 地址数据
 @property(nonatomic, copy, readonly) BMKLocationReGeocode *rgcData;

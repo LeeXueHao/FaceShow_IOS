@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ActionBlock)();
+typedef void(^ActionBlock)(void);
 
 @interface UIViewController (NavigationItem)
 - (void)nyx_setupLeftWithTitle:(NSString *)title action:(ActionBlock)action;

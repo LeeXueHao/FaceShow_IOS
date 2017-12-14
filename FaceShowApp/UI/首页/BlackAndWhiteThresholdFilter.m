@@ -106,11 +106,11 @@
     
     sampler = [CISampler samplerWithImage:inputImage];
     
-    NSArray * outputExtent = [NSArray arrayWithObjects:
-                              [NSNumber numberWithInt:[inputImage extent].origin.x],
-                              [NSNumber numberWithInt:[inputImage extent].origin.y],
-                              [NSNumber numberWithFloat:[inputImage extent].size.width],
-                              [NSNumber numberWithFloat:[inputImage extent].size.height],nil];
+//    NSArray * outputExtent = [NSArray arrayWithObjects:
+//                              [NSNumber numberWithInt:[inputImage extent].origin.x],
+//                              [NSNumber numberWithInt:[inputImage extent].origin.y],
+//                              [NSNumber numberWithFloat:[inputImage extent].size.width],
+//                              [NSNumber numberWithFloat:[inputImage extent].size.height],nil];
     
     
     CIImage * outputImage = [_kernel applyWithExtent:[inputImage extent]

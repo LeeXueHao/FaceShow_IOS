@@ -14,7 +14,7 @@
 
 #import "BlackAndWhiteThresholdFilter.h"
 
-@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, AVCaptureDataOutputSynchronizerDelegate> {
+@interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
     AVCaptureSession *_session;
     AVCaptureDevice *_device;
     AVCaptureDeviceInput *_input;
@@ -182,9 +182,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(imageBuffer, 0);
-    size_t width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0);
-    size_t height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
+//    size_t width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0);
+//    size_t height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
+//    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
     
     CIImage* input = [CIImage imageWithCVImageBuffer: imageBuffer];
     CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
@@ -214,7 +214,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     NSString *ret = nil;
     while ((ret == nil) && (threhold < 1.0)) {
         CIImage *output = [self change:img threshold:threhold];
-        NSArray *arr = [_qrDetector featuresInImage:output];
+//        NSArray *arr = [_qrDetector featuresInImage:output];
         for (CIQRCodeFeature *feature in [_qrDetector featuresInImage:output]) {
             ret = feature.messageString;
             break;

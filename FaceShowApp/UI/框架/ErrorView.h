@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ErrorView : UIView
-@property (nonatomic, copy) void(^retryBlock)();
+@property (nonatomic, copy) void(^retryBlock)(void);
 @end

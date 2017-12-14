@@ -14,6 +14,6 @@
 @property (nonatomic, strong) QuestionRequestItem_question *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
 @property (nonatomic, strong) void(^textChangeBlock) (NSString *text);
-@property (nonatomic, strong) void(^endEdittingBlock) ();
-@property (nonatomic, strong) void(^beginEdittingBlock) ();
+@property (nonatomic, strong) void(^endEdittingBlock) (void);
+@property (nonatomic, strong) void(^beginEdittingBlock) (void);
 @end

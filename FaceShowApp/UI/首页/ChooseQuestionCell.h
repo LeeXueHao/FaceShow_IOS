@@ -13,6 +13,6 @@
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) QuestionRequestItem_question *item;
 @property (nonatomic, assign) BOOL bottomLineHidden;
-@property (nonatomic, strong) void(^answerChangeBlock) ();
+@property (nonatomic, strong) void(^answerChangeBlock) (void);
 @property (nonatomic, assign) BOOL editable;
 @end

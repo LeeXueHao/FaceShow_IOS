@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, BMKGeoFenceRegionStatus)
 
 /**
  *  @brief 判断位置与围栏状态
- *  @param CLLocationCoordinate2D 坐标值
+ *  @param coor CLLocationCoordinate2D 坐标值
  *  @return 返回BMKGeoFenceRegionStatus状态
  */
 -(BMKGeoFenceRegionStatus)judgeStatusWithCoor:(CLLocationCoordinate2D)coor;

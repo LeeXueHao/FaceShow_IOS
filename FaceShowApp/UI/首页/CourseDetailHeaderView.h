@@ -12,7 +12,7 @@
 @interface CourseDetailHeaderView : UIView
 
 @property (nonatomic, strong) GetCourseRequestItem_Course *course;
-@property (nonatomic, copy) void (^viewAllBlock)();
+@property (nonatomic, copy) void (^viewAllBlock)(void);
 
 + (CGFloat)heightForCourse:(GetCourseRequestItem_Course *)course;
 @end

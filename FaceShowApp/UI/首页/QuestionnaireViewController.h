@@ -14,5 +14,5 @@
 @property (nonatomic, strong) NSString *stepId;
 @property (nonatomic, assign) InteractType interactType;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) void(^completeBlock) ();
+@property (nonatomic, strong) void(^completeBlock) (void);
 @end

@@ -17,7 +17,7 @@
 
 @implementation GCDTimer
 
-- (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats triggerBlock:(void(^)())triggerBlock {
+- (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats triggerBlock:(void(^)(void))triggerBlock {
     if (self = [super init]) {
         self.triggerBlock = triggerBlock;
         self.repeats = repeats;
