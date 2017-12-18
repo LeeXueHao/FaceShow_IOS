@@ -33,7 +33,9 @@
 
 - (NSString *)yx_stringByTrimmingCharacters
 {
-    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *string = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
+    return string;
 }
 
 - (NSString *)nyx_stringByTrimmingExtraSpaces {    
