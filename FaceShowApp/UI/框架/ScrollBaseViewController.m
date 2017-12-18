@@ -13,6 +13,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.bottomHeightWhenKeyboardShows = -1;
     [self setupBaseUI];
     [self setupObservers];
 }
@@ -50,6 +51,9 @@
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y, 0);
+            if (keyboardFrame.origin.y < SCREEN_HEIGHT && self.bottomHeightWhenKeyboardShows>0) {
+                [self.scrollView scrollRectToVisible:CGRectMake(0, self.view.height-self.bottomHeightWhenKeyboardShows, 1, 1) animated:NO];
+            }
         }];
     }];
 }

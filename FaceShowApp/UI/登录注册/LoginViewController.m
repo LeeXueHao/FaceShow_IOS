@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.bottomHeightWhenKeyboardShows = 20;
     [self setupUI];
     [self setupObserver];
 }

@@ -11,4 +11,5 @@
 @interface ScrollBaseViewController : BaseViewController
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, assign) CGFloat bottomHeightWhenKeyboardShows;
 @end
