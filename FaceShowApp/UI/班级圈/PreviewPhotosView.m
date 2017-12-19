@@ -9,7 +9,14 @@
 #import "PreviewPhotosView.h"
 #import "ShowPhotosViewController.h"
 @implementation PreviewPhotosModel
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.placeHolderImage = [UIImage imageNamed:@"朋友圈一张图加载失败图片"];
+    }
+    return self;
+}
 @end
 @interface PreviewPhotosView ()
 @property (nonatomic, assign) CGSize photoSize;
@@ -52,6 +59,7 @@
         [imageView sd_setImageWithURL:[NSURL URLWithString:obj.thumbnail] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image != nil && error == nil) {
                 [placeholderImageView removeFromSuperview];
+                obj.placeHolderImage = image;
             }
         }];
         imageView.tag = 10086 + idx;

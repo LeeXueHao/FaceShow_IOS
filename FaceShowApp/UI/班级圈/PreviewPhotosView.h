@@ -12,6 +12,7 @@
 @property (nonatomic, copy) NSString *original;
 @property (nonatomic, assign) CGFloat width;
 @property (nonatomic, assign) CGFloat height;
+@property (nonatomic, strong) UIImage *placeHolderImage;
 @end
 
 @interface PreviewPhotosView : UIView

@@ -66,9 +66,10 @@
         photoView.clipsToBounds = NO;
         photoView.tag = 10086 + idx;
         [self.scrollView addSubview:photoView];
+        [photoView displayImage:obj.placeHolderImage];// 先展示缩略图，不至于屏幕全黑
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         WEAK_SELF
-        [imageView sd_setImageWithURL:[NSURL URLWithString:obj.original] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:obj.original] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             STRONG_SELF
             if (error == nil) {
                 [photoView displayImage:image];
