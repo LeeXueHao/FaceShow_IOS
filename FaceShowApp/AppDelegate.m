@@ -28,6 +28,7 @@
     [[BMKLocationAuth sharedInstance] checkPermisionWithKey:[ConfigManager sharedInstance].BaiduLocAppKey authDelegate:self];
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
     if ([UserManager sharedInstance].loginStatus) {
         [[UserMessageManager sharedInstance] resumeHeartbeat];
     }
