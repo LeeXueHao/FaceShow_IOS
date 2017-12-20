@@ -20,6 +20,7 @@
 #import "ClassMomentClickLikeRequest.h"
 #import "ClassMomentCommentRequest.h"
 #import "ReportViewController.h"
+#import "UserPromptsManager.h"
 
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
@@ -46,6 +47,7 @@
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
     self.navigationItem.title = @"班级圈";
+    [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
     [self setupUI];
     [self setupObservers];
 //    self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -207,6 +209,7 @@
         
     }];
 }
+
 - (void)setupObservers {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
@@ -226,6 +229,13 @@
             }];
             [self.view layoutIfNeeded];
         }];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewMomentNotification object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        if (self.tabBarController.selectedIndex == 2) {
+            [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+        }
+        [self firstPageFetch];
     }];
 }
 

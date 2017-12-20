@@ -66,6 +66,7 @@
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
         [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
+        self.selectedIndex = index;
         [self switchToVCWithIndex:index];
     }];
     [self.view addSubview:tabContainerView];
@@ -76,7 +77,9 @@
     }];
     self.tabControllers = [NSMutableArray array];
     [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]];
-    [self.tabControllers addObject:[[ResourceListViewController alloc]init]];
+    ResourceListViewController *resVC = [[ResourceListViewController alloc]init];
+    resVC.mainVC = self;
+    [self.tabControllers addObject:resVC];
     [self.tabControllers addObject:[[TaskListViewController alloc]init]];
     [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
     for (UIViewController *vc in self.tabControllers) {

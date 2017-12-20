@@ -16,6 +16,7 @@
 #import "QuestionnaireViewController.h"
 #import "GetSigninRequest.h"
 #import "SignInDetailViewController.h"
+#import "UserPromptsManager.h"
 
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -148,6 +149,7 @@
                 STRONG_SELF
                 task.stepFinished = @"1";
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [self checkIfHasUncompleteTask];
             }];
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -159,6 +161,7 @@
             STRONG_SELF
             task.stepFinished = @"1";
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self checkIfHasUncompleteTask];
         }];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (type == InteractType_SignIn) {
@@ -181,6 +184,16 @@
             [self.navigationController pushViewController:signInDetailVC animated:YES];
         }];
     }
+}
+
+- (void)checkIfHasUncompleteTask {
+    for (GetTaskRequestItem_Task *task in self.dataArray) {
+        InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
+        if (task.stepFinished.integerValue!=1 && (type==InteractType_Vote || type==InteractType_Questionare)) {
+            return;
+        }
+    }
+    [UserPromptsManager sharedInstance].taskNewView.hidden = YES;
 }
 
 #pragma mark - RefreshDelegate

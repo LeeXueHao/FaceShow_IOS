@@ -199,6 +199,8 @@
 		7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B41F690EB50001B577 /* ClassMomentViewController.m */; };
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
+		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
+		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
 		7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54151F9729230053DB12 /* YXGeTuiManager.m */; };
 		7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54141F9729230053DB12 /* YXApnsContentModel.m */; };
 		7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */; };
@@ -624,6 +626,10 @@
 		7C2519B61F690ECB0001B577 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		7C2519B71F690ECB0001B577 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
+		7C29F3121FEA361E007A4076 /* GetUserPromptsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserPromptsRequest.h; sourceTree = "<group>"; };
+		7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserPromptsRequest.m; sourceTree = "<group>"; };
+		7C29F3151FEA3AA6007A4076 /* UserPromptsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptsManager.h; sourceTree = "<group>"; };
+		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
 		7C4D54121F970B280053DB12 /* 研修宝.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "研修宝.entitlements"; sourceTree = "<group>"; };
 		7C4D54141F9729230053DB12 /* YXApnsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXApnsContentModel.m; sourceTree = "<group>"; };
 		7C4D54151F9729230053DB12 /* YXGeTuiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXGeTuiManager.m; sourceTree = "<group>"; };
@@ -1220,6 +1226,7 @@
 		7C2519641F68EBCD0001B577 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7C29F3111FEA34E4007A4076 /* 消息提示 */,
 				7C2519651F68EBCD0001B577 /* 我的 */,
 				7C25196A1F68EBCD0001B577 /* 消息 */,
 				7C25196C1F68EBCD0001B577 /* 班级圈 */,
@@ -1516,6 +1523,17 @@
 				4369597E1FDE27B5009E5C43 /* ClassEmptyViewController.m */,
 			);
 			path = "登录注册";
+			sourceTree = "<group>";
+		};
+		7C29F3111FEA34E4007A4076 /* 消息提示 */ = {
+			isa = PBXGroup;
+			children = (
+				7C29F3121FEA361E007A4076 /* GetUserPromptsRequest.h */,
+				7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */,
+				7C29F3151FEA3AA6007A4076 /* UserPromptsManager.h */,
+				7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */,
+			);
+			path = "消息提示";
 			sourceTree = "<group>";
 		};
 		7C4D54131F9728DA0053DB12 /* Push */ = {
@@ -1971,6 +1989,7 @@
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,
 				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
+				7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */,
 				7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */,
 				7CEFC7BA1F998E20001D8C84 /* SexItemView.m in Sources */,
 				43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */,
@@ -2069,6 +2088,7 @@
 				7C2519A51F690C840001B577 /* AppDelegateHelper.m in Sources */,
 				7CEFC7F51F9DA514001D8C84 /* ApnsQuestionnaireViewController.m in Sources */,
 				7C212DF41F6BA72F0007AE01 /* MainPageTopView.m in Sources */,
+				7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */,
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
 				4376E7381F70D146003E2057 /* CourseBriefViewController.m in Sources */,
 				4376E7431F711A2D003E2057 /* QAFileUploadFirstStepRequest.m in Sources */,

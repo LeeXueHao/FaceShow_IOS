@@ -13,6 +13,7 @@
 #import "GetResourceRequest.h"
 #import "ResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
+#import "UserPromptsManager.h"
 
 @interface ResourceListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [UserPromptsManager sharedInstance].resourceNewView.hidden = YES;
     [self setupUI];
     [self requestResourceInfo];
 }
@@ -34,6 +36,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewResourceNotification object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        if (self.mainVC.selectedIndex == 1) {
+            [UserPromptsManager sharedInstance].resourceNewView.hidden = YES;
+        }
+        [self requestResourceInfo];
+    }];
 }
 
 - (void)requestResourceInfo {

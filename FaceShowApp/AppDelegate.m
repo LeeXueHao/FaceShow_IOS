@@ -11,6 +11,7 @@
 #import "UserMessageManager.h"
 #import "YXGeTuiManager.h"
 #import <BMKLocationKit/BMKLocationAuth.h>
+#import "UserPromptsManager.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -31,6 +32,7 @@
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
     if ([UserManager sharedInstance].loginStatus) {
         [[UserMessageManager sharedInstance] resumeHeartbeat];
+        [[UserPromptsManager sharedInstance] resumeHeartbeat];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -48,12 +50,14 @@
         [[YXGeTuiManager sharedInstance] loginSuccess];
         [self.appDelegateHelper handleLoginSuccess];
         [[UserMessageManager sharedInstance] resumeHeartbeat];
+        [[UserPromptsManager sharedInstance] resumeHeartbeat];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [[YXGeTuiManager sharedInstance] logoutSuccess];
         [self.appDelegateHelper handleLogoutSuccess];
         [[UserMessageManager sharedInstance] suspendHeartbeat];
+        [[UserPromptsManager sharedInstance] suspendHeartbeat];
     }];
 }
 

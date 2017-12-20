@@ -24,6 +24,7 @@
 #import "GetResourceDetailRequest.h"
 #import "UserSignInRequest.h"
 #import "SubScanCodeResultViewController.h"
+#import "UserPromptsManager.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -84,6 +85,15 @@
     [tabBarController.tabBar addSubview:redPointView];
     [tabBarController.tabBar bringSubviewToFront:redPointView];
     [UserMessageManager sharedInstance].redPointView = redPointView;
+    
+    UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 2, 6, 9, 9)];
+    momentNewView.layer.cornerRadius = 4.5f;
+    momentNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    momentNewView.hidden = YES;
+    [tabBarController.tabBar addSubview:momentNewView];
+    [tabBarController.tabBar bringSubviewToFront:momentNewView];
+    [UserPromptsManager sharedInstance].momentNewView = momentNewView;
+    
     return tabBarController;
 }
 

@@ -8,7 +8,8 @@
 
 #import "BaseViewController.h"
 #import "RefreshDelegate.h"
+#import "MainPageViewController.h"
 
 @interface ResourceListViewController : BaseViewController<RefreshDelegate>
-
+@property (nonatomic, weak) MainPageViewController *mainVC;
 @end

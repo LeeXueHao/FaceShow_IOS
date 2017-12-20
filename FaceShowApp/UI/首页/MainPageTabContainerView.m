@@ -7,6 +7,7 @@
 //
 
 #import "MainPageTabContainerView.h"
+#import "UserPromptsManager.h"
 
 @interface MainPageTabContainerView()
 @property (nonatomic, strong) NSMutableArray *tabButtonArray;
@@ -60,6 +61,22 @@
         make.height.mas_equalTo(2);
         make.width.mas_equalTo(tabWidth);
     }];
+    
+    UIView *resourceNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 5, 6, 9, 9)];
+    resourceNewView.layer.cornerRadius = 4.5f;
+    resourceNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    resourceNewView.hidden = YES;
+    [self addSubview:resourceNewView];
+    [self bringSubviewToFront:resourceNewView];
+    [UserPromptsManager sharedInstance].resourceNewView = resourceNewView;
+    
+    UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 5, 6, 9, 9)];
+    momentNewView.layer.cornerRadius = 4.5f;
+    momentNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    momentNewView.hidden = YES;
+    [self addSubview:momentNewView];
+    [self bringSubviewToFront:momentNewView];
+    [UserPromptsManager sharedInstance].momentNewView = momentNewView;
 }
 
 - (void)btnAction:(UIButton *)sender {

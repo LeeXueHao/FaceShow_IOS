@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface MainPageViewController : BaseViewController
-
+@property (nonatomic, assign) NSInteger selectedIndex;
 @end
