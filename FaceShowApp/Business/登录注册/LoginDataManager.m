@@ -45,7 +45,6 @@
         UserModel *userModel = [[UserModel alloc] init];
         userModel.token = item.token;
         userModel.passport = item.passport;
-        [UserManager sharedInstance].userModel = userModel;
         
         [manager.getClassRequest stopRequest];
         manager.getClassRequest = [[GetCurrentClazsRequest alloc] init];
@@ -61,7 +60,7 @@
                 BLOCK_EXEC(completeBlock, emptyError);
                 return;
             }
-            [UserManager sharedInstance].userModel.projectClassInfo = item;
+            userModel.projectClassInfo = item;
             
             [manager.getUserInfoRequest stopRequest];
             manager.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
@@ -71,6 +70,7 @@
                     return;
                 }
                 GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
+                [UserManager sharedInstance].userModel = userModel;
                 [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
                 [[UserManager sharedInstance] saveData];
                 BLOCK_EXEC(completeBlock, nil);
