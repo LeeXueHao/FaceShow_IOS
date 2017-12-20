@@ -236,11 +236,12 @@
 }
 
 - (void)dealWithError:(NSError *)error {
-    if ([self isNetworkReachable]) {
-        [self.view nyx_showToast:@"你的输入内容中可能存在表情，请修改后再次提交!"];
-    }else {
+//    if ([self isNetworkReachable]) {
+//        [self.view nyx_showToast:@"你的输入内容中可能存在表情，请修改后再次提交!"];
+//    }else
+//    {
         [self.view nyx_showToast:error.localizedDescription];
-    }
+//    }
 }
 
 - (void)goVoteResult {

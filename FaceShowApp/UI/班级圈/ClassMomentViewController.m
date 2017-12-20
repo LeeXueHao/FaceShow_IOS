@@ -47,7 +47,6 @@
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
     self.navigationItem.title = @"班级圈";
-    [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
     [self setupUI];
     [self setupObservers];
 //    self.edgesForExtendedLayout = UIRectEdgeAll;

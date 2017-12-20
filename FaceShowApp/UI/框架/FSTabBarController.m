@@ -7,8 +7,9 @@
 //
 
 #import "FSTabBarController.h"
+#import "UserPromptsManager.h"
 
-@interface FSTabBarController ()
+@interface FSTabBarController ()<UITabBarControllerDelegate>
 
 @end
 
@@ -16,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -38,6 +40,13 @@
         return navi.topViewController;
     }
     return navi;
+}
+
+#pragma mark - UITabBarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if (self.selectedIndex == 2) {
+        [UserPromptsManager sharedInstance].momentNewView.hidden = NO;
+    }
 }
 
 @end

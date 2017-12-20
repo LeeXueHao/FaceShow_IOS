@@ -16,6 +16,7 @@
 #import "ScheduleViewController.h"
 #import "TaskListViewController.h"
 #import "ScanCodeViewController.h"
+#import "UserPromptsManager.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -67,6 +68,9 @@
         STRONG_SELF
         [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
         self.selectedIndex = index;
+        if (index == 1) {
+            [UserPromptsManager sharedInstance].resourceNewView.hidden = YES;
+        }
         [self switchToVCWithIndex:index];
     }];
     [self.view addSubview:tabContainerView];

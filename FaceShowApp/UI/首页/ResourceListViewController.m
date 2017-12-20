@@ -28,7 +28,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [UserPromptsManager sharedInstance].resourceNewView.hidden = YES;
     [self setupUI];
     [self requestResourceInfo];
 }
