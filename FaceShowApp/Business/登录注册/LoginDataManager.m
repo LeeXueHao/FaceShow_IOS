@@ -48,6 +48,7 @@
         
         [manager.getClassRequest stopRequest];
         manager.getClassRequest = [[GetCurrentClazsRequest alloc] init];
+        manager.getClassRequest.token = userModel.token;
         [manager.getClassRequest startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             if (error) {
                 BLOCK_EXEC(completeBlock, error);
@@ -64,6 +65,7 @@
             
             [manager.getUserInfoRequest stopRequest];
             manager.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
+            manager.getUserInfoRequest.token = userModel.token;
             [manager.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
                 if (error) {
                     BLOCK_EXEC(completeBlock, error);

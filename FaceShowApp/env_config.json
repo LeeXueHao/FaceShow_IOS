@@ -1,6 +1,6 @@
 {
-    "server":"http://yxb.yanxiu.com/pxt/platform/data.api",
-    "loginServer":"http://pp.yanxiu.com/uc/appLogin",
+    "server":"http://orz.yanxiu.com/pxt/platform/data.api",
+    "loginServer":"http://orz.yanxiu.com/uc/appLogin",
     "easygo":"http://orz.yanxiu.com/easygo/multiUpload",
     "serverList" :{
         "server":"http://yxb.yanxiu.com/pxt/platform/data.api",
