@@ -15,6 +15,8 @@
 #import "UserInfoViewController.h"
 #import "SignInRecordViewController.h"
 #import "UserModel.h"
+#import "FeedbackViewController.h"
+
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -28,7 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我";
-    self.titleArray = @[@{@"image":@"签到记录icon",@"title":@"签到记录"}];
+    self.titleArray = @[@{@"image":@"签到记录icon",@"title":@"签到记录"},
+                        @{@"image":@"意见反馈icon",@"title":@"意见反馈"}
+                        ];
     [self setupUI];
     [self setupLayout];
     if ([UserManager sharedInstance].userModel == nil) {
@@ -98,9 +102,12 @@
         [self.navigationController pushViewController:VC animated:YES];
 //        UIViewController *VC = [[NSClassFromString(@"PhotoChooseViewController") alloc] init];
 //        [self.navigationController pushViewController:VC animated:YES];
-    }else {
+    }else if (indexPath.section == 1){
         SignInRecordViewController *signInRecordVC = [[SignInRecordViewController alloc] init];
         [self.navigationController pushViewController:signInRecordVC animated:YES];
+    }else {
+        FeedbackViewController *vc = [[FeedbackViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

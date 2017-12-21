@@ -262,6 +262,8 @@
 		92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C569991F738D180025815B /* UploadHeadImgRequest.m */; };
 		92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */; };
 		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
+		E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E900D79F1FEB51F9005B9163 /* FeedbackViewController.m */; };
+		E900D7A31FEB5806005B9163 /* FeedbackRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E900D7A21FEB5806005B9163 /* FeedbackRequest.m */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -747,6 +749,10 @@
 		92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAvatarRequest.m; sourceTree = "<group>"; };
 		92EF77141F6FAA2F007C3835 /* ClassMomentLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentLikeView.h; sourceTree = "<group>"; };
 		92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentLikeView.m; sourceTree = "<group>"; };
+		E900D79E1FEB51F9005B9163 /* FeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		E900D79F1FEB51F9005B9163 /* FeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		E900D7A11FEB5806005B9163 /* FeedbackRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackRequest.h; sourceTree = "<group>"; };
+		E900D7A21FEB5806005B9163 /* FeedbackRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackRequest.m; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -836,6 +842,8 @@
 				435274F71F7355800050B177 /* GetSignInRecordListRequest.h */,
 				435274F81F7355800050B177 /* GetSignInRecordListRequest.m */,
 				435274FA1F7358220050B177 /* GetSignInRecordList_Mock.json */,
+				E900D7A11FEB5806005B9163 /* FeedbackRequest.h */,
+				E900D7A21FEB5806005B9163 /* FeedbackRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1398,6 +1406,8 @@
 				4322CA381FD941D700E7B565 /* StageSubjectViewController.m */,
 				4378DF921F6F62F9005CFE56 /* SignInRecordViewController.h */,
 				4378DF931F6F62F9005CFE56 /* SignInRecordViewController.m */,
+				E900D79E1FEB51F9005B9163 /* FeedbackViewController.h */,
+				E900D79F1FEB51F9005B9163 /* FeedbackViewController.m */,
 				4378DF9C1F6F6F57005CFE56 /* SignInDetailViewController.h */,
 				4378DF9D1F6F6F57005CFE56 /* SignInDetailViewController.m */,
 				7CEFC7BB1F9990CF001D8C84 /* ModifySexViewController.h */,
@@ -2055,6 +2065,7 @@
 				7C212DF11F6B73830007AE01 /* CourseCatalogCell.m in Sources */,
 				4378DFAB1F6FA4CB005CFE56 /* SignInRecordCell.m in Sources */,
 				923F73871F725C4700D7EA6F /* ClassMomentCommentRequest.m in Sources */,
+				E900D7A31FEB5806005B9163 /* FeedbackRequest.m in Sources */,
 				43538D311FDFBD2D0052A9D3 /* StageSubjectItem.m in Sources */,
 				7C2518ED1F68E68D0001B577 /* UIImage+YXResize.m in Sources */,
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
@@ -2074,6 +2085,7 @@
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
+				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
 				436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */,
@@ -2388,7 +2400,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
 				PRODUCT_NAME = "研修宝";
-				PROVISIONING_PROFILE = "f54bd88c-e14c-4d85-a882-a106ff414244";
+				PROVISIONING_PROFILE = "33b5b126-5fe6-4107-9fdf-cc94044e1fa2";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
