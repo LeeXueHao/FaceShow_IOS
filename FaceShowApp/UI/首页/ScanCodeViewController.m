@@ -133,7 +133,7 @@
     
     // Session
     _session = [[AVCaptureSession alloc]init];
-    [_session setSessionPreset:AVCaptureSessionPresetMedium];
+    [_session setSessionPreset:AVCaptureSessionPresetHigh];
     
     // Input
     _input = [AVCaptureDeviceInput deviceInputWithDevice:_device error:nil];
