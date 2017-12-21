@@ -77,7 +77,7 @@
         }
         self.rightButton.enabled = text.length>0;
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineSpacing = 5;
+        paragraphStyle.lineSpacing = 4;
         NSDictionary *attributes = @{
                                      NSFontAttributeName:[UIFont systemFontOfSize:14],
                                      NSParagraphStyleAttributeName:paragraphStyle
