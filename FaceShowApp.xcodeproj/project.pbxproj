@@ -201,6 +201,7 @@
 		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
 		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
 		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
+		7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */; };
 		7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54151F9729230053DB12 /* YXGeTuiManager.m */; };
 		7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54141F9729230053DB12 /* YXApnsContentModel.m */; };
 		7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */; };
@@ -630,6 +631,8 @@
 		7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserPromptsRequest.m; sourceTree = "<group>"; };
 		7C29F3151FEA3AA6007A4076 /* UserPromptsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptsManager.h; sourceTree = "<group>"; };
 		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
+		7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXInitRequest.m; sourceTree = "<group>"; };
+		7C29F3191FEB4FAD007A4076 /* YXInitRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXInitRequest.h; sourceTree = "<group>"; };
 		7C4D54121F970B280053DB12 /* 研修宝.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "研修宝.entitlements"; sourceTree = "<group>"; };
 		7C4D54141F9729230053DB12 /* YXApnsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXApnsContentModel.m; sourceTree = "<group>"; };
 		7C4D54151F9729230053DB12 /* YXGeTuiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXGeTuiManager.m; sourceTree = "<group>"; };
@@ -1260,6 +1263,8 @@
 				7CEFC7C21F99A267001D8C84 /* UpdateUserInfoRequest.m */,
 				7CEFC7E61F99EE70001D8C84 /* GetSigninRequest.h */,
 				7CEFC7E71F99EE70001D8C84 /* GetSigninRequest.m */,
+				7C29F3191FEB4FAD007A4076 /* YXInitRequest.h */,
+				7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1982,6 +1987,7 @@
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
+				7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */,
 				7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */,

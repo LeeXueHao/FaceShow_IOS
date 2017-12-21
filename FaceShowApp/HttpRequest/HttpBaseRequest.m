@@ -160,7 +160,7 @@
     
     
     // 业务逻辑错误
-    if (item.code.integerValue != 0 || !item.code) {
+    if (item.code.integerValue != 0) {
         error = [NSError errorWithDomain:@"数据错误" code:-2 userInfo:@{NSLocalizedDescriptionKey:item.error.message.length==0? @"数据错误":item.error.message}];
         _completeBlock(item, error, self->_isMock);
         return;

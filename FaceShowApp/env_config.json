@@ -2,12 +2,20 @@
     "server":"http://orz.yanxiu.com/pxt/platform/data.api",
     "loginServer":"http://orz.yanxiu.com/uc/appLogin",
     "easygo":"http://orz.yanxiu.com/easygo/multiUpload",
-    "serverList" :{
+    "initializeUrl":"http://test.hwk.yanxiu.com/app/log/uploadDeviceLog/release.do",
+    "mode":"test",
+    "relServer":{
         "server":"http://yxb.yanxiu.com/pxt/platform/data.api",
-        "testServer":"http://orz.yanxiu.com/pxt/platform/data.api",
         "loginServer":"http://pp.yanxiu.com/uc/appLogin",
-        "loginTestServer":"http://orz.yanxiu.com/uc/appLogin",
         "easygo":"http://b.yanxiu.com/easygo/multiUpload",
-        "testEasygo":"http://orz.yanxiu.com/easygo/multiUpload"
+        "initializeUrl":"http://appadmin.yanxiu.com/app/log/uploadDeviceLog/release.do",
+        "mode":"release"
+    },
+    "testServer":{
+        "testServer":"http://orz.yanxiu.com/pxt/platform/data.api",
+        "loginTestServer":"http://orz.yanxiu.com/uc/appLogin",
+        "testEasygo":"http://orz.yanxiu.com/easygo/multiUpload",
+        "initializeUrl":"http://test.hwk.yanxiu.com/app/log/uploadDeviceLog/release.do",
+        "mode":"test"
     }
 }

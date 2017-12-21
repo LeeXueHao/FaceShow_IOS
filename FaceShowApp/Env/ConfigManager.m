@@ -41,6 +41,8 @@
     self.server = [envDic valueForKey:@"server"];
     self.loginServer = [envDic valueForKey:@"loginServer"];
     self.easygo = [envDic valueForKey:@"easygo"];
+    self.initializeUrl = [envDic valueForKey:@"initializeUrl"];
+    self.mode = [envDic valueForKey:@"mode"];
 }
 
 #pragma mark - properties

@@ -12,6 +12,7 @@
 #import "YXGeTuiManager.h"
 #import <BMKLocationKit/BMKLocationAuth.h>
 #import "UserPromptsManager.h"
+#import "YXInitRequest.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -25,6 +26,9 @@
     [TalkingData setExceptionReportEnabled:YES];
     [TalkingData setSignalReportEnabled:YES];
     [TalkingData sessionStarted:[ConfigManager sharedInstance].TalkingDataAppID withChannelId:[ConfigManager sharedInstance].channel];
+    // 初始化请求，检测版本更新等
+    [[YXInitHelper sharedHelper] requestCompeletion:nil];
+    
     [[YXGeTuiManager sharedInstance] registerGeTuiWithDelegate:self];
     [[BMKLocationAuth sharedInstance] checkPermisionWithKey:[ConfigManager sharedInstance].BaiduLocAppKey authDelegate:self];
     [self registerNotifications];
