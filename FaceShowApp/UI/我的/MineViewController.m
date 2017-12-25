@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"我";
+    self.navigationItem.title = @"我的";
     self.titleArray = @[@{@"image":@"签到记录icon",@"title":@"签到记录"},
                         @{@"image":@"意见反馈icon",@"title":@"意见反馈"}
                         ];

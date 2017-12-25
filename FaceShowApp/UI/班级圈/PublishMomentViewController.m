@@ -23,6 +23,8 @@
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
 @property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
+@property (nonatomic, strong) UIButton *publishButton;
+
 @end
 
 @implementation PublishMomentViewController
@@ -52,7 +54,7 @@
     self.publicationMomentView = [[UIView alloc] init];
     self.publicationMomentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.publicationMomentView];
-    
+     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self.scrollView addSubview:topView];
@@ -107,6 +109,7 @@
             [self requestForUploadImage];
         }
     }];
+    self.publishButton = rightButton;
     [self nyx_setupRightWithCustomView:rightButton];
     
     
@@ -152,11 +155,13 @@
 }
 
 - (void)deleteBtnAction {
+    [self.publicationMomentTextView resignFirstResponder];
     [self.imageArray removeObjectAtIndex:0];
     [self refreshImages];
 }
 
 - (void)imageBtnAction:(UIButton *)sender {
+    [self.publicationMomentTextView resignFirstResponder];
     if (isEmpty(self.imageArray)) {
         [self showImagePicker];
     } else {
@@ -173,13 +178,17 @@
 }
 
 - (void)refreshImages {
+    BOOL publishEnabled = [self.publicationMomentTextView.text yx_stringByTrimmingCharacters].length != 0;
     if (!isEmpty(self.imageArray)) {
         [self.addImageBtn setImage:self.imageArray[0] forState:UIControlStateNormal];
         self.deleteBtn.hidden = NO;
+        publishEnabled = publishEnabled || YES;
     } else {
-        [self.addImageBtn setImage:[UIImage imageWithColor:[UIColor redColor] rect:CGRectMake(0, 0, 60, 60)] forState:UIControlStateNormal];
+        [self.addImageBtn setImage:[UIImage imageNamed:@"添加"] forState:UIControlStateNormal];
         self.deleteBtn.hidden = YES;
+        publishEnabled = publishEnabled || NO;
     }
+    self.publishButton.enabled = publishEnabled;
 }
 
 - (void)showAlertView {

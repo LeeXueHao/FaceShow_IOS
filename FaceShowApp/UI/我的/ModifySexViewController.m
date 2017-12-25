@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"修改性别";
     WEAK_SELF
     [self nyx_setupRightWithTitle:@"保存" action:^{
         STRONG_SELF

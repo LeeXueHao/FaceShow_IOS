@@ -35,7 +35,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"我";
+    self.navigationItem.title = @"我的";
     self.contentMutableArray =
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
