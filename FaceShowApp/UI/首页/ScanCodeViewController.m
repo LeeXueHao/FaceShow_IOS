@@ -128,7 +128,7 @@
     }
     
     [_device lockForConfiguration:nil];
-    [_device setVideoZoomFactor:1.1];
+    [_device setVideoZoomFactor:MIN(1.1, _device.activeFormat.videoMaxZoomFactor)];
     [_device setExposureTargetBias:-0.5 completionHandler:nil];
     
     // Session
