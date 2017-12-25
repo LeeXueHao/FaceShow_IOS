@@ -76,7 +76,7 @@
     momentNewView.hidden = YES;
     [self addSubview:momentNewView];
     [self bringSubviewToFront:momentNewView];
-    [UserPromptsManager sharedInstance].momentNewView = momentNewView;
+    [UserPromptsManager sharedInstance].taskNewView = momentNewView;
 }
 
 - (void)btnAction:(UIButton *)sender {
