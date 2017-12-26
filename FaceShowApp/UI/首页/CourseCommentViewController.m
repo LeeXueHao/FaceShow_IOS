@@ -114,6 +114,7 @@
             [self.view layoutIfNeeded];
             self.tableView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y+inputHieght, 0);
         }];
+        
     }];
 }
 
