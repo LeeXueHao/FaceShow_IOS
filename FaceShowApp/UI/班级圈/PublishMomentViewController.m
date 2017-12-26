@@ -337,11 +337,13 @@
     NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
     NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[UserManager sharedInstance].userModel.userID, (int)interval];
     [self.view nyx_startLoading];
+    [self nyx_disableRightNavigationItem];
     WEAK_SELF
     [QADataManager uploadFile:self.imageArray[0] fileName:fileName completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
         STRONG_SELF
          if (item.result.resid == nil){
              [self.view nyx_stopLoading];
+             [self nyx_enableRightNavigationItem];
             [self.view nyx_showToast:@"发布失败请重试"];
         }else {
             [self requestForPublishMoment:item.result.resid];
@@ -356,6 +358,7 @@
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self nyx_enableRightNavigationItem];
         ClassMomentPublishRequestItem *item = retItem;
         if (item.data == nil) {
             [self.view nyx_stopLoading];
