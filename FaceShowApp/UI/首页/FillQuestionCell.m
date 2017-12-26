@@ -62,7 +62,7 @@
     self.textView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.textView.font = [UIFont systemFontOfSize:14];
     self.textView.textColor = [UIColor colorWithHexString:@"333333"];
-    NSString *placeholderStr = @"暂不支持表情,最多输入250个评价文字";
+    NSString *placeholderStr = @"最多输入250个评价文字";
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"999999"] range:NSMakeRange(0, placeholderStr.length)];
     [attrStr addAttribute:NSFontAttributeName value:self.textView.font range:NSMakeRange(0, placeholderStr.length)];

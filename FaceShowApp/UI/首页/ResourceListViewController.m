@@ -110,6 +110,7 @@
     }];
     
     self.emptyView = [[EmptyView alloc]init];
+    self.emptyView.title = @"暂无资源";
     [self.view addSubview:self.emptyView];
     [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);

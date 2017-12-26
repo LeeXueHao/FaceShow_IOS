@@ -51,7 +51,7 @@
     self.textView.font = [UIFont systemFontOfSize:14];
     self.textView.textColor = [UIColor colorWithHexString:@"333333"];
     self.textView.returnKeyType = UIReturnKeySend;
-    NSString *placeholderStr = @"评论(暂不支持表情)";
+    NSString *placeholderStr = @"评论";
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"666666"] range:NSMakeRange(0, placeholderStr.length)];
     [attrStr addAttribute:NSFontAttributeName value:self.textView.font range:NSMakeRange(0, placeholderStr.length)];
@@ -80,9 +80,9 @@
         }
         return NO;
     }
-    if ([[[textView textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textView textInputMode] primaryLanguage] || [self stringContainsEmoji:text]) {
-        return NO;
-    }
+//    if ([[[textView textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textView textInputMode] primaryLanguage] || [self stringContainsEmoji:text]) {
+//        return NO;
+//    }
     return YES;
 }
 - (BOOL)stringContainsEmoji:(NSString *)string {

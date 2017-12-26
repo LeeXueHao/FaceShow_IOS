@@ -35,7 +35,7 @@
     }];
     
     UILabel *label = [[UILabel alloc]init];
-    label.text = @"无内容";
+    label.text = @"暂无内容";
     label.textColor = [UIColor colorWithHexString:@"999999"];
     label.font = [UIFont systemFontOfSize:13];
     label.textAlignment = NSTextAlignmentCenter;

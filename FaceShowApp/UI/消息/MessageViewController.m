@@ -24,6 +24,7 @@
     fetcher.clazzId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     self.dataFetcher = fetcher;
     [super viewDidLoad];
+    self.emptyView.title = @"暂无通知";
     [self setupUI];
     [self setupObserver];
 }
