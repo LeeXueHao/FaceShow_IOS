@@ -179,9 +179,9 @@
     [self.contentView addSubview:self.timeLabel];
     
     self.reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.reportButton setImage:[UIImage imageNamed:@"投诉举报icon正常态"] forState:UIControlStateNormal];
-//    [self.reportButton setImage:[UIImage imageNamed:@"投诉举报icon点击态"] forState:UIControlStateHighlighted];
-    self.reportButton.backgroundColor = [UIColor redColor];
+    [self.reportButton setImage:[UIImage imageNamed:@"投诉举报icon正常态"] forState:UIControlStateNormal];
+    [self.reportButton setImage:[UIImage imageNamed:@"投诉举报icon点击态"] forState:UIControlStateHighlighted];
+//    self.reportButton.backgroundColor = [UIColor redColor];
     self.reportButton.imageView.contentMode = UIViewContentModeCenter;
     [self.contentView addSubview:self.reportButton];
     WEAK_SELF
