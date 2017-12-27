@@ -40,16 +40,16 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
             return;
         }
         GetUserPromptsRequestItem *item = (GetUserPromptsRequestItem *)retItem;
+        self.taskNewView.hidden = item.data.taskNew.promptNum.integerValue==0;
+        self.resourceNewView.hidden = item.data.resourceNew.promptNum.integerValue==0;
+        self.momentNewView.hidden = item.data.momentNew.promptNum.integerValue > 0;
         if (item.data.taskNew.promptNum.integerValue > 0) {
-            self.taskNewView.hidden = NO;
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewTaskNotification object:nil];
         }
         if (item.data.resourceNew.promptNum.integerValue > 0) {
-            self.resourceNewView.hidden = NO;
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewResourceNotification object:nil];
         }
         if (item.data.momentNew.promptNum.integerValue > 0) {
-            self.momentNewView.hidden = NO;
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
         }
     }];

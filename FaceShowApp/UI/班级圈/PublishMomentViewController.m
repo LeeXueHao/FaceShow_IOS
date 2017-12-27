@@ -355,6 +355,7 @@
     request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.content = self.publicationMomentTextView.text;
     request.resourceIds = resourceIds;
+    [self nyx_disableRightNavigationItem];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

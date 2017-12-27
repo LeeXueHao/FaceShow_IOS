@@ -30,6 +30,7 @@
     [super viewDidLoad];
     [self setupUI];
     [self requestResourceInfo];
+    [self setupObserver];
 }
 
 - (void)didReceiveMemoryWarning {
