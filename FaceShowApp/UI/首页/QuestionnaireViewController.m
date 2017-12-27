@@ -107,6 +107,10 @@
 - (void)refreshUIWithItem:(QuestionRequestItem *)item {
     self.requestItem = item;
     [self.tableView reloadData];
+    QuestionnaireHeaderView *headerView = (QuestionnaireHeaderView *)self.tableView.tableHeaderView;
+    if (!headerView.title) {
+        headerView.title = item.data.questionGroup.title;
+    }
     [self.submitButton setTitleColor:[UIColor colorWithHexString:@"e2e2e2"] forState:UIControlStateNormal];
     [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateNormal];
     if (!item.data.isAnswer.boolValue) {
