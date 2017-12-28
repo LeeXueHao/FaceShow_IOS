@@ -42,7 +42,7 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
         GetUserPromptsRequestItem *item = (GetUserPromptsRequestItem *)retItem;
         self.taskNewView.hidden = item.data.taskNew.promptNum.integerValue==0;
         self.resourceNewView.hidden = item.data.resourceNew.promptNum.integerValue==0;
-        self.momentNewView.hidden = item.data.momentNew.promptNum.integerValue > 0;
+        self.momentNewView.hidden = item.data.momentNew.promptNum.integerValue==0;
         if (item.data.taskNew.promptNum.integerValue > 0) {
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewTaskNotification object:nil];
         }
