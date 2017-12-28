@@ -17,10 +17,13 @@
 #import "TaskListViewController.h"
 #import "ScanCodeViewController.h"
 #import "UserPromptsManager.h"
+#import "GetCurrentClazsRequest.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
+@property (nonatomic, strong) GetCurrentClazsRequest *clazsRefreshRequest;
+@property (nonatomic, strong) MainPageTopView *topView;
 @end
 
 @implementation MainPageViewController
@@ -30,6 +33,11 @@
     
     [self setupNavRightView];
     [self setupUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self updateClazsInfo];
 }
 
 - (void)setupNavRightView {
@@ -60,6 +68,7 @@
         make.left.top.right.mas_equalTo(0);
         make.height.mas_equalTo(135);
     }];
+    self.topView = topView;
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     NSArray *tabNames = @[@"课程",@"资源",@"任务",@"日程"];
     tabContainerView.tabNameArray = tabNames;
@@ -110,5 +119,18 @@
     SAFE_CALL(self.tabControllers[index], refreshUI);
 }
 
+- (void)updateClazsInfo {
+    [self.clazsRefreshRequest stopRequest];
+    self.clazsRefreshRequest = [[GetCurrentClazsRequest alloc] init];
+    WEAK_SELF
+    [self.clazsRefreshRequest startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            return;
+        }
+        GetCurrentClazsRequestItem *item = retItem;
+        self.topView.item = item;
+    }];
+}
 
 @end
