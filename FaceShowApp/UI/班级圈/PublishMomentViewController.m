@@ -152,6 +152,10 @@
     }];
     self.deleteBtn = deleteBtn;
     [self refreshImages];
+    
+    if (self.imageArray.count == 0) {
+        containerView.hidden = YES;
+    }
 }
 
 - (void)deleteBtnAction {
