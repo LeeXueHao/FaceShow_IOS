@@ -115,6 +115,8 @@
     [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateNormal];
     if (!item.data.isAnswer.boolValue) {
         self.submitButton.hidden = NO;
+    }else {
+        self.tableView.contentInset = UIEdgeInsetsZero;
     }
 }
 
