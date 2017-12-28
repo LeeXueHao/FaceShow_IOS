@@ -151,8 +151,8 @@
     }];
     self.backView = backView;
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"返回页面按钮正常态-"] forState:UIControlStateNormal];
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"返回页面按钮点击态"] forState:UIControlStateHighlighted];
+    [backBtn setImage:[UIImage imageNamed:@"返回页面按钮正常态-"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"返回页面按钮点击态"] forState:UIControlStateHighlighted];
     [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
