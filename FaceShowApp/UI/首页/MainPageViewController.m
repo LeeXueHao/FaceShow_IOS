@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"研修宝";
     [self setupNavRightView];
     [self setupUI];
 }
