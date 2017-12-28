@@ -102,6 +102,7 @@
     rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
+        NSLog(@"--------UIControlEventTouchUpInside--------");
         [self.view nyx_startLoading];
         if (self.imageArray.count == 0) {
             [self requestForPublishMoment:nil];
@@ -363,13 +364,14 @@
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self nyx_enableRightNavigationItem];
         ClassMomentPublishRequestItem *item = retItem;
         if (item.data == nil) {
+            [self nyx_enableRightNavigationItem];
             [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"发布失败请重试"];
         }else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
+                [self nyx_enableRightNavigationItem];
                 [self.view nyx_stopLoading];
                 BLOCK_EXEC(self.publishMomentDataBlock,item.data);
                 [self dismiss];
