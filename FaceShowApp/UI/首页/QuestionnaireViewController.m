@@ -108,7 +108,7 @@
     self.requestItem = item;
     [self.tableView reloadData];
     QuestionnaireHeaderView *headerView = (QuestionnaireHeaderView *)self.tableView.tableHeaderView;
-    if (!headerView.title) {
+    if (isEmpty(headerView.title)) {
         headerView.title = item.data.questionGroup.title;
     }
     [self.submitButton setTitleColor:[UIColor colorWithHexString:@"e2e2e2"] forState:UIControlStateNormal];
