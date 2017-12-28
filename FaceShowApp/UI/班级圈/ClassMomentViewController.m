@@ -90,6 +90,9 @@
     self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
     self.headerView.hidden = YES;
     self.tableView.tableHeaderView = self.headerView;
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
      WEAK_SELF
