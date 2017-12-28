@@ -62,16 +62,16 @@
         make.width.mas_equalTo(tabWidth);
     }];
     
-    UIView *resourceNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 5, 6, 9, 9)];
-    resourceNewView.layer.cornerRadius = 4.5f;
+    UIView *resourceNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 5, 6, 6, 6)];
+    resourceNewView.layer.cornerRadius = 3.f;
     resourceNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
     resourceNewView.hidden = YES;
     [self addSubview:resourceNewView];
     [self bringSubviewToFront:resourceNewView];
     [UserPromptsManager sharedInstance].resourceNewView = resourceNewView;
     
-    UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 5, 6, 9, 9)];
-    momentNewView.layer.cornerRadius = 4.5f;
+    UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 5, 6, 6, 6)];
+    momentNewView.layer.cornerRadius = 3.f;
     momentNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
     momentNewView.hidden = YES;
     [self addSubview:momentNewView];

@@ -62,6 +62,23 @@
             }
             [self updateUserInfo];
         }];
+    }else {
+        WEAK_SELF
+        [self nyx_setupRightWithTitle:@"下一步" action:^{
+            STRONG_SELF
+            if (isEmpty(self.selectedStage)) {
+                [self.view nyx_showToast:@"请选择学段"];
+                return;
+            }
+            StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
+            vc.selectedStage = self.selectedStage;
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                BLOCK_EXEC(self.completeBlock);
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
     }
 }
 
@@ -101,16 +118,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (isEmpty(self.selectedStage)) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
         StageSubjectItem_Stage *stage = [UserManager sharedInstance].stages[indexPath.row];
-        vc.selectedStage = stage;
-        WEAK_SELF
-        vc.completeBlock = ^{
-            STRONG_SELF
-            BLOCK_EXEC(self.completeBlock);
-        };
-        [self.navigationController pushViewController:vc animated:YES];
+        self.selectedStage = stage;
     } else {
         StageSubjectItem_Subject *subject = self.selectedStage.subjects[indexPath.row];
         self.selectedSubject = subject;

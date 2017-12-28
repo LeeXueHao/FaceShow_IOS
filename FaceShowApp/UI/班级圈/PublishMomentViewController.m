@@ -190,6 +190,7 @@
         publishEnabled = publishEnabled || YES;
     } else {
         [self.addImageBtn setImage:[UIImage imageNamed:@"添加"] forState:UIControlStateNormal];
+        [self.addImageBtn setImage:[UIImage imageNamed:@"添加照片点击态"] forState:UIControlStateHighlighted];
         self.deleteBtn.hidden = YES;
         publishEnabled = publishEnabled || NO;
     }
