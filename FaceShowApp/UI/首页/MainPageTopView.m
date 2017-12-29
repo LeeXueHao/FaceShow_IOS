@@ -99,6 +99,7 @@
     [self.classLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.classLabel.width+20);
     }];
+    [self setNeedsLayout];
     if (self.classLabel.text.length == 0) {
         self.classLabel.hidden = YES;
     }
