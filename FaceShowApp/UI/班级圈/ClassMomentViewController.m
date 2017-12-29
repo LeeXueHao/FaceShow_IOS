@@ -231,6 +231,16 @@
             }];
             [self.view layoutIfNeeded];
         }];
+        if (SCREEN_HEIGHT > keyboardFrame.origin.y) {
+            UIView *bottomView = [self.tableView footerViewForSection:self.commtentInteger];
+            CGRect rect = [bottomView convertRect:bottomView.bounds toView:self.tableView];
+            CGFloat bottomY = CGRectGetMaxY(rect);
+            CGFloat offset = bottomY-self.tableView.contentOffset.y-keyboardFrame.origin.y+64+self.inputView.height;
+            if (offset > 0) {
+                [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y+offset) animated:YES];
+            }
+            
+        }
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewMomentNotification object:nil] subscribeNext:^(id x) {
         STRONG_SELF
@@ -308,7 +318,6 @@
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
         if (status == ClassMomentClickStatus_Comment) {
-            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
             self.commtentInteger = section;
             if (moment.draftModel != nil) {
                 self.inputView.textString = moment.draftModel;
