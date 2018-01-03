@@ -117,32 +117,40 @@
 
 #pragma mark -
 - (void)handleOpenUrl:(NSURL *)url {
-    NSDictionary *parametersDic = [UserSignInHelper getParametersFromUrlString:url.absoluteString];
-    if (isEmpty(parametersDic) ||
-        [UserManager sharedInstance].loginStatus == NO) {
+    if (![UserManager sharedInstance].loginStatus) {
         return;
     }
-    [self.window nyx_startLoading];
-    [self.userSignInRequest stopRequest];
-    self.userSignInRequest = [[UserSignInRequest alloc] init];
-    self.userSignInRequest.stepId = parametersDic[kStepId];
-    self.userSignInRequest.timestamp = parametersDic[kTimestamp];
-    WEAK_SELF
-    [self.userSignInRequest startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [self.window nyx_stopLoading];
-        if (error && error.code == 1) {
-            [self.window nyx_showToast:error.localizedDescription];
-            return;
-        }
-        UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
-        SubScanCodeResultViewController *scanCodeResultVC = [[SubScanCodeResultViewController alloc] init];
-        scanCodeResultVC.data = error ? nil : item.data;
-        scanCodeResultVC.error = error ? item.error : nil;
-        
-        FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:scanCodeResultVC];
-        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
-    }];
+    FSTabBarController *tabVC = (FSTabBarController *)self.window.rootViewController;
+    FSNavigationController *navi = tabVC.selectedViewController;
+    [navi popToRootViewControllerAnimated:NO];
+    tabVC.selectedIndex = 0;
+    
+//    NSDictionary *parametersDic = [UserSignInHelper getParametersFromUrlString:url.absoluteString];
+//    if (isEmpty(parametersDic) ||
+//        [UserManager sharedInstance].loginStatus == NO) {
+//        return;
+//    }
+//    [self.window nyx_startLoading];
+//    [self.userSignInRequest stopRequest];
+//    self.userSignInRequest = [[UserSignInRequest alloc] init];
+//    self.userSignInRequest.stepId = parametersDic[kStepId];
+//    self.userSignInRequest.timestamp = parametersDic[kTimestamp];
+//    WEAK_SELF
+//    [self.userSignInRequest startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+//        STRONG_SELF
+//        [self.window nyx_stopLoading];
+//        if (error && error.code == 1) {
+//            [self.window nyx_showToast:error.localizedDescription];
+//            return;
+//        }
+//        UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
+//        SubScanCodeResultViewController *scanCodeResultVC = [[SubScanCodeResultViewController alloc] init];
+//        scanCodeResultVC.data = error ? nil : item.data;
+//        scanCodeResultVC.error = error ? item.error : nil;
+//
+//        FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:scanCodeResultVC];
+//        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+//    }];
 }
 
 #pragma mark - Apns
