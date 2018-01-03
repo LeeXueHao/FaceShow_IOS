@@ -246,8 +246,8 @@
         STRONG_SELF
         if (self.tabBarController.selectedIndex == 2) {
             [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+            [self firstPageFetch];
         }
-        [self firstPageFetch];
     }];
 }
 

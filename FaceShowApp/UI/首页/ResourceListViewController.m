@@ -44,8 +44,8 @@
         STRONG_SELF
         if (self.mainVC.selectedIndex == 1) {
             [UserPromptsManager sharedInstance].resourceNewView.hidden = YES;
+            [self requestResourceInfo];
         }
-        [self requestResourceInfo];
     }];
 }
 
