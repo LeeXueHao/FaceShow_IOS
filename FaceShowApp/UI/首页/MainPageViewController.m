@@ -78,7 +78,9 @@
         [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
         self.selectedIndex = index;
         if (index == 1) {
-            [UserPromptsManager sharedInstance].resourceNewView.hidden = YES;
+            if (![UserPromptsManager sharedInstance].resourceNewView.hidden) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewResourceNotification object:nil];
+            }
         }
         [self switchToVCWithIndex:index];
     }];

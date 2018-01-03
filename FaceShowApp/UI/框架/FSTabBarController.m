@@ -45,7 +45,9 @@
 #pragma mark - UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     if (self.selectedIndex == 2) {
-        [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+        if (![UserPromptsManager sharedInstance].momentNewView.hidden) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
+        }
     }
 }
 
