@@ -122,10 +122,7 @@
         model.thumbnail = obj.attachment.resThumb;
         model.original = obj.attachment.resThumb;
         [mutableArray addObject:model];
-#warning 暂时只显示一张图片
-        if (idx == 0) {
-            *stop = YES;
-        }
+
     }];
     self.photosView.imageModelMutableArray = mutableArray;
     [self.photosView reloadData];
@@ -166,8 +163,8 @@
     [self.contentView addSubview:self.contentLabel];
     
     self.photosView = [[PreviewPhotosView alloc] init];
-    self.photosView.widthFloat = SCREEN_WIDTH - 15.0f - 60.0f - 10.0f - 15.0f;
-    self.photosView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
+    self.photosView.widthFloat = SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f;
+//    self.photosView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
 
     [self.contentView addSubview:self.photosView];
     
