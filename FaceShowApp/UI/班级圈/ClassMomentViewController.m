@@ -47,6 +47,24 @@
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
     self.navigationItem.title = @"班级圈";
+    WEAK_SELF
+    [self nyx_setupRightWithTitle:@"发布" action:^{
+        STRONG_SELF
+        PublishMomentViewController *VC = [[PublishMomentViewController alloc]init];
+        WEAK_SELF
+        VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
+            STRONG_SELF
+            if (moment != nil) {
+                self.emptyView.hidden = YES;
+                self.errorView.hidden = YES;
+                [self.dataArray insertObject:moment atIndex:0];
+                [self.tableView reloadData];
+            }
+            
+        };
+        FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:VC];
+        [self presentViewController:navi animated:YES completion:nil];
+    }];
     [self setupUI];
     [self setupObservers];
 //    self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -102,24 +120,24 @@
     }];
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
-    [rightButton setImage:[UIImage imageNamed:@"上传内容图标正常态"] forState:UIControlStateNormal];
-    [rightButton setImage:[UIImage imageNamed:@"上传内容图标点击态"] forState:UIControlStateHighlighted];
-
-    [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        STRONG_SELF
-        [self showAlertView];
-    }];
-    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
-    gestureRecognizer.minimumPressDuration = 1.0f;
-    [[gestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
-        if (x.state == UIGestureRecognizerStateBegan) {
-            [self presentNextPublishViewController:nil];
-        }
-    }];
-    [rightButton addGestureRecognizer:gestureRecognizer];
-    [self nyx_setupRightWithCustomView:rightButton];
+//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
+//    [rightButton setImage:[UIImage imageNamed:@"上传内容图标正常态"] forState:UIControlStateNormal];
+//    [rightButton setImage:[UIImage imageNamed:@"上传内容图标点击态"] forState:UIControlStateHighlighted];
+//
+//    [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        STRONG_SELF
+//        [self showAlertView];
+//    }];
+//    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
+//    gestureRecognizer.minimumPressDuration = 1.0f;
+//    [[gestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
+//        if (x.state == UIGestureRecognizerStateBegan) {
+//            [self presentNextPublishViewController:nil];
+//        }
+//    }];
+//    [rightButton addGestureRecognizer:gestureRecognizer];
+//    [self nyx_setupRightWithCustomView:rightButton];
     
     self.inputView = [[CommentInputView alloc]init];
     self.inputView.isChangeBool = YES;

@@ -11,13 +11,14 @@
 #import "CourseCommentViewController.h"
 #import "QuestionnaireViewController.h"
 #import "QADataManager.h"
+#import "AlbumListViewController.h"
 
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片"];
+    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择"];
     [super viewDidLoad];
 }
 
@@ -48,6 +49,11 @@
         }
         [self.view nyx_showToast:[NSString stringWithFormat:@"上传成功\n资源ID是：%@", item.result.resid]];
     }];
+}
+
+- (void)照片选择 {
+    AlbumListViewController *vc = [[AlbumListViewController alloc]init];
+    [self presentViewController:[[FSNavigationController alloc]initWithRootViewController:vc] animated:YES completion:nil];
 }
 
 @end

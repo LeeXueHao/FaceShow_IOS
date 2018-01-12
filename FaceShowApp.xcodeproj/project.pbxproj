@@ -209,6 +209,13 @@
 		7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */; };
 		7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544C1F972DFD0053DB12 /* libz.tbd */; };
 		7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544E1F972E070053DB12 /* libc++.tbd */; };
+		7C6EE547200736D200B47892 /* ImageAttachmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE546200736D200B47892 /* ImageAttachmentView.m */; };
+		7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */; };
+		7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE54F20073E3000B47892 /* AlbumListViewController.m */; };
+		7C6EE5532007422300B47892 /* AlbumListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE5522007422200B47892 /* AlbumListCell.m */; };
+		7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55520074DC000B47892 /* PhotoListViewController.m */; };
+		7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE558200750AE00B47892 /* PhotoCell.m */; };
+		7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -647,6 +654,20 @@
 		7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7C4D544C1F972DFD0053DB12 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7C4D544E1F972E070053DB12 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		7C6EE545200736D200B47892 /* ImageAttachmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentView.h; sourceTree = "<group>"; };
+		7C6EE546200736D200B47892 /* ImageAttachmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAttachmentView.m; sourceTree = "<group>"; };
+		7C6EE5482007396000B47892 /* ImageAttachmentContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentContainerView.h; sourceTree = "<group>"; };
+		7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAttachmentContainerView.m; sourceTree = "<group>"; };
+		7C6EE54E20073E3000B47892 /* AlbumListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumListViewController.h; sourceTree = "<group>"; };
+		7C6EE54F20073E3000B47892 /* AlbumListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumListViewController.m; sourceTree = "<group>"; };
+		7C6EE5512007422200B47892 /* AlbumListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumListCell.h; sourceTree = "<group>"; };
+		7C6EE5522007422200B47892 /* AlbumListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumListCell.m; sourceTree = "<group>"; };
+		7C6EE55420074DC000B47892 /* PhotoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoListViewController.h; sourceTree = "<group>"; };
+		7C6EE55520074DC000B47892 /* PhotoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoListViewController.m; sourceTree = "<group>"; };
+		7C6EE557200750AE00B47892 /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		7C6EE558200750AE00B47892 /* PhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		7C6EE55A2008547E00B47892 /* ImageSelectionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSelectionHandler.h; sourceTree = "<group>"; };
+		7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSelectionHandler.m; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -1573,6 +1594,27 @@
 			path = "个推";
 			sourceTree = "<group>";
 		};
+		7C6EE55D20086F2800B47892 /* 发布 */ = {
+			isa = PBXGroup;
+			children = (
+				7C6EE545200736D200B47892 /* ImageAttachmentView.h */,
+				7C6EE546200736D200B47892 /* ImageAttachmentView.m */,
+				7C6EE5482007396000B47892 /* ImageAttachmentContainerView.h */,
+				7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */,
+				7C6EE55A2008547E00B47892 /* ImageSelectionHandler.h */,
+				7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */,
+				7C6EE54E20073E3000B47892 /* AlbumListViewController.h */,
+				7C6EE54F20073E3000B47892 /* AlbumListViewController.m */,
+				7C6EE5512007422200B47892 /* AlbumListCell.h */,
+				7C6EE5522007422200B47892 /* AlbumListCell.m */,
+				7C6EE55420074DC000B47892 /* PhotoListViewController.h */,
+				7C6EE55520074DC000B47892 /* PhotoListViewController.m */,
+				7C6EE557200750AE00B47892 /* PhotoCell.h */,
+				7C6EE558200750AE00B47892 /* PhotoCell.m */,
+			);
+			name = "发布";
+			sourceTree = "<group>";
+		};
 		7CBDAB811F6925B50096C4BA /* 扫一扫 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1726,6 +1768,7 @@
 		9279A6E31F6A53B5004A1E2B /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7C6EE55D20086F2800B47892 /* 发布 */,
 				9279A6F31F6A57D4004A1E2B /* 看看图片 */,
 				9279A6EA1F6A5771004A1E2B /* ClassMomentTableHeaderView.h */,
 				9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */,
@@ -1994,6 +2037,7 @@
 				43210E581F724B3D0049C381 /* LoginRequest.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
+				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
@@ -2022,12 +2066,14 @@
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
+				7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */,
 				438FFC871FD4E1B9006F3FB3 /* BaseDownloader.m in Sources */,
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
 				9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */,
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
 				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
+				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
 				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
@@ -2085,6 +2131,7 @@
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
+				7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */,
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
@@ -2097,6 +2144,7 @@
 				438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */,
 				436959881FDE83E7009E5C43 /* FDActionSheetView.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
+				7C6EE547200736D200B47892 /* ImageAttachmentView.m in Sources */,
 				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
 				4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
@@ -2128,6 +2176,8 @@
 				7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
+				7C6EE5532007422300B47892 /* AlbumListCell.m in Sources */,
+				7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */,
 				7C2518E61F68E68D0001B577 /* NSObject+YXNetworkMethod.m in Sources */,
 				7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */,
 				7C2519AC1F690D860001B577 /* LoginViewController.m in Sources */,

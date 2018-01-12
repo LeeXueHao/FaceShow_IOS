@@ -36,12 +36,12 @@
     });
 }
 
-- (void)backAction {
-    [super backAction];
-    if (isEmpty(self.images)) {
-        BLOCK_EXEC(self.didDeleteImage);
-    }
-}
+//- (void)backAction {
+//    [super backAction];
+//    if (isEmpty(self.images)) {
+//        BLOCK_EXEC(self.didDeleteImage);
+//    }
+//}
 
 #pragma mark -
 - (void)removeCurrentImage {
@@ -95,6 +95,7 @@
             [self.view nyx_showToast:@"已删除"];
             [self.images removeObjectAtIndex:self.currentIndex];
             [self.slideView reloadData];
+            BLOCK_EXEC(self.deleteImageBlock,self.currentIndex);
             if (isEmpty(self.images)) {
                 [self backAction];
             }

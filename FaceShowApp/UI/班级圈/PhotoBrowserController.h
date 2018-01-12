@@ -12,4 +12,5 @@
 @property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, copy) void (^didDeleteImage)(void);
+@property (nonatomic, copy) void (^deleteImageBlock)(NSInteger index);
 @end

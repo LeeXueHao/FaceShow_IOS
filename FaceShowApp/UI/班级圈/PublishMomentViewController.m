@@ -13,6 +13,7 @@
 #import "YXImagePickerController.h"
 #import "AlertView.h"
 #import "FDActionSheetView.h"
+#import "ImageAttachmentContainerView.h"
 
 @interface PublishMomentViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -24,6 +25,9 @@
 
 @property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
 @property (nonatomic, strong) UIButton *publishButton;
+@property (nonatomic, strong) ImageAttachmentContainerView *imageContainerView;
+@property (nonatomic, assign) NSInteger imageIndex;
+@property (nonatomic, strong) NSMutableArray *resIdArray;
 
 @end
 
@@ -37,6 +41,7 @@
     self.navigationItem.title = @"班级圈";
     [self setupUI];
     [self setupLayout];
+    [self setupObservers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,9 +49,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setupObservers {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        NSDictionary *dic = noti.userInfo;
+        NSValue *keyboardFrameValue = [dic valueForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
+        NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
+        [UIView animateWithDuration:duration.floatValue animations:^{
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y, 0);
+        }];
+    }];
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
     self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64.0f);
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"dfe2e6"];
     [self.view addSubview:self.scrollView];
@@ -127,36 +148,20 @@
     UIView *containerView = [[UIView alloc] init];
     [self.publicationMomentView addSubview:containerView];
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
-        make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
-        make.size.mas_offset(CGSizeMake(70.0f, 70.0f));
+        make.left.equalTo(self.publicationMomentView.mas_left).offset(0.0f);
+        make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(0.0f);
+        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH, 70*3+10*4));
     }];
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn addTarget:self action:@selector(imageBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [containerView addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.publicationMomentView.mas_left).offset(15.0f);
-        make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(-10.0f);
-        make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
+    self.imageContainerView = [[ImageAttachmentContainerView alloc]init];
+    [self.imageContainerView setImagesChangeBlock:^(NSArray *images) {
+        STRONG_SELF
+        self.imageArray = [NSMutableArray arrayWithArray:images];
+        [self refreshImages];
     }];
-    self.addImageBtn = btn;
-    
-    UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [deleteBtn setImage:[UIImage imageNamed:@"小图片删除按钮正常态"] forState:UIControlStateNormal];
-    [deleteBtn setImage:[UIImage imageNamed:@"小图片删除按钮点击态"] forState:UIControlStateHighlighted];
-    [deleteBtn addTarget:self action:@selector(deleteBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [containerView addSubview:deleteBtn];
-    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(CGPointMake(30, -25));
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+    [containerView addSubview:self.imageContainerView];
+    [self.imageContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
-    self.deleteBtn = deleteBtn;
-    [self refreshImages];
-    
-    if (self.imageArray.count == 0) {
-        containerView.hidden = YES;
-    }
 }
 
 - (void)deleteBtnAction {
@@ -185,13 +190,8 @@
 - (void)refreshImages {
     BOOL publishEnabled = [self.publicationMomentTextView.text yx_stringByTrimmingCharacters].length != 0;
     if (!isEmpty(self.imageArray)) {
-        [self.addImageBtn setImage:self.imageArray[0] forState:UIControlStateNormal];
-        self.deleteBtn.hidden = NO;
         publishEnabled = publishEnabled || YES;
     } else {
-        [self.addImageBtn setImage:[UIImage imageNamed:@"添加"] forState:UIControlStateNormal];
-        [self.addImageBtn setImage:[UIImage imageNamed:@"添加照片点击态"] forState:UIControlStateHighlighted];
-        self.deleteBtn.hidden = YES;
         publishEnabled = publishEnabled || NO;
     }
     self.publishButton.enabled = publishEnabled;
@@ -221,7 +221,7 @@
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.top.equalTo(self.scrollView.mas_top);
-        make.height.mas_offset(195.0f);
+        make.height.mas_offset(195.0f+210);
     }];
     
     [self.publicationMomentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -340,19 +340,31 @@
 }
 #pragma mark - request
 - (void)requestForUploadImage{
-    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
-    NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[UserManager sharedInstance].userModel.userID, (int)interval];
+    self.imageIndex = 0;
+    self.resIdArray = [NSMutableArray array];
     [self.view nyx_startLoading];
     [self nyx_disableRightNavigationItem];
+    [self uploadImageWithIndex:self.imageIndex];
+}
+
+- (void)uploadImageWithIndex:(NSInteger)index {
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
+    NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[UserManager sharedInstance].userModel.userID, (int)interval];
     WEAK_SELF
-    [QADataManager uploadFile:self.imageArray[0] fileName:fileName completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+    [QADataManager uploadFile:self.imageArray[index] fileName:fileName completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
         STRONG_SELF
-         if (item.result.resid == nil){
-             [self.view nyx_stopLoading];
-             [self nyx_enableRightNavigationItem];
+        if (item.result.resid == nil){
+            [self.view nyx_stopLoading];
+            [self nyx_enableRightNavigationItem];
             [self.view nyx_showToast:@"发布失败请重试"];
         }else {
-            [self requestForPublishMoment:item.result.resid];
+            [self.resIdArray addObject:item.result.resid];
+            self.imageIndex++;
+            if (self.imageIndex < self.imageArray.count) {
+                [self uploadImageWithIndex:self.imageIndex];
+            }else {
+                [self requestForPublishMoment:[self.resIdArray componentsJoinedByString:@","]];
+            }
         }
     }];
 }
