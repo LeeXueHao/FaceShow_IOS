@@ -236,6 +236,9 @@
 		7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */; };
 		7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC8001F9ED915001D8C84 /* ApnsResourceDisplayViewController.m */; };
 		7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC8021F9F2598001D8C84 /* LoginUtils.m */; };
+		921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */; };
+		921FF6B5200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */; };
+		921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */; };
 		9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */; };
 		9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */; };
 		9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */; };
@@ -708,6 +711,12 @@
 		7CEFC8001F9ED915001D8C84 /* ApnsResourceDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsResourceDisplayViewController.m; sourceTree = "<group>"; };
 		7CEFC8021F9F2598001D8C84 /* LoginUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginUtils.m; sourceTree = "<group>"; };
 		7CEFC8031F9F2598001D8C84 /* LoginUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginUtils.h; sourceTree = "<group>"; };
+		921FF6B0200DCD8F002CD071 /* ClassMomentDiscardRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDiscardRequest.h; sourceTree = "<group>"; };
+		921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDiscardRequest.m; sourceTree = "<group>"; };
+		921FF6B3200DCDAB002CD071 /* ClassMomentCancelLikeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentCancelLikeRequest.h; sourceTree = "<group>"; };
+		921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentCancelLikeRequest.m; sourceTree = "<group>"; };
+		921FF6B6200DCDF5002CD071 /* ClassMomentReplyRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentReplyRequest.h; sourceTree = "<group>"; };
+		921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentReplyRequest.m; sourceTree = "<group>"; };
 		9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishMomentViewController.h; sourceTree = "<group>"; };
 		9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishMomentViewController.m; sourceTree = "<group>"; };
 		922084181F6BB8D200F8AAC6 /* MineUserHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineUserHeaderCell.h; sourceTree = "<group>"; };
@@ -1335,6 +1344,12 @@
 				923F73861F725C4700D7EA6F /* ClassMomentCommentRequest.m */,
 				435DFCFB1FD0FAE100CEA9C2 /* ReportRequest.h */,
 				435DFCFA1FD0FAE100CEA9C2 /* ReportRequest.m */,
+				921FF6B0200DCD8F002CD071 /* ClassMomentDiscardRequest.h */,
+				921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */,
+				921FF6B3200DCDAB002CD071 /* ClassMomentCancelLikeRequest.h */,
+				921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */,
+				921FF6B6200DCDF5002CD071 /* ClassMomentReplyRequest.h */,
+				921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -2018,6 +2033,7 @@
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
 				7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */,
+				921FF6B5200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m in Sources */,
 				435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */,
 				7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */,
 				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
@@ -2044,6 +2060,7 @@
 				7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				9220841D1F6BB91400F8AAC6 /* MineDefaultCell.m in Sources */,
+				921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */,
 				7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */,
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
@@ -2099,6 +2116,7 @@
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
 				438FFC891FD4E1B9006F3FB3 /* PersistentUrlDownloader.m in Sources */,
+				921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */,
 				9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */,
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,

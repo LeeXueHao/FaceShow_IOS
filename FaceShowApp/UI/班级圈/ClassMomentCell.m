@@ -19,6 +19,11 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+        self.frame = [UIScreen mainScreen].bounds;
+        [self layoutIfNeeded];
+        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make){
+            make.edges.equalTo(self);
+        }];
         [self setupUI];
         [self setupLayout];
     }
