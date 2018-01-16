@@ -30,10 +30,12 @@
 @property (nonatomic, copy) NSString<Optional> *commentID;
 @property (nonatomic, copy) NSString<Optional> *clazsID;
 @property (nonatomic, copy) NSString<Optional> *momentID;
+@property (nonatomic, copy) NSString<Optional> *userID;
 @property (nonatomic, copy) NSString<Optional> *parentID;
 @property (nonatomic, copy) NSString<Optional> *content;
 @property (nonatomic, copy) NSString<Optional> *level;
 @property (nonatomic, copy) NSString<Optional> *createTime;
+@property (nonatomic, copy) NSString<Ignore> *draftModel;
 @property (nonatomic, strong) ClassMomentListRequestItem_UserInfo<Optional> *publisher;
 @property (nonatomic, strong) ClassMomentListRequestItem_UserInfo<Optional> *toUser;
 @end
@@ -70,8 +72,12 @@
 @property (nonatomic, strong) NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment,Optional> *comments;
 @property (nonatomic, strong) NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like,Optional> *likes;
 @property (nonatomic, strong) ClassMomentListRequestItem_UserInfo<Optional> *publisher;
+
+
 @property (nonatomic, copy) NSString<Optional> *isOpen;//自定义展开折叠使用 0 折叠 1展开
 @property (nonatomic, copy) NSString<Optional> *draftModel;
+@property (nonatomic, copy) NSString<Ignore> *myLike;//我第几个点赞
+
 @end
 
 

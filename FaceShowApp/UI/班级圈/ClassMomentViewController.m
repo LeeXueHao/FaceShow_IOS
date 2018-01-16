@@ -21,6 +21,13 @@
 #import "ClassMomentCommentRequest.h"
 #import "ReportViewController.h"
 #import "UserPromptsManager.h"
+#import "ClassMomentReplyRequest.h"
+#import "ClassMomentCancelLikeRequest.h"
+typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
+    ClassMomentComment_Comment = 1,
+    ClassMomentComment_Reply = 2,
+};
+
 
 @interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
@@ -29,9 +36,16 @@
 @property (nonatomic, strong) CommentInputView *inputView;
 
 @property (nonatomic, assign) NSInteger commtentInteger;
+@property (nonatomic, strong) NSIndexPath *replyIndexPath;
+
+@property (nonatomic, assign) ClassMomentCommentType commentType;
 
 @property (nonatomic, strong) ClassMomentClickLikeRequest *clickLikeRequest;
 @property (nonatomic, strong) ClassMomentCommentRequest *commentRequest;
+@property (nonatomic, strong) ClassMomentReplyRequest *replyRequest;
+@property (nonatomic, strong) ClassMomentCancelLikeRequest *cancelLikeRequest;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation ClassMomentViewController
@@ -112,13 +126,12 @@
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
      WEAK_SELF
-    [[tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
+    [[self.tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
         STRONG_SELF
         [self hiddenInputTextView];
     }];
-    [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
 //    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
@@ -145,7 +158,11 @@
     self.inputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
         if (text.length != 0) {
-            [self requstForPublishComment:text];            
+            if (self.commentType == ClassMomentComment_Comment) {
+                [self requstForPublishComment:text];
+            }else {
+                [self requstForReplyComment:text];
+            }
         }
     };
     self.inputView.textHeightChangeBlock = ^(CGFloat textHeight) {
@@ -163,13 +180,20 @@
 
 }
 - (void)hiddenInputTextView {
-    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
-    moment.draftModel = self.inputView.textView.text;
+    if (self.commentType == ClassMomentComment_Comment) {
+        ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
+        moment.draftModel = self.inputView.textView.text;
+    }else {
+        ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.replyIndexPath.section];
+        ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[self.replyIndexPath.row];
+        comment.draftModel = self.inputView.textView.text;
+    }
     self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
     if (self.floatingView.superview != nil) {
         [self.floatingView hiddenView];
     }
+    [self.tableView removeGestureRecognizer:self.tapGestureRecognizer];
 }
 - (void)stopAnimation {
     [super stopAnimation];
@@ -336,30 +360,44 @@
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
         if (status == ClassMomentClickStatus_Comment) {
+            self.commentType = ClassMomentComment_Comment;
             self.commtentInteger = section;
             if (moment.draftModel != nil) {
                 self.inputView.textString = moment.draftModel;
             }
             [self.inputView.textView becomeFirstResponder];
+            [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
         }else {
-            [self requestForClickLike:section];
+            __block BOOL isLike = NO;
+            [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
+                    isLike = YES;
+                    moment.myLike = [NSString stringWithFormat:@"%lu",(unsigned long)idx];
+                    *stop = YES;
+                }
+            }];
+            if (!isLike) {
+                [self requestForClickLike:section];
+            }else {
+                [self requestForCancelLike:section];
+
+            }
         }
     };
     [self.view addSubview:self.floatingView];
     __block BOOL isLike = NO;
-    [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
-            isLike = YES;
-            *stop = YES;
-        }
-    }];
+//    [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
+//            isLike = YES;
+//            *stop = YES;
+//        }
+//    }];
     [self.floatingView reloadFloatingView:rect withStyle:isLike ? ClassMomentFloatingStyle_Comment : ClassMomentFloatingStyle_Double];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     ClassMomentFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentFooterView"];
     return footerView;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     if (moment.likes.count > 0 || moment.comments.count > 0) {
@@ -443,7 +481,6 @@
                                                 NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
     return rect.size.height;
 }
-
 - (CGFloat)sizeForTitle:(NSString *)title {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineHeightMultiple = 1.2f;
@@ -453,7 +490,18 @@
                                                 NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
     return rect.size.height;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    self.commentType = ClassMomentComment_Reply;
+    self.replyIndexPath = indexPath;
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
+    ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
+    if (comment.draftModel != nil) {
+        self.inputView.textString = moment.draftModel;
+    }
+    [self.inputView.textView becomeFirstResponder];
+    [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
+}
 
 #pragma mark - request
 - (void)requestForClickLike:(NSInteger)section {
@@ -476,7 +524,9 @@
                 NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like> *mutableArray = [[NSMutableArray<ClassMomentListRequestItem_Data_Moment_Like> alloc] init];
                 [mutableArray addObject:item.data];
                 moment.likes = mutableArray;
+                moment.myLike = @"0";
             }else {
+                moment.myLike = [NSString stringWithFormat:@"%lu",(unsigned long)moment.likes.count];
                 [moment.likes addObject:item.data];
             }
             [self.tableView reloadData];
@@ -486,6 +536,24 @@
     }];
     self.clickLikeRequest = request;
 }
+- (void)requestForCancelLike:(NSInteger) section {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    ClassMomentCancelLikeRequest *request = [[ClassMomentCancelLikeRequest alloc] init];
+    request.momentId = moment.momentID;
+    WEAK_SELF
+    [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        [moment.likes removeObjectAtIndex:moment.myLike.integerValue];
+        [self.tableView reloadData];
+    }];
+    self.cancelLikeRequest = request;
+}
+
 - (void)requstForPublishComment:(NSString *)content {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
     ClassMomentCommentRequest *request = [[ClassMomentCommentRequest alloc] init];
@@ -519,5 +587,42 @@
         }
     }];
     self.commentRequest = request;
+}
+- (void)requstForReplyComment:(NSString *)content {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.replyIndexPath.section];
+    ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[self.replyIndexPath.row];
+    ClassMomentReplyRequest *request = [[ClassMomentReplyRequest alloc] init];
+    request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    request.momentId = moment.momentID;
+    request.content = content;
+    request.toUserId = comment.userID;
+    request.commentId = moment.momentID;
+    //    [self.view nyx_startLoading];
+    WEAK_SELF
+    [request startRequestWithRetClass:[ClassMomentReplyItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        ClassMomentReplyItem *item = retItem;
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        if (item.data != nil) {
+            item.data.content = content;
+            if (moment.comments.count == 0) {
+                NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment> *mutableArray = [[NSMutableArray<ClassMomentListRequestItem_Data_Moment_Comment> alloc] init];
+                [mutableArray addObject:item.data];
+                moment.comments = mutableArray;
+            }else {
+                [moment.comments addObject:item.data];
+            }
+            comment.draftModel = nil;
+            self.inputView.textString = nil;
+            [self.tableView reloadData];
+        }else {
+            [self.view nyx_showToast:item.message];
+        }
+    }];
+    self.replyRequest = request;
 }
 @end

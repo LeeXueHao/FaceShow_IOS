@@ -12,5 +12,9 @@
 @property (nonatomic, strong) ClassMomentListRequestItem_Data_Moment_Comment<Optional> *data;
 @end
 @interface ClassMomentReplyRequest : YXGetRequest
-
+@property (nonatomic, copy) NSString<Optional> *clazsId;
+@property (nonatomic, copy) NSString<Optional> *momentId;
+@property (nonatomic, copy) NSString<Optional> *content;
+@property (nonatomic, copy) NSString<Optional> *toUserId;
+@property (nonatomic, copy) NSString<Optional> *commentId;
 @end

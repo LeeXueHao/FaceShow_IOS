@@ -250,6 +250,7 @@
 		922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */; };
 		9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220843A1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m */; };
 		9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220843E1F6BD66600F8AAC6 /* PhotoChooseCell.m */; };
+		922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 922600C0200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m */; };
 		923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */; };
 		923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */; };
 		923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F73821F7256DB00D7EA6F /* classMomentClickLike_mock.json */; };
@@ -739,6 +740,8 @@
 		9220843A1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoChooseViewController.m; sourceTree = "<group>"; };
 		9220843D1F6BD66600F8AAC6 /* PhotoChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoChooseCell.h; sourceTree = "<group>"; };
 		9220843E1F6BD66600F8AAC6 /* PhotoChooseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoChooseCell.m; sourceTree = "<group>"; };
+		922600BF200DF2220076AD05 /* ClassMomentDiscardCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDiscardCommentRequest.h; sourceTree = "<group>"; };
+		922600C0200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDiscardCommentRequest.m; sourceTree = "<group>"; };
 		923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentPublish_mock.json; sourceTree = "<group>"; };
 		923F737F1F72552500D7EA6F /* ClassMomentClickLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentClickLikeRequest.h; sourceTree = "<group>"; };
 		923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentClickLikeRequest.m; sourceTree = "<group>"; };
@@ -1350,6 +1353,8 @@
 				921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */,
 				921FF6B6200DCDF5002CD071 /* ClassMomentReplyRequest.h */,
 				921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */,
+				922600BF200DF2220076AD05 /* ClassMomentDiscardCommentRequest.h */,
+				922600C0200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -2093,6 +2098,7 @@
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
+				922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */,
 				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
 				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,

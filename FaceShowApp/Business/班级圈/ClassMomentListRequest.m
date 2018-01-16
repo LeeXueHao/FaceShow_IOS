@@ -14,7 +14,9 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"commentID",
                                                        @"clazsId":@"clazsID",
                                                        @"momentId":@"momentID",
-                                                       @"parentId":@"parentID"}];
+                                                       @"parentId":@"parentID",
+                                                       @"userId":@"userID"
+                                                       }];
 }
 
 @end
