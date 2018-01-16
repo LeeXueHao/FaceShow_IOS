@@ -202,6 +202,8 @@
 		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
 		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
 		7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */; };
+		7C33E626200DCC97006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E625200DCC97006704E7 /* QiniuTokenRequest.m */; };
+		7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E628200DCD71006704E7 /* TestQiniuViewController.m */; };
 		7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54151F9729230053DB12 /* YXGeTuiManager.m */; };
 		7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54141F9729230053DB12 /* YXApnsContentModel.m */; };
 		7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */; };
@@ -646,6 +648,10 @@
 		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
 		7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXInitRequest.m; sourceTree = "<group>"; };
 		7C29F3191FEB4FAD007A4076 /* YXInitRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXInitRequest.h; sourceTree = "<group>"; };
+		7C33E624200DCC97006704E7 /* QiniuTokenRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QiniuTokenRequest.h; sourceTree = "<group>"; };
+		7C33E625200DCC97006704E7 /* QiniuTokenRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QiniuTokenRequest.m; sourceTree = "<group>"; };
+		7C33E627200DCD71006704E7 /* TestQiniuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestQiniuViewController.h; sourceTree = "<group>"; };
+		7C33E628200DCD71006704E7 /* TestQiniuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestQiniuViewController.m; sourceTree = "<group>"; };
 		7C4D54121F970B280053DB12 /* 研修宝.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "研修宝.entitlements"; sourceTree = "<group>"; };
 		7C4D54141F9729230053DB12 /* YXApnsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXApnsContentModel.m; sourceTree = "<group>"; };
 		7C4D54151F9729230053DB12 /* YXGeTuiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXGeTuiManager.m; sourceTree = "<group>"; };
@@ -1143,6 +1149,10 @@
 				7C2519061F68E90C0001B577 /* TestsRootViewController.m */,
 				7C2519071F68E90C0001B577 /* YXTestViewController.h */,
 				7C2519081F68E90C0001B577 /* YXTestViewController.m */,
+				7C33E627200DCD71006704E7 /* TestQiniuViewController.h */,
+				7C33E628200DCD71006704E7 /* TestQiniuViewController.m */,
+				7C33E624200DCC97006704E7 /* QiniuTokenRequest.h */,
+				7C33E625200DCC97006704E7 /* QiniuTokenRequest.m */,
 			);
 			path = TestFramework;
 			sourceTree = "<group>";
@@ -2107,6 +2117,7 @@
 				7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */,
 				7C212DEB1F6B72330007AE01 /* CourseCommentHeaderView.m in Sources */,
 				7C2519931F6900610001B577 /* PagedListFetcherBase.m in Sources */,
+				7C33E626200DCC97006704E7 /* QiniuTokenRequest.m in Sources */,
 				7CEFC7E81F99EE70001D8C84 /* GetSigninRequest.m in Sources */,
 				43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */,
 				92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */,
@@ -2159,6 +2170,7 @@
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
+				7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */,
 				436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */,
 				435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */,
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,

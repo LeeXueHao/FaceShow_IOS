@@ -141,10 +141,17 @@
     WEAK_SELF
     [itemView setClickBlock:^(OptionItemView *view){
         STRONG_SELF
+        QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
+        if (type == QuestionType_MultiChoose) {
+            if ([self totalSelectNum] > self.item.voteInfo.maxSelectNum.integerValue) {
+                view.isSelected = NO;
+                [self.window nyx_showToast:[NSString stringWithFormat:@"最多选%@项",self.item.voteInfo.maxSelectNum]];
+                return;
+            }
+        }
         NSInteger index = [self.itemViewArray indexOfObject:view];
         [self.item.myAnswers replaceObjectAtIndex:index withObject:@(view.isSelected)];
         
-        QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
         if (view.isSelected && type==QuestionType_SingleChoose) {
             for (int i=0; i<self.item.myAnswers.count; i++) {
                 self.item.myAnswers[i] = @(NO);
@@ -162,6 +169,16 @@
         item.isSelected = NO;
     }
     itemView.isSelected = YES;    
+}
+
+- (NSInteger)totalSelectNum {
+    NSInteger total = 0;
+    for (OptionItemView *item in self.itemViewArray) {
+        if (item.isSelected) {
+            total += 1;
+        }
+    }
+    return total;
 }
 
 @end

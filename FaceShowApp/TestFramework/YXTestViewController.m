@@ -12,13 +12,14 @@
 #import "QuestionnaireViewController.h"
 #import "QADataManager.h"
 #import "AlbumListViewController.h"
+#import "TestQiniuViewController.h"
 
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择"];
+    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择",@"qiniu"];
     [super viewDidLoad];
 }
 
@@ -54,6 +55,11 @@
 - (void)照片选择 {
     AlbumListViewController *vc = [[AlbumListViewController alloc]init];
     [self presentViewController:[[FSNavigationController alloc]initWithRootViewController:vc] animated:YES completion:nil];
+}
+
+- (void)qiniu {
+    TestQiniuViewController *vc = [[TestQiniuViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
