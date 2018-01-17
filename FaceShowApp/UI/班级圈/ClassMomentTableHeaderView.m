@@ -51,6 +51,11 @@
     self.userHeaderButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.userHeaderButton.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
     [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"]];
+    WEAK_SELF
+    [[self.userHeaderButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        BLOCK_EXEC(self.classMomentUserButtonBlock);
+    }];
     self.userHeaderButton.layer.masksToBounds = YES;
     self.userHeaderButton.layer.cornerRadius = 5.0f;
     self.userHeaderButton.layer.shadowColor = [UIColor colorWithHexString:@"000000"].CGColor;

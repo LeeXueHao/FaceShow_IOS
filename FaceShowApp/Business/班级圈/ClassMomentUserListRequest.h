@@ -12,5 +12,8 @@
 @property(nonatomic, strong) ClassMomentListRequestItem_Data<Optional> *data;
 @end
 @interface ClassMomentUserListRequest : YXGetRequest
-
+@property (nonatomic, copy) NSString<Optional> *clazsId;
+@property (nonatomic, copy) NSString<Optional> *userId;
+@property (nonatomic, copy) NSString<Optional> *limit;
+@property (nonatomic, copy) NSString<Optional> *offset;
 @end

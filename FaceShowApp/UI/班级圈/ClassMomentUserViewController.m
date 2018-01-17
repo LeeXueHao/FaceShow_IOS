@@ -1,12 +1,12 @@
 //
-//  ClassMomentViewController.m
+//  ClassMomentUserViewController.m
 //  FaceShowApp
 //
-//  Created by niuzhaowang on 2017/9/13.
-//  Copyright © 2017年 niuzhaowang. All rights reserved.
+//  Created by 郑小龙 on 2018/1/17.
+//  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "ClassMomentViewController.h"
+#import "ClassMomentUserViewController.h"
 #import "UITableView+TemplateLayoutHeaderView.h"
 #import "ClassMomentHeaderView.h"
 #import "ClassMomentCell.h"
@@ -16,7 +16,7 @@
 #import "ClassMomentFloatingView.h"
 #import "YXImagePickerController.h"
 #import "CommentInputView.h"
-#import "ClassMomentListFetcher.h"
+#import "ClassMomentUserListFetcher.h"
 #import "ClassMomentClickLikeRequest.h"
 #import "ClassMomentCommentRequest.h"
 #import "ReportViewController.h"
@@ -27,16 +27,13 @@
 #import "ClassMomentDiscardRequest.h"
 #import "FDActionSheetView.h"
 #import "AlertView.h"
-#import "ClassMomentUserViewController.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
     ClassMomentComment_Reply = 2,
 };
-
-
-@interface ClassMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
+@interface ClassMomentUserViewController ()
+<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) CommentInputView *inputView;
@@ -57,41 +54,24 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
-@implementation ClassMomentViewController
+@implementation ClassMomentUserViewController
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     DDLogDebug(@"release========>>%@",[self class]);
 }
 - (void)viewDidLoad {
-    ClassMomentListFetcher *fetcher = [[ClassMomentListFetcher alloc] init];
+    ClassMomentUserListFetcher *fetcher = [[ClassMomentUserListFetcher alloc] init];
     fetcher.pagesize = 20;
     fetcher.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    fetcher.userId = [UserManager sharedInstance].userModel.userID;
     self.dataFetcher = fetcher;
     self.bIsGroupedTableViewStyle = YES;
     [super viewDidLoad];
-    self.navigationItem.title = @"班级圈";
-    WEAK_SELF
-    [self nyx_setupRightWithTitle:@"发布" action:^{
-        STRONG_SELF
-        PublishMomentViewController *VC = [[PublishMomentViewController alloc]init];
-        WEAK_SELF
-        VC.publishMomentDataBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
-            STRONG_SELF
-            if (moment != nil) {
-                self.emptyView.hidden = YES;
-                self.errorView.hidden = YES;
-                [self.dataArray insertObject:moment atIndex:0];
-                [self.tableView reloadData];
-            }
-            
-        };
-        FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:VC];
-        [self presentViewController:navi animated:YES completion:nil];
-    }];
+    self.navigationItem.title = @"我的发布";
     [self setupUI];
     [self setupObservers];
-//    self.edgesForExtendedLayout = UIRectEdgeAll;
-
+    //    self.edgesForExtendedLayout = UIRectEdgeAll;
+    
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -128,44 +108,16 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [self.tableView registerClass:[ClassMomentHeaderView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentHeaderView"];
     [self.tableView registerClass:[ClassMomentCell class] forCellReuseIdentifier:@"ClassMomentCell"];
     [self.tableView registerClass:[ClassMomentFooterView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentFooterView"];
-    self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
-    WEAK_SELF
-    self.headerView.classMomentUserButtonBlock = ^{
-        STRONG_SELF
-        ClassMomentUserViewController *VC = [[ClassMomentUserViewController alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    };
-    self.headerView.hidden = YES;
-    self.tableView.tableHeaderView = self.headerView;
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    WEAK_SELF
     [[self.tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
         STRONG_SELF
         [self hiddenInputTextView];
     }];
-    
-//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
-//    [rightButton setImage:[UIImage imageNamed:@"上传内容图标正常态"] forState:UIControlStateNormal];
-//    [rightButton setImage:[UIImage imageNamed:@"上传内容图标点击态"] forState:UIControlStateHighlighted];
-//
-//    [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-//        STRONG_SELF
-//        [self showAlertView];
-//    }];
-//    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
-//    gestureRecognizer.minimumPressDuration = 1.0f;
-//    [[gestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
-//        if (x.state == UIGestureRecognizerStateBegan) {
-//            [self presentNextPublishViewController:nil];
-//        }
-//    }];
-//    [rightButton addGestureRecognizer:gestureRecognizer];
-//    [self nyx_setupRightWithCustomView:rightButton];
-    
     self.inputView = [[CommentInputView alloc]init];
     self.inputView.isChangeBool = YES;
     self.inputView.textView.returnKeyType = UIReturnKeySend;
@@ -191,7 +143,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         make.height.mas_equalTo(45.0f);
         make.bottom.mas_equalTo(100.0f);
     }];
-
+    
 }
 - (void)hiddenInputTextView {
     if (self.commentType == ClassMomentComment_Comment) {
@@ -212,8 +164,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)stopAnimation {
     [super stopAnimation];
-    [self.headerView reload];
-    self.headerView.hidden = NO;
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
     [self.floatingView hiddenViewAnimate:YES];
@@ -282,7 +232,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             [self.dataArray insertObject:moment atIndex:0];
             [self.tableView reloadData];
         }
-
+        
     };
     FSNavigationController *nav = [[FSNavigationController alloc] initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:^{
@@ -302,9 +252,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [UIView animateWithDuration:duration.floatValue animations:^{
             [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
                 if (SCREEN_HEIGHT == keyboardFrame.origin.y) {
-                    make.bottom.mas_equalTo(-(SCREEN_HEIGHT -keyboardFrame.origin.y) + 100.0f);
-                }else {
                     make.bottom.mas_equalTo(-(SCREEN_HEIGHT -keyboardFrame.origin.y) + 50.0f);
+                }else {
+                    make.bottom.mas_equalTo(-(SCREEN_HEIGHT -keyboardFrame.origin.y));
                 }
             }];
             [self.view layoutIfNeeded];
@@ -383,20 +333,8 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     headerView.classMomentOpenCloseBlock = ^(BOOL isOpen) {
         STRONG_SELF
         moment.isOpen = [NSString stringWithFormat:@"%@",@(!isOpen)];
-//        [tableView beginUpdates];
-//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:section];
-//        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-//        [tableView endUpdates];
-        
-//        [tableView beginUpdates];
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
-//        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//        [tableView endUpdates];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self.tableView reloadData];
-//        });
         [self.tableView reloadData];
-
+        
     };
     return headerView;
 }
@@ -440,7 +378,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
               moment.myLike.integerValue >= 0) {
         [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Cancel];
     }else if (moment.publisher.userID.integerValue != [UserManager sharedInstance].userModel.userID.integerValue &&
-             moment.myLike.integerValue < 0) {
+              moment.myLike.integerValue < 0) {
         [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Like];
     }
 }
@@ -495,7 +433,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             height = height + SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f + 10.0f;
         }
     }
-
+    
     height = height + 10.0f + 30.0f;
     if (moment.likes.count == 0 && moment.comments.count == 0) {
         height = height + 5.0f;
@@ -508,8 +446,8 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         if (moment.albums.count > 0) {
             height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f - 8.0f;
         }else {
-            height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
-        }        
+             height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
+        }
         
     }else if (moment.likes.count != 0) {
         NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
@@ -558,7 +496,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [self.inputView.textView becomeFirstResponder];
         [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
     }
-
+    
 }
 
 #pragma mark - request
@@ -627,7 +565,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.momentId = moment.momentID;
     request.content = content;
-//    [self.view nyx_startLoading];
+    //    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentCommentRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -671,9 +609,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         if (item.code.integerValue == 0) {
             if (self.dataArray.count > section) {
                 [self.dataArray removeObjectAtIndex:section];
-                [self.tableView reloadData];
-                self.emptyView.hidden = self.dataArray.count == 0 ? NO : YES;
             }
+            [self.tableView reloadData];
+            self.emptyView.hidden = self.dataArray.count == 0 ? NO : YES;
         }else {
             [self.view nyx_showToast:item.message];
         }
@@ -745,4 +683,5 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }];
     self.discardCommentRequest = request;
 }
+
 @end

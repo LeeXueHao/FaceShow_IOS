@@ -256,6 +256,7 @@
 		922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 922600C0200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m */; };
 		922600C4200F3CB10076AD05 /* ClassMomentUserListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 922600C3200F3CB10076AD05 /* ClassMomentUserListRequest.m */; };
 		922600C7200F3DC90076AD05 /* ClassMomentUserListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 922600C6200F3DC90076AD05 /* ClassMomentUserListFetcher.m */; };
+		922600CA200F47150076AD05 /* ClassMomentUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922600C9200F47150076AD05 /* ClassMomentUserViewController.m */; };
 		923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */; };
 		923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */; };
 		923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F73821F7256DB00D7EA6F /* classMomentClickLike_mock.json */; };
@@ -757,6 +758,8 @@
 		922600C3200F3CB10076AD05 /* ClassMomentUserListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentUserListRequest.m; sourceTree = "<group>"; };
 		922600C5200F3DC90076AD05 /* ClassMomentUserListFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentUserListFetcher.h; sourceTree = "<group>"; };
 		922600C6200F3DC90076AD05 /* ClassMomentUserListFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentUserListFetcher.m; sourceTree = "<group>"; };
+		922600C8200F47150076AD05 /* ClassMomentUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentUserViewController.h; sourceTree = "<group>"; };
+		922600C9200F47150076AD05 /* ClassMomentUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentUserViewController.m; sourceTree = "<group>"; };
 		923F737D1F7249B000D7EA6F /* classMomentPublish_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classMomentPublish_mock.json; sourceTree = "<group>"; };
 		923F737F1F72552500D7EA6F /* ClassMomentClickLikeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentClickLikeRequest.h; sourceTree = "<group>"; };
 		923F73801F72552500D7EA6F /* ClassMomentClickLikeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentClickLikeRequest.m; sourceTree = "<group>"; };
@@ -1518,6 +1521,8 @@
 				9279A6E31F6A53B5004A1E2B /* view */,
 				7C2519B31F690EB50001B577 /* ClassMomentViewController.h */,
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
+				922600C8200F47150076AD05 /* ClassMomentUserViewController.h */,
+				922600C9200F47150076AD05 /* ClassMomentUserViewController.m */,
 				9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */,
 				9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */,
 				4322CA3D1FD9529700E7B565 /* PhotoBrowserController.h */,
@@ -2112,6 +2117,7 @@
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
 				7C212DDD1F6B69010007AE01 /* ResourceDisplayViewController.m in Sources */,
+				922600CA200F47150076AD05 /* ClassMomentUserViewController.m in Sources */,
 				9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */,
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
 				435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */,

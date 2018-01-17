@@ -12,7 +12,7 @@
 @implementation ClassMomentUserListRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.method = @"app.moment.getMoments";
+        self.method = @"app.moment.getUserMoments";
     }
     return self;
 }
