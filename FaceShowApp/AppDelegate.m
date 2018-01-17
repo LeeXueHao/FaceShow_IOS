@@ -13,6 +13,7 @@
 #import <BMKLocationKit/BMKLocationAuth.h>
 #import "UserPromptsManager.h"
 #import "YXInitRequest.h"
+#import "QiniuDataManager.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -37,6 +38,7 @@
     if ([UserManager sharedInstance].loginStatus) {
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
+        [[QiniuDataManager sharedInstance]updateTokenWithCompleteBlock:nil];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -55,6 +57,7 @@
         [self.appDelegateHelper handleLoginSuccess];
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
+        [[QiniuDataManager sharedInstance]updateTokenWithCompleteBlock:nil];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF

@@ -16,14 +16,16 @@
 
 @interface QiniuTokenRequest()
 @property (nonatomic, strong) NSString *from;
+@property (nonatomic, strong) NSString *dtype;
 @end
 
 @implementation QiniuTokenRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = @"http://orz.yanxiu.com/7up/platform/data.api";
+        self.urlHead = @"http://niuugcupload.yanxiu.com/7up/platform/data.api";
         self.method = @"upload.token";
-        self.from = @"app";
+        self.from = @"100";
+        self.dtype = @"app";
     }
     return self;
 }
