@@ -23,7 +23,12 @@
 #import "UserPromptsManager.h"
 #import "ClassMomentReplyRequest.h"
 #import "ClassMomentCancelLikeRequest.h"
+#import "ClassMomentDiscardCommentRequest.h"
+#import "ClassMomentDiscardRequest.h"
+#import "FDActionSheetView.h"
+#import "AlertView.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
+    ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
     ClassMomentComment_Reply = 2,
 };
@@ -34,6 +39,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) CommentInputView *inputView;
+@property (nonatomic, strong) AlertView *alertView;
 
 @property (nonatomic, assign) NSInteger commtentInteger;
 @property (nonatomic, strong) NSIndexPath *replyIndexPath;
@@ -44,6 +50,8 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentCommentRequest *commentRequest;
 @property (nonatomic, strong) ClassMomentReplyRequest *replyRequest;
 @property (nonatomic, strong) ClassMomentCancelLikeRequest *cancelLikeRequest;
+@property (nonatomic, strong) ClassMomentDiscardCommentRequest *discardCommentRequest;
+@property (nonatomic, strong) ClassMomentDiscardRequest *discardRequest;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
@@ -86,7 +94,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.floatingView hiddenView];
+    [self.floatingView hiddenViewAnimate:NO];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -183,7 +191,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     if (self.commentType == ClassMomentComment_Comment) {
         ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
         moment.draftModel = self.inputView.textView.text;
-    }else {
+    }else if (self.commentType == ClassMomentComment_Reply){
         ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.replyIndexPath.section];
         ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[self.replyIndexPath.row];
         comment.draftModel = self.inputView.textView.text;
@@ -191,8 +199,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
     if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenView];
+        [self.floatingView hiddenViewAnimate:NO];
     }
+    self.commentType = ClassMomentComment_Normal;
     [self.tableView removeGestureRecognizer:self.tapGestureRecognizer];
 }
 - (void)stopAnimation {
@@ -200,37 +209,58 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [self.headerView reload];
     self.headerView.hidden = NO;
 }
-- (void)showAlertView {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+- (void)showAlertView:(NSIndexPath *)indexPath {
+    [self.floatingView hiddenViewAnimate:YES];
+    FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    actionSheetView.titleArray = @[@{@"title":@"删除"}];
+    self.alertView = [[AlertView alloc]init];
+    self.alertView.backgroundColor = [UIColor clearColor];
+    self.alertView.hideWhenMaskClicked = YES;
+    self.alertView.contentView = actionSheetView;
     WEAK_SELF
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [self.alertView setHideBlock:^(AlertView *view) {
         STRONG_SELF
-    }];
-    [alertVC addAction:cancleAction];
-    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        STRONG_SELF
-        [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera completion:^(UIImage *selectedImage) {
-            STRONG_SELF
-            [self presentNextPublishViewController:selectedImage];
+        [UIView animateWithDuration:0.3 animations:^{
+            [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(view.mas_left);
+                make.right.equalTo(view.mas_right);
+                make.top.equalTo(view.mas_bottom);
+                make.height.mas_offset(105.0f);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
         }];
     }];
-    [alertVC addAction:cameraAction];
-    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [self.alertView showWithLayout:^(AlertView *view) {
         STRONG_SELF
-        [self.imagePickerController pickImageWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
-            STRONG_SELF
-            [self presentNextPublishViewController:selectedImage];
+        [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(view.mas_left);
+            make.right.equalTo(view.mas_right);
+            make.top.equalTo(view.mas_bottom);
+            make.height.mas_offset(105.0f );
         }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3 animations:^{
+                [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(view.mas_left);
+                    make.right.equalTo(view.mas_right);
+                    make.bottom.equalTo(view.mas_bottom);
+                    make.height.mas_offset(105.0f);
+                }];
+                [view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+        });
     }];
-    [alertVC addAction:photoAction];
-    
-    UIViewController *visibleVC = [self nyx_visibleViewController];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        alertVC.popoverPresentationController.sourceView = visibleVC.view;
-        alertVC.popoverPresentationController.sourceRect = CGRectMake(200,100,200,200);
-    }
-
-    [visibleVC presentViewController:alertVC animated:YES completion:nil];
+    actionSheetView.actionSheetBlock = ^(NSInteger integer) {
+        STRONG_SELF
+        if (integer == 1) {
+            [self requestForDiscardComment:indexPath];
+        }
+        [self.alertView hide];
+    };
 }
 - (void)presentNextPublishViewController:(UIImage *)image {
     PublishMomentViewController *VC = [[PublishMomentViewController alloc] init];
@@ -305,7 +335,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClassMomentCell" forIndexPath:indexPath];
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
     ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
-    [cell reloadName:comment.publisher.realName withComment:comment.content withLast:indexPath.row + 1 == moment.comments.count];
+    [cell reloadName:comment.publisher.realName withToReplyName:comment.toUser.realName withComment:comment.content withLast:indexPath.row + 1 == moment.comments.count];
     return cell;
 }
 #pragma mark - UITableViewDelegate
@@ -348,7 +378,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
     if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenView];
+        [self.floatingView hiddenViewAnimate:YES];
         return;
     }
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
@@ -367,32 +397,28 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             }
             [self.inputView.textView becomeFirstResponder];
             [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
-        }else {
-            __block BOOL isLike = NO;
-            [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
-                    isLike = YES;
-                    moment.myLike = [NSString stringWithFormat:@"%lu",(unsigned long)idx];
-                    *stop = YES;
-                }
-            }];
-            if (!isLike) {
-                [self requestForClickLike:section];
-            }else {
-                [self requestForCancelLike:section];
-
-            }
+        }else if(status == ClassMomentClickStatus_Like){
+            [self requestForClickLike:section];
+        }else if(status == ClassMomentClickStatus_Cancel){
+            [self requestForCancelLike:section];
+        }else if(status == ClassMomentClickStatus_Delete){
+            [self requestForDiscardMoment:section];
         }
     };
     [self.view addSubview:self.floatingView];
-    __block BOOL isLike = NO;
-//    [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (obj.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
-//            isLike = YES;
-//            *stop = YES;
-//        }
-//    }];
-    [self.floatingView reloadFloatingView:rect withStyle:isLike ? ClassMomentFloatingStyle_Comment : ClassMomentFloatingStyle_Double];
+    if (moment.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue &&
+        moment.myLike.integerValue >= 0) {
+        [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Cancel | ClassMomentFloatingStyle_Delete];
+    }else if (moment.publisher.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue &&
+              moment.myLike.integerValue < 0) {
+        [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Like | ClassMomentFloatingStyle_Delete];
+    }else if (moment.publisher.userID.integerValue != [UserManager sharedInstance].userModel.userID.integerValue &&
+              moment.myLike.integerValue >= 0) {
+        [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Cancel];
+    }else if (moment.publisher.userID.integerValue != [UserManager sharedInstance].userModel.userID.integerValue &&
+             moment.myLike.integerValue < 0) {
+        [self.floatingView reloadFloatingView:rect withStyle:ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Like];
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     ClassMomentFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ClassMomentFooterView"];
@@ -409,7 +435,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     return [tableView fd_heightForCellWithIdentifier:@"ClassMomentCell" configuration:^(ClassMomentCell *cell) {
         ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
         ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
-        [cell reloadName:comment.publisher.realName withComment:comment.content withLast:indexPath.row];
+        [cell reloadName:comment.publisher.realName withToReplyName:comment.toUser.realName withComment:comment.content withLast:indexPath.row + 1 == moment.comments.count];
     }];
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -491,16 +517,20 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     return rect.size.height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    self.commentType = ClassMomentComment_Reply;
-    self.replyIndexPath = indexPath;
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
     ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
-    if (comment.draftModel != nil) {
-        self.inputView.textString = moment.draftModel;
+    if (comment.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {
+        [self showAlertView:indexPath];
+    }else {
+        self.commentType = ClassMomentComment_Reply;
+        self.replyIndexPath = indexPath;
+        if (comment.draftModel != nil) {
+            self.inputView.textString = moment.draftModel;
+        }
+        [self.inputView.textView becomeFirstResponder];
+        [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
     }
-    [self.inputView.textView becomeFirstResponder];
-    [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
+
 }
 
 #pragma mark - request
@@ -509,7 +539,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentClickLikeRequest *request = [[ClassMomentClickLikeRequest alloc] init];
     request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     request.momentId = moment.momentID;
-//    [self.view nyx_startLoading];
+    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[ClassMomentClickLikeRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -540,6 +570,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     ClassMomentCancelLikeRequest *request = [[ClassMomentCancelLikeRequest alloc] init];
     request.momentId = moment.momentID;
+    [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -548,8 +579,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
-        [moment.likes removeObjectAtIndex:moment.myLike.integerValue];
-        [self.tableView reloadData];
+        HttpBaseRequestItem *item = retItem;
+        if (item.code.integerValue == 0) {
+            [moment.likes removeObjectAtIndex:moment.myLike.integerValue];
+            moment.myLike = @"-1";
+            [self.tableView reloadData];
+        }else {
+            [self.view nyx_showToast:item.message];
+        }
     }];
     self.cancelLikeRequest = request;
 }
@@ -588,6 +625,31 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }];
     self.commentRequest = request;
 }
+- (void)requestForDiscardMoment:(NSInteger)section {
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
+    ClassMomentDiscardRequest *request = [[ClassMomentDiscardRequest alloc] init];
+    request.momentId = moment.momentID;
+    WEAK_SELF
+    [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        HttpBaseRequestItem *item = retItem;
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        if (item.code.integerValue == 0) {
+            [self.dataArray removeObjectAtIndex:section];
+            [self.tableView reloadData];
+            self.emptyView.hidden = self.dataArray.count == 0 ? NO : YES;
+        }else {
+            [self.view nyx_showToast:item.message];
+        }
+    }];
+    self.discardRequest = request;
+}
+
+
 - (void)requstForReplyComment:(NSString *)content {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.replyIndexPath.section];
     ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[self.replyIndexPath.row];
@@ -624,5 +686,29 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         }
     }];
     self.replyRequest = request;
+}
+
+- (void)requestForDiscardComment:(NSIndexPath *)indexPath{
+    ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
+    ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
+    ClassMomentDiscardCommentRequest *request = [[ClassMomentDiscardCommentRequest alloc] init];
+    request.commentId = comment.commentID;
+    WEAK_SELF
+    [request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        HttpBaseRequestItem *item = retItem;
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        if (item.code.integerValue == 0) {
+            [moment.comments removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
+        }else {
+            [self.view nyx_showToast:item.message];
+        }
+    }];
+    self.discardCommentRequest = request;
 }
 @end

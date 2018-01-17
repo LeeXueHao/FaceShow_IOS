@@ -10,6 +10,7 @@
 
 @interface ClassMomentCell : UITableViewCell
 - (void)reloadName:(NSString *)nameString
+   withToReplyName:(NSString *)replyString
        withComment:(NSString *)commentString
           withLast:(BOOL)isLast;
 @end

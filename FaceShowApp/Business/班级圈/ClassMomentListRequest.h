@@ -77,7 +77,6 @@
 @property (nonatomic, copy) NSString<Optional> *isOpen;//自定义展开折叠使用 0 折叠 1展开
 @property (nonatomic, copy) NSString<Optional> *draftModel;
 @property (nonatomic, copy) NSString<Ignore> *myLike;//我第几个点赞
-
 @end
 
 

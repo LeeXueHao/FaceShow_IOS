@@ -75,16 +75,33 @@
     }];
     
 }
-
-- (void)reloadName:(NSString *)nameString withComment:(NSString *)commentString withLast:(BOOL)isLast {
-    NSString *tempString = [NSString stringWithFormat:@"%@: %@",nameString,commentString];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineHeightMultiple = 1.2f;
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:tempString];
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, tempString.length)];
-    [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14.0f] range:NSMakeRange(0, nameString.length)];
-    self.contentLabel.attributedText = attributedString;
+- (void)reloadName:(NSString *)nameString withToReplyName:(NSString *)replyString withComment:(NSString *)commentString withLast:(BOOL)isLast {
+    if (replyString.length > 0) {
+        NSString *tempString = [NSString stringWithFormat:@"%@ 回复 %@: %@",nameString,replyString,commentString];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineHeightMultiple = 1.2f;
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:tempString];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, tempString.length)];
+        [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14.0f] range:NSMakeRange(0, nameString.length + replyString.length + 4)];
+        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(0, nameString.length)];
+        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(nameString.length + 4, replyString.length)];
+        self.contentLabel.attributedText = attributedString;
+        
+    }else {
+        NSString *tempString = [NSString stringWithFormat:@"%@: %@",nameString,commentString];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineHeightMultiple = 1.2f;
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:tempString];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, tempString.length)];
+        [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14.0f] range:NSMakeRange(0, nameString.length)];
+        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(0, nameString.length)];
+        self.contentLabel.attributedText = attributedString;
+    }
     self.bottomView.layer.mask =  isLast ? self.bottomLayer : nil;
+
+}
+- (void)reloadName:(NSString *)nameString withComment:(NSString *)commentString withLast:(BOOL)isLast {
+
 }
 
 - (void)awakeFromNib {

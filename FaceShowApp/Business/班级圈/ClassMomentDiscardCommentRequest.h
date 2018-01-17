@@ -9,6 +9,6 @@
 #import "YXGetRequest.h"
 
 @interface ClassMomentDiscardCommentRequest : YXGetRequest
-@property (nonatomic, copy) NSString<Optional> *momentId;
+@property (nonatomic, copy) NSString<Optional> *commentId;
 
 @end
