@@ -44,6 +44,10 @@
     
 }
 
+- (void)handleClassChange {
+    
+}
+
 - (void)handleApnsData:(YXApnsContentModel *)apns {
     
 }

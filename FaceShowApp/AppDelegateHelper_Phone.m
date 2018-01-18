@@ -115,6 +115,12 @@
     [self.window.rootViewController presentViewController:[self loginViewController] animated:YES completion:nil];
 }
 
+- (void)handleClassChange {
+    [self.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+    self.window.rootViewController.view.hidden = YES;
+    self.window.rootViewController = [self rootViewController];
+}
+
 #pragma mark -
 - (void)handleOpenUrl:(NSURL *)url {
     if (![UserManager sharedInstance].loginStatus) {

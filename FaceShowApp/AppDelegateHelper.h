@@ -21,6 +21,8 @@
 - (void)handleLoginSuccess;
 - (void)handleLogoutSuccess;
 
+- (void)handleClassChange;
+
 - (void)handleOpenUrl:(NSURL *)url;
 
 // Apns

@@ -8,6 +8,8 @@
 
 #import "UserModel.h"
 
+NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
+
 @implementation UserModel
 
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo {

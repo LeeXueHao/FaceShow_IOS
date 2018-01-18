@@ -66,6 +66,10 @@
         [[UserMessageManager sharedInstance] suspendHeartbeat];
         [[UserPromptsManager sharedInstance] suspendHeartbeat];
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kClassDidSelectNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self.appDelegateHelper handleClassChange];
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

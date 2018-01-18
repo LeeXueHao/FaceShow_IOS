@@ -18,11 +18,13 @@
 #import "ScanCodeViewController.h"
 #import "UserPromptsManager.h"
 #import "GetCurrentClazsRequest.h"
+#import "ClassSelectionViewController.h"
+#import "GetStudentClazsRequest.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
-@property (nonatomic, strong) GetCurrentClazsRequest *clazsRefreshRequest;
+@property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
 @property (nonatomic, strong) MainPageTopView *topView;
 @end
 
@@ -31,6 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"研修宝";
+    WEAK_SELF
+    [self nyx_setupLeftWithTitle:@"切换班级" action:^{
+        STRONG_SELF
+        ClassSelectionViewController *vc = [[ClassSelectionViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
     [self setupNavRightView];
     [self setupUI];
 }
@@ -123,7 +131,8 @@
 
 - (void)updateClazsInfo {
     [self.clazsRefreshRequest stopRequest];
-    self.clazsRefreshRequest = [[GetCurrentClazsRequest alloc] init];
+    self.clazsRefreshRequest = [[GetStudentClazsRequest alloc] init];
+    self.clazsRefreshRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     WEAK_SELF
     [self.clazsRefreshRequest startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
