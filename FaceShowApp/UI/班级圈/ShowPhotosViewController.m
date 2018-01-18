@@ -66,12 +66,18 @@
         photoView.clipsToBounds = NO;
         photoView.tag = 10086 + idx;
         [self.scrollView addSubview:photoView];
-        [photoView displayImage:obj.placeHolderImage];// 先展示缩略图，不至于屏幕全黑
+        UIImageView *placeholderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"朋友圈一张图加载失败图片"]];
+        [photoView addSubview:placeholderImageView];
+        [placeholderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(photoView);
+            make.size.mas_offset(CGSizeMake(170.0f, 50.f));
+        }];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         WEAK_SELF
         [imageView sd_setImageWithURL:[NSURL URLWithString:obj.original] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             STRONG_SELF
-            if (error == nil) {
+            if (image != nil && error == nil) {
+                [placeholderImageView removeFromSuperview];
                 [photoView displayImage:image];
                 photoView.zoomScale = photoView.minimumZoomScale;
             }

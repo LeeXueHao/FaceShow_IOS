@@ -133,6 +133,16 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.headerView.classMomentUserButtonBlock = ^{
         STRONG_SELF
         ClassMomentUserViewController *VC = [[ClassMomentUserViewController alloc] init];
+        VC.classMomentUserReloadBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
+            STRONG_SELF
+            [self.dataArray enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (moment.momentID.integerValue == obj.momentID.integerValue) {
+                    [self.dataArray replaceObjectAtIndex:idx withObject:moment];
+                    [self.tableView reloadData];
+                    *stop = YES;
+                }
+            }];
+        };
         [self.navigationController pushViewController:VC animated:YES];
     };
     self.headerView.hidden = YES;
@@ -204,9 +214,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }
     self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
-    if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:NO];
-    }
     self.commentType = ClassMomentComment_Normal;
     [self.tableView removeGestureRecognizer:self.tapGestureRecognizer];
 }
@@ -545,6 +552,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     return rect.size.height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.floatingView.superview != nil) {
+        [self.floatingView hiddenViewAnimate:NO];
+    }
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
     ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
     if (comment.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {

@@ -525,6 +525,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 moment.myLike = [NSString stringWithFormat:@"%lu",(unsigned long)moment.likes.count];
                 [moment.likes addObject:item.data];
             }
+            BLOCK_EXEC(self.classMomentUserReloadBlock,moment);
             [self.tableView reloadData];
         }else {
             [self.view nyx_showToast:item.message];
@@ -551,6 +552,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 [moment.likes removeObjectAtIndex:moment.myLike.integerValue];
                 moment.myLike = @"-1";
                 [self.tableView reloadData];
+                BLOCK_EXEC(self.classMomentUserReloadBlock,moment);
             }
         }else {
             [self.view nyx_showToast:item.message];
@@ -587,6 +589,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             moment.draftModel = nil;
             self.inputView.textString = nil;
             [self.tableView reloadData];
+            BLOCK_EXEC(self.classMomentUserReloadBlock,moment);
         }else {
             [self.view nyx_showToast:item.message];
         }
@@ -612,6 +615,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             }
             [self.tableView reloadData];
             self.emptyView.hidden = self.dataArray.count == 0 ? NO : YES;
+            BLOCK_EXEC(self.classMomentUserReloadBlock,moment);
         }else {
             [self.view nyx_showToast:item.message];
         }
@@ -651,6 +655,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             comment.draftModel = nil;
             self.inputView.textString = nil;
             [self.tableView reloadData];
+            BLOCK_EXEC(self.classMomentUserReloadBlock,moment);
         }else {
             [self.view nyx_showToast:item.message];
         }
@@ -677,6 +682,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 [moment.comments removeObjectAtIndex:indexPath.row];
             }
             [self.tableView reloadData];
+            BLOCK_EXEC(self.classMomentUserReloadBlock,moment);
         }else {
             [self.view nyx_showToast:item.message];
         }

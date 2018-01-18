@@ -7,7 +7,7 @@
 //
 
 #import "PagedListViewControllerBase.h"
-
+#import "ClassMomentListRequest.h"
 @interface ClassMomentUserViewController : PagedListViewControllerBase
-
+@property (nonatomic, copy) void(^classMomentUserReloadBlock)(ClassMomentListRequestItem_Data_Moment *moment);
 @end
