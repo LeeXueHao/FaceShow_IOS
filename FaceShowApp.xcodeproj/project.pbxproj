@@ -280,6 +280,9 @@
 		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
 		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
+		92BDD702201194E200B05B6F /* ClassMomentDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BDD701201194E200B05B6F /* ClassMomentDetailRequest.m */; };
+		92BDD7052011958A00B05B6F /* ClassMomentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BDD7042011958A00B05B6F /* ClassMomentDetailViewController.m */; };
+		92BDD708201195DB00B05B6F /* ClassMomentNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BDD707201195DB00B05B6F /* ClassMomentNotificationViewController.m */; };
 		92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C569991F738D180025815B /* UploadHeadImgRequest.m */; };
 		92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */; };
 		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
@@ -806,6 +809,12 @@
 		92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPhotosViewController.m; sourceTree = "<group>"; };
 		92A7CACD1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TemplateLayoutHeaderView.h"; sourceTree = "<group>"; };
 		92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TemplateLayoutHeaderView.m"; sourceTree = "<group>"; };
+		92BDD700201194E200B05B6F /* ClassMomentDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDetailRequest.h; sourceTree = "<group>"; };
+		92BDD701201194E200B05B6F /* ClassMomentDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDetailRequest.m; sourceTree = "<group>"; };
+		92BDD7032011958A00B05B6F /* ClassMomentDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDetailViewController.h; sourceTree = "<group>"; };
+		92BDD7042011958A00B05B6F /* ClassMomentDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDetailViewController.m; sourceTree = "<group>"; };
+		92BDD706201195DB00B05B6F /* ClassMomentNotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentNotificationViewController.h; sourceTree = "<group>"; };
+		92BDD707201195DB00B05B6F /* ClassMomentNotificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentNotificationViewController.m; sourceTree = "<group>"; };
 		92C569981F738D180025815B /* UploadHeadImgRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadHeadImgRequest.h; sourceTree = "<group>"; };
 		92C569991F738D180025815B /* UploadHeadImgRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadHeadImgRequest.m; sourceTree = "<group>"; };
 		92C5699B1F73AF780025815B /* UpdateAvatarRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAvatarRequest.h; sourceTree = "<group>"; };
@@ -1396,6 +1405,8 @@
 				922600C3200F3CB10076AD05 /* ClassMomentUserListRequest.m */,
 				922600C5200F3DC90076AD05 /* ClassMomentUserListFetcher.h */,
 				922600C6200F3DC90076AD05 /* ClassMomentUserListFetcher.m */,
+				92BDD700201194E200B05B6F /* ClassMomentDetailRequest.h */,
+				92BDD701201194E200B05B6F /* ClassMomentDetailRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1539,6 +1550,10 @@
 				7C2519B41F690EB50001B577 /* ClassMomentViewController.m */,
 				922600C8200F47150076AD05 /* ClassMomentUserViewController.h */,
 				922600C9200F47150076AD05 /* ClassMomentUserViewController.m */,
+				92BDD706201195DB00B05B6F /* ClassMomentNotificationViewController.h */,
+				92BDD707201195DB00B05B6F /* ClassMomentNotificationViewController.m */,
+				92BDD7032011958A00B05B6F /* ClassMomentDetailViewController.h */,
+				92BDD7042011958A00B05B6F /* ClassMomentDetailViewController.m */,
 				9220840B1F6BA8CE00F8AAC6 /* PublishMomentViewController.h */,
 				9220840C1F6BA8CE00F8AAC6 /* PublishMomentViewController.m */,
 				4322CA3D1FD9529700E7B565 /* PhotoBrowserController.h */,
@@ -2153,12 +2168,14 @@
 				7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */,
 				438FFC871FD4E1B9006F3FB3 /* BaseDownloader.m in Sources */,
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
+				92BDD702201194E200B05B6F /* ClassMomentDetailRequest.m in Sources */,
 				9220843F1F6BD66600F8AAC6 /* PhotoChooseCell.m in Sources */,
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
 				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
 				4376E73B1F70D4A8003E2057 /* ProfessorDetailViewController.m in Sources */,
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
+				92BDD708201195DB00B05B6F /* ClassMomentNotificationViewController.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
 				922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */,
 				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
@@ -2290,6 +2307,7 @@
 				432F90BC1F74FDB700FCF655 /* GetResourceRequest.m in Sources */,
 				7CB9C8F620105558005BE126 /* GetStudentClazsRequest.m in Sources */,
 				7C2519731F68EBCD0001B577 /* UserModel.m in Sources */,
+				92BDD7052011958A00B05B6F /* ClassMomentDetailViewController.m in Sources */,
 				922084201F6BBEB800F8AAC6 /* MineTableFooterView.m in Sources */,
 				435274F91F7355800050B177 /* GetSignInRecordListRequest.m in Sources */,
 				432F90BF1F75050700FCF655 /* GetScheduleListRequest.m in Sources */,

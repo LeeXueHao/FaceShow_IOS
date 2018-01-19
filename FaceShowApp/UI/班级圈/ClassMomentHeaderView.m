@@ -28,6 +28,7 @@
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         self.frame = [UIScreen mainScreen].bounds;
         [self layoutIfNeeded];
+        self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
         [self setupUI];
         [self setupLayout];
     }

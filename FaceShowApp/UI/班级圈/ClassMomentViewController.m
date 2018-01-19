@@ -28,6 +28,8 @@
 #import "FDActionSheetView.h"
 #import "AlertView.h"
 #import "ClassMomentUserViewController.h"
+
+#import "ClassMomentDetailViewController.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
@@ -128,22 +130,18 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [self.tableView registerClass:[ClassMomentHeaderView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentHeaderView"];
     [self.tableView registerClass:[ClassMomentCell class] forCellReuseIdentifier:@"ClassMomentCell"];
     [self.tableView registerClass:[ClassMomentFooterView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentFooterView"];
-    self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
+    self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f)];
     WEAK_SELF
-    self.headerView.classMomentUserButtonBlock = ^{
+    self.headerView.classMomentUserButtonBlock = ^(NSInteger tag) {
         STRONG_SELF
-        ClassMomentUserViewController *VC = [[ClassMomentUserViewController alloc] init];
-        VC.classMomentUserReloadBlock = ^(ClassMomentListRequestItem_Data_Moment *moment) {
-            STRONG_SELF
-            [self.dataArray enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (moment.momentID.integerValue == obj.momentID.integerValue) {
-                    [self.dataArray replaceObjectAtIndex:idx withObject:moment];
-                    [self.tableView reloadData];
-                    *stop = YES;
-                }
-            }];
-        };
-        [self.navigationController pushViewController:VC animated:YES];
+        if (tag == 1) {
+            ClassMomentUserViewController *VC = [[ClassMomentUserViewController alloc] init];
+            [self.navigationController pushViewController:VC animated:YES];
+        }else {
+            ClassMomentDetailViewController *VC = [[ClassMomentDetailViewController alloc] init];
+            VC.momentId = @"722";
+            [self.navigationController pushViewController:VC animated:YES];
+        }
     };
     self.headerView.hidden = YES;
     self.tableView.tableHeaderView = self.headerView;
@@ -351,6 +349,19 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
             [self firstPageFetch];
         }
+    }];
+    
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"kReloadMomentNotification" object:nil]subscribeNext:^(NSNotification *x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        ClassMomentListRequestItem_Data_Moment *moment = noti.object;
+        [self.dataArray enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (moment.momentID.integerValue == obj.momentID.integerValue) {
+                [self.dataArray replaceObjectAtIndex:idx withObject:moment];
+                [self.tableView reloadData];
+                *stop = YES;
+            }
+        }];
     }];
 }
 

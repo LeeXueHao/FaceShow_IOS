@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ClassMomentTableHeaderView : UIView
-@property (nonatomic, copy) void(^classMomentUserButtonBlock)(void);
+@property (nonatomic, copy) void(^classMomentUserButtonBlock)(NSInteger tag);
 - (void)reload;
 @end
