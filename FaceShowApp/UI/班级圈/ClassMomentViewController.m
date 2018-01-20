@@ -130,7 +130,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [self.tableView registerClass:[ClassMomentHeaderView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentHeaderView"];
     [self.tableView registerClass:[ClassMomentCell class] forCellReuseIdentifier:@"ClassMomentCell"];
     [self.tableView registerClass:[ClassMomentFooterView class] forHeaderFooterViewReuseIdentifier:@"ClassMomentFooterView"];
-    self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f)];
+    self.headerView = [[ClassMomentTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 157.0f)];
     WEAK_SELF
     self.headerView.classMomentUserButtonBlock = ^(NSInteger tag) {
         STRONG_SELF
@@ -138,8 +138,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             ClassMomentUserViewController *VC = [[ClassMomentUserViewController alloc] init];
             [self.navigationController pushViewController:VC animated:YES];
         }else {
+            self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f);
+            self.tableView.tableHeaderView = self.headerView;
             ClassMomentDetailViewController *VC = [[ClassMomentDetailViewController alloc] init];
-            VC.momentId = @"722";
+            VC.momentId = @"707";
             [self.navigationController pushViewController:VC animated:YES];
         }
     };
@@ -297,7 +299,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 
 - (void)setupObservers {
     WEAK_SELF
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         NSDictionary *dic = noti.userInfo;
@@ -345,13 +347,19 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewMomentNotification object:nil] subscribeNext:^(id x) {
         STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        if ([noti.object integerValue] > 0) {
+            self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f);
+            self.headerView.messageInteger = [noti.object integerValue];
+            self.tableView.tableHeaderView = self.headerView;
+        }
         if (self.tabBarController.selectedIndex == 2) {
             [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
             [self firstPageFetch];
         }
     }];
     
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"kReloadMomentNotification" object:nil]subscribeNext:^(NSNotification *x) {
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"kReloadMomentNotification" object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         ClassMomentListRequestItem_Data_Moment *moment = noti.object;
@@ -444,7 +452,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         }else if(status == ClassMomentClickStatus_Cancel){
             [self requestForCancelLike:section];
         }else if(status == ClassMomentClickStatus_Delete){
-            [self requestForDiscardMoment:section];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+               [self requestForDiscardMoment:section];
+            }];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+            [alert addAction:delete];
+            [alert addAction:cancel];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     };
     [self.view addSubview:self.floatingView];
@@ -504,11 +519,11 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }
     if (moment.albums.count > 0) {
         if (moment.albums.count > 0 && moment.albums.count < 2) {
-            height += photoHeight + 15.0f;
+            height += photoHeight + 6.0f;
         }else if (moment.albums.count >= 2 && moment.albums.count < 4 ){
             height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f;
         }else if(moment.albums.count >= 4 && moment.albums.count <= 6){
-            height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f * 2.0f + 5.0f;
+            height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f * 2.0f + 10.0f;
         }else {
             height = height + SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f + 10.0f;
         }
@@ -523,11 +538,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [mutableArrray addObject:obj.publisher.realName?:@""];
         }];
-        if (moment.albums.count > 0) {
-            height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f - 8.0f;
-        }else {
-            height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
-        }        
+        height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
         
     }else if (moment.likes.count != 0) {
         NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];

@@ -73,6 +73,7 @@
             make.size.mas_offset(CGSizeMake(170.0f, 50.f));
         }];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        photoView.zoomView = imageView;
         WEAK_SELF
         [imageView sd_setImageWithURL:[NSURL URLWithString:obj.original] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             STRONG_SELF
@@ -93,7 +94,7 @@
         UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
         [[longGestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
             STRONG_SELF
-            if (x.state == UIGestureRecognizerStateEnded) {
+            if (x.state == UIGestureRecognizerStateEnded && photoView.zoomView.image != nil) {
                 [self saveImageToPhotos:photoView.zoomView.image];
             }
         }];

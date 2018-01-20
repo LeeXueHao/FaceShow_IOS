@@ -357,7 +357,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         }else if(status == ClassMomentClickStatus_Cancel){
             [self requestForCancelLike:section];
         }else if(status == ClassMomentClickStatus_Delete){
-            [self requestForDiscardMoment:section];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [self requestForDiscardMoment:section];
+            }];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+            [alert addAction:delete];
+            [alert addAction:cancel];
+            [self presentViewController:alert animated:YES completion:nil];  
         }
     };
     [self.view addSubview:self.floatingView];

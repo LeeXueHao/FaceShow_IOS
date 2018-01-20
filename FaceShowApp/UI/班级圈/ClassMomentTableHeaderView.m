@@ -21,6 +21,10 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (void)setMessageInteger:(NSInteger)messageInteger {
+    _messageInteger = messageInteger;
+    [self.messageButton setTitle:[NSString stringWithFormat:@"%ld条新消息",(long)_messageInteger] forState:UIControlStateNormal];
+}
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.clipsToBounds = YES;

@@ -3,7 +3,7 @@
     "server1_1":"http://orz.yanxiu.com/pxt/v1.1/platform/data.api",
     "loginServer":"http://orz.yanxiu.com/uc/appLogin",
     "qiniuServer":"http://orz.yanxiu.com/7up/platform/data.api",
-    "easygo":"http://b.yanxiu.com/easygo/multiUpload",
+    "easygo":"http://orz.yanxiu.com/easygo/multiUpload",
     "initializeUrl":"http://appadmin.yanxiu.com/app/log/uploadDeviceLog/release.do",
     "mode":"release",
     "relServer":{

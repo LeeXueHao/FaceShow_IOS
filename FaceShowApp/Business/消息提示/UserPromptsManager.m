@@ -50,7 +50,7 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewResourceNotification object:nil];
         }
         if (item.data.momentNew.promptNum.integerValue > 0) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
+            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:item.data.momentNew.promptNum];
         }
     }];
 }
