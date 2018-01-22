@@ -14,6 +14,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.method = @"moment.publishMoment";
+        self.resourceSource = @"qiniu";
     }
     return self;
 }

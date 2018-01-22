@@ -41,6 +41,7 @@
     self.server = [envDic valueForKey:@"server"];
     self.loginServer = [envDic valueForKey:@"loginServer"];
     self.server1_1 = [envDic valueForKey:@"server1_1"];
+    self.qiniuServer = [envDic valueForKey:@"qiniuServer"];
     self.easygo = [envDic valueForKey:@"easygo"];
     self.initializeUrl = [envDic valueForKey:@"initializeUrl"];
     self.mode = [envDic valueForKey:@"mode"];

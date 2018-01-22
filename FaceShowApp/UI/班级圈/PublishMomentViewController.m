@@ -14,6 +14,7 @@
 #import "AlertView.h"
 #import "FDActionSheetView.h"
 #import "ImageAttachmentContainerView.h"
+#import "QiniuDataManager.h"
 
 @interface PublishMomentViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -348,23 +349,23 @@
 }
 
 - (void)uploadImageWithIndex:(NSInteger)index {
-    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
-    NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg",[UserManager sharedInstance].userModel.userID, (int)interval];
+    UIImage *img = self.imageArray[index];
+    NSData *data = UIImageJPEGRepresentation(img, 1);
     WEAK_SELF
-    [QADataManager uploadFile:self.imageArray[index] fileName:fileName completeBlock:^(QAFileUploadSecondStepRequestItem *item, NSError *error) {
+    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key, NSError *error) {
         STRONG_SELF
-        if (item.result.resid == nil){
+        if (error) {
             [self.view nyx_stopLoading];
             [self nyx_enableRightNavigationItem];
             [self.view nyx_showToast:@"发布失败请重试"];
+            return;
+        }
+        [self.resIdArray addObject:[NSString stringWithFormat:@"%@|jpeg",key]];
+        self.imageIndex++;
+        if (self.imageIndex < self.imageArray.count) {
+            [self uploadImageWithIndex:self.imageIndex];
         }else {
-            [self.resIdArray addObject:item.result.resid];
-            self.imageIndex++;
-            if (self.imageIndex < self.imageArray.count) {
-                [self uploadImageWithIndex:self.imageIndex];
-            }else {
-                [self requestForPublishMoment:[self.resIdArray componentsJoinedByString:@","]];
-            }
+            [self requestForPublishMoment:[self.resIdArray componentsJoinedByString:@","]];
         }
     }];
 }

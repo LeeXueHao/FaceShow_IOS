@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString<Optional> *server;      // 切换正式、测试环境 Url Header
 @property (nonatomic, strong) NSString<Optional> *loginServer;
 @property (nonatomic, strong) NSString<Optional> *server1_1;
+@property (nonatomic, strong) NSString<Optional> *qiniuServer;
 
 @property (nonatomic, strong) NSString<Optional> *easygo;      // 切换正式、测试环境 头像上传路径
 @property (nonatomic, strong) NSString<Optional> *initializeUrl;
