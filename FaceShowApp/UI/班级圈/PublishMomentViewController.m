@@ -350,7 +350,7 @@
 
 - (void)uploadImageWithIndex:(NSInteger)index {
     UIImage *img = self.imageArray[index];
-    NSData *data = UIImageJPEGRepresentation(img, 1);
+    NSData *data = [UIImage compressionImage:img limitSize:0.1 * 1024 * 1024];
     WEAK_SELF
     [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key, NSError *error) {
         STRONG_SELF

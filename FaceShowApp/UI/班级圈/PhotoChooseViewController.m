@@ -50,6 +50,7 @@
     self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerClass:[PhotoChooseCell class] forCellWithReuseIdentifier:@"PhotoChooseCell"];
     [self.view addSubview:self.collectionView];
+    
 }
 
 - (void)setupLayout {

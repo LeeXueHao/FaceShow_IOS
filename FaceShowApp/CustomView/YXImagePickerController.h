@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface YXImagePickerController : NSObject
-
+@property (nonatomic, assign) BOOL canEdit;
 - (void)pickImageWithSourceType:(UIImagePickerControllerSourceType)sourceType
                      completion:(void(^)(UIImage *selectedImage))completion;
 @end

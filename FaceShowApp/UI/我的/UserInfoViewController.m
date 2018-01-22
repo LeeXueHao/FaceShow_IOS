@@ -63,6 +63,7 @@
 {
     if (_imagePickerController == nil) {
         _imagePickerController = [[YXImagePickerController alloc] init];
+        _imagePickerController.canEdit = YES;
     }
     return _imagePickerController;
 }

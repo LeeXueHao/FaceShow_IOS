@@ -11,6 +11,7 @@
 #import "YXImagePickerController.h"
 #import "AlbumListViewController.h"
 #import "PhotoBrowserController.h"
+#import <Photos/Photos.h>
 
 @interface ImageSelectionHandler()
 @property (nonatomic, assign) NSInteger maxCount;
@@ -43,20 +44,43 @@
     }];
     [alertVC addAction:cameraAction];
     UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        STRONG_SELF
-        AlbumListViewController *vc = [[AlbumListViewController alloc]init];
-        vc.maxCount = self.maxCount;
-        WEAK_SELF
-        [vc setCompleteBlock:^(NSArray *imageArray) {
-            STRONG_SELF
-            BLOCK_EXEC(self.completeBlock,imageArray);
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status == PHAuthorizationStatusAuthorized){
+                STRONG_SELF
+                AlbumListViewController *vc = [[AlbumListViewController alloc]init];
+                vc.maxCount = self.maxCount;
+                WEAK_SELF
+                [vc setCompleteBlock:^(NSArray *imageArray) {
+                    STRONG_SELF
+                    BLOCK_EXEC(self.completeBlock,imageArray);
+                }];
+                FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:vc];
+                [visibleVC presentViewController:navi animated:YES completion:nil];
+            }else if (status == PHAuthorizationStatusDenied || status == PHAuthorizationStatusRestricted) {
+                [self showAlertWithTitle:@"照片访问权限被禁用，请到设置中允许研修宝访问照片" rootVC:visibleVC];
+            }
+            
         }];
-        FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:vc];
-        [visibleVC presentViewController:navi animated:YES completion:nil];
     }];
-    [alertVC addAction:photoAction];
-    
+    [alertVC addAction:photoAction];    
     [visibleVC presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)showAlertWithTitle:(NSString *)title rootVC:(UIViewController *)vc {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle: title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *edit = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:edit];
+    [alert addAction:cancel];
+    
+    [vc presentViewController:alert animated:YES completion:nil];
 }
 
 - (YXImagePickerController *)imagePickerController

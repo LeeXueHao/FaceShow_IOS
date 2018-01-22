@@ -51,7 +51,7 @@
     if (!_imagePickerController) {
         _imagePickerController = [[UIImagePickerController alloc] init];
         _imagePickerController.delegate = self;
-//        _imagePickerController.allowsEditing = YES;
+        _imagePickerController.allowsEditing = self.canEdit;
     }
     return _imagePickerController;
 }
@@ -77,9 +77,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    if (self.isPublish) {
-//        image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    }
+    if (self.canEdit) {
+        image = [info objectForKey:UIImagePickerControllerEditedImage];
+    }
 
     [self completionImagePick:picker image:image];
 }
