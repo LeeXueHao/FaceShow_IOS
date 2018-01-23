@@ -205,6 +205,7 @@
 		7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E628200DCD71006704E7 /* TestQiniuViewController.m */; };
 		7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */; };
 		7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E632200EF48C006704E7 /* QiniuDataManager.m */; };
+		7C37A5792016CFEB0073FDE2 /* GetToolsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C37A5782016CFEB0073FDE2 /* GetToolsRequest.m */; };
 		7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54151F9729230053DB12 /* YXGeTuiManager.m */; };
 		7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54141F9729230053DB12 /* YXApnsContentModel.m */; };
 		7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */; };
@@ -665,6 +666,8 @@
 		7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuTokenRequest.m; sourceTree = "<group>"; };
 		7C33E631200EF48C006704E7 /* QiniuDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QiniuDataManager.h; sourceTree = "<group>"; };
 		7C33E632200EF48C006704E7 /* QiniuDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QiniuDataManager.m; sourceTree = "<group>"; };
+		7C37A5772016CFEB0073FDE2 /* GetToolsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetToolsRequest.h; sourceTree = "<group>"; };
+		7C37A5782016CFEB0073FDE2 /* GetToolsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetToolsRequest.m; sourceTree = "<group>"; };
 		7C4D54121F970B280053DB12 /* 研修宝.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "研修宝.entitlements"; sourceTree = "<group>"; };
 		7C4D54141F9729230053DB12 /* YXApnsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXApnsContentModel.m; sourceTree = "<group>"; };
 		7C4D54151F9729230053DB12 /* YXGeTuiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXGeTuiManager.m; sourceTree = "<group>"; };
@@ -1315,6 +1318,7 @@
 		7C2519641F68EBCD0001B577 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7C37A5762016CFA80073FDE2 /* 工具箱 */,
 				7C33E62A200EF37D006704E7 /* 七牛 */,
 				7C29F3111FEA34E4007A4076 /* 消息提示 */,
 				7C2519651F68EBCD0001B577 /* 我的 */,
@@ -1661,6 +1665,15 @@
 				7C33E632200EF48C006704E7 /* QiniuDataManager.m */,
 			);
 			path = "七牛";
+			sourceTree = "<group>";
+		};
+		7C37A5762016CFA80073FDE2 /* 工具箱 */ = {
+			isa = PBXGroup;
+			children = (
+				7C37A5772016CFEB0073FDE2 /* GetToolsRequest.h */,
+				7C37A5782016CFEB0073FDE2 /* GetToolsRequest.m */,
+			);
+			path = "工具箱";
 			sourceTree = "<group>";
 		};
 		7C4D54131F9728DA0053DB12 /* Push */ = {
@@ -2252,6 +2265,7 @@
 				436959881FDE83E7009E5C43 /* FDActionSheetView.m in Sources */,
 				7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */,
 				7C6EE547200736D200B47892 /* ImageAttachmentView.m in Sources */,
+				7C37A5792016CFEB0073FDE2 /* GetToolsRequest.m in Sources */,
 				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
 				4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,

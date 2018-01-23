@@ -8,8 +8,9 @@
 
 #import "ResourceDisplayViewController.h"
 #import "FileDownloadHelper.h"
+#import <WebKit/WebKit.h>
 
-@interface ResourceDisplayViewController ()<UIWebViewDelegate>
+@interface ResourceDisplayViewController ()<WKNavigationDelegate>
 @property (nonatomic, strong) FileDownloadHelper *downloadHelper;
 @end
 
@@ -27,9 +28,8 @@
 }
 
 - (void)setupUI {
-    UIWebView *webview = [[UIWebView alloc]init];
-    webview.scalesPageToFit = YES;
-    webview.delegate = self;
+    WKWebView *webview = [[WKWebView alloc]init];
+    webview.navigationDelegate = self;
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.urlString]];
     [webview loadRequest:request];
     [self.view addSubview:webview];
@@ -48,16 +48,17 @@
     }];
 }
 
-#pragma mark - UIWebViewDelegate
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+#pragma mark - WKNavigationDelegate
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     [self.view nyx_startLoading];
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self.view nyx_stopLoading];
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
     [self.view nyx_stopLoading];
     [self.view nyx_showToast:@"资源加载失败"];
 }
+
 
 @end

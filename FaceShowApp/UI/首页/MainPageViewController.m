@@ -20,12 +20,16 @@
 #import "GetCurrentClazsRequest.h"
 #import "ClassSelectionViewController.h"
 #import "GetStudentClazsRequest.h"
+#import "GetToolsRequest.h"
+#import "ResourceDisplayViewController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
 @property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
 @property (nonatomic, strong) MainPageTopView *topView;
+@property (nonatomic, strong) GetToolsRequest *toolsRequest;
+@property (nonatomic, strong) GetToolsRequestItem *toolsItem;
 @end
 
 @implementation MainPageViewController
@@ -41,6 +45,7 @@
     }];
     [self setupNavRightView];
     [self setupUI];
+    [self requestGameInfo];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -144,4 +149,58 @@
     }];
 }
 
+#pragma mark - Game
+- (void)requestGameInfo {
+    [self.toolsRequest stopRequest];
+    self.toolsRequest = [[GetToolsRequest alloc]init];
+    self.toolsRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    WEAK_SELF
+    [self.toolsRequest startRequestWithRetClass:[GetToolsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            return;
+        }
+        [self setupGameUIWithItem:retItem];
+    }];
+}
+
+- (void)setupGameUIWithItem:(GetToolsRequestItem *)item {
+    self.toolsItem = item;
+    if (item.data.tools.count == 0) {
+        return;
+    }
+    UIButton *btn = [[UIButton alloc]init];
+    btn.backgroundColor = [UIColor redColor];
+    [btn addTarget:self action:@selector(gameAction) forControlEvents:UIControlEventTouchUpInside];
+    btn.layer.cornerRadius = 50;
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-50);
+        make.bottom.mas_equalTo(-100);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+    }];
+    UILabel *lb = [[UILabel alloc]init];
+    lb.textColor = [UIColor whiteColor];
+    lb.font = [UIFont boldSystemFontOfSize:15];
+    lb.textAlignment = NSTextAlignmentCenter;
+    lb.numberOfLines = 0;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.5;
+    paraStyle.alignment = NSTextAlignmentCenter;
+    GetToolsRequestItem_tool *tool = item.data.tools.firstObject;
+    lb.attributedText = [[NSAttributedString alloc]initWithString:tool.name attributes:@{NSParagraphStyleAttributeName:paraStyle}];
+    [btn addSubview:lb];
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(15, 20, 20, 20));
+    }];
+}
+
+- (void)gameAction {
+    ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
+    GetToolsRequestItem_tool *tool = self.toolsItem.data.tools.firstObject;
+    vc.urlString = tool.eventObj.content;
+//    vc.urlString = @"http://baidu.com";
+    vc.name = tool.eventObj.title;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end
