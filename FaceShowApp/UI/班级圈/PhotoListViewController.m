@@ -101,21 +101,31 @@
 }
 
 - (void)doneAction {
+    [self.view nyx_startLoading];
+    dispatch_group_t group = dispatch_group_create();
     NSMutableArray *array = [NSMutableArray array];
     for (PhotoItem *item in self.assetArray) {
         if (item.selected) {
+            dispatch_group_enter(group);
             CGSize size = CGSizeMake(SCREEN_WIDTH*2, SCREEN_HEIGHT*2);
             PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-            options.synchronous = YES;
+            options.synchronous = NO;
+            options.networkAccessAllowed = YES;
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+            options.resizeMode = PHImageRequestOptionsResizeModeFast;
             WEAK_SELF
             [[PHCachingImageManager defaultManager] requestImageForAsset:item.asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
                 STRONG_SELF
                 [array addObject:result];
+                dispatch_group_leave(group);
             }];
         }
     }
-    BLOCK_EXEC(self.completeBlock,array);
-    [self dismissViewControllerAnimated:YES completion:nil];
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.view nyx_stopLoading];
+        BLOCK_EXEC(self.completeBlock,array);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 #pragma mark - UICollectionViewDataSource
