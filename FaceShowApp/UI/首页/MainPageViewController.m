@@ -198,8 +198,11 @@
 - (void)gameAction {
     ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
     GetToolsRequestItem_tool *tool = self.toolsItem.data.tools.firstObject;
-    vc.urlString = tool.eventObj.content;
-//    vc.urlString = @"http://baidu.com";
+    NSString *headUrl = tool.eventObj.content;
+    NSString *classId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    NSString *token = [UserManager sharedInstance].userModel.token;
+    NSString *url = [NSString stringWithFormat:@"%@?classId=%@&token=%@",headUrl,classId,token];
+    vc.urlString = url;
     vc.name = tool.eventObj.title;
     [self.navigationController pushViewController:vc animated:YES];
 }
