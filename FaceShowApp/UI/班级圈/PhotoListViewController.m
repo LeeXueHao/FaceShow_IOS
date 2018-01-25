@@ -141,10 +141,11 @@
     [cell setClickBlock:^{
         STRONG_SELF
         if ([self countOfSelectedPhotos] == self.maxCount && item.selected == NO) {
+            [self showReachMaxAlert];
             return;
         }
         item.selected = !item.selected;
-        [self refreshUI];
+        [self refreshUIWithItem:item];
     }];
     return cell;
 }
@@ -159,20 +160,42 @@
     return count;
 }
 
-- (void)refreshUI {
-    NSInteger index = 1;
+- (void)refreshUIWithItem:(PhotoItem *)item {
+    NSInteger count = [self countOfSelectedPhotos];
+    if (item.selected) {
+        item.selectedIndex = count;
+    }else {
+        for (PhotoItem *pItem in self.assetArray) {
+            if (pItem.selected && pItem.selectedIndex>item.selectedIndex) {
+                pItem.selectedIndex--;
+            }
+        }
+    }
+
     for (PhotoItem *item in self.assetArray) {
-        if (item.selected) {
-            item.selectedIndex = index;
-            index++;
+        item.canSelect = YES;
+    }
+    if (count == self.maxCount) {
+        for (PhotoItem *item in self.assetArray) {
+            item.canSelect = item.selected;
         }
     }
     [self.collectionView reloadData];
     
-    if (index == 1) {
+    if (count == 0) {
         [self disableDoneButton];
     }else {
         [self enableDoneButton];
     }
+}
+
+- (void)showReachMaxAlert {
+    NSString *title = [NSString stringWithFormat:@"你最多只能选择%@张照片",@(self.maxCount)];
+    UIAlertController *vc = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [vc addAction:action];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 @end

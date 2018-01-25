@@ -42,6 +42,7 @@
     self.scrollView.backgroundColor = [UIColor blackColor];
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.contentOffset = CGPointMake(self.startInteger*SCREEN_WIDTH, 0);
     [self.view addSubview:self.scrollView];
     
     self.pageControl = [[UIPageControl alloc]init];

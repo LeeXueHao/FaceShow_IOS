@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, assign) BOOL canSelect;
 @end
 
 @interface PhotoCell : UICollectionViewCell

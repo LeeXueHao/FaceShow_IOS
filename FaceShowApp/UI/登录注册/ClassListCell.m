@@ -32,7 +32,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.backView.backgroundColor = [UIColor colorWithHexString:selected ? @"0068bd" : @"ffffff"];
+    self.backView.backgroundColor = [UIColor colorWithHexString:selected ? @"1da1f2" : @"ffffff"];
     self.nameLabel.textColor = [UIColor colorWithHexString:selected ? @"ffffff" : @"333333"];
     self.timeLabel.textColor = [UIColor colorWithHexString:selected ? @"ffffff" : @"999999"];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];

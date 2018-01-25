@@ -18,6 +18,20 @@
 
 @implementation ImageAttachmentContainerView
 
++ (CGFloat)heightForCount:(NSInteger)count {
+    CGFloat top = 5;
+    CGFloat gap = 5;
+    CGFloat margin = 15;
+    CGFloat width = (SCREEN_WIDTH-gap*3-margin*2)/4;
+    NSInteger line = 1;
+    if (count >= 8) {
+        line = 3;
+    }else if (count >= 4) {
+        line = 2;
+    }
+    return width*line + top*(line+1);
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -47,16 +61,17 @@
     for (UIView *v in self.subviews) {
         [v removeFromSuperview];
     }
-    CGFloat top = 10;
-    CGFloat width = 70;
-    CGFloat gap = (SCREEN_WIDTH-width*4)/5;
+    CGFloat top = 5;
+    CGFloat gap = 5;
+    CGFloat margin = 15;
+    CGFloat width = (SCREEN_WIDTH-gap*3-margin*2)/4;
     [self.itemArray enumerateObjectsUsingBlock:^(ImageAttachmentView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addSubview:obj];
-        obj.frame = CGRectMake(gap+idx%4*(width+gap), top+idx/4*(width+top), width, width);
+        obj.frame = CGRectMake(margin+idx%4*(width+gap), top+idx/4*(width+top), width, width);
     }];
     if (self.itemArray.count < 9) {
         [self addSubview:self.addImageBtn];
-        self.addImageBtn.frame = CGRectMake(gap+self.itemArray.count%4*(width+gap), top+self.itemArray.count/4*(width+top)+10, width-10, width-10);
+        self.addImageBtn.frame = CGRectMake(margin+self.itemArray.count%4*(width+gap), top+self.itemArray.count/4*(width+top)+10, width-10, width-10);
     }
     NSMutableArray *array = [NSMutableArray array];
     for (ImageAttachmentView *item in self.itemArray) {

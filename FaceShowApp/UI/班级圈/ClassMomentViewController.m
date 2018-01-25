@@ -497,6 +497,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hiddenInputTextView];
+    if (self.floatingView.superview != nil) {
+        [self.floatingView hiddenViewAnimate:NO];
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return [self tableHeightForHeaderInSection:section];

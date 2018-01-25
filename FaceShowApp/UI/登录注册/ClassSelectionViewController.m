@@ -45,7 +45,7 @@
     self.navRightBtn.frame = CGRectMake(0, 0, 40, 30);
     self.navRightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.navRightBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [self.navRightBtn setTitleColor:[UIColor colorWithHexString:@"0068bd"] forState:UIControlStateNormal];
+    [self.navRightBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     [self.navRightBtn setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
     [self.navRightBtn addTarget:self action:@selector(navRightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navRightBtn.enabled = !isEmpty(self.selectedClass);
@@ -125,6 +125,9 @@
     ClassListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClassListCell"];
     ClassListRequestItem_clazsInfos *info = self.clazsListItem.data.clazsInfos[indexPath.row];
     cell.classInfo = info;
+    if (!self.selectedClass && [info.clazsId isEqualToString:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]) {
+        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
     return cell;
 }
 

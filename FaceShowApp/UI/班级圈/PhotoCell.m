@@ -9,12 +9,19 @@
 #import "PhotoCell.h"
 
 @implementation PhotoItem
+- (instancetype)init {
+    if (self = [super init]) {
+        self.canSelect = YES;
+    }
+    return self;
+}
 @end
 
 @interface PhotoCell()
 @property (nonatomic, strong) UIImageView *photoImageView;
 @property (nonatomic, strong) UIButton *topButton;
 @property (nonatomic, strong) UIImageView *selectImageView;
+@property (nonatomic, strong) UIImageView *coverView;
 @end
 
 @implementation PhotoCell
@@ -47,6 +54,12 @@
         make.top.mas_equalTo(3);
         make.right.mas_equalTo(-3);
         make.size.mas_equalTo(CGSizeMake(24, 24));
+    }];
+    self.coverView = [[UIImageView alloc]init];
+    self.coverView.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.5];
+    [self.contentView addSubview:self.coverView];
+    [self.coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
 }
 
@@ -83,6 +96,7 @@
             make.edges.mas_equalTo(0);
         }];
     }
+    self.coverView.hidden = photoItem.canSelect;
 }
 
 - (void)updateWithImage:(UIImage *)image {

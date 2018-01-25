@@ -151,13 +151,24 @@
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.publicationMomentView.mas_left).offset(0.0f);
         make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(0.0f);
-        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH, 70*3+10*4));
+        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH, [ImageAttachmentContainerView heightForCount:0]));
     }];
     self.imageContainerView = [[ImageAttachmentContainerView alloc]init];
     [self.imageContainerView setImagesChangeBlock:^(NSArray *images) {
         STRONG_SELF
         self.imageArray = [NSMutableArray arrayWithArray:images];
         [self refreshImages];
+        [self.publicationMomentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            make.top.equalTo(self.scrollView.mas_top);
+            make.height.mas_offset(180.0f+[ImageAttachmentContainerView heightForCount:images.count]);
+        }];
+        [containerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.publicationMomentView.mas_left).offset(0.0f);
+            make.bottom.equalTo(self.publicationMomentView.mas_bottom).offset(0.0f);
+            make.size.mas_offset(CGSizeMake(SCREEN_WIDTH, [ImageAttachmentContainerView heightForCount:images.count]));
+        }];
     }];
     [containerView addSubview:self.imageContainerView];
     [self.imageContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -222,7 +233,7 @@
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.top.equalTo(self.scrollView.mas_top);
-        make.height.mas_offset(195.0f+210);
+        make.height.mas_offset(180.0f+[ImageAttachmentContainerView heightForCount:0]);
     }];
     
     [self.publicationMomentTextView mas_makeConstraints:^(MASConstraintMaker *make) {

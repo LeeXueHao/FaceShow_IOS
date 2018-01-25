@@ -101,22 +101,22 @@
         
     }];
     if ((floatingStyle == (ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Cancel | ClassMomentFloatingStyle_Delete)) || (floatingStyle == (ClassMomentFloatingStyle_Comment | ClassMomentFloatingStyle_Like | ClassMomentFloatingStyle_Delete))) {
-        [self addSubview:self.likeButton];
-        [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self addSubview:self.deleteButton];
+        [self.deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left);
             make.height.equalTo(self.mas_height);
             make.top.equalTo(self.mas_top);
             make.width.mas_offset(80.0f);
         }];
-        [self addSubview:self.commentButton];
-        [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self addSubview:self.likeButton];
+        [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(self.mas_height);
             make.top.equalTo(self.mas_top);
             make.centerX.equalTo(self.mas_centerX);
             make.width.mas_offset(80.0f);
         }];
-        [self addSubview:self.deleteButton];
-        [self.deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self addSubview:self.commentButton];
+        [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(self.mas_height);
             make.top.equalTo(self.mas_top);
             make.right.equalTo(self.mas_right);
@@ -126,14 +126,14 @@
         [self.oneLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.mas_centerY);
             make.size.mas_offset(CGSizeMake(1.0f, 25.0f));
-            make.left.equalTo(self.likeButton.mas_right);
+            make.left.equalTo(self.deleteButton.mas_right);
         }];
         
         [self addSubview:self.twoLineView];
         [self.twoLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.mas_centerY);
             make.size.mas_offset(CGSizeMake(1.0f, 25.0f));
-            make.right.equalTo(self.deleteButton.mas_left);
+            make.right.equalTo(self.commentButton.mas_left);
         }];
     }else {
         [self addSubview:self.likeButton];
