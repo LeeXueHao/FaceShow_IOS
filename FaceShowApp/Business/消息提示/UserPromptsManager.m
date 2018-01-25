@@ -34,7 +34,7 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
     [self.promptRequest stopRequest];
     self.promptRequest = [[GetUserPromptsRequest alloc] init];
     self.promptRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
-    self.promptRequest.bizIds = @"taskNew,momentNew,resourceNew";
+    self.promptRequest.bizIds = @"taskNew,momentNew,resourceNew,momentMsgNew";
     [self.promptRequest startRequestWithRetClass:[GetUserPromptsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         if (error) {
             return;
@@ -50,7 +50,11 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewResourceNotification object:nil];
         }
         if (item.data.momentNew.promptNum.integerValue > 0) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:item.data.momentNew.promptNum];
+            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
+        }
+        
+        if (item.data.momentMsgNew.promptNum.integerValue > 0) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:item.data.momentMsgNew.promptNum];
         }
     }];
 }

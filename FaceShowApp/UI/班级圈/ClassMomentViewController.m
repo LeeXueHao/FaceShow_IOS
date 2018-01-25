@@ -28,8 +28,7 @@
 #import "FDActionSheetView.h"
 #import "AlertView.h"
 #import "ClassMomentUserViewController.h"
-
-#import "ClassMomentDetailViewController.h"
+#import "ClassMomentNotificationViewController.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
@@ -85,7 +84,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 [self.dataArray insertObject:moment atIndex:0];
                 [self.tableView reloadData];
             }
-            
         };
         FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:VC];
         [self presentViewController:navi animated:YES completion:nil];
@@ -138,10 +136,11 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             ClassMomentUserViewController *VC = [[ClassMomentUserViewController alloc] init];
             [self.navigationController pushViewController:VC animated:YES];
         }else {
-            self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f);
-            self.tableView.tableHeaderView = self.headerView;
-            ClassMomentDetailViewController *VC = [[ClassMomentDetailViewController alloc] init];
-            VC.momentId = @"707";
+            ClassMomentNotificationViewController *VC = [[ClassMomentNotificationViewController alloc] init];
+            VC.classMomentNotificationReloadBlock = ^{
+                self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f);
+                self.tableView.tableHeaderView = self.headerView;
+            };
             [self.navigationController pushViewController:VC animated:YES];
         }
     };
@@ -352,10 +351,11 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f);
             self.headerView.messageInteger = [noti.object integerValue];
             self.tableView.tableHeaderView = self.headerView;
-        }
-        if (self.tabBarController.selectedIndex == 2) {
-            [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
-            [self firstPageFetch];
+        }else {
+            if (self.tabBarController.selectedIndex == 2) {
+                [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+                [self firstPageFetch];
+            }
         }
     }];
     

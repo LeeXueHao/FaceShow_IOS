@@ -281,6 +281,8 @@
 		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
 		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
+		92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92AF46A2201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m */; };
+		92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92AF46A52019955F0076AFA0 /* ClassMomentNotificationCell.m */; };
 		92BDD702201194E200B05B6F /* ClassMomentDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BDD701201194E200B05B6F /* ClassMomentDetailRequest.m */; };
 		92BDD7052011958A00B05B6F /* ClassMomentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BDD7042011958A00B05B6F /* ClassMomentDetailViewController.m */; };
 		92BDD708201195DB00B05B6F /* ClassMomentNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BDD707201195DB00B05B6F /* ClassMomentNotificationViewController.m */; };
@@ -812,6 +814,10 @@
 		92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPhotosViewController.m; sourceTree = "<group>"; };
 		92A7CACD1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TemplateLayoutHeaderView.h"; sourceTree = "<group>"; };
 		92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TemplateLayoutHeaderView.m"; sourceTree = "<group>"; };
+		92AF46A1201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentUserMomentMsgRequest.h; sourceTree = "<group>"; };
+		92AF46A2201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentUserMomentMsgRequest.m; sourceTree = "<group>"; };
+		92AF46A42019955F0076AFA0 /* ClassMomentNotificationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentNotificationCell.h; sourceTree = "<group>"; };
+		92AF46A52019955F0076AFA0 /* ClassMomentNotificationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentNotificationCell.m; sourceTree = "<group>"; };
 		92BDD700201194E200B05B6F /* ClassMomentDetailRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDetailRequest.h; sourceTree = "<group>"; };
 		92BDD701201194E200B05B6F /* ClassMomentDetailRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDetailRequest.m; sourceTree = "<group>"; };
 		92BDD7032011958A00B05B6F /* ClassMomentDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDetailViewController.h; sourceTree = "<group>"; };
@@ -1411,6 +1417,8 @@
 				922600C6200F3DC90076AD05 /* ClassMomentUserListFetcher.m */,
 				92BDD700201194E200B05B6F /* ClassMomentDetailRequest.h */,
 				92BDD701201194E200B05B6F /* ClassMomentDetailRequest.m */,
+				92AF46A1201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.h */,
+				92AF46A2201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m */,
 			);
 			path = "班级圈";
 			sourceTree = "<group>";
@@ -1892,6 +1900,8 @@
 				4322CA4D1FD9535700E7B565 /* SlideImageView.m */,
 				435DFCF81FD0FABD00CEA9C2 /* ReportTableViewCell.h */,
 				435DFCF71FD0FABD00CEA9C2 /* ReportTableViewCell.m */,
+				92AF46A42019955F0076AFA0 /* ClassMomentNotificationCell.h */,
+				92AF46A52019955F0076AFA0 /* ClassMomentNotificationCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2146,6 +2156,7 @@
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
+				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */,
@@ -2286,6 +2297,7 @@
 				7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */,
 				435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
+				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,

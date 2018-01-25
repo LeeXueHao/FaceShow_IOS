@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ClassMomentNotificationViewController : BaseViewController
-
+@property (nonatomic, copy) void(^classMomentNotificationReloadBlock)(void);
 @end

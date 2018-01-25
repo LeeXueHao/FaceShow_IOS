@@ -33,6 +33,8 @@
 @property (nonatomic, strong) GetUserPromptsRequestItem_taskNew<Optional> *taskNew;
 @property (nonatomic, strong) GetUserPromptsRequestItem_momentNew<Optional> *momentNew;
 @property (nonatomic, strong) GetUserPromptsRequestItem_resourceNew<Optional> *resourceNew;
+@property (nonatomic, strong) GetUserPromptsRequestItem_resourceNew<Optional> *momentMsgNew;
+
 @end
 
 @interface GetUserPromptsRequestItem: HttpBaseRequestItem
