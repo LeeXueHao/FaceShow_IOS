@@ -105,7 +105,7 @@
     WEAK_SELF
     [[leftButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
-        if (self.imageArray.count == 0) {
+        if (self.imageArray.count == 0 && self.publicationMomentTextView.text.length == 0) {
             [self dismiss];
         }else {
             [self showAlertView];

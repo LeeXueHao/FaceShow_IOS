@@ -62,7 +62,7 @@
         if (self.imageModelMutableArray.count == 1) {
             urlString = [QiniuDataManager resizedUrlStringWithOriString:obj.thumbnail maxLongEdge:self.widthFloat];
         }else {
-            urlString = [QiniuDataManager resizedUrlStringWithOriString:obj.thumbnail maxLongEdge:self.photoSize.width];
+            urlString = [QiniuDataManager resizedUrlStringWithOriString:obj.thumbnail maxLongEdge:200];
         }
         [imageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image != nil && error == nil) {

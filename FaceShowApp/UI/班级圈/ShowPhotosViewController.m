@@ -19,7 +19,9 @@
 - (void)dealloc {
     DDLogDebug(@"release=====>>%@",NSStringFromClass([self class]));
 }
-
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.transitioningDelegate = self;
@@ -39,7 +41,7 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * self.imageModelMutableArray.count,SCREEN_HEIGHT);
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor blackColor];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentOffset = CGPointMake(self.startInteger*SCREEN_WIDTH, 0);
@@ -75,9 +77,11 @@
         }];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         photoView.zoomView = imageView;
+        [photoView nyx_startLoading];
         WEAK_SELF
         [imageView sd_setImageWithURL:[NSURL URLWithString:obj.original] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             STRONG_SELF
+            [photoView nyx_stopLoading];
             if (image != nil && error == nil) {
                 [placeholderImageView removeFromSuperview];
                 [photoView displayImage:image];
