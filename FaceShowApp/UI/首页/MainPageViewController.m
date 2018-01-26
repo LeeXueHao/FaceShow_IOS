@@ -169,30 +169,20 @@
     if (item.data.tools.count == 0) {
         return;
     }
-    UIButton *btn = [[UIButton alloc]init];
-    btn.backgroundColor = [UIColor redColor];
-    [btn addTarget:self action:@selector(gameAction) forControlEvents:UIControlEventTouchUpInside];
-    btn.layer.cornerRadius = 50;
-    [self.view addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-50);
-        make.bottom.mas_equalTo(-100);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
+    UIImageView *imgView = [[UIImageView alloc]init];
+    imgView.userInteractionEnabled = YES;
+    imgView.animationImages = @[[UIImage imageNamed:@"按"],[UIImage imageNamed:@"按下"]];
+    imgView.animationDuration = 0.2;
+    [self.view addSubview:imgView];
+    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-15);
+        make.bottom.mas_equalTo(-35);
+        make.size.mas_equalTo(CGSizeMake(114, 102));
     }];
-    UILabel *lb = [[UILabel alloc]init];
-    lb.textColor = [UIColor whiteColor];
-    lb.font = [UIFont boldSystemFontOfSize:15];
-    lb.textAlignment = NSTextAlignmentCenter;
-    lb.numberOfLines = 0;
-    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    paraStyle.lineHeightMultiple = 1.5;
-    paraStyle.alignment = NSTextAlignmentCenter;
-    GetToolsRequestItem_tool *tool = item.data.tools.firstObject;
-    lb.attributedText = [[NSAttributedString alloc]initWithString:tool.name attributes:@{NSParagraphStyleAttributeName:paraStyle}];
-    [btn addSubview:lb];
-    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(15, 20, 20, 20));
-    }];
+    [imgView startAnimating];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gameAction)];
+    [imgView addGestureRecognizer:tap];
 }
 
 - (void)gameAction {

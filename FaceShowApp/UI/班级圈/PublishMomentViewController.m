@@ -90,7 +90,7 @@
     self.publicationMomentTextView.delegate = self;
     self.publicationMomentTextView.font = [UIFont systemFontOfSize:14.0f];
     self.publicationMomentTextView.textColor = [UIColor colorWithHexString:@"333333"];
-    self.publicationMomentTextView.placeholder = @"这一刻的想法......";
+    self.publicationMomentTextView.placeholder = @"这一刻的想法......(最多200字)";
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
@@ -324,6 +324,10 @@
 //    if ([[[textView textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textView textInputMode] primaryLanguage] || [self stringContainsEmoji:text]) {
 //        return NO;
 //    }
+    NSString *str = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (str.length > 200) {
+        return NO;
+    }
     return YES;
 }
 - (BOOL)stringContainsEmoji:(NSString *)string {

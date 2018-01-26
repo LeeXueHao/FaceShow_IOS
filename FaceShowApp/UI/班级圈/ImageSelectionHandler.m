@@ -28,6 +28,7 @@
 
 - (void)showAlertView {
     UIViewController *visibleVC = [[UIApplication sharedApplication].keyWindow.rootViewController nyx_visibleViewController];
+    [visibleVC.view endEditing:YES];
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     WEAK_SELF

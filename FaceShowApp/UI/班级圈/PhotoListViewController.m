@@ -103,7 +103,6 @@
 - (void)doneAction {
     [self.view nyx_startLoading];
     dispatch_group_t group = dispatch_group_create();
-    NSMutableArray *array = [NSMutableArray array];
     for (PhotoItem *item in self.assetArray) {
         if (item.selected) {
             dispatch_group_enter(group);
@@ -116,13 +115,22 @@
             WEAK_SELF
             [[PHCachingImageManager defaultManager] requestImageForAsset:item.asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
                 STRONG_SELF
-                [array addObject:result];
+                item.image = result;
                 dispatch_group_leave(group);
             }];
         }
     }
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [self.view nyx_stopLoading];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected = YES"];
+        NSArray *selectedArray = [self.assetArray filteredArrayUsingPredicate:predicate];
+        selectedArray = [selectedArray sortedArrayUsingComparator:^NSComparisonResult(PhotoItem *  _Nonnull obj1, PhotoItem *  _Nonnull obj2) {
+            return obj1.selectedIndex > obj2.selectedIndex;
+        }];
+        NSMutableArray *array = [NSMutableArray array];
+        for (PhotoItem *item in selectedArray) {
+            [array addObject:item.image];
+        }
         BLOCK_EXEC(self.completeBlock,array);
         [self dismissViewControllerAnimated:YES completion:nil];
     });
