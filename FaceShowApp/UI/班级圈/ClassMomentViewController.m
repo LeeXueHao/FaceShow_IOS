@@ -354,7 +354,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         }else {
             if (self.tabBarController.selectedIndex == 2) {
                 [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
-                [self firstPageFetch];
+//                [self firstPageFetch];
             }
         }
     }];
