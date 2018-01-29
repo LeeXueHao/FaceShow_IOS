@@ -55,7 +55,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentDiscardCommentRequest *discardCommentRequest;
 @property (nonatomic, strong) ClassMomentDiscardRequest *discardRequest;
 
-@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation ClassMomentViewController
@@ -150,12 +149,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     
-    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-    [[self.tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
-        STRONG_SELF
-        [self hiddenInputTextView];
-    }];
-    
 //    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
 //    [rightButton setImage:[UIImage imageNamed:@"上传内容图标正常态"] forState:UIControlStateNormal];
@@ -214,7 +207,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
     self.commentType = ClassMomentComment_Normal;
-    [self.tableView removeGestureRecognizer:self.tapGestureRecognizer];
 }
 - (void)stopAnimation {
     [super stopAnimation];
@@ -447,7 +439,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             }
             self.inputView.placeHolder = @"评论";
             [self.inputView.textView becomeFirstResponder];
-            [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
         }else if(status == ClassMomentClickStatus_Like){
             [self requestForClickLike:section];
         }else if(status == ClassMomentClickStatus_Cancel){
@@ -593,7 +584,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         }
         self.inputView.placeHolder = [NSString stringWithFormat:@"回复%@:",comment.publisher.realName];
         [self.inputView.textView becomeFirstResponder];
-        [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
     }
 
 }
