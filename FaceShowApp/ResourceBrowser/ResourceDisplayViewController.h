@@ -12,4 +12,5 @@
 @property (nonatomic, strong) NSString *urlString;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) BOOL needDownload;
+@property (nonatomic, assign) BOOL naviBarHidden;
 @end

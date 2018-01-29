@@ -201,6 +201,7 @@
     
     vc.urlString = url;
     vc.name = tool.eventObj.title;
+    vc.naviBarHidden = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end
