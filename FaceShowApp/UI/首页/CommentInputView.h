@@ -13,6 +13,7 @@
 @property (nonatomic, strong) SAMTextView *textView;
 @property (nonatomic, assign) NSInteger maxTextNumber;
 
+@property (nonatomic, strong) NSString *placeHolder;
 
 //TBD: 暂时实现自动改变输入框 
 @property (nonatomic, assign) BOOL isChangeBool;

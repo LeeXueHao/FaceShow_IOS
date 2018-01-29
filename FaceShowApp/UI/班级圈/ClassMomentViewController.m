@@ -445,6 +445,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             if (moment.draftModel != nil) {
                 self.inputView.textString = moment.draftModel;
             }
+            self.inputView.placeHolder = @"评论";
             [self.inputView.textView becomeFirstResponder];
             [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
         }else if(status == ClassMomentClickStatus_Like){
@@ -590,6 +591,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         if (comment.draftModel != nil) {
             self.inputView.textString = moment.draftModel;
         }
+        self.inputView.placeHolder = [NSString stringWithFormat:@"回复%@:",comment.publisher.realName];
         [self.inputView.textView becomeFirstResponder];
         [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
     }

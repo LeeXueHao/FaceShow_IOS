@@ -51,11 +51,7 @@
     self.textView.font = [UIFont systemFontOfSize:14];
     self.textView.textColor = [UIColor colorWithHexString:@"333333"];
     self.textView.returnKeyType = UIReturnKeySend;
-    NSString *placeholderStr = @"评论";
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
-    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"666666"] range:NSMakeRange(0, placeholderStr.length)];
-    [attrStr addAttribute:NSFontAttributeName value:self.textView.font range:NSMakeRange(0, placeholderStr.length)];
-    self.textView.attributedPlaceholder = attrStr;
+    self.placeHolder = @"评论";
     self.textView.textContainerInset = UIEdgeInsetsMake(8, 8, 8, 8);
     self.textView.layer.cornerRadius = 6;
     self.textView.layer.borderColor = [UIColor colorWithHexString:@"dddddd"].CGColor;
@@ -69,6 +65,14 @@
         make.top.mas_equalTo(5);
         make.bottom.mas_equalTo(-5);
     }];
+}
+
+- (void)setPlaceHolder:(NSString *)placeHolder {
+    _placeHolder = placeHolder;
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeHolder];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"666666"] range:NSMakeRange(0, placeHolder.length)];
+    [attrStr addAttribute:NSFontAttributeName value:self.textView.font range:NSMakeRange(0, placeHolder.length)];
+    self.textView.attributedPlaceholder = attrStr;
 }
 
 #pragma mark - UITextViewDelegate
