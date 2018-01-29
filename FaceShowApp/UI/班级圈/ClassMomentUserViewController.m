@@ -51,7 +51,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentDiscardCommentRequest *discardCommentRequest;
 @property (nonatomic, strong) ClassMomentDiscardRequest *discardRequest;
 
-@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation ClassMomentUserViewController
@@ -112,15 +112,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     
-    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-    WEAK_SELF
-    [[self.tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
-        STRONG_SELF
-        [self hiddenInputTextView];
-    }];
     self.inputView = [[CommentInputView alloc]init];
     self.inputView.isChangeBool = YES;
     self.inputView.textView.returnKeyType = UIReturnKeySend;
+    WEAK_SELF
     self.inputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
         if (text.length != 0) {
@@ -144,6 +139,15 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         make.bottom.mas_equalTo(100.0f);
     }];
     
+    self.tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
+    [self.view addGestureRecognizer:self.tapGesture];
+    self.tapGesture.enabled = NO;
+}
+- (void)tapAction {
+    if (self.floatingView.superview != nil) {
+        [self.floatingView hiddenViewAnimate:YES];
+        self.tapGesture.enabled = NO;
+    }
 }
 - (void)hiddenInputTextView {
     if (self.commentType == ClassMomentComment_Comment) {
@@ -160,7 +164,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [self.floatingView hiddenViewAnimate:NO];
     }
     self.commentType = ClassMomentComment_Normal;
-    [self.tableView removeGestureRecognizer:self.tapGestureRecognizer];
 }
 - (void)stopAnimation {
     [super stopAnimation];
@@ -336,6 +339,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [self.floatingView hiddenViewAnimate:YES];
         return;
     }
+    self.tapGesture.enabled = YES;
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
     if (moment.comments.count > 0) {
@@ -351,7 +355,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 self.inputView.textString = moment.draftModel;
             }
             [self.inputView.textView becomeFirstResponder];
-            [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
         }else if(status == ClassMomentClickStatus_Like){
             [self requestForClickLike:section];
         }else if(status == ClassMomentClickStatus_Cancel){
@@ -494,7 +497,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             self.inputView.textString = moment.draftModel;
         }
         [self.inputView.textView becomeFirstResponder];
-        [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
     }
     
 }

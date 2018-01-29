@@ -54,7 +54,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentCancelLikeRequest *cancelLikeRequest;
 @property (nonatomic, strong) ClassMomentDiscardCommentRequest *discardCommentRequest;
 @property (nonatomic, strong) ClassMomentDiscardRequest *discardRequest;
-
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation ClassMomentViewController
@@ -193,7 +193,16 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         make.height.mas_equalTo(45.0f);
         make.bottom.mas_equalTo(100.0f);
     }];
-
+    
+    self.tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
+    [self.view addGestureRecognizer:self.tapGesture];
+    self.tapGesture.enabled = NO;
+}
+- (void)tapAction {
+    if (self.floatingView.superview != nil) {
+        [self.floatingView hiddenViewAnimate:YES];
+        self.tapGesture.enabled = NO;
+    }
 }
 - (void)hiddenInputTextView {
     if (self.commentType == ClassMomentComment_Comment) {
@@ -423,6 +432,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [self.floatingView hiddenViewAnimate:YES];
         return;
     }
+    self.tapGesture.enabled = YES;
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
     if (moment.comments.count > 0) {
