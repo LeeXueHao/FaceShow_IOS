@@ -27,7 +27,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.clipsToBounds = YES;
-        self.widthFloat = SCREEN_WIDTH;
+        self.widthFloat = SCREEN_WIDTH*2;
         self.verticalMargin = 5.0f;
         self.horizontalMargin = 5.0f;
         self.doubleRow = YES;

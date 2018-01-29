@@ -12,8 +12,6 @@
 @interface QiniuDataManager : NSObject
 + (QiniuDataManager *)sharedInstance;
 
-- (void)updateTokenWithCompleteBlock:(void(^)(QiniuTokenRequestItem *item,NSError *error))completeBlock;
-
 - (void)uploadData:(NSData *)data
  withProgressBlock:(void(^)(CGFloat percent))progressBlock
      completeBlock:(void(^)(NSString *key,NSError *error))completeBlock;

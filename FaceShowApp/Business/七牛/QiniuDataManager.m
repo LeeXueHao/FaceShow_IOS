@@ -9,8 +9,6 @@
 #import "QiniuDataManager.h"
 #import <QNUploadManager.h>
 
-static NSString * const kQiniuTokenKey = @"kQiniuTokenKey";
-
 @interface QiniuDataManager ()
 @property (nonatomic, strong) QiniuTokenRequest *tokenRequest;
 @property (nonatomic, strong) QNUploadManager *upManager;
@@ -37,7 +35,6 @@ static NSString * const kQiniuTokenKey = @"kQiniuTokenKey";
             return;
         }
         QiniuTokenRequestItem *item = (QiniuTokenRequestItem *)retItem;
-        [[NSUserDefaults standardUserDefaults]setValue:[item toJSONString] forKey:kQiniuTokenKey];
         BLOCK_EXEC(completeBlock,item,nil);
     }];
 }
@@ -45,21 +42,15 @@ static NSString * const kQiniuTokenKey = @"kQiniuTokenKey";
 - (void)uploadData:(NSData *)data
  withProgressBlock:(void(^)(CGFloat percent))progressBlock
      completeBlock:(void(^)(NSString *key,NSError *error))completeBlock {
-    NSString *json = [[NSUserDefaults standardUserDefaults]valueForKey:kQiniuTokenKey];
-    if (json) {
-        QiniuTokenRequestItem *item = [[QiniuTokenRequestItem alloc]initWithString:json error:nil];
+    WEAK_SELF
+    [self updateTokenWithCompleteBlock:^(QiniuTokenRequestItem *item, NSError *error) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,nil,error);
+            return;
+        }
         [self uploadData:data withToken:item.data.token progressBlock:progressBlock completeBlock:completeBlock];
-    }else {
-        WEAK_SELF
-        [self updateTokenWithCompleteBlock:^(QiniuTokenRequestItem *item, NSError *error) {
-            STRONG_SELF
-            if (error) {
-                BLOCK_EXEC(completeBlock,nil,error);
-                return;
-            }
-            [self uploadData:data withToken:item.data.token progressBlock:progressBlock completeBlock:completeBlock];
-        }];
-    }
+    }];
 }
 
 - (void)uploadData:(NSData *)data
