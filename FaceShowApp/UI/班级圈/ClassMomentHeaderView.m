@@ -53,7 +53,7 @@
                 make.left.equalTo(self.nameLabel.mas_left);
                 make.top.equalTo(self.nameLabel.mas_bottom).offset(3.0f);
                 make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-                make.height.mas_offset(85.0f).priorityHigh();
+                make.height.mas_equalTo(85.0f);
             }];
         }else {
             [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {

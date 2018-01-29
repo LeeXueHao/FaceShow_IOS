@@ -28,7 +28,11 @@
 }
 
 - (void)setupUI {
-    WKWebView *webview = [[WKWebView alloc]init];
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    config.allowsInlineMediaPlayback = YES;
+    config.mediaPlaybackRequiresUserAction = false;
+
+    WKWebView *webview = [[WKWebView alloc]initWithFrame:CGRectZero configuration:config];
     webview.navigationDelegate = self;
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.urlString]];
     [webview loadRequest:request];

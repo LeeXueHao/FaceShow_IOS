@@ -191,7 +191,14 @@
     NSString *headUrl = tool.eventObj.content;
     NSString *classId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     NSString *token = [UserManager sharedInstance].userModel.token;
-    NSString *url = [NSString stringWithFormat:@"%@?classId=%@&token=%@",headUrl,classId,token];
+    NSString *random = [NSString stringWithFormat:@"%@",@([[NSDate date]timeIntervalSince1970])];
+    NSString *url = nil;
+    if ([headUrl rangeOfString:@"?"].location == NSNotFound) {
+        url = [NSString stringWithFormat:@"%@?classId=%@&token=%@&_=%@",headUrl,classId,token,random];
+    }else {
+        url = [NSString stringWithFormat:@"%@&classId=%@&token=%@&_=%@",headUrl,classId,token,random];
+    }
+    
     vc.urlString = url;
     vc.name = tool.eventObj.title;
     [self.navigationController pushViewController:vc animated:YES];
