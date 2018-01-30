@@ -12,6 +12,7 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "ClassMomentDetailViewController.h"
+#import "ClassMomentDetailRequest.h"
 
 @interface ClassMomentNotificationViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) ClassMomentUserMomentMsgRequest *messageRequest;
+@property (nonatomic, strong) ClassMomentDetailRequest *detailRequest;
 @end
 
 @implementation ClassMomentNotificationViewController
@@ -87,9 +89,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ClassMomentUserMomentMsgItem_Data_Msg *message = self.dataArray[indexPath.row];
-    ClassMomentDetailViewController *VC = [[ClassMomentDetailViewController alloc] init];
-    VC.momentId = message.momentId;
-    [self.navigationController pushViewController:VC animated:YES];
+    [self requestForMomentDetailWithMomentID:message.momentId];
 }
 #pragma mark - request
 - (void)requestForUserMomentMsg {
@@ -117,4 +117,24 @@
     }];
     self.messageRequest = request;
 }
+
+- (void)requestForMomentDetailWithMomentID:(NSString *)momentID{
+    ClassMomentDetailRequest *request = [[ClassMomentDetailRequest alloc] init];
+    request.momentId = momentID;
+    [self.view nyx_startLoading];
+    WEAK_SELF
+    [request startRequestWithRetClass:[ClassMomentDetailItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        ClassMomentDetailViewController *VC = [[ClassMomentDetailViewController alloc] init];
+        VC.item = retItem;
+        [self.navigationController pushViewController:VC animated:YES];
+    }];
+    self.detailRequest = request;
+}
+
 @end

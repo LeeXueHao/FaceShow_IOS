@@ -170,6 +170,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [super stopAnimation];
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
+    [self hiddenInputTextView];
     [self hideFloatingView];
     FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     actionSheetView.titleArray = @[@{@"title":@"删除"}];

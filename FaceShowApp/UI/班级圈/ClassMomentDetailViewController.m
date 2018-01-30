@@ -29,7 +29,7 @@
 #import "AlertView.h"
 #import "EmptyView.h"
 #import "ErrorView.h"
-#import "ClassMomentDetailRequest.h"
+
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
@@ -72,12 +72,11 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [[NSMutableArray alloc] init];
+    [self.dataArray addObject:self.item.data];
     self.navigationItem.title = @"详情";
     self.view.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self setupUI];
     [self setupObservers];
-    [self.view nyx_startLoading];
-    [self requestForMomentDetail];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -161,7 +160,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [self.errorView setRetryBlock:^{
        STRONG_SELF
         [self.view nyx_startLoading];
-        [self requestForMomentDetail];
     }];
     [self.view addSubview:self.errorView];
     [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,6 +194,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.commentType = ClassMomentComment_Normal;
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
+    [self hiddenInputTextView];
     [self hideFloatingView];
     FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     actionSheetView.titleArray = @[@{@"title":@"删除"}];
@@ -531,33 +530,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 
 #pragma mark - request
-- (void)requestForMomentDetail{
-    ClassMomentDetailRequest *request = [[ClassMomentDetailRequest alloc] init];
-    request.momentId = self.momentId;
-    WEAK_SELF
-    [request startRequestWithRetClass:[ClassMomentDetailItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [self.view nyx_stopLoading];
-        ClassMomentDetailItem *item = retItem;
-        if (error) {
-            self.errorView.hidden = NO;
-        }
-        if (item.code.integerValue == 0) {
-            if (item.data == nil) {
-                self.emptyView.hidden = NO;
-            }else {
-                self.emptyView.hidden = YES;
-                self.errorView.hidden = YES;
-                [self.dataArray removeAllObjects];
-                [self.dataArray addObject:item.data];
-                [self.tableView reloadData];
-            }
-        }else {
-            [self.view nyx_showToast:item.message];
-        }
-    }];
-    self.detailRequest = request;
-}
 - (void)requestForClickLike:(NSInteger)section {
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     ClassMomentClickLikeRequest *request = [[ClassMomentClickLikeRequest alloc] init];

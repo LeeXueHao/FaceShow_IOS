@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "ClassMomentDetailRequest.h"
 
 @interface ClassMomentDetailViewController : BaseViewController
-@property (nonatomic, copy) NSString *momentId;
+@property (nonatomic, strong) ClassMomentDetailItem *item;
 @end
