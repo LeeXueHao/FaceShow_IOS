@@ -374,6 +374,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     WEAK_SELF
     self.floatingView.classMomentFloatingBlock = ^(ClassMomentClickStatus status) {
         STRONG_SELF
+        self.tapGesture.enabled = NO;
         if (status == ClassMomentClickStatus_Comment) {
             self.commentType = ClassMomentComment_Comment;
             self.commtentInteger = section;
