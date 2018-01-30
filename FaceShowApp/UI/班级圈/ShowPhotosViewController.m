@@ -139,28 +139,28 @@
 }
 
 - (void)dismiss{
-    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationPortrait] forKey:@"orientation"];
+//    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationPortrait] forKey:@"orientation"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark -
-- (BOOL)shouldAutorotate {
-    if (!self.appeared) {
-        return NO;
-    }
-    return YES;
-}
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations NS_AVAILABLE_IOS(6_0) {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-}
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    self.scrollView.contentSize = CGSizeMake(size.width * self.imageModelMutableArray.count,size.height);
-    [self.imageModelMutableArray enumerateObjectsUsingBlock:^(PreviewPhotosModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        PhotosScrollView *photoView = [self.scrollView viewWithTag:10086 + idx];
-        if (photoView != nil) {
-            photoView.frame = CGRectMake(idx * size.width, 0, size.width, size.height);
-        }
-    }];
-}
+//- (BOOL)shouldAutorotate {
+//    if (!self.appeared) {
+//        return NO;
+//    }
+//    return YES;
+//}
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations NS_AVAILABLE_IOS(6_0) {
+//    return UIInterfaceOrientationMaskAllButUpsideDown;
+//}
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+//    self.scrollView.contentSize = CGSizeMake(size.width * self.imageModelMutableArray.count,size.height);
+//    [self.imageModelMutableArray enumerateObjectsUsingBlock:^(PreviewPhotosModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        PhotosScrollView *photoView = [self.scrollView viewWithTag:10086 + idx];
+//        if (photoView != nil) {
+//            photoView.frame = CGRectMake(idx * size.width, 0, size.width, size.height);
+//        }
+//    }];
+//}
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     self.pageControl.currentPage = (NSInteger)(self.scrollView.contentOffset.x / SCREEN_WIDTH);
