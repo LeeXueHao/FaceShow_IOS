@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.floatingView hiddenViewAnimate:NO];
+    [self hideFloatingView];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -144,6 +144,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.tapGesture.enabled = NO;
 }
 - (void)tapAction {
+    [self hideFloatingView];
+}
+- (void)hideFloatingView {
     if (self.floatingView.superview != nil) {
         [self.floatingView hiddenViewAnimate:YES];
         self.tapGesture.enabled = NO;
@@ -160,16 +163,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }
     self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
-    if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:NO];
-    }
+    [self hideFloatingView];
     self.commentType = ClassMomentComment_Normal;
 }
 - (void)stopAnimation {
     [super stopAnimation];
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
-    [self.floatingView hiddenViewAnimate:YES];
+    [self hideFloatingView];
     FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     actionSheetView.titleArray = @[@{@"title":@"删除"}];
     self.alertView = [[AlertView alloc]init];
@@ -336,7 +337,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
     if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:YES];
+        [self hideFloatingView];
         return;
     }
     self.tapGesture.enabled = YES;

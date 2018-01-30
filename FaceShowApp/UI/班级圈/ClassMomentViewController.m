@@ -94,7 +94,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.floatingView hiddenViewAnimate:NO];
+    [self hideFloatingView];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -199,6 +199,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.tapGesture.enabled = NO;
 }
 - (void)tapAction {
+    [self hideFloatingView];
+}
+- (void)hideFloatingView {
     if (self.floatingView.superview != nil) {
         [self.floatingView hiddenViewAnimate:YES];
         self.tapGesture.enabled = NO;
@@ -223,7 +226,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.headerView.hidden = NO;
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
-    [self.floatingView hiddenViewAnimate:YES];
+    [self hideFloatingView];
     FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     actionSheetView.titleArray = @[@{@"title":@"删除"}];
     self.alertView = [[AlertView alloc]init];
@@ -429,7 +432,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
     if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:YES];
+        [self hideFloatingView];
         return;
     }
     self.tapGesture.enabled = YES;
@@ -499,9 +502,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hiddenInputTextView];
-    if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:NO];
-    }
+    [self hideFloatingView];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return [self tableHeightForHeaderInSection:section];
@@ -579,9 +580,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     return rect.size.height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:NO];
-    }
+    [self hideFloatingView];
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[indexPath.section];
     ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[indexPath.row];
     if (comment.userID.integerValue == [UserManager sharedInstance].userModel.userID.integerValue) {

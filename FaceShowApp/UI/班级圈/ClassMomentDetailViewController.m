@@ -60,7 +60,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentDiscardCommentRequest *discardCommentRequest;
 @property (nonatomic, strong) ClassMomentDiscardRequest *discardRequest;
 
-@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation ClassMomentDetailViewController
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.floatingView hiddenViewAnimate:NO];
+    [self hideFloatingView];
 }
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
@@ -122,12 +122,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         make.edges.equalTo(self.view);
     }];
     
-    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     WEAK_SELF
-    [[self.tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
-        STRONG_SELF
-        [self hiddenInputTextView];
-    }];
     self.inputView = [[CommentInputView alloc]init];
     self.inputView.isChangeBool = YES;
     self.inputView.textView.returnKeyType = UIReturnKeySend;
@@ -173,6 +168,18 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         make.edges.mas_equalTo(@0);
     }];
     
+    self.tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
+    [self.view addGestureRecognizer:self.tapGesture];
+    self.tapGesture.enabled = NO;
+}
+- (void)tapAction {
+    [self hideFloatingView];
+}
+- (void)hideFloatingView {
+    if (self.floatingView.superview != nil) {
+        [self.floatingView hiddenViewAnimate:YES];
+        self.tapGesture.enabled = NO;
+    }
 }
 - (void)hiddenInputTextView {
     if (self.commentType == ClassMomentComment_Comment) {
@@ -185,14 +192,11 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }
     self.inputView.textString = nil;
     [self.inputView.textView resignFirstResponder];
-    if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:NO];
-    }
+    [self hideFloatingView];
     self.commentType = ClassMomentComment_Normal;
-    [self.tableView removeGestureRecognizer:self.tapGestureRecognizer];
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
-    [self.floatingView hiddenViewAnimate:YES];
+    [self hideFloatingView];
     FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     actionSheetView.titleArray = @[@{@"title":@"删除"}];
     self.alertView = [[AlertView alloc]init];
@@ -359,9 +363,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 }
 - (void)showFloatView:(CGRect)rect withSection:(NSInteger)section{
     if (self.floatingView.superview != nil) {
-        [self.floatingView hiddenViewAnimate:YES];
+        [self hideFloatingView];
         return;
     }
+    self.tapGesture.enabled = YES;
     ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[section];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:NSNotFound inSection:section];
     if (moment.comments.count > 0) {
@@ -376,8 +381,8 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             if (moment.draftModel != nil) {
                 self.inputView.textString = moment.draftModel;
             }
+            self.inputView.placeHolder = @"评论";
             [self.inputView.textView becomeFirstResponder];
-            [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
         }else if(status == ClassMomentClickStatus_Like){
             [self requestForClickLike:section];
         }else if(status == ClassMomentClickStatus_Cancel){
@@ -519,8 +524,8 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         if (comment.draftModel != nil) {
             self.inputView.textString = moment.draftModel;
         }
+        self.inputView.placeHolder = [NSString stringWithFormat:@"回复%@:",comment.publisher.realName];
         [self.inputView.textView becomeFirstResponder];
-        [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
     }
     
 }
