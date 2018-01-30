@@ -94,6 +94,12 @@
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+    QuestionType type = [FSDataMappingTable QuestionTypeWithKey:self.item.questionType];
+    if (type == QuestionType_MultiChoose) {
+        if (self.item.voteInfo.maxSelectNum.integerValue > 0) {
+            stem = [stem stringByAppendingFormat:@"(最多选%@项)",@(self.item.voteInfo.maxSelectNum.integerValue)];
+        }
+    }
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:stem attributes:dic];
     self.stemLabel.attributedText = attributeStr;
 }
