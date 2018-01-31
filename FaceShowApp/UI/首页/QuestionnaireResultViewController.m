@@ -67,6 +67,10 @@
         [self.view nyx_stopLoading];
         self.errorView.hidden = YES;
         if (error) {
+            if ([self isNetworkReachable]) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
             self.errorView.hidden = NO;
             return;
         }
