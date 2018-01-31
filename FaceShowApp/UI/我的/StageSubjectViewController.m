@@ -10,6 +10,8 @@
 #import "StageSubjectCell.h"
 #import "UpdateUserInfoRequest.h"
 
+static  NSString *const kStageNavigationItemtitle = @"选择学段";
+
 @interface StageSubjectViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -51,7 +53,7 @@
 
 #pragma mark - setupNavigation
 - (void)setupNavigation {
-    self.navigationItem.title = isEmpty(self.selectedStage) ? @"选择学段" : self.selectedStage.name;
+    self.navigationItem.title = isEmpty(self.selectedStage) ? kStageNavigationItemtitle : self.selectedStage.name;
     if (!isEmpty(self.selectedStage)) {
         WEAK_SELF
         [self nyx_setupRightWithTitle:@"确定" action:^{
@@ -117,7 +119,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (isEmpty(self.selectedStage)) {
+    if ([self.navigationItem.title isEqualToString:kStageNavigationItemtitle]) {
         StageSubjectItem_Stage *stage = [UserManager sharedInstance].stages[indexPath.row];
         self.selectedStage = stage;
     } else {
