@@ -202,6 +202,8 @@
     vc.urlString = url;
     vc.name = tool.eventObj.title;
     vc.naviBarHidden = YES;
+    vc.backNormalImage = [UIImage imageNamed:@"游戏返回页面按钮正常态"];
+    vc.backHighlightImage = [UIImage imageNamed:@"游戏返回页面按钮点击态"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

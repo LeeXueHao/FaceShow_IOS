@@ -13,4 +13,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) BOOL needDownload;
 @property (nonatomic, assign) BOOL naviBarHidden;
+
+@property (nonatomic, strong) UIImage *backNormalImage;
+@property (nonatomic, strong) UIImage *backHighlightImage;
 @end

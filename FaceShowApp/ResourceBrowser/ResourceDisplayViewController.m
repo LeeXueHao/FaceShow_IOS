@@ -27,8 +27,8 @@
     self.navigationItem.title = self.name;
     if (self.naviBarHidden) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
-        UIImage *normalImage = [UIImage imageNamed:@"返回页面按钮正常态-"];
-        UIImage *highlightImage = [UIImage imageNamed:@"返回页面按钮点击态"];
+        UIImage *normalImage = self.backNormalImage? :[UIImage imageNamed:@"返回页面按钮正常态-"];
+        UIImage *highlightImage = self.backHighlightImage? :[UIImage imageNamed:@"返回页面按钮点击态"];
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 20, normalImage.size.width+20, normalImage.size.height+20)];
         [backButton setImage:normalImage forState:UIControlStateNormal];
         [backButton setImage:highlightImage forState:UIControlStateHighlighted];
