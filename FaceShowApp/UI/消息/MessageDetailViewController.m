@@ -64,6 +64,10 @@
         STRONG_SELF
         [self.view nyx_stopLoading];
         if (error) {
+            if ([self isNetworkReachable]) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
             self.errorView.hidden = NO;
             return;
         }
