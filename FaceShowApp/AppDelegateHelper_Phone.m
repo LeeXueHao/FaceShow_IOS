@@ -187,6 +187,7 @@
     [self.getSigninRequest startRequestWithRetClass:[GetSigninRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         if (error) {
+            [[UIApplication sharedApplication].keyWindow nyx_showToast:error.localizedDescription];
             return;
         }
         GetSigninRequestItem *item = retItem;
@@ -233,6 +234,7 @@
     [self.resourceDetailRequest startRequestWithRetClass:[GetResourceDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         if (error) {
+            [[UIApplication sharedApplication].keyWindow nyx_showToast:error.localizedDescription];
             return;
         }
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
