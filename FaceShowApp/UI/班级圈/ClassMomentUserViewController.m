@@ -431,11 +431,11 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }
     if (moment.albums.count > 0) {
         if (moment.albums.count > 0 && moment.albums.count < 2) {
-            height += photoHeight + 15.0f;
+            height += photoHeight + 6.0f;
         }else if (moment.albums.count >= 2 && moment.albums.count < 4 ){
             height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f;
         }else if(moment.albums.count >= 4 && moment.albums.count <= 6){
-            height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f * 2.0f + 5.0f;
+            height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f * 2.0f + 10.0f;
         }else {
             height = height + SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f + 10.0f;
         }
@@ -450,11 +450,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [mutableArrray addObject:obj.publisher.realName?:@""];
         }];
-        if (moment.albums.count > 0) {
-            height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f - 8.0f;
-        }else {
-             height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
-        }
+        height = height + 5.0f + 7.0f + [self sizeForLikes:[mutableArrray componentsJoinedByString:@","]] + 10.0f + 20.0f;
         
     }else if (moment.likes.count != 0) {
         NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
