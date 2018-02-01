@@ -431,7 +431,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }
     if (moment.albums.count > 0) {
         if (moment.albums.count > 0 && moment.albums.count < 2) {
-            height += photoHeight + 6.0f;
+            height += photoHeight + 6.0f+4;
         }else if (moment.albums.count >= 2 && moment.albums.count < 4 ){
             height = height + (SCREEN_WIDTH - 15.0f - 40.0f - 10.0f - 15.0f - 10.0f)/3.0f;
         }else if(moment.albums.count >= 4 && moment.albums.count <= 6){
