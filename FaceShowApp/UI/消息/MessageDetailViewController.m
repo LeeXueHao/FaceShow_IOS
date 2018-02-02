@@ -11,6 +11,7 @@
 #import "ErrorView.h"
 #import "ShowPhotosViewController.h"
 #import "UserMessageManager.h"
+#import "UIViewController+VisibleViewController.h"
 
 @interface MessageDetailViewController ()
 
@@ -170,7 +171,7 @@
     showPhotosVC.animateRect = [self.view convertRect:self.detailImageView.frame toView:self.view.window.rootViewController.view];
     showPhotosVC.imageModelMutableArray = photoArr;
     showPhotosVC.startInteger = 0;
-    [self.view.window.rootViewController presentViewController:showPhotosVC animated:YES completion:nil];
+    [[self nyx_visibleViewController] presentViewController:showPhotosVC animated:YES completion:nil];
 }
 
 @end
