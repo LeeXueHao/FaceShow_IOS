@@ -20,7 +20,7 @@
     self.interactivePopGestureRecognizer.enabled = NO;
     // 导航背景
     [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[[UIColor whiteColor] colorWithAlphaComponent:0.9f]] forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.translucent = YES;
+    self.navigationBar.translucent = NO;
     self.navigationBar.shadowImage = [UIImage new];
     // 标题样式
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
