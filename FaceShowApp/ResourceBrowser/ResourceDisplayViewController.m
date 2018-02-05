@@ -59,8 +59,8 @@
     }
     webview.navigationDelegate = self;
     if (self.needDownload) {
-        NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL fileURLWithPath:self.urlString]];
-        [webview loadRequest:request];
+        NSURL *url = [NSURL fileURLWithPath:self.urlString isDirectory:NO];
+        [webview loadFileURL:url allowingReadAccessToURL:url];
     } else {
         NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.urlString]];
         [webview loadRequest:request];
