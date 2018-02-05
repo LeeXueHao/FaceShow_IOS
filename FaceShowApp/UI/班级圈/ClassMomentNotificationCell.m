@@ -53,6 +53,7 @@
     self.contentLabel = [[UILabel alloc] init];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
+    self.contentLabel.numberOfLines = 4;
     [self.contentView addSubview:self.contentLabel];
     
     self.likeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"赞点后的小标签"]];
