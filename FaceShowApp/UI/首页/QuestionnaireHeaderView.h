@@ -10,6 +10,7 @@
 
 @interface QuestionnaireHeaderView : UITableViewHeaderFooterView
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *desc;
 
-+ (CGFloat)heightForTitle:(NSString *)title;
++ (CGFloat)heightForTitle:(NSString *)title desc:(NSString *)desc;
 @end

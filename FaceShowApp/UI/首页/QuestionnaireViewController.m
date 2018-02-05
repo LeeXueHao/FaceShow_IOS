@@ -115,10 +115,14 @@
 - (void)refreshUIWithItem:(QuestionRequestItem *)item {
     self.requestItem = item;
     [self.tableView reloadData];
-    QuestionnaireHeaderView *headerView = (QuestionnaireHeaderView *)self.tableView.tableHeaderView;
-    if (isEmpty(headerView.title)) {
-        headerView.title = item.data.questionGroup.title;
-    }
+    NSString *title = item.data.questionGroup.title;
+    NSString *desc = item.data.questionGroup.desc;
+    CGFloat height = [QuestionnaireHeaderView heightForTitle:title desc:desc];
+    QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+    headerView.title = self.name;
+    headerView.desc = desc;
+    self.tableView.tableHeaderView = headerView;
+
     [self.submitButton setTitleColor:[UIColor colorWithHexString:@"e2e2e2"] forState:UIControlStateNormal];
     [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateNormal];
     if (!item.data.isAnswer.boolValue) {
@@ -129,12 +133,8 @@
 }
 
 - (void)setupUI {
-    CGFloat height = [QuestionnaireHeaderView heightForTitle:self.name];
-    QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
-    headerView.title = self.name;
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    self.tableView.tableHeaderView = headerView;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

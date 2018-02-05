@@ -74,18 +74,22 @@
             self.errorView.hidden = NO;
             return;
         }
-        self.requestItem = retItem;
+        QuestionRequestItem *item = (QuestionRequestItem *)retItem;
+        self.requestItem = item;
         [self.tableView reloadData];
+        NSString *title = item.data.questionGroup.title;
+        NSString *desc = item.data.questionGroup.desc;
+        CGFloat height = [QuestionnaireHeaderView heightForTitle:title desc:desc];
+        QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+        headerView.title = self.name;
+        headerView.desc = desc;
+        self.tableView.tableHeaderView = headerView;
     }];
 }
 
 - (void)setupUI {
-    CGFloat height = [QuestionnaireHeaderView heightForTitle:self.name];
-    QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
-    headerView.title = self.name;
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    self.tableView.tableHeaderView = headerView;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

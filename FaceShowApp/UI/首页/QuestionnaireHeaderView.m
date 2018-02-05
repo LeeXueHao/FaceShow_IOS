@@ -9,7 +9,10 @@
 #import "QuestionnaireHeaderView.h"
 
 @interface QuestionnaireHeaderView()
+@property (nonatomic, strong) UIView *bgView;
+
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *descLabel;
 @end
 
 @implementation QuestionnaireHeaderView
@@ -31,6 +34,8 @@
         make.top.mas_equalTo(5);
         make.bottom.mas_equalTo(-5);
     }];
+    self.bgView = bgView;
+    
     self.titleLabel = [[UILabel alloc]init];
     self.titleLabel.backgroundColor = [UIColor whiteColor];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -40,7 +45,20 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.centerY.mas_equalTo(0);
+        make.top.mas_equalTo(5);
+    }];
+    
+    self.descLabel = [[UILabel alloc]init];
+    self.descLabel.backgroundColor = [UIColor whiteColor];
+    self.descLabel.font = [UIFont systemFontOfSize:13];
+    self.descLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.descLabel.numberOfLines = 0;
+    [bgView addSubview:self.descLabel];
+    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.equalTo(self.titleLabel.mas_bottom);
+        make.bottom.mas_equalTo(-10);
     }];
 }
 
@@ -53,7 +71,18 @@
     self.titleLabel.attributedText = attributeStr;
 }
 
-+ (CGFloat)heightForTitle:(NSString *)title {
+- (void)setDesc:(NSString *)desc {
+    _desc = desc;
+    if (desc.length > 0) {
+        NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+        paraStyle.lineHeightMultiple = 1.2;
+        NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
+        NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:desc attributes:dic];
+        self.descLabel.attributedText = attributeStr;
+    }
+}
+
++ (CGFloat)heightForTitle:(NSString *)title desc:(NSString *)desc {
     UILabel *label = [[UILabel alloc]init];
     label.font = [UIFont boldSystemFontOfSize:18];
     label.numberOfLines = 0;
@@ -63,7 +92,22 @@
     NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:title attributes:dic];
     label.attributedText = attributeStr;
     CGSize size = [label sizeThatFits:CGSizeMake(SCREEN_WIDTH-30, CGFLOAT_MAX)];
-    return size.height+50+10;
+    
+    if (desc.length > 0) {
+        UILabel *label1 = [[UILabel alloc]init];
+        label1.font = [UIFont systemFontOfSize:13];
+        label1.numberOfLines = 0;
+        NSMutableParagraphStyle *paraStyle1 = [[NSMutableParagraphStyle alloc] init];
+        paraStyle1.lineHeightMultiple = 1.2;
+        NSDictionary *dic1 = @{NSParagraphStyleAttributeName:paraStyle};
+        NSAttributedString *attributeStr1 = [[NSAttributedString alloc] initWithString:desc attributes:dic1];
+        label1.attributedText = attributeStr1;
+        CGSize size1 = [label1 sizeThatFits:CGSizeMake(SCREEN_WIDTH-30, CGFLOAT_MAX)];
+        
+        return size.height+30+size1.height;
+    }
+    
+    return size.height + 50 + 10;
 }
 
 @end
