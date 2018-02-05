@@ -58,8 +58,13 @@
         webview.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     webview.navigationDelegate = self;
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.urlString]];
-    [webview loadRequest:request];
+    if (self.needDownload) {
+        NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL fileURLWithPath:self.urlString]];
+        [webview loadRequest:request];
+    } else {
+        NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.urlString]];
+        [webview loadRequest:request];
+    }
     [self.view addSubview:webview];
     [webview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
