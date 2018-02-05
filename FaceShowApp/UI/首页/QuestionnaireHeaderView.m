@@ -45,20 +45,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.top.mas_equalTo(5);
-    }];
-    
-    self.descLabel = [[UILabel alloc]init];
-    self.descLabel.backgroundColor = [UIColor whiteColor];
-    self.descLabel.font = [UIFont systemFontOfSize:13];
-    self.descLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.descLabel.numberOfLines = 0;
-    [bgView addSubview:self.descLabel];
-    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
-        make.top.equalTo(self.titleLabel.mas_bottom);
-        make.bottom.mas_equalTo(-10);
+        make.centerY.mas_equalTo(0);
     }];
 }
 
@@ -104,10 +91,32 @@
         label1.attributedText = attributeStr1;
         CGSize size1 = [label1 sizeThatFits:CGSizeMake(SCREEN_WIDTH-30, CGFLOAT_MAX)];
         
-        return size.height+30+size1.height;
+        return size.height+50+size1.height;
     }
     
     return size.height + 50 + 10;
 }
 
+- (UILabel *)descLabel {
+    if (!_descLabel) {
+        _descLabel = [[UILabel alloc]init];
+        _descLabel.backgroundColor = [UIColor whiteColor];
+        _descLabel.font = [UIFont systemFontOfSize:13];
+        _descLabel.textColor = [UIColor colorWithHexString:@"333333"];
+        _descLabel.numberOfLines = 0;
+        [self.bgView addSubview:_descLabel];
+        [_descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.right.mas_equalTo(-15);
+            make.top.equalTo(self.titleLabel.mas_bottom).offset(5.f);
+            make.bottom.mas_equalTo(-20);
+        }];
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.right.mas_equalTo(-15);
+            make.top.mas_equalTo(15);
+        }];
+    }
+    return _descLabel;
+}
 @end
