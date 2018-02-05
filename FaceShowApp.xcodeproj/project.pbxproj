@@ -213,6 +213,13 @@
 		7C4D544B1F972DEF0053DB12 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */; };
 		7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544C1F972DFD0053DB12 /* libz.tbd */; };
 		7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544E1F972E070053DB12 /* libc++.tbd */; };
+		7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */; };
+		7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26C2027F6030067E242 /* HeadImageClipView.m */; };
+		7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */; };
+		7C66B2792027F6050067E242 /* HeadImageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26F2027F6030067E242 /* HeadImageHandler.m */; };
+		7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */; };
+		7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B2752027F6050067E242 /* HeadImageClipViewController.m */; };
+		7C66B27E2027F8510067E242 /* QAPhotoClipBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */; };
 		7C6EE547200736D200B47892 /* ImageAttachmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE546200736D200B47892 /* ImageAttachmentView.m */; };
 		7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */; };
 		7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE54F20073E3000B47892 /* AlbumListViewController.m */; };
@@ -682,6 +689,20 @@
 		7C4D544A1F972DEF0053DB12 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7C4D544C1F972DFD0053DB12 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7C4D544E1F972E070053DB12 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImagePickerOptionItemView.h; sourceTree = "<group>"; };
+		7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImagePickerOptionItemView.m; sourceTree = "<group>"; };
+		7C66B26C2027F6030067E242 /* HeadImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipView.m; sourceTree = "<group>"; };
+		7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageCameraOverlayView.m; sourceTree = "<group>"; };
+		7C66B26E2027F6030067E242 /* HeadImageClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImageClipViewController.h; sourceTree = "<group>"; };
+		7C66B26F2027F6030067E242 /* HeadImageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageHandler.m; sourceTree = "<group>"; };
+		7C66B2702027F6040067E242 /* HeadImageClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImageClipView.h; sourceTree = "<group>"; };
+		7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImagePickerOptionView.m; sourceTree = "<group>"; };
+		7C66B2722027F6040067E242 /* HeadImagePickerOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImagePickerOptionView.h; sourceTree = "<group>"; };
+		7C66B2732027F6040067E242 /* HeadImageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImageHandler.h; sourceTree = "<group>"; };
+		7C66B2742027F6040067E242 /* HeadImageCameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImageCameraOverlayView.h; sourceTree = "<group>"; };
+		7C66B2752027F6050067E242 /* HeadImageClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipViewController.m; sourceTree = "<group>"; };
+		7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAPhotoClipBottomView.m; sourceTree = "<group>"; };
+		7C66B27D2027F8510067E242 /* QAPhotoClipBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAPhotoClipBottomView.h; sourceTree = "<group>"; };
 		7C6EE545200736D200B47892 /* ImageAttachmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentView.h; sourceTree = "<group>"; };
 		7C6EE546200736D200B47892 /* ImageAttachmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAttachmentView.m; sourceTree = "<group>"; };
 		7C6EE5482007396000B47892 /* ImageAttachmentContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentContainerView.h; sourceTree = "<group>"; };
@@ -1706,6 +1727,27 @@
 			path = "个推";
 			sourceTree = "<group>";
 		};
+		7C66B2692027F5DA0067E242 /* 图像选取 */ = {
+			isa = PBXGroup;
+			children = (
+				7C66B2732027F6040067E242 /* HeadImageHandler.h */,
+				7C66B26F2027F6030067E242 /* HeadImageHandler.m */,
+				7C66B2742027F6040067E242 /* HeadImageCameraOverlayView.h */,
+				7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */,
+				7C66B26E2027F6030067E242 /* HeadImageClipViewController.h */,
+				7C66B2752027F6050067E242 /* HeadImageClipViewController.m */,
+				7C66B2722027F6040067E242 /* HeadImagePickerOptionView.h */,
+				7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */,
+				7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */,
+				7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */,
+				7C66B2702027F6040067E242 /* HeadImageClipView.h */,
+				7C66B26C2027F6030067E242 /* HeadImageClipView.m */,
+				7C66B27D2027F8510067E242 /* QAPhotoClipBottomView.h */,
+				7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */,
+			);
+			name = "图像选取";
+			sourceTree = "<group>";
+		};
 		7C6EE55D20086F2800B47892 /* 发布 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1836,6 +1878,7 @@
 		9220840E1F6BB6A700F8AAC6 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7C66B2692027F5DA0067E242 /* 图像选取 */,
 				4378DFA71F6FA4CB005CFE56 /* SignInRecordCell.h */,
 				4378DFA81F6FA4CB005CFE56 /* SignInRecordCell.m */,
 				4378DFA91F6FA4CB005CFE56 /* SignInRecordHeaderView.h */,
@@ -2189,6 +2232,7 @@
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
+				7C66B2792027F6050067E242 /* HeadImageHandler.m in Sources */,
 				7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */,
 				438FFC871FD4E1B9006F3FB3 /* BaseDownloader.m in Sources */,
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
@@ -2223,6 +2267,7 @@
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
 				7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */,
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
+				7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
 				438FFC891FD4E1B9006F3FB3 /* PersistentUrlDownloader.m in Sources */,
 				921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */,
@@ -2247,6 +2292,7 @@
 				4322CA3C1FD941F500E7B565 /* StageSubjectCell.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
+				7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */,
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
@@ -2281,6 +2327,7 @@
 				4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
 				43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */,
+				7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */,
 				7C25194A1F68EB900001B577 /* GCDTimer.m in Sources */,
 				7C25198C1F69003A0001B577 /* SimpleAlertButton.m in Sources */,
 				7C2519A51F690C840001B577 /* AppDelegateHelper.m in Sources */,
@@ -2298,9 +2345,11 @@
 				435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
+				7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,
+				7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
@@ -2308,6 +2357,7 @@
 				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
 				7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
+				7C66B27E2027F8510067E242 /* QAPhotoClipBottomView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
 				7C6EE5532007422300B47892 /* AlbumListCell.m in Sources */,
 				7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */,

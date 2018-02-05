@@ -18,11 +18,13 @@
 #import "ModifySexViewController.h"
 #import "ModifyNameViewController.h"
 #import "StageSubjectViewController.h"
+#import "HeadImageHandler.h"
 
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
+@property (nonatomic, strong) HeadImageHandler *imageHandler;
 
 @property (nonatomic, strong) GetUserInfoRequest *userInfoRequest;
 @property (nonatomic, strong) UploadHeadImgRequest *uploadHeadImgRequest;
@@ -36,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的";
+    self.imageHandler = [[HeadImageHandler alloc]init];
     self.contentMutableArray =
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
@@ -94,7 +97,8 @@
     [alertVC addAction:cancleAction];
     UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         STRONG_SELF
-        [self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self pickImageFromCamera];
+//        [self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera];
     }];
     [alertVC addAction:cameraAction];
     UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -114,6 +118,13 @@
     [self.imagePickerController pickImageWithSourceType:sourceType completion:^(UIImage *selectedImage) {
         STRONG_SELF
         [self updateWithHeaderImage:selectedImage];
+    }];
+}
+- (void)pickImageFromCamera {
+    WEAK_SELF
+    [self.imageHandler pickImageFromCameraWithCompleteBlock:^(UIImage *image) {
+        STRONG_SELF
+        [self updateWithHeaderImage:image];
     }];
 }
 #pragma mark - UITableViewDelegate
