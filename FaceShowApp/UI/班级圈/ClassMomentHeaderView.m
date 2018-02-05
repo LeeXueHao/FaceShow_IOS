@@ -225,6 +225,7 @@
         make.left.equalTo(self.userButton.mas_right).offset(10.0f);
         make.top.equalTo(self.userButton.mas_top).offset(6.0f);
         make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+        make.height.mas_offset(14.0f);
     }];
     
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {

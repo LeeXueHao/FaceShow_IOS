@@ -540,7 +540,6 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     height = height + 10.0f + 30.0f;
     if (moment.likes.count == 0 && moment.comments.count == 0) {
         height = height + 5.0f;
-        
     }else if (moment.likes.count != 0 && moment.comments.count != 0) {
         NSMutableArray *mutableArrray = [[NSMutableArray alloc] init];
         [moment.likes enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Like *obj, NSUInteger idx, BOOL * _Nonnull stop) {
