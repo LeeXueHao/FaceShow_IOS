@@ -47,7 +47,8 @@
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
     NSAttributedString *attributedString  = [[NSAttributedString alloc] initWithString:_moment.content?:@"\n" attributes:@{NSParagraphStyleAttributeName :paragraphStyle}];
     self.contentLabel.attributedText = attributedString;
-    if ([self sizeForTitle:_moment.content?:@""] >= 85.0f) {
+    CGFloat height = [self sizeForTitle:_moment.content?:@""];
+    if (height >= 85.0f) {
         if (!_moment.isOpen.boolValue) {
             [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.nameLabel.mas_left);
@@ -60,6 +61,7 @@
                 make.left.equalTo(self.nameLabel.mas_left);
                 make.top.equalTo(self.nameLabel.mas_bottom).offset(3.0f);
                 make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+                make.height.mas_equalTo(height);
             }];
         }
         self.openCloseButton.selected = _moment.isOpen.boolValue;
@@ -281,6 +283,6 @@
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],
                                                 NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
-    return rect.size.height;
+    return ceilf(rect.size.height);
 }
 @end

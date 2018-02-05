@@ -578,7 +578,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],
                                                 NSParagraphStyleAttributeName :paragraphStyle} context:NULL];
-    return rect.size.height;
+    return ceilf(rect.size.height);
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self hideFloatingView];
