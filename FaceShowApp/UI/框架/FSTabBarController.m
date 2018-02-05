@@ -9,6 +9,8 @@
 #import "FSTabBarController.h"
 #import "UserPromptsManager.h"
 
+NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
+
 @interface FSTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -44,11 +46,12 @@
 
 #pragma mark - UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    if (self.selectedIndex == 2) {
-        if (![UserPromptsManager sharedInstance].momentNewView.hidden) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
-        }
-    }
+//    if (self.selectedIndex == 2) {
+//        if (![UserPromptsManager sharedInstance].momentNewView.hidden) {
+//            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
+//        }
+//    }
+    [[NSNotificationCenter defaultCenter]postNotificationName:kTabBarDidSelectNotification object:viewController];
 }
 
 @end

@@ -29,6 +29,7 @@
 #import "AlertView.h"
 #import "ClassMomentUserViewController.h"
 #import "ClassMomentNotificationViewController.h"
+#import "FSTabBarController.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
@@ -96,6 +97,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [super viewWillDisappear:animated];
     [self hideFloatingView];
 }
+
 #pragma mark - set & get
 - (YXImagePickerController *)imagePickerController
 {
@@ -360,6 +362,15 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             if (self.tabBarController.selectedIndex == 2) {
                 [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
 //                [self firstPageFetch];
+            }
+        }
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTabBarDidSelectNotification object:nil]subscribeNext:^(NSNotification *x) {
+        STRONG_SELF
+        if (self.navigationController == x.object) {
+            if (![UserPromptsManager sharedInstance].momentNewView.hidden) {
+                [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+                [self firstPageFetch];
             }
         }
     }];

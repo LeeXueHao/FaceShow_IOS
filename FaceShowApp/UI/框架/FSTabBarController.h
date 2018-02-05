@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const kTabBarDidSelectNotification;
+
 @interface FSTabBarController : UITabBarController
 
 @end
