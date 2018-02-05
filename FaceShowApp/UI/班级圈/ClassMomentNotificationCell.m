@@ -53,7 +53,6 @@
     self.contentLabel = [[UILabel alloc] init];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
-    self.contentLabel.numberOfLines = 4;
     [self.contentView addSubview:self.contentLabel];
     
     self.likeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"赞点后的小标签"]];
@@ -72,6 +71,7 @@
     self.commetnLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.commetnLabel.font = [UIFont systemFontOfSize:14.0f];
     self.commetnLabel.textAlignment = NSTextAlignmentRight;
+    self.commetnLabel.numberOfLines = 4;
     [self.contentView addSubview:self.commetnLabel];
     
     self.lineView = [[UIView alloc] init];
@@ -99,7 +99,7 @@
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(15.0f);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-16.0f);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-13.0f);
     }];
     
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -111,7 +111,7 @@
     [self.commetnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.right.equalTo(self.contentView.mas_right).offset(-14.0f);
-        make.size.mas_offset(CGSizeMake(60.0f, 60.0f));
+        make.width.mas_offset(60.f);
     }];
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
