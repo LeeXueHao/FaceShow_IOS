@@ -60,7 +60,7 @@
         WEAK_SELF
         NSString *urlString = nil;
         if (self.imageModelMutableArray.count == 1) {
-            urlString = [QiniuDataManager resizedUrlStringWithOriString:obj.thumbnail maxLongEdge:self.widthFloat];
+            urlString = obj.thumbnail;
         }else {
             urlString = [QiniuDataManager resizedUrlStringWithOriString:obj.thumbnail maxLongEdge:200];
         }

@@ -83,6 +83,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 self.errorView.hidden = YES;
                 [self.dataArray insertObject:moment atIndex:0];
                 [self.tableView reloadData];
+                self.tableView.contentOffset = CGPointZero;
             }
         };
         FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:VC];
