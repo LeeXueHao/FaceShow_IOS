@@ -572,7 +572,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         }];
         height = height + 7.0f + 10.0f + 10.0f;
     }
-    return ceil(height);
+    return ceilf(height);
 }
 - (CGFloat)sizeForLikes:(NSString *)title {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
