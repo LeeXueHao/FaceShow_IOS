@@ -148,6 +148,14 @@
         make.size.mas_equalTo(CGSizeMake(100, 25));
     }];
     
+    UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈icon" highlightedImage:@"意见反馈icon"];
+    [self.view addSubview:feedbackInfoBtn];
+    [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(40);
+        make.centerX.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(100, 25));
+    }];
+    
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [logoutBtn setTitle:@"退出" forState:UIControlStateNormal];
@@ -160,6 +168,17 @@
     [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(49);
+    }];
+    
+    UILabel *versionLabel = [[UILabel alloc]init];
+    versionLabel.textColor = [UIColor colorWithHexString:@"a4acb8"];
+    versionLabel.text = [NSString stringWithFormat:@"版本号：V%@",[ConfigManager sharedInstance].clientVersion];
+    versionLabel.font = [UIFont systemFontOfSize:14];
+    versionLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:versionLabel];
+    [versionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(logoutBtn.mas_top).mas_offset(-20);
+        make.centerX.mas_equalTo(0);
     }];
 }
 
@@ -197,6 +216,10 @@
         [TalkingData trackEvent:@"点击签到记录"];
         SignInRecordViewController *signInRecordVC = [[SignInRecordViewController alloc] init];
         [self.navigationController pushViewController:signInRecordVC animated:YES];
+    }else if ([sender.titleLabel.text isEqualToString:@"意见反馈"]) {
+        [TalkingData trackEvent:@"点击意见反馈"];
+        FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] init];
+        [self.navigationController pushViewController:feedbackVC animated:YES];
     } else if ([sender.titleLabel.text isEqualToString:@"我的资料"]) {
         UserInfoViewController *VC = [[UserInfoViewController alloc] init];
         WEAK_SELF
