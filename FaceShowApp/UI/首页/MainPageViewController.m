@@ -83,14 +83,14 @@
     }];
     self.topView = topView;
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
-    NSArray *tabNames = @[@"课程",@"资源",@"任务",@"日程"];
+    NSArray *tabNames = @[@"课程",@"日程",@"任务",@"资源"];
     tabContainerView.tabNameArray = tabNames;
     WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
         [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
         self.selectedIndex = index;
-        if (index == 1) {
+        if (index == 3) {
             if (![UserPromptsManager sharedInstance].resourceNewView.hidden) {
                 [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewResourceNotification object:nil];
             }
@@ -105,11 +105,11 @@
     }];
     self.tabControllers = [NSMutableArray array];
     [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]];
+    [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
+    [self.tabControllers addObject:[[TaskListViewController alloc]init]];
     ResourceListViewController *resVC = [[ResourceListViewController alloc]init];
     resVC.mainVC = self;
     [self.tabControllers addObject:resVC];
-    [self.tabControllers addObject:[[TaskListViewController alloc]init]];
-    [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
     for (UIViewController *vc in self.tabControllers) {
         [self addChildViewController:vc];
     }

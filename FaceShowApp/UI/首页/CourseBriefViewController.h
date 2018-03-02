@@ -1,15 +1,13 @@
 //
 //  CourseBriefViewController.h
-//  FaceShowApp
+//  FaceShowAdminApp
 //
-//  Created by LiuWenXing on 2017/9/19.
+//  Created by niuzhaowang on 2017/11/9.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "ScrollBaseViewController.h"
+#import "BaseViewController.h"
 
-@interface CourseBriefViewController : ScrollBaseViewController
-
-@property (nonatomic, strong) NSString *courseBrief;
-
+@interface CourseBriefViewController : BaseViewController
+@property (nonatomic, strong) NSString *brief;
 @end

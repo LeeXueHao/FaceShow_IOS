@@ -34,7 +34,7 @@
     
     self.statusLabel = [[UILabel alloc] init];
     self.statusLabel.font = [UIFont systemFontOfSize:13];
-    self.statusLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.statusLabel.textColor = [UIColor colorWithHexString:@"666666"];
     [self.contentView addSubview:self.statusLabel];
     [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-15);
@@ -92,7 +92,14 @@
     _task = task;
     self.titleLabel.text = task.interactName;
     self.timeLabel.text = [task.createTime omitSecondOfFullDateString];
-    self.statusLabel.text = task.stepFinished.boolValue ? @"已完成" : @"未完成";
+    if (task.stepFinished.boolValue) {
+        self.statusLabel.text = @"已完成";
+        self.statusLabel.textColor = [UIColor colorWithHexString:@"666666"];
+    }else {
+        self.statusLabel.text = @"未完成";
+        self.statusLabel.textColor = [UIColor colorWithHexString:@"f56f5d"];
+    }
+    
     self.statusImageView.image = [UIImage imageNamed:task.stepFinished.boolValue ? @"已完成" : @"未完成"];
     InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
     if (type == InteractType_Vote) {

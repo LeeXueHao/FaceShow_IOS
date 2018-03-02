@@ -1,20 +1,19 @@
 //
-//  MainPageTabContainerView.m
-//  FaceShowApp
+//  CourseDetailTabContainerView.m
+//  FaceShowAdminApp
 //
-//  Created by niuzhaowang on 2017/9/14.
+//  Created by niuzhaowang on 2017/11/8.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "MainPageTabContainerView.h"
-#import "UserPromptsManager.h"
+#import "CourseDetailTabContainerView.h"
 
-@interface MainPageTabContainerView()
+@interface CourseDetailTabContainerView()
 @property (nonatomic, strong) NSMutableArray *tabButtonArray;
 @property (nonatomic, strong) UIView *sliderView;
 @end
 
-@implementation MainPageTabContainerView
+@implementation CourseDetailTabContainerView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -54,29 +53,15 @@
         }
     }];
     self.sliderView = [[UIView alloc]init];
-    self.sliderView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
+    self.sliderView.backgroundColor = [UIColor colorWithHexString:@"0068bd"];
     [self addSubview:self.sliderView];
+    UIButton *b = self.tabButtonArray.firstObject;
     [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.mas_equalTo(0);
+        make.centerX.mas_equalTo(b.mas_centerX);
+        make.bottom.mas_equalTo(0);
         make.height.mas_equalTo(2);
-        make.width.mas_equalTo(tabWidth);
+        make.width.mas_equalTo(130);
     }];
-    
-    UIView *resourceNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 7 / 8 + 5, 6, 6, 6)];
-    resourceNewView.layer.cornerRadius = 3.f;
-    resourceNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    resourceNewView.hidden = YES;
-    [self addSubview:resourceNewView];
-    [self bringSubviewToFront:resourceNewView];
-    [UserPromptsManager sharedInstance].resourceNewView = resourceNewView;
-    
-    UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 5, 6, 6, 6)];
-    momentNewView.layer.cornerRadius = 3.f;
-    momentNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    momentNewView.hidden = YES;
-    [self addSubview:momentNewView];
-    [self bringSubviewToFront:momentNewView];
-    [UserPromptsManager sharedInstance].taskNewView = momentNewView;
 }
 
 - (void)btnAction:(UIButton *)sender {
@@ -87,11 +72,14 @@
         b.selected = NO;
     }
     sender.selected = YES;
-    CGFloat tabWidth = SCREEN_WIDTH/self.tabNameArray.count;
+    //    CGFloat tabWidth = SCREEN_WIDTH/self.tabNameArray.count;
     NSInteger index = [self.tabButtonArray indexOfObject:sender];
-    [UIView animateWithDuration:0.2 animations:^{
-        [self.sliderView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(tabWidth*index);
+    [UIView animateWithDuration:.2 animations:^{
+        [self.sliderView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(sender.mas_centerX);
+            make.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(2);
+            make.width.mas_equalTo(130);
         }];
         [self layoutIfNeeded];
     }];

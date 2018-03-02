@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSString<Optional> *createTime;
 @property (nonatomic, strong) NSString<Optional> *stepFinished;
 @property (nonatomic, strong) NSString<Optional> *interactTypeName;
+@property (nonatomic, strong) NSString<Optional> *totalStudentNum;
+@property (nonatomic, strong) NSString<Optional> *finishedStudentNum;
 @end
 
 @protocol GetCourseRequestItem_AttachmentInfo <NSObject>

@@ -1,23 +1,23 @@
 //
 //  CourseBriefViewController.m
-//  FaceShowApp
+//  FaceShowAdminApp
 //
-//  Created by LiuWenXing on 2017/9/19.
+//  Created by niuzhaowang on 2017/11/9.
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
 #import "CourseBriefViewController.h"
+#import "EmptyView.h"
 
 @interface CourseBriefViewController ()
-
-@property (nonatomic, strong) UILabel *contentLabel;
-
+@property (nonatomic, strong) EmptyView *emptyView;
 @end
 
 @implementation CourseBriefViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     [self setupUI];
 }
 
@@ -26,36 +26,29 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - setupUI
 - (void)setupUI {
-    self.title = @"课程简介";
-    
-    UIView *headerView = [[UIView alloc] init];
-    headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self.contentView addSubview:headerView];
-    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
-        make.height.mas_equalTo(5);
+    UITextView *tv = [[UITextView alloc]init];
+    tv.backgroundColor = [UIColor clearColor];
+    tv.textContainerInset = UIEdgeInsetsMake(25, 15, 25, 15);
+    tv.textColor = [UIColor colorWithHexString:@"333333"];
+    tv.font = [UIFont systemFontOfSize:14];
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.2;
+    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:self.brief attributes:dic];
+    tv.attributedText = attributeStr;
+    tv.editable = NO;
+    [self.view addSubview:tv];
+    [tv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
     
-    self.contentLabel = [[UILabel alloc] init];
-    self.contentLabel.numberOfLines = 0;
-    [self.contentView addSubview:self.contentLabel];
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(headerView.mas_bottom).offset(25);
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
-        make.bottom.mas_equalTo(-25);
+    self.emptyView = [[EmptyView alloc]init];
+    [self.view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
-    
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.minimumLineHeight = 23;
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.courseBrief attributes:@{
-                                                                                                                  NSFontAttributeName : [UIFont systemFontOfSize:16],
-                                                                                                                  NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
-                                                                                                                  NSParagraphStyleAttributeName : style
-                                                                                                                  }];
-    self.contentLabel.attributedText = attributedStr;
+    self.emptyView.hidden = !isEmpty(self.brief);
 }
 
 @end
