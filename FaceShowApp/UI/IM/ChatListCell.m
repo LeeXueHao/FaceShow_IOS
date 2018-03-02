@@ -141,8 +141,10 @@
             self.messageLabel.text = topic.latestMessage.text;
         }
     }
-    NSString *string = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:topic.latestMessage.sendTime];
-    self.timeLabel.text = [string componentsSeparatedByString:@" "].firstObject;
+    if (topic.latestMessage.sendTime > 0) {
+        NSString *string = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:topic.latestMessage.sendTime];
+        self.timeLabel.text = [string componentsSeparatedByString:@" "].firstObject;
+    }
 }
 
 - (void)setIsLastRow:(BOOL)isLastRow {

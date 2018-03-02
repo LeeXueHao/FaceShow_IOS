@@ -69,7 +69,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         entity.type = message.type;
         entity.uniqueID = message.uniqueID;
         entity.messageID = message.messageID;
-        if (message.sendState == MessageSendState_Sending) {
+        if (!entity.primaryKey || message.sendState == MessageSendState_Sending) {
             IMTopicMessageEntity *lastEntity = [IMTopicMessageEntity MR_findFirstOrderedByAttribute:@"primaryKey" ascending:NO inContext:localContext];
             entity.primaryKey = lastEntity.primaryKey + 1;
         }
