@@ -305,6 +305,7 @@
 		92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF77151F6FAA2F007C3835 /* ClassMomentLikeView.m */; };
 		E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E900D79F1FEB51F9005B9163 /* FeedbackViewController.m */; };
 		E900D7A31FEB5806005B9163 /* FeedbackRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E900D7A21FEB5806005B9163 /* FeedbackRequest.m */; };
+		E90C51372049331D0008F92A /* IMImageMessageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C51362049331D0008F92A /* IMImageMessageBaseCell.m */; };
 		E91E5D0D2047B0CB00052FBA /* ClazsMemberListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */; };
 		E91E5D0E2047B0CB00052FBA /* ClazsMemberListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */; };
 		E91E5D0F2047B0CB00052FBA /* ClazsMemberListRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */; };
@@ -928,6 +929,8 @@
 		E900D79F1FEB51F9005B9163 /* FeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		E900D7A11FEB5806005B9163 /* FeedbackRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackRequest.h; sourceTree = "<group>"; };
 		E900D7A21FEB5806005B9163 /* FeedbackRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackRequest.m; sourceTree = "<group>"; };
+		E90C51352049331D0008F92A /* IMImageMessageBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMImageMessageBaseCell.h; sourceTree = "<group>"; };
+		E90C51362049331D0008F92A /* IMImageMessageBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessageBaseCell.m; sourceTree = "<group>"; };
 		E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListFetcher.m; sourceTree = "<group>"; };
 		E91E5D092047B0CB00052FBA /* ClazsMemberListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListRequest.h; sourceTree = "<group>"; };
 		E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListRequest.m; sourceTree = "<group>"; };
@@ -2311,6 +2314,8 @@
 				E91E5D2C2047B22400052FBA /* IMTextMessageLeftCell.m */,
 				E91E5D3A2047B22600052FBA /* IMTextMessageRightCell.h */,
 				E91E5D392047B22600052FBA /* IMTextMessageRightCell.m */,
+				E90C51352049331D0008F92A /* IMImageMessageBaseCell.h */,
+				E90C51362049331D0008F92A /* IMImageMessageBaseCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2782,6 +2787,7 @@
 				E91E5DA62047B8E300052FBA /* IMTextMessage.m in Sources */,
 				E91E5D732047B88600052FBA /* IMTopicMessage.m in Sources */,
 				E91E5DC62047DB5500052FBA /* IMConnectionManager.m in Sources */,
+				E90C51372049331D0008F92A /* IMImageMessageBaseCell.m in Sources */,
 				E91E5DB52047B90E00052FBA /* MqttMsg.pbobjc.m in Sources */,
 				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
 				4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */,

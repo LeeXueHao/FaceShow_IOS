@@ -11,12 +11,6 @@
 
 @interface IMTextMessageBaseCell : IMMessageBaseCell
 
-@property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIButton *avatarButton;
-@property (nonatomic, strong) UILabel *usernameLabel;
-@property (nonatomic, strong) UIImageView *messageBackgroundView;
 @property (nonatomic, strong) UILabel *messageTextLabel;
-@property (nonatomic, strong) UIButton *stateButton;
-
 
 @end

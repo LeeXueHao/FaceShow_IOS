@@ -20,5 +20,13 @@
 
 @property (nonatomic, assign) TopicType topicType;
 
+@property (nonatomic, strong) UIImageView *messageBackgroundView;
+@property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIButton *avatarButton;
+@property (nonatomic, strong) UILabel *usernameLabel;
+@property (nonatomic, strong) UIButton *stateButton;
+
+- (void)setupUI;
+- (void)setupLayout;
 @end
 

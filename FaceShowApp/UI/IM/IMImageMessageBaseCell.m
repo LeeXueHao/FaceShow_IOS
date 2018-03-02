@@ -1,15 +1,14 @@
 //
-//  IMTextMessageBaseCell.m
+//  IMImageMessageBaseCell.m
 //  FaceShowApp
 //
-//  Created by ZLL on 2018/1/9.
+//  Created by ZLL on 2018/3/2.
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "IMTextMessageBaseCell.h"
+#import "IMImageMessageBaseCell.h"
 
-
-@implementation IMTextMessageBaseCell
+@implementation IMImageMessageBaseCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -23,18 +22,15 @@
 }
 
 - (void)setupUI {
-    [super setupUI];
-    self.messageTextLabel = [[UILabel alloc] init];
-    self.messageTextLabel.numberOfLines = 0;
-    self.messageTextLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.messageTextLabel.font = [UIFont systemFontOfSize:14.0f];
+    self.messageImageview = [[UIImageView alloc]init];
+    self.messageImageview.backgroundColor = [UIColor redColor];
 }
 
 - (void)setupLayout {
-    [super setupLayout];
-    [self.messageBackgroundView addSubview:self.messageTextLabel];
-    [self.messageTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.messageBackgroundView addSubview:self.messageImageview];
+    [self.messageImageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(11.f, 15.f, 18.f, 14.f));
+        make.size.mas_equalTo(CGSizeMake(100, 100));
     }];
 }
 
@@ -42,8 +38,7 @@
     if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
         return;
     }
-    self.messageTextLabel.text = message.text;
+    [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"聊聊-背景"]];
     [super setMessage:message];
 }
-
 @end

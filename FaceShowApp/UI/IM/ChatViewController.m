@@ -20,6 +20,7 @@
 #import "IMMessageMenuView.h"
 #import "IMMessageTableView.h"
 #import "IMTimeHandleManger.h"
+#import "ImageSelectionHandler.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (assign,nonatomic) BOOL isFirst;
@@ -27,7 +28,7 @@
 @property (nonatomic, strong) NSMutableArray<IMTopicMessage *> *dataArray;
 @property (nonatomic, strong) IMInputView *imInputView;
 @property (nonatomic, strong) IMMessageMenuView *menuView;
-
+@property (nonatomic, strong) ImageSelectionHandler *imageHandler;
 @property (assign,nonatomic)BOOL hasMore;
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
 @end
@@ -50,6 +51,7 @@
     }else {
         self.title = self.member.name;
     }
+    self.imageHandler = [[ImageSelectionHandler alloc]init];
     [self setupUI];
     [self setupData];
     [self setupObserver];
@@ -81,6 +83,9 @@
     }];
     [self.imInputView setCameraButtonClickBlock:^{
         STRONG_SELF
+        [self.imageHandler pickImageWithMaxCount:9 completeBlock:^(NSArray *array) {
+            DDLogDebug(@"发送图片消息");
+        }];
     }];
     [self.view addSubview:self.imInputView];
     [self.imInputView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,7 +123,7 @@
 
 - (void)setupData {
     WEAK_SELF
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:100 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         self.dataArray = [NSMutableArray arrayWithArray:array];
         [self handelTimeForDataSource:self.dataArray];
@@ -230,6 +235,7 @@
     [self.activity startAnimating];
     [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeIndex:self.dataArray.firstObject.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
+        [self.activity stopAnimating];
         self.hasMore = hasMore;
         if (array.count > 0) {
             for (NSInteger i = 0; i < array.count; i ++) {
@@ -237,7 +243,6 @@
             }
             [self handelTimeForDataSource:self.dataArray];
             [self.tableView reloadData];
-            [self.activity stopAnimating];
             self.tableView.tableHeaderView.hidden = YES;
         }
     }];
