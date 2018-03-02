@@ -115,7 +115,7 @@
 - (void)setTopic:(IMTopic *)topic {
     _topic = topic;
     if (topic.type == TopicType_Group) {
-        self.avatarImageView.image = [UIImage imageNamed:@"背景"];
+        self.avatarImageView.image = [UIImage imageNamed:@"群聊-背景"];
         self.nameLabel.text = @"班级群聊";
         if (topic.latestMessage.type == MessageType_Image) {
             self.messageLabel.text = @"[图片]";
@@ -153,7 +153,7 @@
 }
 
 - (void)setupMockData {
-    self.avatarImageView.image = [UIImage imageNamed:@"背景"];
+    self.avatarImageView.image = [UIImage imageNamed:@"群聊-背景"];
     self.nameLabel.text = @"这是标题啦这是标题啦";
     self.messageLabel.text = @"这是最新的信息啦这是最新的信息啦这是最新的信息啦这是最新的信息啦这是最新的信息啦";
     self.timeLabel.text = @"2017.12.31 00:00";
