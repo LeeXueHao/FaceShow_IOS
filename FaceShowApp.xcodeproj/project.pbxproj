@@ -1943,6 +1943,40 @@
 			name = "抽屉";
 			sourceTree = "<group>";
 		};
+		7CBC5B812049061F004ACA04 /* request */ = {
+			isa = PBXGroup;
+			children = (
+				E91E5D992047B8E000052FBA /* SaveTextMsgRequest.h */,
+				E91E5D8F2047B8DF00052FBA /* SaveTextMsgRequest.m */,
+				E91E5D942047B8E000052FBA /* TopicData.h */,
+				E91E5D972047B8E000052FBA /* TopicData.m */,
+				E91E5D9A2047B8E000052FBA /* TopicMsgData.h */,
+				E91E5D922047B8DF00052FBA /* TopicMsgData.m */,
+				E91E5D9E2047B8E100052FBA /* CreateTopicRequest.h */,
+				E91E5D912047B8DF00052FBA /* CreateTopicRequest.m */,
+				E91E5D902047B8DF00052FBA /* GetMemberTopicsRequest.h */,
+				E91E5D982047B8E000052FBA /* GetMemberTopicsRequest.m */,
+				E91E5D932047B8DF00052FBA /* GetTopicMsgsRequest.h */,
+				E91E5D9B2047B8E100052FBA /* GetTopicMsgsRequest.m */,
+				E91E5D952047B8E000052FBA /* GetTopicsRequest.h */,
+				E91E5D8E2047B8DF00052FBA /* GetTopicsRequest.m */,
+			);
+			name = request;
+			sourceTree = "<group>";
+		};
+		7CBC5B822049066E004ACA04 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E91E5DBF2047DAFB00052FBA /* DB */,
+				E91E5D4B2047B67E00052FBA /* Service */,
+				E91E5D502047B6EA00052FBA /* EventHandlers */,
+				E91E5D4F2047B6D400052FBA /* Http */,
+				E91E5D4E2047B6BE00052FBA /* Protos */,
+				E91E5DC32047DB3300052FBA /* Connection */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		7CBDAB811F6925B50096C4BA /* 扫一扫 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2177,13 +2211,8 @@
 				E91E5D5C2047B83C00052FBA /* IMConfig.m */,
 				E91E5D5E2047B83C00052FBA /* IMManager.h */,
 				E91E5D5D2047B83C00052FBA /* IMManager.m */,
-				E91E5DC32047DB3300052FBA /* Connection */,
-				E91E5DBF2047DAFB00052FBA /* DB */,
 				E91E5DBD2047DA7000052FBA /* UserInterface */,
-				E91E5D4B2047B67E00052FBA /* Service */,
-				E91E5D502047B6EA00052FBA /* EventHandlers */,
-				E91E5D4F2047B6D400052FBA /* Http */,
-				E91E5D4E2047B6BE00052FBA /* Protos */,
+				7CBC5B822049066E004ACA04 /* Core */,
 			);
 			path = IM;
 			sourceTree = "<group>";
@@ -2287,26 +2316,13 @@
 		E91E5D4F2047B6D400052FBA /* Http */ = {
 			isa = PBXGroup;
 			children = (
-				E91E5D9E2047B8E100052FBA /* CreateTopicRequest.h */,
-				E91E5D912047B8DF00052FBA /* CreateTopicRequest.m */,
-				E91E5D902047B8DF00052FBA /* GetMemberTopicsRequest.h */,
-				E91E5D982047B8E000052FBA /* GetMemberTopicsRequest.m */,
-				E91E5D932047B8DF00052FBA /* GetTopicMsgsRequest.h */,
-				E91E5D9B2047B8E100052FBA /* GetTopicMsgsRequest.m */,
-				E91E5D952047B8E000052FBA /* GetTopicsRequest.h */,
-				E91E5D8E2047B8DF00052FBA /* GetTopicsRequest.m */,
+				7CBC5B812049061F004ACA04 /* request */,
 				E91E5D9F2047B8E200052FBA /* IMRequestManager.h */,
 				E91E5D9D2047B8E100052FBA /* IMRequestManager.m */,
 				E91E5DA02047B8E200052FBA /* IMTextMessage.h */,
 				E91E5D962047B8E000052FBA /* IMTextMessage.m */,
 				E91E5D9C2047B8E100052FBA /* IMTextMessageSender.h */,
 				E91E5DA12047B8E300052FBA /* IMTextMessageSender.m */,
-				E91E5D992047B8E000052FBA /* SaveTextMsgRequest.h */,
-				E91E5D8F2047B8DF00052FBA /* SaveTextMsgRequest.m */,
-				E91E5D942047B8E000052FBA /* TopicData.h */,
-				E91E5D972047B8E000052FBA /* TopicData.m */,
-				E91E5D9A2047B8E000052FBA /* TopicMsgData.h */,
-				E91E5D922047B8DF00052FBA /* TopicMsgData.m */,
 			);
 			name = Http;
 			sourceTree = "<group>";

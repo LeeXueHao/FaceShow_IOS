@@ -41,6 +41,7 @@
         msg.uniqueID = reqId;
     }
     message.sendState = MessageSendState_Sending;
+    message.sendTime = [[NSDate date]timeIntervalSince1970]*1000;
     [[IMDatabaseManager sharedInstance]saveMessage:message];
     
     [self.msgArray addObject:msg];

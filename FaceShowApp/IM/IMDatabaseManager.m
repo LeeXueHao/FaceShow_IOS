@@ -245,6 +245,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     topic.channel = entity.channel;
     topic.topicChange = entity.topicChange;
     topic.latestMsgId = entity.latestMsgId;
+    topic.unreadCount = entity.unreadCount;
     topic.latestMessage = [self messageFromEntity:entity.latestMessage];
     NSMutableArray *members = [NSMutableArray array];
     for (IMMemberEntity *member in entity.members) {

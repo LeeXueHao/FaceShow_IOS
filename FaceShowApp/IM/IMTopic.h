@@ -22,6 +22,7 @@ typedef NS_ENUM(int64_t, TopicType) {
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) int64_t latestMsgId;
 @property (nonatomic, assign) int64_t topicChange;
+@property (nonatomic, assign) int64_t unreadCount;
 @property (nonatomic, strong) IMTopicMessage *latestMessage;
 @property (nonatomic, strong) NSArray<IMMember *> *members;
 @end
