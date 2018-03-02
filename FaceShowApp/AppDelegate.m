@@ -13,6 +13,7 @@
 #import <BMKLocationKit/BMKLocationAuth.h>
 #import "UserPromptsManager.h"
 #import "YXInitRequest.h"
+#import "IMManager.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -37,6 +38,8 @@
     if ([UserManager sharedInstance].loginStatus) {
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
+        [[IMManager sharedInstance]setupWithCurrentMember:[[UserManager sharedInstance].userModel.imInfo.imMember toIMMember] token:[UserManager sharedInstance].userModel.imInfo.imToken];
+        [[IMManager sharedInstance] startConnection];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -55,6 +58,8 @@
         [self.appDelegateHelper handleLoginSuccess];
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
+        [[IMManager sharedInstance]setupWithCurrentMember:[[UserManager sharedInstance].userModel.imInfo.imMember toIMMember] token:[UserManager sharedInstance].userModel.imInfo.imToken];
+        [[IMManager sharedInstance] startConnection];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
@@ -62,6 +67,7 @@
         [self.appDelegateHelper handleLogoutSuccess];
         [[UserMessageManager sharedInstance] suspendHeartbeat];
         [[UserPromptsManager sharedInstance] suspendHeartbeat];
+        [[IMManager sharedInstance] stopConnection];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kClassDidSelectNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
@@ -88,6 +94,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [[IMManager sharedInstance] stopConnection];
     [GlobalUtils clearCore];
 }
 

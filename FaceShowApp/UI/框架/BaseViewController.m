@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "PageNameMappingTable.h"
+#import "YXDrawerController.h"
 
 @interface BaseViewController ()
 
@@ -64,6 +65,18 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UINavigationController *)navigationController{
+    UINavigationController *navi = [super navigationController];
+    if (!navi) {
+        YXDrawerViewController *drawerVC = [YXDrawerController drawer];
+        if ([drawerVC.paneViewController isKindOfClass:[UITabBarController class]]) {
+            UITabBarController *tabBarVC = (UITabBarController *)drawerVC.paneViewController;
+            navi = tabBarVC.viewControllers[tabBarVC.selectedIndex];
+        }
+    }
+    return navi;
 }
 
 @end

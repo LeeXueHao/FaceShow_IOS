@@ -7,6 +7,7 @@
 //
 
 #import "FSNavigationController.h"
+#import "YXDrawerController.h"
 
 @interface FSNavigationController ()
 
@@ -47,6 +48,7 @@
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [YXDrawerController hideDrawer];
     if (self.viewControllers.count == 1) {
         viewController.hidesBottomBarWhenPushed = YES;
     }

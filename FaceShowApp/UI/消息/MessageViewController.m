@@ -12,6 +12,7 @@
 #import "NoticeListFetcher.h"
 #import "GetNoticeListRequest.h"
 #import "UserMessageManager.h"
+#import "YXDrawerController.h"
 
 @interface MessageViewController ()
 
@@ -24,6 +25,11 @@
     fetcher.clazzId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     self.dataFetcher = fetcher;
     [super viewDidLoad];
+    WEAK_SELF
+    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
+        STRONG_SELF
+        [YXDrawerController showDrawer];
+    }];
     self.emptyView.title = @"暂无通知";
     [self setupUI];
     [self setupObserver];

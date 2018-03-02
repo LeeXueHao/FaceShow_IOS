@@ -32,6 +32,8 @@ extern NSString * const kClassDidSelectNotification;
 @property (nonatomic, copy) NSString<Optional> *token;
 @property (nonatomic, copy) NSString<Optional> *passport;
 
+@property (nonatomic, strong) GetUserInfoRequestItem_imTokenInfo<Optional> *imInfo;
+
 @property (nonatomic, strong) GetCurrentClazsRequestItem<Optional> *projectClassInfo;
 
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo;

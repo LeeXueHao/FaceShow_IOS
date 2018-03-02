@@ -8,6 +8,24 @@
 
 #import "GetUserInfoRequest.h"
 
+@implementation GetUserInfoRequestItem_imMember
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"memberID"}];
+}
+
+- (IMMember *)toIMMember {
+    IMMember *member = [[IMMember alloc]init];
+    member.memberID = self.memberID.integerValue;
+    member.userID = self.userId.integerValue;
+    member.name = self.memberName;
+    member.avatar = self.avatar;
+    return member;
+}
+@end
+
+@implementation GetUserInfoRequestItem_imTokenInfo
+@end
+
 @implementation GetUserInfoRequestItem_Data
 @end
 

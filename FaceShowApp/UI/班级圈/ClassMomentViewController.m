@@ -30,6 +30,7 @@
 #import "ClassMomentUserViewController.h"
 #import "ClassMomentNotificationViewController.h"
 #import "FSTabBarController.h"
+#import "YXDrawerController.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
@@ -72,6 +73,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [super viewDidLoad];
     self.navigationItem.title = @"班级圈";
     WEAK_SELF
+    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
+        STRONG_SELF
+        [YXDrawerController showDrawer];
+    }];
     [self nyx_setupRightWithTitle:@"发布" action:^{
         STRONG_SELF
         PublishMomentViewController *VC = [[PublishMomentViewController alloc]init];

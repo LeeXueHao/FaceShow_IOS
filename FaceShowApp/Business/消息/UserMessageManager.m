@@ -7,13 +7,13 @@
 //
 
 #import "UserMessageManager.h"
-#import "GCDTimer.h"
+#import "YXGCDTimer.h"
 #import "MessageHasUnViewRequest.h"
 
 NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
 
 @interface UserMessageManager ()
-@property (nonatomic, strong) GCDTimer *timer;
+@property (nonatomic, strong) YXGCDTimer *timer;
 @property (nonatomic, strong) MessageHasUnViewRequest *messageHasUnViewRequest;
 @end
 
@@ -47,7 +47,7 @@ NSString * const kHasNewMessageNotification = @"kHasNewMessageNotification";
 - (void)resumeHeartbeat {
     WEAK_SELF
     if (!self.timer) {
-        self.timer = [[GCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
+        self.timer = [[YXGCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
             STRONG_SELF
             [self fetchUserMessageWithNeedRefreshList:YES];
         }];

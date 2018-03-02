@@ -8,7 +8,7 @@
 
 #import "MineVerifyCodeInputView.h"
 #import "MineInputView.h"
-#import "GCDTimer.h"
+#import "YXGCDTimer.h"
 
 static const NSInteger kTimerDuration = 45;
 
@@ -16,7 +16,7 @@ static const NSInteger kTimerDuration = 45;
 
 @property (nonatomic, strong) MineInputView *inputView;
 @property (nonatomic, strong) UIButton *codeButton;
-@property (nonatomic, strong) GCDTimer *timer;
+@property (nonatomic, strong) YXGCDTimer *timer;
 @property (nonatomic, assign) NSInteger secondsRemained;
 @end
 
@@ -112,7 +112,7 @@ static const NSInteger kTimerDuration = 45;
     if (!self.timer) {
         self.secondsRemained = kTimerDuration;
         WEAK_SELF
-        self.timer = [[GCDTimer alloc]initWithInterval:1 repeats:YES triggerBlock:^{
+        self.timer = [[YXGCDTimer alloc]initWithInterval:1 repeats:YES triggerBlock:^{
             STRONG_SELF
             [self countdownTimer];
         }];

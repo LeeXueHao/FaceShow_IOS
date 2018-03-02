@@ -1,22 +1,21 @@
 //
-//  GCDTimer.m
-//  SanKeApp
+//  YXGCDTimer.m
+//  FaceShowApp
 //
-//  Created by niuzhaowang on 2017/1/5.
-//  Copyright © 2017年 niuzhaowang. All rights reserved.
+//  Created by ZLL on 2018/3/1.
+//  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "GCDTimer.h"
+#import "YXGCDTimer.h"
 
-@interface GCDTimer()
+@interface YXGCDTimer()
 @property (nonatomic, strong) dispatch_source_t timerSource;
 @property (nonatomic, strong) void(^triggerBlock) (void);
 @property (nonatomic, assign) BOOL repeats;
 @property (nonatomic, assign) NSTimeInterval interval;
 @end
 
-@implementation GCDTimer
-
+@implementation YXGCDTimer
 - (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats triggerBlock:(void(^)(void))triggerBlock {
     if (self = [super init]) {
         self.triggerBlock = triggerBlock;

@@ -7,7 +7,7 @@
 //
 
 #import "UserPromptsManager.h"
-#import "GCDTimer.h"
+#import "YXGCDTimer.h"
 #import "GetUserPromptsRequest.h"
 
 NSString * const kHasNewTaskNotification = @"kHasNewTaskNotification";
@@ -15,7 +15,7 @@ NSString * const kHasNewMomentNotification = @"kHasNewMomentNotification";
 NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
 
 @interface UserPromptsManager ()
-@property (nonatomic, strong) GCDTimer *timer;
+@property (nonatomic, strong) YXGCDTimer *timer;
 @property (nonatomic, strong) GetUserPromptsRequest *promptRequest;
 @end
 
@@ -62,7 +62,7 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
 - (void)resumeHeartbeat {
     WEAK_SELF
     if (!self.timer) {
-        self.timer = [[GCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
+        self.timer = [[YXGCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
             STRONG_SELF
             [self performRequest];
         }];

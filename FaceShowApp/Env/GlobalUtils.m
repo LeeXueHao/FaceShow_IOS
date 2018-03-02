@@ -17,11 +17,11 @@
 
 #import <objc/runtime.h>
 #import <Aspects.h>
-#ifdef DEBUG
- int ddLogLevel =  DDLogLevelVerbose;
-#else
- int ddLogLevel =  DDLogLevelWarning;
-#endif
+//#ifdef DEBUG
+// int ddLogLevel =  DDLogLevelVerbose;
+//#else
+// int ddLogLevel =  DDLogLevelWarning;
+//#endif
 void FLUncaughtExceptionHandler(NSException * exception)
 {
     NSArray * arr = [exception callStackSymbols];

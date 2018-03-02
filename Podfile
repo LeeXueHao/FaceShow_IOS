@@ -36,6 +36,8 @@ pod 'SocketRocket'
 pod 'SCRecorder', '~> 2.6.1'
 pod 'Qiniu', '~> 7.0'
 pod 'SDWebImage'
+pod 'Protobuf'
+pod 'MQTTClient'
 
 inhibit_all_warnings!
 end

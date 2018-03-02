@@ -25,6 +25,8 @@
 #import "UserSignInRequest.h"
 #import "SubScanCodeResultViewController.h"
 #import "UserPromptsManager.h"
+#import "YXDrawerViewController.h"
+#import "ChatListViewController.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -71,12 +73,18 @@
     [self configTabbarItem:classVC.tabBarItem image:@"朋友圈icon" selectedImage:@"朋友圈icon选择"];
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
-    UIViewController *mineVC = [[MineViewController alloc]init];
-    mineVC.title = @"我的";
-    [self configTabbarItem:mineVC.tabBarItem image:@"我的icon" selectedImage:@"我的icon选择"];
-    FSNavigationController *mineNavi = [[FSNavigationController alloc] initWithRootViewController:mineVC];
+    UIViewController *chatVC = [[ChatListViewController alloc]init];
+    chatVC.title = @"聊聊";
+    [self configTabbarItem:chatVC.tabBarItem image:@"聊天icon正常态" selectedImage:@"聊天icon点击态"];
+    FSNavigationController *chatNavi = [[FSNavigationController alloc] initWithRootViewController:chatVC];
     
-    tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, mineNavi];
+    tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, chatNavi];
+    
+    MineViewController *mineVC = [[MineViewController alloc]init];
+    YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
+    drawerVC.paneViewController = tabBarController;
+    drawerVC.drawerViewController = mineVC;
+    drawerVC.drawerWidth = 305*kPhoneWidthRatio;
     
     UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 2, 6, 9, 9)];
     redPointView.layer.cornerRadius = 4.5f;
@@ -94,7 +102,7 @@
     [tabBarController.tabBar bringSubviewToFront:momentNewView];
     [UserPromptsManager sharedInstance].momentNewView = momentNewView;
     
-    return tabBarController;
+    return drawerVC;
 }
 
 - (void)configTabbarItem:(UITabBarItem *)tabBarItem image:(NSString *)image selectedImage:(NSString *)selectedImage {

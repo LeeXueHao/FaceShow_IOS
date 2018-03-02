@@ -7,6 +7,23 @@
 //
 
 #import "YXGetRequest.h"
+#import "IMMember.h"
+
+@interface GetUserInfoRequestItem_imMember : JSONModel
+@property (nonatomic, copy) NSString<Optional> *memberID;
+@property (nonatomic, copy) NSString<Optional> *bizSource;
+@property (nonatomic, copy) NSString<Optional> *memberType;
+@property (nonatomic, copy) NSString<Optional> *userId;
+@property (nonatomic, copy) NSString<Optional> *memberName;
+@property (nonatomic, copy) NSString<Optional> *avatar;
+
+- (IMMember *)toIMMember;
+@end
+
+@interface GetUserInfoRequestItem_imTokenInfo : JSONModel
+@property (nonatomic, copy) NSString<Optional> *imToken;
+@property (nonatomic, strong) GetUserInfoRequestItem_imMember<Optional> *imMember;
+@end
 
 @interface GetUserInfoRequestItem_Data : JSONModel
 @property (nonatomic, copy) NSString<Optional> *userId;
@@ -23,6 +40,7 @@
 @property (nonatomic, copy) NSString<Optional> *stageName;
 @property (nonatomic, copy) NSString<Optional> *subjectName;
 @property (nonatomic, copy) NSString<Optional> *sexName;
+@property (nonatomic, strong) GetUserInfoRequestItem_imTokenInfo<Optional> *imTokenInfo;
 
 @end
 

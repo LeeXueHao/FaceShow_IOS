@@ -22,6 +22,7 @@
 #import "GetStudentClazsRequest.h"
 #import "GetToolsRequest.h"
 #import "ResourceDisplayViewController.h"
+#import "YXDrawerController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -38,10 +39,9 @@
     [super viewDidLoad];
     self.navigationItem.title = @"研修宝";
     WEAK_SELF
-    [self nyx_setupLeftWithTitle:@"切换班级" action:^{
+    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
         STRONG_SELF
-        ClassSelectionViewController *vc = [[ClassSelectionViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [YXDrawerController showDrawer];
     }];
     [self setupNavRightView];
     [self setupUI];
