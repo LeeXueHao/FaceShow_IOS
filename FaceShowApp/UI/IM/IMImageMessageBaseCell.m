@@ -24,12 +24,13 @@
 - (void)setupUI {
     self.messageImageview = [[UIImageView alloc]init];
     self.messageImageview.backgroundColor = [UIColor redColor];
+    self.messageBackgroundView.image = [[UIImage alloc]init];
 }
 
 - (void)setupLayout {
     [self.messageBackgroundView addSubview:self.messageImageview];
     [self.messageImageview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(11.f, 15.f, 18.f, 14.f));
+        make.edges.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(100, 100));
     }];
 }

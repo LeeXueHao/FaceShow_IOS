@@ -21,6 +21,9 @@
 #import "IMMessageTableView.h"
 #import "IMTimeHandleManger.h"
 #import "ImageSelectionHandler.h"
+#import "IMImageMessageBaseCell.h"
+#import "IMImageMessageLeftCell.h"
+#import "IMImageMessageRightCell.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (assign,nonatomic) BOOL isFirst;
@@ -100,6 +103,9 @@
     [self.tableView registerClass:[IMTextMessageBaseCell class] forCellReuseIdentifier:@"IMTextMessageBaseCell"];
     [self.tableView registerClass:[IMTextMessageLeftCell class] forCellReuseIdentifier:@"IMTextMessageLeftCell"];
     [self.tableView registerClass:[IMTextMessageRightCell class] forCellReuseIdentifier:@"IMTextMessageRightCell"];
+    [self.tableView registerClass:[IMImageMessageBaseCell class] forCellReuseIdentifier:@"IMImageMessageBaseCell"];
+    [self.tableView registerClass:[IMImageMessageLeftCell class] forCellReuseIdentifier:@"IMImageMessageLeftCell"];
+    [self.tableView registerClass:[IMImageMessageRightCell class] forCellReuseIdentifier:@"IMImageMessageRightCell"];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
