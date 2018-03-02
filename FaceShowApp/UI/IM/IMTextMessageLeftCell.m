@@ -21,4 +21,8 @@
     // Configure the view for the selected state
 }
 
+- (void)setMessage:(IMTopicMessage *)message {
+    [super setMessage:message];
+    self.stateButton.hidden = YES;
+}
 @end

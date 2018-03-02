@@ -212,7 +212,7 @@
 }
 
 - (void)scrollToBottom {
-    if ([self.dataArray count]) {
+    if (self.dataArray.count >= 1) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
