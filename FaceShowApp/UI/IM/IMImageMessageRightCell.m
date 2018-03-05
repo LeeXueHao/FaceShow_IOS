@@ -22,9 +22,6 @@
 }
 
 - (void)setMessage:(IMTopicMessage *)message {
-    if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
-        return;
-    }
     [super setMessage:message];
     
     [self.avatarButton mas_remakeConstraints:^(MASConstraintMaker *make) {

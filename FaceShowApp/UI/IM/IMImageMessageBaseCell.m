@@ -40,7 +40,7 @@
         //更新图片
         return;
     }
-    [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"聊聊-背景"]];
     [super setMessage:message];
+    [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"聊聊-背景"]];
 }
 @end

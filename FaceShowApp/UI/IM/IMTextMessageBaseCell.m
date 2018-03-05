@@ -39,11 +39,8 @@
 }
 
 - (void)setMessage:(IMTopicMessage *)message {
-    if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
-        return;
-    }
-    self.messageTextLabel.text = message.text;
     [super setMessage:message];
+    self.messageTextLabel.text = message.text;
 }
 
 @end

@@ -182,6 +182,7 @@
         self.stateButton.enabled = NO;
     }
 }
+
 - (void)setTopicType:(TopicType)topicType {
     if (topicType == TopicType_Private) {
         self.usernameLabel.hidden = YES;
