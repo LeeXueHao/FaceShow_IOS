@@ -8,11 +8,16 @@
 
 #import "ScanCodeViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ScanCodeMaskView.h"
 #import "ScanCodeResultViewController.h"
 #import "UserSignInRequest.h"
-
+#import "ClassCodeItem.h"
 #import "BlackAndWhiteThresholdFilter.h"
+#import "VerifyPhoneViewController.h"
+#import "ScanCodeMaskView.h"
+#import "ScanClazsCodeRequest.h"
+#import "MessagePromptView.h"
+#import "AlertView.h"
+#import "GetStudentClazsRequest.h"
 
 @interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
     AVCaptureSession *_session;
@@ -26,8 +31,12 @@
     CIDetector *_qrDetector;
 }
 
-@property (nonatomic, strong) ScanCodeMaskView *scanCodeMaskView;
 @property (nonatomic, strong) UserSignInRequest *request;
+@property (nonatomic, strong) ScanClazsCodeRequest *clazsCodeRequest;
+@property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
+@property (nonatomic, strong) ClassCodeItem *classCodeItem;
+@property (nonatomic, strong) ScanCodeMaskView *scanCodeMaskView;
+@property (nonatomic, strong) AlertView *alertView;
 @end
 
 @implementation ScanCodeViewController
@@ -50,7 +59,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    self.navigationItem.title = @"签到";
     if (!isEmpty(self.presentingViewController)) {
         [self nyx_setupLeftWithTitle:@"返回" action:^{
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -88,6 +96,7 @@
         [self backAction];
     }
     self.scanCodeMaskView = [[ScanCodeMaskView alloc] init];
+    self.scanCodeMaskView.prompt = self.prompt;
     [self.view addSubview:self.scanCodeMaskView];
     self.scanCodeMaskView.backgroundColor = [UIColor clearColor];
     [self.scanCodeMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -233,6 +242,11 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     NSDictionary *parametersDic = [UserSignInHelper getParametersFromUrlString:stringValue];
     if (!isEmpty(parametersDic)) {
+        if (![UserManager sharedInstance].loginStatus) {
+            [self.view.window nyx_showToast:@"请先登录后再签到"];
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
         [self.view nyx_startLoading];
         [self.request stopRequest];
         self.request = [[UserSignInRequest alloc] init];
@@ -259,17 +273,60 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             };
             [self.navigationController pushViewController:scanCodeResultVC animated:YES];
         }];
-    } else {
-        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
-        scanCodeResultVC.currentIndexPath = self.currentIndexPath;
-        HttpBaseRequestItem_Error *error = [HttpBaseRequestItem_Error new];
-        error.message = @"无效二维码";
-        scanCodeResultVC.error = error;
-        scanCodeResultVC.reScanCodeBlock = ^{
-            [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
-            [self->_session startRunning];
-        };
-        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+    }else if ([stringValue containsString:@"method=clazs.scanClazsCode"]) {
+        [self.view nyx_startLoading];
+        [self.clazsCodeRequest stopRequest];
+        self.clazsCodeRequest = [[ScanClazsCodeRequest alloc]init];
+        self.clazsCodeRequest.url = stringValue;
+        WEAK_SELF
+        [self.clazsCodeRequest startRequestWithRetClass:[ClassCodeItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            if (![UserManager sharedInstance].loginStatus) {
+                if (error) {
+                    [self.view nyx_showToast:error.localizedDescription];
+                    [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+                    [self->_session startRunning];
+                    return;
+                }
+                ClassCodeItem *item = (ClassCodeItem *)retItem;
+                VerifyPhoneViewController *vc = [[VerifyPhoneViewController alloc]init];
+                vc.classID = item.data.clazsId;
+                WEAK_SELF
+                vc.reScanCodeBlock = ^{
+                    STRONG_SELF
+                    [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+                    [self->_session startRunning];
+                };
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                if (!retItem) {
+                    [self.view nyx_showToast:error.localizedDescription];
+                    [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+                    [self->_session startRunning];
+                    return;
+                }
+                self.classCodeItem = retItem;
+                if (error) {
+                    [self showAlertWithMessage:error.localizedDescription];
+                }else {
+                    [self showAlertWithMessage:[NSString stringWithFormat:@"成功加入【%@】",self.classCodeItem.data.clazsInfo.clazsName]];
+                }
+            }
+        }];
+    }else {
+        [self.view.window nyx_showToast:@"无效二维码"];
+        [self.navigationController popViewControllerAnimated:YES];
+//        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+//        scanCodeResultVC.currentIndexPath = self.currentIndexPath;
+//        HttpBaseRequestItem_Error *error = [HttpBaseRequestItem_Error new];
+//        error.message = @"无效二维码";
+//        scanCodeResultVC.error = error;
+//        scanCodeResultVC.reScanCodeBlock = ^{
+//            [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+//            [self->_session startRunning];
+//        };
+//        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
     }
 }
 
@@ -284,5 +341,47 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     });
 }
 
+- (void)showAlertWithMessage:(NSString *)message {
+    MessagePromptView *promptView = [[MessagePromptView alloc]init];
+    promptView.layer.cornerRadius = 7;
+    promptView.clipsToBounds = YES;
+    promptView.message = message;
+    WEAK_SELF
+    [promptView setConfirmBlock:^{
+        STRONG_SELF
+        [self.alertView hide];
+        [self updateClazsInfo];
+    }];
+    self.alertView = [[AlertView alloc]init];
+    self.alertView.maskColor = [[UIColor colorWithHexString:@"333333"]colorWithAlphaComponent:.6];
+    self.alertView.contentView = promptView;
+    [self.alertView showWithLayout:^(AlertView *view) {
+        [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(0);
+            make.left.mas_equalTo(25);
+            make.right.mas_equalTo(-25);
+        }];
+    }];
+}
+
+- (void)updateClazsInfo {
+    [self.clazsRefreshRequest stopRequest];
+    self.clazsRefreshRequest = [[GetStudentClazsRequest alloc] init];
+    self.clazsRefreshRequest.clazsId = self.classCodeItem.data.clazsId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.clazsRefreshRequest startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        GetCurrentClazsRequestItem *item = retItem;
+        [UserManager sharedInstance].userModel.projectClassInfo = item;
+        [[UserManager sharedInstance]saveData];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kClassDidSelectNotification object:nil];
+    }];
+}
 
 @end

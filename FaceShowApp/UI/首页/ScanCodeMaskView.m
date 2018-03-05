@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) NSInteger scanCount;
 @property (nonatomic, strong) UIImageView *scanLineImageView;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
@@ -57,6 +58,7 @@
         make.top.mas_equalTo(middleView.mas_bottom).offset(20);
         make.centerX.mas_equalTo(0);
     }];
+    self.titleLabel = titleLabel;
     
     self.scanLineImageView = [[UIImageView alloc] init];
     self.scanLineImageView.image = [UIImage imageNamed:@"扫描"];
@@ -70,6 +72,11 @@
     if (self.scanCount >= 250) {
         self.scanCount = 0;
     }
+}
+
+- (void)setPrompt:(NSString *)prompt {
+    _prompt = prompt;
+    self.titleLabel.text = prompt;
 }
 
 @end

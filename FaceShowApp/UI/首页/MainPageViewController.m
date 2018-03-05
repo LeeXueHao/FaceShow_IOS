@@ -70,6 +70,7 @@
 - (void)navRightBtnAction:(UIButton *)sender {
     [TalkingData trackEvent:@"点击首页中签到"];
     ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
+    scanCodeVC.navigationItem.title = @"签到";
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 

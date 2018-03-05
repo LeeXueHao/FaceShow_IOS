@@ -238,6 +238,18 @@
 		7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5B9A204932B8004ACA04 /* CourseDetailTabContainerView.m */; };
 		7CBC5BA2204932BA004ACA04 /* CourseInfoTabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5B9C204932B9004ACA04 /* CourseInfoTabContainerView.m */; };
 		7CBC5BA620493F64004ACA04 /* ProfessorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BA520493F63004ACA04 /* ProfessorDetailViewController.m */; };
+		7CBC5BA9204CE6E5004ACA04 /* ClassCodeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BA8204CE6E5004ACA04 /* ClassCodeItem.m */; };
+		7CBC5BAC204CE94A004ACA04 /* VerifyPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BAB204CE94A004ACA04 /* VerifyPhoneViewController.m */; };
+		7CBC5BAF204CEAF2004ACA04 /* GetCheckCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BAE204CEAF2004ACA04 /* GetCheckCodeRequest.m */; };
+		7CBC5BB2204CEBB2004ACA04 /* RegistYxbRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BB1204CEBB2004ACA04 /* RegistYxbRequest.m */; };
+		7CBC5BB5204CF46C004ACA04 /* MessagePromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BB4204CF46C004ACA04 /* MessagePromptView.m */; };
+		7CBC5BB8204D1724004ACA04 /* ScanClazsCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BB7204D1724004ACA04 /* ScanClazsCodeRequest.m */; };
+		7CBC5BBB204D2AEF004ACA04 /* MineNameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BBA204D2AEF004ACA04 /* MineNameInputView.m */; };
+		7CBC5BBE204D2C1C004ACA04 /* RegisterInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BBD204D2C1C004ACA04 /* RegisterInfoViewController.m */; };
+		7CBC5BC1204D3325004ACA04 /* CompleteUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BC0204D3325004ACA04 /* CompleteUserInfoViewController.m */; };
+		7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BC3204D365B004ACA04 /* CompleteInfoHeaderView.m */; };
+		7CBC5BC7204E298C004ACA04 /* SysUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BC6204E298C004ACA04 /* SysUserItem.m */; };
+		7CBC5BCD204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -806,6 +818,30 @@
 		7CBC5B9C204932B9004ACA04 /* CourseInfoTabContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInfoTabContainerView.m; sourceTree = "<group>"; };
 		7CBC5BA420493F63004ACA04 /* ProfessorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessorDetailViewController.h; sourceTree = "<group>"; };
 		7CBC5BA520493F63004ACA04 /* ProfessorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessorDetailViewController.m; sourceTree = "<group>"; };
+		7CBC5BA7204CE6E5004ACA04 /* ClassCodeItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassCodeItem.h; sourceTree = "<group>"; };
+		7CBC5BA8204CE6E5004ACA04 /* ClassCodeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassCodeItem.m; sourceTree = "<group>"; };
+		7CBC5BAA204CE94A004ACA04 /* VerifyPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyPhoneViewController.h; sourceTree = "<group>"; };
+		7CBC5BAB204CE94A004ACA04 /* VerifyPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyPhoneViewController.m; sourceTree = "<group>"; };
+		7CBC5BAD204CEAF2004ACA04 /* GetCheckCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCheckCodeRequest.h; sourceTree = "<group>"; };
+		7CBC5BAE204CEAF2004ACA04 /* GetCheckCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCheckCodeRequest.m; sourceTree = "<group>"; };
+		7CBC5BB0204CEBB2004ACA04 /* RegistYxbRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistYxbRequest.h; sourceTree = "<group>"; };
+		7CBC5BB1204CEBB2004ACA04 /* RegistYxbRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistYxbRequest.m; sourceTree = "<group>"; };
+		7CBC5BB3204CF46C004ACA04 /* MessagePromptView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagePromptView.h; sourceTree = "<group>"; };
+		7CBC5BB4204CF46C004ACA04 /* MessagePromptView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagePromptView.m; sourceTree = "<group>"; };
+		7CBC5BB6204D1724004ACA04 /* ScanClazsCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanClazsCodeRequest.h; sourceTree = "<group>"; };
+		7CBC5BB7204D1724004ACA04 /* ScanClazsCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanClazsCodeRequest.m; sourceTree = "<group>"; };
+		7CBC5BB9204D2AEF004ACA04 /* MineNameInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineNameInputView.h; sourceTree = "<group>"; };
+		7CBC5BBA204D2AEF004ACA04 /* MineNameInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineNameInputView.m; sourceTree = "<group>"; };
+		7CBC5BBC204D2C1C004ACA04 /* RegisterInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterInfoViewController.h; sourceTree = "<group>"; };
+		7CBC5BBD204D2C1C004ACA04 /* RegisterInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterInfoViewController.m; sourceTree = "<group>"; };
+		7CBC5BBF204D3325004ACA04 /* CompleteUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompleteUserInfoViewController.h; sourceTree = "<group>"; };
+		7CBC5BC0204D3325004ACA04 /* CompleteUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompleteUserInfoViewController.m; sourceTree = "<group>"; };
+		7CBC5BC2204D365B004ACA04 /* CompleteInfoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompleteInfoHeaderView.h; sourceTree = "<group>"; };
+		7CBC5BC3204D365B004ACA04 /* CompleteInfoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompleteInfoHeaderView.m; sourceTree = "<group>"; };
+		7CBC5BC5204E298C004ACA04 /* SysUserItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SysUserItem.h; sourceTree = "<group>"; };
+		7CBC5BC6204E298C004ACA04 /* SysUserItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SysUserItem.m; sourceTree = "<group>"; };
+		7CBC5BCB204E33B7004ACA04 /* RegistUnenterAndYxbRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistUnenterAndYxbRequest.h; sourceTree = "<group>"; };
+		7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistUnenterAndYxbRequest.m; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -1105,6 +1141,18 @@
 				7CB9C8EC2010389F005BE126 /* ClassListRequest.m */,
 				7CB9C8F420105558005BE126 /* GetStudentClazsRequest.h */,
 				7CB9C8F520105558005BE126 /* GetStudentClazsRequest.m */,
+				7CBC5BB6204D1724004ACA04 /* ScanClazsCodeRequest.h */,
+				7CBC5BB7204D1724004ACA04 /* ScanClazsCodeRequest.m */,
+				7CBC5BA7204CE6E5004ACA04 /* ClassCodeItem.h */,
+				7CBC5BA8204CE6E5004ACA04 /* ClassCodeItem.m */,
+				7CBC5BC5204E298C004ACA04 /* SysUserItem.h */,
+				7CBC5BC6204E298C004ACA04 /* SysUserItem.m */,
+				7CBC5BAD204CEAF2004ACA04 /* GetCheckCodeRequest.h */,
+				7CBC5BAE204CEAF2004ACA04 /* GetCheckCodeRequest.m */,
+				7CBC5BB0204CEBB2004ACA04 /* RegistYxbRequest.h */,
+				7CBC5BB1204CEBB2004ACA04 /* RegistYxbRequest.m */,
+				7CBC5BCB204E33B7004ACA04 /* RegistUnenterAndYxbRequest.h */,
+				7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1879,6 +1927,12 @@
 				4369597E1FDE27B5009E5C43 /* ClassEmptyViewController.m */,
 				7CB9C8EF201038B5005BE126 /* ClassSelectionViewController.h */,
 				7CB9C8EE201038B5005BE126 /* ClassSelectionViewController.m */,
+				7CBC5BAA204CE94A004ACA04 /* VerifyPhoneViewController.h */,
+				7CBC5BAB204CE94A004ACA04 /* VerifyPhoneViewController.m */,
+				7CBC5BBC204D2C1C004ACA04 /* RegisterInfoViewController.h */,
+				7CBC5BBD204D2C1C004ACA04 /* RegisterInfoViewController.m */,
+				7CBC5BBF204D3325004ACA04 /* CompleteUserInfoViewController.h */,
+				7CBC5BC0204D3325004ACA04 /* CompleteUserInfoViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -2112,8 +2166,14 @@
 				7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */,
 				7CEFC7A81F98926A001D8C84 /* MinePasswordInputView.h */,
 				7CEFC7AE1F98926B001D8C84 /* MinePasswordInputView.m */,
+				7CBC5BB9204D2AEF004ACA04 /* MineNameInputView.h */,
+				7CBC5BBA204D2AEF004ACA04 /* MineNameInputView.m */,
 				7CB9C8F1201038D1005BE126 /* ClassListCell.h */,
 				7CB9C8F2201038D1005BE126 /* ClassListCell.m */,
+				7CBC5BB3204CF46C004ACA04 /* MessagePromptView.h */,
+				7CBC5BB4204CF46C004ACA04 /* MessagePromptView.m */,
+				7CBC5BC2204D365B004ACA04 /* CompleteInfoHeaderView.h */,
+				7CBC5BC3204D365B004ACA04 /* CompleteInfoHeaderView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2638,6 +2698,7 @@
 				7C2518E71F68E68D0001B577 /* NSString+YXString.m in Sources */,
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,
 				E90C5143204D23DE0008F92A /* ContactsSearchBarView.m in Sources */,
+				7CBC5BBE204D2C1C004ACA04 /* RegisterInfoViewController.m in Sources */,
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
 				7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */,
@@ -2651,6 +2712,7 @@
 				7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */,
 				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
 				7C212DE61F6B6DEA0007AE01 /* CourseListHeaderView.m in Sources */,
+				7CBC5BC1204D3325004ACA04 /* CompleteUserInfoViewController.m in Sources */,
 				E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
 				E91E5D282047B1F900052FBA /* TestIMViewController.m in Sources */,
@@ -2685,6 +2747,7 @@
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,
 				7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */,
 				7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */,
+				7CBC5BB5204CF46C004ACA04 /* MessagePromptView.m in Sources */,
 				7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */,
 				7CEFC7BA1F998E20001D8C84 /* SexItemView.m in Sources */,
 				43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */,
@@ -2719,9 +2782,11 @@
 				E91E5D8C2047B8C900052FBA /* IMNewTopicEventHandler.m in Sources */,
 				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
+				7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */,
 				7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
 				92BDD708201195DB00B05B6F /* ClassMomentNotificationViewController.m in Sources */,
+				7CBC5BAC204CE94A004ACA04 /* VerifyPhoneViewController.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
 				922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */,
 				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
@@ -2730,6 +2795,7 @@
 				7C2519431F68EB780001B577 /* ExtendTextField.m in Sources */,
 				438FFC741FD4E1B9006F3FB3 /* YXFileDownloadProgressView.m in Sources */,
 				E91E5DA72047B8E300052FBA /* TopicData.m in Sources */,
+				7CBC5BA9204CE6E5004ACA04 /* ClassCodeItem.m in Sources */,
 				7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */,
 				E91E5D2A2047B1F900052FBA /* ChatListViewController.m in Sources */,
 				7C212DEB1F6B72330007AE01 /* CourseCommentHeaderView.m in Sources */,
@@ -2745,6 +2811,7 @@
 				923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */,
 				7CEFC7B21F98926B001D8C84 /* MineActionView.m in Sources */,
 				E91E5D692047B86B00052FBA /* IMTopicUpdateService.m in Sources */,
+				7CBC5BCD204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m in Sources */,
 				7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */,
 				438FFC881FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel in Sources */,
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
@@ -2787,6 +2854,7 @@
 				4322CA3C1FD941F500E7B565 /* StageSubjectCell.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
+				7CBC5BC7204E298C004ACA04 /* SysUserItem.m in Sources */,
 				7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */,
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
@@ -2806,6 +2874,7 @@
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
+				7CBC5BBB204D2AEF004ACA04 /* MineNameInputView.m in Sources */,
 				7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */,
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
@@ -2886,6 +2955,7 @@
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
 				7C2518EA1F68E68D0001B577 /* UIImage+Color.m in Sources */,
+				7CBC5BB8204D1724004ACA04 /* ScanClazsCodeRequest.m in Sources */,
 				7C24E1FB1F72575E00A6921B /* GetVoteRequest.m in Sources */,
 				E91E5D8A2047B8C900052FBA /* IMTopicChangeEventHandler.m in Sources */,
 				E91E5DA92047B8E300052FBA /* GetTopicMsgsRequest.m in Sources */,
@@ -2897,6 +2967,7 @@
 				438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */,
 				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
 				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
+				7CBC5BAF204CEAF2004ACA04 /* GetCheckCodeRequest.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
 				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,
 				432F90BC1F74FDB700FCF655 /* GetResourceRequest.m in Sources */,
@@ -2931,6 +3002,7 @@
 				7CBC5B8F2049326E004ACA04 /* CourseDetailViewController.m in Sources */,
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
 				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
+				7CBC5BB2204CEBB2004ACA04 /* RegistYxbRequest.m in Sources */,
 				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */,

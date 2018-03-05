@@ -87,4 +87,8 @@
     return code.length==4;
 }
 
++ (BOOL)isNameValid:(NSString *)name {
+    return name.length<=6 && name.length>0;
+}
+
 @end

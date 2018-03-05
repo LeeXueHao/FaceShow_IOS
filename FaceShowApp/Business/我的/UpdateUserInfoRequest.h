@@ -15,4 +15,5 @@
 @property (nonatomic, strong) NSString<Optional> *stage;
 @property (nonatomic, strong) NSString<Optional> *schoolName;
 @property (nonatomic, strong) NSString<Optional> *url;
+@property (nonatomic, strong) NSString<Optional> *userId;
 @end

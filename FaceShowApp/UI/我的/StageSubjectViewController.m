@@ -47,7 +47,8 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
         [UserManager sharedInstance].userModel.subjectName = self.selectedSubject.name;
         [[UserManager sharedInstance]saveData];
         BLOCK_EXEC(self.completeBlock);
-        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+        NSInteger index = self.navigationController.viewControllers.count-3;
+        [self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
     }];
 }
 

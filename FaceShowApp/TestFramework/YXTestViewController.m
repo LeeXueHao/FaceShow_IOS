@@ -13,13 +13,15 @@
 #import "QADataManager.h"
 #import "AlbumListViewController.h"
 #import "TestQiniuViewController.h"
+#import "CompleteUserInfoViewController.h"
+#import "RegisterInfoViewController.h"
 
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择",@"qiniu"];
+    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择",@"qiniu",@"test"];
     [super viewDidLoad];
 }
 
@@ -59,6 +61,11 @@
 
 - (void)qiniu {
     TestQiniuViewController *vc = [[TestQiniuViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)test {
+    RegisterInfoViewController *vc = [[RegisterInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

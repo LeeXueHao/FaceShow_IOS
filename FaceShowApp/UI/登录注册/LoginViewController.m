@@ -10,6 +10,7 @@
 #import "LoginDataManager.h"
 #import "ForgotPasswordViewController.h"
 #import "ClassEmptyViewController.h"
+#import "ScanCodeViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -151,10 +152,18 @@
     [touristBtn addTarget:self action:@selector(touristBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:touristBtn];
     [touristBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
+        make.right.mas_equalTo(self.loginBtn.mas_right);
         make.bottom.mas_equalTo(-44);
     }];
-//    touristBtn.hidden = YES;
+    
+    UIButton *registerBtn = [touristBtn clone];
+    [registerBtn setTitle:@"扫码注册" forState:UIControlStateNormal];
+    [registerBtn addTarget:self action:@selector(registerBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:registerBtn];
+    [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.loginBtn.mas_left);
+        make.bottom.mas_equalTo(-44);
+    }];
 }
 
 #pragma mark - setupObserver
@@ -212,6 +221,13 @@
 //        }
 //        [UserManager sharedInstance].loginStatus = YES;
 //    }];
+}
+
+- (void)registerBtnAction:(UIButton *)sender {
+    ScanCodeViewController *vc = [[ScanCodeViewController alloc]init];
+    vc.navigationItem.title = @"扫码注册";
+    vc.prompt = @"请扫描二维码完成注册";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

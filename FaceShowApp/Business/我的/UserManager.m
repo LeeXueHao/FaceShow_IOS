@@ -36,7 +36,7 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
 }
 
 - (BOOL)loginStatus {
-    if (self.userModel) {
+    if (self.userModel.token) {
         return YES;
     }
     return NO;

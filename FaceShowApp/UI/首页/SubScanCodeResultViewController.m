@@ -28,6 +28,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         ScanCodeViewController *vc = [[ScanCodeViewController alloc] init];
+        vc.navigationItem.title = @"签到";
         [self.navigationController pushViewController:vc animated:YES];
         NSMutableArray *vcs = [self.navigationController.viewControllers mutableCopy];
         [vcs removeObjectAtIndex:0];

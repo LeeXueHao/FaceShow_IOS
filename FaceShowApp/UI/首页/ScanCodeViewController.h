@@ -10,4 +10,5 @@
 
 @interface ScanCodeViewController : BaseViewController
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
+@property (nonatomic, strong) NSString *prompt;
 @end

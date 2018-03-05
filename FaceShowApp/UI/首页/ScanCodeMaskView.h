@@ -11,5 +11,6 @@
 @interface ScanCodeMaskView : UIView
 
 @property (nonatomic,strong)NSTimer *scanTimer;
+@property (nonatomic, strong) NSString *prompt;
 
 @end

@@ -12,6 +12,10 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.method = @"app.sysUser.updateMyInfo";
+        if (![UserManager sharedInstance].userModel.token) {
+            self.method = @"app.sysUser.updateUserInfo";
+            self.userId = [UserManager sharedInstance].userModel.userID;
+        }
     }
     return self;
 }
