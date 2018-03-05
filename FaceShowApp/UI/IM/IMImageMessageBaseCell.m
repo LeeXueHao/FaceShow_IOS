@@ -37,6 +37,7 @@
 
 - (void)setMessage:(IMTopicMessage *)message {
     if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
+        //更新图片
         return;
     }
     [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"聊聊-背景"]];

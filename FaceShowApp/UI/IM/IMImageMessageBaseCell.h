@@ -9,6 +9,7 @@
 #import "IMMessageBaseCell.h"
 
 @interface IMImageMessageBaseCell : IMMessageBaseCell
+
 @property (nonatomic, strong) UIImageView *messageImageview;
 
 @end

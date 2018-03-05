@@ -24,6 +24,7 @@
 #import "IMImageMessageBaseCell.h"
 #import "IMImageMessageLeftCell.h"
 #import "IMImageMessageRightCell.h"
+#import "UIImage+YXImage.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (assign,nonatomic) BOOL isFirst;
@@ -88,6 +89,12 @@
         STRONG_SELF
         [self.imageHandler pickImageWithMaxCount:9 completeBlock:^(NSArray *array) {
             DDLogDebug(@"发送图片消息");
+            for (UIImage *image in array) {
+                //发送图片
+                CGSize size = [image nyx_aspectFitSizeWithSize:CGSizeMake(150, 150)];
+                UIImage *resultImage = [image nyx_aspectFitImageWithSize:CGSizeMake(150, 150)];
+                DDLogDebug(@"哈哈");
+            }
         }];
     }];
     [self.view addSubview:self.imInputView];

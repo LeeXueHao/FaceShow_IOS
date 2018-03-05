@@ -145,9 +145,11 @@
 }
 
 - (void)setMessage:(IMTopicMessage *)message {
-    if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
+    if (_message && [_message.uniqueID isEqualToString:message.uniqueID]) {
+        [self setupSendStateWithMessage:message];
         return;
     }
+    _message = message;
     if (message.isTimeVisible) {
         NSString *timeString = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:message.sendTime];
         CGRect rect = [timeString boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
@@ -164,6 +166,11 @@
     }
     [self.usernameLabel setText:message.sender.name];
     [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:message.sender.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
+    [self setupSendStateWithMessage:message];
+    DDLogDebug(@"内容为:%@-----状态为%@",message.text,@(message.sendState));
+}
+
+- (void)setupSendStateWithMessage:(IMTopicMessage *)message {
     if (message.sendState == MessageSendState_Sending) {
         self.stateButton.enabled = NO;
         self.stateButton.backgroundColor = [UIColor yellowColor];
@@ -174,9 +181,7 @@
         self.stateButton.backgroundColor = [UIColor greenColor];
         self.stateButton.enabled = NO;
     }
-    DDLogDebug(@"内容为:%@-----状态为%@",message.text,@(message.sendState));
 }
-
 - (void)setTopicType:(TopicType)topicType {
     if (topicType == TopicType_Private) {
         self.usernameLabel.hidden = YES;
