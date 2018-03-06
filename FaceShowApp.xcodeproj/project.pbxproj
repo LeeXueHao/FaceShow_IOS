@@ -309,6 +309,10 @@
 		E90C513A204949150008F92A /* IMImageMessageLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5139204949150008F92A /* IMImageMessageLeftCell.m */; };
 		E90C513D2049493E0008F92A /* IMImageMessageRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C513C2049493E0008F92A /* IMImageMessageRightCell.m */; };
 		E90C5140204CF5410008F92A /* IMImageSendingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C513F204CF5410008F92A /* IMImageSendingProgressView.m */; };
+		E90C5143204D23DE0008F92A /* ContactsSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5142204D23DE0008F92A /* ContactsSearchBarView.m */; };
+		E90C5146204D41220008F92A /* ContactsClassFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5145204D41220008F92A /* ContactsClassFilterView.m */; };
+		E90C5149204D41A80008F92A /* ContactsClassFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5148204D41A80008F92A /* ContactsClassFilterCell.m */; };
+		E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C514B204D49440008F92A /* ContactsCurrentClassView.m */; };
 		E91E5D0D2047B0CB00052FBA /* ClazsMemberListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */; };
 		E91E5D0E2047B0CB00052FBA /* ClazsMemberListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */; };
 		E91E5D0F2047B0CB00052FBA /* ClazsMemberListRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */; };
@@ -940,6 +944,14 @@
 		E90C513C2049493E0008F92A /* IMImageMessageRightCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessageRightCell.m; sourceTree = "<group>"; };
 		E90C513E204CF5410008F92A /* IMImageSendingProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMImageSendingProgressView.h; sourceTree = "<group>"; };
 		E90C513F204CF5410008F92A /* IMImageSendingProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageSendingProgressView.m; sourceTree = "<group>"; };
+		E90C5141204D23DE0008F92A /* ContactsSearchBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsSearchBarView.h; sourceTree = "<group>"; };
+		E90C5142204D23DE0008F92A /* ContactsSearchBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsSearchBarView.m; sourceTree = "<group>"; };
+		E90C5144204D41220008F92A /* ContactsClassFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsClassFilterView.h; sourceTree = "<group>"; };
+		E90C5145204D41220008F92A /* ContactsClassFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsClassFilterView.m; sourceTree = "<group>"; };
+		E90C5147204D41A80008F92A /* ContactsClassFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsClassFilterCell.h; sourceTree = "<group>"; };
+		E90C5148204D41A80008F92A /* ContactsClassFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsClassFilterCell.m; sourceTree = "<group>"; };
+		E90C514A204D49440008F92A /* ContactsCurrentClassView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsCurrentClassView.h; sourceTree = "<group>"; };
+		E90C514B204D49440008F92A /* ContactsCurrentClassView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsCurrentClassView.m; sourceTree = "<group>"; };
 		E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListFetcher.m; sourceTree = "<group>"; };
 		E91E5D092047B0CB00052FBA /* ClazsMemberListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListRequest.h; sourceTree = "<group>"; };
 		E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListRequest.m; sourceTree = "<group>"; };
@@ -2399,6 +2411,14 @@
 			children = (
 				E91E5D1A2047B1C300052FBA /* ContactsCell.h */,
 				E91E5D192047B1C200052FBA /* ContactsCell.m */,
+				E90C5141204D23DE0008F92A /* ContactsSearchBarView.h */,
+				E90C5142204D23DE0008F92A /* ContactsSearchBarView.m */,
+				E90C5144204D41220008F92A /* ContactsClassFilterView.h */,
+				E90C5145204D41220008F92A /* ContactsClassFilterView.m */,
+				E90C5147204D41A80008F92A /* ContactsClassFilterCell.h */,
+				E90C5148204D41A80008F92A /* ContactsClassFilterCell.m */,
+				E90C514A204D49440008F92A /* ContactsCurrentClassView.h */,
+				E90C514B204D49440008F92A /* ContactsCurrentClassView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2617,6 +2637,7 @@
 				438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */,
 				7C2518E71F68E68D0001B577 /* NSString+YXString.m in Sources */,
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,
+				E90C5143204D23DE0008F92A /* ContactsSearchBarView.m in Sources */,
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
 				7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */,
@@ -2680,6 +2701,7 @@
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
 				4376E7471F712DE9003E2057 /* QADataManager.m in Sources */,
 				7C24E21D1F78F25000A6921B /* QuestionnaireHeaderView.m in Sources */,
+				E90C5149204D41A80008F92A /* ContactsClassFilterCell.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
 				E91E5DB42047B90E00052FBA /* TopicMsg.pbobjc.m in Sources */,
@@ -2836,6 +2858,7 @@
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,
 				7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */,
+				E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
@@ -2893,6 +2916,7 @@
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
+				E90C5146204D41220008F92A /* ContactsClassFilterView.m in Sources */,
 				F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */,
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
