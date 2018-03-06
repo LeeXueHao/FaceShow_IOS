@@ -136,7 +136,10 @@
     WEAK_SELF
     [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
-        self.dataArray = [NSMutableArray arrayWithArray:array];
+        self.dataArray = [NSMutableArray array];
+        for (IMTopicMessage *msg in array) {
+            [self.dataArray insertObject:msg atIndex:0];
+        }
         [self handelTimeForDataSource:self.dataArray];
         self.hasMore = hasMore;
     }];

@@ -196,11 +196,11 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     NSMutableArray *array = [NSMutableArray array];
     for (IMTopicMessageEntity *entity in results) {
         IMTopicMessage *message = [self messageFromEntity:entity];
-        [array insertObject:message atIndex:0];
+        [array addObject:message];
     }
     BOOL hasMore = NO;
     if (array.count > count) {
-        [array removeObjectAtIndex:0];
+        [array removeLastObject];
         hasMore = YES;
     }
     BLOCK_EXEC(completeBlock,array,hasMore);
@@ -217,11 +217,11 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     NSMutableArray *array = [NSMutableArray array];
     for (IMTopicMessageEntity *entity in results) {
         IMTopicMessage *message = [self messageFromEntity:entity];
-        [array insertObject:message atIndex:0];
+        [array addObject:message];
     }
     BOOL hasMore = NO;
     if (array.count > count) {
-        [array removeObjectAtIndex:0];
+        [array removeLastObject];
         hasMore = YES;
     }
     BLOCK_EXEC(completeBlock,array,hasMore);
