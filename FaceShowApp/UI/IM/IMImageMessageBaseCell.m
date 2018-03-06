@@ -54,7 +54,6 @@ static const CGFloat kMaxImageSizeWidth = 140;
     
     [self.messageImageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth));
     }];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -65,14 +64,7 @@ static const CGFloat kMaxImageSizeWidth = 140;
     if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
         //更新图片
         [self updateSendStateWithMessage:message];
-        WEAK_SELF
-        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"背景图片"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            STRONG_SELF
-            CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-            [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(size.width, size.height));
-            }];
-        }];
+        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"背景图片"]];
         return;
     }
     [super setMessage:message];
@@ -81,7 +73,7 @@ static const CGFloat kMaxImageSizeWidth = 140;
     self.messageImageview.image = [UIImage imageNamed:@"背景图片"];
     CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
     [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(size.width, size.height));
+        make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
     }];
 }
 

@@ -35,6 +35,8 @@
 @property (nonatomic, strong) IMMessageMenuView *menuView;
 @property (nonatomic, strong) ImageSelectionHandler *imageHandler;
 @property (assign,nonatomic)BOOL hasMore;
+@property (assign,nonatomic)BOOL isRefresh;
+
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
 @end
 
@@ -253,17 +255,19 @@
 
 #pragma mark - loadMoreHistoryData
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y < 0  && self.hasMore) {
+    if (scrollView.contentOffset.y < 0  && self.hasMore && !self.isRefresh) {
         [self loadMoreHistoryData];
     }
 }
 
 - (void)loadMoreHistoryData {
     WEAK_SELF
+    self.isRefresh = YES;
     self.tableView.tableHeaderView.hidden = NO;
     [self.activity startAnimating];
     [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:self.dataArray.firstObject completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
+        self.isRefresh = NO;
         [self.activity stopAnimating];
         self.hasMore = hasMore;
         if (array.count > 0) {

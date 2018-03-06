@@ -51,13 +51,19 @@
                       count:(NSUInteger)count
                    asending:(BOOL)asending
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
-    [[IMDatabaseManager sharedInstance]findMessagesInTopic:topicID count:count asending:asending completeBlock:completeBlock];
+    [[IMDatabaseManager sharedInstance]findMessagesInTopic:topicID count:count asending:asending completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+        completeBlock(array, YES);
+    }];
 }
 
 + (void)findMessagesInTopic:(int64_t)topicID
                       count:(NSUInteger)count
                   beforeMsg:(IMTopicMessage *)msg
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
+    if (!msg) {
+        msg = [[IMTopicMessage alloc]init];
+        msg.messageID = INT64_MAX;
+    }
     [[IMDatabaseManager sharedInstance]findMessagesInTopic:topicID count:count beforeIndex:msg.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         if (array.count > 0) {
             completeBlock(array, YES);

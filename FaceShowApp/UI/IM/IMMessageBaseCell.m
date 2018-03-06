@@ -128,6 +128,7 @@
     [self.usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.avatarButton.mas_top);
         make.left.mas_equalTo(self.avatarButton.mas_right).mas_offset(10.f);
+        make.height.mas_equalTo(14.f);
     }];
     
     [self.messageBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
