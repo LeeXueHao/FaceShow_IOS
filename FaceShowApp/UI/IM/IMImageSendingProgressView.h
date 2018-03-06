@@ -10,7 +10,6 @@
 
 @interface IMImageSendingProgressView : UIView
 
-@property (nonatomic, strong) UIActivityIndicatorView *activity;
-@property (nonatomic, strong) UILabel *progressLabel;
+@property(nonatomic, strong) NSString *progress;
 
 @end

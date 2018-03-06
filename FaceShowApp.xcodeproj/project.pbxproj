@@ -325,6 +325,8 @@
 		E90C5146204D41220008F92A /* ContactsClassFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5145204D41220008F92A /* ContactsClassFilterView.m */; };
 		E90C5149204D41A80008F92A /* ContactsClassFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5148204D41A80008F92A /* ContactsClassFilterCell.m */; };
 		E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C514B204D49440008F92A /* ContactsCurrentClassView.m */; };
+		E90C514E204E73010008F92A /* 加载动效.gif in Resources */ = {isa = PBXBuildFile; fileRef = E90C514D204E73010008F92A /* 加载动效.gif */; };
+		E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C514F204E792D0008F92A /* UIImage+GIF.m */; };
 		E91E5D0D2047B0CB00052FBA /* ClazsMemberListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */; };
 		E91E5D0E2047B0CB00052FBA /* ClazsMemberListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */; };
 		E91E5D0F2047B0CB00052FBA /* ClazsMemberListRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */; };
@@ -988,6 +990,9 @@
 		E90C5148204D41A80008F92A /* ContactsClassFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsClassFilterCell.m; sourceTree = "<group>"; };
 		E90C514A204D49440008F92A /* ContactsCurrentClassView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsCurrentClassView.h; sourceTree = "<group>"; };
 		E90C514B204D49440008F92A /* ContactsCurrentClassView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsCurrentClassView.m; sourceTree = "<group>"; };
+		E90C514D204E73010008F92A /* 加载动效.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "加载动效.gif"; sourceTree = "<group>"; };
+		E90C514F204E792D0008F92A /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
+		E90C5150204E792D0008F92A /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListFetcher.m; sourceTree = "<group>"; };
 		E91E5D092047B0CB00052FBA /* ClazsMemberListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListRequest.h; sourceTree = "<group>"; };
 		E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListRequest.m; sourceTree = "<group>"; };
@@ -1409,6 +1414,8 @@
 		7C2518C11F68E67B0001B577 /* Categoty */ = {
 			isa = PBXGroup;
 			children = (
+				E90C5150204E792D0008F92A /* UIImage+GIF.h */,
+				E90C514F204E792D0008F92A /* UIImage+GIF.m */,
 				7C2518C21F68E68D0001B577 /* CloneCategory.h */,
 				7C2518C31F68E68D0001B577 /* CloneCategory.m */,
 				7C2518C41F68E68D0001B577 /* NSDictionary+Dictionarys.h */,
@@ -2374,6 +2381,7 @@
 		E91E5D2B2047B1FE00052FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E90C514D204E73010008F92A /* 加载动效.gif */,
 				E91E5D2E2047B22400052FBA /* ChatListCell.h */,
 				E91E5D362047B22600052FBA /* ChatListCell.m */,
 				E91E5D3D2047B22700052FBA /* IMInputView.h */,
@@ -2618,6 +2626,7 @@
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
 				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,
 				7C24E1EB1F72262F00A6921B /* GetCurrentClazsRequest_mock.json in Resources */,
+				E90C514E204E73010008F92A /* 加载动效.gif in Resources */,
 				7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */,
 				43538D2E1FDFB7C40052A9D3 /* StageSubject.json in Resources */,
 				43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */,
@@ -2945,6 +2954,7 @@
 				7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */,
 				7C2519AC1F690D860001B577 /* LoginViewController.m in Sources */,
 				E91E5D482047B22800052FBA /* ChatListCell.m in Sources */,
+				E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
 				431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */,
