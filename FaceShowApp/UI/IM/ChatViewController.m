@@ -25,6 +25,7 @@
 #import "IMImageMessageLeftCell.h"
 #import "IMImageMessageRightCell.h"
 #import "UIImage+YXImage.h"
+#import "PhotoBrowserController.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (assign,nonatomic) BOOL isFirst;
@@ -280,6 +281,20 @@
 
 - (void)messageCellTap:(IMTopicMessage *)message {
     [self.view nyx_showToast:@"click image to do ..."];
+    NSURL *url = [NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226683021&di=f4f8c422c2a55a2f0fdeeecb9a51060b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F68%2F11%2F35W58PICzbv_1024.jpg"];//message.thumbnail];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData:data];
+    NSMutableArray *array = [NSMutableArray arrayWithObject:image];
+    PhotoBrowserController *vc = [[PhotoBrowserController alloc] init];
+    vc.cantNotDeleteImage = YES;
+    vc.images = array;
+    vc.currentIndex = 0;
+    WEAK_SELF
+    vc.didDeleteImage = ^{
+        STRONG_SELF
+        
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)messageCellLongPress:(IMTopicMessage *)message rect:(CGRect)rect {

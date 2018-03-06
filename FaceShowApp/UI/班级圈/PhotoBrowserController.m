@@ -23,7 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupNavigationBar];
+    if (!self.cantNotDeleteImage) {
+        [self setupNavigationBar];
+    }
     [self setupUI];
 }
 

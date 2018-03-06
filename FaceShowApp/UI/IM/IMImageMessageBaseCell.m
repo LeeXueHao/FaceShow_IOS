@@ -34,6 +34,17 @@ static const CGFloat kMaxImageSizeWidth = 140;
     self.messageBackgroundView.image = [[UIImage alloc]init];
     self.messageBackgroundView.layer.cornerRadius = 6.0f;
     self.messageBackgroundView.clipsToBounds = YES;
+    
+    self.messageBackgroundView.userInteractionEnabled = YES;
+    self.messageImageview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
+    [self.messageBackgroundView addGestureRecognizer:tap];
+}
+
+- (void)tapAction {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellTap:)]) {
+        [self.delegate messageCellTap:self.message];
+    }
 }
 
 - (void)setupLayout {
@@ -41,10 +52,9 @@ static const CGFloat kMaxImageSizeWidth = 140;
     [self.messageBackgroundView addSubview:self.messageImageview];
     [self.messageImageview addSubview:self.progressView];
     
-//    CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
     [self.messageImageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
-//        make.size.mas_equalTo(CGSizeMake(size.width, size.height));
+        make.size.mas_equalTo(CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth));
     }];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -67,13 +77,11 @@ static const CGFloat kMaxImageSizeWidth = 140;
     }
     [super setMessage:message];
     [self updateSendStateWithMessage:message];
-    WEAK_SELF
-    [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"背景图片"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        STRONG_SELF
-        CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-        [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(size.width, size.height));
-        }];
+//    self.messageImageview.image = [UIImage imageWithContentsOfFile:@""];
+    self.messageImageview.image = [UIImage imageNamed:@"背景图片"];
+    CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(size.width, size.height));
     }];
 }
 
