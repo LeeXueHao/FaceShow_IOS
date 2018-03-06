@@ -224,7 +224,9 @@
     [filterView setContactsClassFilterCompletedBlock:^(NSString *selectedTitle, NSInteger selectedRow) {
         STRONG_SELF
         [alert hide];
-        self.currentClassView.title = selectedTitle;
+        if (![selectedTitle isEqualToString:self.currentClassView.title]) {
+            self.currentClassView.title = selectedTitle;
+        }
         //切换相应的班级的联系人列表
         //进行筛选
     }];
@@ -240,6 +242,7 @@
         [self.alertView layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self.alertView removeFromSuperview];
+        self.currentClassView.isFiltering = NO;
     }];
 }
 

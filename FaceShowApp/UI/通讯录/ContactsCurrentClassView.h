@@ -12,6 +12,7 @@ typedef void(^ContactsClassStartFilterBlock) (NSString *currentTitle);
 
 @interface ContactsCurrentClassView : UIView
 @property(nonatomic, copy) NSString *title;
+@property(nonatomic, assign) BOOL isFiltering;
 
 - (void)setContactsClassStartFilterBlock:(ContactsClassStartFilterBlock)block;
 

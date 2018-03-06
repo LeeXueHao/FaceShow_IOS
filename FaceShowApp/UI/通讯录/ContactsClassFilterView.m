@@ -13,7 +13,7 @@
 @interface ContactsClassFilterView ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSArray *dataArray;
-@property(nonatomic, strong) UIButton *confirmButton;
+//@property(nonatomic, strong) UIButton *confirmButton;
 @property(nonatomic, copy) ContactsClassFilterCompletedBlock block;
 @end
 
@@ -46,29 +46,30 @@
     [self.tableView registerClass:[ContactsClassFilterCell class] forCellReuseIdentifier:@"ContactsClassFilterCell"];
     [self addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-45.f);
+        make.edges.mas_equalTo(0);
+//        make.left.top.right.mas_equalTo(0);
+//        make.bottom.mas_equalTo(-45.f);
     }];
     
-    self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.confirmButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
-    [self.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
-    [self.confirmButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-    [self.confirmButton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateHighlighted];
-    self.confirmButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.confirmButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"ffffff"]] forState:UIControlStateNormal];
-    [self.confirmButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1a90d9"]] forState:UIControlStateHighlighted];
-    [self.confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.confirmButton];
-    [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
-        make.height.mas_equalTo(45.f);
-    }];
+//    self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.confirmButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+//    [self.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+//    [self.confirmButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+//    [self.confirmButton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateHighlighted];
+//    self.confirmButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.confirmButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"ffffff"]] forState:UIControlStateNormal];
+//    [self.confirmButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"1a90d9"]] forState:UIControlStateHighlighted];
+//    [self.confirmButton addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.confirmButton];
+//    [self.confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.bottom.mas_equalTo(0);
+//        make.height.mas_equalTo(45.f);
+//    }];
 }
 
-- (void)confirmAction {
-    BLOCK_EXEC(self.block,self.dataArray[self.selectedRow],self.selectedRow);
-}
+//- (void)confirmAction {
+//    BLOCK_EXEC(self.block,self.dataArray[self.selectedRow],self.selectedRow);
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -82,7 +83,11 @@
     }else {
         cell.selected = NO;
     }
-    cell.shouldShowLine = YES;
+    if (indexPath.row == self.dataArray.count - 1) {
+        cell.shouldShowLine = NO;
+    }else {
+        cell.shouldShowLine = YES;
+    }
     return cell;
 }
 
@@ -92,10 +97,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedRow = indexPath.row;
+    BLOCK_EXEC(self.block,self.dataArray[self.selectedRow],self.selectedRow);
 }
 
 - (CGFloat)heightForContactsClassFilterView {
-    return self.dataArray.count * 51 + 45;
+    return self.dataArray.count * 50;
 }
 
 - (void)setContactsClassFilterCompletedBlock:(ContactsClassFilterCompletedBlock)block {

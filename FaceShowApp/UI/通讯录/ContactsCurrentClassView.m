@@ -60,19 +60,27 @@
 }
 
 - (void)filterAction:(UITapGestureRecognizer *)gesture {
-    [self.selectedbutton setImage:[UIImage imageNamed:@"收起按钮正常态"] forState:UIControlStateNormal];
-    [self.selectedbutton setImage:[UIImage imageNamed:@"收起按钮点击态"] forState:UIControlStateHighlighted];
+    self.isFiltering = YES;
     BLOCK_EXEC(self.block,self.title);
 }
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    [self.selectedbutton setImage:[UIImage imageNamed:@"下拉按钮正常态"] forState:UIControlStateNormal];
-    [self.selectedbutton setImage:[UIImage imageNamed:@"下拉按钮点击态"] forState:UIControlStateHighlighted];
     self.titleLabel.text = title;
 }
 
 - (void)setContactsClassStartFilterBlock:(ContactsClassStartFilterBlock)block {
     self.block = block;
+}
+
+- (void)setIsFiltering:(BOOL)isFiltering {
+    _isFiltering = isFiltering;
+    if (isFiltering) {
+        [self.selectedbutton setImage:[UIImage imageNamed:@"收起按钮正常态"] forState:UIControlStateNormal];
+        [self.selectedbutton setImage:[UIImage imageNamed:@"收起按钮点击态"] forState:UIControlStateHighlighted];
+    }else {
+        [self.selectedbutton setImage:[UIImage imageNamed:@"下拉按钮正常态"] forState:UIControlStateNormal];
+        [self.selectedbutton setImage:[UIImage imageNamed:@"下拉按钮点击态"] forState:UIControlStateHighlighted];
+    }
 }
 @end
