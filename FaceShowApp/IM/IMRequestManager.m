@@ -80,6 +80,7 @@
 - (void)requestTopicMsgsWithTopicID:(int64_t)topicID
                             startID:(int64_t)startID
                            asending:(BOOL)asending
+                            dataNum:(NSInteger)num
                       completeBlock:(void(^)(NSArray<IMTopicMessage *> *msgs,NSError *error))completeBlock {
     NSString *reqId = [IMConfig generateUniqueID];
     [self.msgsRequest stopRequest];
@@ -88,6 +89,7 @@
     self.msgsRequest.topicId = [NSString stringWithFormat:@"%@",@(topicID)];
     self.msgsRequest.startId = [NSString stringWithFormat:@"%@",@(startID)];
     self.msgsRequest.order = asending? @"asc":@"desc";
+    self.msgsRequest.dataNum = [NSString stringWithFormat:@"%@",@(num)];
     WEAK_SELF
     [self.msgsRequest startRequestWithRetClass:[GetTopicMsgsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

@@ -56,9 +56,24 @@
 
 + (void)findMessagesInTopic:(int64_t)topicID
                       count:(NSUInteger)count
-                beforeIndex:(int64_t)index
+                  beforeMsg:(IMTopicMessage *)msg
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
-    [[IMDatabaseManager sharedInstance]findMessagesInTopic:topicID count:count beforeIndex:index completeBlock:completeBlock];
+    [[IMDatabaseManager sharedInstance]findMessagesInTopic:topicID count:count beforeIndex:msg.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+        if (array.count > 0) {
+            completeBlock(array, YES);
+        }else {
+            [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:topicID startID:msg.messageID asending:NO dataNum:count+1 completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
+                BOOL more = msgs.count>count;
+                if (more) {
+                    NSMutableArray *array = [NSMutableArray arrayWithArray:msgs];
+                    [array removeLastObject];
+                    completeBlock(array, more);
+                }else {
+                    completeBlock(msgs, more);
+                }
+            }];
+        }
+    }];
 }
 
 + (void)clearDirtyMessages {

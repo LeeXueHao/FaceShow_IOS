@@ -21,6 +21,7 @@
 - (void)requestTopicMsgsWithTopicID:(int64_t)topicID
                             startID:(int64_t)startID
                            asending:(BOOL)asending
+                            dataNum:(NSInteger)num
                       completeBlock:(void(^)(NSArray<IMTopicMessage *> *msgs,NSError *error))completeBlock;
 
 - (void)requestNewTopicWithMember:(IMMember *)member

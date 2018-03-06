@@ -26,7 +26,7 @@
 
 - (void)start {
     WEAK_SELF
-    [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:self.topicID startID:self.startID asending:YES completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
+    [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:self.topicID startID:self.startID asending:YES dataNum:20 completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
         STRONG_SELF
         BOOL hasMore = msgs.count>0;
         for (IMTopicMessage *message in msgs) {

@@ -258,7 +258,7 @@
     WEAK_SELF
     self.tableView.tableHeaderView.hidden = NO;
     [self.activity startAnimating];
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeIndex:self.dataArray.firstObject.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:self.dataArray.firstObject completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         [self.activity stopAnimating];
         self.hasMore = hasMore;

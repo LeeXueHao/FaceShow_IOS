@@ -23,7 +23,7 @@
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
 + (void)findMessagesInTopic:(int64_t)topicID
                       count:(NSUInteger)count
-                beforeIndex:(int64_t)index
+                  beforeMsg:(IMTopicMessage *)msg
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
 + (void)clearDirtyMessages;
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
