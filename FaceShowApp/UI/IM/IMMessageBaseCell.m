@@ -75,7 +75,7 @@
 - (void)avatarButtonDown:(UIButton *)sender
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellDidClickAvatarForUser:)]) {
-        [self.delegate messageCellDidClickAvatarForUser:self.message.sender];
+        [self.delegate messageCellDidClickAvatarForUser:self.model.message.sender];
     }
 }
 
@@ -88,14 +88,14 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellLongPress:rect:)]) {
         CGRect rect = self.messageBackgroundView.frame;
         rect.size.height -= 10;     // 北京图片底部空白区域
-        [self.delegate messageCellLongPress:self.message rect:rect];
+        [self.delegate messageCellLongPress:self.model rect:rect];
     }
 }
 
 - (void)doubleTabpMsgBGView
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellDoubleClick:)]) {
-        [self.delegate messageCellDoubleClick:self.message];
+        [self.delegate messageCellDoubleClick:self.model];
     }
 }
 
@@ -103,7 +103,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellDidClickStateButton: rect:)]) {
         CGRect rect = self.stateButton.frame;
         rect.size.height -= 10;     // 北京图片底部空白区域
-        [self.delegate messageCellDidClickStateButton:self.message rect:rect];
+        [self.delegate messageCellDidClickStateButton:self.model rect:rect];
     }
 }
 
@@ -145,13 +145,14 @@
     }];
 }
 
-- (void)setMessage:(IMTopicMessage *)message {
-    if (_message && [_message.uniqueID isEqualToString:message.uniqueID]) {
+- (void)setModel:(IMChatViewModel *)model {
+    IMTopicMessage *message = model.message;
+    if (_model && [_model.message.uniqueID isEqualToString:message.uniqueID]) {
         [self setupSendStateWithMessage:message];
         return;
     }
-    _message = message;
-    if (message.isTimeVisible) {
+    _model = model;
+    if (model.isTimeVisible) {
         NSString *timeString = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:message.sendTime];
         CGRect rect = [timeString boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
         [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -169,22 +170,8 @@
     [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:message.sender.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
     [self setupSendStateWithMessage:message];
     DDLogDebug(@"内容为:%@-----状态为%@",message.text,@(message.sendState));
-}
-
-- (void)setupSendStateWithMessage:(IMTopicMessage *)message {
-    if (message.sendState == MessageSendState_Sending) {
-        self.stateButton.enabled = NO;
-        self.stateButton.backgroundColor = [UIColor yellowColor];
-    }else if (message.sendState == MessageSendState_Failed) {
-        self.stateButton.backgroundColor = [UIColor redColor];
-        self.stateButton.enabled = YES;
-    }else {
-        self.stateButton.backgroundColor = [UIColor greenColor];
-        self.stateButton.enabled = NO;
-    }
-}
-
-- (void)setTopicType:(TopicType)topicType {
+    
+    TopicType topicType = model.topicType;
     if (topicType == TopicType_Private) {
         self.usernameLabel.hidden = YES;
         [self.usernameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -202,6 +189,23 @@
             make.top.mas_equalTo(self.usernameLabel.mas_bottom).mas_offset(6.f);
         }];
     }
+}
+
+- (void)setupSendStateWithMessage:(IMTopicMessage *)message {
+    if (message.sendState == MessageSendState_Sending) {
+        self.stateButton.enabled = NO;
+        self.stateButton.backgroundColor = [UIColor yellowColor];
+    }else if (message.sendState == MessageSendState_Failed) {
+        self.stateButton.backgroundColor = [UIColor redColor];
+        self.stateButton.enabled = YES;
+    }else {
+        self.stateButton.backgroundColor = [UIColor greenColor];
+        self.stateButton.enabled = NO;
+    }
+}
+
++ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+    return .0f;
 }
 @end
 

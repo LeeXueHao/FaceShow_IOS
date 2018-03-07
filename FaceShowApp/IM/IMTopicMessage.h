@@ -22,7 +22,6 @@ typedef NS_ENUM(int64_t, MessageSendState) {
 
 @interface IMTopicMessage : NSObject
 @property (nonatomic, assign) MessageType type;
-@property (nonatomic, assign) BOOL isTimeVisible;
 @property (nonatomic, assign) NSTimeInterval sendTime;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *thumbnail;

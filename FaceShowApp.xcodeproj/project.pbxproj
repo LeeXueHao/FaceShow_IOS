@@ -327,6 +327,7 @@
 		E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C514B204D49440008F92A /* ContactsCurrentClassView.m */; };
 		E90C514E204E73010008F92A /* 加载动效.gif in Resources */ = {isa = PBXBuildFile; fileRef = E90C514D204E73010008F92A /* 加载动效.gif */; };
 		E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C514F204E792D0008F92A /* UIImage+GIF.m */; };
+		E90C5159204FC4C30008F92A /* IMChatViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5158204FC4C30008F92A /* IMChatViewModel.m */; };
 		E91E5D0D2047B0CB00052FBA /* ClazsMemberListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */; };
 		E91E5D0E2047B0CB00052FBA /* ClazsMemberListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */; };
 		E91E5D0F2047B0CB00052FBA /* ClazsMemberListRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */; };
@@ -993,6 +994,8 @@
 		E90C514D204E73010008F92A /* 加载动效.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "加载动效.gif"; sourceTree = "<group>"; };
 		E90C514F204E792D0008F92A /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		E90C5150204E792D0008F92A /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
+		E90C5157204FC4C30008F92A /* IMChatViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMChatViewModel.h; sourceTree = "<group>"; };
+		E90C5158204FC4C30008F92A /* IMChatViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMChatViewModel.m; sourceTree = "<group>"; };
 		E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListFetcher.m; sourceTree = "<group>"; };
 		E91E5D092047B0CB00052FBA /* ClazsMemberListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListRequest.h; sourceTree = "<group>"; };
 		E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListRequest.m; sourceTree = "<group>"; };
@@ -2362,6 +2365,8 @@
 				E91E5D212047B1F800052FBA /* IMMessageCell.m */,
 				E91E5D1F2047B1F800052FBA /* IMTimeHandleManger.h */,
 				E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */,
+				E90C5157204FC4C30008F92A /* IMChatViewModel.h */,
+				E90C5158204FC4C30008F92A /* IMChatViewModel.m */,
 				E91E5D242047B1F900052FBA /* TestIMViewController.h */,
 				E91E5D202047B1F800052FBA /* TestIMViewController.m */,
 			);
@@ -2725,6 +2730,7 @@
 				E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
 				E91E5D282047B1F900052FBA /* TestIMViewController.m in Sources */,
+				E90C5159204FC4C30008F92A /* IMChatViewModel.m in Sources */,
 				9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
 				7CEFC7FB1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m in Sources */,

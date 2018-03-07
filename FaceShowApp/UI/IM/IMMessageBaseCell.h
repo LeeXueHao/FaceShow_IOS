@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IMTopicMessage.h"
-#import "IMTopic.h"
 #import "IMMessageCellDelegate.h"
 #import "IMUserInterface.h"
+#import "IMChatViewModel.h"
 
 @interface IMMessageBaseCell : UITableViewCell
 
 @property (nonatomic, assign) id<IMMessageCellDelegate>delegate;
 
-@property (nonatomic, strong) IMTopicMessage *message;
+@property (nonatomic, strong) IMChatViewModel *model;
 
 @property (nonatomic, assign) TopicType topicType;
 
@@ -28,5 +27,6 @@
 
 - (void)setupUI;
 - (void)setupLayout;
++ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model;
 @end
 

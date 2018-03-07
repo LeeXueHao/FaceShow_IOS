@@ -17,7 +17,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -31,8 +31,8 @@
     return self;
 }
 
-- (void)setMessage:(IMTopicMessage *)message {
-    [super setMessage:message];
+- (void)setModel:(IMChatViewModel *)model {
+    [super setModel:model];
     
     [self.avatarButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(15.f);
@@ -58,4 +58,23 @@
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
 }
+
++ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+    IMTopicMessage *message = model.message;
+    CGFloat height = 0;
+    //时间的高度
+    if (model.isTimeVisible) {//显示时间
+        height += 50;
+    }else {
+        height += 15;
+    }
+    //聊天内容文字的高
+    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake(226.f , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
+    height += textSize.height;
+    //文字距离背景上下的高度
+    height += 24;
+    
+    return height;
+}
+
 @end

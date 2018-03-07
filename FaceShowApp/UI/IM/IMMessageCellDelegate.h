@@ -7,19 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-@class IMTopicMessage;
+@class IMChatViewModel;
 @class IMMember;
 
 @protocol IMMessageCellDelegate <NSObject>
 
 - (void)messageCellDidClickAvatarForUser:(IMMember *)user;
 
-- (void)messageCellTap:(IMTopicMessage *)message;
+- (void)messageCellTap:(IMChatViewModel *)model;
 
-- (void)messageCellLongPress:(IMTopicMessage *)message rect:(CGRect)rect;
+- (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect;
 
-- (void)messageCellDoubleClick:(IMTopicMessage *)message;
+- (void)messageCellDoubleClick:(IMChatViewModel *)mmodel;
 
-- (void)messageCellDidClickStateButton:(IMTopicMessage *)message rect:(CGRect)rect;
+- (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect;
 
 @end

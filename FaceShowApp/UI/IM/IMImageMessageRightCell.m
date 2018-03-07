@@ -21,8 +21,8 @@
     // Configure the view for the selected state
 }
 
-- (void)setMessage:(IMTopicMessage *)message {
-    [super setMessage:message];
+- (void)setModel:(IMChatViewModel *)model {
+    [super setModel:model];
     
     [self.avatarButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(15.f);

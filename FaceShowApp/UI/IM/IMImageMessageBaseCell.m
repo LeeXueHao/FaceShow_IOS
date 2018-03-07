@@ -43,7 +43,7 @@ static const CGFloat kMaxImageSizeWidth = 140;
 
 - (void)tapAction {
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellTap:)]) {
-        [self.delegate messageCellTap:self.message];
+        [self.delegate messageCellTap:self.model];
     }
 }
 
@@ -60,14 +60,15 @@ static const CGFloat kMaxImageSizeWidth = 140;
     }];
 }
 
-- (void)setMessage:(IMTopicMessage *)message {
-    if (self.message && [self.message.uniqueID isEqualToString:message.uniqueID]) {
+- (void)setModel:(IMChatViewModel *)model {
+    IMTopicMessage *message = model.message;
+    if (self.model && [self.model.message.uniqueID isEqualToString:model.message.uniqueID]) {
         //更新图片
         [self updateSendStateWithMessage:message];
         [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"背景图片"]];
         return;
     }
-    [super setMessage:message];
+    [super setModel:model];
     [self updateSendStateWithMessage:message];
 //    self.messageImageview.image = [UIImage imageWithContentsOfFile:@""];
     self.messageImageview.image = [UIImage imageNamed:@"背景图片"];

@@ -12,9 +12,10 @@
 #import "IMTextMessageLeftCell.h"
 #import "IMTextMessageRightCell.h"
 #import "IMTopicMessage.h"
+#import "IMChatViewModel.h"
 
 @interface IMMessageCellFactory : NSObject
 
-+ (IMMessageBaseCell *)cellWithMessage:(IMTopicMessage *)message;
++ (IMMessageBaseCell *)cellWithMessageModel:(IMChatViewModel *)model;
 
 @end

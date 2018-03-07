@@ -26,11 +26,12 @@
 #import "IMImageMessageRightCell.h"
 #import "UIImage+YXImage.h"
 #import "PhotoBrowserController.h"
+#import "IMChatViewModel.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (assign,nonatomic) BOOL isFirst;
 @property (nonatomic, strong) IMMessageTableView *tableView;
-@property (nonatomic, strong) NSMutableArray<IMTopicMessage *> *dataArray;
+@property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
 @property (nonatomic, strong) IMInputView *imInputView;
 @property (nonatomic, strong) IMMessageMenuView *menuView;
 @property (nonatomic, strong) ImageSelectionHandler *imageHandler;
@@ -140,7 +141,10 @@
         STRONG_SELF
         self.dataArray = [NSMutableArray array];
         for (IMTopicMessage *msg in array) {
-            [self.dataArray insertObject:msg atIndex:0];
+            IMChatViewModel *model = [[IMChatViewModel alloc]init];
+            model.message = msg;
+            model.topicType = self.topic.type;
+            [self.dataArray insertObject:model atIndex:0];
         }
         [self handelTimeForDataSource:self.dataArray];
         self.hasMore = hasMore;
@@ -153,16 +157,21 @@
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopicMessage *message = noti.object;
-        for (IMTopicMessage *item in self.dataArray) {
+        for (IMChatViewModel *model in self.dataArray) {
+            IMTopicMessage *item = model.message;
             if ([item.uniqueID isEqualToString:message.uniqueID]) {
-                NSUInteger index = [self.dataArray indexOfObject:item];
-                [self.dataArray replaceObjectAtIndex:index withObject:message];
+                NSUInteger index = [self.dataArray indexOfObject:model];
+                model.message = message;
+                [self.dataArray replaceObjectAtIndex:index withObject:model];
                 [self handelTimeForDataSource:self.dataArray];
                 [self.tableView reloadData];
                 return;
             }
         }
-        [self.dataArray addObject:message];
+        IMChatViewModel *model = [[IMChatViewModel alloc]init];
+        model.message = message;
+        model.topicType = self.topic.type;
+        [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
         [self.tableView reloadData];
         [self scrollToBottom];
@@ -220,9 +229,8 @@
         self.isFirst = NO;
         [self scrollToBottom];
     }
-    IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessage:self.dataArray[indexPath.row]];
-    cell.message = self.dataArray[indexPath.row];
-    cell.topicType = self.topic.type;
+    IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self.dataArray[indexPath.row]];
+    cell.model = self.dataArray[indexPath.row];
     cell.delegate = self;
     //测试图片
 //    IMImageMessageLeftCell *cell = [[IMImageMessageLeftCell alloc]init];
@@ -265,14 +273,18 @@
     self.isRefresh = YES;
     self.tableView.tableHeaderView.hidden = NO;
     [self.activity startAnimating];
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:self.dataArray.firstObject completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    IMChatViewModel *model = self.dataArray.firstObject;
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         self.isRefresh = NO;
         [self.activity stopAnimating];
         self.hasMore = hasMore;
         if (array.count > 0) {
             for (NSInteger i = 0; i < array.count; i ++) {
-                [self.dataArray insertObject:array[i] atIndex:0];
+                IMChatViewModel *model = [[IMChatViewModel alloc]init];
+                model.topicType = self.topic.type;
+                model.message = array[i];
+                [self.dataArray insertObject:model atIndex:0];
             }
             [self handelTimeForDataSource:self.dataArray];
             [self.tableView reloadData];
@@ -286,7 +298,7 @@
     [self.view nyx_showToast:@"click avatar to do ..."];
 }
 
-- (void)messageCellTap:(IMTopicMessage *)message {
+- (void)messageCellTap:(IMChatViewModel *)model {
     [self.view nyx_showToast:@"click image to do ..."];
     NSURL *url = [NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226683021&di=f4f8c422c2a55a2f0fdeeecb9a51060b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F68%2F11%2F35W58PICzbv_1024.jpg"];//message.thumbnail];
     NSData *data = [NSData dataWithContentsOfURL:url];
@@ -304,14 +316,14 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)messageCellLongPress:(IMTopicMessage *)message rect:(CGRect)rect {
+- (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {
     DDLogDebug(@"long press to do ...");
-    
-    NSInteger row = [self.dataArray indexOfObject:message];
+    NSInteger row = [self.dataArray indexOfObject:model];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     CGRect cellRect = [self.tableView rectForRowAtIndexPath:indexPath];
     rect.origin.y += cellRect.origin.y - self.tableView.contentOffset.y;
     
+    IMTopicMessage *message = model.message;
     WEAK_SELF
     [self.menuView setMenuItemActionBlock:^(IMMessageMenuItemType type) {
         STRONG_SELF
@@ -342,28 +354,29 @@
     [self.menuView showInView:self.tableView  withRect:rect];
 }
 
-- (void)messageCellDoubleClick:(IMTopicMessage *)message {
+- (void)messageCellDoubleClick:(IMChatViewModel *)mmodel {
     [self.view nyx_showToast:@"double click to do ..."];
 }
 
-- (void)messageCellDidClickStateButton:(IMTopicMessage *)message rect:(CGRect)rect {
+- (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect {
     DDLogDebug(@"click state button to do ...");
     if ([self isFirstResponder]) {
         [self resignFirstResponder];
     }
-    NSInteger row = [self.dataArray indexOfObject:message];
+    NSInteger row = [self.dataArray indexOfObject:model];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     CGRect cellRect = [self.tableView rectForRowAtIndexPath:indexPath];
     rect.origin.y += cellRect.origin.y - self.tableView.contentOffset.y;
     
+    IMTopicMessage *message = model.message;
     WEAK_SELF
     [self.menuView setMenuItemActionBlock:^(IMMessageMenuItemType type) {
         STRONG_SELF
         if (type == IMMessageMenuItemType_Resend) {
-            if ([self.dataArray containsObject:message]) {
-                NSUInteger index = [self.dataArray indexOfObject:message];
+            if ([self.dataArray containsObject:model]) {
+                NSUInteger index = [self.dataArray indexOfObject:model];
                 [self.dataArray removeObjectAtIndex:index];
-                [self.dataArray addObject:message];
+                [self.dataArray addObject:model];
                 [self handelTimeForDataSource:self.dataArray];
                 [self.tableView reloadData];
             }
@@ -396,26 +409,27 @@
 
 #pragma mark - 时间显示相关
 - (void)handelTimeForDataSource:(NSMutableArray *)dataArray {
-    IMTopicMessage *msg;
+    IMChatViewModel *model;
     NSTimeInterval lastVisibleTime = 0.0;
     for (int i=0; i<dataArray.count; i++) {
-        msg = [dataArray objectAtIndex:i];
+        model = [dataArray objectAtIndex:i];
+        IMTopicMessage *msg = model.message;
         if (i == 0) {
-            msg.isTimeVisible = YES;
+            model.isTimeVisible = YES;
             lastVisibleTime = msg.sendTime;
         }else {
             int timeSpan=(int)[IMTimeHandleManger compareTime1:lastVisibleTime withTime2:msg.sendTime type:IMTimeType_Minute];
             if (timeSpan >= 5) {
-                msg.isTimeVisible = YES;
+                model.isTimeVisible = YES;
                 lastVisibleTime = msg.sendTime;
             }else if (timeSpan < 0) {
-                msg.isTimeVisible = YES;
+                model.isTimeVisible = YES;
                 lastVisibleTime = msg.sendTime;
             }else {
-                msg.isTimeVisible = NO;
+                model.isTimeVisible = NO;
             }
         }
-        dataArray[i] = msg;
+        dataArray[i] = model;
     }
 }
 
