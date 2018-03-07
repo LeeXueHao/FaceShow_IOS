@@ -16,6 +16,7 @@
     self.bottomHeightWhenKeyboardShows = -1;
     [self setupBaseUI];
     [self setupObservers];
+    AdjustsScrollViewInsetNever(self, self.scrollView);
 }
 
 - (void)didReceiveMemoryWarning {

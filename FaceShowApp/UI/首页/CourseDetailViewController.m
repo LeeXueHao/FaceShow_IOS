@@ -42,7 +42,7 @@
     [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(11);
-        make.centerY.mas_equalTo(self.view.mas_top).offset(42);
+        make.centerY.mas_equalTo(self.view.mas_top).offset(42+SafeAreaTopHeight);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
 }
@@ -68,7 +68,7 @@
     [self.view addSubview:self.headerImageView];
     [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(135);
+        make.height.mas_equalTo(135+SafeAreaTopHeight);
     }];
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont boldSystemFontOfSize:21];

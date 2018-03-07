@@ -144,7 +144,8 @@
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.left.top.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
     }];
     [self.tableView registerClass:[ChooseQuestionCell class] forCellReuseIdentifier:@"ChooseQuestionCell"];
     [self.tableView registerClass:[FillQuestionCell class] forCellReuseIdentifier:@"FillQuestionCell"];
@@ -159,7 +160,8 @@
     [self.submitButton addTarget:self action:@selector(submitAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.submitButton];
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
         make.height.mas_equalTo(49);
     }];
     self.submitButton.hidden = YES;

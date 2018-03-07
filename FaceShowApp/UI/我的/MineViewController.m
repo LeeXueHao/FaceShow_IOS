@@ -52,7 +52,7 @@
     [self.view addSubview:backImageView];
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(239);
+        make.height.mas_equalTo(239+SafeAreaTopHeight);
     }];
     
     self.avatarImageView = [[UIImageView alloc] init];
@@ -64,7 +64,7 @@
     }];
     [self.view addSubview:self.avatarImageView];
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(44);
+        make.top.mas_equalTo(44+SafeAreaTopHeight);
         make.centerX.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(55, 55));
     }];
@@ -166,7 +166,8 @@
     [logoutBtn addTarget:self action:@selector(logoutBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
     [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
+        make.bottom.mas_equalTo(0-SafeAreaBottomHeight);
+        make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(49);
     }];
     

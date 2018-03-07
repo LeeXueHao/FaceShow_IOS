@@ -60,7 +60,7 @@
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-50);
+        make.bottom.mas_equalTo(-50-SafeAreaBottomHeight);
     }];
     UIView *line = [[UIView alloc]init];
     line.backgroundColor = [UIColor colorWithHexString:@"e5e9ec"];
