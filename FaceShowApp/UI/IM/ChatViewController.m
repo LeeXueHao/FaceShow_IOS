@@ -29,7 +29,6 @@
 #import "IMChatViewModel.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
-@property (assign,nonatomic) BOOL isFirst;
 @property (nonatomic, strong) IMMessageTableView *tableView;
 @property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
 @property (nonatomic, strong) IMInputView *imInputView;
@@ -63,7 +62,6 @@
     [self setupUI];
     [self setupData];
     [self setupObserver];
-    self.isFirst = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -71,11 +69,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    [self scrollToBottom];
-//}
 
 - (void)setupUI {
     self.imInputView = [[IMInputView alloc]init];
@@ -117,7 +110,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.estimatedRowHeight = 50.0f;
+    self.tableView.estimatedRowHeight = 0.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,17 +130,20 @@
 
 - (void)setupData {
     WEAK_SELF
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:5 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         self.dataArray = [NSMutableArray array];
         for (IMTopicMessage *msg in array) {
             IMChatViewModel *model = [[IMChatViewModel alloc]init];
             model.message = msg;
             model.topicType = self.topic.type;
+//            model.height = [self heightForModel:model];
             [self.dataArray insertObject:model atIndex:0];
         }
         [self handelTimeForDataSource:self.dataArray];
         self.hasMore = hasMore;
+        [self.tableView reloadData];
+        [self scrollToBottom];
     }];
 }
 
@@ -162,8 +158,9 @@
             if ([item.uniqueID isEqualToString:message.uniqueID]) {
                 NSUInteger index = [self.dataArray indexOfObject:model];
                 model.message = message;
+//                model.height = [self heightForModel:model];
                 [self.dataArray replaceObjectAtIndex:index withObject:model];
-                [self handelTimeForDataSource:self.dataArray];
+//                [self handelTimeForDataSource:self.dataArray];
                 [self.tableView reloadData];
                 return;
             }
@@ -171,6 +168,7 @@
         IMChatViewModel *model = [[IMChatViewModel alloc]init];
         model.message = message;
         model.topicType = self.topic.type;
+//        model.height = [self heightForModel:model];
         [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
         [self.tableView reloadData];
@@ -225,29 +223,31 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.isFirst) {
-        self.isFirst = NO;
-        [self scrollToBottom];
-    }
     IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self.dataArray[indexPath.row]];
     cell.model = self.dataArray[indexPath.row];
     cell.delegate = self;
     //测试图片
-//    IMImageMessageLeftCell *cell = [[IMImageMessageLeftCell alloc]init];
-//    IMTopicMessage *message = [[IMTopicMessage alloc]init];
-//    message.type = MessageType_Image;
-//    IMMember *mem = [[IMMember alloc]init];
-//    mem.name = @"发送者";
-//    mem.avatar = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226683021&di=f4f8c422c2a55a2f0fdeeecb9a51060b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F68%2F11%2F35W58PICzbv_1024.jpg";
-//    message.sender = mem;
-//    message.sender.name = @"发送者";
-//    message.sendState = MessageSendState_Sending;
-//    message.thumbnail = @"http://img5.imgtn.bdimg.com/it/u=4005232556,476955445&fm=27&gp=0.jpg";
-//    //@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226599946&di=58056cbae9f7d5b2bda8c3b7cae51652&imgtype=0&src=http%3A%2F%2Fpic54.nipic.com%2Ffile%2F20141201%2F13740598_112413393000_2.jpg";
-//    cell.message = message;
-//    cell.topicType = TopicType_Group;
-//    cell.delegate = self;
+    //    IMImageMessageLeftCell *cell = [[IMImageMessageLeftCell alloc]init];
+    //    IMTopicMessage *message = [[IMTopicMessage alloc]init];
+    //    message.type = MessageType_Image;
+    //    IMMember *mem = [[IMMember alloc]init];
+    //    mem.name = @"发送者";
+    //    mem.avatar = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226683021&di=f4f8c422c2a55a2f0fdeeecb9a51060b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F68%2F11%2F35W58PICzbv_1024.jpg";
+    //    message.sender = mem;
+    //    message.sender.name = @"发送者";
+    //    message.sendState = MessageSendState_Sending;
+    //    message.thumbnail = @"http://img5.imgtn.bdimg.com/it/u=4005232556,476955445&fm=27&gp=0.jpg";
+    //    //@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226599946&di=58056cbae9f7d5b2bda8c3b7cae51652&imgtype=0&src=http%3A%2F%2Fpic54.nipic.com%2Ffile%2F20141201%2F13740598_112413393000_2.jpg";
+    //    cell.message = message;
+    //    cell.topicType = TopicType_Group;
+    //    cell.delegate = self;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    DDLogDebug(@"heightForRowAtIndexPath--------%@",@(indexPath.row));
+    IMChatViewModel *model = self.dataArray[indexPath.row];
+    return model.height;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -270,26 +270,29 @@
 
 - (void)loadMoreHistoryData {
     WEAK_SELF
-    self.isRefresh = YES;
-    self.tableView.tableHeaderView.hidden = NO;
     [self.activity startAnimating];
+    self.isRefresh = YES;
     IMChatViewModel *model = self.dataArray.firstObject;
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:5 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
-        self.isRefresh = NO;
-        [self.activity stopAnimating];
-        self.hasMore = hasMore;
-        if (array.count > 0) {
-            for (NSInteger i = 0; i < array.count; i ++) {
-                IMChatViewModel *model = [[IMChatViewModel alloc]init];
-                model.topicType = self.topic.type;
-                model.message = array[i];
-                [self.dataArray insertObject:model atIndex:0];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.hasMore = hasMore;
+            [self.activity stopAnimating];
+            if (array.count > 0) {
+                NSMutableArray *resultArray = [NSMutableArray array];
+                for (NSInteger i = 0; i < array.count; i ++) {
+                    IMChatViewModel *model = [[IMChatViewModel alloc]init];
+                    model.topicType = self.topic.type;
+                    model.message = array[i];
+//                    model.height = [self heightForModel:model];
+                    [self.dataArray insertObject:model atIndex:0];
+                    [resultArray insertObject:model atIndex:0];
+                }
+                [self handelTimeForDataSource:resultArray];
+                [self.tableView reloadData];
             }
-            [self handelTimeForDataSource:self.dataArray];
-            [self.tableView reloadData];
-            self.tableView.tableHeaderView.hidden = YES;
-        }
+            self.isRefresh = NO;
+        });
     }];
 }
 
@@ -433,4 +436,13 @@
     }
 }
 
+- (void)setHasMore:(BOOL)hasMore {
+    _hasMore = hasMore;
+    self.tableView.tableHeaderView.hidden = !hasMore;
+}
+
+//- (CGFloat)heightForModel:(IMChatViewModel *)model {
+//    IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:model];
+//    return [cell heigthtForMessageModel:model];
+//}
 @end

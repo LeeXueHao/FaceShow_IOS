@@ -56,9 +56,7 @@
     self.usernameLabel.font = [UIFont systemFontOfSize:12.0f];
     
     self.messageBackgroundView = [[UIImageView alloc] init];
-    UIImage *image = [UIImage imageNamed:@"ReceiverTextNodeBkg"];
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25, 30, 25, 30) resizingMode:UIImageResizingModeStretch];
-    self.messageBackgroundView.image = image;
+    self.messageBackgroundView.image = [UIImage yx_resizableImageNamed:@"ReceiverTextNodeBkg"];
     [self.messageBackgroundView setUserInteractionEnabled:YES];
     
     UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressMsgBGView:)];
@@ -135,7 +133,7 @@
         make.top.mas_equalTo(self.usernameLabel.mas_bottom).mas_offset(6.f);
         make.left.mas_equalTo(self.avatarButton.mas_right).mas_offset(5.f).priorityHigh();
         make.bottom.mas_equalTo(0.f);
-        make.right.mas_lessThanOrEqualTo(-75 * kPhoneWidthRatio);
+        make.right.mas_lessThanOrEqualTo(-65);
     }];
     
     [self.stateButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -204,8 +202,12 @@
     }
 }
 
-+ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
     return .0f;
+}
+
+- (CGFloat)textMaxWidth {
+    return SCREEN_WIDTH - (15 + 40 + 5 + 4 + 10 + 10 + 65);
 }
 @end
 

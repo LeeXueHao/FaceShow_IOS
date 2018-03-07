@@ -24,9 +24,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        UIImage *image = [UIImage imageNamed:@"SenderTextNodeBkg"];
-        image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25, 30, 25, 30) resizingMode:UIImageResizingModeStretch];
-        self.messageBackgroundView.image = image;
+         self.messageBackgroundView.image = [UIImage yx_resizableImageNamed:@"SenderTextNodeBkg"];
     }
     return self;
 }
@@ -49,7 +47,7 @@
         make.top.equalTo(self.avatarButton.mas_top);
         make.right.equalTo(self.avatarButton.mas_left).offset(-5.f).priorityHigh();
         make.bottom.mas_equalTo(0.f);
-        make.left.mas_greaterThanOrEqualTo(75 * kPhoneWidthRatio);
+        make.left.mas_greaterThanOrEqualTo(65 * kPhoneWidthRatio);
     }];
     
     [self.stateButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -59,7 +57,7 @@
     }];
 }
 
-+ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
     IMTopicMessage *message = model.message;
     CGFloat height = 0;
     //时间的高度
@@ -69,10 +67,10 @@
         height += 15;
     }
     //聊天内容文字的高
-    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake(226.f , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
+    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth] , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
     height += textSize.height;
     //文字距离背景上下的高度
-    height += 24;
+    height += 29;
     
     return height;
 }

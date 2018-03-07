@@ -27,6 +27,7 @@
 
 - (void)setupUI;
 - (void)setupLayout;
-+ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model;
+- (CGFloat)textMaxWidth;
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model;
 @end
 

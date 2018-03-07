@@ -34,7 +34,7 @@
     [super setupLayout];
     [self.messageBackgroundView addSubview:self.messageTextLabel];
     [self.messageTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(11.f, 15.f, 18.f, 14.f));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(11.f, 10.f, 18.f, 10.f));
     }];
 }
 
@@ -43,7 +43,7 @@
     self.messageTextLabel.text = model.message.text;
 }
 
-+ (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
     IMTopicMessage *message = model.message;
     CGFloat height = 0;
     //时间的高度
@@ -54,15 +54,15 @@
     }
     //名字的高度
     if (model.topicType == TopicType_Group) {//群聊显示名字
-        height += 18;
+        height += 20;
     }else {
         height += 0;
     }
     //聊天内容文字的高
-    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake(226.f , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
+    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth], MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
     height += textSize.height;
     //文字距离背景上下的高度
-    height += 24;
+    height += 29;
     
     return height;
 }
