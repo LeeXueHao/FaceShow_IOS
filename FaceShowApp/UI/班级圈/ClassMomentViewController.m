@@ -338,7 +338,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             if (bottomView != nil) {
                 CGRect rect = [bottomView convertRect:bottomView.bounds toView:self.tableView];
                 CGFloat bottomY = CGRectGetMaxY(rect);
-                CGFloat offset = bottomY - (keyboardFrame.origin.y - self.inputView.height) + 50.0f+SafeAreaBottomHeight - self.tableView.contentOffset.y;
+                CGFloat offset = bottomY - (keyboardFrame.origin.y - self.inputView.height) + NavigationBarHeight - self.tableView.contentOffset.y;
                 if (offset > 0) {
                     [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y+offset) animated:YES];
                 }
