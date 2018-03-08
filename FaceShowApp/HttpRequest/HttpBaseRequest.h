@@ -16,6 +16,7 @@ static NSString *const YXTokenInValidNotification = @"kYXTokenInValidNotificatio
 @property (nonatomic, copy) NSString<Optional> *code;
 @property (nonatomic, copy) NSString<Optional> *message;
 @property (nonatomic, strong) HttpBaseRequestItem_Error<Optional> *error;
+@property (nonatomic, strong) NSString<Optional> *currentTime;
 
 @end
 

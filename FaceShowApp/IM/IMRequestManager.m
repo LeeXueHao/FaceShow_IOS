@@ -22,6 +22,8 @@
 @property (nonatomic, strong) GetTopicMsgsRequest *msgsRequest;
 @property (nonatomic, strong) CreateTopicRequest *createTopicRequest;
 @property (nonatomic, strong) SaveTextMsgRequest *saveTextMsgRequest;
+
+@property (nonatomic, assign) NSTimeInterval timeoffset;
 @end
 
 @implementation IMRequestManager
@@ -32,6 +34,13 @@
         manager = [[IMRequestManager alloc] init];
     });
     return manager;
+}
+
+- (void)updateTimeOffsetWithServerTime:(NSTimeInterval)serverTime {
+    if (self.timeoffset == 0) {
+        NSTimeInterval interval = [[NSDate date]timeIntervalSince1970];
+        self.timeoffset = serverTime - interval*1000;
+    }
 }
 
 - (void)requestTopicsWithCompleteBlock:(void(^)(NSArray<IMTopic *> *topics,NSError *error))completeBlock {
@@ -47,6 +56,7 @@
             return;
         }
         GetMemberTopicsRequestItem *item = (GetMemberTopicsRequestItem *)retItem;
+        [self updateTimeOffsetWithServerTime:item.currentTime.doubleValue];
         NSMutableArray *array = [NSMutableArray array];
         for (TopicData_topic *topicItem in item.data.topic) {
             [array addObject:[topicItem toIMTopic]];

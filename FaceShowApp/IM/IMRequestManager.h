@@ -13,6 +13,8 @@
 @interface IMRequestManager : NSObject
 + (IMRequestManager *)sharedInstance;
 
+@property (nonatomic, assign, readonly) NSTimeInterval timeoffset;//记录server时间和本地时间偏差，在消息发送中用本地时间加上偏差的值模拟server时间时使用。
+
 - (void)requestTopicsWithCompleteBlock:(void(^)(NSArray<IMTopic *> *topics,NSError *error))completeBlock;
 
 - (void)requestTopicDetailWithTopicIds:(NSString *)topicIds
