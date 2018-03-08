@@ -29,15 +29,14 @@
 #import "IMChatViewModel.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
+@property (strong,nonatomic)UIActivityIndicatorView *activity;
 @property (nonatomic, strong) IMMessageTableView *tableView;
-@property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
 @property (nonatomic, strong) IMInputView *imInputView;
-@property (nonatomic, strong) IMMessageMenuView *menuView;
 @property (nonatomic, strong) ImageSelectionHandler *imageHandler;
+@property (nonatomic, strong) IMMessageMenuView *menuView;
+@property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
 @property (assign,nonatomic)BOOL hasMore;
 @property (assign,nonatomic)BOOL isRefresh;
-
-@property (strong,nonatomic)UIActivityIndicatorView *activity;
 @end
 
 @implementation ChatViewController
@@ -55,11 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (self.topic) {
-        if (self.topic.type == TopicType_Group) {
-            self.title = [NSString stringWithFormat:@"%@(%@)",self.topic.name,@(self.topic.members.count)];
-        }else {
-            self.title = self.topic.name;
-        }
+        [self setupTitleWithTopic:self.topic];
     }else {
         self.title = self.member.name;
     }
@@ -73,6 +68,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupTitleWithTopic:(IMTopic *)topic {
+    if (topic.type == TopicType_Group) {
+        self.title = [NSString stringWithFormat:@"%@(%@)",self.topic.name,@(self.topic.members.count)];
+    }else {
+        [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (item.memberID == [IMManager sharedInstance].currentMember.memberID) {
+                self.title = topic.members[topic.members.count - idx - 1].name;
+            }
+        }];
+    }
 }
 
 - (void)setupUI {
@@ -141,8 +148,7 @@
         for (IMTopicMessage *msg in array) {
             IMChatViewModel *model = [[IMChatViewModel alloc]init];
             model.message = msg;
-            model.topicType = self.topic.type;
-//            model.height = [self heightForModel:model];
+            model.topicType = self.topic ? self.topic.type : TopicType_Private;
             [self.dataArray insertObject:model atIndex:0];
         }
         [self handelTimeForDataSource:self.dataArray];
@@ -150,6 +156,42 @@
         [self.tableView reloadData];
         [self scrollToBottom];
     }];
+}
+
+- (void)handelTimeForDataSource:(NSMutableArray *)dataArray {
+    IMChatViewModel *model;
+    NSTimeInterval lastVisibleTime = 0.0;
+    for (int i=0; i<dataArray.count; i++) {
+        model = [dataArray objectAtIndex:i];
+        IMTopicMessage *msg = model.message;
+        if (i == 0) {
+            model.isTimeVisible = YES;
+            lastVisibleTime = msg.sendTime;
+        }else {
+            int timeSpan=(int)[IMTimeHandleManger compareTime1:lastVisibleTime withTime2:msg.sendTime type:IMTimeType_Minute];
+            if (timeSpan > 5) {
+                model.isTimeVisible = YES;
+                lastVisibleTime = msg.sendTime;
+            }else if (timeSpan < 0) {
+                model.isTimeVisible = YES;
+                lastVisibleTime = msg.sendTime;
+            }else {
+                model.isTimeVisible = NO;
+            }
+        }
+        dataArray[i] = model;
+    }
+}
+
+- (void)setHasMore:(BOOL)hasMore {
+    _hasMore = hasMore;
+    self.tableView.tableHeaderView.hidden = !hasMore;
+}
+
+- (void)scrollToBottom {
+    if (self.dataArray.count >= 1) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
 }
 
 - (void)setupObserver {
@@ -163,17 +205,14 @@
             if ([item.uniqueID isEqualToString:message.uniqueID]) {
                 NSUInteger index = [self.dataArray indexOfObject:model];
                 model.message = message;
-//                model.height = [self heightForModel:model];
                 [self.dataArray replaceObjectAtIndex:index withObject:model];
-//                [self handelTimeForDataSource:self.dataArray];
                 [self.tableView reloadData];
                 return;
             }
         }
         IMChatViewModel *model = [[IMChatViewModel alloc]init];
         model.message = message;
-        model.topicType = self.topic.type;
-//        model.height = [self heightForModel:model];
+        model.topicType = self.topic ? self.topic.type : TopicType_Private;
         [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
         [self.tableView reloadData];
@@ -199,11 +238,14 @@
     
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMTopicDidUpdateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
-        if (self.topic) {
-            return;
-        }
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
+
+        if (self.topic && self.topic.topicID == topic.topicID) {//有话题
+            self.topic = topic;
+            [self setupTitleWithTopic:topic];
+            return;
+        }
         if (topic.type == TopicType_Private) {
             for (IMMember *item in topic.members) {
 #warning self.member需要看结构是什么
@@ -250,7 +292,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DDLogDebug(@"heightForRowAtIndexPath--------%@",@(indexPath.row));
     IMChatViewModel *model = self.dataArray[indexPath.row];
     return model.height;
 }
@@ -260,13 +301,6 @@
     [self.imInputView resignFirstResponder];
 }
 
-- (void)scrollToBottom {
-    if (self.dataArray.count >= 1) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    }
-}
-
-#pragma mark - loadMoreHistoryData
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y < 0  && self.hasMore && !self.isRefresh) {
         [self loadMoreHistoryData];
@@ -287,9 +321,8 @@
                 NSMutableArray *resultArray = [NSMutableArray array];
                 for (NSInteger i = 0; i < array.count; i ++) {
                     IMChatViewModel *model = [[IMChatViewModel alloc]init];
-                    model.topicType = self.topic.type;
+                    model.topicType = self.topic ? self.topic.type : TopicType_Private;
                     model.message = array[i];
-//                    model.height = [self heightForModel:model];
                     [self.dataArray insertObject:model atIndex:0];
                     [resultArray insertObject:model atIndex:0];
                 }
@@ -415,39 +448,4 @@
     return _menuView;
 }
 
-#pragma mark - 时间显示相关
-- (void)handelTimeForDataSource:(NSMutableArray *)dataArray {
-    IMChatViewModel *model;
-    NSTimeInterval lastVisibleTime = 0.0;
-    for (int i=0; i<dataArray.count; i++) {
-        model = [dataArray objectAtIndex:i];
-        IMTopicMessage *msg = model.message;
-        if (i == 0) {
-            model.isTimeVisible = YES;
-            lastVisibleTime = msg.sendTime;
-        }else {
-            int timeSpan=(int)[IMTimeHandleManger compareTime1:lastVisibleTime withTime2:msg.sendTime type:IMTimeType_Minute];
-            if (timeSpan >= 5) {
-                model.isTimeVisible = YES;
-                lastVisibleTime = msg.sendTime;
-            }else if (timeSpan < 0) {
-                model.isTimeVisible = YES;
-                lastVisibleTime = msg.sendTime;
-            }else {
-                model.isTimeVisible = NO;
-            }
-        }
-        dataArray[i] = model;
-    }
-}
-
-- (void)setHasMore:(BOOL)hasMore {
-    _hasMore = hasMore;
-    self.tableView.tableHeaderView.hidden = !hasMore;
-}
-
-//- (CGFloat)heightForModel:(IMChatViewModel *)model {
-//    IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:model];
-//    return [cell heigthtForMessageModel:model];
-//}
 @end

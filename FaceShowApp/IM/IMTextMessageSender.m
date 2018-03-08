@@ -98,6 +98,8 @@
         STRONG_SELF
         if (error) {
             [self messageSentFailed:textMsg];
+        }else {
+            [[IMDatabaseManager sharedInstance]saveMessage:msg];
         }
         [self sendNext];
     }];

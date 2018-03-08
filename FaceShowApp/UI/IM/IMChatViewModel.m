@@ -13,11 +13,13 @@
 @implementation IMChatViewModel
 
 - (CGFloat)height {
-    if (!_height) {
-        IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self];
-        _height = [cell heigthtForMessageModel:self];
-    }
-    return _height;
+//    if (!_height) {
+//        IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self];
+//        _height = [cell heigthtForMessageModel:self];
+//    }
+//    return _height;
+    IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self];
+    return [cell heigthtForMessageModel:self];
 }
 
 @end

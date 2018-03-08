@@ -39,7 +39,7 @@
     return result;
 }
 
-+ (NSString *)compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:(NSTimeInterval)originalTime; {
++ (NSString *)compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:(NSTimeInterval)originalTime {
     
     NSTimeInterval tempMilli = originalTime;
     NSTimeInterval seconds = tempMilli/1000.0;
