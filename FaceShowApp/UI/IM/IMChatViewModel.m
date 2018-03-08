@@ -15,21 +15,12 @@
 - (CGFloat)height {
     if (!_height) {
         IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self];
-        _height = [cell heigthtForMessageModel:self] ;
+        _height = [cell heigthtForMessageModel:self];
+    }
+    if (_isTimeVisible) {
+        return _height + 35;
     }
     return _height;
 }
 
-- (void)setIsTimeVisible:(BOOL)isTimeVisible {
-    if (!_isTimeVisible && isTimeVisible) {
-        if (!_height) {
-            IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self];
-            _height = [cell heigthtForMessageModel:self];
-            _height += 35;
-        }else {
-            _height += 35;
-        }
-    }
-     _isTimeVisible = isTimeVisible;
-}
 @end
