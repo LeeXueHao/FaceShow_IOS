@@ -47,6 +47,11 @@
     [IMUserInterface clearDirtyMessages];
 }
 
+- (void)backAction {
+    BLOCK_EXEC(self.exitBlock);
+    [super backAction];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (self.topic) {

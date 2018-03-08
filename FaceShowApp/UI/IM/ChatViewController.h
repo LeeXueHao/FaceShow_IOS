@@ -13,5 +13,5 @@
 @interface ChatViewController : BaseViewController
 @property (nonatomic, strong) IMTopic *topic;
 @property (nonatomic, strong) IMMember *member;
-
+@property (nonatomic, strong) void(^exitBlock)(void);
 @end

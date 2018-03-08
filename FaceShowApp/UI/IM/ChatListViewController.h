@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ChatListViewController : BaseViewController
-
+@property (nonatomic, strong) UIView *unreadPromptView;
 @end

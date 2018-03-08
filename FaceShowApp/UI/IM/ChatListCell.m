@@ -13,7 +13,7 @@
 
 @interface ChatListCell ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
-//@property (nonatomic, strong) UIImageView *tipImageView;红点
+@property (nonatomic, strong) UIImageView *tipImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
@@ -58,18 +58,18 @@
         make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
     
-//    self.tipImageView = [[UIImageView alloc] init];
-//    self.tipImageView.contentMode = UIViewContentModeScaleAspectFill;
-//    self.tipImageView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-//    self.tipImageView.clipsToBounds = YES;
-//    self.tipImageView.layer.cornerRadius = 4.5;
-//    self.tipImageView.userInteractionEnabled = YES;
-//    [self.contentView addSubview:self.tipImageView];
-//    [self.tipImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.avatarImageView.mas_right).offset(3.5);
-//        make.top.equalTo(self.avatarImageView.mas_top).offset(-3.5);
-//        make.size.mas_equalTo(CGSizeMake(9, 9));
-//    }];
+    self.tipImageView = [[UIImageView alloc] init];
+    self.tipImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.tipImageView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    self.tipImageView.clipsToBounds = YES;
+    self.tipImageView.layer.cornerRadius = 4.5;
+    self.tipImageView.userInteractionEnabled = YES;
+    [self.contentView addSubview:self.tipImageView];
+    [self.tipImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.avatarImageView.mas_right).offset(3.5);
+        make.top.equalTo(self.avatarImageView.mas_top).offset(-3.5);
+        make.size.mas_equalTo(CGSizeMake(9, 9));
+    }];
     
     self.timeLabel = [[UILabel alloc] init];
     self.timeLabel.font = [UIFont systemFontOfSize:14];
@@ -145,6 +145,7 @@
         NSString *string = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:topic.latestMessage.sendTime];
         self.timeLabel.text = [string componentsSeparatedByString:@" "].firstObject;
     }
+    self.tipImageView.hidden = topic.unreadCount==0;
 }
 
 - (void)setIsLastRow:(BOOL)isLastRow {

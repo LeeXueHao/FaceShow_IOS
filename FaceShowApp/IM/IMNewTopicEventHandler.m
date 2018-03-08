@@ -21,6 +21,11 @@
         NSLog(@"parse error:%@",error.localizedDescription);
         return;
     }
+    IMTopic *imtopic = [[IMTopic alloc]init];
+    imtopic.topicID = msg.topicId;
+    [[IMDatabaseManager sharedInstance]saveTopic:imtopic];
+    [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:msg.topicId]];
+    
     [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(msg.topicId)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
         if (error) {
             return;
@@ -28,7 +33,6 @@
         for (IMTopic *topic in topics) {
             [[IMDatabaseManager sharedInstance]saveTopic:topic];
         }
-        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:msg.topicId]];
     }];
 }
 @end

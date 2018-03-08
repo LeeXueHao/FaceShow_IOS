@@ -21,7 +21,7 @@
 @interface ChatListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray<IMTopic *> *dataArray;
-
+@property (nonatomic, strong) IMTopic *chattingTopic;
 @end
 
 @implementation ChatListViewController
@@ -38,6 +38,7 @@
     [self setupNavRightView];
     [self setupUI];
     [self setupData];
+    [self updateUnreadPromptView];
     [self setupObserver];
     // Do any additional setup after loading the view.
 }
@@ -83,6 +84,17 @@
     self.dataArray = [NSMutableArray arrayWithArray:[IMUserInterface findAllTopics]];
 }
 
+- (void)updateUnreadPromptView {
+    BOOL hasUnread = NO;
+    for (IMTopic *topic in self.dataArray) {
+        if (topic.unreadCount > 0) {
+            hasUnread = YES;
+            break;
+        }
+    }
+    self.unreadPromptView.hidden = !hasUnread;
+}
+
 - (void)setupObserver {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMMessageDidUpdateNotification object:nil]subscribeNext:^(id x) {
@@ -110,12 +122,45 @@
                 NSUInteger index = [self.dataArray indexOfObject:item];
                 [self.dataArray replaceObjectAtIndex:index withObject:topic];
                 [self.tableView reloadData];
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
         }
         [self.dataArray addObject:topic];
         [self.tableView reloadData];
     }];
+    
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMUnreadMessageCountDidUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        int64_t topicID = ((NSString *)[noti.userInfo valueForKey:kIMUnreadMessageCountTopicKey]).longLongValue;
+        int64_t count = ((NSString *)[noti.userInfo valueForKey:kIMUnreadMessageCountKey]).longLongValue;
+        for (IMTopic *item in self.dataArray) {
+            if (item.topicID == topicID) {
+                item.unreadCount = count;
+                NSUInteger index = [self.dataArray indexOfObject:item];
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+        [self updateUnreadPromptView];
+    }];
+    
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillTerminateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self clearChattingTopicUnreadCount];
+    }];
+}
+
+- (void)clearChattingTopicUnreadCount {
+    [IMUserInterface resetUnreadMessageCountWithTopicID:self.chattingTopic.topicID];
+    for (IMTopic *item in self.dataArray) {
+        if (item.topicID == self.chattingTopic.topicID) {
+            item.unreadCount = 0;
+            NSInteger index = [self.dataArray indexOfObject:item];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
+    [self updateUnreadPromptView];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -135,8 +180,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    IMTopic *topic = self.dataArray[indexPath.row];
+    self.chattingTopic = topic;
     ChatViewController *chatVC = [[ChatViewController alloc]init];
     chatVC.topic = self.dataArray[indexPath.row];
+    WEAK_SELF
+    [chatVC setExitBlock:^{
+        STRONG_SELF
+        [self clearChattingTopicUnreadCount];
+        self.chattingTopic = nil;
+    }];
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

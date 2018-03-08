@@ -73,7 +73,7 @@
     [self configTabbarItem:classVC.tabBarItem image:@"朋友圈icon" selectedImage:@"朋友圈icon选择"];
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
-    UIViewController *chatVC = [[ChatListViewController alloc]init];
+    ChatListViewController *chatVC = [[ChatListViewController alloc]init];
     chatVC.title = @"聊聊";
     [self configTabbarItem:chatVC.tabBarItem image:@"聊天icon正常态" selectedImage:@"聊天icon点击态"];
     FSNavigationController *chatNavi = [[FSNavigationController alloc] initWithRootViewController:chatVC];
@@ -101,6 +101,14 @@
     [tabBarController.tabBar addSubview:momentNewView];
     [tabBarController.tabBar bringSubviewToFront:momentNewView];
     [UserPromptsManager sharedInstance].momentNewView = momentNewView;
+    
+    UIView *unreadView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 7 / 8 + 2, 6, 9, 9)];
+    unreadView.layer.cornerRadius = 4.5f;
+    unreadView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    unreadView.hidden = YES;
+    [tabBarController.tabBar addSubview:unreadView];
+    [tabBarController.tabBar bringSubviewToFront:unreadView];
+    chatVC.unreadPromptView = unreadView;
     
     return drawerVC;
 }
