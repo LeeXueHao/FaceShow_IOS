@@ -139,16 +139,19 @@
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
+        if (topic.members.count == 0) {
+            return;
+        }
         for (IMTopic *item in self.dataArray) {
             if (item.topicID == topic.topicID) {
                 NSUInteger index = [self.dataArray indexOfObject:item];
                 [self.dataArray replaceObjectAtIndex:index withObject:topic];
-                [self.tableView reloadData];
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
         }
-        [self.dataArray addObject:topic];
+        NSInteger targetIndex = topic.type==TopicType_Group? 0:self.privateTopicIndex;
+        [self.dataArray insertObject:topic atIndex:targetIndex];
         [self.tableView reloadData];
     }];
     
