@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray<IMTopic *> *dataArray;
 @property (nonatomic, strong) IMTopic *chattingTopic;
+@property (nonatomic, assign) NSInteger privateTopicIndex;
 @end
 
 @implementation ChatListViewController
@@ -82,6 +83,14 @@
 
 - (void)setupData {
     self.dataArray = [NSMutableArray arrayWithArray:[IMUserInterface findAllTopics]];
+    self.privateTopicIndex = 0;
+    for (IMTopic *topic in self.dataArray) {
+        if (topic.type == TopicType_Group) {
+            self.privateTopicIndex++;
+        }else {
+            break;
+        }
+    }
 }
 
 - (void)updateUnreadPromptView {
@@ -105,9 +114,22 @@
             if (item.topicID == message.topicID) {
                 NSUInteger index = [self.dataArray indexOfObject:item];
                 IMTopic *topic = self.dataArray[index];
+                BOOL isSameMsg = [message.uniqueID isEqualToString:topic.latestMessage.uniqueID];
                 topic.latestMessage = message;
                 [self.dataArray replaceObjectAtIndex:index withObject:topic];
-                [self.tableView reloadData];
+                if (isSameMsg) {
+                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                }else {
+                    if ((index==self.privateTopicIndex && topic.type==TopicType_Private)
+                        || (index==0 && topic.type==TopicType_Group)) {
+                        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                    }else {
+                        NSInteger targetIndex = topic.type==TopicType_Group? 0:self.privateTopicIndex;
+                        [self.dataArray removeObject:topic];
+                        [self.dataArray insertObject:topic atIndex:targetIndex];
+                        [self.tableView reloadData];
+                    }
+                }
                 return;
             }
         }

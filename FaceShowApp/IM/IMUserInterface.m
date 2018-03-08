@@ -36,14 +36,24 @@
 
 + (NSArray<IMTopic *> *)findAllTopics {
     NSArray<IMTopic *> *topics = [[IMDatabaseManager sharedInstance]findAllTopics];
-    NSMutableArray *array = [NSMutableArray array];
+    NSMutableArray *groupArray = [NSMutableArray array];
+    NSMutableArray *privateArray = [NSMutableArray array];
     for (IMTopic *topic in topics) {
         if (topic.type == TopicType_Private) {
-            [array addObject:topic];
+            [privateArray addObject:topic];
         }else {
-            [array insertObject:topic atIndex:0];
+            [groupArray addObject:topic];
         }
     }
+    [groupArray sortedArrayUsingComparator:^NSComparisonResult(IMTopic *  _Nonnull obj1, IMTopic *  _Nonnull obj2) {
+        return obj1.latestMessage.sendTime < obj2.latestMessage.sendTime;
+    }];
+    [privateArray sortedArrayUsingComparator:^NSComparisonResult(IMTopic *  _Nonnull obj1, IMTopic *  _Nonnull obj2) {
+        return obj1.latestMessage.sendTime < obj2.latestMessage.sendTime;
+    }];
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObjectsFromArray:groupArray];
+    [array addObjectsFromArray:privateArray];
     return array;
 }
 
