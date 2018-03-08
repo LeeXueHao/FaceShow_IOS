@@ -95,6 +95,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         }
         
         // 补充message缺少的字段值，保证通知出去的message是完整的
+        message.sendTime = entity.sendTime;
         message.index = entity.primaryKey;
         message.sender.userID = senderEntity.userID;
         message.sender.avatar = senderEntity.avatar;

@@ -169,7 +169,7 @@
             lastVisibleTime = msg.sendTime;
         }else {
             int timeSpan=(int)[IMTimeHandleManger compareTime1:lastVisibleTime withTime2:msg.sendTime type:IMTimeType_Minute];
-            if (timeSpan > 5) {
+            if (timeSpan >= 5) {
                 model.isTimeVisible = YES;
                 lastVisibleTime = msg.sendTime;
             }else if (timeSpan < 0) {

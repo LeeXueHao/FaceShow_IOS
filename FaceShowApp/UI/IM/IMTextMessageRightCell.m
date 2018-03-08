@@ -59,16 +59,16 @@
 
 - (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
     IMTopicMessage *message = model.message;
-    CGFloat height = 0;
+    CGFloat height = 15;
     //时间的高度
-    if (model.isTimeVisible) {//显示时间
-        height += 50;
-    }else {
-        height += 15;
-    }
+//    if (model.isTimeVisible) {//显示时间
+//        height += 35;
+//    }else {
+//        height += 0;
+//    }
     //聊天内容文字的高
     CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth] , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
-    height += textSize.height;
+    height += ceil(textSize.height);
     //文字距离背景上下的高度
     height += 29;
     
