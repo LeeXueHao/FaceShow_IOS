@@ -206,8 +206,5 @@
     return .0f;
 }
 
-- (CGFloat)textMaxWidth {
-    return SCREEN_WIDTH - (15 + 40 + 5 + 4 + 10 + 10 + 65);
-}
 @end
 

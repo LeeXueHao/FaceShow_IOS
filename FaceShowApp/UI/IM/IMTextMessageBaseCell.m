@@ -59,12 +59,16 @@
         height += 0;
     }
     //聊天内容文字的高
-    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth], MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
+    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth], MAXFLOAT) options: NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
     height += textSize.height;
     //文字距离背景上下的高度
     height += 29;
     
     return height;
+}
+
+- (CGFloat)textMaxWidth {
+    return SCREEN_WIDTH - (15 + 40 + 5 + 4 + 10 + 10 + 65);
 }
 
 @end

@@ -47,7 +47,7 @@
         make.top.equalTo(self.avatarButton.mas_top);
         make.right.equalTo(self.avatarButton.mas_left).offset(-5.f).priorityHigh();
         make.bottom.mas_equalTo(0.f);
-        make.left.mas_greaterThanOrEqualTo(65 * kPhoneWidthRatio);
+        make.left.mas_greaterThanOrEqualTo(65);
     }];
     
     [self.stateButton mas_remakeConstraints:^(MASConstraintMaker *make) {

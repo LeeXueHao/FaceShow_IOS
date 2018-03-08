@@ -12,5 +12,5 @@
 @interface IMTextMessageBaseCell : IMMessageBaseCell
 
 @property (nonatomic, strong) UILabel *messageTextLabel;
-
+- (CGFloat)textMaxWidth;
 @end
