@@ -25,6 +25,7 @@
 - (IMTopic *)findTopicWithID:(int64_t)topicID;
 
 - (IMTopicMessage *)findMessageWithUniqueID:(NSString *)uniqueID;
+- (IMTopicMessage *)findLastSuccessfulMessageInTopic:(int64_t)topicID;
 
 - (void)findMessagesInTopic:(int64_t)topicID
                       count:(NSUInteger)count

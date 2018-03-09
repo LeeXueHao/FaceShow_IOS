@@ -73,6 +73,10 @@
     if (!msg) {
         msg = [[IMTopicMessage alloc]init];
         msg.messageID = INT64_MAX;
+        msg.index = INT64_MAX;
+    }
+    if (msg.messageID == 0) {
+        msg.messageID = INT64_MAX;
     }
     [[IMDatabaseManager sharedInstance]findMessagesInTopic:topicID count:count beforeIndex:msg.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         if (array.count > 0) {

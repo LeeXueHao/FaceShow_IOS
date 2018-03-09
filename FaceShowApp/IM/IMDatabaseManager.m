@@ -236,6 +236,12 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     return [self messageFromEntity:msgEntity];
 }
 
+- (IMTopicMessage *)findLastSuccessfulMessageInTopic:(int64_t)topicID {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@ && sendState = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Success)];
+    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate sortedBy:@"messageID" ascending:NO];
+    return [self messageFromEntity:msgEntity];
+}
+
 #pragma mark - 转换
 - (IMTopic *)topicFromEntity:(IMTopicEntity *)entity {
     if (!entity) {
