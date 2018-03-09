@@ -46,12 +46,7 @@
 - (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
     IMTopicMessage *message = model.message;
     CGFloat height = 15;
-//    //时间的高度 放到外面进行
-//    if (model.isTimeVisible) {//显示时间
-//        height += 35;
-//    }else {
-//        height += 0;
-//    }
+    //时间的高度 放到外面进行
     //名字的高度
     if (model.topicType == TopicType_Group) {//群聊显示名字
         height += 20;

@@ -70,15 +70,13 @@
     [self.stateButton addTarget:self action:@selector(stateButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)avatarButtonDown:(UIButton *)sender
-{
+- (void)avatarButtonDown:(UIButton *)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellDidClickAvatarForUser:)]) {
         [self.delegate messageCellDidClickAvatarForUser:self.model.message.sender];
     }
 }
 
-- (void)longPressMsgBGView:(UIGestureRecognizer *)gestureRecognizer
-{
+- (void)longPressMsgBGView:(UIGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan) {
         return;
     }
@@ -90,8 +88,7 @@
     }
 }
 
-- (void)doubleTabpMsgBGView
-{
+- (void)doubleTabpMsgBGView {
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellDoubleClick:)]) {
         [self.delegate messageCellDoubleClick:self.model];
     }

@@ -15,9 +15,9 @@
 - (CGFloat)height {
     if (!_height) {
         IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self];
-        _height = [cell heigthtForMessageModel:self];
+        _height = [cell heigthtForMessageModel:self];//除去时间之外的高度
     }
-    if (_isTimeVisible) {
+    if (_isTimeVisible) {//显示时间的话需要再加上35的高度
         return _height + 35;
     }
     return _height;

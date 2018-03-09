@@ -49,4 +49,14 @@
     }];
 }
 
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+    CGFloat height = 15;
+    //时间的高度 放到外面进行
+    //聊天内容图片的高
+    CGSize size = [[UIImage imageNamed:@"背景图片"] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    height += size.height;
+    
+    return height;
+}
+
 @end

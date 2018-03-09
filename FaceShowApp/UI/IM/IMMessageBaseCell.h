@@ -27,6 +27,6 @@
 
 - (void)setupUI;
 - (void)setupLayout;
-- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model;
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model;//此处的高度不包括 时间 的高
 @end
 

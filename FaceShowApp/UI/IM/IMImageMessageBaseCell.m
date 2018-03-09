@@ -8,8 +8,6 @@
 
 #import "IMImageMessageBaseCell.h"
 
-static const CGFloat kMaxImageSizeWidth = 140;
-
 @implementation IMImageMessageBaseCell
 
 - (void)awakeFromNib {
@@ -90,5 +88,21 @@ static const CGFloat kMaxImageSizeWidth = 140;
         self.progressView.hidden = YES;
         self.stateButton.hidden = NO;
     }
+}
+
+- (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
+    CGFloat height = 15;
+    //时间的高度 放到外面进行
+    //名字的高度
+    if (model.topicType == TopicType_Group) {//群聊显示名字
+        height += 20;
+    }else {
+        height += 0;
+    }
+    //聊天内容图片的高
+    CGSize size = [[UIImage imageNamed:@"背景图片"] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];//这里的图片需要等数据结构出来后确定
+    height += size.height;
+    
+    return height;
 }
 @end

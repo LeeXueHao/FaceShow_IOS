@@ -9,6 +9,8 @@
 #import "IMMessageBaseCell.h"
 #import "IMImageSendingProgressView.h"
 
+static const CGFloat kMaxImageSizeWidth = 140;
+
 @interface IMImageMessageBaseCell : IMMessageBaseCell
 
 @property (nonatomic, strong) UIImageView *messageImageview;
