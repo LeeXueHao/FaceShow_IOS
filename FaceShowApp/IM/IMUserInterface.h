@@ -16,6 +16,10 @@
 + (void)sendTextMessageWithText:(NSString *)text topicID:(int64_t)topicID uniqueID:(NSString *)uniqueID;
 + (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member;//用于新建会话尚无topicID的情况
 
++ (void)sendImageMessageWithImage:(UIImage *)image topicID:(int64_t)topicID;
++ (void)sendImageMessageWithImage:(UIImage *)image topicID:(int64_t)topicID uniqueID:(NSString *)uniqueID;
++ (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member;
+
 + (NSArray<IMTopic *> *)findAllTopics;
 + (void)findMessagesInTopic:(int64_t)topicID
                       count:(NSUInteger)count
@@ -36,5 +40,11 @@ UIKIT_EXTERN NSNotificationName const kIMTopicDidUpdateNotification;
 UIKIT_EXTERN NSNotificationName const kIMUnreadMessageCountDidUpdateNotification;
 UIKIT_EXTERN NSString * const kIMUnreadMessageCountTopicKey;
 UIKIT_EXTERN NSString * const kIMUnreadMessageCountKey;
+
+UIKIT_EXTERN NSNotificationName const kIMImageUploadDidUpdateNotification; // 图片上传进度更新
+UIKIT_EXTERN NSString * const kIMImageUploadTopicKey; // topicID
+UIKIT_EXTERN NSString * const kIMImageUploadMessageKey; // uniqueID
+UIKIT_EXTERN NSString * const kIMImageUploadProgressKey; // percent e.g. 0.25
+
 
 @end

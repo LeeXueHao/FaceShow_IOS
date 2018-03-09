@@ -158,8 +158,8 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMUnreadMessageCountDidUpdateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
-        int64_t topicID = ((NSString *)[noti.userInfo valueForKey:kIMUnreadMessageCountTopicKey]).longLongValue;
-        int64_t count = ((NSString *)[noti.userInfo valueForKey:kIMUnreadMessageCountKey]).longLongValue;
+        int64_t topicID = ((NSNumber *)[noti.userInfo valueForKey:kIMUnreadMessageCountTopicKey]).longLongValue;
+        int64_t count = ((NSNumber *)[noti.userInfo valueForKey:kIMUnreadMessageCountKey]).longLongValue;
         for (IMTopic *item in self.dataArray) {
             if (item.topicID == topicID) {
                 item.unreadCount = count;

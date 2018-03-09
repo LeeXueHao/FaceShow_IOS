@@ -250,6 +250,8 @@
 		7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BC3204D365B004ACA04 /* CompleteInfoHeaderView.m */; };
 		7CBC5BC7204E298C004ACA04 /* SysUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BC6204E298C004ACA04 /* SysUserItem.m */; };
 		7CBC5BCD204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */; };
+		7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */; };
+		7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BD220522E23004ACA04 /* IMImageMessage.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -845,6 +847,10 @@
 		7CBC5BC6204E298C004ACA04 /* SysUserItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SysUserItem.m; sourceTree = "<group>"; };
 		7CBC5BCB204E33B7004ACA04 /* RegistUnenterAndYxbRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistUnenterAndYxbRequest.h; sourceTree = "<group>"; };
 		7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistUnenterAndYxbRequest.m; sourceTree = "<group>"; };
+		7CBC5BCE20522E0A004ACA04 /* IMImageMessageSender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMImageMessageSender.h; sourceTree = "<group>"; };
+		7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessageSender.m; sourceTree = "<group>"; };
+		7CBC5BD120522E23004ACA04 /* IMImageMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMImageMessage.h; sourceTree = "<group>"; };
+		7CBC5BD220522E23004ACA04 /* IMImageMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessage.m; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -2443,8 +2449,12 @@
 				E91E5D9D2047B8E100052FBA /* IMRequestManager.m */,
 				E91E5DA02047B8E200052FBA /* IMTextMessage.h */,
 				E91E5D962047B8E000052FBA /* IMTextMessage.m */,
+				7CBC5BD120522E23004ACA04 /* IMImageMessage.h */,
+				7CBC5BD220522E23004ACA04 /* IMImageMessage.m */,
 				E91E5D9C2047B8E100052FBA /* IMTextMessageSender.h */,
 				E91E5DA12047B8E300052FBA /* IMTextMessageSender.m */,
+				7CBC5BCE20522E0A004ACA04 /* IMImageMessageSender.h */,
+				7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */,
 			);
 			name = Http;
 			sourceTree = "<group>";
@@ -2804,6 +2814,7 @@
 				43210E541F7226220049C381 /* GetCourseRequest.m in Sources */,
 				E91E5D8C2047B8C900052FBA /* IMNewTopicEventHandler.m in Sources */,
 				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
+				7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */,
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
 				7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */,
 				7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */,
@@ -2905,6 +2916,7 @@
 				7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */,
 				436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */,
 				435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */,
+				7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */,
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				4369598A1FDE83E7009E5C43 /* FDActionSheetFooterView.m in Sources */,

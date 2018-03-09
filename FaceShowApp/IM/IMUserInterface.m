@@ -10,6 +10,7 @@
 #import "IMRequestManager.h"
 #import "IMDatabaseManager.h"
 #import "IMTextMessageSender.h"
+#import "IMImageMessageSender.h"
 
 @implementation IMUserInterface
 
@@ -32,6 +33,27 @@
     msg.otherMember = member;
     
     [[IMTextMessageSender sharedInstance]addTextMessage:msg];
+}
+
++ (void)sendImageMessageWithImage:(UIImage *)image topicID:(int64_t)topicID {
+    [self sendImageMessageWithImage:image topicID:topicID uniqueID:nil];
+}
+
++ (void)sendImageMessageWithImage:(UIImage *)image topicID:(int64_t)topicID uniqueID:(NSString *)uniqueID {
+    IMImageMessage *msg = [[IMImageMessage alloc]init];
+    msg.image = image;
+    msg.topicID = topicID;
+    msg.uniqueID = uniqueID;
+    
+    [[IMImageMessageSender sharedInstance]addImageMessage:msg];
+}
+
++ (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member {
+    IMImageMessage *msg = [[IMImageMessage alloc]init];
+    msg.image = image;
+    msg.otherMember = member;
+    
+    [[IMImageMessageSender sharedInstance]addImageMessage:msg];
 }
 
 + (NSArray<IMTopic *> *)findAllTopics {

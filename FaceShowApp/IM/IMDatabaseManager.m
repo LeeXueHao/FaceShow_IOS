@@ -106,8 +106,8 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMMessageDidUpdateNotification object:message];
     }
     if (unreadMsg) {
-        NSDictionary *info = @{kIMUnreadMessageCountTopicKey:[NSString stringWithFormat:@"%@",@(topicID)],
-                               kIMUnreadMessageCountKey:[NSString stringWithFormat:@"%@",@(unreadCount)]};
+        NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
+                               kIMUnreadMessageCountKey:@(unreadCount)};
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
     }
 }
