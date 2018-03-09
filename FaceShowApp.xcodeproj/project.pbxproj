@@ -2386,6 +2386,7 @@
 		E91E5D2B2047B1FE00052FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E95ED5D72052236C006ECCEA /* IMMessageCell */,
 				E90C514D204E73010008F92A /* 加载动效.gif */,
 				E91E5D2E2047B22400052FBA /* ChatListCell.h */,
 				E91E5D362047B22600052FBA /* ChatListCell.m */,
@@ -2400,20 +2401,6 @@
 				E91E5D342047B22500052FBA /* IMMessageMenuItem.m */,
 				E91E5D372047B22600052FBA /* IMMessageMenuView.h */,
 				E91E5D312047B22500052FBA /* IMMessageMenuView.m */,
-				E91E5D3C2047B22700052FBA /* IMMessageBaseCell.h */,
-				E91E5D302047B22500052FBA /* IMMessageBaseCell.m */,
-				E91E5D2D2047B22400052FBA /* IMTextMessageBaseCell.h */,
-				E91E5D2F2047B22400052FBA /* IMTextMessageBaseCell.m */,
-				E91E5D3F2047B22700052FBA /* IMTextMessageLeftCell.h */,
-				E91E5D2C2047B22400052FBA /* IMTextMessageLeftCell.m */,
-				E91E5D3A2047B22600052FBA /* IMTextMessageRightCell.h */,
-				E91E5D392047B22600052FBA /* IMTextMessageRightCell.m */,
-				E90C51352049331D0008F92A /* IMImageMessageBaseCell.h */,
-				E90C51362049331D0008F92A /* IMImageMessageBaseCell.m */,
-				E90C5138204949150008F92A /* IMImageMessageLeftCell.h */,
-				E90C5139204949150008F92A /* IMImageMessageLeftCell.m */,
-				E90C513B2049493E0008F92A /* IMImageMessageRightCell.h */,
-				E90C513C2049493E0008F92A /* IMImageMessageRightCell.m */,
 				E90C513E204CF5410008F92A /* IMImageSendingProgressView.h */,
 				E90C513F204CF5410008F92A /* IMImageSendingProgressView.m */,
 			);
@@ -2528,6 +2515,27 @@
 				E91E5DC52047DB5500052FBA /* IMConnectionManager.m */,
 			);
 			name = Connection;
+			sourceTree = "<group>";
+		};
+		E95ED5D72052236C006ECCEA /* IMMessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				E91E5D3C2047B22700052FBA /* IMMessageBaseCell.h */,
+				E91E5D302047B22500052FBA /* IMMessageBaseCell.m */,
+				E91E5D2D2047B22400052FBA /* IMTextMessageBaseCell.h */,
+				E91E5D2F2047B22400052FBA /* IMTextMessageBaseCell.m */,
+				E91E5D3F2047B22700052FBA /* IMTextMessageLeftCell.h */,
+				E91E5D2C2047B22400052FBA /* IMTextMessageLeftCell.m */,
+				E91E5D3A2047B22600052FBA /* IMTextMessageRightCell.h */,
+				E91E5D392047B22600052FBA /* IMTextMessageRightCell.m */,
+				E90C51352049331D0008F92A /* IMImageMessageBaseCell.h */,
+				E90C51362049331D0008F92A /* IMImageMessageBaseCell.m */,
+				E90C5138204949150008F92A /* IMImageMessageLeftCell.h */,
+				E90C5139204949150008F92A /* IMImageMessageLeftCell.m */,
+				E90C513B2049493E0008F92A /* IMImageMessageRightCell.h */,
+				E90C513C2049493E0008F92A /* IMImageMessageRightCell.m */,
+			);
+			name = IMMessageCell;
 			sourceTree = "<group>";
 		};
 		F7524D491FA851EC00CC6793 /* OpenGL */ = {

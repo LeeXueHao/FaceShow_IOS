@@ -57,7 +57,9 @@
     
     if (nowCmps.year != myCmps.year) {
         dateFmt.dateFormat = @"yyyy-MM-dd hh:mm";
-    } else {
+    } else if (nowCmps.month != myCmps.month) {
+        dateFmt.dateFormat = @"MM-dd hh:mm";
+    }else {
         if (nowCmps.day == myCmps.day) {
             dateFmt.AMSymbol = @"上午";
             dateFmt.PMSymbol = @"下午";

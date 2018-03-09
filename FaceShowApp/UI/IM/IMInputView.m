@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.textMaxHeight = 83.0f;
+        self.textMaxHeight = 90.0f;
         [self setupUI];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     }
@@ -66,11 +66,6 @@
     self.textView.font = [UIFont systemFontOfSize:14];
     self.textView.textColor = [UIColor colorWithHexString:@"333333"];
     self.textView.returnKeyType = UIReturnKeySend;
-    NSString *placeholderStr = @"输入评论内容...";
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
-    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"666666"] range:NSMakeRange(0, placeholderStr.length)];
-    [attrStr addAttribute:NSFontAttributeName value:self.textView.font range:NSMakeRange(0, placeholderStr.length)];
-    self.textView.attributedPlaceholder = attrStr;
     self.textView.textContainerInset = UIEdgeInsetsMake(12, 8, 8, 8);
     self.textView.delegate = self;
     [self.contentView addSubview:self.textView];
@@ -96,13 +91,6 @@
 }
 
 #pragma mark - UITextViewDelegate
-//- (void)textViewDidChange:(UITextView *)textView {
-//    NSString *content = textView.text;
-//    if (content.length > 2000) {
-//        textView.text =  [content substringToIndex:2000];
-//    }
-//}
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         if ([[self.textView.text yx_stringByTrimmingCharacters] length]!=0) {

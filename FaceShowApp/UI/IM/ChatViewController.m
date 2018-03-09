@@ -84,7 +84,15 @@
 
 - (void)setupUI {
     self.imInputView = [[IMInputView alloc]init];
+    self.imInputView.isChangeBool = YES;
+    self.imInputView.textView.returnKeyType = UIReturnKeySend;
     WEAK_SELF
+    self.imInputView.textHeightChangeBlock = ^(CGFloat textHeight) {
+        STRONG_SELF
+        [self.imInputView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(textHeight + 12.0f);
+        }];
+    };
     [self.imInputView setCompleteBlock:^(NSString *text){
         STRONG_SELF
         if (self.topic) {
@@ -92,7 +100,16 @@
         }else {
             [IMUserInterface sendTextMessageWithText:text toMember:self.member];
         }
-        self.imInputView.textView.text = nil;
+        if (self.imInputView.height > 50) {
+            [UIView animateWithDuration:.3f animations:^{
+                [self.imInputView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(50.f);
+                }];
+                [self.view layoutIfNeeded];
+            }];
+        }
+        self.imInputView.textString = @"";
+        [self scrollToBottom];
     }];
     [self.imInputView setCameraButtonClickBlock:^{
         STRONG_SELF
@@ -229,7 +246,6 @@
         [UIView animateWithDuration:duration.floatValue animations:^{
             [self.imInputView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
-                make.height.mas_equalTo(50);
             }];
             [self.view layoutIfNeeded];
         }];
