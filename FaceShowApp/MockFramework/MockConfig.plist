@@ -258,7 +258,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>ClazsMemberListRequest</key>
+		<key>ContactMemberContactsRequest</key>
 		<dict>
 			<key>mockEnable</key>
 			<true/>
@@ -266,7 +266,7 @@
 			<array>
 				<dict>
 					<key>fileName</key>
-					<string>ClazsMemberListRequest_mock.json</string>
+					<string>ContactMemberContactsRequest.json</string>
 					<key>percent</key>
 					<integer>100</integer>
 				</dict>

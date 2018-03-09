@@ -73,17 +73,18 @@
     WEAK_SELF
     [[self.textField rac_textSignal]subscribeNext:^(id x) {
         STRONG_SELF
-        BLOCK_EXEC(self.searchBlock,x)
+        BLOCK_EXEC(self.searchBlock,x);
         self.deleteButton.hidden = isEmpty(x);
     }];
 }
 
 - (void)deleteBtnAction {
     self.textField.text = nil;
+    BLOCK_EXEC(self.searchBlock,self.textField.text);
 }
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BLOCK_EXEC(self.searchBlock,textField.text)
+    BLOCK_EXEC(self.searchBlock,textField.text);
     [textField resignFirstResponder];
     return YES;
 }

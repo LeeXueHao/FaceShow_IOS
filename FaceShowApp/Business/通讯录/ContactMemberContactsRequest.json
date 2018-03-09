@@ -1,0 +1,152 @@
+{
+    "code": 0,
+    "message": "",
+    "data": {
+        "imEvent": 233,
+        "reqId": "1",
+        "topicChange": null,
+        "topic": null,
+        "topicMsg": null,
+        "chatroom": null,
+        "members": null,
+        "contacts": {
+            "groups": [
+                       {
+                       "groupId": 10,
+                       "groupName": "终极一班",
+                       "contacts": [
+                                    {
+                                    "id": null,
+                                    "bizSource": 1,
+                                    "memberId": 5,
+                                    "contactId": 1,
+                                    "contactType": 2,
+                                    "memberInfo": {
+                                    "id": 1,
+                                    "bizSource": 1,
+                                    "memberType": 1,
+                                    "userId": 23248703,
+                                    "memberName": "许褚",
+                                    "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                                    "state": 1
+                                    }
+                                    },
+                                    {
+                                    "id": null,
+                                    "bizSource": 1,
+                                    "memberId": 5,
+                                    "contactId": 5,
+                                    "contactType": 2,
+                                    "memberInfo": {
+                                    "id": 5,
+                                    "bizSource": 1,
+                                    "memberType": 1,
+                                    "userId": 23248706,
+                                    "memberName": "典韦",
+                                    "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                                    "state": 1
+                                    }
+                                    }
+                                    ]
+                       },
+                       {
+                       "groupId": 10,
+                       "groupName": "终极二班",
+                       "contacts": [
+                                    {
+                                    "id": null,
+                                    "bizSource": 1,
+                                    "memberId": 5,
+                                    "contactId": 1,
+                                    "contactType": 2,
+                                    "memberInfo": {
+                                    "id": 2,
+                                    "bizSource": 1,
+                                    "memberType": 1,
+                                    "userId": 23248704,
+                                    "memberName": "李白",
+                                    "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                                    "state": 1
+                                    }
+                                    },
+                                    {
+                                    "id": null,
+                                    "bizSource": 1,
+                                    "memberId": 5,
+                                    "contactId": 5,
+                                    "contactType": 2,
+                                    "memberInfo": {
+                                    "id": 3,
+                                    "bizSource": 1,
+                                    "memberType": 1,
+                                    "userId": 23248705,
+                                    "memberName": "白居易",
+                                    "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                                    "state": 1
+                                    }
+                                    }
+                                    ]
+                       },
+                       {
+                       "groupId": 10,
+                       "groupName": "终极三班",
+                       "contacts": [
+                                    {
+                                    "id": null,
+                                    "bizSource": 1,
+                                    "memberId": 5,
+                                    "contactId": 1,
+                                    "contactType": 2,
+                                    "memberInfo": {
+                                    "id": 4,
+                                    "bizSource": 1,
+                                    "memberType": 1,
+                                    "userId": 23248707,
+                                    "memberName": "孟浩然",
+                                    "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                                    "state": 1
+                                    }
+                                    },
+                                    {
+                                    "id": null,
+                                    "bizSource": 1,
+                                    "memberId": 5,
+                                    "contactId": 5,
+                                    "contactType": 2,
+                                    "memberInfo": {
+                                    "id": 7,
+                                    "bizSource": 1,
+                                    "memberType": 1,
+                                    "userId": 23248708,
+                                    "memberName": "诸葛",
+                                    "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                                    "state": 1
+                                    }
+                                    }
+                                    ]
+                       }
+                       ],
+            "personals": [
+                          {
+                          "id": 2,
+                          "bizSource": 1,
+                          "memberId": 5,
+                          "contactId": 188,
+                          "contactType": 1,
+                          "memberInfo": {
+                          "id": 188,
+                          "bizSource": 1,
+                          "memberType": 1,
+                          "userId": -1515600934003,
+                          "memberName": "老狗",
+                          "avatar": "http://s2.jsyxw.cn/yanxiu/h2.jpg",
+                          "state": 0
+                          }
+                          }
+                          ]
+        }
+    },
+    "currentUser": "",
+    "currentTime": 1520563310394,
+    "error": null
+}

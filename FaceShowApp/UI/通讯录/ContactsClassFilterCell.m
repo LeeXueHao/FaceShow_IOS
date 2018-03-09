@@ -11,7 +11,7 @@
 @interface ContactsClassFilterCell ()
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UIImageView *selectedImageView;
-@property (nonatomic, strong) UIView *bottomLineView;
+@property (nonatomic, strong) UIView *topLineView;
 
 @end
 
@@ -64,11 +64,12 @@
         make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
     }];
     
-    self.bottomLineView = [[UIView alloc]init];
-    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self.contentView addSubview:self.bottomLineView];
-    [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
+    self.topLineView = [[UIView alloc]init];
+    self.topLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.contentView addSubview:self.topLineView];
+    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.left.mas_equalTo(self.titleLabel.mas_left);
         make.height.mas_equalTo(1);
     }];
 }
@@ -78,12 +79,4 @@
     self.titleLabel.text = title;
 }
 
-- (void)setShouldShowLine:(BOOL)shouldShowLine {
-    _shouldShowLine = shouldShowLine;
-    if (shouldShowLine) {
-        self.bottomLineView.hidden = NO;
-    }else {
-        self.bottomLineView.hidden = YES;
-    }
-}
 @end

@@ -11,7 +11,7 @@
 @interface ContactsCell ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *numberLabel;
+//@property (nonatomic, strong) UILabel *numberLabel;//server暂时无法返回手机号 先不显示
 @property (nonatomic, strong) UIView *lineView;
 @end
 
@@ -52,16 +52,16 @@
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     
-    self.numberLabel = [[UILabel alloc] init];
-    self.numberLabel.font = [UIFont systemFontOfSize:14];
-    self.numberLabel.textColor = [UIColor colorWithHexString:@"666666"];
-    self.numberLabel.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:self.numberLabel];
-    [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-15);
-        make.centerY.mas_equalTo(0);
-        make.width.mas_equalTo(100);
-    }];
+//    self.numberLabel = [[UILabel alloc] init];
+//    self.numberLabel.font = [UIFont systemFontOfSize:14];
+//    self.numberLabel.textColor = [UIColor colorWithHexString:@"666666"];
+//    self.numberLabel.textAlignment = NSTextAlignmentRight;
+//    [self.contentView addSubview:self.numberLabel];
+//    [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(-15);
+//        make.centerY.mas_equalTo(0);
+//        make.width.mas_equalTo(100);
+//    }];
     
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -69,7 +69,7 @@
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.avatarImageView.mas_right).offset(10);
-        make.right.mas_equalTo(self.numberLabel.mas_left).offset(-10);
+//        make.right.mas_equalTo(self.numberLabel.mas_left).offset(-10);
         make.centerY.mas_equalTo(0);
     }];
     
@@ -83,17 +83,17 @@
     }];
 }
 
-- (void)setData:(GetUserInfoRequestItem_Data *)data {
+- (void)setData:(ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *)data {
     _data = data;
     self.avatarImageView.contentMode = UIViewContentModeCenter;
     
     WEAK_SELF
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:data.avatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:data.memberInfo.avatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         STRONG_SELF
         self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
     }];
-    self.nameLabel.text = data.realName;
-    self.numberLabel.text = data.mobilePhone;
+    self.nameLabel.text = data.memberInfo.memberName;
+//    self.numberLabel.text = data.mobilePhone;
 }
 
 - (void)setIsLastRow:(BOOL)isLastRow {

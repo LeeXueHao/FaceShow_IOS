@@ -331,9 +331,6 @@
 		E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C514F204E792D0008F92A /* UIImage+GIF.m */; };
 		E90C5159204FC4C30008F92A /* IMChatViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C5158204FC4C30008F92A /* IMChatViewModel.m */; };
 		E90C515C204FD6DF0008F92A /* IMMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E90C515A204FD6DE0008F92A /* IMMessageTableView.m */; };
-		E91E5D0D2047B0CB00052FBA /* ClazsMemberListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */; };
-		E91E5D0E2047B0CB00052FBA /* ClazsMemberListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */; };
-		E91E5D0F2047B0CB00052FBA /* ClazsMemberListRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */; };
 		E91E5D172047B17300052FBA /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D132047B17200052FBA /* ContactsViewController.m */; };
 		E91E5D1B2047B1C300052FBA /* ContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D192047B1C200052FBA /* ContactsCell.m */; };
 		E91E5D262047B1F900052FBA /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D1C2047B1F700052FBA /* ChatViewController.m */; };
@@ -382,6 +379,8 @@
 		E91E5DBA2047D6DE00052FBA /* YXGCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DB92047D6DE00052FBA /* YXGCDTimer.m */; };
 		E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */; };
 		E91E5DC62047DB5500052FBA /* IMConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC52047DB5500052FBA /* IMConnectionManager.m */; };
+		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
+		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1004,11 +1003,6 @@
 		E90C5158204FC4C30008F92A /* IMChatViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMChatViewModel.m; sourceTree = "<group>"; };
 		E90C515A204FD6DE0008F92A /* IMMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMMessageTableView.m; sourceTree = "<group>"; };
 		E90C515B204FD6DE0008F92A /* IMMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMMessageTableView.h; sourceTree = "<group>"; };
-		E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListFetcher.m; sourceTree = "<group>"; };
-		E91E5D092047B0CB00052FBA /* ClazsMemberListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListRequest.h; sourceTree = "<group>"; };
-		E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListRequest.m; sourceTree = "<group>"; };
-		E91E5D0B2047B0CB00052FBA /* ClazsMemberListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListFetcher.h; sourceTree = "<group>"; };
-		E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ClazsMemberListRequest_mock.json; sourceTree = "<group>"; };
 		E91E5D132047B17200052FBA /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		E91E5D142047B17200052FBA /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		E91E5D192047B1C200052FBA /* ContactsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsCell.m; path = "FaceShowApp/UI/通讯录/ContactsCell.m"; sourceTree = SOURCE_ROOT; };
@@ -1105,6 +1099,9 @@
 		E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDatabaseManager.m; sourceTree = "<group>"; };
 		E91E5DC42047DB5500052FBA /* IMConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConnectionManager.h; sourceTree = "<group>"; };
 		E91E5DC52047DB5500052FBA /* IMConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConnectionManager.m; sourceTree = "<group>"; };
+		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
+		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
+		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -2350,11 +2347,9 @@
 		E91E5D072047B0A600052FBA /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
-				E91E5D0B2047B0CB00052FBA /* ClazsMemberListFetcher.h */,
-				E91E5D082047B0CB00052FBA /* ClazsMemberListFetcher.m */,
-				E91E5D0C2047B0CB00052FBA /* ClazsMemberListRequest_mock.json */,
-				E91E5D092047B0CB00052FBA /* ClazsMemberListRequest.h */,
-				E91E5D0A2047B0CB00052FBA /* ClazsMemberListRequest.m */,
+				E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */,
+				E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */,
+				E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */,
 			);
 			path = "通讯录";
 			sourceTree = "<group>";
@@ -2631,9 +2626,9 @@
 				923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */,
 				7C2518F61F68E8130001B577 /* Empty.xib in Resources */,
 				435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */,
-				E91E5D0F2047B0CB00052FBA /* ClazsMemberListRequest_mock.json in Resources */,
 				7C2519BA1F6917960001B577 /* env_config.json in Resources */,
 				7C2519331F68EB2A0001B577 /* MockConfig.plist in Resources */,
+				E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */,
 				7C2518F81F68E8510001B577 /* Default-568h@2x.png in Resources */,
 				7C2518F41F68E8000001B577 /* Config.plist in Resources */,
 				435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */,
@@ -2757,7 +2752,6 @@
 				43210E581F724B3D0049C381 /* LoginRequest.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
-				E91E5D0E2047B0CB00052FBA /* ClazsMemberListRequest.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
@@ -2912,6 +2906,7 @@
 				7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */,
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
+				E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
 				7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */,
 				436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */,
@@ -2986,7 +2981,6 @@
 				431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */,
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
-				E91E5D0D2047B0CB00052FBA /* ClazsMemberListFetcher.m in Sources */,
 				E91E5D682047B86B00052FBA /* IMServiceManager.m in Sources */,
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GetUserInfoRequest.h"
+#import "ContactMemberContactsRequest.h"
 
 @interface ContactsCell : UITableViewCell
-@property (nonatomic, strong) GetUserInfoRequestItem_Data *data;
+@property (nonatomic, strong) ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *data;
 @property (nonatomic, assign) BOOL isLastRow;
 @end
 

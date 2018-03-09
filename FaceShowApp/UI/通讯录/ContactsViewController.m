@@ -7,7 +7,6 @@
 //
 
 #import "ContactsViewController.h"
-#import "ClazsMemberListFetcher.h"
 #import "ContactsCell.h"
 #import "ChatViewController.h"
 #import "IMDatabaseManager.h"
@@ -15,28 +14,35 @@
 #import "ContactsCurrentClassView.h"
 #import "ContactsClassFilterView.h"
 #import "AlertView.h"
+#import "IMConfig.h"
+#import "ContactMemberContactsRequest.h"
+#import "IMMember.h"
 
-@interface ContactsViewController ()
+@interface ContactsViewController () <UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) EmptyView *emptyView;
 @property(nonatomic, strong) ContactsSearchBarView *searchView;
-@property(nonatomic, assign) BOOL isSearching;
-@property(nonatomic, strong) NSMutableArray *filteredDataArray;
+@property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) ContactsCurrentClassView *currentClassView;
 @property(nonatomic, strong) ContactsClassFilterView *classFilterView;
 @property(nonatomic, strong) AlertView *alertView;
 
+@property(nonatomic, assign) NSInteger currentSelectedGroupIndex;
+@property (nonatomic, strong) NSMutableArray <ContactMemberContactsRequestItem_Data_Gcontacts_Groups *> *groupsArray;//通讯录的所有数据
+@property (nonatomic, strong) NSArray <ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *> *dataArray;//当前班级的数据
+@property(nonatomic, strong) ContactMemberContactsRequest *request;
 @end
 
 @implementation ContactsViewController
 
 - (void)viewDidLoad {
-    ClazsMemberListFetcher *fetcher = [[ClazsMemberListFetcher alloc] init];
-    fetcher.pagesize = 10;
-    self.dataFetcher = fetcher;
     [super viewDidLoad];
     self.title = @"通讯录";
+    self.currentSelectedGroupIndex = 0;
+    self.groupsArray = [NSMutableArray array];
+    self.dataArray = [NSArray array];
     [self setupUI];
-    self.isSearching = NO;
-    self.filteredDataArray = [NSMutableArray array];
+    [self requestContacts];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,96 +50,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)firstPageFetch {
-    if (!self.dataFetcher) {
-        return;
-    }
-    [self.dataFetcher stop];
-    
-    SAFE_CALL(self.requestDelegate, requestWillRefresh);
-    @weakify(self);
-    [self.dataFetcher startWithBlock:^(int total, NSArray *retItemArray, NSError *error) {
-        @strongify(self); if (!self) return;
-        SAFE_CALL_OneParam(self.requestDelegate, requestEndRefreshWithError, error);
-        [self.view nyx_stopLoading];
-        [self stopAnimation];
-        if (error) {
-            if (isEmpty(self.dataArray)) {  // no cache 强提示, 加载失败界面
-                self->_total = 0;
-                [self showErroView];
-            } else {
-                [self.view nyx_showToast:error.localizedDescription];
-            }
-            [self checkHasMore];
-            return;
-        }
-        
-        // 隐藏失败界面
-        [self hideErrorView];
-        
-        [self->_header setLastUpdateTime:[NSDate date]];
-        self.total = total;
-        [self.dataArray removeAllObjects];
-        
-        if (isEmpty(retItemArray.firstObject) && isEmpty(retItemArray.lastObject)) {
-            self.emptyView.hidden = NO;
-        } else {
-            self.emptyView.hidden = YES;
-            [self.dataArray addObjectsFromArray:retItemArray];
-            [self checkHasMore];
-            [self.dataFetcher saveToCache];
-        }
-        [self.tableView reloadData];
-    }];
-}
-
-- (void)morePageFetch {
-    [self.dataFetcher stop];
-    SAFE_CALL(self.requestDelegate, requestWillFetchMore);
-    @weakify(self);
-    [self.dataFetcher startWithBlock:^(int total, NSArray *retItemArray, NSError *error) {
-        @strongify(self); if (!self) return;
-        SAFE_CALL_OneParam(self.requestDelegate, requestEndFetchMoreWithError, error);
-        @weakify(self);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            @strongify(self); if (!self) return;
-            [self->_footer endRefreshing];
-            if (error) {
-                self.dataFetcher.pageindex--;
-                [self.view nyx_showToast:error.localizedDescription];
-                return;
-            }
-            
-            NSMutableArray *students = [NSMutableArray arrayWithArray:self.dataArray.lastObject];
-            [students addObjectsFromArray:retItemArray.lastObject];
-            self.dataArray[1] = students;
-            self.total = total;
-            [self.tableView reloadData];
-            [self checkHasMore];
-        });
-    }];
-}
-
-- (void)showErroView {
-    self.errorView.hidden = NO;
-    [self.view bringSubviewToFront:self.errorView];
-}
-
-- (void)hideErrorView {
-    self.errorView.hidden = YES;
-}
-
-- (void)checkHasMore {
-    [self setPullupViewHidden:[self.dataArray.lastObject count] >= _total];
-}
-
 #pragma mark - setupUI
 - (void)setupUI {
-    self.searchView =  [[ContactsSearchBarView alloc]init];
+    self.emptyView = [[EmptyView alloc]init];
+    
+    self.errorView = [[ErrorView alloc]init];
     WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestContacts];
+    }];
+    
+    self.searchView =  [[ContactsSearchBarView alloc]init];
     [self.searchView setSearchBlock:^(NSString *text){
         STRONG_SELF
-        self.isSearching = YES;
         [self searchContanctslWithKeyword:text];
     }];
     [self.view addSubview:self.searchView];
@@ -145,44 +75,52 @@
     }];
     
     self.currentClassView = [[ContactsCurrentClassView alloc]init];
-    self.currentClassView.title = @"终极一班";
     [self.currentClassView setContactsClassStartFilterBlock:^(NSString *currentTitle) {
         STRONG_SELF
+        [self.view endEditing:YES];
         [self showFilterView];
     }];
     [self.view addSubview:self.currentClassView];
     [self.currentClassView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.searchView.mas_bottom).mas_offset(10);
-        make.height.mas_equalTo(51.f);
+        make.height.mas_equalTo(50.f);
     }];
     
+    self.tableView = [[UITableView alloc]init];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[ContactsCell class] forCellReuseIdentifier:@"ContactsCell"];
+    [self.view addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
         make.top.mas_equalTo(self.currentClassView.mas_bottom);
     }];
     
     self.classFilterView = [[ContactsClassFilterView alloc]init];
-    self.classFilterView.selectedRow = 0;
 }
 
 - (void)searchContanctslWithKeyword:(NSString *)keyword {
-    //    if (keyword.length <= 0) {
-    //        return;
-    //    }
-    //    for (int i = 0; i < self.dataArray.count; i++) {
-    //        GetUserInfoRequestItem_Data *member = self.dataArray[0][i];
-    //        NSString *string = member.realName;
-    //        if (string.length >= keyword.length) {
-    //            if ([string rangeOfString:keyword].location != NSNotFound) {
-    //                [self.filteredDataArray addObject:member];
-    //                [self.tableView reloadData];
-    //            }
-    //        }
-    //    }
+    if (keyword.length <= 0) {
+        self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;
+        return;
+    }
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (int i = 0; i < self.dataArray.count; i++) {
+        ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *contactsInfo = self.dataArray[i];
+        NSString *string = contactsInfo.memberInfo.memberName;
+        if (string.length >= keyword.length) {
+            if ([string rangeOfString:keyword].location != NSNotFound) {
+                [resultArray addObject:contactsInfo];
+            }
+        }
+    }
+    self.dataArray = resultArray;
 }
 
 - (void)showFilterView {
@@ -204,7 +142,7 @@
     [alert showInView:self.view withLayout:^(AlertView *view) {
         STRONG_SELF
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(99.f);
+            make.top.mas_equalTo(self.currentClassView.mas_bottom);
             make.left.right.bottom.mas_equalTo(0);
         }];
         [filterView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -215,20 +153,23 @@
         [UIView animateWithDuration:0.3f animations:^{
             [filterView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.equalTo(view);
-                make.top.equalTo(view.mas_top).offset(0);
+                make.top.equalTo(view.mas_top);
                 make.height.mas_equalTo(selectionViewHeight);
             }];
             [view layoutIfNeeded];
         }];
     }];
-    [filterView setContactsClassFilterCompletedBlock:^(NSString *selectedTitle, NSInteger selectedRow) {
+    [filterView setContactsClassFilterCompletedBlock:^(ContactMemberContactsRequestItem_Data_Gcontacts_Groups *selectedGroup, NSInteger selectedRow) {
         STRONG_SELF
         [alert hide];
-        if (![selectedTitle isEqualToString:self.currentClassView.title]) {
-            self.currentClassView.title = selectedTitle;
+        if (![selectedGroup.groupName isEqualToString:self.currentClassView.title]) {
+            self.currentSelectedGroupIndex = selectedRow;
+            self.currentClassView.title = selectedGroup.groupName;
+            //切换相应的班级的联系人列表
+            self.dataArray = self.groupsArray[selectedRow].contacts;
+            //根据关键字筛选联系人
+            [self searchContanctslWithKeyword:self.searchView.textField.text];
         }
-        //切换相应的班级的联系人列表
-        //进行筛选
     }];
     
 }
@@ -246,19 +187,49 @@
     }];
 }
 
-#pragma mark - UITableViewDataSource & UITableViewDelegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    if (self.isSearching) {
-//        return self.filteredDataArray.count;
-//    }
-    return self.dataArray.count;
+- (void)requestContacts {
+    NSString *reqId = [IMConfig generateUniqueID];
+    [self.request stopRequest];
+    self.request = [[ContactMemberContactsRequest alloc]init];
+    self.request.reqId = reqId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.request startRequestWithRetClass:[ContactMemberContactsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view addSubview:self.errorView];
+            [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(@0);
+            }];
+            return;
+        }
+        ContactMemberContactsRequestItem *item = (ContactMemberContactsRequestItem *)retItem;
+        if (!item.data.contacts || item.data.contacts.groups.count <= 0) {
+            [self.view addSubview:self.emptyView];
+            [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(@0);
+            }];
+            return;
+        }
+        [self.errorView removeFromSuperview];
+        [self.emptyView removeFromSuperview];
+        ContactMemberContactsRequestItem_Data_Gcontacts *contacts = item.data.contacts;
+        NSMutableArray *array = [NSMutableArray array];
+        for (ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group in contacts.groups) {
+            [self.groupsArray addObject:group];
+            self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;//当前班级的数据源
+            [array addObject:group];
+        }
+        self.classFilterView.dataArray = array.copy;//班级筛选的数据
+        self.classFilterView.selectedRow = self.currentSelectedGroupIndex;
+        self.currentClassView.title = self.groupsArray[self.currentSelectedGroupIndex].groupName;//当前班级的名字
+    }];
 }
 
+#pragma mark - UITableViewDataSource & UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (self.isSearching) {
-//        return [self.filteredDataArray[section] count];
-//    }
-    return [self.dataArray[section] count];
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -277,33 +248,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactsCell" forIndexPath:indexPath];
-//    if (self.isSearching) {
-//        cell.data = self.filteredDataArray[indexPath.section][indexPath.row];
-//        cell.isLastRow = indexPath.row == [self.filteredDataArray[indexPath.section] count] - 1;
-//    }
-    cell.data = self.dataArray[indexPath.section][indexPath.row];
-    cell.isLastRow = indexPath.row == [self.dataArray[indexPath.section] count] - 1;
+    cell.data = self.dataArray[indexPath.row];
+    cell.isLastRow = indexPath.row == self.dataArray.count - 1;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatViewController *chatVC = [[ChatViewController alloc]init];
 #warning 此处的member后续还需要看通讯录的结构是什么
-    IMMember *member;
-    GetUserInfoRequestItem_Data *data;
-    if (self.isSearching) {
-//         data = self.filteredDataArray[indexPath.section][indexPath.row];
-    }else {
-        data = self.dataArray[indexPath.section][indexPath.row];
-    }
-    if (data.imTokenInfo) {
-        member = [data.imTokenInfo.imMember toIMMember];
-    }else {
-        member = [[IMMember alloc]init];
-        member.userID = [data.userId integerValue];
-        member.name = data.realName;
-        member.avatar = data.avatar;
-    }
+    IMMember *member = [self.dataArray[indexPath.row] toIMMember];
     IMTopic *topic = [[IMDatabaseManager sharedInstance] findTopicWithMember:member];
     if (topic) {
         chatVC.topic = topic;
@@ -315,12 +268,16 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    self.isSearching = NO;
-    [self.searchView.textField resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
-- (void)setIsSearching:(BOOL)isSearching {
-    _isSearching = isSearching;
-//    [self.tableView reloadData];
+- (void)setCurrentSelectedGroupIndex:(NSInteger)currentSelectedGroupIndex {
+    _currentSelectedGroupIndex = currentSelectedGroupIndex;
+    self.dataArray = self.groupsArray[currentSelectedGroupIndex].contacts;
+}
+
+- (void)setDataArray:(NSArray<ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *> *)dataArray {
+    _dataArray = dataArray;
+    [self.tableView reloadData];
 }
 @end

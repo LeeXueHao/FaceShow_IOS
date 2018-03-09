@@ -10,5 +10,4 @@
 
 @interface ContactsClassFilterCell : UITableViewCell
 @property(nonatomic, copy) NSString *title;
-@property (nonatomic, assign) BOOL shouldShowLine;
 @end

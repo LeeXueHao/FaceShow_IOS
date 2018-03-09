@@ -9,10 +9,10 @@
 #import "ContactsClassFilterView.h"
 #import "ContactsClassFilterCell.h"
 #import "UIImage+Color.h"
+#import "ContactMemberContactsRequest.h"
 
 @interface ContactsClassFilterView ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSArray *dataArray;
 //@property(nonatomic, strong) UIButton *confirmButton;
 @property(nonatomic, copy) ContactsClassFilterCompletedBlock block;
 @end
@@ -21,18 +21,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self setupDataArray];
+        self.selectedRow = 0;
         [self setupUI];
     }
     return self;
-}
-
-- (void)setupDataArray {
-    self.dataArray = @[
-                       @"全部",
-                       @"已作答",
-                       @"未作答"
-                       ];
 }
 
 - (void)setupUI {
@@ -42,7 +34,6 @@
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"f9f9f9"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 50.f;
     [self.tableView registerClass:[ContactsClassFilterCell class] forCellReuseIdentifier:@"ContactsClassFilterCell"];
     [self addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -77,22 +68,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ContactsClassFilterCell *cell = [[ContactsClassFilterCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.title = self.dataArray[indexPath.row];
+    ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group = self.dataArray[indexPath.row];
+    cell.title = group.groupName;
     if (self.selectedRow == indexPath.row) {
         cell.selected = YES;
     }else {
         cell.selected = NO;
     }
-    if (indexPath.row == self.dataArray.count - 1) {
-        cell.shouldShowLine = NO;
-    }else {
-        cell.shouldShowLine = YES;
-    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.f;
+    return 51.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,10 +88,16 @@
 }
 
 - (CGFloat)heightForContactsClassFilterView {
-    return self.dataArray.count * 50;
+    return self.dataArray.count * 51;
 }
 
 - (void)setContactsClassFilterCompletedBlock:(ContactsClassFilterCompletedBlock)block {
     self.block = block;
 }
+
+- (void)setDataArray:(NSArray *)dataArray {
+    _dataArray = dataArray;
+    [self.tableView reloadData];
+}
+
 @end

@@ -11,7 +11,6 @@
 @interface ContactsCurrentClassView ()
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UIButton *selectedbutton;
-@property (nonatomic, strong) UIView *bottomLineView;
 @property(nonatomic, copy) ContactsClassStartFilterBlock block;
 
 @end
@@ -45,14 +44,6 @@
         make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
-    }];
-    
-    self.bottomLineView = [[UIView alloc]init];
-    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self addSubview:self.bottomLineView];
-    [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
-        make.height.mas_equalTo(1);
     }];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(filterAction:)];

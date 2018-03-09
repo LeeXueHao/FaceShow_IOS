@@ -8,6 +8,6 @@
 
 #import "PagedListViewControllerBase.h"
 
-@interface ContactsViewController : PagedListViewControllerBase
+@interface ContactsViewController : BaseViewController
 
 @end
