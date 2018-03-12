@@ -15,5 +15,5 @@
 @property(nonatomic, assign) TopicType topicType;
 @property (nonatomic, assign) BOOL isTimeVisible;
 @property (nonatomic, assign) CGFloat height;
-
+@property (nonatomic, assign) CGFloat percent;
 @end

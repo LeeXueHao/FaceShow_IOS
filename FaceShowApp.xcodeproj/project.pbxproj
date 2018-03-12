@@ -2371,8 +2371,6 @@
 				E91E5D212047B1F800052FBA /* IMMessageCell.m */,
 				E91E5D1F2047B1F800052FBA /* IMTimeHandleManger.h */,
 				E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */,
-				E90C5157204FC4C30008F92A /* IMChatViewModel.h */,
-				E90C5158204FC4C30008F92A /* IMChatViewModel.m */,
 				E91E5D242047B1F900052FBA /* TestIMViewController.h */,
 				E91E5D202047B1F800052FBA /* TestIMViewController.m */,
 			);
@@ -2392,6 +2390,7 @@
 		E91E5D2B2047B1FE00052FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E997064520566DCB0096DAB0 /* Model */,
 				E95ED5D72052236C006ECCEA /* IMMessageCell */,
 				E90C514D204E73010008F92A /* 加载动效.gif */,
 				E91E5D2E2047B22400052FBA /* ChatListCell.h */,
@@ -2546,6 +2545,15 @@
 				E90C513C2049493E0008F92A /* IMImageMessageRightCell.m */,
 			);
 			name = IMMessageCell;
+			sourceTree = "<group>";
+		};
+		E997064520566DCB0096DAB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E90C5157204FC4C30008F92A /* IMChatViewModel.h */,
+				E90C5158204FC4C30008F92A /* IMChatViewModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		F7524D491FA851EC00CC6793 /* OpenGL */ = {

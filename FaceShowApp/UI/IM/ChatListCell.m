@@ -116,7 +116,7 @@
     _topic = topic;
     if (topic.type == TopicType_Group) {
         self.avatarImageView.image = [UIImage imageNamed:@"群聊-背景"];
-        self.nameLabel.text = @"班级群聊";
+        self.nameLabel.text = [NSString stringWithFormat:@"%@(%@)",@"班级群聊",topic.group];
         if (topic.latestMessage.type == MessageType_Image) {
             self.messageLabel.text = @"[图片]";
         }else {
@@ -131,7 +131,7 @@
         [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             STRONG_SELF
             if ([[IMManager sharedInstance] currentMember].memberID != obj.memberID) {
-                self.nameLabel.text = obj.name;
+                self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
                 *stop = YES;
             }
         }];

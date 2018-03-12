@@ -218,15 +218,15 @@
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        IMTopic *topic = self.dataArray[indexPath.row];
-//        if (topic.type == TopicType_Group) {//群聊不可删除
-//            return;
-//        }
-        //删除聊天
-//        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        DDLogDebug(@"删除");
-    }
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+////        IMTopic *topic = self.dataArray[indexPath.row];
+////        if (topic.type == TopicType_Group) {//群聊不可删除
+////            return;
+////        }
+//        //删除聊天
+////        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//        DDLogDebug(@"删除");
+//    }
+//}
 @end

@@ -34,6 +34,7 @@
 @property (nonatomic, strong) IMInputView *imInputView;
 @property (nonatomic, strong) ImageSelectionHandler *imageHandler;
 @property (nonatomic, strong) IMMessageMenuView *menuView;
+
 @property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
 @property (assign,nonatomic)BOOL hasMore;
 @property (assign,nonatomic)BOOL isRefresh;
@@ -96,10 +97,9 @@
     [self.imInputView setCompleteBlock:^(NSString *text){
         STRONG_SELF
         if (self.topic) {
-            [IMUserInterface sendTextMessageWithText:text topicID:16];
+            [IMUserInterface sendTextMessageWithText:text topicID:self.topic.topicID];
         }else {
-#warning 需要替换为真实的groupID
-            [IMUserInterface sendTextMessageWithText:text toMember:self.member fromGroup:0];
+            [IMUserInterface sendTextMessageWithText:text toMember:self.member fromGroup:self.groupId.integerValue];
         }
         if (self.imInputView.height > 50) {
             [UIView animateWithDuration:.3f animations:^{
@@ -117,7 +117,11 @@
         [self.imageHandler pickImageWithMaxCount:9 completeBlock:^(NSArray *array) {
             DDLogDebug(@"发送图片消息");
             for (UIImage *image in array) {
-                //发送图片
+                if (self.topic) {
+                    [IMUserInterface sendImageMessageWithImage:image topicID:self.topic.topicID];
+                }else {
+                    [IMUserInterface sendImageMessageWithImage:image toMember:self.member fromGroup:self.groupId.integerValue];
+                }
             }
         }];
     }];
@@ -149,7 +153,6 @@
     }];
     
     self.automaticallyAdjustsScrollViewInsets = false;  //第一个cell和顶部有留白，scrollerview遗留下来的，用来取消它
-    //刷新控件
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
     self.activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activity.frame = CGRectMake(headerView.frame.size.width/2, 0, 20, 20);;
@@ -265,7 +268,6 @@
         }
         if (topic.type == TopicType_Private) {
             for (IMMember *item in topic.members) {
-#warning self.member需要看结构是什么
                 if (self.member.memberID) {
                     if (item.memberID == self.member.memberID) {
                         self.topic = topic;
@@ -276,6 +278,25 @@
                     self.topic = topic;
                     return;
                 }
+            }
+        }
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMImageUploadDidUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        int64_t topicID = ((NSNumber *)[noti.userInfo valueForKey:kIMImageUploadTopicKey]).longLongValue;
+        NSString *uniqueId = [noti.userInfo valueForKey:kIMImageUploadMessageKey];
+        CGFloat percent = ((NSNumber *)[noti.userInfo valueForKey:kIMImageUploadProgressKey]).floatValue;
+        if (self.topic.topicID != topicID) {
+            return;
+        }
+        for (IMChatViewModel *model in self.dataArray) {
+            IMTopicMessage *item = model.message;
+            if ([item.uniqueID isEqualToString:uniqueId]) {
+                NSUInteger index = [self.dataArray indexOfObject:model];
+                model.percent = percent;
+                [self.dataArray replaceObjectAtIndex:index withObject:model];
+                return;
             }
         }
     }];

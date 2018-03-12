@@ -19,9 +19,25 @@
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setupObserver];
+    }
+    return self;
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[self rac_valuesForKeyPath:@"percent" observer:self] subscribeNext:^(id x) {
+        STRONG_SELF
+        self.progressView.progress = [NSString stringWithFormat:@"%@",x];
+    }];
+}
 
 - (void)setupUI {
     [super setupUI];
+    
     self.messageImageview = [[UIImageView alloc]init];
     self.messageImageview.backgroundColor = [UIColor redColor];
     self.messageImageview.layer.cornerRadius = 6.0f;
@@ -60,20 +76,30 @@
 
 - (void)setModel:(IMChatViewModel *)model {
     IMTopicMessage *message = model.message;
-    if (self.model && [self.model.message.uniqueID isEqualToString:model.message.uniqueID]) {
-        //更新图片
-        [self updateSendStateWithMessage:message];
-        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"背景图片"]];
-        return;
-    }
+//    if (self.model && [self.model.message.uniqueID isEqualToString:model.message.uniqueID]) {
+//        //更新图片
+//        [self updateSendStateWithMessage:message];
+//        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.thumbnail] placeholderImage:[UIImage imageNamed:@"背景图片"]];
+//        return;
+//    }
     [super setModel:model];
     [self updateSendStateWithMessage:message];
-//    self.messageImageview.image = [UIImage imageWithContentsOfFile:@""];
-    self.messageImageview.image = [UIImage imageNamed:@"背景图片"];
-    CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-    [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
-    }];
+//    if (message.sendState == MessageSendState_Success) {
+        WEAK_SELF
+        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"背景图片"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            STRONG_SELF
+            CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+            [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
+            }];
+        }];
+//    }else {
+//        self.messageImageview.image = [UIImage imageWithContentsOfFile:message.viewUrl];
+//        CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+//        [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
+//        }];
+//    }
 }
 
 - (void)updateSendStateWithMessage:(IMTopicMessage *)message {
@@ -100,7 +126,13 @@
         height += 0;
     }
     //聊天内容图片的高
-    CGSize size = [[UIImage imageNamed:@"背景图片"] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];//这里的图片需要等数据结构出来后确定
+    UIImage *image;
+    if (model.message.sendState == MessageSendState_Success) {
+        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:model.message.viewUrl]];
+    }else {
+        image = [UIImage imageWithData:[NSData dataWithContentsOfFile:model.message.viewUrl]];
+    }
+    CGSize size = [image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];//这里的图片需要等数据结构出来后确定
     height += size.height;
     
     return height;

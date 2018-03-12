@@ -12,18 +12,18 @@
 
 + (IMMessageBaseCell *)cellWithMessageModel:(IMChatViewModel *)model {
     IMTopicMessage *message = model.message;
-    //    MessageType type = message.type;
-    //    if (type == MessageType_Text) {
-    if ([message isFromCurrentUser]) {
-        return [[IMTextMessageRightCell alloc]init];
+    MessageType type = message.type;
+    if (type == MessageType_Text) {
+        if ([message isFromCurrentUser]) {
+            return [[IMTextMessageRightCell alloc]init];
+        }else {
+            return [[IMTextMessageLeftCell alloc]init];
+        }
+    }else if (type == MessageType_Image) {
+        return [[IMMessageBaseCell alloc]init];
     }else {
-        return [[IMTextMessageLeftCell alloc]init];
+        return [[IMMessageBaseCell alloc]init];
     }
-    //    }else if (type == MessageType_Image) {
-    //        return [[IMMessageBaseCell alloc]init];
-    //    }else {
-    //        return [[IMMessageBaseCell alloc]init];
-    //    }
 }
 
 @end

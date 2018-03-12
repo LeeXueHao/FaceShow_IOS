@@ -255,13 +255,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatViewController *chatVC = [[ChatViewController alloc]init];
-#warning 此处的member后续还需要看通讯录的结构是什么
     IMMember *member = [self.dataArray[indexPath.row] toIMMember];
+    NSString *groupId = self.groupsArray[self.currentSelectedGroupIndex].groupId;
     IMTopic *topic = [[IMDatabaseManager sharedInstance] findTopicWithMember:member];
     if (topic) {
         chatVC.topic = topic;
     }else {
         chatVC.member = member;
+        chatVC.groupId = groupId;
     }
     [self.navigationController pushViewController:chatVC animated:YES];
 }
