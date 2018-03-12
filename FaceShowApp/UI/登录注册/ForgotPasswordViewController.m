@@ -172,6 +172,10 @@
         [self.view nyx_showToast:@"密码长度需要在6-20位之间"];
         return;
     }
+    if ([LoginUtils hasEmpty:self.passwordView.text]) {
+        [self.view nyx_showToast:@"密码不能包含空格"];
+        return;
+    }
     WEAK_SELF
     [self.view nyx_startLoading];
     [self.resetPasswordRequest stopRequest];

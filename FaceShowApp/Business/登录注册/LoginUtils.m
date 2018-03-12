@@ -91,4 +91,12 @@
     return name.length<=6 && name.length>0;
 }
 
++ (BOOL)hasEmpty:(NSString *)password{
+    NSRange range = [password rangeOfString:@" "];
+    if (range.location != NSNotFound) {
+        return YES; //yes代表包含空格
+    }else {
+        return NO; //反之
+    }
+}
 @end
