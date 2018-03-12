@@ -44,6 +44,7 @@
 }
 
 - (void)setupUI {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     
     self.titleLabel = [[UILabel alloc]init];

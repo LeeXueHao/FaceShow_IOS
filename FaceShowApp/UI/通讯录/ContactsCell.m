@@ -78,7 +78,7 @@
     [self.contentView addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.right.bottom.mas_equalTo(0);
+        make.right.top.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
 }
@@ -96,9 +96,5 @@
 //    self.numberLabel.text = data.mobilePhone;
 }
 
-- (void)setIsLastRow:(BOOL)isLastRow {
-    _isLastRow = isLastRow;
-    self.lineView.hidden = isLastRow;
-}
 @end
 

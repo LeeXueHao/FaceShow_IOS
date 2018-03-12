@@ -31,9 +31,13 @@
     self.tableView = [[UITableView alloc]init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"f9f9f9"];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedSectionHeaderHeight = 0.f;
+    self.tableView.estimatedSectionFooterHeight = 0.f;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     [self.tableView registerClass:[ContactsClassFilterCell class] forCellReuseIdentifier:@"ContactsClassFilterCell"];
     [self addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -79,7 +83,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 51.f;
+    return 50.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,7 +92,7 @@
 }
 
 - (CGFloat)heightForContactsClassFilterView {
-    return self.dataArray.count * 51;
+    return self.dataArray.count * 50;
 }
 
 - (void)setContactsClassFilterCompletedBlock:(ContactsClassFilterCompletedBlock)block {

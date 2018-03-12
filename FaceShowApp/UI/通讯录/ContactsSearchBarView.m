@@ -7,6 +7,7 @@
 //
 
 #import "ContactsSearchBarView.h"
+#import "UIButton+ExpandHitArea.h"
 
 @interface ContactsSearchBarView()<UITextFieldDelegate>
 @property (nonatomic, strong) UIButton *searchButton;
@@ -40,6 +41,7 @@
     }];
     
     self.deleteButton = [[UIButton alloc]init];
+    [self.deleteButton setHitTestEdgeInsets:UIEdgeInsetsMake(-8, -10, -8, -15)];
     [self.deleteButton setImage:[UIImage imageNamed:@"聊聊-删除按钮正常态"] forState:UIControlStateNormal];
     [self.deleteButton setImage:[UIImage imageNamed:@"聊聊-删除按钮点击态"] forState:UIControlStateHighlighted];
     [self.deleteButton addTarget:self action:@selector(deleteBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -65,7 +67,7 @@
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(0);
         make.left.mas_equalTo(self.searchButton.mas_right).mas_offset(10);
-        make.right.mas_equalTo(self.deleteButton.mas_left).mas_offset(-5);
+        make.right.mas_equalTo(self.deleteButton.mas_left).mas_offset(-10);
     }];
 }
 
@@ -82,6 +84,7 @@
     self.textField.text = nil;
     BLOCK_EXEC(self.searchBlock,self.textField.text);
 }
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BLOCK_EXEC(self.searchBlock,textField.text);

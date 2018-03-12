@@ -95,6 +95,8 @@
     }
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.estimatedSectionHeaderHeight = 0.f;
+    self.tableView.estimatedSectionFooterHeight = 0.f;
     [self.tableView registerClass:[ContactsCell class] forCellReuseIdentifier:@"ContactsCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -106,8 +108,11 @@
 }
 
 - (void)searchContanctslWithKeyword:(NSString *)keyword {
+    self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;
+    if (self.currentClassView.isFiltering) {
+        [self.alertView hide];
+    }
     if (keyword.length <= 0) {
-        self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;
         return;
     }
     NSMutableArray *resultArray = [NSMutableArray array];
@@ -233,11 +238,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 61;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 5.f;
+    return 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -249,7 +250,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactsCell" forIndexPath:indexPath];
     cell.data = self.dataArray[indexPath.row];
-    cell.isLastRow = indexPath.row == self.dataArray.count - 1;
     return cell;
 }
 
