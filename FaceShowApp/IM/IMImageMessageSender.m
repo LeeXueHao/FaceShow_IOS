@@ -81,7 +81,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     NSData *data = UIImageJPEGRepresentation(image, 1);
     NSString *path = [self.imageFolderPath stringByAppendingPathComponent:uniqueID];
     [data writeToFile:path atomically:YES];
-    message.uniqueID = path;
+    message.viewUrl = uniqueID;
     return message;
 }
 
