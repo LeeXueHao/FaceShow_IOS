@@ -10,7 +10,7 @@
 #import "MineInputView.h"
 #import "YXGCDTimer.h"
 
-static const NSInteger kTimerDuration = 45;
+static const NSInteger kTimerDuration = 60;
 
 @interface MineVerifyCodeInputView()<UITextFieldDelegate>
 
