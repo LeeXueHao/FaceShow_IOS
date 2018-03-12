@@ -315,18 +315,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             }
         }];
     }else {
-        [self.view.window nyx_showToast:@"无效二维码"];
+        if (![stringValue containsString:@"2bai.co"] && ![stringValue containsString:@"yxb.yanxiu.com"]) {
+            [self.view.window nyx_showToast:@"无效二维码"];
+        }
         [self.navigationController popViewControllerAnimated:YES];
-//        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
-//        scanCodeResultVC.currentIndexPath = self.currentIndexPath;
-//        HttpBaseRequestItem_Error *error = [HttpBaseRequestItem_Error new];
-//        error.message = @"无效二维码";
-//        scanCodeResultVC.error = error;
-//        scanCodeResultVC.reScanCodeBlock = ^{
-//            [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
-//            [self->_session startRunning];
-//        };
-//        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
     }
 }
 
