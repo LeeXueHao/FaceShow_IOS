@@ -15,7 +15,7 @@ NSString * const kPassword = @"public";
 NSString * const kHost = @"orz.yanxiu.com";
 NSUInteger const kPort = 7914;
 
-NSString * const kBizSourse = @"1";
+NSString * const kBizSourse = @"22";
 
 @implementation IMConfig
 

@@ -39,15 +39,18 @@
     return result;
 }
 
-+ (NSString *)compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:(NSTimeInterval)originalTime {
++ (NSString *)displayedTimeStringComparedCurrentTime:(NSTimeInterval)currentTime WithOriginalTime:(NSTimeInterval)originalTime {
+    NSTimeInterval tempMilli0 = currentTime;
+    NSTimeInterval seconds0 = tempMilli0/1000.0;
+    NSDate *nowDate = [NSDate dateWithTimeIntervalSince1970:seconds0];
     
-    NSTimeInterval tempMilli = originalTime;
-    NSTimeInterval seconds = tempMilli/1000.0;
-    NSDate *myDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+    NSTimeInterval tempMilli1 = originalTime;
+    NSTimeInterval seconds1 = tempMilli1/1000.0;
+    NSDate *myDate = [NSDate dateWithTimeIntervalSince1970:seconds1];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     int unit = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear ;
-    NSDateComponents *nowCmps = [calendar components:unit fromDate:[NSDate date]];
+    NSDateComponents *nowCmps = [calendar components:unit fromDate:nowDate];
     NSDateComponents *myCmps = [calendar components:unit fromDate:myDate];
     
     NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];

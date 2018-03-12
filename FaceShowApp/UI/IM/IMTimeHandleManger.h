@@ -33,6 +33,7 @@ typedef NS_ENUM(int64_t,IMTimeType) {
 /**
  将消息的发送时间的时间戳转换为要显示的字符串
  
+ @param currentTime 当前的时间戳(加上与server的时间差后)
  @param originalTime 要转化的时间戳
  @return 符合要求的字符串
  0.当天的消息 显示上/下午+收发消息的时间 (注没日期)
@@ -42,5 +43,6 @@ typedef NS_ENUM(int64_t,IMTimeType) {
  4.1年内的,显示手机收发的时间（注 日期+时间)
  5.超过1年的,显示手机收发的时间（注 年+日期+时间)
  */
-+ (NSString *)compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:(NSTimeInterval)originalTime;
++ (NSString *)displayedTimeStringComparedCurrentTime:(NSTimeInterval)currentTime
+                                        WithOriginalTime:(NSTimeInterval)originalTime;
 @end

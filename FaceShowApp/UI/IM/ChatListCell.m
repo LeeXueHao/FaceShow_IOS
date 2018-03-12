@@ -10,6 +10,7 @@
 #import "IMTopic.h"
 #import "IMManager.h"
 #import "IMTimeHandleManger.h"
+#import "IMUserInterface.h"
 
 @interface ChatListCell ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -117,10 +118,12 @@
     if (topic.type == TopicType_Group) {
         self.avatarImageView.image = [UIImage imageNamed:@"群聊-背景"];
         self.nameLabel.text = [NSString stringWithFormat:@"%@(%@)",@"班级群聊",topic.group];
-        if (topic.latestMessage.type == MessageType_Image) {
-            self.messageLabel.text = @"[图片]";
-        }else {
-            self.messageLabel.text = [NSString stringWithFormat:@"%@:%@",topic.latestMessage.sender.name,topic.latestMessage.text];
+        if (topic.latestMessage) {
+            if (topic.latestMessage.type == MessageType_Image) {
+                self.messageLabel.text = @"[图片]";
+            }else {
+                self.messageLabel.text = [NSString stringWithFormat:@"%@:%@",topic.latestMessage.sender.name,topic.latestMessage.text];
+            }
         }
     }else {
         WEAK_SELF
@@ -142,8 +145,10 @@
         }
     }
     if (topic.latestMessage.sendTime > 0) {
-        NSString *string = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:topic.latestMessage.sendTime];
-        self.timeLabel.text = [string componentsSeparatedByString:@" "].firstObject;
+        NSTimeInterval interval = [[NSDate date]timeIntervalSince1970]*1000;
+        NSTimeInterval currentTime = interval + [IMUserInterface obtainTimeoffset];
+        NSString *timeString = [IMTimeHandleManger displayedTimeStringComparedCurrentTime:currentTime WithOriginalTime:topic.latestMessage.sendTime];
+        self.timeLabel.text = [timeString componentsSeparatedByString:@" "].firstObject;
     }
     self.tipImageView.hidden = topic.unreadCount==0;
 }
@@ -160,8 +165,10 @@
     self.timeLabel.text = @"2017.12.31 00:00";
     
     NSTimeInterval time = [[NSDate date]timeIntervalSince1970];
-    NSString *string = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:time - 86400 * 3];
-    self.timeLabel.text = [string componentsSeparatedByString:@" "].firstObject;
+    NSTimeInterval interval = [[NSDate date]timeIntervalSince1970]*1000;
+    NSTimeInterval currentTime = interval + [IMUserInterface obtainTimeoffset];
+    NSString *timeString = [IMTimeHandleManger displayedTimeStringComparedCurrentTime:currentTime WithOriginalTime:time];
+    self.timeLabel.text = [timeString componentsSeparatedByString:@" "].firstObject;
 }
 @end
 

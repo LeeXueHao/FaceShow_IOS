@@ -379,9 +379,14 @@
 
 - (void)messageCellTap:(IMChatViewModel *)model {
     [self.view nyx_showToast:@"click image to do ..."];
-    NSURL *url = [NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226683021&di=f4f8c422c2a55a2f0fdeeecb9a51060b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F68%2F11%2F35W58PICzbv_1024.jpg"];//message.thumbnail];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [UIImage imageWithData:data];
+    UIImage *image;
+    if (model.message.sendState == MessageSendState_Success) {
+        NSURL *url = [NSURL URLWithString:model.message.viewUrl];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        image = [UIImage imageWithData:data];
+    }else {
+        image = [model.message imageWaitForSending];
+    }
     NSMutableArray *array = [NSMutableArray arrayWithObject:image];
     PhotoBrowserController *vc = [[PhotoBrowserController alloc] init];
     vc.cantNotDeleteImage = YES;
@@ -477,6 +482,12 @@
     [self.menuView addMenuItemModels:array.copy];
     
     [self.menuView showInView:self.tableView  withRect:rect];
+}
+
+- (void)messageCellUpdateHeight:(IMChatViewModel *)model {
+    NSInteger row = [self.dataArray indexOfObject:model];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (IMMessageMenuView *)menuView {

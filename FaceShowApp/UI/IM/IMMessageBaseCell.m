@@ -56,7 +56,9 @@
     self.usernameLabel.font = [UIFont systemFontOfSize:12.0f];
     
     self.messageBackgroundView = [[UIImageView alloc] init];
-    self.messageBackgroundView.image = [UIImage yx_resizableImageNamed:@"ReceiverTextNodeBkg"];
+    UIImage *image = [UIImage imageNamed:@"发送白底"];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(28, 15, 10, 15) resizingMode:UIImageResizingModeStretch];
+    self.messageBackgroundView.image = image;
     [self.messageBackgroundView setUserInteractionEnabled:YES];
     
     UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressMsgBGView:)];
@@ -148,7 +150,9 @@
     }
     _model = model;
     if (model.isTimeVisible) {
-        NSString *timeString = [IMTimeHandleManger compareCurrentTimeWithOriginalTimeObtainDisplayedTimeString:message.sendTime];
+        NSTimeInterval interval = [[NSDate date]timeIntervalSince1970]*1000;
+        NSTimeInterval currentTime = interval + [IMUserInterface obtainTimeoffset];
+        NSString *timeString = [IMTimeHandleManger displayedTimeStringComparedCurrentTime:currentTime WithOriginalTime:message.sendTime];
         CGRect rect = [timeString boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
         [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(rect.size.width + 12);

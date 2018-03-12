@@ -34,7 +34,7 @@
     [super setupLayout];
     [self.messageBackgroundView addSubview:self.messageTextLabel];
     [self.messageTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(11.f, 10.f, 18.f, 10.f));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(12.f, 10.f, 12.f, 10.f));
     }];
 }
 
@@ -57,7 +57,7 @@
     CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth], MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
     height += ceil(textSize.height);
     //文字距离背景上下的高度
-    height += 29;
+    height += 24;
     
     return height;
 }

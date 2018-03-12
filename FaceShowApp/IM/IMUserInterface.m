@@ -130,4 +130,8 @@
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID {
     [[IMDatabaseManager sharedInstance] resetUnreadMessageCountWithTopicID:topicID];
 }
+
++ (NSTimeInterval)obtainTimeoffset {
+    return [IMRequestManager sharedInstance].timeoffset;
+}
 @end

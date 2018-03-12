@@ -32,6 +32,14 @@
 + (void)clearDirtyMessages;
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 
+
+/**
+ 记录server时间和本地时间偏差，在消息发送中用本地时间加上偏差的值模拟server时间时使用。
+
+ @return 时间差
+ */
++ (NSTimeInterval)obtainTimeoffset;
+
 // Notifications
 UIKIT_EXTERN NSNotificationName const kIMMessageDidUpdateNotification;
 

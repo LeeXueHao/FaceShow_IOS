@@ -14,6 +14,6 @@
 @property (nonatomic, copy) void (^didDeleteImage)(void);
 @property (nonatomic, copy) void (^deleteImageBlock)(NSInteger index);
 
-@property (nonatomic, assign) BOOL cantNotDeleteImage;
+@property (nonatomic, assign) BOOL cantNotDeleteImage;//是否可以删除图片
 
 @end

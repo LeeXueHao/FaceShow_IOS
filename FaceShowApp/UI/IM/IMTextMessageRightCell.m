@@ -24,7 +24,9 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-         self.messageBackgroundView.image = [UIImage yx_resizableImageNamed:@"SenderTextNodeBkg"];
+        UIImage *image = [UIImage imageNamed:@"发送蓝底"];
+        image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(28, 15, 10, 15) resizingMode:UIImageResizingModeStretch];
+        self.messageBackgroundView.image = image;
     }
     return self;
 }
@@ -65,7 +67,7 @@
     CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth] , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
     height += ceil(textSize.height);
     //文字距离背景上下的高度
-    height += 29;
+    height += 24;
     
     return height;
 }

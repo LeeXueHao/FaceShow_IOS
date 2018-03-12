@@ -22,4 +22,5 @@
 
 - (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect;
 
+- (void)messageCellUpdateHeight:(IMChatViewModel *)model;
 @end

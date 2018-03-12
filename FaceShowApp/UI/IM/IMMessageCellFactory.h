@@ -11,6 +11,8 @@
 #import "IMTextMessageBaseCell.h"
 #import "IMTextMessageLeftCell.h"
 #import "IMTextMessageRightCell.h"
+#import "IMImageMessageLeftCell.h"
+#import "IMImageMessageRightCell.h"
 #import "IMTopicMessage.h"
 #import "IMChatViewModel.h"
 

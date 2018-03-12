@@ -20,7 +20,11 @@
             return [[IMTextMessageLeftCell alloc]init];
         }
     }else if (type == MessageType_Image) {
-        return [[IMMessageBaseCell alloc]init];
+        if ([message isFromCurrentUser]) {
+            return [[IMImageMessageRightCell alloc]init];
+        }else {
+            return [[IMImageMessageLeftCell alloc]init];
+        }
     }else {
         return [[IMMessageBaseCell alloc]init];
     }
