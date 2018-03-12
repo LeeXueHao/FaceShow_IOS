@@ -13,4 +13,6 @@
 + (IMImageMessageSender *)sharedInstance;
 
 - (void)addImageMessage:(IMImageMessage *)msg;
+
+- (NSString *)imageCacheFolderPath;
 @end

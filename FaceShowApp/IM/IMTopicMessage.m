@@ -8,9 +8,17 @@
 
 #import "IMTopicMessage.h"
 #import "IMManager.h"
+#import "IMImageMessageSender.h"
 
 @implementation IMTopicMessage
 - (BOOL)isFromCurrentUser {
     return self.sender.memberID == [[IMManager sharedInstance] currentMember].memberID;
+}
+
+- (NSString *)viewUrl {
+    if (self.sendState == MessageSendState_Success) {
+        return _viewUrl;
+    }
+    return [[[IMImageMessageSender sharedInstance] imageCacheFolderPath]stringByAppendingPathComponent:_viewUrl];
 }
 @end

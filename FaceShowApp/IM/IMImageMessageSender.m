@@ -50,6 +50,10 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     self.imageFolderPath = path;
 }
 
+- (NSString *)imageCacheFolderPath {
+    return self.imageFolderPath;
+}
+
 - (void)addImageMessage:(IMImageMessage *)msg {
     IMTopicMessage *message = [[IMDatabaseManager sharedInstance]findMessageWithUniqueID:msg.uniqueID];
     if (!message) {
@@ -77,7 +81,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     NSData *data = UIImageJPEGRepresentation(image, 1);
     NSString *path = [self.imageFolderPath stringByAppendingPathComponent:uniqueID];
     [data writeToFile:path atomically:YES];
-    message.viewUrl = path;
+    message.uniqueID = path;
     return message;
 }
 
