@@ -10,8 +10,9 @@
 #import "IMMember.h"
 
 typedef NS_ENUM(int64_t, MessageType) {
-    MessageType_Text,
-    MessageType_Image
+    MessageType_Text = 10,
+    MessageType_Image = 20,
+    MessageType_Video = 30
 };
 
 typedef NS_ENUM(int64_t, MessageSendState) {

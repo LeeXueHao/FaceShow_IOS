@@ -15,6 +15,7 @@
 #import "IMConfig.h"
 #import "CreateTopicRequest.h"
 #import "SaveTextMsgRequest.h"
+#import "SaveImageMsgRequest.h"
 
 @interface IMRequestManager()
 @property (nonatomic, strong) GetMemberTopicsRequest *getTopicsRequest;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) GetTopicMsgsRequest *msgsRequest;
 @property (nonatomic, strong) CreateTopicRequest *createTopicRequest;
 @property (nonatomic, strong) SaveTextMsgRequest *saveTextMsgRequest;
+@property (nonatomic, strong) SaveImageMsgRequest *saveImageMsgRequest;
 
 @property (nonatomic, assign) NSTimeInterval timeoffset;
 @end
@@ -156,6 +158,25 @@
             return;
         }
         SaveTextMsgRequestItem *item = (SaveTextMsgRequestItem *)retItem;
+        TopicMsgData_topicMsg *topicMsg = item.data.topicMsg.firstObject;
+        BLOCK_EXEC(completeBlock,[topicMsg toIMTopicMessage],nil);
+    }];
+}
+
+- (void)requestSaveImageMsgWithMsg:(IMImageMessage *)msg completeBlock:(void(^)(IMTopicMessage *msg,NSError *error))completeBlock{
+    WEAK_SELF
+    [self.saveImageMsgRequest stopRequest];
+    self.saveImageMsgRequest = [[SaveImageMsgRequest alloc]init];
+    self.saveImageMsgRequest.topicId = [NSString stringWithFormat:@"%@",@(msg.topicID)];
+    self.saveImageMsgRequest.rid = msg.resourceID;
+    self.saveImageMsgRequest.reqId = msg.uniqueID;
+    [self.saveImageMsgRequest startRequestWithRetClass:[SaveImageMsgRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,nil,error);
+            return;
+        }
+        SaveImageMsgRequestItem *item = (SaveImageMsgRequestItem *)retItem;
         TopicMsgData_topicMsg *topicMsg = item.data.topicMsg.firstObject;
         BLOCK_EXEC(completeBlock,[topicMsg toIMTopicMessage],nil);
     }];

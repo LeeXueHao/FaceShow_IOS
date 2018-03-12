@@ -1,20 +1,20 @@
 //
-//  SaveTextMsgRequest.h
+//  SaveImageMsgRequest.h
 //  FaceShowApp
 //
-//  Created by niuzhaowang on 2018/1/3.
+//  Created by niuzhaowang on 2018/3/12.
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
 #import "YXPostRequest.h"
 #import "TopicMsgData.h"
 
-@interface SaveTextMsgRequestItem : HttpBaseRequestItem
+@interface SaveImageMsgRequestItem : HttpBaseRequestItem
 @property (nonatomic, strong) TopicMsgData<Optional> *data;
 @end
 
-@interface SaveTextMsgRequest : YXPostRequest
+@interface SaveImageMsgRequest : YXPostRequest
 @property (nonatomic, strong) NSString *topicId;
 @property (nonatomic, strong) NSString *reqId;
-@property (nonatomic, strong) NSString *msg;
+@property (nonatomic, strong) NSString *rid;
 @end

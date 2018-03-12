@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IMDatabaseManager.h"
 #import "IMTextMessage.h"
+#import "IMImageMessage.h"
 
 @interface IMRequestManager : NSObject
 + (IMRequestManager *)sharedInstance;
@@ -32,5 +33,7 @@
 
 - (void)requestSaveTextMsgWithMsg:(IMTextMessage *)msg
                     completeBlock:(void(^)(IMTopicMessage *msg,NSError *error))completeBlock;
+- (void)requestSaveImageMsgWithMsg:(IMImageMessage *)msg
+                     completeBlock:(void(^)(IMTopicMessage *msg,NSError *error))completeBlock;
 
 @end

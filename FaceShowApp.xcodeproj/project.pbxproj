@@ -252,6 +252,7 @@
 		7CBC5BCD204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */; };
 		7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */; };
 		7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BD220522E23004ACA04 /* IMImageMessage.m */; };
+		7CBC5BDC20567184004ACA04 /* SaveImageMsgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -850,6 +851,8 @@
 		7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessageSender.m; sourceTree = "<group>"; };
 		7CBC5BD120522E23004ACA04 /* IMImageMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMImageMessage.h; sourceTree = "<group>"; };
 		7CBC5BD220522E23004ACA04 /* IMImageMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessage.m; sourceTree = "<group>"; };
+		7CBC5BDA20567184004ACA04 /* SaveImageMsgRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveImageMsgRequest.h; sourceTree = "<group>"; };
+		7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveImageMsgRequest.m; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -2061,6 +2064,8 @@
 			children = (
 				E91E5D992047B8E000052FBA /* SaveTextMsgRequest.h */,
 				E91E5D8F2047B8DF00052FBA /* SaveTextMsgRequest.m */,
+				7CBC5BDA20567184004ACA04 /* SaveImageMsgRequest.h */,
+				7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */,
 				E91E5D942047B8E000052FBA /* TopicData.h */,
 				E91E5D972047B8E000052FBA /* TopicData.m */,
 				E91E5D9A2047B8E000052FBA /* TopicMsgData.h */,
@@ -2726,6 +2731,7 @@
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,
 				E90C5143204D23DE0008F92A /* ContactsSearchBarView.m in Sources */,
 				7CBC5BBE204D2C1C004ACA04 /* RegisterInfoViewController.m in Sources */,
+				7CBC5BDC20567184004ACA04 /* SaveImageMsgRequest.m in Sources */,
 				7C2519721F68EBCD0001B577 /* UserManager.m in Sources */,
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
 				7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */,

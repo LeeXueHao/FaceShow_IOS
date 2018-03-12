@@ -7,7 +7,6 @@
 //
 
 #import "IMTextMessageSender.h"
-#import "SaveTextMsgRequest.h"
 #import "IMDatabaseManager.h"
 #import "IMManager.h"
 #import "IMConfig.h"
@@ -17,7 +16,6 @@
 @interface IMTextMessageSender()
 @property (nonatomic, strong) NSMutableArray<IMTextMessage *> *msgArray;
 @property (nonatomic, assign) BOOL isMsgSending;
-@property (nonatomic, strong) SaveTextMsgRequest *saveTextMsgRequest;
 @end
 
 @implementation IMTextMessageSender

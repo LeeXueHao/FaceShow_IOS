@@ -22,7 +22,6 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
 @interface IMImageMessageSender()
 @property (nonatomic, strong) NSMutableArray<IMImageMessage *> *msgArray;
 @property (nonatomic, assign) BOOL isMsgSending;
-//@property (nonatomic, strong) SaveTextMsgRequest *saveTextMsgRequest;
 @property (nonatomic, strong) NSString *imageFolderPath;
 @end
 
@@ -125,17 +124,27 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMImageUploadDidUpdateNotification object:nil userInfo:info];
     } completeBlock:^(NSString *key, NSError *error) {
         STRONG_SELF
+        if (error) {
+            [self messageSentFailed:imageMsg];
+            [self sendNext];
+        }else {
+            imageMsg.resourceID = key;
+            [self saveMessage:imageMsg];
+        }
     }];
-//    WEAK_SELF
-//    [[IMRequestManager sharedInstance]requestSaveTextMsgWithMsg:textMsg completeBlock:^(IMTopicMessage *msg, NSError *error) {
-//        STRONG_SELF
-//        if (error) {
-//            [self messageSentFailed:textMsg];
-//        }else {
-//            [[IMDatabaseManager sharedInstance]saveMessage:msg];
-//        }
-//        [self sendNext];
-//    }];
+}
+
+- (void)saveMessage:(IMImageMessage *)imageMsg {
+    WEAK_SELF
+    [[IMRequestManager sharedInstance]requestSaveImageMsgWithMsg:imageMsg completeBlock:^(IMTopicMessage *msg, NSError *error) {
+        STRONG_SELF
+        if (error) {
+            [self messageSentFailed:imageMsg];
+        }else {
+            [[IMDatabaseManager sharedInstance]saveMessage:msg];
+        }
+        [self sendNext];
+    }];
 }
 
 - (void)messageSentFailed:(IMImageMessage *)msg {
@@ -149,4 +158,5 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     self.isMsgSending = NO;
     [self checkAndSend];
 }
+
 @end

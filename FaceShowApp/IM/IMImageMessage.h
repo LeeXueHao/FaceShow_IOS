@@ -13,5 +13,6 @@
 @property (nonatomic, assign) uint64_t groupID;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *uniqueID;
+@property (nonatomic, strong) NSString *resourceID;
 @property (nonatomic, strong) IMMember *otherMember;
 @end
