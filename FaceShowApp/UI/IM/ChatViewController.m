@@ -98,7 +98,8 @@
         if (self.topic) {
             [IMUserInterface sendTextMessageWithText:text topicID:16];
         }else {
-            [IMUserInterface sendTextMessageWithText:text toMember:self.member];
+#warning 需要替换为真实的groupID
+            [IMUserInterface sendTextMessageWithText:text toMember:self.member fromGroup:0];
         }
         if (self.imInputView.height > 50) {
             [UIView animateWithDuration:.3f animations:^{

@@ -90,7 +90,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     IMImageMessage *msg = [self.msgArray firstObject];
     if (!msg.topicID) {
         WEAK_SELF
-        [[IMRequestManager sharedInstance]requestNewTopicWithMember:msg.otherMember completeBlock:^(IMTopic *topic, NSError *error) {
+        [[IMRequestManager sharedInstance]requestNewTopicWithMember:msg.otherMember fromGroup:msg.groupID completeBlock:^(IMTopic *topic, NSError *error) {
             STRONG_SELF
             if (error) {
                 [self messageSentFailed:msg];

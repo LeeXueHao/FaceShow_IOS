@@ -116,12 +116,15 @@
     }];
 }
 
-- (void)requestNewTopicWithMember:(IMMember *)member completeBlock:(void(^)(IMTopic *topic,NSError *error))completeBlock {
+- (void)requestNewTopicWithMember:(IMMember *)member fromGroup:(int64_t)groupID completeBlock:(void(^)(IMTopic *topic,NSError *error))completeBlock {
     NSString *reqId = [IMConfig generateUniqueID];
     [self.createTopicRequest stopRequest];
     self.createTopicRequest = [[CreateTopicRequest alloc]init];
     self.createTopicRequest.reqId = reqId;
     self.createTopicRequest.topicType = @"1";
+    if (groupID > 0) {
+        self.createTopicRequest.fromGroupTopicId = [NSString stringWithFormat:@"%@",@(groupID)];
+    }
     if (member.memberID > 0) {
         self.createTopicRequest.imMemberIds = [NSString stringWithFormat:@"%@,%@",@([IMManager sharedInstance].currentMember.memberID),@(member.memberID)];
     }else if (member.userID > 0) {

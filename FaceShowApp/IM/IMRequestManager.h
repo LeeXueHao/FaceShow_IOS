@@ -27,6 +27,7 @@
                       completeBlock:(void(^)(NSArray<IMTopicMessage *> *msgs,NSError *error))completeBlock;
 
 - (void)requestNewTopicWithMember:(IMMember *)member
+                        fromGroup:(int64_t)groupID
                     completeBlock:(void(^)(IMTopic *topic,NSError *error))completeBlock;
 
 - (void)requestSaveTextMsgWithMsg:(IMTextMessage *)msg

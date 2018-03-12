@@ -20,6 +20,7 @@ typedef NS_ENUM(int64_t, TopicType) {
 @property (nonatomic, assign) int64_t topicID;
 @property (nonatomic, strong) NSString *channel;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *group;
 @property (nonatomic, assign) int64_t latestMsgId;
 @property (nonatomic, assign) int64_t topicChange;
 @property (nonatomic, assign) int64_t unreadCount;

@@ -120,6 +120,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
             topicEntity = [IMTopicEntity MR_createEntityInContext:localContext];
         }
         topicEntity.name = topic.name;
+        topicEntity.group = topic.group;
         topicEntity.channel = topic.channel;
         topicEntity.topicID = topic.topicID;
         topicEntity.type = topic.type;
@@ -251,6 +252,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     topic.type = entity.type;
     topic.topicID = entity.topicID;
     topic.name = entity.name;
+    topic.group = entity.group;
     topic.channel = entity.channel;
     topic.topicChange = entity.topicChange;
     topic.latestMsgId = entity.latestMsgId;

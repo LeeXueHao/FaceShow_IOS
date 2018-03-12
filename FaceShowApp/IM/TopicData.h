@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSString<Optional> *topicId;
 @property (nonatomic, strong) NSString<Optional> *topicName;
 @property (nonatomic, strong) NSString<Optional> *topicType;
+@property (nonatomic, strong) NSString<Optional> *topicGroup;
 @property (nonatomic, strong) NSString<Optional> *state;
 @property (nonatomic, strong) NSString<Optional> *topicChange;
 @property (nonatomic, strong) NSString<Optional> *createTime;

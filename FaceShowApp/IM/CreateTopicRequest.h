@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString<Optional> *reqId;
 @property (nonatomic, strong) NSString<Optional> *topicType; //主题类型： 1-私聊 2-群聊
 @property (nonatomic, strong) NSString<Optional> *topicName;
+@property (nonatomic, strong) NSString<Optional> *fromGroupTopicId;
 @property (nonatomic, strong) NSString<Optional> *yxUsers;
 @property (nonatomic, strong) NSString<Optional> *imMemberIds; 
 @end

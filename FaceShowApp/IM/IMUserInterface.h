@@ -14,11 +14,11 @@
 
 + (void)sendTextMessageWithText:(NSString *)text topicID:(int64_t)topicID;
 + (void)sendTextMessageWithText:(NSString *)text topicID:(int64_t)topicID uniqueID:(NSString *)uniqueID;
-+ (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member;//用于新建会话尚无topicID的情况
++ (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member fromGroup:(int64_t)groupID;//用于新建会话尚无topicID的情况
 
 + (void)sendImageMessageWithImage:(UIImage *)image topicID:(int64_t)topicID;
 + (void)sendImageMessageWithImage:(UIImage *)image topicID:(int64_t)topicID uniqueID:(NSString *)uniqueID;
-+ (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member;
++ (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member fromGroup:(int64_t)groupID;
 
 + (NSArray<IMTopic *> *)findAllTopics;
 + (void)findMessagesInTopic:(int64_t)topicID

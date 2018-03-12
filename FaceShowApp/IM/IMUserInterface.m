@@ -27,10 +27,11 @@
     [[IMTextMessageSender sharedInstance]addTextMessage:msg];
 }
 
-+ (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member {
++ (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member fromGroup:(int64_t)groupID{
     IMTextMessage *msg = [[IMTextMessage alloc]init];
     msg.text = text;
     msg.otherMember = member;
+    msg.groupID = groupID;
     
     [[IMTextMessageSender sharedInstance]addTextMessage:msg];
 }
@@ -48,10 +49,11 @@
     [[IMImageMessageSender sharedInstance]addImageMessage:msg];
 }
 
-+ (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member {
++ (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member fromGroup:(int64_t)groupID{
     IMImageMessage *msg = [[IMImageMessage alloc]init];
     msg.image = image;
     msg.otherMember = member;
+    msg.groupID = groupID;
     
     [[IMImageMessageSender sharedInstance]addImageMessage:msg];
 }

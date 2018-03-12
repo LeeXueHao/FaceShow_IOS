@@ -37,6 +37,7 @@
     topic.topicID = self.topicId.longLongValue;
     topic.channel = [IMConfig topicForTopicID:self.topicId.longLongValue];
     topic.name = self.topicName;
+    topic.group = self.topicGroup;
     topic.topicChange = self.topicChange.longLongValue;
     topic.latestMsgId = self.latestMsgId.longLongValue;
     NSMutableArray *members = [NSMutableArray array];
