@@ -10,7 +10,7 @@
 
 @implementation ScanClazsCodeRequest
 - (void)updateRequestUrlAndParams {
-    NSString *completeUrl = self.url;
+    NSString *completeUrl = [self.url stringByAppendingString:@"&from=yxbApp"];
     if ([UserManager sharedInstance].loginStatus) {
         completeUrl = [NSString stringWithFormat:@"%@&token=%@",completeUrl,[UserManager sharedInstance].userModel.token];
     }
