@@ -59,11 +59,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    if (!isEmpty(self.presentingViewController)) {
-        [self nyx_setupLeftWithTitle:@"返回" action:^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }];
-    }
     
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusDenied) {
