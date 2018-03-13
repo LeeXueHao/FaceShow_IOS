@@ -66,6 +66,9 @@
         make.edges.mas_equalTo(0);
     }];
     self.emptyView.hidden = YES;
+    if (self.attachmentInfos.count == 0) {
+        self.emptyView.hidden = NO;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
