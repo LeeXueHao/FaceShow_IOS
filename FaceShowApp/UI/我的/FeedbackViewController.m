@@ -73,16 +73,17 @@
     [[self.textView rac_textSignal]subscribeNext:^(NSString *text) {
         STRONG_SELF
         if (text.length>200) {
-            self.textView.text = [text substringWithRange:NSMakeRange(0, 200)];
+            NSString *realText = [text substringWithRange:NSMakeRange(0, 200)];
+                    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                    paragraphStyle.lineSpacing = 4;
+                    NSDictionary *attributes = @{
+                                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                                 NSParagraphStyleAttributeName:paragraphStyle
+                                                 };
+                    self.textView.attributedText = [[NSAttributedString alloc] initWithString:realText attributes:attributes];
+            
         }
         self.rightButton.enabled = text.length>0;
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineSpacing = 4;
-        NSDictionary *attributes = @{
-                                     NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                     NSParagraphStyleAttributeName:paragraphStyle
-                                     };
-        self.textView.attributedText = [[NSAttributedString alloc] initWithString:self.textView.text attributes:attributes];
     }];
 }
 
