@@ -15,10 +15,7 @@
     return self.sender.memberID == [[IMManager sharedInstance] currentMember].memberID;
 }
 
-- (NSString *)viewUrl {
-    if (self.sendState == MessageSendState_Success) {
-        return _viewUrl;
-    }
-    return [[[IMImageMessageSender sharedInstance] imageCacheFolderPath]stringByAppendingPathComponent:_viewUrl];
+- (UIImage *)imageWaitForSending {
+    return [[IMImageMessageSender sharedInstance]cacheImageWithMessageUniqueID:self.uniqueID];
 }
 @end

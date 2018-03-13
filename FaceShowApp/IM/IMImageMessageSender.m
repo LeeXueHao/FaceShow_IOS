@@ -50,8 +50,11 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     self.imageFolderPath = path;
 }
 
-- (NSString *)imageCacheFolderPath {
-    return self.imageFolderPath;
+- (UIImage *)cacheImageWithMessageUniqueID:(NSString *)uniqueID {
+    NSString *path = [self.imageFolderPath stringByAppendingPathComponent:uniqueID];
+    NSData *imageData = [[NSData alloc]initWithContentsOfFile:path];
+    UIImage *image = [[UIImage alloc]initWithData:imageData];
+    return image;
 }
 
 - (void)addImageMessage:(IMImageMessage *)msg {
@@ -81,7 +84,6 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     NSData *data = UIImageJPEGRepresentation(image, 1);
     NSString *path = [self.imageFolderPath stringByAppendingPathComponent:uniqueID];
     [data writeToFile:path atomically:YES];
-    message.viewUrl = uniqueID;
     return message;
 }
 
@@ -146,6 +148,8 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
             [self messageSentFailed:imageMsg];
         }else {
             [[IMDatabaseManager sharedInstance]saveMessage:msg];
+            NSString *path = [self.imageFolderPath stringByAppendingPathComponent:imageMsg.uniqueID];
+            [[NSFileManager defaultManager]removeItemAtPath:path error:nil];
         }
         [self sendNext];
     }];

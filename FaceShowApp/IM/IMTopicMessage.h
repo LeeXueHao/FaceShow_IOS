@@ -37,4 +37,5 @@ typedef NS_ENUM(int64_t, MessageSendState) {
 @property (nonatomic, strong) IMMember *sender;
 
 - (BOOL)isFromCurrentUser;
+- (UIImage *)imageWaitForSending;
 @end

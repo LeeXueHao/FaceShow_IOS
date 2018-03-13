@@ -14,5 +14,5 @@
 
 - (void)addImageMessage:(IMImageMessage *)msg;
 
-- (NSString *)imageCacheFolderPath;
+- (UIImage *)cacheImageWithMessageUniqueID:(NSString *)uniqueID;
 @end
