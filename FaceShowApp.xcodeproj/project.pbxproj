@@ -216,6 +216,7 @@
 		7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */; };
 		7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B2752027F6050067E242 /* HeadImageClipViewController.m */; };
 		7C66B27E2027F8510067E242 /* QAPhotoClipBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */; };
+		7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6ECFC42057CD82008D0E8A /* ChatPlaceViewController.m */; };
 		7C6EE547200736D200B47892 /* ImageAttachmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE546200736D200B47892 /* ImageAttachmentView.m */; };
 		7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */; };
 		7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE54F20073E3000B47892 /* AlbumListViewController.m */; };
@@ -779,6 +780,8 @@
 		7C66B2752027F6050067E242 /* HeadImageClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipViewController.m; sourceTree = "<group>"; };
 		7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAPhotoClipBottomView.m; sourceTree = "<group>"; };
 		7C66B27D2027F8510067E242 /* QAPhotoClipBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAPhotoClipBottomView.h; sourceTree = "<group>"; };
+		7C6ECFC32057CD82008D0E8A /* ChatPlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPlaceViewController.h; sourceTree = "<group>"; };
+		7C6ECFC42057CD82008D0E8A /* ChatPlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatPlaceViewController.m; sourceTree = "<group>"; };
 		7C6EE545200736D200B47892 /* ImageAttachmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentView.h; sourceTree = "<group>"; };
 		7C6EE546200736D200B47892 /* ImageAttachmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAttachmentView.m; sourceTree = "<group>"; };
 		7C6EE5482007396000B47892 /* ImageAttachmentContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentContainerView.h; sourceTree = "<group>"; };
@@ -2373,6 +2376,8 @@
 				E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */,
 				E91E5D242047B1F900052FBA /* TestIMViewController.h */,
 				E91E5D202047B1F800052FBA /* TestIMViewController.m */,
+				7C6ECFC32057CD82008D0E8A /* ChatPlaceViewController.h */,
+				7C6ECFC42057CD82008D0E8A /* ChatPlaceViewController.m */,
 			);
 			path = IM;
 			sourceTree = "<group>";
@@ -2782,6 +2787,7 @@
 				921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */,
 				7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */,
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
+				7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */,
 				7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */,

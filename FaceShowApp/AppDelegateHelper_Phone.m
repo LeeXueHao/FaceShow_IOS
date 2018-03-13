@@ -27,6 +27,7 @@
 #import "UserPromptsManager.h"
 #import "YXDrawerViewController.h"
 #import "ChatListViewController.h"
+#import "ChatPlaceViewController.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -74,6 +75,7 @@
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
     ChatListViewController *chatVC = [[ChatListViewController alloc]init];
+//    ChatPlaceViewController *chatVC = [[ChatPlaceViewController alloc]init];
     chatVC.title = @"聊聊";
     [self configTabbarItem:chatVC.tabBarItem image:@"聊天icon正常态" selectedImage:@"聊天icon点击态"];
     FSNavigationController *chatNavi = [[FSNavigationController alloc] initWithRootViewController:chatVC];
