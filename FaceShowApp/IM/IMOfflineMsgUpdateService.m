@@ -28,8 +28,14 @@
     WEAK_SELF
     [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:self.topicID startID:self.startID asending:YES dataNum:20 completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
         STRONG_SELF
-        BOOL hasMore = msgs.count>0;
+        if (error) {
+            return;
+        }
+        BOOL hasMore = msgs.count==20;
         for (IMTopicMessage *message in msgs) {
+            if (message.messageID == self.startID) {
+                continue;
+            }
             IMTopicMessage *dbMsg = [[IMDatabaseManager sharedInstance]findMessageWithUniqueID:message.uniqueID];
             if (dbMsg) {
                 hasMore = NO;

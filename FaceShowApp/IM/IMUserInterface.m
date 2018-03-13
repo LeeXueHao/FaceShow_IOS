@@ -106,15 +106,18 @@
         if (array.count > 0) {
             completeBlock(array, YES);
         }else {
-            [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:topicID startID:msg.messageID asending:NO dataNum:count+1 completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
-                BOOL more = msgs.count>count;
-                if (more) {
-                    NSMutableArray *array = [NSMutableArray arrayWithArray:msgs];
-                    [array removeLastObject];
-                    completeBlock(array, more);
-                }else {
-                    completeBlock(msgs, more);
+            // 有真实messageID时，返回的消息会包含当前的message，所以需要多取一个
+            NSInteger offset = msg.messageID!=INT64_MAX;
+            [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:topicID startID:msg.messageID asending:NO dataNum:count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
+                BOOL more = (msgs.count-offset)>count;
+                NSMutableArray *array = [NSMutableArray arrayWithArray:msgs];
+                if (offset > 0) {
+                    [array removeObjectAtIndex:0];
                 }
+                if (more) {
+                    [array removeLastObject];
+                }
+                completeBlock(array, more);
             }];
         }
     }];
