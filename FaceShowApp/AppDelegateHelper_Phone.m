@@ -142,7 +142,8 @@
     if (![UserManager sharedInstance].loginStatus) {
         return;
     }
-    FSTabBarController *tabVC = (FSTabBarController *)self.window.rootViewController;
+    YXDrawerViewController *drawer = (YXDrawerViewController *)self.window.rootViewController;
+    FSTabBarController *tabVC = (FSTabBarController *)drawer.paneViewController;
     FSNavigationController *navi = tabVC.selectedViewController;
     [navi popToRootViewControllerAnimated:NO];
     tabVC.selectedIndex = 0;
