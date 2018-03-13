@@ -303,6 +303,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 }
                 self.classCodeItem = retItem;
                 if (error) {
+                    NSArray *paraStrings = [[stringValue componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];
+                    for (NSString *paraString in paraStrings) {
+                        NSString *name = [paraString componentsSeparatedByString:@"="].firstObject;
+                        NSString *value = [paraString componentsSeparatedByString:@"="].lastObject;
+                        if ([name isEqualToString:@"clazsId"]) {
+                            ClassCodeItem_data *data = [[ClassCodeItem_data alloc]init];
+                            data.clazsId = value;
+                            self.classCodeItem.data = data;
+                            break;
+                        }
+                    }
                     [self showAlertWithMessage:error.localizedDescription];
                 }else {
                     [self showAlertWithMessage:[NSString stringWithFormat:@"成功加入【%@】",self.classCodeItem.data.clazsInfo.clazsName]];
