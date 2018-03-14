@@ -81,7 +81,7 @@
         NSString *desc = item.data.questionGroup.desc;
         CGFloat height = [QuestionnaireHeaderView heightForTitle:title desc:desc];
         QuestionnaireHeaderView *headerView = [[QuestionnaireHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
-        headerView.title = self.name;
+        headerView.title = title;
         headerView.desc = desc;
         self.tableView.tableHeaderView = headerView;
     }];
