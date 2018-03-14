@@ -14,7 +14,6 @@
 #import "IMUserInterface.h"
 #import "IMRequestManager.h"
 #import "ChatViewController.h"
-#import "TestIMViewController.h"
 #import "IMTimeHandleManger.h"
 #import "YXDrawerController.h"
 

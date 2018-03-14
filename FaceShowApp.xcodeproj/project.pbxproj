@@ -337,8 +337,6 @@
 		E91E5D1B2047B1C300052FBA /* ContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D192047B1C200052FBA /* ContactsCell.m */; };
 		E91E5D262047B1F900052FBA /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D1C2047B1F700052FBA /* ChatViewController.m */; };
 		E91E5D272047B1F900052FBA /* IMTimeHandleManger.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */; };
-		E91E5D282047B1F900052FBA /* TestIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D202047B1F800052FBA /* TestIMViewController.m */; };
-		E91E5D292047B1F900052FBA /* IMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D212047B1F800052FBA /* IMMessageCell.m */; };
 		E91E5D2A2047B1F900052FBA /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D222047B1F800052FBA /* ChatListViewController.m */; };
 		E91E5D412047B22800052FBA /* IMTextMessageLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D2C2047B22400052FBA /* IMTextMessageLeftCell.m */; };
 		E91E5D422047B22800052FBA /* IMTextMessageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D2F2047B22400052FBA /* IMTextMessageBaseCell.m */; };
@@ -1017,12 +1015,8 @@
 		E91E5D1D2047B1F800052FBA /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
 		E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTimeHandleManger.m; sourceTree = "<group>"; };
 		E91E5D1F2047B1F800052FBA /* IMTimeHandleManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTimeHandleManger.h; sourceTree = "<group>"; };
-		E91E5D202047B1F800052FBA /* TestIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestIMViewController.m; sourceTree = "<group>"; };
-		E91E5D212047B1F800052FBA /* IMMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMMessageCell.m; sourceTree = "<group>"; };
 		E91E5D222047B1F800052FBA /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		E91E5D232047B1F900052FBA /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		E91E5D242047B1F900052FBA /* TestIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestIMViewController.h; sourceTree = "<group>"; };
-		E91E5D252047B1F900052FBA /* IMMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMMessageCell.h; sourceTree = "<group>"; };
 		E91E5D2C2047B22400052FBA /* IMTextMessageLeftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTextMessageLeftCell.m; sourceTree = "<group>"; };
 		E91E5D2D2047B22400052FBA /* IMTextMessageBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTextMessageBaseCell.h; sourceTree = "<group>"; };
 		E91E5D2E2047B22400052FBA /* ChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListCell.h; sourceTree = "<group>"; };
@@ -2365,17 +2359,10 @@
 		E91E5D102047B0FA00052FBA /* IM */ = {
 			isa = PBXGroup;
 			children = (
-				E91E5D2B2047B1FE00052FBA /* View */,
-				E91E5D1D2047B1F800052FBA /* ChatListViewController.h */,
-				E91E5D222047B1F800052FBA /* ChatListViewController.m */,
-				E91E5D232047B1F900052FBA /* ChatViewController.h */,
-				E91E5D1C2047B1F700052FBA /* ChatViewController.m */,
-				E91E5D252047B1F900052FBA /* IMMessageCell.h */,
-				E91E5D212047B1F800052FBA /* IMMessageCell.m */,
 				E91E5D1F2047B1F800052FBA /* IMTimeHandleManger.h */,
 				E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */,
-				E91E5D242047B1F900052FBA /* TestIMViewController.h */,
-				E91E5D202047B1F800052FBA /* TestIMViewController.m */,
+				E91E5D2B2047B1FE00052FBA /* View */,
+				E99706472058D2590096DAB0 /* Controller */,
 				7C6ECFC32057CD82008D0E8A /* ChatPlaceViewController.h */,
 				7C6ECFC42057CD82008D0E8A /* ChatPlaceViewController.m */,
 			);
@@ -2404,9 +2391,6 @@
 				E91E5D352047B22500052FBA /* IMInputView.m */,
 				E90C515B204FD6DE0008F92A /* IMMessageTableView.h */,
 				E90C515A204FD6DE0008F92A /* IMMessageTableView.m */,
-				E91E5D402047B22700052FBA /* IMMessageCellDelegate.h */,
-				E91E5D3B2047B22600052FBA /* IMMessageCellFactory.h */,
-				E91E5D3E2047B22700052FBA /* IMMessageCellFactory.m */,
 				E91E5D332047B22500052FBA /* IMMessageMenuItem.h */,
 				E91E5D342047B22500052FBA /* IMMessageMenuItem.m */,
 				E91E5D372047B22600052FBA /* IMMessageMenuView.h */,
@@ -2534,6 +2518,9 @@
 		E95ED5D72052236C006ECCEA /* IMMessageCell */ = {
 			isa = PBXGroup;
 			children = (
+				E91E5D402047B22700052FBA /* IMMessageCellDelegate.h */,
+				E91E5D3B2047B22600052FBA /* IMMessageCellFactory.h */,
+				E91E5D3E2047B22700052FBA /* IMMessageCellFactory.m */,
 				E91E5D3C2047B22700052FBA /* IMMessageBaseCell.h */,
 				E91E5D302047B22500052FBA /* IMMessageBaseCell.m */,
 				E91E5D2D2047B22400052FBA /* IMTextMessageBaseCell.h */,
@@ -2559,6 +2546,17 @@
 				E90C5158204FC4C30008F92A /* IMChatViewModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E99706472058D2590096DAB0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E91E5D1D2047B1F800052FBA /* ChatListViewController.h */,
+				E91E5D222047B1F800052FBA /* ChatListViewController.m */,
+				E91E5D232047B1F900052FBA /* ChatViewController.h */,
+				E91E5D1C2047B1F700052FBA /* ChatViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		F7524D491FA851EC00CC6793 /* OpenGL */ = {
@@ -2761,7 +2759,6 @@
 				7CBC5BC1204D3325004ACA04 /* CompleteUserInfoViewController.m in Sources */,
 				E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
-				E91E5D282047B1F900052FBA /* TestIMViewController.m in Sources */,
 				E90C5159204FC4C30008F92A /* IMChatViewModel.m in Sources */,
 				9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
@@ -2910,7 +2907,6 @@
 				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
 				7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */,
 				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
-				E91E5D292047B1F900052FBA /* IMMessageCell.m in Sources */,
 				7C24E1E61F72041D00A6921B /* GetCurrentClazsRequest.m in Sources */,
 				7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */,
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
