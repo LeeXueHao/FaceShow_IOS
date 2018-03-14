@@ -23,6 +23,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
 @property (nonatomic, strong) NSMutableArray<IMImageMessage *> *msgArray;
 @property (nonatomic, assign) BOOL isMsgSending;
 @property (nonatomic, strong) NSString *imageFolderPath;
+@property (nonatomic, strong) NSMutableArray *successMsgUniqueIDArray;
 @end
 
 @implementation IMImageMessageSender
@@ -32,8 +33,10 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     dispatch_once(&onceToken, ^{
         manager = [[IMImageMessageSender alloc] init];
         manager.msgArray = [NSMutableArray array];
+        manager.successMsgUniqueIDArray = [NSMutableArray array];
         manager.isMsgSending = NO;
         [manager createImageCacheFolderIfNotExist];
+        [manager setupObserver];
     });
     return manager;
 }
@@ -48,6 +51,17 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
         [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
     }
     self.imageFolderPath = path;
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillResignActiveNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        for (NSString *uniqueID in self.successMsgUniqueIDArray) {
+            NSString *path = [self.imageFolderPath stringByAppendingPathComponent:uniqueID];
+            [[NSFileManager defaultManager]removeItemAtPath:path error:nil];
+        }
+    }];
 }
 
 - (UIImage *)cacheImageWithMessageUniqueID:(NSString *)uniqueID {
@@ -148,8 +162,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
             [self messageSentFailed:imageMsg];
         }else {
             [[IMDatabaseManager sharedInstance]saveMessage:msg];
-            NSString *path = [self.imageFolderPath stringByAppendingPathComponent:imageMsg.uniqueID];
-            [[NSFileManager defaultManager]removeItemAtPath:path error:nil];
+            [self.successMsgUniqueIDArray addObject:imageMsg.uniqueID];
         }
         [self sendNext];
     }];
