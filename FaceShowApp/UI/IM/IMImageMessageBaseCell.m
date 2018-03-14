@@ -58,7 +58,6 @@
     
     [self.messageImageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
-//        make.size.mas_equalTo(CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)).priorityHigh();
     }];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
