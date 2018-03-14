@@ -72,6 +72,7 @@
         GetCurrentClazsRequestItem *item = retItem;
         [UserManager sharedInstance].userModel.projectClassInfo = item;
         [[UserManager sharedInstance]saveData];
+        [UserManager sharedInstance].hasUsedBefore = YES;
         [[NSNotificationCenter defaultCenter]postNotificationName:kClassDidSelectNotification object:nil];
     }];
 }

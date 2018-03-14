@@ -47,6 +47,14 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
     [self saveData];
 }
 
+- (void)setHasUsedBefore:(BOOL)hasUsedBefore {
+    [[NSUserDefaults standardUserDefaults]setBool:hasUsedBefore forKey:@"has_used_before"];
+}
+
+- (BOOL)hasUsedBefore {
+    return [[NSUserDefaults standardUserDefaults]boolForKey:@"has_used_before"];
+}
+
 #pragma mark - 
 - (void)saveData {
     NSString *json = [self.userModel toJSONString];

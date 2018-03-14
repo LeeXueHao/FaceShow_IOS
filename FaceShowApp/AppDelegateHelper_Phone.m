@@ -28,6 +28,7 @@
 #import "YXDrawerViewController.h"
 #import "ChatListViewController.h"
 #import "ChatPlaceViewController.h"
+#import "ClassSelectionViewController.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -43,6 +44,9 @@
     }else if (![UserManager sharedInstance].loginStatus) {
         return [self loginViewController];
     }else {
+        if (![UserManager sharedInstance].hasUsedBefore) {
+            return [self classSelectionViewController];
+        }
         return [self mainViewController];
     }
 }
@@ -54,6 +58,11 @@
 
 - (UIViewController *)loginViewController {
     LoginViewController *vc = [[LoginViewController alloc] init];
+    return [[FSNavigationController alloc] initWithRootViewController:vc];
+}
+
+- (UIViewController *)classSelectionViewController {
+    ClassSelectionViewController *vc = [[ClassSelectionViewController alloc] init];
     return [[FSNavigationController alloc] initWithRootViewController:vc];
 }
 
@@ -126,7 +135,7 @@
 - (void)handleLoginSuccess {
     [self.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
     self.window.rootViewController.view.hidden = YES;
-    self.window.rootViewController = [self mainViewController];
+    self.window.rootViewController = [self rootViewController];
 }
 
 - (void)handleLogoutSuccess {
