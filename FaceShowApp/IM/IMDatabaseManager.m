@@ -316,11 +316,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     for (IMTopic *topic in topicArray) {
         if (topic.type == TopicType_Private) {
             for (IMMember *targetMember in topic.members) {
-#warning 此处比较两个menmber为同一个的决定属性 需要看通讯录的数据结构再确定
                 if (member.memberID && targetMember.memberID == member.memberID) {
-                    return topic;
-                }
-                if (targetMember.userID == member.userID) {
                     return topic;
                 }
             }

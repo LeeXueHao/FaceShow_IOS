@@ -58,7 +58,7 @@
     
     [self.messageImageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)).priorityHigh();
+//        make.size.mas_equalTo(CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)).priorityHigh();
     }];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -80,23 +80,19 @@
     if (self.messageImageview.image) {
         return;
     }
+    CGSize size;
+    if (model.message.height<= 0 ) {
+        size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
+    }else {
+        size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    }
+    [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
+    }];
     if ([message imageWaitForSending]) {
         self.messageImageview.image = [message imageWaitForSending];
-        CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-        [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
-        }];
     }else {
-        WEAK_SELF
-        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            STRONG_SELF
-            CGSize size = [self.messageImageview.image nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-            [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
-            }];
-//            [self updateImageHeightWithModel:model imageHeight:size.height];
-//            [self layoutIfNeeded];
-        }];
+        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
     }
 }
 

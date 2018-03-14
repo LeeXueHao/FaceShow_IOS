@@ -161,11 +161,14 @@
     [headerView addSubview:self.activity];
     self.tableView.tableHeaderView = headerView;
     headerView.hidden = YES;
+    
+    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+    self.tableView.tableFooterView = footerView;
 }
 
 - (void)setupData {
     WEAK_SELF
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:5 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 asending:NO completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         self.dataArray = [NSMutableArray array];
         for (IMTopicMessage *msg in array) {
@@ -315,21 +318,6 @@
     IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self.dataArray[indexPath.row]];
     cell.model = self.dataArray[indexPath.row];
     cell.delegate = self;
-    //测试图片
-    //    IMImageMessageLeftCell *cell = [[IMImageMessageLeftCell alloc]init];
-    //    IMTopicMessage *message = [[IMTopicMessage alloc]init];
-    //    message.type = MessageType_Image;
-    //    IMMember *mem = [[IMMember alloc]init];
-    //    mem.name = @"发送者";
-    //    mem.avatar = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226683021&di=f4f8c422c2a55a2f0fdeeecb9a51060b&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F68%2F11%2F35W58PICzbv_1024.jpg";
-    //    message.sender = mem;
-    //    message.sender.name = @"发送者";
-    //    message.sendState = MessageSendState_Sending;
-    //    message.thumbnail = @"http://img5.imgtn.bdimg.com/it/u=4005232556,476955445&fm=27&gp=0.jpg";
-    //    //@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520226599946&di=58056cbae9f7d5b2bda8c3b7cae51652&imgtype=0&src=http%3A%2F%2Fpic54.nipic.com%2Ffile%2F20141201%2F13740598_112413393000_2.jpg";
-    //    cell.message = message;
-    //    cell.topicType = TopicType_Group;
-    //    cell.delegate = self;
     return cell;
 }
 
@@ -354,7 +342,7 @@
     [self.activity startAnimating];
     self.isRefresh = YES;
     IMChatViewModel *model = self.dataArray.firstObject;
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:5 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.hasMore = hasMore;
@@ -491,12 +479,6 @@
     
     [self.menuView showInView:self.tableView  withRect:rect];
 }
-
-//- (void)messageCellUpdateHeight:(IMChatViewModel *)model {
-//    NSInteger row = [self.dataArray indexOfObject:model];
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//}
 
 - (IMMessageMenuView *)menuView {
     if (_menuView == nil) {
