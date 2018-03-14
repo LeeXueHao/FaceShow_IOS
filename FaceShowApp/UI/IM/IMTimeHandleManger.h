@@ -37,11 +37,10 @@ typedef NS_ENUM(int64_t,IMTimeType) {
  @param originalTime 要转化的时间戳
  @return 符合要求的字符串
  0.当天的消息 显示上/下午+收发消息的时间 (注没日期)
- 1.消息超过1天，小于2天，显示昨天+收发消息的时间（注没日期）
- 2.消息超过2天、小于1周，显示星期+收发消息的时间（注没日期）
- 3.消息大于1周，显示手机收发的时间（注 日期+时间)
- 4.1年内的,显示手机收发的时间（注 日期+时间)
- 5.超过1年的,显示手机收发的时间（注 年+日期+时间)
+ 1.消息超过1天、小于1周，显示星期+收发消息的时间（注没日期）
+ 2.消息大于1周，显示手机收发的时间（注 日期+时间)
+ 3.1年内的,显示手机收发的时间（注 日期+时间)
+ 4.超过1年的,显示手机收发的时间（注 年+日期+时间)
  */
 + (NSString *)displayedTimeStringComparedCurrentTime:(NSTimeInterval)currentTime
                                         WithOriginalTime:(NSTimeInterval)originalTime;
