@@ -118,7 +118,7 @@
         [self.imageHandler pickImageWithMaxCount:9 completeBlock:^(NSArray *array) {
             STRONG_SELF
             for (UIImage *image in array) {
-               UIImage *resultImage = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
+                UIImage *resultImage = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
                 if (self.topic) {
                     [IMUserInterface sendImageMessageWithImage:resultImage topicID:self.topic.topicID];
                 }else {
@@ -146,7 +146,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.estimatedRowHeight = 30.f;
+    self.tableView.estimatedRowHeight = 0.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

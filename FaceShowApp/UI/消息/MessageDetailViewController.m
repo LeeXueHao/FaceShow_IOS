@@ -131,6 +131,7 @@
     
     self.detailImageView = [[UIImageView alloc] init];
     self.detailImageView.userInteractionEnabled = YES;
+    self.detailImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:self.detailImageView];
     [self.detailImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.detailLabel.mas_bottom).offset(22);

@@ -24,7 +24,7 @@
     [super setupUI];
     
     self.messageImageview = [[UIImageView alloc]init];
-    self.messageImageview.contentMode = UIViewContentModeScaleToFill;
+    self.messageImageview.contentMode = UIViewContentModeScaleAspectFill;
     self.messageImageview.backgroundColor = [UIColor redColor];
     self.messageImageview.layer.cornerRadius = 6.0f;
     self.messageImageview.clipsToBounds = YES;
@@ -120,7 +120,12 @@
         height += 0;
     }
     //聊天内容图片的高
-    CGSize size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    CGSize size;
+    if (model.message.height<= 0 ) {
+        size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
+    }else {
+        size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    }
     height += size.height;
     
     return height;

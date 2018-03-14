@@ -135,10 +135,8 @@
 
 - (UIImage *)nyx_aspectFitImageWithSize:(CGSize)size {
     CGSize scaledSize = [self nyx_aspectFitSizeWithSize:size];
-    CGFloat x = (size.width-scaledSize.width)/2;
-    CGFloat y = (size.height-scaledSize.height)/2;
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    [self drawInRect:CGRectMake(x, y, scaledSize.width, scaledSize.height)];
+    UIGraphicsBeginImageContextWithOptions(scaledSize, NO, 0);
+    [self drawInRect:CGRectMake(0, 0, scaledSize.width, scaledSize.height)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return scaledImage;
