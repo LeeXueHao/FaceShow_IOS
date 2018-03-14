@@ -45,7 +45,20 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.centerY.mas_equalTo(0);
+        make.top.mas_equalTo(15);
+    }];
+    
+    self.descLabel = [[UILabel alloc]init];
+    self.descLabel.backgroundColor = [UIColor whiteColor];
+    self.descLabel.font = [UIFont systemFontOfSize:13];
+    self.descLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.descLabel.numberOfLines = 0;
+    [self.bgView addSubview:self.descLabel];
+    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(5.f);
+//        make.bottom.mas_equalTo(-20);
     }];
 }
 
@@ -97,26 +110,4 @@
     return size.height + 50 + 10;
 }
 
-- (UILabel *)descLabel {
-    if (!_descLabel) {
-        _descLabel = [[UILabel alloc]init];
-        _descLabel.backgroundColor = [UIColor whiteColor];
-        _descLabel.font = [UIFont systemFontOfSize:13];
-        _descLabel.textColor = [UIColor colorWithHexString:@"333333"];
-        _descLabel.numberOfLines = 0;
-        [self.bgView addSubview:_descLabel];
-        [_descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.right.mas_equalTo(-15);
-            make.top.equalTo(self.titleLabel.mas_bottom).offset(5.f);
-            make.bottom.mas_equalTo(-20);
-        }];
-        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(15);
-        }];
-    }
-    return _descLabel;
-}
 @end
