@@ -91,6 +91,8 @@ typedef GPB_ENUM(TopicMsg_ContentDataProto_FieldNumber) {
   TopicMsg_ContentDataProto_FieldNumber_Rid = 2,
   TopicMsg_ContentDataProto_FieldNumber_Thumbnail = 3,
   TopicMsg_ContentDataProto_FieldNumber_ViewURL = 4,
+  TopicMsg_ContentDataProto_FieldNumber_Width = 5,
+  TopicMsg_ContentDataProto_FieldNumber_Height = 6,
 };
 
 @interface TopicMsg_ContentDataProto : GPBMessage
@@ -102,6 +104,10 @@ typedef GPB_ENUM(TopicMsg_ContentDataProto_FieldNumber) {
 @property(nonatomic, readwrite, copy, null_resettable) NSString *thumbnail;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *viewURL;
+
+@property(nonatomic, readwrite) int32_t width;
+
+@property(nonatomic, readwrite) int32_t height;
 
 @end
 

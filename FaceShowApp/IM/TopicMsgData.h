@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSString<Optional> *msg;
 @property (nonatomic, strong) NSString<Optional> *thumbnail;
 @property (nonatomic, strong) NSString<Optional> *viewUrl;
+@property (nonatomic, strong) NSString<Optional> *width;
+@property (nonatomic, strong) NSString<Optional> *height;
 @end
 
 @protocol TopicMsgData_topicMsg

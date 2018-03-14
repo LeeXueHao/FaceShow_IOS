@@ -168,6 +168,8 @@
     [self.saveImageMsgRequest stopRequest];
     self.saveImageMsgRequest = [[SaveImageMsgRequest alloc]init];
     self.saveImageMsgRequest.topicId = [NSString stringWithFormat:@"%@",@(msg.topicID)];
+    self.saveImageMsgRequest.width = [NSString stringWithFormat:@"%@",@(msg.width)];
+    self.saveImageMsgRequest.height = [NSString stringWithFormat:@"%@",@(msg.height)];
     self.saveImageMsgRequest.rid = msg.resourceID;
     self.saveImageMsgRequest.reqId = msg.uniqueID;
     [self.saveImageMsgRequest startRequestWithRetClass:[SaveImageMsgRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {

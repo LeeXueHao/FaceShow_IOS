@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="IMMemberEntity" representedClassName="IMMemberEntity" syncable="YES" codeGenerationType="class">
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="memberID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -21,6 +21,7 @@
     </entity>
     <entity name="IMTopicMessageEntity" representedClassName="IMTopicMessageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="messageID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="primaryKey" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sendState" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
@@ -31,12 +32,13 @@
         <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="viewUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="curMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMMemberEntity" syncable="YES"/>
         <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMMemberEntity" syncable="YES"/>
     </entity>
     <elements>
         <element name="IMMemberEntity" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="IMTopicEntity" positionX="-36" positionY="9" width="128" height="210"/>
-        <element name="IMTopicMessageEntity" positionX="-54" positionY="-9" width="128" height="240"/>
+        <element name="IMTopicMessageEntity" positionX="-54" positionY="-9" width="128" height="270"/>
     </elements>
 </model>

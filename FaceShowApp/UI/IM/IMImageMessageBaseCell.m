@@ -71,7 +71,10 @@
     WEAK_SELF
     [[self.model                                                                                                      rac_valuesForKeyPath:@"percent" observer:self] subscribeNext:^(id x) {
         STRONG_SELF
-        self.progressView.progress = [NSString stringWithFormat:@"%@",x];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.progressView.progress = [NSString stringWithFormat:@"%@",x];
+        });
+        
     }];
     [self updateSendStateWithMessage:message];
     if (self.messageImageview.image) {
@@ -91,7 +94,7 @@
             [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
             }];
-            [self updateImageHeightWithModel:model imageHeight:size.height];
+//            [self updateImageHeightWithModel:model imageHeight:size.height];
 //            [self layoutIfNeeded];
         }];
     }
@@ -100,13 +103,10 @@
 - (void)updateSendStateWithMessage:(IMTopicMessage *)message {
     if (message.sendState == MessageSendState_Sending) {
         self.progressView.hidden = NO;
-        self.stateButton.hidden = YES;
     }else if (message.sendState == MessageSendState_Success) {
         self.progressView.hidden = YES;
-        self.stateButton.hidden = YES;
     }else {
         self.progressView.hidden = YES;
-        self.stateButton.hidden = NO;
     }
 }
 
@@ -120,29 +120,30 @@
         height += 0;
     }
     //聊天内容图片的高
-    __block CGSize size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
-    if (model.message.sendState != MessageSendState_Success) {
-        size = [[model.message imageWaitForSending] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-    }
-    height += size.height;
+    height += model.message.height;
+//    __block CGSize size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
+//    if (model.message.sendState != MessageSendState_Success) {
+//        size = [[model.message imageWaitForSending] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+//    }
+//    height += size.height;
     
     return height;
 }
 
-- (void)updateImageHeightWithModel:(IMChatViewModel *)model imageHeight:(CGFloat)imageHeight {
-    CGFloat height = 15;
-    //时间的高度 放到外面进行
-    //名字的高度
-    if (model.topicType == TopicType_Group) {//群聊显示名字
-        height += 20;
-    }else {
-        height += 0;
-    }
-    //聊天内容图片的高
-    height += imageHeight;
-    self.model.height = height;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellUpdateHeight:)]) {
-        [self.delegate messageCellUpdateHeight:self.model];
-    }
-}
+//- (void)updateImageHeightWithModel:(IMChatViewModel *)model imageHeight:(CGFloat)imageHeight {
+//    CGFloat height = 15;
+//    //时间的高度 放到外面进行
+//    //名字的高度
+//    if (model.topicType == TopicType_Group) {//群聊显示名字
+//        height += 20;
+//    }else {
+//        height += 0;
+//    }
+//    //聊天内容图片的高
+//    height += imageHeight;
+//    self.model.height = height;
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellUpdateHeight:)]) {
+//        [self.delegate messageCellUpdateHeight:self.model];
+//    }
+//}
 @end

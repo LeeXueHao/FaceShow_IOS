@@ -29,6 +29,8 @@
     message.channel = [IMConfig topicForTopicID:message.topicID];
     message.uniqueID = self.reqId;
     message.messageID = self.msgId.longLongValue;
+    message.width = self.contentData.width.longLongValue;
+    message.height = self.contentData.height.longLongValue;
     
     IMMember *sender = [[IMMember alloc]init];
     sender.memberID = self.senderId.longLongValue;

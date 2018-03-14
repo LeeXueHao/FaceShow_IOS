@@ -33,7 +33,8 @@ typedef NS_ENUM(int64_t, MessageSendState) {
 @property (nonatomic, strong) NSString *channel;
 @property (nonatomic, strong) NSString *uniqueID;
 @property (nonatomic, assign) int64_t messageID;
-
+@property (nonatomic, assign) int64_t width;
+@property (nonatomic, assign) int64_t height;
 @property (nonatomic, strong) IMMember *sender;
 
 - (BOOL)isFromCurrentUser;

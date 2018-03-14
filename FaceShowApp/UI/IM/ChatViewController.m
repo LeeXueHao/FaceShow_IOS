@@ -27,6 +27,7 @@
 #import "UIImage+YXImage.h"
 #import "PhotoBrowserController.h"
 #import "IMChatViewModel.h"
+#import "UIImage+YXImage.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
@@ -115,12 +116,13 @@
     [self.imInputView setCameraButtonClickBlock:^{
         STRONG_SELF
         [self.imageHandler pickImageWithMaxCount:9 completeBlock:^(NSArray *array) {
-            DDLogDebug(@"发送图片消息");
+            STRONG_SELF
             for (UIImage *image in array) {
+               UIImage *resultImage = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
                 if (self.topic) {
-                    [IMUserInterface sendImageMessageWithImage:image topicID:self.topic.topicID];
+                    [IMUserInterface sendImageMessageWithImage:resultImage topicID:self.topic.topicID];
                 }else {
-                    [IMUserInterface sendImageMessageWithImage:image toMember:self.member fromGroup:self.groupId.integerValue];
+                    [IMUserInterface sendImageMessageWithImage:resultImage toMember:self.member fromGroup:self.groupId.integerValue];
                 }
             }
         }];
@@ -490,11 +492,11 @@
     [self.menuView showInView:self.tableView  withRect:rect];
 }
 
-- (void)messageCellUpdateHeight:(IMChatViewModel *)model {
-    NSInteger row = [self.dataArray indexOfObject:model];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-}
+//- (void)messageCellUpdateHeight:(IMChatViewModel *)model {
+//    NSInteger row = [self.dataArray indexOfObject:model];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//}
 
 - (IMMessageMenuView *)menuView {
     if (_menuView == nil) {

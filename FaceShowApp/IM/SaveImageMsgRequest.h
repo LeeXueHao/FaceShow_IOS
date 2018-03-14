@@ -17,4 +17,6 @@
 @property (nonatomic, strong) NSString *topicId;
 @property (nonatomic, strong) NSString *reqId;
 @property (nonatomic, strong) NSString *rid;
+@property (nonatomic, strong) NSString *width;
+@property (nonatomic, strong) NSString *height;
 @end

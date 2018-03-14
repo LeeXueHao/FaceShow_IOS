@@ -186,9 +186,13 @@ typedef struct TopicMsg__storage_ {
 @dynamic rid;
 @dynamic thumbnail;
 @dynamic viewURL;
+@dynamic width;
+@dynamic height;
 
 typedef struct TopicMsg_ContentDataProto__storage_ {
   uint32_t _has_storage_[1];
+  int32_t width;
+  int32_t height;
   NSString *msg;
   NSString *rid;
   NSString *thumbnail;
@@ -236,6 +240,24 @@ typedef struct TopicMsg_ContentDataProto__storage_ {
         .offset = (uint32_t)offsetof(TopicMsg_ContentDataProto__storage_, viewURL),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "width",
+        .dataTypeSpecific.className = NULL,
+        .number = TopicMsg_ContentDataProto_FieldNumber_Width,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(TopicMsg_ContentDataProto__storage_, width),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeInt32,
+      },
+      {
+        .name = "height",
+        .dataTypeSpecific.className = NULL,
+        .number = TopicMsg_ContentDataProto_FieldNumber_Height,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(TopicMsg_ContentDataProto__storage_, height),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =

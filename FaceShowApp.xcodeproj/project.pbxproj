@@ -372,7 +372,6 @@
 		E91E5DA92047B8E300052FBA /* GetTopicMsgsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D9B2047B8E100052FBA /* GetTopicMsgsRequest.m */; };
 		E91E5DAA2047B8E300052FBA /* IMRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D9D2047B8E100052FBA /* IMRequestManager.m */; };
 		E91E5DAB2047B8E300052FBA /* IMTextMessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DA12047B8E300052FBA /* IMTextMessageSender.m */; };
-		E91E5DB42047B90E00052FBA /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DAD2047B90D00052FBA /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E91E5DB52047B90E00052FBA /* MqttMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DAE2047B90D00052FBA /* MqttMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E91E5DB62047B90E00052FBA /* TopicGet.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DAF2047B90D00052FBA /* TopicGet.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DB32047B90D00052FBA /* ImMqtt.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -381,6 +380,7 @@
 		E91E5DC62047DB5500052FBA /* IMConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC52047DB5500052FBA /* IMConnectionManager.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
+		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1086,11 +1086,9 @@
 		E91E5DA02047B8E200052FBA /* IMTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTextMessage.h; sourceTree = "<group>"; };
 		E91E5DA12047B8E300052FBA /* IMTextMessageSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTextMessageSender.m; sourceTree = "<group>"; };
 		E91E5DAC2047B90D00052FBA /* ImMqtt.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImMqtt.pbobjc.h; sourceTree = "<group>"; };
-		E91E5DAD2047B90D00052FBA /* TopicMsg.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicMsg.pbobjc.m; sourceTree = "<group>"; };
 		E91E5DAE2047B90D00052FBA /* MqttMsg.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MqttMsg.pbobjc.m; sourceTree = "<group>"; };
 		E91E5DAF2047B90D00052FBA /* TopicGet.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicGet.pbobjc.m; sourceTree = "<group>"; };
 		E91E5DB02047B90D00052FBA /* MqttMsg.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MqttMsg.pbobjc.h; sourceTree = "<group>"; };
-		E91E5DB12047B90D00052FBA /* TopicMsg.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicMsg.pbobjc.h; sourceTree = "<group>"; };
 		E91E5DB22047B90D00052FBA /* TopicGet.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicGet.pbobjc.h; sourceTree = "<group>"; };
 		E91E5DB32047B90D00052FBA /* ImMqtt.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImMqtt.pbobjc.m; sourceTree = "<group>"; };
 		E91E5DB82047D6DE00052FBA /* YXGCDTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXGCDTimer.h; sourceTree = "<group>"; };
@@ -1102,6 +1100,8 @@
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
+		E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicMsg.pbobjc.m; sourceTree = "<group>"; };
+		E9970649205900070096DAB0 /* TopicMsg.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicMsg.pbobjc.h; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -2417,14 +2417,14 @@
 		E91E5D4E2047B6BE00052FBA /* Protos */ = {
 			isa = PBXGroup;
 			children = (
+				E9970649205900070096DAB0 /* TopicMsg.pbobjc.h */,
+				E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */,
 				E91E5DAC2047B90D00052FBA /* ImMqtt.pbobjc.h */,
 				E91E5DB32047B90D00052FBA /* ImMqtt.pbobjc.m */,
 				E91E5DB02047B90D00052FBA /* MqttMsg.pbobjc.h */,
 				E91E5DAE2047B90D00052FBA /* MqttMsg.pbobjc.m */,
 				E91E5DB22047B90D00052FBA /* TopicGet.pbobjc.h */,
 				E91E5DAF2047B90D00052FBA /* TopicGet.pbobjc.m */,
-				E91E5DB12047B90D00052FBA /* TopicMsg.pbobjc.h */,
-				E91E5DAD2047B90D00052FBA /* TopicMsg.pbobjc.m */,
 			);
 			name = Protos;
 			sourceTree = "<group>";
@@ -2811,7 +2811,6 @@
 				E90C5149204D41A80008F92A /* ContactsClassFilterCell.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
-				E91E5DB42047B90E00052FBA /* TopicMsg.pbobjc.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
 				E91E5D672047B86B00052FBA /* IMOfflineMsgUpdateService.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
@@ -3050,6 +3049,7 @@
 				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
 				7CBC5BB2204CEBB2004ACA04 /* RegistYxbRequest.m in Sources */,
 				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,
+				E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */,
 				7C2518AC1F68E5C70001B577 /* main.m in Sources */,
