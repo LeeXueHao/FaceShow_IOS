@@ -24,7 +24,7 @@
     [super setupUI];
     
     self.messageImageview = [[UIImageView alloc]init];
-    self.messageImageview.contentMode = UIViewContentModeScaleAspectFill;
+    self.messageImageview.contentMode = UIViewContentModeScaleToFill;
     self.messageImageview.backgroundColor = [UIColor redColor];
     self.messageImageview.layer.cornerRadius = 6.0f;
     self.messageImageview.clipsToBounds = YES;
@@ -120,30 +120,17 @@
         height += 0;
     }
     //聊天内容图片的高
-    height += model.message.height;
-//    __block CGSize size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
-//    if (model.message.sendState != MessageSendState_Success) {
-//        size = [[model.message imageWaitForSending] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
-//    }
-//    height += size.height;
+    CGSize size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    height += size.height;
     
     return height;
 }
 
-//- (void)updateImageHeightWithModel:(IMChatViewModel *)model imageHeight:(CGFloat)imageHeight {
-//    CGFloat height = 15;
-//    //时间的高度 放到外面进行
-//    //名字的高度
-//    if (model.topicType == TopicType_Group) {//群聊显示名字
-//        height += 20;
-//    }else {
-//        height += 0;
-//    }
-//    //聊天内容图片的高
-//    height += imageHeight;
-//    self.model.height = height;
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellUpdateHeight:)]) {
-//        [self.delegate messageCellUpdateHeight:self.model];
-//    }
-//}
+- (CGSize)aspectFitOriginalSize:(CGSize)originalSize withReferenceSize:(CGSize)referenceSize {
+    CGFloat scaleW = originalSize.width / referenceSize.width;
+    CGFloat scaleH = originalSize.height / referenceSize.height;
+    CGFloat scale = MAX(scaleH, scaleW);
+    CGSize scaledSize = CGSizeMake(originalSize.width / scale, originalSize.height / scale);
+    return scaledSize;
+}
 @end

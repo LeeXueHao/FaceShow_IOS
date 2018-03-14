@@ -17,4 +17,5 @@ static const CGFloat kMaxImageSizeWidth = 140;
 
 @property (nonatomic, strong) IMImageSendingProgressView *progressView;
 
+- (CGSize)aspectFitOriginalSize:(CGSize)originalSize withReferenceSize:(CGSize)referenceSize;
 @end

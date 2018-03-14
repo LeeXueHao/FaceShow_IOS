@@ -53,7 +53,12 @@
     CGFloat height = 15;
     //时间的高度 放到外面进行
     //聊天内容图片的高
-    CGSize size = [[UIImage imageNamed:@"背景图片"] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    CGSize size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    //    height += ;
+    //    __block CGSize size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
+    //    if (model.message.sendState != MessageSendState_Success) {
+    //        size = [[model.message imageWaitForSending] nyx_aspectFitSizeWithSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+    //    }
     height += size.height;
     
     return height;
