@@ -75,8 +75,10 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     IMTopicMessage *message = [[IMDatabaseManager sharedInstance]findMessageWithUniqueID:msg.uniqueID];
     if (!message) {
         NSString *reqId = [IMConfig generateUniqueID];
-        message = [self imageMsgFromCurrentUserWithImage:msg.image topicID:msg.topicID uniqueID:reqId];
         msg.uniqueID = reqId;
+        msg.width = msg.image.size.width * msg.image.scale;
+        msg.height = msg.image.size.height * msg.image.scale;
+        message = [self imageTopicMsgFromMessage:msg];
     }
     message.sendState = MessageSendState_Sending;
     message.sendTime = [[NSDate date]timeIntervalSince1970]*1000 + [IMRequestManager sharedInstance].timeoffset;
@@ -86,19 +88,17 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     [self checkAndSend];
 }
 
-- (IMTopicMessage *)imageMsgFromCurrentUserWithImage:(UIImage *)image
-                                           topicID:(int64_t)topicID
-                                          uniqueID:(NSString *)uniqueID{
+- (IMTopicMessage *)imageTopicMsgFromMessage:(IMImageMessage *)msg {
     IMTopicMessage *message = [[IMTopicMessage alloc]init];
     message.type = MessageType_Image;
-    message.topicID = topicID;
+    message.topicID = msg.topicID;
     message.channel = [IMConfig generateUniqueID];
-    message.uniqueID = uniqueID;
-    message.width = image.size.width * image.scale;
-    message.height = image.size.height * image.scale;
+    message.uniqueID = msg.uniqueID;
+    message.width = msg.width;
+    message.height = msg.height;
     message.sender = [[IMManager sharedInstance]currentMember];
-    NSData *data = UIImageJPEGRepresentation(image, 1);
-    NSString *path = [self.imageFolderPath stringByAppendingPathComponent:uniqueID];
+    NSData *data = UIImageJPEGRepresentation(msg.image, 1);
+    NSString *path = [self.imageFolderPath stringByAppendingPathComponent:msg.uniqueID];
     [data writeToFile:path atomically:YES];
     return message;
 }

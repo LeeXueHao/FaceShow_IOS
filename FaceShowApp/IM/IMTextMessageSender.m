@@ -35,8 +35,8 @@
     IMTopicMessage *message = [[IMDatabaseManager sharedInstance]findMessageWithUniqueID:msg.uniqueID];
     if (!message) {
         NSString *reqId = [IMConfig generateUniqueID];
-        message = [self textMsgFromCurrentUserWithText:msg.text topicID:msg.topicID uniqueID:reqId];
         msg.uniqueID = reqId;
+        message = [self textTopicMsgFromMessage:msg];
     }
     message.sendState = MessageSendState_Sending;
     message.sendTime = [[NSDate date]timeIntervalSince1970]*1000 + [IMRequestManager sharedInstance].timeoffset;
@@ -46,15 +46,13 @@
     [self checkAndSend];
 }
 
-- (IMTopicMessage *)textMsgFromCurrentUserWithText:(NSString *)text
-                                           topicID:(int64_t)topicID
-                                          uniqueID:(NSString *)uniqueID{
+- (IMTopicMessage *)textTopicMsgFromMessage:(IMTextMessage *)msg {
     IMTopicMessage *message = [[IMTopicMessage alloc]init];
     message.type = MessageType_Text;
-    message.text = text;
-    message.topicID = topicID;
+    message.text = msg.text;
+    message.topicID = msg.topicID;
     message.channel = [IMConfig generateUniqueID];
-    message.uniqueID = uniqueID;
+    message.uniqueID = msg.uniqueID;
     message.sender = [[IMManager sharedInstance]currentMember];
     return message;
 }
