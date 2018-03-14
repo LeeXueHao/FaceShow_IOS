@@ -29,6 +29,8 @@
     message.sendTime = msg.sendTime;
     message.messageID = msg.id_p;
     message.sendState = MessageSendState_Success;
+    message.width = msg.contentData.width;
+    message.height = msg.contentData.height;
     
     IMMember *sender = [[IMMember alloc]init];
     sender.memberID = msg.senderId;

@@ -293,6 +293,8 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     message.channel = entity.channel;
     message.uniqueID = entity.uniqueID;
     message.messageID = entity.messageID;
+    message.width = entity.width;
+    message.height = entity.height;
     message.sender = [self memberFromEntity:entity.sender];
     return message;
 }

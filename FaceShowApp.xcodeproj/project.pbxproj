@@ -380,7 +380,7 @@
 		E91E5DC62047DB5500052FBA /* IMConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC52047DB5500052FBA /* IMConnectionManager.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
-		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; };
+		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
