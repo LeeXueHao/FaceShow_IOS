@@ -10,6 +10,7 @@
         <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latestMsgId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="memberIDs" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topicChange" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="topicID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -17,7 +18,6 @@
         <attribute name="unreadCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="curMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMMemberEntity" syncable="YES"/>
         <relationship name="latestMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMTopicMessageEntity" syncable="YES"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IMMemberEntity" syncable="YES"/>
     </entity>
     <entity name="IMTopicMessageEntity" representedClassName="IMTopicMessageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>

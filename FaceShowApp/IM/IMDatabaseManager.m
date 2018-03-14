@@ -136,7 +136,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         topicEntity.latestMessage = msgEntity;
         
         if (topic.members.count > 0) {
-            [topicEntity removeMembers:topicEntity.members];
+            NSMutableArray *memberIDArray = [NSMutableArray array];
             for (IMMember *member in topic.members) {
                 NSPredicate *memberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(member.memberID)];
                 IMMemberEntity *memberEntity = [IMMemberEntity MR_findFirstWithPredicate:memberPredicate inContext:localContext];
@@ -148,8 +148,9 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
                 memberEntity.name = member.name;
                 memberEntity.avatar = member.avatar;
                 
-                [topicEntity addMembersObject:memberEntity];
+                [memberIDArray addObject:[NSString stringWithFormat:@"%@",@(member.memberID)]];
             }
+            topicEntity.memberIDs = [memberIDArray componentsJoinedByString:@","];
         }
         
         // 补充topic缺少的latest message信息
@@ -258,8 +259,16 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     topic.latestMsgId = entity.latestMsgId;
     topic.unreadCount = entity.unreadCount;
     topic.latestMessage = [self messageFromEntity:entity.latestMessage];
+    
+    NSArray *memberIDArray = [entity.memberIDs componentsSeparatedByString:@","];
+    NSMutableArray *conditionArray = [NSMutableArray array];
+    for (NSString *memberID in memberIDArray) {
+        [conditionArray addObject:@(memberID.longLongValue)];
+    }
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"memberID IN (%@)",conditionArray];
+    NSArray *memberEntities = [IMMemberEntity MR_findAllWithPredicate:predicate];    
     NSMutableArray *members = [NSMutableArray array];
-    for (IMMemberEntity *member in entity.members) {
+    for (IMMemberEntity *member in memberEntities) {
         [members addObject:[self memberFromEntity:member]];
     }
     topic.members = members;
