@@ -227,7 +227,8 @@
                 NSUInteger index = [self.dataArray indexOfObject:model];
                 model.message = message;
                 [self.dataArray replaceObjectAtIndex:index withObject:model];
-                [self.tableView reloadData];
+//                [self.tableView reloadData];
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
         }
@@ -236,7 +237,8 @@
         model.topicType = self.topic ? self.topic.type : TopicType_Private;
         [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [self scrollToBottom];
     }];
     
@@ -464,7 +466,11 @@
                 [self handelTimeForDataSource:self.dataArray];
                 [self.tableView reloadData];
             }
-            [IMUserInterface sendTextMessageWithText:message.text topicID:self.topic.topicID uniqueID:message.uniqueID];
+            if (message.type == MessageType_Text) {
+                [IMUserInterface sendTextMessageWithText:message.text topicID:self.topic.topicID uniqueID:message.uniqueID];
+            }else if (message.type == MessageType_Image) {
+                [IMUserInterface sendImageMessageWithImage:[message imageWaitForSending] topicID:self.topic.topicID uniqueID:message.uniqueID];
+            }
         }
     }];
     

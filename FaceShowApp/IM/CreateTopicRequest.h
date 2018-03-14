@@ -12,7 +12,7 @@
 @interface CreateTopicRequestItem_data : JSONModel
 @property (nonatomic, strong) NSString<Optional> *imEvent;
 @property (nonatomic, strong) NSString<Optional> *reqId;
-@property (nonatomic, strong) TopicData_topic<Optional> *topic;
+@property (nonatomic, strong) NSArray<TopicData_topic, Optional> *topic;
 @end
 
 @interface CreateTopicRequestItem: HttpBaseRequestItem

@@ -140,7 +140,7 @@
             return;
         }
         CreateTopicRequestItem *item = (CreateTopicRequestItem *)retItem;
-        BLOCK_EXEC(completeBlock,[item.data.topic toIMTopic],nil);
+        BLOCK_EXEC(completeBlock,[item.data.topic.firstObject toIMTopic],nil);
     }];
 }
 

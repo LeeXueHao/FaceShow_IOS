@@ -54,6 +54,7 @@
 
 - (void)setProgress:(NSString *)progress {
     _progress = progress;
-    self.progressLabel.text = [NSString stringWithFormat:@"%@%@",progress,@"%"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ];
+    CGFloat persent = progress.floatValue;
+    self.progressLabel.text = [NSString stringWithFormat:@"%.0f%@",persent*100,@"%"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ];
 }
 @end

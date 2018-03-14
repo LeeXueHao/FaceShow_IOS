@@ -256,6 +256,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatViewController *chatVC = [[ChatViewController alloc]init];
     IMMember *member = [self.dataArray[indexPath.row] toIMMember];
+    //如果是自己则返回
+    GetUserInfoRequestItem_imTokenInfo *info = [UserManager sharedInstance].userModel.imInfo;
+    if (member.memberID == [info.imMember toIMMember].memberID) {
+        return;
+    }
     NSString *groupId = self.groupsArray[self.currentSelectedGroupIndex].groupId;
     IMTopic *topic = [[IMDatabaseManager sharedInstance] findTopicWithMember:member];
     if (topic) {

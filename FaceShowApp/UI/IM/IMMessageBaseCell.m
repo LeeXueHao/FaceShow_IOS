@@ -8,6 +8,7 @@
 
 #import "IMMessageBaseCell.h"
 #import "IMTimeHandleManger.h"
+#import "UIImage+GIF.h"
 
 @interface IMMessageBaseCell()
 @end
@@ -136,7 +137,7 @@
     }];
     
     [self.stateButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.messageBackgroundView.mas_centerY).offset(-5);
+        make.centerY.equalTo(self.messageBackgroundView.mas_centerY);
         make.left.equalTo(self.messageBackgroundView.mas_right).offset(5.f);
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
@@ -192,14 +193,18 @@
 
 - (void)setupSendStateWithMessage:(IMTopicMessage *)message {
     if (message.sendState == MessageSendState_Sending) {
+        self.stateButton.hidden = YES;
         self.stateButton.enabled = NO;
-        self.stateButton.backgroundColor = [UIColor yellowColor];
+//        self.stateButton.imageView.image = [UIImage nyx_animatedGIFNamed:@"加载动效"];
+//        [self.stateButton setImage:[UIImage nyx_animatedGIFNamed:@"加载动效"] forState:UIControlStateNormal];
     }else if (message.sendState == MessageSendState_Failed) {
-        self.stateButton.backgroundColor = [UIColor redColor];
+        self.stateButton.hidden = NO;
         self.stateButton.enabled = YES;
+        [self.stateButton setImage:[UIImage imageNamed:@"发送失败"] forState:UIControlStateNormal];
     }else {
-        self.stateButton.backgroundColor = [UIColor greenColor];
-        self.stateButton.enabled = NO;
+        self.stateButton.hidden = YES;
+//        self.stateButton.backgroundColor = [UIColor greenColor];
+//        self.stateButton.enabled = NO;
     }
 }
 

@@ -53,7 +53,7 @@
     }];
     
     [self.stateButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.messageBackgroundView.mas_centerY).offset(-5);
+        make.centerY.equalTo(self.messageBackgroundView.mas_centerY);
         make.right.equalTo(self.messageBackgroundView.mas_left).offset(-5.f);
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
