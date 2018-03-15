@@ -29,10 +29,15 @@
 @end
 
 @implementation MineViewController
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    DDLogDebug(@"release========>>%@",[self class]);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    [self setupObservers];
     if ([UserManager sharedInstance].userModel == nil) {
         [self requestForUserInfo];
     }
@@ -183,6 +188,7 @@
     }];
 }
 
+
 - (UIButton *)optionBtnWithTitle:(NSString *)title normalImage:(NSString *)normalImage highlightedImage:(NSString *)highlightedImage {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -196,6 +202,21 @@
     [btn addTarget:self action:@selector(optionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+
+#pragma mark - setupObservers
+-(void)setupObservers{
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kYXUploadUserPicSuccessNotification" object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self reload];
+    }];
+}
+- (void)reload{
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
+    }];
+}
+
 
 #pragma mark - actions
 - (void)changeClassBtnAction {
