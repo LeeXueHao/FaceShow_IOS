@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 @class IMChatViewModel;
 @class IMMember;
+@class IMMessageBaseCell;
 
 @protocol IMMessageCellDelegate <NSObject>
 
 - (void)messageCellDidClickAvatarForUser:(IMMember *)user;
 
-- (void)messageCellTap:(IMChatViewModel *)model;
+- (void)messageCellTap:(IMMessageBaseCell *)cell;
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect;
 
@@ -22,5 +23,4 @@
 
 - (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect;
 
-//- (void)messageCellUpdateHeight:(IMChatViewModel *)model;
 @end

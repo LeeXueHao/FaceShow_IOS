@@ -9,6 +9,8 @@
 #import "IMInputView.h"
 #import <SAMTextView.h>
 
+static const NSInteger kMaxTextLength = 2000;
+
 @interface IMInputView()<UITextViewDelegate>
 @property (nonatomic, assign) CGFloat textMaxHeight;
 @property (nonatomic, assign) CGFloat textHeight;
@@ -91,6 +93,13 @@
 }
 
 #pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView {
+    NSString *content = textView.text;
+    if (content.length > kMaxTextLength) {
+        textView.text =  [content substringToIndex:kMaxTextLength];
+    }
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         if ([[self.textView.text yx_stringByTrimmingCharacters] length]!=0) {

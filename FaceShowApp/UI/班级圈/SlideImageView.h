@@ -9,6 +9,7 @@
 #import "QASlideItemBaseView.h"
 
 @interface SlideImageView : QASlideItemBaseView
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
 

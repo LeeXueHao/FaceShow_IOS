@@ -26,7 +26,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-//        [self setupMockData];
     }
     return self;
 }
@@ -120,7 +119,7 @@
         self.nameLabel.text = [NSString stringWithFormat:@"%@(%@)",@"班级群聊",topic.group];
         if (topic.latestMessage) {
             if (topic.latestMessage.type == MessageType_Image) {
-                self.messageLabel.text = @"[图片]";
+                self.messageLabel.text = [NSString stringWithFormat:@"%@:%@",topic.latestMessage.sender.name,@"[图片]"];
             }else {
                 self.messageLabel.text = [NSString stringWithFormat:@"%@:%@",topic.latestMessage.sender.name,topic.latestMessage.text];
             }
@@ -134,21 +133,25 @@
         [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             STRONG_SELF
             if ([[IMManager sharedInstance] currentMember].memberID != obj.memberID) {
-                self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
+                if (topic.group) {
+                    self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
+                }else {
+                    self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
+                }
                 *stop = YES;
             }
         }];
         if (topic.latestMessage.type == MessageType_Image) {
             self.messageLabel.text = @"[图片]";
-        }else {
-            self.messageLabel.text = topic.latestMessage.text;
         }
     }
-    if (topic.latestMessage.sendTime > 0) {
+    if (topic.latestMessage && topic.latestMessage.sendTime > 0) {
         NSTimeInterval interval = [[NSDate date]timeIntervalSince1970]*1000;
         NSTimeInterval currentTime = interval + [IMUserInterface obtainTimeoffset];
         NSString *timeString = [IMTimeHandleManger displayedTimeStringComparedCurrentTime:currentTime WithOriginalTime:topic.latestMessage.sendTime];
         self.timeLabel.text = [timeString componentsSeparatedByString:@" "].firstObject;
+    }else {
+        self.timeLabel.text = @"";
     }
     self.tipImageView.hidden = topic.unreadCount==0;
 }

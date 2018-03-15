@@ -28,6 +28,7 @@
 #import "PhotoBrowserController.h"
 #import "IMChatViewModel.h"
 #import "UIImage+YXImage.h"
+#import "IMPhotoBrowserView.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
@@ -74,7 +75,7 @@
 
 - (void)setupTitleWithTopic:(IMTopic *)topic {
     if (topic.type == TopicType_Group) {
-        self.title = [NSString stringWithFormat:@"%@(%@)",self.topic.name,@(self.topic.members.count)];
+        self.title = [NSString stringWithFormat:@"%@(%@)",@"班级群聊",@(self.topic.members.count)];
     }else {
         [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
             if (item.memberID == [IMManager sharedInstance].currentMember.memberID) {
@@ -85,6 +86,8 @@
 }
 
 - (void)setupUI {
+    self.view.backgroundColor = [UIColor colorWithHexString:@"dfe3e5"];
+    
     self.imInputView = [[IMInputView alloc]init];
     self.imInputView.isChangeBool = YES;
     self.imInputView.textView.returnKeyType = UIReturnKeySend;
@@ -151,7 +154,7 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.bottom.equalTo(self.imInputView.mas_top);
+        make.bottom.equalTo(self.imInputView.mas_top).offset(-10);
     }];
     
     self.automaticallyAdjustsScrollViewInsets = false;  //第一个cell和顶部有留白，scrollerview遗留下来的，用来取消它
@@ -161,9 +164,6 @@
     [headerView addSubview:self.activity];
     self.tableView.tableHeaderView = headerView;
     headerView.hidden = YES;
-    
-    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-    self.tableView.tableFooterView = footerView;
 }
 
 - (void)setupData {
@@ -232,7 +232,7 @@
                 NSUInteger index = [self.dataArray indexOfObject:model];
                 model.message = message;
                 [self.dataArray replaceObjectAtIndex:index withObject:model];
-//                [self.tableView reloadData];
+                //                [self.tableView reloadData];
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
@@ -242,7 +242,7 @@
         model.topicType = self.topic ? self.topic.type : TopicType_Private;
         [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
-//        [self.tableView reloadData];
+        //        [self.tableView reloadData];
         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [self scrollToBottom];
     }];
@@ -267,7 +267,7 @@
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
-
+        
         if (self.topic && self.topic.topicID == topic.topicID) {//有话题
             self.topic = topic;
             [self setupTitleWithTopic:topic];
@@ -369,27 +369,36 @@
     [self.view nyx_showToast:@"click avatar to do ..."];
 }
 
-- (void)messageCellTap:(IMChatViewModel *)model {
-    [self.view nyx_showToast:@"click image to do ..."];
-    UIImage *image;
+- (void)messageCellTap:(IMMessageBaseCell *)cell {
+    IMChatViewModel *model = cell.model;
+    CGRect rect = cell.messageBackgroundView.bounds;
+    rect = [cell.messageBackgroundView convertRect:rect toView:self.view.window];
+    
+    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]init];
+    NSMutableArray *array = [NSMutableArray array];
     if (model.message.sendState == MessageSendState_Success) {
-        NSURL *url = [NSURL URLWithString:model.message.viewUrl];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        image = [UIImage imageWithData:data];
+        [array addObject:model.message.viewUrl];
+        photoBrowserView.isUrlFormat = YES;
+        photoBrowserView.imageUrlStrArray = array;
     }else {
-        image = [model.message imageWaitForSending];
+        [array addObject:[model.message imageWaitForSending]];
+        photoBrowserView.imageArray = array;
     }
-    NSMutableArray *array = [NSMutableArray arrayWithObject:image];
-    PhotoBrowserController *vc = [[PhotoBrowserController alloc] init];
-    vc.cantNotDeleteImage = YES;
-    vc.images = array;
-    vc.currentIndex = 0;
+    
+    photoBrowserView.currentIndex = 0;
     WEAK_SELF
-    vc.didDeleteImage = ^{
+    [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
-        
-    };
-    [self.navigationController pushViewController:vc animated:YES];
+//        [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//            view.frame = rect;
+//        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+//        }];
+    }];
+    [self.view.window addSubview:photoBrowserView];
+//    [UIView animateWithDuration:.3 animations:^{
+        photoBrowserView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//    }];
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {

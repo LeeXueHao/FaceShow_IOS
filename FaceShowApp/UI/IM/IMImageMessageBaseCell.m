@@ -43,7 +43,8 @@
 
 - (void)tapAction {
     if (self.delegate && [self.delegate respondsToSelector:@selector(messageCellTap:)]) {
-        [self.delegate messageCellTap:self.model];
+//        CGRect rect = self.messageBackgroundView.frame;
+        [self.delegate messageCellTap:self];
     }
 }
 

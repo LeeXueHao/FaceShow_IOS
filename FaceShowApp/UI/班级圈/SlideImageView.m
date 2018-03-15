@@ -13,7 +13,7 @@
 
 @interface SlideImageView ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIImageView *imageView;
+
 @property (nonatomic, assign) BOOL layoutComplete;
 @end
 

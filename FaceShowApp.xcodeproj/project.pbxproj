@@ -382,6 +382,7 @@
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1105,6 +1106,8 @@
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
 		E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicMsg.pbobjc.m; sourceTree = "<group>"; };
 		E9970649205900070096DAB0 /* TopicMsg.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicMsg.pbobjc.h; sourceTree = "<group>"; };
+		E997064B205A0A010096DAB0 /* IMPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMPhotoBrowserView.h; sourceTree = "<group>"; };
+		E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMPhotoBrowserView.m; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -2402,6 +2405,8 @@
 				E91E5D312047B22500052FBA /* IMMessageMenuView.m */,
 				E90C513E204CF5410008F92A /* IMImageSendingProgressView.h */,
 				E90C513F204CF5410008F92A /* IMImageSendingProgressView.m */,
+				E997064B205A0A010096DAB0 /* IMPhotoBrowserView.h */,
+				E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2856,6 +2861,7 @@
 				92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */,
 				E90C513A204949150008F92A /* IMImageMessageLeftCell.m in Sources */,
 				E91E5DAA2047B8E300052FBA /* IMRequestManager.m in Sources */,
+				E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */,
 				7CBC5B932049326E004ACA04 /* CourseResourceViewController.m in Sources */,
 				923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */,
 				7CEFC7B21F98926B001D8C84 /* MineActionView.m in Sources */,

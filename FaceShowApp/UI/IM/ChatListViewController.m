@@ -197,7 +197,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatListCell" forIndexPath:indexPath];
+    ChatListCell *cell = [[ChatListCell alloc]init]; //[tableView dequeueReusableCellWithIdentifier:@"ChatListCell" forIndexPath:indexPath];
     cell.topic = self.dataArray[indexPath.row];
     cell.isLastRow = indexPath.row == self.dataArray.count - 1;
     return cell;
