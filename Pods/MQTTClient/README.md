@@ -1,18 +1,9 @@
-# MQTT-Client-Framework 
+MQTT-Client-Framework 
+=====================
 
-| |Build Status|
-|---|:---:|
-|**iOS**  |[![Build Status](https://travis-ci.org/novastone-media/MQTT-Client-Framework.svg?branch=master)](https://travis-ci.org/novastone-media/MQTT-Client-Framework)|
-|**macOS**||
-|**tvOS** ||
+an Objective-C native MQTT Framework http://mqtt.org
 
-**Welcome to MQTT-Client-Framework**
-
-MQTT-Client-Framework is Objective-C native MQTT Framework http://mqtt.org
-
-You can read [introduction](http://www.hivemq.com/blog/mqtt-client-library-encyclopedia-mqtt-client-framework) to learn more about framework.
-
-MQTT-Client-Framework is tested with a long list of brokers:
+### Tested with a long list of brokers
 
 * mosquitto
 * paho
@@ -29,8 +20,6 @@ MQTT-Client-Framework is tested with a long list of brokers:
 * aws
 * hbmqtt (MQTTv311 only, limitations)
 * [aedes](https://github.com/mcollina/aedes) 
-
-## Installation
 
 ### As a CocoaPod
 
@@ -75,10 +64,10 @@ Or include the source from here.
 
 [Carthage](https://github.com/Carthage/Carthage)
 ```
-github "novastone-media/MQTT-Client-Framework"
+github "ckrey/MQTT-Client-Framework"
 ```
 
-## Docs
+### docs
 
 Documentation generated with doxygen http://doxygen.org in the `./MQTTClient/dist/documentation` subdirectory.
 
@@ -88,14 +77,14 @@ You may open the HTML version of the documentation here  [index.html](MQTTClient
 
 Run `make install` in the `./MQTTClient/dist/documentation/html` subdirectory to install the the documentation as a DOCSET on your Mac.
 
-## Usage
+### Usage
 
 Create a new client and connect to a broker:
 
 ```objective-c
 #import "MQTTClient.h"
 
-@interface MyDelegate : ... <MQTTSessionDelegate>
+\@interface MyDelegate : ... <MQTTSessionDelegate>
 ...
 
         MQTTCFSocketTransport *transport = [[MQTTCFSocketTransport alloc] init];
@@ -144,4 +133,15 @@ Publish a message to a topic:
                      retain:NO
 	                qos:MQTTQosLevelAtLeastOnce]; // this is part of the asynchronous API
 ```
+
+
+
+
+### Comparison MQTT Clients for iOS (incomplete)
+
+|Wrapper|---|----|MQTTKit  |Marquette|Moscapsule|Musqueteer|MQTT-Client|MqttSDK|CocoaMQTT|
+|-------|---|----|---------|---------|----------|----------|-----------|-------|---------|
+|       |   |    |Obj-C    |Obj-C    |Swift     |Obj-C     |Obj-C      |Obj-C  |Swift    |
+|Library|IBM|Paho|Mosquitto|Mosquitto|Mosquitto |Mosquitto |native     |native |native   |
+
 

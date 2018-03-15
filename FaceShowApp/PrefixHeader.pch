@@ -54,7 +54,6 @@ extern int ddLogLevel;
 #import <FCUUID.h>
 #import <SAMTextView.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <IQKeyboardManager.h>
 #import <SCRecorder.h>
 #import <QiniuSDK.h>
 #import <UIView+CBFrameHelpers.h>

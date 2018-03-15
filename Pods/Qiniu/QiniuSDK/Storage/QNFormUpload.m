@@ -9,7 +9,6 @@
 #import "QNFormUpload.h"
 #import "QNConfiguration.h"
 #import "QNCrc32.h"
-#import "QNHttpManager.h"
 #import "QNRecorderDelegate.h"
 #import "QNResponseInfo.h"
 #import "QNUploadManager.h"
@@ -27,6 +26,8 @@
 @property (nonatomic, strong) QNUpCompletionHandler complete;
 @property (nonatomic, strong) QNConfiguration *config;
 @property (nonatomic) float previousPercent;
+
+@property (nonatomic, strong) NSString *access; //AK
 
 @end
 
@@ -48,6 +49,7 @@
         _httpManager = http;
         _config = config;
         _previousPercent = 0;
+        _access = token.access;
     }
     return self;
 }
@@ -60,15 +62,13 @@
     } else {
         fileName = @"?";
     }
-
+    
     parameters[@"token"] = _token.token;
-
+    
     [parameters addEntriesFromDictionary:_option.params];
-
-    if (_option.checkCrc) {
-        parameters[@"crc32"] = [NSString stringWithFormat:@"%u", (unsigned int)[QNCrc32 data:_data]];
-    }
-
+    
+    parameters[@"crc32"] = [NSString stringWithFormat:@"%u", (unsigned int)[QNCrc32 data:_data]];
+    
     QNInternalProgressBlock p = ^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
         float percent = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
         if (percent > 0.95) {
@@ -81,7 +81,9 @@
         }
         _option.progressHandler(_key, percent);
     };
-
+    
+    __block NSString *upHost = [_config.zone up:_token isHttps:_config.useHttps frozenDomain:nil];
+    
     QNCompleteBlock complete = ^(QNResponseInfo *info, NSDictionary *resp) {
         if (info.isOK) {
             _option.progressHandler(_key, 1.0);
@@ -94,18 +96,44 @@
             _complete([QNResponseInfo cancel], _key, nil);
             return;
         }
-        NSString *nextHost = _config.up.address;
+        __block NSString * nextHost = upHost;
         if (info.isConnectionBroken || info.needSwitchServer) {
-            nextHost = _config.upBackup.address;
+            nextHost = [_config.zone up:_token isHttps:_config.useHttps frozenDomain:nextHost];
         }
-
         QNCompleteBlock retriedComplete = ^(QNResponseInfo *info, NSDictionary *resp) {
             if (info.isOK) {
                 _option.progressHandler(_key, 1.0);
             }
-            _complete(info, _key, resp);
+            if (info.isOK || !info.couldRetry) {
+                _complete(info, _key, resp);
+                return;
+            }
+            if (_option.cancellationSignal()) {
+                _complete([QNResponseInfo cancel], _key, nil);
+                return;
+            }
+            NSString * thirdHost = nextHost;
+            if (info.isConnectionBroken || info.needSwitchServer) {
+                thirdHost = [_config.zone up:_token isHttps:_config.useHttps frozenDomain:nextHost];
+            }
+            
+            QNCompleteBlock thirdComplete = ^(QNResponseInfo *info, NSDictionary *resp) {
+                if (info.isOK) {
+                    _option.progressHandler(_key, 1.0);
+                }
+                _complete(info, _key, resp);
+            };
+            [_httpManager multipartPost:thirdHost
+                               withData:_data
+                             withParams:parameters
+                           withFileName:fileName
+                           withMimeType:_option.mimeType
+                      withCompleteBlock:thirdComplete
+                      withProgressBlock:p
+                        withCancelBlock:_option.cancellationSignal
+                             withAccess:_access];
         };
-
+        
         [_httpManager multipartPost:nextHost
                            withData:_data
                          withParams:parameters
@@ -113,17 +141,19 @@
                        withMimeType:_option.mimeType
                   withCompleteBlock:retriedComplete
                   withProgressBlock:p
-                    withCancelBlock:_option.cancellationSignal];
+                    withCancelBlock:_option.cancellationSignal
+                         withAccess:_access];
     };
-
-    [_httpManager multipartPost:_config.up.address
+    
+    [_httpManager multipartPost:upHost
                        withData:_data
                      withParams:parameters
                    withFileName:fileName
                    withMimeType:_option.mimeType
               withCompleteBlock:complete
               withProgressBlock:p
-                withCancelBlock:_option.cancellationSignal];
+                withCancelBlock:_option.cancellationSignal
+                     withAccess:_access];
 }
 
 @end
