@@ -81,7 +81,10 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     [self.tableView registerClass:[CourseCommentCell class] forCellReuseIdentifier:@"CourseCommentCell"];
     [self.tableView registerClass:[CourseCommentHeaderView class] forHeaderFooterViewReuseIdentifier:@"CourseCommentHeaderView"];
-    
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
+    }];
     self.inputView = [[CommentInputView alloc]init];
     WEAK_SELF
     [self.inputView setCompleteBlock:^(NSString *text){
@@ -90,7 +93,8 @@
     }];
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
         make.height.mas_equalTo(44);
     }];
 }
