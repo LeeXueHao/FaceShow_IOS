@@ -53,7 +53,7 @@
             return;
         }
         if (self.dataArray.count == 0) {
-            [self.view nyx_showToast:@"暂无评论"];
+//            [self.view nyx_showToast:@"暂无评论"];
         }else {
             [self.view performSelector:@selector(nyx_showToast:) withObject:@"暂无更多" afterDelay:1];
         }

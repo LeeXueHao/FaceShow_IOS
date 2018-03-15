@@ -12,6 +12,7 @@
 #import "ResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "ResourceTypeMapping.h"
+#import "AppDelegate.h"
 
 @interface CourseResourceViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -93,13 +94,15 @@
     [self.request stopRequest];
     self.request = [[GetResourceDetailRequest alloc]init];
     self.request.resId = resId;
-    [self.view nyx_startLoading];
+    
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appdelegate.window nyx_startLoading];
     WEAK_SELF
     [self.request startRequestWithRetClass:[GetResourceDetailRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self.view nyx_stopLoading];
+        [appdelegate.window nyx_stopLoading];
         if (error) {
-            [self.view nyx_showToast:error.localizedDescription];
+            [appdelegate.window nyx_showToast:error.localizedDescription];
             return;
         }
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
