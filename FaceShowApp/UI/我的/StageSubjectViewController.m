@@ -101,7 +101,12 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
         [self nyx_setupRightWithTitle:@"确定" action:^{
             STRONG_SELF
             NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            self.selectedSubject = self.selectedStage.subjects[indexPath.row];
+            if (isEmpty(indexPath)) {
+                [self.view nyx_showToast:@"请选择学科"];
+                return;
+            }else{
+                self.selectedSubject = self.selectedStage.subjects[indexPath.row];
+            }
             if (isEmpty(self.selectedSubject)) {
                 [self.view nyx_showToast:@"请选择学科"];
                 return;
