@@ -7,6 +7,8 @@
 //
 
 #import "UserInfoViewController.h"
+#import "FDActionSheetView.h"
+#import "AlertView.h"
 #import "YXNoFloatingHeaderFooterTableView.h"
 #import "UserInfoHeaderCell.h"
 #import "UserInfoDefaultCell.h"
@@ -15,13 +17,16 @@
 #import "UserModel.h"
 #import "UploadHeadImgRequest.h"
 #import "UpdateAvatarRequest.h"
+#import "UpdateUserInfoRequest.h"
 #import "ModifySexViewController.h"
 #import "ModifyNameViewController.h"
 #import "StageSubjectViewController.h"
 #import "HeadImageHandler.h"
 
+
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) AlertView *alertView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) HeadImageHandler *imageHandler;
@@ -29,6 +34,7 @@
 @property (nonatomic, strong) GetUserInfoRequest *userInfoRequest;
 @property (nonatomic, strong) UploadHeadImgRequest *uploadHeadImgRequest;
 @property (nonatomic, strong) UpdateAvatarRequest *avatarRequest;
+@property (nonatomic, strong) UpdateUserInfoRequest *updateUserInfoRequest;
 @end
 
 @implementation UserInfoViewController
@@ -127,6 +133,59 @@
         [self updateWithHeaderImage:image];
     }];
 }
+- (void)showUpdateSexAlertViewWithIndex:(NSIndexPath *)index{
+    FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    actionSheetView.titleArray = @[@{@"title":@"男"}, @{@"title":@"女"}];
+    self.alertView = [[AlertView alloc] init];
+    self.alertView.backgroundColor = [UIColor clearColor];
+    self.alertView.hideWhenMaskClicked = YES;
+    self.alertView.contentView = actionSheetView;
+    WEAK_SELF
+    [self.alertView setHideBlock:^(AlertView *view) {
+        STRONG_SELF
+        [UIView animateWithDuration:0.3 animations:^{
+            [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(view.mas_left);
+                make.right.equalTo(view.mas_right);
+                make.top.equalTo(view.mas_bottom);
+                make.height.mas_offset(155.0f);
+            }];
+            [view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+    [self.alertView showWithLayout:^(AlertView *view) {
+        STRONG_SELF
+        [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(view.mas_left);
+            make.right.equalTo(view.mas_right);
+            make.top.equalTo(view.mas_bottom);
+            make.height.mas_offset(155.0f );
+        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3 animations:^{
+                [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(view.mas_left);
+                    make.right.equalTo(view.mas_right);
+                    make.bottom.equalTo(view.mas_bottom);
+                    make.height.mas_offset(155.0f);
+                }];
+                [view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+        });
+    }];
+    actionSheetView.actionSheetBlock = ^(NSInteger integer) {
+        STRONG_SELF
+        if ([UserManager sharedInstance].userModel.sexID.integerValue == integer%2) {
+            [self.alertView hide];
+            return;
+        }
+        [self updateUserInfoWithSexID:integer%2 sexIndex:index];
+    };
+}
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -150,14 +209,7 @@
     if (indexPath.section == 0) {
         [self showAlertView];
     }else if (indexPath.section == 3) {
-        ModifySexViewController *vc = [[ModifySexViewController alloc]init];
-        WEAK_SELF
-        [vc setCompleteBlock:^{
-            STRONG_SELF
-            [self.contentMutableArray[2] setValue:[UserManager sharedInstance].userModel.sexName forKey:@"content"];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self showUpdateSexAlertViewWithIndex:indexPath];
     }else if (indexPath.section == 1) {
         ModifyNameViewController *vc = [[ModifyNameViewController alloc]init];
         WEAK_SELF
@@ -171,6 +223,7 @@
     } else if (indexPath.section == 4) {
         [TalkingData trackEvent:@"点击修改学段学科"];
         StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
+        vc.selectedStageSubjectString = [self stageSubjectString];
         WEAK_SELF
         vc.completeBlock = ^{
             STRONG_SELF
@@ -267,5 +320,27 @@
     }];
     self.avatarRequest = request;
 }
+- (void)updateUserInfoWithSexID:(NSInteger)sexID sexIndex:(NSIndexPath *)index {
+    [self.updateUserInfoRequest stopRequest];
+    self.updateUserInfoRequest = [[UpdateUserInfoRequest alloc]init];
+    self.updateUserInfoRequest.sex = [NSString stringWithFormat:@"%@", @(sexID)];
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.updateUserInfoRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        [UserManager sharedInstance].userModel.sexName = sexID ? @"男" : @"女";
+        [UserManager sharedInstance].userModel.sexID = [NSString stringWithFormat:@"%@", @(sexID)];
+        [[UserManager sharedInstance]saveData];
+        [self.alertView hide];
+        [self.contentMutableArray[2] setValue:[UserManager sharedInstance].userModel.sexName forKey:@"content"];
+        [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+    }];
+}
+
 
 @end

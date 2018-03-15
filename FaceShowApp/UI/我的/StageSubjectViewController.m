@@ -27,6 +27,47 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
     [self setupUI];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (isEmpty(self.selectedStage)) {
+        [self setDefaultStage];
+    }else{
+        [self setDefaultSubject];
+    }
+
+}
+
+-(void)setDefaultStage{
+    NSString *currentStage = [self.selectedStageSubjectString componentsSeparatedByString:@"-"].firstObject;
+    for (int i = 0; i < [UserManager sharedInstance].stages.count; i ++) {
+        StageSubjectItem_Stage *stage = [UserManager sharedInstance].stages[i];
+        if ([stage.name isEqualToString:currentStage]) {
+            NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
+            [self.tableView selectRowAtIndexPath:index animated:YES scrollPosition:UITableViewScrollPositionNone];
+            return;
+        }
+    }
+}
+
+-(void)setDefaultSubject{
+    NSString *currentStage = [self.selectedStageSubjectString componentsSeparatedByString:@"-"].firstObject;
+    if (![currentStage isEqualToString:self.selectedStage.name]) {
+        return;
+    }else{
+        NSString *currentSubject = [self.selectedStageSubjectString componentsSeparatedByString:@"-"].lastObject;
+        for (int i = 0; i < self.selectedStage.subjects.count; i ++) {
+            StageSubjectItem_Subject *subject = self.selectedStage.subjects[i];
+            if ([subject.name isEqualToString:currentSubject]) {
+                NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
+                [self.tableView selectRowAtIndexPath:index animated:YES scrollPosition:UITableViewScrollPositionNone];
+                return;
+            }
+        }
+    }
+
+
+}
+
 - (void)updateUserInfo {
     [self.request stopRequest];
     self.request = [[UpdateUserInfoRequest alloc]init];
@@ -59,6 +100,8 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
         WEAK_SELF
         [self nyx_setupRightWithTitle:@"确定" action:^{
             STRONG_SELF
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            self.selectedSubject = self.selectedStage.subjects[indexPath.row];
             if (isEmpty(self.selectedSubject)) {
                 [self.view nyx_showToast:@"请选择学科"];
                 return;
@@ -69,12 +112,15 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
         WEAK_SELF
         [self nyx_setupRightWithTitle:@"下一步" action:^{
             STRONG_SELF
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            self.selectedStage = [UserManager sharedInstance].stages[indexPath.row];
             if (isEmpty(self.selectedStage)) {
                 [self.view nyx_showToast:@"请选择学段"];
                 return;
             }
             StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
             vc.selectedStage = self.selectedStage;
+            vc.selectedStageSubjectString = self.selectedStageSubjectString;
             WEAK_SELF
             vc.completeBlock = ^{
                 STRONG_SELF

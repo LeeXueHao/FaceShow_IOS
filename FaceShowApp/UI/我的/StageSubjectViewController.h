@@ -12,4 +12,5 @@
 @interface StageSubjectViewController : BaseViewController
 @property (nonatomic, strong) StageSubjectItem_Stage *selectedStage;
 @property (nonatomic, copy) void (^completeBlock)(void);
+@property (nonatomic, copy) NSString *selectedStageSubjectString;
 @end

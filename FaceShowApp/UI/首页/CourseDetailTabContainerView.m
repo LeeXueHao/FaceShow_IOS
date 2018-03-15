@@ -53,7 +53,7 @@
         }
     }];
     self.sliderView = [[UIView alloc]init];
-    self.sliderView.backgroundColor = [UIColor colorWithHexString:@"0068bd"];
+    self.sliderView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
     [self addSubview:self.sliderView];
     UIButton *b = self.tabButtonArray.firstObject;
     [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
