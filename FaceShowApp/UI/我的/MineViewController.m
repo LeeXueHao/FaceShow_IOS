@@ -129,7 +129,7 @@
     [classHomeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(backImageView.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.left.right.mas_equalTo(0);
     }];
     
     UIButton *mineInfoBtn = [self optionBtnWithTitle:@"我的资料" normalImage:@"我的icon正常态" highlightedImage:@"我的icon点击态"];
@@ -137,7 +137,7 @@
     [mineInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(classHomeBtn.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.left.right.mas_equalTo(0);
     }];
     
     UIButton *signInfoBtn = [self optionBtnWithTitle:@"签到记录" normalImage:@"签到记录正常态" highlightedImage:@"签到记录点击态"];
@@ -145,7 +145,7 @@
     [signInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.left.right.mas_equalTo(0);
     }];
     
     UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈正常态" highlightedImage:@"意见反馈点击态"];
@@ -153,7 +153,7 @@
     [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.left.right.mas_equalTo(0);
     }];
     
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];

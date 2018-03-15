@@ -48,11 +48,11 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
 }
 
 - (void)setHasUsedBefore:(BOOL)hasUsedBefore {
-    [[NSUserDefaults standardUserDefaults]setBool:hasUsedBefore forKey:@"has_used_before"];
+    [[NSUserDefaults standardUserDefaults]setBool:hasUsedBefore forKey:self.userModel.userID];
 }
 
 - (BOOL)hasUsedBefore {
-    return [[NSUserDefaults standardUserDefaults]boolForKey:@"has_used_before"];
+    return [[NSUserDefaults standardUserDefaults]boolForKey:self.userModel.userID];
 }
 
 #pragma mark - 

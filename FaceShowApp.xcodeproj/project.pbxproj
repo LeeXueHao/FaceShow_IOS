@@ -224,6 +224,7 @@
 		7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55520074DC000B47892 /* PhotoListViewController.m */; };
 		7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE558200750AE00B47892 /* PhotoCell.m */; };
 		7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */; };
+		7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */; };
 		7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EC2010389F005BE126 /* ClassListRequest.m */; };
 		7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EE201038B5005BE126 /* ClassSelectionViewController.m */; };
 		7CB9C8F3201038D1005BE126 /* ClassListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8F2201038D1005BE126 /* ClassListCell.m */; };
@@ -794,6 +795,8 @@
 		7C6EE558200750AE00B47892 /* PhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		7C6EE55A2008547E00B47892 /* ImageSelectionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSelectionHandler.h; sourceTree = "<group>"; };
 		7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSelectionHandler.m; sourceTree = "<group>"; };
+		7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseLectureCell.m; sourceTree = "<group>"; };
+		7C7AADE8205A0F8B003C80E4 /* CourseLectureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseLectureCell.h; sourceTree = "<group>"; };
 		7CB9C8EB2010389F005BE126 /* ClassListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassListRequest.h; sourceTree = "<group>"; };
 		7CB9C8EC2010389F005BE126 /* ClassListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassListRequest.m; sourceTree = "<group>"; };
 		7CB9C8EE201038B5005BE126 /* ClassSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassSelectionViewController.m; sourceTree = "<group>"; };
@@ -1333,6 +1336,8 @@
 				7C212DF01F6B73830007AE01 /* CourseCatalogCell.m */,
 				4376E7301F70B5C8003E2057 /* CourseDetailHeaderView.h */,
 				4376E7311F70B5C8003E2057 /* CourseDetailHeaderView.m */,
+				7C7AADE8205A0F8B003C80E4 /* CourseLectureCell.h */,
+				7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */,
 			);
 			name = "课程信息";
 			sourceTree = "<group>";
@@ -2737,6 +2742,7 @@
 				7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */,
 				7C2519AF1F690DA00001B577 /* MainPageViewController.m in Sources */,
 				7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */,
+				7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */,
 				438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */,
 				7C2518E71F68E68D0001B577 /* NSString+YXString.m in Sources */,
 				7C2518E91F68E68D0001B577 /* UIButton+HighlightColor.m in Sources */,

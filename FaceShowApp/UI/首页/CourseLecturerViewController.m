@@ -7,7 +7,7 @@
 //
 
 #import "CourseLecturerViewController.h"
-#import "CourseCatalogCell.h"
+#import "CourseLectureCell.h"
 #import "EmptyView.h"
 #import "ProfessorDetailViewController.h"
 
@@ -38,10 +38,11 @@
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = 59;
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[CourseCatalogCell class] forCellReuseIdentifier:@"CourseCatalogCell"];
+    [self.tableView registerClass:[CourseLectureCell class] forCellReuseIdentifier:@"CourseLectureCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -61,19 +62,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CourseCatalogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCatalogCell"];
-    GetCourseRequestItem_LecturerInfo *info = self.lecturerInfos[indexPath.row];
-    cell.title = info.lecturerName;
-    cell.iconName = @"讲师";
+    CourseLectureCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseLectureCell"];
+    cell.data = self.lecturerInfos[indexPath.row];
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    GetCourseRequestItem_LecturerInfo *info = self.lecturerInfos[indexPath.row];
-    ProfessorDetailViewController *professorDetailVC = [[ProfessorDetailViewController alloc] init];
-    professorDetailVC.lecturerInfo = info;
-    [self.navigationController pushViewController:professorDetailVC animated:NO];
 }
 
 @end

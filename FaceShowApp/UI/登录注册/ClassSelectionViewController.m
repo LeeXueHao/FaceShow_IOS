@@ -21,6 +21,7 @@
 @property (nonatomic, strong) ClassListRequestItem *clazsListItem;
 @property (nonatomic, strong) ClassListRequest *getClassRequest;
 @property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
+@property (nonatomic, assign) NSInteger selectedIndex;
 @end
 
 @implementation ClassSelectionViewController
@@ -109,7 +110,17 @@
         }
         ClassListRequestItem *item = (ClassListRequestItem *)retItem;
         self.clazsListItem = item;
+        NSString *clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+        for (ClassListRequestItem_clazsInfos *info in item.data.clazsInfos) {
+            if ([info.clazsId isEqualToString:clazsId]) {
+                self.selectedIndex = [item.data.clazsInfos indexOfObject:info];
+                break;
+            }
+        }
         [self.tableview reloadData];
+        if (item.data.clazsInfos.count > 0) {
+            self.navRightBtn.enabled = YES;
+        }
     }];
 }
 
@@ -126,14 +137,17 @@
     ClassListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClassListCell"];
     ClassListRequestItem_clazsInfos *info = self.clazsListItem.data.clazsInfos[indexPath.row];
     cell.classInfo = info;
-    if (!self.selectedClass && [info.clazsId isEqualToString:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]) {
+    if (indexPath.row == self.selectedIndex) {
         [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedClass = self.clazsListItem.data.clazsInfos[indexPath.row];
+    self.selectedIndex = indexPath.row;
     self.navRightBtn.enabled = !isEmpty(self.selectedClass);
 }
 
