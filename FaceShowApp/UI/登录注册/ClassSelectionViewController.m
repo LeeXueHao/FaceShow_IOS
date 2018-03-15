@@ -114,6 +114,7 @@
         for (ClassListRequestItem_clazsInfos *info in item.data.clazsInfos) {
             if ([info.clazsId isEqualToString:clazsId]) {
                 self.selectedIndex = [item.data.clazsInfos indexOfObject:info];
+                self.selectedClass = info;
                 break;
             }
         }
