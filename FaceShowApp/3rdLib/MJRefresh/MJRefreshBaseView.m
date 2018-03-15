@@ -277,6 +277,7 @@
     // scrollView所滚动的Y值 * 控件的类型（头部控件是-1，尾部控件是1）
     CGFloat offsetY = _scrollView.contentOffset.y * self.viewType;
     CGFloat validY = self.validY;
+    validY += 1;
     if (offsetY <= validY) return;
     
     //    if (_scrollView.isDragging) {
