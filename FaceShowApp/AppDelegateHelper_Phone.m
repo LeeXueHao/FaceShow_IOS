@@ -83,8 +83,8 @@
     [self configTabbarItem:classVC.tabBarItem image:@"朋友圈icon" selectedImage:@"朋友圈icon选择"];
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
-    ChatListViewController *chatVC = [[ChatListViewController alloc]init];
-//    ChatPlaceViewController *chatVC = [[ChatPlaceViewController alloc]init];
+//    ChatListViewController *chatVC = [[ChatListViewController alloc]init];
+    ChatPlaceViewController *chatVC = [[ChatPlaceViewController alloc]init];
     chatVC.title = @"聊聊";
     [self configTabbarItem:chatVC.tabBarItem image:@"聊天icon正常态" selectedImage:@"聊天icon点击态"];
     FSNavigationController *chatNavi = [[FSNavigationController alloc] initWithRootViewController:chatVC];
