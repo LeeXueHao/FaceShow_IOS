@@ -121,6 +121,7 @@
     } else if (indexPath.section == 3) {
         [TalkingData trackEvent:@"点击修改学段学科"];
         StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
+        vc.selectedStageSubjectString = [self stageSubjectString];
         WEAK_SELF
         vc.completeBlock = ^{
             STRONG_SELF
