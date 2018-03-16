@@ -55,10 +55,6 @@
     backImageView.contentMode = UIViewContentModeScaleAspectFill;
     backImageView.userInteractionEnabled = YES;
     [self.view addSubview:backImageView];
-    [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(239*kPhoneHeightRatio);
-    }];
     
     self.avatarImageView = [[UIImageView alloc] init];
     self.avatarImageView.clipsToBounds = YES;
@@ -131,6 +127,10 @@
         make.top.mas_equalTo(self.classNameLabel.mas_bottom).offset(10.5f);
         make.centerX.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(80, 26));
+    }];
+    [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(changeClassBtn.mas_bottom).mas_offset(20);
     }];
     
     UIButton *classHomeBtn = [self optionBtnWithTitle:@"班级首页" normalImage:@"首页icon正常态" highlightedImage:@"首页icon点击态"];
