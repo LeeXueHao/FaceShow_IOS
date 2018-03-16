@@ -234,6 +234,9 @@
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopicMessage *message = noti.object;
+        if (message.topicID != self.topic.topicID) {
+            return;
+        }
         for (IMChatViewModel *model in self.dataArray) {
             IMTopicMessage *item = model.message;
             if ([item.uniqueID isEqualToString:message.uniqueID]) {

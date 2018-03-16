@@ -115,8 +115,14 @@
         }
         // update offline msgs
         IMTopicMessage *lastMsg = [[IMDatabaseManager sharedInstance]findLastSuccessfulMessageInTopic:topic.topicID];
-        if (lastMsg && topic.latestMsgId > lastMsg.messageID) {
-            IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:topic.topicID startID:lastMsg.messageID];
+        int64_t lastID = 0;
+        if (lastMsg) {
+            lastID = lastMsg.messageID;
+        }else if (dbTopic) {
+            lastID = dbTopic.latestMsgId;
+        }
+        if (lastID > 0 && topic.latestMsgId > lastID) {
+            IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:topic.topicID startID:lastID];
             [self.offlineMsgServices addObject:offlineService];
             [offlineService start];
         }
