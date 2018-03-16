@@ -77,14 +77,18 @@
     }else if (self.networkStatus != NotReachable &&
               netStatus != NotReachable &&
               self.networkStatus != netStatus) {
-        [[IMConnectionManager sharedInstance]connectWithHost:kHost port:kPort username:kUsername password:kPassword];
-        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForCurrentMember]];
         NSArray *topics = [[IMDatabaseManager sharedInstance]findAllTopics];
-        for (IMTopic *topic in topics) {
-            [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
-        }
+        [self connectAndSubscribeWithTopics:topics];
     }
     self.networkStatus = netStatus;
+}
+
+- (void)connectAndSubscribeWithTopics:(NSArray *)topics {
+    [[IMConnectionManager sharedInstance]connectWithHost:kHost port:kPort username:kUsername password:kPassword];
+    [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForCurrentMember]];
+    for (IMTopic *topic in topics) {
+        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
+    }
 }
 
 - (void)startServicesForNetworkReachable {
@@ -98,12 +102,7 @@
         for (IMTopic *topic in topics) {
             [[IMDatabaseManager sharedInstance]saveTopic:topic];
         }
-        
-        [[IMConnectionManager sharedInstance]connectWithHost:kHost port:kPort username:kUsername password:kPassword];
-        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForCurrentMember]];
-        for (IMTopic *topic in topics) {
-            [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
-        }
+        [self connectAndSubscribeWithTopics:topics];
     }];
 }
 
