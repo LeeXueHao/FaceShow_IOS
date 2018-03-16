@@ -168,7 +168,11 @@
                 [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(view.mas_left);
                     make.right.equalTo(view.mas_right);
-                    make.bottom.equalTo(view.mas_bottom).offset(-SafeAreaBottomHeight);
+                    if (@available(iOS 11.0, *)) {
+                        make.bottom.mas_equalTo(view.mas_safeAreaLayoutGuideBottom);
+                    } else {
+                        make.bottom.mas_equalTo(0);
+                    }
                     make.height.mas_offset(155.0f);
                 }];
                 [view layoutIfNeeded];

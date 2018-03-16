@@ -83,7 +83,11 @@
     [self.tableView registerClass:[CourseCommentHeaderView class] forHeaderFooterViewReuseIdentifier:@"CourseCommentHeaderView"];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(0);
+        }
     }];
     self.inputView = [[CommentInputView alloc]init];
     WEAK_SELF
@@ -94,7 +98,11 @@
     [self.view addSubview:self.inputView];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(0);
+        }
         make.height.mas_equalTo(44);
     }];
 }
@@ -110,9 +118,22 @@
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
 //            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y+self.inputView.height, 0);
-            CGFloat inputHieght = [UIScreen mainScreen].bounds.size.height==keyboardFrame.origin.y? 44:100;
+            BOOL keyboardHidden = [UIScreen mainScreen].bounds.size.height==keyboardFrame.origin.y;
+            CGFloat inputHieght = keyboardHidden? 44:100;
             [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                if (keyboardHidden) {
+                    if (@available(iOS 11.0, *)) {
+                        make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+                    } else {
+                        make.bottom.mas_equalTo(0);
+                    }
+                }else {
+                    if (@available(iOS 11.0, *)) {
+                        make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y)+SafeAreaBottomHeight(self.view));
+                    } else {
+                        make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y)+SafeAreaBottomHeight(self.view));
+                    }
+                }
                 make.height.mas_equalTo(inputHieght);
             }];
             [self.view layoutIfNeeded];

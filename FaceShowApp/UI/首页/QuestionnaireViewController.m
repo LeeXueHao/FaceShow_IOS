@@ -145,7 +145,11 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(0);
+        }
     }];
     [self.tableView registerClass:[ChooseQuestionCell class] forCellReuseIdentifier:@"ChooseQuestionCell"];
     [self.tableView registerClass:[FillQuestionCell class] forCellReuseIdentifier:@"FillQuestionCell"];
@@ -161,7 +165,11 @@
     [self.view addSubview:self.submitButton];
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-SafeAreaBottomHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(0);
+        }
         make.height.mas_equalTo(49);
     }];
     self.submitButton.hidden = YES;
