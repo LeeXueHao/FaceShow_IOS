@@ -19,6 +19,7 @@
 @property (nonatomic, assign) NetworkStatus networkStatus;
 @property (nonatomic, strong) IMTopicUpdateService *topicUpdateService;
 @property (nonatomic, strong) NSMutableArray<IMOfflineMsgUpdateService *> *offlineMsgServices;
+@property (nonatomic, assign) BOOL running;
 @end
 
 @implementation IMServiceManager
@@ -30,22 +31,31 @@
         manager.networkStatus = NotReachable;
         manager.topicUpdateService = [[IMTopicUpdateService alloc]init];
         manager.offlineMsgServices = [NSMutableArray array];
+        manager.running = NO;
     });
     return manager;
 }
 
 - (void)start {
+    if (self.running) {
+        return;
+    }
     [self listenNetWorkingStatus];
     if (self.networkStatus != NotReachable) {
         [self startServicesForNetworkReachable];
     }
+    self.running = YES;
 }
 
 - (void)stop {
+    if (!self.running) {
+        return;
+    }
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
     [[IMConnectionManager sharedInstance]disconnect];
     [self.topicUpdateService removeAllTopics];
     [self.offlineMsgServices removeAllObjects];
+    self.running = NO;
 }
 
 -(void)listenNetWorkingStatus{
@@ -61,8 +71,18 @@
 - (void)reachabilityChanged:(NSNotification *)note {
     Reachability* curReach = [note object];
     NetworkStatus netStatus = [curReach currentReachabilityStatus];
-    if (self.networkStatus == NotReachable && netStatus != NotReachable) {
+    if (self.networkStatus == NotReachable &&
+        netStatus != NotReachable) {
         [self startServicesForNetworkReachable];
+    }else if (self.networkStatus != NotReachable &&
+              netStatus != NotReachable &&
+              self.networkStatus != netStatus) {
+        [[IMConnectionManager sharedInstance]connectWithHost:kHost port:kPort username:kUsername password:kPassword];
+        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForCurrentMember]];
+        NSArray *topics = [[IMDatabaseManager sharedInstance]findAllTopics];
+        for (IMTopic *topic in topics) {
+            [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
+        }
     }
     self.networkStatus = netStatus;
 }
