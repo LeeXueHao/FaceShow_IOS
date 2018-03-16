@@ -29,6 +29,7 @@
 #import "IMChatViewModel.h"
 #import "UIImage+YXImage.h"
 #import "IMPhotoBrowserView.h"
+#import "CircleSpreadTransition.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
@@ -40,6 +41,7 @@
 @property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
 @property (assign,nonatomic)BOOL hasMore;
 @property (assign,nonatomic)BOOL isRefresh;
+@property (assign,nonatomic)BOOL isPreview;//预览图片的时候收到新消息并不滚动到最下面
 @end
 
 @implementation ChatViewController
@@ -132,7 +134,13 @@
     }];
     [self.view addSubview:self.imInputView];
     [self.imInputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            // Fallback on earlier versions
+            make.bottom.mas_equalTo(0);
+        }
         make.height.mas_equalTo(50.f);
     }];
     
@@ -209,7 +217,7 @@
     }
 }
 
-- (void)setHasMore:(BOOL)hasMore {
+- (void)setHasMore:(BOOL)hasMore {                               
     _hasMore = hasMore;
     self.tableView.tableHeaderView.hidden = !hasMore;
 }
@@ -232,7 +240,6 @@
                 NSUInteger index = [self.dataArray indexOfObject:model];
                 model.message = message;
                 [self.dataArray replaceObjectAtIndex:index withObject:model];
-                //                [self.tableView reloadData];
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
@@ -242,9 +249,10 @@
         model.topicType = self.topic ? self.topic.type : TopicType_Private;
         [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
-        //        [self.tableView reloadData];
         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [self scrollToBottom];
+        if (!self.isPreview) {
+            [self scrollToBottom];
+        }
     }];
     
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]subscribeNext:^(id x) {
@@ -256,7 +264,11 @@
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
             [self.imInputView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                if (@available(iOS 11.0, *)) {
+                    make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                } else {
+                    make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                }
             }];
             [self.view layoutIfNeeded];
         }];
@@ -370,11 +382,12 @@
 }
 
 - (void)messageCellTap:(IMMessageBaseCell *)cell {
+    self.isPreview = YES;
     IMChatViewModel *model = cell.model;
     CGRect rect = cell.messageBackgroundView.bounds;
     rect = [cell.messageBackgroundView convertRect:rect toView:self.view.window];
     
-    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]init];
+    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]initWithFrame:rect];
     NSMutableArray *array = [NSMutableArray array];
     if (model.message.sendState == MessageSendState_Success) {
         [array addObject:model.message.viewUrl];
@@ -389,16 +402,20 @@
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
-//        [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//            view.frame = rect;
-//        } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.3f animations:^{
+            view.frame = rect;
+            view.alpha = 0.f;
+            [self.view.window layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            self.isPreview = NO;
             [view removeFromSuperview];
-//        }];
+        }];
     }];
     [self.view.window addSubview:photoBrowserView];
-//    [UIView animateWithDuration:.3 animations:^{
-        photoBrowserView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//    }];
+    [UIView animateWithDuration:.3f animations:^{
+        photoBrowserView.frame = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
+        [self.view.window layoutIfNeeded];
+    }];
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {
