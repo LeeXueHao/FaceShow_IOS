@@ -25,7 +25,7 @@
                       count:(NSUInteger)count
                    asending:(BOOL)asending
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
-+ (void)findMessagesInTopic:(int64_t)topicID
++ (void)findMessagesInTopic:(IMTopic *)topic
                       count:(NSUInteger)count
                   beforeMsg:(IMTopicMessage *)msg
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;

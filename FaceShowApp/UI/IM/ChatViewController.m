@@ -357,7 +357,7 @@
     [self.activity startAnimating];
     self.isRefresh = YES;
     IMChatViewModel *model = self.dataArray.firstObject;
-    [IMUserInterface findMessagesInTopic:self.topic.topicID count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
         STRONG_SELF
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.hasMore = hasMore;
