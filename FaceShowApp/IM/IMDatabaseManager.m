@@ -168,6 +168,16 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     }];
 }
 
+- (void)resetDirtyMessagesWithTopicID:(int64_t)topicID {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = 0"];
+        NSArray *entities = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
+        for (IMTopicMessageEntity *entity in entities) {
+            entity.topicID = topicID;
+        }
+    }];
+}
+
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];

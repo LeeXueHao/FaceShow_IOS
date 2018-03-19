@@ -73,9 +73,7 @@
                 return;
             }
             // 更新topicid
-            IMTopicMessage *message = [[IMDatabaseManager sharedInstance]findMessageWithUniqueID:msg.uniqueID];
-            message.topicID = topic.topicID;
-            [[IMDatabaseManager sharedInstance]saveMessage:message];
+            [[IMDatabaseManager sharedInstance] resetDirtyMessagesWithTopicID:topic.topicID];
             // 订阅新的topic
             [[IMDatabaseManager sharedInstance]saveTopic:topic];
             [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];

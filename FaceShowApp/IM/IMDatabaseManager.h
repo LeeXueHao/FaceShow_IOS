@@ -19,6 +19,7 @@
 - (void)saveTopic:(IMTopic *)topic;
 
 - (void)clearDirtyMessages;// 清除没有所属topic的所有message
+- (void)resetDirtyMessagesWithTopicID:(int64_t)topicID;
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 
 - (NSArray<IMTopic *> *)findAllTopics;
