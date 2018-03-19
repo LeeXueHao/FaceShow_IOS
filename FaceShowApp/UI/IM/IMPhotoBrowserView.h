@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QASlideView.h"
 @class IMPhotoBrowserView;
 
 typedef void(^PhotoBrowserViewSingleTapActionBlock) (IMPhotoBrowserView *view);
@@ -16,6 +17,7 @@ typedef void(^PhotoBrowserViewSingleTapActionBlock) (IMPhotoBrowserView *view);
 @property (nonatomic, assign) BOOL isUrlFormat;//传的数据源的格式是否是Url
 @property (nonatomic, strong) NSMutableArray *imageArray;//传入图片
 @property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, strong) QASlideView *slideView;
 
 - (void)setPhotoBrowserViewSingleTapActionBlock:(PhotoBrowserViewSingleTapActionBlock)block;
 @end

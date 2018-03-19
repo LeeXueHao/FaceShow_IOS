@@ -30,6 +30,7 @@
 #import "UIImage+YXImage.h"
 #import "IMPhotoBrowserView.h"
 #import "CircleSpreadTransition.h"
+#import "SlideImageView.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
@@ -390,34 +391,59 @@
     CGRect rect = cell.messageBackgroundView.bounds;
     rect = [cell.messageBackgroundView convertRect:rect toView:self.view.window];
     
-    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]initWithFrame:rect];
+    CGRect fixRect = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
+    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]initWithFrame:fixRect];
     NSMutableArray *array = [NSMutableArray array];
-    if (model.message.sendState == MessageSendState_Success) {
+    if ([model.message imageWaitForSending]) {
+        [array addObject:[model.message imageWaitForSending]];
+        [array addObject:[model.message imageWaitForSending]];
+        [array addObject:[model.message imageWaitForSending]];
+        photoBrowserView.imageArray = array;
+    }else {
+        [array addObject:model.message.viewUrl];
+        [array addObject:model.message.viewUrl];
         [array addObject:model.message.viewUrl];
         photoBrowserView.isUrlFormat = YES;
         photoBrowserView.imageUrlStrArray = array;
-    }else {
-        [array addObject:[model.message imageWaitForSending]];
-        photoBrowserView.imageArray = array;
     }
     
     photoBrowserView.currentIndex = 0;
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
-        [UIView animateWithDuration:.3f animations:^{
-            view.frame = rect;
-            view.alpha = 0.f;
-            [self.view.window layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            self.isPreview = NO;
-            [view removeFromSuperview];
+        view.hidden = YES;
+        SlideImageView *foldSlideImageV = [view.slideView itemViewAtIndex:view.currentIndex];
+        CGRect newRect = foldSlideImageV.imageView.frame;
+        
+        UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
+//        foldImgView.backgroundColor = [UIColor blackColor];
+        foldImgView.contentMode = UIViewContentModeScaleAspectFit;
+        foldImgView.image = foldSlideImageV.image;
+        [self.view.window addSubview:foldImgView];
+        foldImgView.userInteractionEnabled = YES;
+        [UIView animateWithDuration:.3 animations:^{
+            foldImgView.frame = rect;
+        }completion:^(BOOL finished) {
+            [foldImgView removeFromSuperview];
         }];
     }];
     [self.view.window addSubview:photoBrowserView];
-    [UIView animateWithDuration:.3f animations:^{
-        photoBrowserView.frame = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
-        [self.view.window layoutIfNeeded];
+    photoBrowserView.hidden = YES;
+    
+    UIImageView *openImgView = [[UIImageView alloc]initWithFrame:rect];
+    openImgView.backgroundColor = [UIColor blackColor];
+    if ([model.message imageWaitForSending]) {
+        openImgView.image = photoBrowserView.imageArray[photoBrowserView.currentIndex];
+    }else {
+        [openImgView sd_setImageWithURL:[NSURL URLWithString:photoBrowserView.imageUrlStrArray[photoBrowserView.currentIndex]] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
+    }
+    openImgView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view.window addSubview:openImgView];
+    [UIView animateWithDuration:.3 animations:^{
+        openImgView.frame = fixRect;
+    }completion:^(BOOL finished) {
+        [openImgView removeFromSuperview];
+        photoBrowserView.hidden = NO;
     }];
 }
 

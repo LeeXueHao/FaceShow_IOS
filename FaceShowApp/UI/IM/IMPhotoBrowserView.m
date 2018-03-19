@@ -7,12 +7,11 @@
 //
 
 #import "IMPhotoBrowserView.h"
-#import "QASlideView.h"
 #import "SlideImageView.h"
 #import "AlertView.h"
 
 @interface IMPhotoBrowserView ()<QASlideViewDataSource, QASlideViewDelegate>
-@property (nonatomic, strong) QASlideView *slideView;
+
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, copy) PhotoBrowserViewSingleTapActionBlock block;
 @end
@@ -60,7 +59,7 @@
 - (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
     SlideImageView *imageView = [[SlideImageView alloc] init];
     if (self.isUrlFormat) {
-        [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlStrArray[index]] placeholderImage:[UIImage imageNamed:@""]];
+        [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlStrArray[index]] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
     }else {
         imageView.image = self.imageArray[index];
     }

@@ -143,6 +143,8 @@
         }];
         if (topic.latestMessage.type == MessageType_Image) {
             self.messageLabel.text = @"[图片]";
+        }else {
+            self.messageLabel.text = topic.latestMessage.text;
         }
     }
     if (topic.latestMessage && topic.latestMessage.sendTime > 0) {
