@@ -28,7 +28,7 @@
 + (void)findMessagesInTopic:(IMTopic *)topic
                       count:(NSUInteger)count
                   beforeMsg:(IMTopicMessage *)msg
-              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
+              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore, NSError *error))completeBlock;
 + (void)clearDirtyMessages;
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 

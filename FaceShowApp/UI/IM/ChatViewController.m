@@ -358,11 +358,16 @@
     [self.activity startAnimating];
     self.isRefresh = YES;
     IMChatViewModel *model = self.dataArray.firstObject;
-    [IMUserInterface findMessagesInTopic:self.topic count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+    [IMUserInterface findMessagesInTopic:self.topic count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore, NSError *error) {
         STRONG_SELF
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.hasMore = hasMore;
             [self.activity stopAnimating];
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                self.isRefresh = NO;
+                return;
+            }
+            self.hasMore = hasMore;
             if (array.count > 0) {
                 NSMutableArray *resultArray = [NSMutableArray array];
                 for (NSInteger i = 0; i < array.count; i ++) {
@@ -416,7 +421,7 @@
         CGRect newRect = foldSlideImageV.imageView.frame;
         
         UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
-        foldImgView.backgroundColor = [UIColor blackColor];
+//        foldImgView.backgroundColor = [UIColor blackColor];
         foldImgView.contentMode = UIViewContentModeScaleAspectFit;
         foldImgView.image = foldSlideImageV.image;
         [self.view.window addSubview:foldImgView];

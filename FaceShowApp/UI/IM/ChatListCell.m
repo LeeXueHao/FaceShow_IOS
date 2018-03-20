@@ -133,11 +133,13 @@
         [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             STRONG_SELF
             if ([[IMManager sharedInstance] currentMember].memberID != obj.memberID) {
-                if (topic.group) {
-                    self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
-                }else {
-                    self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
-                }
+//                if (topic.group) {
+//                    self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
+//                }else {
+//                    self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
+//                }
+                //私聊暂不显示班级来源
+                self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
                 *stop = YES;
             }
         }];
