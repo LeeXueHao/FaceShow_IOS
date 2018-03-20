@@ -11,7 +11,7 @@
 @interface ContactsClassFilterCell ()
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UIImageView *selectedImageView;
-@property (nonatomic, strong) UIView *topLineView;
+@property (nonatomic, strong) UIView *bottomLineView;
 
 @end
 
@@ -24,15 +24,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    if (selected) {
-        self.selectedImageView.hidden = NO;
-        self.titleLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
-        self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
-    }else {
-        self.selectedImageView.hidden = YES;
-        self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
-        self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
-    }
     // Configure the view for the selected state
 }
 
@@ -65,11 +56,11 @@
         make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
     }];
     
-    self.topLineView = [[UIView alloc]init];
-    self.topLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self.contentView addSubview:self.topLineView];
-    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
+    self.bottomLineView = [[UIView alloc]init];
+    self.bottomLineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.contentView addSubview:self.bottomLineView];
+    [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
         make.left.mas_equalTo(self.titleLabel.mas_left);
         make.height.mas_equalTo(1);
     }];
@@ -80,4 +71,16 @@
     self.titleLabel.text = title;
 }
 
+- (void)setIsChoosed:(BOOL)isChoosed {
+    _isChoosed = isChoosed;
+    if (isChoosed) {
+        self.selectedImageView.hidden = NO;
+        self.titleLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
+        self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    }else {
+        self.selectedImageView.hidden = YES;
+        self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+        self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    }
+}
 @end

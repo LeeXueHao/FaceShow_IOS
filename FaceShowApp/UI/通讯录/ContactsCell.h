@@ -11,5 +11,6 @@
 
 @interface ContactsCell : UITableViewCell
 @property (nonatomic, strong) ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *data;
+@property(nonatomic, assign) BOOL isShowLine;
 @end
 

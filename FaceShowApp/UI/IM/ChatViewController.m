@@ -416,7 +416,7 @@
         CGRect newRect = foldSlideImageV.imageView.frame;
         
         UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
-//        foldImgView.backgroundColor = [UIColor blackColor];
+        foldImgView.backgroundColor = [UIColor blackColor];
         foldImgView.contentMode = UIViewContentModeScaleAspectFit;
         foldImgView.image = foldSlideImageV.image;
         [self.view.window addSubview:foldImgView];

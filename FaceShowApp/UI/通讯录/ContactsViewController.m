@@ -41,7 +41,13 @@
     self.currentSelectedGroupIndex = 0;
     self.groupsArray = [NSMutableArray array];
     self.dataArray = [NSArray array];
-    [self setupUI];
+    self.emptyView = [[EmptyView alloc]init];
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestContacts];
+    }];
     [self requestContacts];
 }
 
@@ -52,15 +58,7 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.emptyView = [[EmptyView alloc]init];
-    
-    self.errorView = [[ErrorView alloc]init];
     WEAK_SELF
-    [self.errorView setRetryBlock:^{
-        STRONG_SELF
-        [self requestContacts];
-    }];
-    
     self.searchView =  [[ContactsSearchBarView alloc]init];
     [self.searchView setSearchBlock:^(NSString *text){
         STRONG_SELF
@@ -90,9 +88,6 @@
     self.tableView = [[UITableView alloc]init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedSectionHeaderHeight = 0.f;
@@ -132,8 +127,9 @@
     if (self.alertView.superview) {
         return;
     }
-    
+    self.currentClassView.isFiltering = YES;
     ContactsClassFilterView *filterView = self.classFilterView;
+    [filterView reloadData];
     AlertView *alert = [[AlertView alloc]init];
     alert.hideWhenMaskClicked = YES;
     alert.contentView = filterView;
@@ -219,6 +215,7 @@
         }
         [self.errorView removeFromSuperview];
         [self.emptyView removeFromSuperview];
+        [self setupUI];
         ContactMemberContactsRequestItem_Data_Gcontacts *contacts = item.data.contacts;
         NSMutableArray *array = [NSMutableArray array];
         for (ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group in contacts.groups) {
@@ -226,8 +223,9 @@
             self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;//当前班级的数据源
             [array addObject:group];
         }
-        self.classFilterView.dataArray = array.copy;//班级筛选的数据
         self.classFilterView.selectedRow = self.currentSelectedGroupIndex;
+        self.classFilterView.dataArray = array.copy;//班级筛选的数据
+        [self.classFilterView reloadData];
         self.currentClassView.title = self.groupsArray[self.currentSelectedGroupIndex].groupName;//当前班级的名字
     }];
 }
@@ -250,6 +248,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactsCell" forIndexPath:indexPath];
     cell.data = self.dataArray[indexPath.row];
+    cell.isShowLine = self.dataArray.count - 1 == indexPath.row ?  NO : YES;
     return cell;
 }
 

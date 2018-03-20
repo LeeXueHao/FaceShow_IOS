@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ContactsClassFilterCell : UITableViewCell
+@property(nonatomic, assign) BOOL isChoosed;
 @property(nonatomic, copy) NSString *title;
 @end

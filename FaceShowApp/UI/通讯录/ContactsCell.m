@@ -78,7 +78,7 @@
     [self.contentView addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.right.top.mas_equalTo(0);
+        make.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
 }
@@ -96,5 +96,13 @@
 //    self.numberLabel.text = data.mobilePhone;
 }
 
+- (void)setIsShowLine:(BOOL)isShowLine {
+    _isShowLine = isShowLine;
+    if (isShowLine) {
+        self.lineView.hidden = NO;
+    }else {
+        self.lineView.hidden = YES;
+    }
+}
 @end
 

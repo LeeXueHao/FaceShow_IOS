@@ -12,6 +12,7 @@
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UIButton *selectedbutton;
 @property(nonatomic, copy) ContactsClassStartFilterBlock block;
+@property (nonatomic, strong) UIView *lineView;
 
 @end
 
@@ -46,12 +47,20 @@
         make.size.mas_equalTo(CGSizeMake(15.f, 15.f));
     }];
     
+    self.lineView = [[UIView alloc]init];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
+        make.left.mas_equalTo(self.titleLabel.mas_left);
+        make.height.mas_equalTo(1);
+    }];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(filterAction:)];
     [self addGestureRecognizer:tap];
 }
 
 - (void)filterAction:(UITapGestureRecognizer *)gesture {
-    self.isFiltering = YES;
     BLOCK_EXEC(self.block,self.title);
 }
 

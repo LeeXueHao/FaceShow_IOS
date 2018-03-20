@@ -16,4 +16,5 @@ typedef void(^ContactsClassFilterCompletedBlock) (ContactMemberContactsRequestIt
 @property(nonatomic, strong) NSArray *dataArray;
 - (void)setContactsClassFilterCompletedBlock:(ContactsClassFilterCompletedBlock)block;
 - (CGFloat)heightForContactsClassFilterView;
+- (void)reloadData;
 @end
