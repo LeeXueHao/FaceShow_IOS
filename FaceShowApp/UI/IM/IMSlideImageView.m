@@ -1,27 +1,29 @@
 //
-//  SlideImageView.m
-//  SanKeApp
+//  IMSlideImageView.m
+//  FaceShowApp
 //
-//  Created by LiuWenXing on 2017/5/27.
-//  Copyright © 2017年 niuzhaowang. All rights reserved.
+//  Created by ZLL on 2018/3/22.
+//  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "SlideImageView.h"
-
+#import "IMSlideImageView.h"
 #define kMinZoomScale 1.0f //最小缩放倍数
-#define kMaxZoomScale 2.0f //最大缩放倍数
+#define kMaxZoomScale 3.0f //最大缩放倍数
 
-@interface SlideImageView ()<UIScrollViewDelegate>
+@interface IMSlideImageView ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
-
-@property (nonatomic, assign) BOOL layoutComplete;
+@property (nonatomic, assign) CGFloat imageWidth;
+@property (nonatomic, assign) CGFloat imageHeight;
 @end
 
-@implementation SlideImageView
+@implementation IMSlideImageView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self setupUI];
+- (instancetype)initWithImageWidth:(CGFloat)imageWidth imageHeight:(CGFloat)imageHeight {
+    if (self = [super init]) {
+        _imageWidth = imageWidth;
+        _imageHeight = imageHeight;
+         [self setupUI];
+        [self setupLayout];
     }
     return self;
 }
@@ -62,44 +64,14 @@
     self.imageView.image = image;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self setupLayout];
-}
-
 - (void)setupLayout {
-    if (self.layoutComplete) {
-        return;
-    }
-    CGRect frame = self.scrollView.frame;
-    if (self.imageView.image) {
-        UIImage *image = self.imageView.image;
-        CGFloat width = image.size.width;
-        CGFloat height = image.size.height;
-        CGFloat maxHeight = self.scrollView.bounds.size.height;
-        CGFloat maxWidth = self.scrollView.bounds.size.width;
-;
-        if (width > maxWidth || height > width) {
-            CGFloat ratio = height / width;
-            CGFloat maxRatio = maxHeight / maxWidth;
-            if (ratio < maxRatio) {
-                width = maxWidth;
-                height = width*ratio;
-            } else {
-                height = maxHeight;
-                width = height / ratio;
-            }
-        }
-        self.imageView.frame = CGRectMake((maxWidth - width) / 2, (maxHeight - height) / 2, width, height);
-        self.scrollView.contentSize = self.imageView.frame.size;
-        self.scrollView.zoomScale = 1.0f;
-    } else {
-        frame.origin = CGPointZero;
-        self.imageView.frame = frame;
-        self.scrollView.contentSize = self.imageView.frame.size;
-    }
+    CGSize size = [self aspectFitOriginalSize:CGSizeMake(self.imageWidth / [UIScreen mainScreen].scale, self.imageHeight / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(0);
+        make.size.mas_equalTo(size);
+    }];
+    self.scrollView.contentSize = size;
     self.scrollView.contentOffset = CGPointZero;
-    self.layoutComplete = YES;
 }
 
 #pragma mark UIScrollViewDelegate
@@ -152,4 +124,11 @@
     }
 }
 
+- (CGSize)aspectFitOriginalSize:(CGSize)originalSize withReferenceSize:(CGSize)referenceSize {
+    CGFloat scaleW = originalSize.width / referenceSize.width;
+    CGFloat scaleH = originalSize.height / referenceSize.height;
+    CGFloat scale = MAX(scaleH, scaleW);
+    CGSize scaledSize = CGSizeMake(originalSize.width / scale, originalSize.height / scale);
+    return scaledSize;
+}
 @end

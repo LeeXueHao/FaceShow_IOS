@@ -30,7 +30,7 @@
 #import "UIImage+YXImage.h"
 #import "IMPhotoBrowserView.h"
 #import "CircleSpreadTransition.h"
-#import "SlideImageView.h"
+#import "IMSlideImageView.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
@@ -40,9 +40,9 @@
 @property (nonatomic, strong) IMMessageMenuView *menuView;
 
 @property (nonatomic, strong) NSMutableArray<IMChatViewModel *> *dataArray;
-@property (assign,nonatomic)BOOL hasMore;
-@property (assign,nonatomic)BOOL isRefresh;
-@property (assign,nonatomic)BOOL isPreview;//预览图片的时候收到新消息并不滚动到最下面
+@property (assign,nonatomic) BOOL hasMore;
+@property (assign,nonatomic) BOOL isRefresh;
+@property (assign,nonatomic) BOOL isPreview;//预览图片的时候收到新消息并不滚动到最下面
 @end
 
 @implementation ChatViewController
@@ -282,25 +282,24 @@
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
-        
-        if (self.topic && self.topic.topicID == topic.topicID) {//有话题
-            self.topic = topic;
-            [self setupTitleWithTopic:topic];
+        if (topic.members.count == 0) {
             return;
         }
-        if (topic.type == TopicType_Private) {
-            for (IMMember *item in topic.members) {
-                if (self.member.memberID) {
-                    if (item.memberID == self.member.memberID) {
-                        self.topic = topic;
-                        return;
-                    }
+        if (self.topic) {//topic已存在 则判断是否为当前的
+            if ([IMUserInterface isSameTopicWithOneTopic:self.topic anotherTopic:topic]) {
+                self.topic = topic;
+                [self setupTitleWithTopic:topic];
+                if (self.topic.topicID != topic.topicID) {//原来的为临时的topic,需要更新所有message的topicId
+                    [self.dataArray enumerateObjectsUsingBlock:^(IMChatViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        obj.message.topicID = topic.topicID;
+                    }];
                 }
-                if (item.userID == self.member.userID) {
-                    self.topic = topic;
-                    return;
-                }
-            }
+            };
+            return;
+        }
+        if ([IMUserInterface topic:topic isWithMember:self.member]) {//topic不存在 判断是否为当前的
+            self.topic = topic;
+            return;
         }
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMImageUploadDidUpdateNotification object:nil]subscribeNext:^(id x) {
@@ -394,61 +393,51 @@
     IMChatViewModel *model = cell.model;
     CGRect rect = cell.messageBackgroundView.bounds;
     rect = [cell.messageBackgroundView convertRect:rect toView:self.view.window];
-    
     CGRect fixRect = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
-    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]initWithFrame:fixRect];
-    NSMutableArray *array = [NSMutableArray array];
-    if ([model.message imageWaitForSending]) {
-        [array addObject:[model.message imageWaitForSending]];
-        [array addObject:[model.message imageWaitForSending]];
-        [array addObject:[model.message imageWaitForSending]];
-        photoBrowserView.imageArray = array;
-    }else {
-        [array addObject:model.message.viewUrl];
-        [array addObject:model.message.viewUrl];
-        [array addObject:model.message.viewUrl];
-        photoBrowserView.isUrlFormat = YES;
-        photoBrowserView.imageUrlStrArray = array;
-    }
     
+    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]init];
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:model.message];
+    photoBrowserView.imageMessageArray = array;
     photoBrowserView.currentIndex = 0;
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
-        view.hidden = YES;
-        SlideImageView *foldSlideImageV = [view.slideView itemViewAtIndex:view.currentIndex];
-        CGRect newRect = foldSlideImageV.imageView.frame;
-        
-        UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
-//        foldImgView.backgroundColor = [UIColor blackColor];
-        foldImgView.contentMode = UIViewContentModeScaleAspectFit;
-        foldImgView.image = foldSlideImageV.image;
-        [self.view.window addSubview:foldImgView];
-        foldImgView.userInteractionEnabled = YES;
         [UIView animateWithDuration:.3 animations:^{
-            foldImgView.frame = rect;
+            //            view.frame = rect;
+            [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(rect.origin.x);
+                make.top.mas_equalTo(rect.origin.y);
+                make.size.mas_equalTo(rect.size);
+            }];
+            [self.view.window layoutIfNeeded];
         }completion:^(BOOL finished) {
-            [foldImgView removeFromSuperview];
+            [view removeFromSuperview];
         }];
     }];
     [self.view.window addSubview:photoBrowserView];
-    photoBrowserView.hidden = YES;
-    
-    UIImageView *openImgView = [[UIImageView alloc]initWithFrame:rect];
-    openImgView.backgroundColor = [UIColor blackColor];
-    if ([model.message imageWaitForSending]) {
-        openImgView.image = photoBrowserView.imageArray[photoBrowserView.currentIndex];
-    }else {
-        [openImgView sd_setImageWithURL:[NSURL URLWithString:photoBrowserView.imageUrlStrArray[photoBrowserView.currentIndex]] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
-    }
-    openImgView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.view.window addSubview:openImgView];
-    [UIView animateWithDuration:.3 animations:^{
-        openImgView.frame = fixRect;
-    }completion:^(BOOL finished) {
-        [openImgView removeFromSuperview];
-        photoBrowserView.hidden = NO;
+    [photoBrowserView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(rect.origin.x);
+        make.top.mas_equalTo(rect.origin.y);
+        make.size.mas_equalTo(rect.size);
     }];
+    [self.view.window layoutIfNeeded];
+    [UIView animateWithDuration:.3 animations:^{
+        
+        [photoBrowserView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            //            make.bottom.mas_equalTo(-SafeAreaBottomHeight(self.view.window));
+            //            make.size.mas_equalTo(fixRect.size);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
+        }];
+        //        photoBrowserView.frame = fixRect;
+        [self.view.window layoutIfNeeded];
+    }completion:^(BOOL finished) {
+        
+    }];
+
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {
@@ -474,10 +463,10 @@
     model0.type = IMMessageMenuItemType_Copy;
     [array addObject:model0];
     
-    IMMessageMenuItemModel *model1 = [[IMMessageMenuItemModel alloc]init];
-    model1.title = @"删除";
-    model1.type = IMMessageMenuItemType_Delete;
-    [array addObject:model1];
+//    IMMessageMenuItemModel *model1 = [[IMMessageMenuItemModel alloc]init];
+//    model1.title = @"删除";
+//    model1.type = IMMessageMenuItemType_Delete;
+//    [array addObject:model1];
     
     IMMessageMenuItemModel *model2 = [[IMMessageMenuItemModel alloc]init];
     model2.title = @"取消";

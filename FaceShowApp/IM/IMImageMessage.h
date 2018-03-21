@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface IMImageMessage : NSObject
-@property (nonatomic, assign) uint64_t topicID;
-@property (nonatomic, assign) uint64_t groupID;
+@property (nonatomic, assign) int64_t topicID;
+@property (nonatomic, assign) int64_t groupID;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, assign) uint64_t width;
 @property (nonatomic, assign) uint64_t height;

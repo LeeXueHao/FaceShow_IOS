@@ -32,6 +32,13 @@
 
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 
+/**
+ 从通讯录选择某一个联系人进入聊天界面的时候调用
+ 
+ @param member 联系人信息
+ @return 聊天信息
+ */
++ (IMTopic *)findTopicWithMember:(IMMember *)member;
 
 /**
  记录server时间和本地时间偏差，在消息发送中用本地时间加上偏差的值模拟server时间时使用。
@@ -39,6 +46,18 @@
  @return 时间差
  */
 + (NSTimeInterval)obtainTimeoffset;
+
+/**
+ 当前的member是否在某个topic里面
+ @return 传入的member在传入的topic中返回YES,否则返回NO
+ */
++ (BOOL)topic:(IMTopic *)topic isWithMember:(IMMember *)member;
+
+/**
+ 判断两个topic是否为同一个
+ @return 是同一个返回YES,否则返回NO
+ */
++ (BOOL)isSameTopicWithOneTopic:(IMTopic *)topic anotherTopic:(IMTopic *)anotherTopic;
 
 // Notifications
 UIKIT_EXTERN NSNotificationName const kIMMessageDidUpdateNotification;

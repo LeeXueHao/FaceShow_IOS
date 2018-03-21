@@ -149,7 +149,40 @@
     [[IMDatabaseManager sharedInstance] resetUnreadMessageCountWithTopicID:topicID];
 }
 
++ (IMTopic *)findTopicWithMember:(IMMember *)member {
+   return [[IMDatabaseManager sharedInstance] findTopicWithMember:member];
+}
+
 + (NSTimeInterval)obtainTimeoffset {
     return [IMRequestManager sharedInstance].timeoffset;
+}
+
++ (BOOL)topic:(IMTopic *)topic isWithMember:(IMMember *)member {
+    if (topic.type != TopicType_Private) {
+        return NO;
+    }
+    for (IMMember *item in topic.members) {
+        if (item.memberID == member.memberID) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (BOOL)isSameTopicWithOneTopic:(IMTopic *)topic anotherTopic:(IMTopic *)anotherTopic {
+    if (topic.topicID == anotherTopic.topicID) {
+        return YES;
+    }
+    NSArray *topicMembers = topic.members;
+    NSArray *anotherTopicMembers = anotherTopic.members;
+    if (topic.type == anotherTopic.type && topicMembers.count == anotherTopicMembers.count) {
+        for (IMMember *member in topicMembers) {
+            if (![anotherTopicMembers containsObject:member]) {
+                return NO;
+            }
+        }
+        return YES;
+    }
+    return NO;
 }
 @end

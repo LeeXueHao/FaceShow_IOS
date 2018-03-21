@@ -7,10 +7,12 @@
 //
 
 #import "IMPhotoBrowserView.h"
-#import "SlideImageView.h"
+#import "IMSlideImageView.h"
 #import "AlertView.h"
+#import "IMTopicMessage.h"
+#import "IMSlideView.h"
 
-@interface IMPhotoBrowserView ()<QASlideViewDataSource, QASlideViewDelegate>
+@interface IMPhotoBrowserView ()<IMSlideViewDataSource, IMSlideViewDelegate>
 
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, copy) PhotoBrowserViewSingleTapActionBlock block;
@@ -29,8 +31,7 @@
 #pragma mark - setupUI
 - (void)setupUI {
     
-    self.slideView = [[QASlideView alloc] init];
-    self.slideView.backgroundColor = [UIColor blackColor];
+    self.slideView = [[IMSlideView alloc] init];
     self.slideView.dataSource = self;
     self.slideView.delegate = self;
     self.slideView.currentIndex = self.currentIndex;
@@ -48,29 +49,27 @@
     }];
 }
 
-#pragma mark - QASlideViewDataSource & QASlideViewDelegate
-- (NSInteger)numberOfItemsInSlideView:(QASlideView *)slideView {
-    if (self.isUrlFormat) {
-        return self.imageUrlStrArray.count;
-    }
-    return self.imageArray.count;
+#pragma mark - IMSlideViewDataSource & IMSlideViewDelegate
+- (NSInteger)numberOfItemsInSlideView:(IMSlideView *)slideView {
+   return self.imageMessageArray.count;
 }
 
-- (QASlideItemBaseView *)slideView:(QASlideView *)slideView itemViewAtIndex:(NSInteger)index {
-    SlideImageView *imageView = [[SlideImageView alloc] init];
-    if (self.isUrlFormat) {
-        [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlStrArray[index]] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
+- (QASlideItemBaseView *)slideView:(IMSlideView *)slideView itemViewAtIndex:(NSInteger)index {
+    IMTopicMessage *message = self.imageMessageArray[index];
+    IMSlideImageView *imageView = [[IMSlideImageView alloc] initWithImageWidth:message.width imageHeight:message.height];
+    if (![message imageWaitForSending]) {
+        [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
     }else {
-        imageView.image = self.imageArray[index];
+        imageView.image = [message imageWaitForSending];
     }
     return imageView;
 }
 
-- (void)slideView:(QASlideView *)slideView didSlideFromIndex:(NSInteger)from toIndex:(NSInteger)to {
+- (void)slideView:(IMSlideView *)slideView didSlideFromIndex:(NSInteger)from toIndex:(NSInteger)to {
     self.currentIndex = to;
-    SlideImageView *fromImageView = [slideView itemViewAtIndex:from];
+    IMSlideImageView *fromImageView = [slideView itemViewAtIndex:from];
     [fromImageView resetZoomScale];
-    SlideImageView *toImageView = [slideView itemViewAtIndex:to];
+    IMSlideImageView *toImageView = [slideView itemViewAtIndex:to];
     if (toImageView) {
         [self.singleTap requireGestureRecognizerToFail:toImageView.doubleTap];
     }

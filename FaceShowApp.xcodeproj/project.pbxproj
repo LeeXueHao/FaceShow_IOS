@@ -380,6 +380,8 @@
 		E91E5DBA2047D6DE00052FBA /* YXGCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DB92047D6DE00052FBA /* YXGCDTimer.m */; };
 		E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */; };
 		E91E5DC62047DB5500052FBA /* IMConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC52047DB5500052FBA /* IMConnectionManager.m */; };
+		E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EC206342F000CED82E /* IMSlideImageView.m */; };
+		E93327F020638DF800CED82E /* IMSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EF20638DF800CED82E /* IMSlideView.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1104,6 +1106,10 @@
 		E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDatabaseManager.m; sourceTree = "<group>"; };
 		E91E5DC42047DB5500052FBA /* IMConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConnectionManager.h; sourceTree = "<group>"; };
 		E91E5DC52047DB5500052FBA /* IMConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConnectionManager.m; sourceTree = "<group>"; };
+		E93327EB206342F000CED82E /* IMSlideImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSlideImageView.h; sourceTree = "<group>"; };
+		E93327EC206342F000CED82E /* IMSlideImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideImageView.m; sourceTree = "<group>"; };
+		E93327EE20638DF800CED82E /* IMSlideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSlideView.h; sourceTree = "<group>"; };
+		E93327EF20638DF800CED82E /* IMSlideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideView.m; sourceTree = "<group>"; };
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
@@ -2410,6 +2416,10 @@
 				E90C513F204CF5410008F92A /* IMImageSendingProgressView.m */,
 				E997064B205A0A010096DAB0 /* IMPhotoBrowserView.h */,
 				E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */,
+				E93327EB206342F000CED82E /* IMSlideImageView.h */,
+				E93327EC206342F000CED82E /* IMSlideImageView.m */,
+				E93327EE20638DF800CED82E /* IMSlideView.h */,
+				E93327EF20638DF800CED82E /* IMSlideView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2915,6 +2925,7 @@
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
 				7CBC5BC7204E298C004ACA04 /* SysUserItem.m in Sources */,
+				E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */,
 				7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */,
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
@@ -3013,6 +3024,7 @@
 				431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */,
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
+				E93327F020638DF800CED82E /* IMSlideView.m in Sources */,
 				E91E5D682047B86B00052FBA /* IMServiceManager.m in Sources */,
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,

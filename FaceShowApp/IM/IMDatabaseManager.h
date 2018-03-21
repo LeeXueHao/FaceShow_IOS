@@ -39,12 +39,6 @@
                 beforeIndex:(int64_t)index
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
 
-/**
-  从通讯录选择某一个联系人进入聊天界面的时候调用
-
- @param member 联系人信息
- @return 聊天信息
- */
 - (IMTopic *)findTopicWithMember:(IMMember *)member;
 
 #pragma mark - 离线消息抓取相关

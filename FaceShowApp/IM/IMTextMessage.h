@@ -10,8 +10,8 @@
 #import "IMMember.h"
 
 @interface IMTextMessage : NSObject
-@property (nonatomic, assign) uint64_t topicID;
-@property (nonatomic, assign) uint64_t groupID;
+@property (nonatomic, assign) int64_t topicID;
+@property (nonatomic, assign) int64_t groupID;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *uniqueID;
 @property (nonatomic, strong) IMMember *otherMember;

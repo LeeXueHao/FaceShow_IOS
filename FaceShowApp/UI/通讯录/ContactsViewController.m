@@ -17,6 +17,7 @@
 #import "IMConfig.h"
 #import "ContactMemberContactsRequest.h"
 #import "IMMember.h"
+#import "IMUserInterface.h"
 
 @interface ContactsViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -261,7 +262,7 @@
         return;
     }
     NSString *groupId = self.groupsArray[self.currentSelectedGroupIndex].groupId;
-    IMTopic *topic = [[IMDatabaseManager sharedInstance] findTopicWithMember:member];
+    IMTopic *topic = [IMUserInterface findTopicWithMember:member];
     if (topic) {
         chatVC.topic = topic;
     }else {
