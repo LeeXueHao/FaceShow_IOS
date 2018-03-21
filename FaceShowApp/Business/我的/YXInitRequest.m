@@ -178,10 +178,6 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
     }
 
     self.body = self.item.data[0];
-    NSString *version = [@"v" stringByAppendingString:[ConfigManager sharedInstance].clientVersion];
-    if ([version isEqualToString:self.body.version]) {
-        return;
-    }
 
     if ([self.body isTest]) { //测试环境
 #ifndef DEBUG
