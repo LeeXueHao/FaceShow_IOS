@@ -109,7 +109,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     }
     self.isMsgSending = YES;
     IMImageMessage *msg = [self.msgArray firstObject];
-    if (!msg.topicID) {
+    if ([[IMDatabaseManager sharedInstance]isTempTopicID:msg.topicID]) {
         WEAK_SELF
         [[IMRequestManager sharedInstance]requestNewTopicWithMember:msg.otherMember fromGroup:msg.groupID completeBlock:^(IMTopic *topic, NSError *error) {
             STRONG_SELF
@@ -118,8 +118,6 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
                 [self sendNext];
                 return;
             }
-            // 更新topicid
-            [[IMDatabaseManager sharedInstance] resetDirtyMessagesWithTopicID:topic.topicID];
             // 订阅新的topic
             [[IMDatabaseManager sharedInstance]saveTopic:topic];
             [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];

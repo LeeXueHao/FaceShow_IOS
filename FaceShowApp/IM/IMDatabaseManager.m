@@ -133,10 +133,6 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
         topicEntity.curMember = curMemberEntity;
         
-        NSPredicate *msgPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
-        IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:msgPredicate sortedBy:@"primaryKey" ascending:NO inContext:localContext];
-        topicEntity.latestMessage = msgEntity;
-        
         if (topic.members.count > 0) {
             NSMutableArray *memberIDArray = [NSMutableArray array];
             for (IMMember *member in topic.members) {
@@ -153,7 +149,13 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
                 [memberIDArray addObject:[NSString stringWithFormat:@"%@",@(member.memberID)]];
             }
             topicEntity.memberIDs = [memberIDArray componentsJoinedByString:@","];
+            
+            [self migrateTempMessagesIfNeededToTopicEntity:topicEntity inContext:localContext];
         }
+        
+        NSPredicate *msgPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:msgPredicate sortedBy:@"primaryKey" ascending:NO inContext:localContext];
+        topicEntity.latestMessage = msgEntity;
         
         // 补充topic缺少的latest message信息
         topic.latestMessage = [self messageFromEntity:msgEntity];
@@ -161,21 +163,40 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:topic];
 }
 
-- (void)clearDirtyMessages {
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = 0"];
-        [IMTopicMessageEntity MR_deleteAllMatchingPredicate:predicate inContext:localContext];
-    }];
+- (void)migrateTempMessagesIfNeededToTopicEntity:(IMTopicEntity *)topicEntity inContext:(NSManagedObjectContext *)context {
+    if (topicEntity.topicID < 0) {
+        return;
+    }
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID < 0 && curMember.memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
+    NSArray *tempEntities = [IMTopicEntity MR_findAllWithPredicate:predicate inContext:context];
+    for (IMTopicEntity *entity in tempEntities) {
+        if ([self isSameTopicWithOneEntity:entity anotherEntity:topicEntity]) {
+            NSPredicate *msgPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(entity.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+            NSArray *msgEntities = [IMTopicMessageEntity MR_findAllWithPredicate:msgPredicate inContext:context];
+            for (IMTopicMessageEntity *msg in msgEntities) {
+                msg.topicID = topicEntity.topicID;
+            }
+            [entity MR_deleteEntityInContext:context];
+            return;
+        }
+    }
 }
 
-- (void)resetDirtyMessagesWithTopicID:(int64_t)topicID {
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = 0"];
-        NSArray *entities = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
-        for (IMTopicMessageEntity *entity in entities) {
-            entity.topicID = topicID;
+- (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {
+    if (entity.topicID == anotherEntity.topicID) {
+        return YES;
+    }
+    NSArray *entityMemberIDs = [entity.memberIDs componentsSeparatedByString:@","];
+    NSArray *anotherEntityMemberIDs = [anotherEntity.memberIDs componentsSeparatedByString:@","];
+    if (entity.type == anotherEntity.type && entityMemberIDs.count == anotherEntityMemberIDs.count) {
+        for (NSString *memberID in entityMemberIDs) {
+            if (![anotherEntityMemberIDs containsObject:memberID]) {
+                return NO;
+            }
         }
-    }];
+        return YES;
+    }
+    return NO;
 }
 
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID {
@@ -185,6 +206,20 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         topicEntity.unreadCount = 0;
     }];
 }
+
+- (int64_t)generateTempTopicID {
+    NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID < 0 && curMember.memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
+    IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate sortedBy:@"topicID" ascending:YES];
+    if (topicEntity) {
+        return topicEntity.topicID - 1;
+    }
+    return -1;
+}
+
+- (BOOL)isTempTopicID:(int64_t)topicID {
+    return topicID < 0;
+}
+
 #pragma mark - 查询
 - (NSArray<IMTopic *> *)findAllTopics {
     NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"curMember.memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
@@ -256,6 +291,20 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     return [self messageFromEntity:msgEntity];
 }
 
+- (IMTopic *)findTopicWithMember:(IMMember *)member {
+    NSArray *topicArray = [self findAllTopics];
+    for (IMTopic *topic in topicArray) {
+        if (topic.type == TopicType_Private) {
+            for (IMMember *targetMember in topic.members) {
+                if (member.memberID && targetMember.memberID == member.memberID) {
+                    return topic;
+                }
+            }
+        }
+    }
+    return nil;
+}
+
 #pragma mark - 转换
 - (IMTopic *)topicFromEntity:(IMTopicEntity *)entity {
     if (!entity) {
@@ -321,17 +370,4 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     return member;
 }
 
-- (IMTopic *)findTopicWithMember:(IMMember *)member {
-    NSArray *topicArray = [self findAllTopics];
-    for (IMTopic *topic in topicArray) {
-        if (topic.type == TopicType_Private) {
-            for (IMMember *targetMember in topic.members) {
-                if (member.memberID && targetMember.memberID == member.memberID) {
-                    return topic;
-                }
-            }
-        }
-    }
-    return nil;
-}
 @end

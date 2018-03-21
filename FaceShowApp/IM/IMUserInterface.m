@@ -11,6 +11,7 @@
 #import "IMDatabaseManager.h"
 #import "IMTextMessageSender.h"
 #import "IMImageMessageSender.h"
+#import "IMManager.h"
 
 @implementation IMUserInterface
 
@@ -28,10 +29,12 @@
 }
 
 + (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member fromGroup:(int64_t)groupID{
+    IMTopic *tempTopic = [IMUserInterface generateTempTopicWithMember:member];
     IMTextMessage *msg = [[IMTextMessage alloc]init];
     msg.text = text;
     msg.otherMember = member;
     msg.groupID = groupID;
+    msg.topicID = tempTopic.topicID;
     
     [[IMTextMessageSender sharedInstance]addTextMessage:msg];
 }
@@ -50,12 +53,23 @@
 }
 
 + (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member fromGroup:(int64_t)groupID{
+    IMTopic *tempTopic = [IMUserInterface generateTempTopicWithMember:member];
     IMImageMessage *msg = [[IMImageMessage alloc]init];
     msg.image = image;
     msg.otherMember = member;
     msg.groupID = groupID;
+    msg.topicID = tempTopic.topicID;
     
     [[IMImageMessageSender sharedInstance]addImageMessage:msg];
+}
+
++ (IMTopic *)generateTempTopicWithMember:(IMMember *)member {
+    IMTopic *topic = [[IMTopic alloc]init];
+    topic.type = TopicType_Private;
+    topic.topicID = [[IMDatabaseManager sharedInstance]generateTempTopicID];
+    topic.members = @[member,[IMManager sharedInstance].currentMember];
+    [[IMDatabaseManager sharedInstance]saveTopic:topic];
+    return topic;
 }
 
 + (NSArray<IMTopic *> *)findAllTopics {
@@ -129,10 +143,6 @@
             }
         }
     }];
-}
-
-+ (void)clearDirtyMessages {
-    [[IMDatabaseManager sharedInstance] clearDirtyMessages];
 }
 
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID {

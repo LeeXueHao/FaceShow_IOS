@@ -49,7 +49,6 @@
 
 - (void)dealloc {
     [self.menuView dismiss];
-    [IMUserInterface clearDirtyMessages];
 }
 
 - (void)backAction {
