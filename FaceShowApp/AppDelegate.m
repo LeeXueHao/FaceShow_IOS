@@ -39,6 +39,7 @@
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
         [[IMManager sharedInstance]setupWithCurrentMember:[[UserManager sharedInstance].userModel.imInfo.imMember toIMMember] token:[UserManager sharedInstance].userModel.imInfo.imToken];
+        [[IMManager sharedInstance]setupWithSceneID:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
         [[IMManager sharedInstance] startConnection];
     }
     
@@ -59,6 +60,7 @@
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
         [[IMManager sharedInstance]setupWithCurrentMember:[[UserManager sharedInstance].userModel.imInfo.imMember toIMMember] token:[UserManager sharedInstance].userModel.imInfo.imToken];
+        [[IMManager sharedInstance]setupWithSceneID:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
         [[IMManager sharedInstance] startConnection];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {

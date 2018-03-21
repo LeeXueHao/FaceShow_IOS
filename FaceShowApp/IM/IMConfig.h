@@ -23,4 +23,6 @@ extern NSString * const kBizSourse;
 
 + (NSString *)generateUniqueID;
 
++ (NSString *)sceneInfoString;
+
 @end

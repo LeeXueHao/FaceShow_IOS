@@ -16,6 +16,7 @@
 @interface SaveImageMsgRequest ()
 @property (nonatomic, strong) NSString *bizSource;
 @property (nonatomic, strong) NSString *imToken;
+@property (nonatomic, strong) NSString *imExt;
 @end
 
 @implementation SaveImageMsgRequest
@@ -25,6 +26,7 @@
         self.method = @"topic.saveImageMsg";
         self.bizSource = kBizSourse;
         self.imToken = [[IMManager sharedInstance]token];
+        self.imExt = [IMConfig sceneInfoString];
     }
     return self;
 }

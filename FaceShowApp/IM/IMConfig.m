@@ -31,4 +31,8 @@ NSString * const kBizSourse = @"22";
     return [[NSString stringWithFormat:@"%@:%@",[IMManager sharedInstance].token,[[NSUUID UUID]UUIDString]]md5];
 }
 
++ (NSString *)sceneInfoString {
+    return [NSString stringWithFormat:@"{\"scene\":\"clazs\", \"sceneId\":\"%@\"}",[IMManager sharedInstance].sceneID];
+}
+
 @end

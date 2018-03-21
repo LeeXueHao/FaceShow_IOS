@@ -16,6 +16,7 @@
 @interface SaveTextMsgRequest ()
 @property (nonatomic, strong) NSString *bizSource;
 @property (nonatomic, strong) NSString *imToken;
+@property (nonatomic, strong) NSString *imExt;
 @end
 
 @implementation SaveTextMsgRequest
@@ -25,6 +26,7 @@
         self.method = @"topic.saveTextMsg";
         self.bizSource = kBizSourse;
         self.imToken = [[IMManager sharedInstance]token];
+        self.imExt = [IMConfig sceneInfoString];
     }
     return self;
 }

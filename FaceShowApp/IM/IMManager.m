@@ -14,6 +14,7 @@
 @interface IMManager()
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) IMMember *currentMember;
+@property (nonatomic, strong) NSString *sceneID;
 @end
 
 @implementation IMManager
@@ -27,9 +28,13 @@
 }
 
 - (void)setupWithCurrentMember:(IMMember *)member token:(NSString *)token {
-    _currentMember = member;
-    _token = token;
+    self.currentMember = member;
+    self.token = token;
     [[IMDatabaseManager sharedInstance]saveMember:member];
+}
+
+- (void)setupWithSceneID:(NSString *)sceneID {
+    self.sceneID = sceneID;
 }
 
 - (void)startConnection {

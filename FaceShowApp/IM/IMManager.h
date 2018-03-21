@@ -15,7 +15,10 @@
 @property (nonatomic, strong, readonly) NSString *token;
 @property (nonatomic, strong, readonly) IMMember *currentMember;
 
+@property (nonatomic, strong, readonly) NSString *sceneID;
+
 - (void)setupWithCurrentMember:(IMMember *)member token:(NSString *)token;
+- (void)setupWithSceneID:(NSString *)sceneID;
 
 - (void)startConnection;
 - (void)stopConnection;

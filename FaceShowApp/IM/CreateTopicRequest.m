@@ -21,6 +21,7 @@
 @interface CreateTopicRequest ()
 @property (nonatomic, strong) NSString *bizSource;
 @property (nonatomic, strong) NSString *imToken;
+@property (nonatomic, strong) NSString *imExt;
 @end
 
 @implementation CreateTopicRequest
@@ -30,6 +31,7 @@
         self.method = @"topic.createTopic";
         self.bizSource = kBizSourse;
         self.imToken = [[IMManager sharedInstance]token];
+        self.imExt = [IMConfig sceneInfoString];
     }
     return self;
 }
