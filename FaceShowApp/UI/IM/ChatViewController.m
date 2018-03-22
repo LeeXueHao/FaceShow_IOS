@@ -414,51 +414,51 @@
     IMChatViewModel *model = cell.model;
     CGRect rect = cell.messageBackgroundView.bounds;
     rect = [cell.messageBackgroundView convertRect:rect toView:self.view.window];
-    CGRect fixRect = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
     
-    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]init];
+    CGRect fixRect = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
+    IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]initWithFrame:fixRect];
     NSMutableArray *array = [NSMutableArray array];
     [array addObject:model.message];
     photoBrowserView.imageMessageArray = array;
     photoBrowserView.currentIndex = 0;
+
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
+        view.hidden = YES;
+        IMSlideImageView *foldSlideImageV = [view.slideView itemViewAtIndex:view.currentIndex];
+        CGRect newRect = foldSlideImageV.imageView.frame;
+        
+        UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
+//        foldImgView.backgroundColor = [UIColor blackColor];
+        foldImgView.contentMode = UIViewContentModeScaleAspectFit;
+        foldImgView.image = foldSlideImageV.image;
+        [self.view.window addSubview:foldImgView];
+        foldImgView.userInteractionEnabled = YES;
         [UIView animateWithDuration:.3 animations:^{
-            //            view.frame = rect;
-            [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(rect.origin.x);
-                make.top.mas_equalTo(rect.origin.y);
-                make.size.mas_equalTo(rect.size);
-            }];
-            [self.view.window layoutIfNeeded];
+            foldImgView.frame = rect;
         }completion:^(BOOL finished) {
-            [view removeFromSuperview];
+            [foldImgView removeFromSuperview];
         }];
     }];
     [self.view.window addSubview:photoBrowserView];
-    [photoBrowserView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(rect.origin.x);
-        make.top.mas_equalTo(rect.origin.y);
-        make.size.mas_equalTo(rect.size);
-    }];
-    [self.view.window layoutIfNeeded];
+    photoBrowserView.hidden = YES;
+    
+    UIImageView *openImgView = [[UIImageView alloc]initWithFrame:rect];
+    openImgView.backgroundColor = [UIColor blackColor];
+    if ([model.message imageWaitForSending]) {
+        openImgView.image = [photoBrowserView.imageMessageArray[photoBrowserView.currentIndex] imageWaitForSending];
+    }else {
+        [openImgView sd_setImageWithURL:[NSURL URLWithString:photoBrowserView.imageMessageArray[photoBrowserView.currentIndex].viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
+    }
+    openImgView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view.window addSubview:openImgView];
     [UIView animateWithDuration:.3 animations:^{
-        
-        [photoBrowserView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.mas_equalTo(0);
-            //            make.bottom.mas_equalTo(-SafeAreaBottomHeight(self.view.window));
-            //            make.size.mas_equalTo(fixRect.size);
-            make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
-        }];
-        //        photoBrowserView.frame = fixRect;
-        [self.view.window layoutIfNeeded];
+        openImgView.frame = fixRect;
     }completion:^(BOOL finished) {
-        
+        [openImgView removeFromSuperview];
+        photoBrowserView.hidden = NO;
     }];
-
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {

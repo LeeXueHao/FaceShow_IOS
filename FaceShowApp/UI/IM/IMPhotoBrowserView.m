@@ -10,7 +10,6 @@
 #import "IMSlideImageView.h"
 #import "AlertView.h"
 #import "IMTopicMessage.h"
-#import "IMSlideView.h"
 
 @interface IMPhotoBrowserView ()<IMSlideViewDataSource, IMSlideViewDelegate>
 

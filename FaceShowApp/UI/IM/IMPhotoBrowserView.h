@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "QASlideView.h"
+#import "IMSlideView.h"
 @class IMPhotoBrowserView;
 @class IMTopicMessage;
-@class IMSlideView;
 
 typedef void(^PhotoBrowserViewSingleTapActionBlock) (IMPhotoBrowserView *view);
 
