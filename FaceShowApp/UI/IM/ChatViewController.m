@@ -385,7 +385,28 @@
 
 #pragma mark - IMMessageCellDelegate
 - (void)messageCellDidClickAvatarForUser:(IMMember *)user {
-    [self.view nyx_showToast:@"click avatar to do ..."];
+//    [self.view nyx_showToast:@"click avatar to do ..."];
+    if (self.member) {//有member说明是私聊
+        return;
+    }
+    if (self.topic && self.topic.type == TopicType_Group) {//有topic的情况下 且是群聊
+        ChatViewController *chatVC = [[ChatViewController alloc]init];
+        IMMember *member = user;
+        //如果是自己则返回
+        GetUserInfoRequestItem_imTokenInfo *info = [UserManager sharedInstance].userModel.imInfo;
+        if (member.memberID == [info.imMember toIMMember].memberID) {
+            return;
+        }
+        NSString *groupId = self.groupId ? self.groupId : @"0";
+        IMTopic *topic = [IMUserInterface findTopicWithMember:member];
+        if (topic) {
+            chatVC.topic = topic;
+        }else {
+            chatVC.member = member;
+            chatVC.groupId = groupId;
+        }
+        [self.navigationController pushViewController:chatVC animated:YES];
+    }
 }
 
 - (void)messageCellTap:(IMMessageBaseCell *)cell {
@@ -441,7 +462,7 @@
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {
-    DDLogDebug(@"long press to do ...");
+//    DDLogDebug(@"long press to do ...");
     NSInteger row = [self.dataArray indexOfObject:model];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     CGRect cellRect = [self.tableView rectForRowAtIndexPath:indexPath];
@@ -479,11 +500,11 @@
 }
 
 - (void)messageCellDoubleClick:(IMChatViewModel *)mmodel {
-    [self.view nyx_showToast:@"double click to do ..."];
+//    [self.view nyx_showToast:@"double click to do ..."];
 }
 
 - (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect {
-    DDLogDebug(@"click state button to do ...");
+//    DDLogDebug(@"click state button to do ...");
     if ([self isFirstResponder]) {
         [self resignFirstResponder];
     }
