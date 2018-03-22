@@ -77,6 +77,9 @@
     NSMutableArray *groupArray = [NSMutableArray array];
     NSMutableArray *privateArray = [NSMutableArray array];
     for (IMTopic *topic in topics) {
+        if (topic.members.count == 0) {
+            continue;
+        }
         if (topic.type == TopicType_Private) {
             [privateArray addObject:topic];
         }else {
