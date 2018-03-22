@@ -225,6 +225,7 @@
 		7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE558200750AE00B47892 /* PhotoCell.m */; };
 		7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */; };
 		7C7A9ECB206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */; };
+		7C7A9ECE2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ECD2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m */; };
 		7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */; };
 		7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EC2010389F005BE126 /* ClassListRequest.m */; };
 		7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EE201038B5005BE126 /* ClassSelectionViewController.m */; };
@@ -801,6 +802,8 @@
 		7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSelectionHandler.m; sourceTree = "<group>"; };
 		7C7A9EC9206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTopicOfflineMsgFetchRecord.h; sourceTree = "<group>"; };
 		7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMTopicOfflineMsgFetchRecord.m; sourceTree = "<group>"; };
+		7C7A9ECC2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMOfflineMsgUpdateServiceManager.h; sourceTree = "<group>"; };
+		7C7A9ECD2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMOfflineMsgUpdateServiceManager.m; sourceTree = "<group>"; };
 		7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseLectureCell.m; sourceTree = "<group>"; };
 		7C7AADE8205A0F8B003C80E4 /* CourseLectureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseLectureCell.h; sourceTree = "<group>"; };
 		7CB9C8EB2010389F005BE126 /* ClassListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassListRequest.h; sourceTree = "<group>"; };
@@ -2429,6 +2432,8 @@
 			children = (
 				E91E5D622047B86B00052FBA /* IMOfflineMsgUpdateService.h */,
 				E91E5D612047B86B00052FBA /* IMOfflineMsgUpdateService.m */,
+				7C7A9ECC2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.h */,
+				7C7A9ECD2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m */,
 				E91E5D652047B86B00052FBA /* IMServiceManager.h */,
 				E91E5D632047B86B00052FBA /* IMServiceManager.m */,
 				E91E5D662047B86B00052FBA /* IMTopicUpdateService.h */,
@@ -2913,6 +2918,7 @@
 				7C2518EB1F68E68D0001B577 /* UIImage+FixOrientation.m in Sources */,
 				7C2518E81F68E68D0001B577 /* UIButton+ExpandHitArea.m in Sources */,
 				7C212DF11F6B73830007AE01 /* CourseCatalogCell.m in Sources */,
+				7C7A9ECE2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m in Sources */,
 				4378DFAB1F6FA4CB005CFE56 /* SignInRecordCell.m in Sources */,
 				923F73871F725C4700D7EA6F /* ClassMomentCommentRequest.m in Sources */,
 				E900D7A31FEB5806005B9163 /* FeedbackRequest.m in Sources */,

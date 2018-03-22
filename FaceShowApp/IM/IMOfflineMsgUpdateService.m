@@ -13,6 +13,7 @@
 @interface IMOfflineMsgUpdateService()
 @property (nonatomic, assign) int64_t topicID;
 @property (nonatomic, assign) int64_t startID;
+@property (nonatomic, strong) void(^completeBlock)(NSError *error);
 @end
 
 @implementation IMOfflineMsgUpdateService
@@ -24,11 +25,17 @@
     return self;
 }
 
+- (void)startWithCompleteBlock:(void(^)(NSError *error))completeBlock {
+    self.completeBlock = completeBlock;
+    [self start];
+}
+
 - (void)start {
     WEAK_SELF
     [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:self.topicID startID:self.startID asending:YES dataNum:20 completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
         STRONG_SELF
         if (error) {
+            self.completeBlock(error);
             return;
         }
         BOOL hasMore = msgs.count==20;
@@ -49,6 +56,7 @@
             [self start];
         }else {
             [[IMDatabaseManager sharedInstance]removeOfflineMsgFetchRecordInTopic:self.topicID withStartID:self.startID];
+            self.completeBlock(nil);
         }
     }];
 }

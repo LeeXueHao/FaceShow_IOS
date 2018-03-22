@@ -11,5 +11,6 @@
 @interface IMOfflineMsgUpdateService : NSObject
 - (instancetype)initWithTopicID:(int64_t)topicID startID:(int64_t)startID;
 
-- (void)start;
+- (void)startWithCompleteBlock:(void(^)(NSError *error))completeBlock;
+
 @end

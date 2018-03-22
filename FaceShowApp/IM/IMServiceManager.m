@@ -13,12 +13,13 @@
 #import "IMConnectionManager.h"
 #import "IMConfig.h"
 #import "IMOfflineMsgUpdateService.h"
+#import "IMOfflineMsgUpdateServiceManager.h"
 
 @interface IMServiceManager()
 @property (nonatomic, strong) Reachability *hostReachability;
 @property (nonatomic, assign) NetworkStatus networkStatus;
 @property (nonatomic, strong) IMTopicUpdateService *topicUpdateService;
-@property (nonatomic, strong) NSMutableArray<IMOfflineMsgUpdateService *> *offlineMsgServices;
+@property (nonatomic, strong) IMOfflineMsgUpdateServiceManager *offlineServiceManager;
 @property (nonatomic, assign) BOOL running;
 @end
 
@@ -30,7 +31,7 @@
         manager = [[IMServiceManager alloc] init];
         manager.networkStatus = NotReachable;
         manager.topicUpdateService = [[IMTopicUpdateService alloc]init];
-        manager.offlineMsgServices = [NSMutableArray array];
+        manager.offlineServiceManager = [[IMOfflineMsgUpdateServiceManager alloc]init];
         manager.running = NO;
     });
     return manager;
@@ -54,7 +55,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
     [[IMConnectionManager sharedInstance]disconnect];
     [self.topicUpdateService removeAllTopics];
-    [self.offlineMsgServices removeAllObjects];
+    [self.offlineServiceManager removeAllServices];
     self.running = NO;
 }
 
@@ -126,13 +127,11 @@
             record.topicID = topic.topicID;
             record.startID = lastID;
             [[IMDatabaseManager sharedInstance]saveOfflineMsgFetchRecord:record];
-            
-            NSArray *offlineRecords = [[IMDatabaseManager sharedInstance]findAllOfflineMsgFetchRecordsWithTopicID:topic.topicID];
-            for (IMTopicOfflineMsgFetchRecord *item in offlineRecords) {
-                IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:item.topicID startID:item.startID];
-                [self.offlineMsgServices addObject:offlineService];
-                [offlineService start];
-            }
+        }
+        NSArray *offlineRecords = [[IMDatabaseManager sharedInstance]findAllOfflineMsgFetchRecordsWithTopicID:topic.topicID];
+        for (IMTopicOfflineMsgFetchRecord *item in offlineRecords) {
+            IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:item.topicID startID:item.startID];
+            [self.offlineServiceManager addService:offlineService];
         }
     }
 }
