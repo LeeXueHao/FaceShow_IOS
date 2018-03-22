@@ -122,9 +122,17 @@
             lastID = dbTopic.latestMsgId;
         }
         if (lastID > 0 && topic.latestMsgId > lastID) {
-            IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:topic.topicID startID:lastID];
-            [self.offlineMsgServices addObject:offlineService];
-            [offlineService start];
+            IMTopicOfflineMsgFetchRecord *record = [[IMTopicOfflineMsgFetchRecord alloc]init];
+            record.topicID = topic.topicID;
+            record.startID = lastID;
+            [[IMDatabaseManager sharedInstance]saveOfflineMsgFetchRecord:record];
+            
+            NSArray *offlineRecords = [[IMDatabaseManager sharedInstance]findAllOfflineMsgFetchRecordsWithTopicID:topic.topicID];
+            for (IMTopicOfflineMsgFetchRecord *item in offlineRecords) {
+                IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:item.topicID startID:item.startID];
+                [self.offlineMsgServices addObject:offlineService];
+                [offlineService start];
+            }
         }
     }
 }

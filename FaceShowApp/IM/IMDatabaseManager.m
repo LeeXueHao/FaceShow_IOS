@@ -10,6 +10,7 @@
 #import "IMMemberEntity+CoreDataClass.h"
 #import "IMTopicEntity+CoreDataClass.h"
 #import "IMTopicMessageEntity+CoreDataClass.h"
+#import "IMTopicOfflineMsgFetchEntity+CoreDataClass.h"
 #import "IMManager.h"
 
 NSString * const kIMMessageDidUpdateNotification = @"kIMMessageDidUpdateNotification";
@@ -368,6 +369,61 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     member.name = entity.name;
     member.avatar = entity.avatar;
     return member;
+}
+
+#pragma mark - 离线消息待抓取记录
+- (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsWithTopicID:(int64_t)topicID {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
+    NSArray *entities = [IMTopicOfflineMsgFetchEntity MR_findAllSortedBy:@"startID" ascending:YES withPredicate:predicate];
+    NSMutableArray *array = [NSMutableArray array];
+    for (IMTopicOfflineMsgFetchEntity *entity in entities) {
+        [array addObject:[self offlineMsgFetchRecordFromEntity:entity]];
+    }
+    return array;
+}
+
+- (IMTopicOfflineMsgFetchRecord *)offlineMsgFetchRecordFromEntity:(IMTopicOfflineMsgFetchEntity *)entity {
+    if (!entity) {
+        return nil;
+    }
+    IMTopicOfflineMsgFetchRecord *record = [[IMTopicOfflineMsgFetchRecord alloc]init];
+    record.topicID = entity.topicID;
+    record.startID = entity.startID;
+    return record;
+}
+
+- (void)saveOfflineMsgFetchRecord:(IMTopicOfflineMsgFetchRecord *)record {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && startID = %@ && curMember.memberID = %@",@(record.topicID),@(record.startID),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicOfflineMsgFetchEntity *entity = [IMTopicOfflineMsgFetchEntity MR_findFirstWithPredicate:predicate inContext:localContext];
+        if (entity) {
+            return;
+        }
+        entity = [IMTopicOfflineMsgFetchEntity MR_createEntityInContext:localContext];
+        entity.topicID = record.topicID;
+        entity.startID = record.startID;
+        
+        NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
+        IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
+        entity.curMember = curMemberEntity;
+    }];
+}
+
+- (void)updateOfflineMsgFetchRecordStartIDInTopic:(int64_t)topicID from:(int64_t)from to:(int64_t)to {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && startID = %@ && curMember.memberID = %@",@(topicID),@(from),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicOfflineMsgFetchEntity *entity = [IMTopicOfflineMsgFetchEntity MR_findFirstWithPredicate:predicate inContext:localContext];
+        entity.topicID = topicID;
+        entity.startID = to;
+    }];
+}
+
+- (void)removeOfflineMsgFetchRecordInTopic:(int64_t)topicID withStartID:(int64_t)startID {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && startID = %@ && curMember.memberID = %@",@(topicID),@(startID),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicOfflineMsgFetchEntity *entity = [IMTopicOfflineMsgFetchEntity MR_findFirstWithPredicate:predicate inContext:localContext];
+        [entity MR_deleteEntityInContext:localContext];
+    }];
 }
 
 @end

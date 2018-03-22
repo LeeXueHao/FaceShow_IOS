@@ -10,6 +10,7 @@
 #import "IMMember.h"
 #import "IMTopicMessage.h"
 #import "IMTopic.h"
+#import "IMTopicOfflineMsgFetchRecord.h"
 
 @interface IMDatabaseManager : NSObject
 + (IMDatabaseManager *)sharedInstance;
@@ -45,4 +46,10 @@
  @return 聊天信息
  */
 - (IMTopic *)findTopicWithMember:(IMMember *)member;
+
+#pragma mark - 离线消息抓取相关
+- (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsWithTopicID:(int64_t)topicID;
+- (void)saveOfflineMsgFetchRecord:(IMTopicOfflineMsgFetchRecord *)record;
+- (void)updateOfflineMsgFetchRecordStartIDInTopic:(int64_t)topicID from:(int64_t)from to:(int64_t)to;
+- (void)removeOfflineMsgFetchRecordInTopic:(int64_t)topicID withStartID:(int64_t)startID;
 @end

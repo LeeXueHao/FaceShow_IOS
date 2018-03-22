@@ -224,6 +224,7 @@
 		7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55520074DC000B47892 /* PhotoListViewController.m */; };
 		7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE558200750AE00B47892 /* PhotoCell.m */; };
 		7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */; };
+		7C7A9ECB206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */; };
 		7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */; };
 		7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EC2010389F005BE126 /* ClassListRequest.m */; };
 		7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EE201038B5005BE126 /* ClassSelectionViewController.m */; };
@@ -796,6 +797,8 @@
 		7C6EE558200750AE00B47892 /* PhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		7C6EE55A2008547E00B47892 /* ImageSelectionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSelectionHandler.h; sourceTree = "<group>"; };
 		7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSelectionHandler.m; sourceTree = "<group>"; };
+		7C7A9EC9206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTopicOfflineMsgFetchRecord.h; sourceTree = "<group>"; };
+		7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMTopicOfflineMsgFetchRecord.m; sourceTree = "<group>"; };
 		7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseLectureCell.m; sourceTree = "<group>"; };
 		7C7AADE8205A0F8B003C80E4 /* CourseLectureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseLectureCell.h; sourceTree = "<group>"; };
 		7CB9C8EB2010389F005BE126 /* ClassListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassListRequest.h; sourceTree = "<group>"; };
@@ -2511,6 +2514,8 @@
 			children = (
 				E91E5DC02047DB2C00052FBA /* IMDatabaseManager.h */,
 				E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */,
+				7C7A9EC9206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.h */,
+				7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */,
 				E91E5D792047B8AE00052FBA /* IM.xcdatamodeld */,
 			);
 			name = DB;
@@ -2989,6 +2994,7 @@
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
 				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
 				E91E5D1B2047B1C300052FBA /* ContactsCell.m in Sources */,
+				7C7A9ECB206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m in Sources */,
 				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
 				7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,

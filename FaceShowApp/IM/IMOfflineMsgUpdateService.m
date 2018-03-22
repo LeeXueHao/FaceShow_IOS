@@ -44,8 +44,11 @@
             [[IMDatabaseManager sharedInstance]saveMessage:message];
         }
         if (hasMore) {
+            [[IMDatabaseManager sharedInstance]updateOfflineMsgFetchRecordStartIDInTopic:self.topicID from:self.startID to:msgs.lastObject.messageID];
             self.startID = msgs.lastObject.messageID;
             [self start];
+        }else {
+            [[IMDatabaseManager sharedInstance]removeOfflineMsgFetchRecordInTopic:self.topicID withStartID:self.startID];
         }
     }];
 }
