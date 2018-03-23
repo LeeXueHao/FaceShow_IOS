@@ -141,6 +141,7 @@
                     if (more) {
                         [array removeLastObject];
                     }
+                    [[IMDatabaseManager sharedInstance]saveHistoryMessages:array];
                     completeBlock(array, more, error);
                 }];
             }

@@ -394,6 +394,7 @@
                 }
                 [self handelTimeForDataSource:resultArray];
                 [self.tableView reloadData];
+                BLOCK_EXEC(self.historyMsgReceiveBlock,array.firstObject);
             }
             self.isRefresh = NO;
         });

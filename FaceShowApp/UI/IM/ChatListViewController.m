@@ -216,6 +216,19 @@
         [self clearChattingTopicUnreadCount];
         self.chattingTopic = nil;
     }];
+    [chatVC setHistoryMsgReceiveBlock:^(IMTopicMessage *lastMsg) {
+        STRONG_SELF
+        for (IMTopic *item in self.dataArray) {
+            if (item.topicID == topic.topicID) {
+                if (!item.latestMessage) {
+                    item.latestMessage = lastMsg;
+                    NSUInteger index = [self.dataArray indexOfObject:item];
+                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                }
+                break;
+            }
+        }
+    }];
     [self.navigationController pushViewController:chatVC animated:YES];
     if (topic.type == TopicType_Group) {
         [TalkingData trackEvent:@"点击班级群聊"];

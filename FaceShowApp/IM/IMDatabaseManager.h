@@ -17,6 +17,7 @@
 
 - (void)saveMember:(IMMember *)member;
 - (void)saveMessage:(IMTopicMessage *)message;
+- (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages;
 - (void)saveTopic:(IMTopic *)topic;
 
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;

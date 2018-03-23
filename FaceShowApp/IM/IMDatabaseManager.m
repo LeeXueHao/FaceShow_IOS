@@ -122,6 +122,58 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     }
 }
 
+- (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages{
+    if (messages.count == 0) {
+        return;
+    }
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(messages.firstObject.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        NSArray *localMsgs = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
+        for (IMTopicMessageEntity *msg in localMsgs) {
+            msg.primaryKey += messages.count;
+        }
+        int64_t key = messages.count;
+        for (IMTopicMessage *message in messages) {
+            IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_createEntityInContext:localContext];
+            entity.channel = message.channel;
+            entity.sendState = message.sendState;
+            entity.text = message.text;
+            entity.thumbnail = message.thumbnail;
+            entity.viewUrl = message.viewUrl;
+            entity.topicID = message.topicID;
+            entity.type = message.type;
+            entity.uniqueID = message.uniqueID;
+            entity.messageID = message.messageID;
+            entity.width = message.width;
+            entity.height = message.height;
+            entity.sendTime = message.sendTime;
+            entity.primaryKey = key--;
+            
+            NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
+            IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
+            entity.curMember = curMemberEntity;
+            
+            NSPredicate *senderPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(message.sender.memberID)];
+            IMMemberEntity *senderEntity = [IMMemberEntity MR_findFirstWithPredicate:senderPredicate inContext:localContext];
+            entity.sender = senderEntity;
+            
+            if ([messages indexOfObject:message] == 0) {
+                NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(message.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+                IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+                if (!topicEntity.latestMessage) {
+                    topicEntity.latestMessage = entity;
+                }
+            }
+            // 补充message缺少的字段值，保证通知出去的message是完整的
+            message.index = entity.primaryKey;
+            message.sender.userID = senderEntity.userID;
+            message.sender.avatar = senderEntity.avatar;
+            message.sender.name = senderEntity.name;
+            message.sender.memberID = senderEntity.memberID;
+        }
+    }];
+}
+
 - (void)saveTopic:(IMTopic *)topic {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
