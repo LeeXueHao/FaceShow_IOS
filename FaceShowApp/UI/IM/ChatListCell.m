@@ -126,13 +126,13 @@
         }
     }else {
         WEAK_SELF
-        [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:topic.latestMessage.sender.avatar] placeholderImage:[UIImage imageNamed:@"我个人头像默认图"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            STRONG_SELF
-            self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
-        }];
         [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             STRONG_SELF
             if ([[IMManager sharedInstance] currentMember].memberID != obj.memberID) {
+                [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatar] placeholderImage:[UIImage imageNamed:@"我个人头像默认图"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    STRONG_SELF
+                    self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
+                }];
 //                if (topic.group) {
 //                    self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
 //                }else {
