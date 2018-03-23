@@ -100,9 +100,6 @@
             return;
         }
         [self updateTopics:topics];
-        for (IMTopic *topic in topics) {
-            [[IMDatabaseManager sharedInstance]saveTopic:topic];
-        }
         [self connectAndSubscribeWithTopics:topics];
     }];
 }
@@ -112,6 +109,8 @@
         // update topics
         IMTopic *dbTopic = [[IMDatabaseManager sharedInstance]findTopicWithID:topic.topicID];
         if (topic.topicChange != dbTopic.topicChange) {
+            topic.topicChange = dbTopic.topicChange;
+            [[IMDatabaseManager sharedInstance]saveTopic:topic];
             [self.topicUpdateService addTopic:topic];
         }
         // update offline msgs
