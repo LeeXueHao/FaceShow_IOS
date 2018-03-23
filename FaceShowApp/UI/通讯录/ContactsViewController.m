@@ -57,6 +57,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)requestContacts {
+    NSString *reqId = [IMConfig generateUniqueID];
+    [self.request stopRequest];
+    self.request = [[ContactMemberContactsRequest alloc]init];
+    self.request.reqId = reqId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.request startRequestWithRetClass:[ContactMemberContactsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view addSubview:self.errorView];
+            [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(@0);
+            }];
+            return;
+        }
+        ContactMemberContactsRequestItem *item = (ContactMemberContactsRequestItem *)retItem;
+        if (!item.data.contacts || item.data.contacts.groups.count <= 0) {
+            [self.view addSubview:self.emptyView];
+            [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(@0);
+            }];
+            return;
+        }
+        [self.errorView removeFromSuperview];
+        [self.emptyView removeFromSuperview];
+        [self setupUI];
+        ContactMemberContactsRequestItem_Data_Gcontacts *contacts = item.data.contacts;
+        NSMutableArray *array = [NSMutableArray array];
+        for (ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group in contacts.groups) {
+            [self.groupsArray addObject:group];
+            self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;//当前班级的数据源
+            [array addObject:group];
+        }
+        self.classFilterView.selectedRow = self.currentSelectedGroupIndex;
+        self.classFilterView.dataArray = array.copy;//班级筛选的数据
+        [self.classFilterView reloadData];
+        self.currentClassView.title = self.groupsArray[self.currentSelectedGroupIndex].groupName;//当前班级的名字
+    }];
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
     WEAK_SELF
@@ -64,6 +106,7 @@
     [self.searchView setSearchBlock:^(NSString *text){
         STRONG_SELF
         [self searchContanctslWithKeyword:text];
+        [TalkingData trackEvent:@"点击聊聊搜索框"];
     }];
     [self.view addSubview:self.searchView];
     [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,6 +215,7 @@
             //根据关键字筛选联系人
             [self searchContanctslWithKeyword:self.searchView.textField.text];
         }
+        [TalkingData trackEvent:@"点击聊聊切换班级"];
     }];
     
 }
@@ -186,48 +230,6 @@
     } completion:^(BOOL finished) {
         [self.alertView removeFromSuperview];
         self.currentClassView.isFiltering = NO;
-    }];
-}
-
-- (void)requestContacts {
-    NSString *reqId = [IMConfig generateUniqueID];
-    [self.request stopRequest];
-    self.request = [[ContactMemberContactsRequest alloc]init];
-    self.request.reqId = reqId;
-    WEAK_SELF
-    [self.view nyx_startLoading];
-    [self.request startRequestWithRetClass:[ContactMemberContactsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [self.view nyx_stopLoading];
-        if (error) {
-            [self.view addSubview:self.errorView];
-            [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(@0);
-            }];
-            return;
-        }
-        ContactMemberContactsRequestItem *item = (ContactMemberContactsRequestItem *)retItem;
-        if (!item.data.contacts || item.data.contacts.groups.count <= 0) {
-            [self.view addSubview:self.emptyView];
-            [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(@0);
-            }];
-            return;
-        }
-        [self.errorView removeFromSuperview];
-        [self.emptyView removeFromSuperview];
-        [self setupUI];
-        ContactMemberContactsRequestItem_Data_Gcontacts *contacts = item.data.contacts;
-        NSMutableArray *array = [NSMutableArray array];
-        for (ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group in contacts.groups) {
-            [self.groupsArray addObject:group];
-            self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;//当前班级的数据源
-            [array addObject:group];
-        }
-        self.classFilterView.selectedRow = self.currentSelectedGroupIndex;
-        self.classFilterView.dataArray = array.copy;//班级筛选的数据
-        [self.classFilterView reloadData];
-        self.currentClassView.title = self.groupsArray[self.currentSelectedGroupIndex].groupName;//当前班级的名字
     }];
 }
 
@@ -270,6 +272,7 @@
         chatVC.groupId = groupId;
     }
     [self.navigationController pushViewController:chatVC animated:YES];
+    [TalkingData trackEvent:@"点击通讯录中头像"];
 }
 
 

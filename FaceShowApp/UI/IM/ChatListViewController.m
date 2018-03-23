@@ -61,6 +61,7 @@
 - (void)navRightBtnAction:(UIButton *)sender {
     ContactsViewController *contactsVC = [[ContactsViewController alloc] init];
     [self.navigationController pushViewController:contactsVC animated:YES];
+    [TalkingData trackEvent:@"通讯录"];
 }
 
 #pragma mark - setupUI
@@ -215,6 +216,9 @@
         self.chattingTopic = nil;
     }];
     [self.navigationController pushViewController:chatVC animated:YES];
+    if (topic.type == TopicType_Group) {
+        [TalkingData trackEvent:@"点击班级群聊"];
+    }
 }
 
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -15,21 +15,18 @@
 #import "IMMessageBaseCell.h"
 #import "IMTextMessageBaseCell.h"
 #import "IMMessageCellFactory.h"
+#import "IMImageMessageBaseCell.h"
+#import "IMImageMessageLeftCell.h"
+#import "IMImageMessageRightCell.h"
 #import "IMInputView.h"
 #import "IMMessageCellDelegate.h"
 #import "IMMessageMenuView.h"
 #import "IMMessageTableView.h"
 #import "IMTimeHandleManger.h"
 #import "ImageSelectionHandler.h"
-#import "IMImageMessageBaseCell.h"
-#import "IMImageMessageLeftCell.h"
-#import "IMImageMessageRightCell.h"
 #import "UIImage+YXImage.h"
-#import "PhotoBrowserController.h"
 #import "IMChatViewModel.h"
-#import "UIImage+YXImage.h"
 #import "IMPhotoBrowserView.h"
-#import "CircleSpreadTransition.h"
 #import "IMSlideImageView.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
@@ -54,6 +51,24 @@
 - (void)backAction {
     BLOCK_EXEC(self.exitBlock);
     [super backAction];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.topic && self.topic.type == TopicType_Group) {
+        [TalkingData trackPageBegin:@"群聊页面"];
+    }else {
+        [TalkingData trackPageBegin:@"私聊页面"];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.topic && self.topic.type == TopicType_Group) {
+        [TalkingData trackPageEnd:@"群聊页面"];
+    }else {
+        [TalkingData trackPageEnd:@"私聊页面"];
+    }
 }
 
 - (void)viewDidLoad {
@@ -117,6 +132,7 @@
         }
         self.imInputView.textString = @"";
         [self scrollToBottom];
+        [TalkingData trackEvent:@"点击聊聊发送"];
     }];
     [self.imInputView setCameraButtonClickBlock:^{
         STRONG_SELF
@@ -131,6 +147,7 @@
                 }
             }
         }];
+        [TalkingData trackEvent:@"点击聊聊相机"];
     }];
     [self.view addSubview:self.imInputView];
     [self.imInputView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -406,6 +423,7 @@
             chatVC.groupId = groupId;
         }
         [self.navigationController pushViewController:chatVC animated:YES];
+        [TalkingData trackEvent:@"点击班级群聊头像"];
     }
 }
 

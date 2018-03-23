@@ -51,6 +51,9 @@ NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
 //            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
 //        }
 //    }
+    if (self.selectedIndex == self.viewControllers.count - 1) {//聊聊
+        [TalkingData trackEvent:@"点击聊聊"];
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabBarDidSelectNotification object:viewController];
 }
 
