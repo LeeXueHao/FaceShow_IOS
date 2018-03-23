@@ -179,7 +179,7 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.bottom.equalTo(self.imInputView.mas_top).offset(-10);
+        make.bottom.equalTo(self.imInputView.mas_top);
     }];
     
     self.automaticallyAdjustsScrollViewInsets = false;  //第一个cell和顶部有留白，scrollerview遗留下来的，用来取消它
@@ -241,7 +241,7 @@
 
 - (void)scrollToBottom {
     if (self.dataArray.count >= 1) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
 
@@ -341,20 +341,36 @@
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    if (section == 0) {
+        return self.dataArray.count;
+    }
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self.dataArray[indexPath.row]];
-    cell.model = self.dataArray[indexPath.row];
-    cell.delegate = self;
+    if (indexPath.section == 0) {
+        IMMessageBaseCell *cell = [IMMessageCellFactory cellWithMessageModel:self.dataArray[indexPath.row]];
+        cell.model = self.dataArray[indexPath.row];
+        cell.delegate = self;
+        return cell;
+    }
+    UITableViewCell *cell = [[UITableViewCell alloc]init];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    IMChatViewModel *model = self.dataArray[indexPath.row];
-    return model.height;
+    if (indexPath.section == 0) {
+        IMChatViewModel *model = self.dataArray[indexPath.row];
+        return model.height;
+    }
+    return 10.f;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
