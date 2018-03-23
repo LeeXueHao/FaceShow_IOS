@@ -304,13 +304,13 @@
         }
         if (self.topic) {//topic已存在 则判断是否为当前的
             if ([IMUserInterface isSameTopicWithOneTopic:self.topic anotherTopic:topic]) {
-                self.topic = topic;
-                [self setupTitleWithTopic:topic];
                 if (self.topic.topicID != topic.topicID) {//原来的为临时的topic,需要更新所有message的topicId
                     [self.dataArray enumerateObjectsUsingBlock:^(IMChatViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         obj.message.topicID = topic.topicID;
                     }];
                 }
+                self.topic = topic;
+                [self setupTitleWithTopic:topic];
             };
             return;
         }

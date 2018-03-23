@@ -176,11 +176,17 @@
     if (topic.topicID == anotherTopic.topicID) {
         return YES;
     }
-    NSArray *topicMembers = topic.members;
-    NSArray *anotherTopicMembers = anotherTopic.members;
+    NSMutableArray *topicMembers = [NSMutableArray arrayWithCapacity:topic.members.count];
+    NSMutableArray *anotherTopicMembers = [NSMutableArray arrayWithCapacity:anotherTopic.members.count];
+    [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [topicMembers addObject:[NSString stringWithFormat:@"%@",@(obj.memberID)]];
+    }];
+    [anotherTopic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [anotherTopicMembers addObject:[NSString stringWithFormat:@"%@",@(obj.memberID)]];
+    }];
     if (topic.type == anotherTopic.type && topicMembers.count == anotherTopicMembers.count) {
-        for (IMMember *member in topicMembers) {
-            if (![anotherTopicMembers containsObject:member]) {
+        for (NSString *memberID in topicMembers) {
+            if (![anotherTopicMembers containsObject:memberID]) {
                 return NO;
             }
         }

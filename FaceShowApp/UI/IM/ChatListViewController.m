@@ -143,13 +143,14 @@
             return;
         }
         for (IMTopic *item in self.dataArray) {
-            if (item.topicID == topic.topicID) {
+            if ([IMUserInterface isSameTopicWithOneTopic:item anotherTopic:topic]) {
                 NSUInteger index = [self.dataArray indexOfObject:item];
                 [self.dataArray replaceObjectAtIndex:index withObject:topic];
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
         }
+        
         NSInteger targetIndex = topic.type==TopicType_Group? 0:self.privateTopicIndex;
         [self.dataArray insertObject:topic atIndex:targetIndex];
         [self.tableView reloadData];
