@@ -54,6 +54,8 @@
     NSDateComponents *myCmps = [calendar components:unit fromDate:myDate];
     
     NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
+    dateFmt.locale = locale;
     
     //2. 指定日历对象,要去取日期对象的那些部分.
     NSDateComponents *comp = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:myDate];
