@@ -14,6 +14,7 @@
 #import "IMConfig.h"
 #import "IMOfflineMsgUpdateService.h"
 #import "IMOfflineMsgUpdateServiceManager.h"
+#import "IMManager.h"
 
 @interface IMServiceManager()
 @property (nonatomic, strong) Reachability *hostReachability;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) IMOfflineMsgUpdateServiceManager *offlineServiceManager;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, strong) NSTimer *reconnectTimer;
+@property (nonatomic, assign) BOOL shouldFetchFromFirstMsg;
 @end
 
 @implementation IMServiceManager
@@ -124,7 +126,7 @@
         }else if (dbTopic) {
             lastID = dbTopic.latestMsgId;
         }
-        if (lastID > 0 && topic.latestMsgId > lastID) {
+        if ((lastID > 0 || self.shouldFetchFromFirstMsg) && topic.latestMsgId > lastID) {
             IMTopicOfflineMsgFetchRecord *record = [[IMTopicOfflineMsgFetchRecord alloc]init];
             record.topicID = topic.topicID;
             record.startID = lastID;
@@ -136,6 +138,17 @@
             [self.offlineServiceManager addService:offlineService];
         }
     }
+    self.shouldFetchFromFirstMsg = YES;
+}
+
+- (BOOL)shouldFetchFromFirstMsg {
+    NSString *key = [NSString stringWithFormat:@"%@_im_topic_fetch_all",@([IMManager sharedInstance].currentMember.memberID)];
+    return [[NSUserDefaults standardUserDefaults]boolForKey:key];
+}
+
+- (void)setShouldFetchFromFirstMsg:(BOOL)shouldFetchFromFirstMsg {
+    NSString *key = [NSString stringWithFormat:@"%@_im_topic_fetch_all",@([IMManager sharedInstance].currentMember.memberID)];
+    [[NSUserDefaults standardUserDefaults]setBool:shouldFetchFromFirstMsg forKey:key];
 }
 
 #pragma mark - 连接断开处理

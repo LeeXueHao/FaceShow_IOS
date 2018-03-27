@@ -120,31 +120,27 @@
         msg.messageID = INT64_MAX;
     }
     [[IMDatabaseManager sharedInstance]findMessagesInTopic:topic.topicID count:count beforeIndex:msg.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
-        if (topic.type == TopicType_Private) {
-            completeBlock(array, hasMore, nil);
-        }else if (topic.type == TopicType_Group){
-            if (array.count > 0) {
-                completeBlock(array, YES, nil);
-            }else {
-                // 有真实messageID时，返回的消息会包含当前的message，所以需要多取一个
-                NSInteger offset = msg.messageID!=INT64_MAX;
-                [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:topic.topicID startID:msg.messageID asending:NO dataNum:count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
-                    if (error) {
-                        completeBlock(nil, NO, error);
-                        return;
-                    }
-                    BOOL more = (msgs.count-offset)>count;
-                    NSMutableArray *array = [NSMutableArray arrayWithArray:msgs];
-                    if (offset > 0) {
-                        [array removeObjectAtIndex:0];
-                    }
-                    if (more) {
-                        [array removeLastObject];
-                    }
-                    [[IMDatabaseManager sharedInstance]saveHistoryMessages:array];
-                    completeBlock(array, more, error);
-                }];
-            }
+        if (array.count > 0) {
+            completeBlock(array, YES, nil);
+        }else {
+            // 有真实messageID时，返回的消息会包含当前的message，所以需要多取一个
+            NSInteger offset = msg.messageID!=INT64_MAX;
+            [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:topic.topicID startID:msg.messageID asending:NO dataNum:count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
+                if (error) {
+                    completeBlock(nil, NO, error);
+                    return;
+                }
+                BOOL more = (msgs.count-offset)>count;
+                NSMutableArray *array = [NSMutableArray arrayWithArray:msgs];
+                if (offset > 0) {
+                    [array removeObjectAtIndex:0];
+                }
+                if (more) {
+                    [array removeLastObject];
+                }
+                [[IMDatabaseManager sharedInstance]saveHistoryMessages:array];
+                completeBlock(array, more, error);
+            }];
         }
     }];
 }
