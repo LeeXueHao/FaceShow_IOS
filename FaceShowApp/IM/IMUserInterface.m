@@ -86,15 +86,15 @@
             [groupArray addObject:topic];
         }
     }
-    [groupArray sortedArrayUsingComparator:^NSComparisonResult(IMTopic *  _Nonnull obj1, IMTopic *  _Nonnull obj2) {
+    NSArray *newGroupArray = [groupArray sortedArrayUsingComparator:^NSComparisonResult(IMTopic *  _Nonnull obj1, IMTopic *  _Nonnull obj2) {
         return obj1.latestMessage.sendTime < obj2.latestMessage.sendTime;
     }];
-    [privateArray sortedArrayUsingComparator:^NSComparisonResult(IMTopic *  _Nonnull obj1, IMTopic *  _Nonnull obj2) {
+    NSArray *newPrivateArray = [privateArray sortedArrayUsingComparator:^NSComparisonResult(IMTopic *  _Nonnull obj1, IMTopic *  _Nonnull obj2) {
         return obj1.latestMessage.sendTime < obj2.latestMessage.sendTime;
     }];
     NSMutableArray *array = [NSMutableArray array];
-    [array addObjectsFromArray:groupArray];
-    [array addObjectsFromArray:privateArray];
+    [array addObjectsFromArray:newGroupArray];
+    [array addObjectsFromArray:newPrivateArray];
     return array;
 }
 
