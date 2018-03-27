@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+UIKIT_EXTERN NSNotificationName const kIMConnectionDidCloseNotification;
+
 @interface IMConnectionManager : NSObject
+
+@property (nonatomic, assign, readonly) BOOL isConnectionOpen;
 
 + (IMConnectionManager *)sharedInstance;
 

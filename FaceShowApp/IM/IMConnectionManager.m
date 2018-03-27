@@ -12,6 +12,8 @@
 #import "ImMqtt.pbobjc.h"
 #import "IMEventHandlerFactory.h"
 
+NSString * const kIMConnectionDidCloseNotification = @"kIMConnectionDidCloseNotification";
+
 @interface IMConnectionManager()<MQTTSessionDelegate>
 @property (nonatomic, strong) MQTTSession *mySession;
 @end
@@ -38,7 +40,7 @@
     self.mySession.delegate = self;
     self.mySession.userName = username;
     self.mySession.password = password;
-    [self.mySession connectAndWaitTimeout:1];
+    [self.mySession connectAndWaitTimeout:3];
 }
 
 - (void)disconnect {
@@ -55,6 +57,10 @@
             NSLog(@"successful qos:%@",gQoss);
         }
     }];
+}
+
+- (BOOL)isConnectionOpen {
+    return self.mySession.status != MQTTSessionStatusClosed;
 }
 
 #pragma mark - MQTTSessionDelegate
@@ -74,6 +80,10 @@
     for (NSData *data in imMsg.bodyArray) {
         [eventHandler handleData:data inTopic:topic];
     }
+}
+
+- (void)connectionClosed:(MQTTSession *)session {
+    [[NSNotificationCenter defaultCenter]postNotificationName:kIMConnectionDidCloseNotification object:nil];
 }
 
 @end

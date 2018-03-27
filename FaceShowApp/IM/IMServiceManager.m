@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IMTopicUpdateService *topicUpdateService;
 @property (nonatomic, strong) IMOfflineMsgUpdateServiceManager *offlineServiceManager;
 @property (nonatomic, assign) BOOL running;
+@property (nonatomic, strong) NSTimer *reconnectTimer;
 @end
 
 @implementation IMServiceManager
@@ -41,22 +42,24 @@
     if (self.running) {
         return;
     }
+    self.running = YES;
     [self listenNetWorkingStatus];
     if (self.networkStatus != NotReachable) {
         [self startServicesForNetworkReachable];
     }
-    self.running = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionClosed:) name:kIMConnectionDidCloseNotification object:nil];
 }
 
 - (void)stop {
     if (!self.running) {
         return;
     }
+    self.running = NO;
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kIMConnectionDidCloseNotification object:nil];
     [[IMConnectionManager sharedInstance]disconnect];
     [self.topicUpdateService removeAllTopics];
     [self.offlineServiceManager removeAllServices];
-    self.running = NO;
 }
 
 -(void)listenNetWorkingStatus{
@@ -132,6 +135,20 @@
             IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:item.topicID startID:item.startID];
             [self.offlineServiceManager addService:offlineService];
         }
+    }
+}
+
+#pragma mark - 连接断开处理
+- (void)connectionClosed:(NSNotification *)note {
+    if (self.running && self.networkStatus!=NotReachable) {
+        [self.reconnectTimer invalidate];
+        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reconnectTimerAction) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)reconnectTimerAction {
+    if (self.running && self.networkStatus!=NotReachable && ![IMConnectionManager sharedInstance].isConnectionOpen) {
+        [self startServicesForNetworkReachable];
     }
 }
 
