@@ -59,6 +59,15 @@
  */
 + (BOOL)isSameTopicWithOneTopic:(IMTopic *)topic anotherTopic:(IMTopic *)anotherTopic;
 
+
+/**
+ 获取话题基本信息，仅用于更新名称，成员信息
+ @param topicID topicID
+ @param completeBlock 回调
+ */
++ (void)updateTopicInfoWithTopicID:(int64_t)topicID
+                     completeBlock:(void(^)(IMTopic *topic, NSError *error))completeBlock;
+
 // Notifications
 UIKIT_EXTERN NSNotificationName const kIMMessageDidUpdateNotification;
 

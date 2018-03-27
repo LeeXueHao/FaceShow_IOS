@@ -242,6 +242,30 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
     }
 }
 
+- (void)updateTopicInfo:(IMTopic *)topic {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+        if (!topicEntity) {
+            return;
+        }
+        topicEntity.name = topic.name;
+        topicEntity.group = topic.group;
+        
+        for (IMMember *member in topic.members) {
+            NSPredicate *memberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(member.memberID)];
+            IMMemberEntity *memberEntity = [IMMemberEntity MR_findFirstWithPredicate:memberPredicate inContext:localContext];
+            if (!memberEntity) {
+                memberEntity = [IMMemberEntity MR_createEntityInContext:localContext];
+            }
+            memberEntity.memberID = member.memberID;
+            memberEntity.userID = member.userID;
+            memberEntity.name = member.name;
+            memberEntity.avatar = member.avatar;
+        }
+    }];
+}
+
 - (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {
     if (entity.topicID == anotherEntity.topicID) {
         return YES;

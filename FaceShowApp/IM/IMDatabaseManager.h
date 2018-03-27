@@ -19,6 +19,7 @@
 - (void)saveMessage:(IMTopicMessage *)message;
 - (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages;
 - (void)saveTopic:(IMTopic *)topic;
+- (void)updateTopicInfo:(IMTopic *)topic;//用于更新话题名称，成员信息
 
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 - (int64_t)generateTempTopicID;

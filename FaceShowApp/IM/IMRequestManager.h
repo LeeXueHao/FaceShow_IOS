@@ -36,4 +36,7 @@
 - (void)requestSaveImageMsgWithMsg:(IMImageMessage *)msg
                      completeBlock:(void(^)(IMTopicMessage *msg,NSError *error))completeBlock;
 
+- (void)requestTopicInfoWithTopicId:(NSString *)topicId
+                      completeBlock:(void(^)(IMTopic *topic,NSError *error))completeBlock;
+
 @end

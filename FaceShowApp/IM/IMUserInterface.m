@@ -195,4 +195,18 @@
     }
     return NO;
 }
+
++ (void)updateTopicInfoWithTopicID:(int64_t)topicID completeBlock:(void(^)(IMTopic *topic, NSError *error))completeBlock{
+    NSString *topicIDStr = [NSString stringWithFormat:@"%@",@(topicID)];
+    WEAK_SELF
+    [[IMRequestManager sharedInstance]requestTopicInfoWithTopicId:topicIDStr completeBlock:^(IMTopic *topic, NSError *error) {
+        STRONG_SELF
+        if (error) {
+            completeBlock(nil,error);
+            return;
+        }
+        [[IMDatabaseManager sharedInstance]updateTopicInfo:topic];
+        completeBlock(topic,nil);
+    }];
+}
 @end

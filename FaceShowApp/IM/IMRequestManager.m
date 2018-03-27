@@ -24,6 +24,7 @@
 @property (nonatomic, strong) CreateTopicRequest *createTopicRequest;
 @property (nonatomic, strong) SaveTextMsgRequest *saveTextMsgRequest;
 @property (nonatomic, strong) SaveImageMsgRequest *saveImageMsgRequest;
+@property (nonatomic, strong) GetTopicsRequest *getTopicInfoRequest;
 
 @property (nonatomic, assign) NSTimeInterval timeoffset;
 @end
@@ -184,4 +185,22 @@
     }];
 }
 
+- (void)requestTopicInfoWithTopicId:(NSString *)topicId completeBlock:(void(^)(IMTopic *topic,NSError *error))completeBlock {
+    NSString *reqId = [IMConfig generateUniqueID];
+    [self.getTopicInfoRequest stopRequest];
+    self.getTopicInfoRequest = [[GetTopicsRequest alloc]init];
+    self.getTopicInfoRequest.reqId = reqId;
+    self.getTopicInfoRequest.topicIds = topicId;
+    WEAK_SELF
+    [self.getTopicInfoRequest startRequestWithRetClass:[GetTopicsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            BLOCK_EXEC(completeBlock,nil,error);
+            return;
+        }
+        GetTopicsRequestItem *item = (GetTopicsRequestItem *)retItem;
+        TopicData_topic *topic = item.data.topic.firstObject;
+        BLOCK_EXEC(completeBlock,[topic toIMTopic],nil);
+    }];
+}
 @end
