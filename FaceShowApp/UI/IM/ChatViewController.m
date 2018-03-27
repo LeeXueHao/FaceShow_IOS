@@ -338,6 +338,28 @@
             }
         }
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMTopicInfoUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        IMTopic *topic = noti.object;
+        if ([IMUserInterface isSameTopicWithOneTopic:self.topic anotherTopic:topic]) {
+            self.topic = topic;
+            [self setupTitleWithTopic:topic];
+            NSMutableDictionary *memberDict = [NSMutableDictionary dictionary];
+            [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull member, NSUInteger idx, BOOL * _Nonnull stop) {
+                [memberDict setObject:member forKey:[NSString stringWithFormat:@"%@",@(member.memberID)]];
+            }];
+            [self.dataArray enumerateObjectsUsingBlock:^(IMChatViewModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
+                IMMember *sender = model.message.sender;
+                if ([memberDict objectForKey:[NSString stringWithFormat:@"%@",@(sender.memberID)]]) {
+                    model.message.sender = [memberDict objectForKey:[NSString stringWithFormat:@"%@",@(sender.memberID)]];
+                    [self.dataArray replaceObjectAtIndex:idx withObject:model];
+                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }];
+        };
+        return;
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate

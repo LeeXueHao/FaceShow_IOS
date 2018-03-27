@@ -175,6 +175,28 @@
         STRONG_SELF
         [self clearChattingTopicUnreadCount];
     }];
+    
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMTopicInfoUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        IMTopic *topic = noti.object;
+        for (IMTopic *item in self.dataArray) {
+            if ([IMUserInterface isSameTopicWithOneTopic:item anotherTopic:topic]) {
+                NSUInteger index = [self.dataArray indexOfObject:item];
+                item.group = topic.group;
+                item.members = topic.members;
+                [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull member, NSUInteger idx, BOOL * _Nonnull stop) {
+                    IMMember *sender = item.latestMessage.sender;
+                    if (sender.memberID == member.memberID) {
+                        item.latestMessage.sender = member;
+                    }
+                }];
+                [self.dataArray replaceObjectAtIndex:index withObject:item];
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                return;
+            }
+        }
+    }];
 }
 
 - (void)clearChattingTopicUnreadCount {
@@ -208,6 +230,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     IMTopic *topic = self.dataArray[indexPath.row];
     self.chattingTopic = topic;
+    [IMUserInterface updateTopicInfoWithTopicID:topic.topicID];//更新话题的名称 成员信息等
     ChatViewController *chatVC = [[ChatViewController alloc]init];
     chatVC.topic = self.dataArray[indexPath.row];
     WEAK_SELF

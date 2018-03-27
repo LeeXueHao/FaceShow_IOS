@@ -20,6 +20,8 @@ NSString * const kIMUnreadMessageCountDidUpdateNotification = @"kIMUnreadMessage
 NSString * const kIMUnreadMessageCountTopicKey = @"kIMUnreadMessageCountTopicKey";
 NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
 
+NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotification";
+
 @implementation IMDatabaseManager
 + (IMDatabaseManager *)sharedInstance {
     static IMDatabaseManager *manager;
@@ -263,6 +265,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
             memberEntity.name = member.name;
             memberEntity.avatar = member.avatar;
         }
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicInfoUpdateNotification object:topic];
     }];
 }
 

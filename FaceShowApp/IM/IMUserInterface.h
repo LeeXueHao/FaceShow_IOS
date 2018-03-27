@@ -63,10 +63,8 @@
 /**
  获取话题基本信息，仅用于更新名称，成员信息
  @param topicID topicID
- @param completeBlock 回调
  */
-+ (void)updateTopicInfoWithTopicID:(int64_t)topicID
-                     completeBlock:(void(^)(IMTopic *topic, NSError *error))completeBlock;
++ (void)updateTopicInfoWithTopicID:(int64_t)topicID;
 
 // Notifications
 UIKIT_EXTERN NSNotificationName const kIMMessageDidUpdateNotification;
@@ -82,5 +80,5 @@ UIKIT_EXTERN NSString * const kIMImageUploadTopicKey; // topicID
 UIKIT_EXTERN NSString * const kIMImageUploadMessageKey; // uniqueID
 UIKIT_EXTERN NSString * const kIMImageUploadProgressKey; // percent e.g. 0.25
 
-
+UIKIT_EXTERN NSNotificationName const kIMTopicInfoUpdateNotification;//更新话题的名称，成员信息
 @end
