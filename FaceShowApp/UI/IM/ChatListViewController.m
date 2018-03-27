@@ -125,8 +125,7 @@
                         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                     }else {
                         NSInteger targetIndex = topic.type==TopicType_Group? 0:self.privateTopicIndex;
-                        [self.dataArray removeObject:topic];
-                        [self.dataArray insertObject:topic atIndex:targetIndex];
+                        [self.dataArray exchangeObjectAtIndex:index withObjectAtIndex:targetIndex];
                         [self.tableView reloadData];
                     }
                 }
@@ -154,6 +153,9 @@
         NSInteger targetIndex = topic.type==TopicType_Group? 0:self.privateTopicIndex;
         [self.dataArray insertObject:topic atIndex:targetIndex];
         [self.tableView reloadData];
+        if (topic.type == TopicType_Group) {
+            self.privateTopicIndex++;
+        }
     }];
     
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMUnreadMessageCountDidUpdateNotification object:nil]subscribeNext:^(id x) {
