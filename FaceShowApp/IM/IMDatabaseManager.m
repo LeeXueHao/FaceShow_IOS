@@ -265,8 +265,8 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
             memberEntity.name = member.name;
             memberEntity.avatar = member.avatar;
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicInfoUpdateNotification object:topic];
     }];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicInfoUpdateNotification object:topic];
 }
 
 - (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {
