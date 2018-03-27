@@ -71,7 +71,7 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
         entity.messageID = message.messageID;
         entity.width = message.width;
         entity.height = message.height;
-        if (entity.sendTime == 0) {
+        if (entity.sendTime == 0 || message.sendState == MessageSendState_Sending) {
             entity.sendTime = message.sendTime;
         }
         if (!entity.primaryKey || message.sendState == MessageSendState_Sending) {
