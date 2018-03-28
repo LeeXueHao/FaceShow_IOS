@@ -22,6 +22,9 @@
 @property (nonatomic, strong) NSMutableArray<IMTopic *> *dataArray;
 @property (nonatomic, strong) IMTopic *chattingTopic;
 @property (nonatomic, assign) NSInteger privateTopicIndex;
+
+@property (nonatomic, strong) NSMutableArray<IMTopic *> *fetchHistoryTopicArray;
+@property (nonatomic, assign) BOOL isHistoryMsgFetching;
 @end
 
 @implementation ChatListViewController
@@ -34,6 +37,8 @@
         STRONG_SELF
         [YXDrawerController showDrawer];
     }];
+    self.fetchHistoryTopicArray = [NSMutableArray array];
+    self.isHistoryMsgFetching = NO;
 //    [[IMManager sharedInstance] startConnection];
     [self setupNavRightView];
     [self setupUI];
@@ -87,6 +92,9 @@
     for (IMTopic *topic in self.dataArray) {
         if (topic.type == TopicType_Group) {
             self.privateTopicIndex++;
+            if (!topic.latestMessage) {
+                [self addHistoryTopic:topic];
+            }
         }else {
             break;
         }
@@ -155,6 +163,9 @@
         [self.tableView reloadData];
         if (topic.type == TopicType_Group) {
             self.privateTopicIndex++;
+            if (!topic.latestMessage) {
+                [self addHistoryTopic:topic];
+            }
         }
     }];
     
@@ -271,4 +282,37 @@
 //        DDLogDebug(@"删除");
 //    }
 //}
+
+#pragma mark - 抓取新加入的群聊的历史消息
+- (void)addHistoryTopic:(IMTopic *)topic {
+    [self.fetchHistoryTopicArray addObject:topic];
+    [self checkAndUpdate];
+}
+
+- (void)checkAndUpdate{
+    if (!self.isHistoryMsgFetching && self.fetchHistoryTopicArray.count>0) {
+        self.isHistoryMsgFetching = YES;
+        IMTopic *topic = [self.fetchHistoryTopicArray firstObject];
+        WEAK_SELF
+        [IMUserInterface findMessagesInTopic:topic count:15 beforeMsg:nil completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore, NSError *error) {
+            STRONG_SELF
+            if (error || array.count==0) {
+                return;
+            }
+            for (IMTopic *item in self.dataArray) {
+                if (item.topicID == topic.topicID) {
+                    if (!item.latestMessage) {
+                        item.latestMessage = array.firstObject;
+                        NSUInteger index = [self.dataArray indexOfObject:item];
+                        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                    break;
+                }
+            }
+            [self.fetchHistoryTopicArray removeObjectAtIndex:0];
+            self.isHistoryMsgFetching = NO;
+            [self checkAndUpdate];
+        }];
+    }
+}
 @end
