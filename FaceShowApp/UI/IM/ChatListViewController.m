@@ -26,6 +26,13 @@
 
 @implementation ChatListViewController
 
+- (void)setUnreadPromptView:(UIView *)unreadPromptView {
+    _unreadPromptView = unreadPromptView;
+    // 用于激活红点逻辑
+    UIView *v = self.view;
+    v = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"聊聊";
@@ -182,11 +189,6 @@
         [self updateUnreadPromptView];
     }];
     
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillTerminateNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        [self clearChattingTopicUnreadCount];
-    }];
-    
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMTopicInfoUpdateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
@@ -228,12 +230,18 @@
             }
         }
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMUnreadMessageCountClearNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        IMTopic *topic = noti.object;
+        [self clearChattingTopicUnreadCount:topic];
+    }];
 }
 
-- (void)clearChattingTopicUnreadCount {
-    [IMUserInterface resetUnreadMessageCountWithTopicID:self.chattingTopic.topicID];
+- (void)clearChattingTopicUnreadCount:(IMTopic *)topic {
+    [IMUserInterface resetUnreadMessageCountWithTopicID:topic.topicID];
     for (IMTopic *item in self.dataArray) {
-        if (item.topicID == self.chattingTopic.topicID) {
+        if (item.topicID == topic.topicID) {
             item.unreadCount = 0;
             NSInteger index = [self.dataArray indexOfObject:item];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -264,12 +272,6 @@
     [IMUserInterface updateTopicInfoWithTopicID:topic.topicID];//更新话题的名称 成员信息等
     ChatViewController *chatVC = [[ChatViewController alloc]init];
     chatVC.topic = self.dataArray[indexPath.row];
-    WEAK_SELF
-    [chatVC setExitBlock:^{
-        STRONG_SELF
-        [self clearChattingTopicUnreadCount];
-        self.chattingTopic = nil;
-    }];
     [self.navigationController pushViewController:chatVC animated:YES];
     if (topic.type == TopicType_Group) {
         [TalkingData trackEvent:@"点击班级群聊"];

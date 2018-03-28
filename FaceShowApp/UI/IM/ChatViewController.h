@@ -7,6 +7,9 @@
 //
 
 #import "BaseViewController.h"
+
+UIKIT_EXTERN NSNotificationName const kIMUnreadMessageCountClearNotification;
+
 @class IMTopic;
 @class IMMember;
 @class IMTopicMessage;
@@ -15,5 +18,4 @@
 @property (nonatomic, strong) IMTopic *topic;
 @property (nonatomic, strong) IMMember *member;
 @property (nonatomic, strong) NSString *groupId;//没有topic的时候 member所在的group的id
-@property (nonatomic, strong) void(^exitBlock)(void);
 @end

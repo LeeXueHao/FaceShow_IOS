@@ -29,6 +29,8 @@
 #import "IMPhotoBrowserView.h"
 #import "IMSlideImageView.h"
 
+NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCountClearNotification";
+
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
 @property (strong,nonatomic)UIActivityIndicatorView *activity;
 @property (nonatomic, strong) IMMessageTableView *tableView;
@@ -49,7 +51,7 @@
 }
 
 - (void)backAction {
-    BLOCK_EXEC(self.exitBlock);
+    [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountClearNotification object:self.topic];
     [super backAction];
 }
 
@@ -392,6 +394,10 @@
             }
             self.isRefresh = NO;
         });
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillTerminateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountClearNotification object:self.topic];
     }];
 }
 
