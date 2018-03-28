@@ -32,6 +32,7 @@ NSString * const kIMConnectionDidCloseNotification = @"kIMConnectionDidCloseNoti
                    port:(NSUInteger)port
                username:(NSString *)username
                password:(NSString *)password {
+    [self disconnect];
     MQTTCFSocketTransport *transport = [[MQTTCFSocketTransport alloc]init];
     transport.host = host;
     transport.port = (UInt32)port;
