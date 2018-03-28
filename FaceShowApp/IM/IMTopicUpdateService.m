@@ -42,9 +42,6 @@
         WEAK_SELF
         [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(topic.topicID)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
             STRONG_SELF
-            if (error) {
-                return;
-            }
             for (IMTopic *topic in topics) {
                 [[IMDatabaseManager sharedInstance]saveTopic:topic];
             }

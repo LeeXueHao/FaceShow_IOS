@@ -27,8 +27,7 @@
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
 + (void)findMessagesInTopic:(IMTopic *)topic
                       count:(NSUInteger)count
-                  beforeMsg:(IMTopicMessage *)msg
-              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore, NSError *error))completeBlock;
+                  beforeMsg:(IMTopicMessage *)msg;
 
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 
@@ -81,4 +80,12 @@ UIKIT_EXTERN NSString * const kIMImageUploadMessageKey; // uniqueID
 UIKIT_EXTERN NSString * const kIMImageUploadProgressKey; // percent e.g. 0.25
 
 UIKIT_EXTERN NSNotificationName const kIMTopicInfoUpdateNotification;//更新话题的名称，成员信息
+
+//历史消息
+UIKIT_EXTERN NSNotificationName const kIMHistoryMessageDidUpdateNotification;
+UIKIT_EXTERN NSString * const kIMHistoryMessageTopicKey; // topicID
+UIKIT_EXTERN NSString * const kIMHistoryMessageKey; // message array
+UIKIT_EXTERN NSString * const kIMHistoryMessageHasMoreKey; // has more
+UIKIT_EXTERN NSString * const kIMHistoryMessageErrorKey; // has more
+
 @end

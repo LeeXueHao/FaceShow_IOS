@@ -226,6 +226,8 @@
 		7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE55B2008547E00B47892 /* ImageSelectionHandler.m */; };
 		7C7A9ECB206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */; };
 		7C7A9ECE2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ECD2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m */; };
+		7C7A9ED4206B5008003EE15B /* IMHistoryMessageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ED3206B5008003EE15B /* IMHistoryMessageFetcher.m */; };
+		7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ED6206B50E0003EE15B /* IMHistoryFetchRecord.m */; };
 		7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */; };
 		7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EC2010389F005BE126 /* ClassListRequest.m */; };
 		7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EE201038B5005BE126 /* ClassSelectionViewController.m */; };
@@ -804,6 +806,10 @@
 		7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMTopicOfflineMsgFetchRecord.m; sourceTree = "<group>"; };
 		7C7A9ECC2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMOfflineMsgUpdateServiceManager.h; sourceTree = "<group>"; };
 		7C7A9ECD2063A710003EE15B /* IMOfflineMsgUpdateServiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMOfflineMsgUpdateServiceManager.m; sourceTree = "<group>"; };
+		7C7A9ED2206B5008003EE15B /* IMHistoryMessageFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMHistoryMessageFetcher.h; sourceTree = "<group>"; };
+		7C7A9ED3206B5008003EE15B /* IMHistoryMessageFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMHistoryMessageFetcher.m; sourceTree = "<group>"; };
+		7C7A9ED5206B50E0003EE15B /* IMHistoryFetchRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMHistoryFetchRecord.h; sourceTree = "<group>"; };
+		7C7A9ED6206B50E0003EE15B /* IMHistoryFetchRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMHistoryFetchRecord.m; sourceTree = "<group>"; };
 		7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseLectureCell.m; sourceTree = "<group>"; };
 		7C7AADE8205A0F8B003C80E4 /* CourseLectureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseLectureCell.h; sourceTree = "<group>"; };
 		7CB9C8EB2010389F005BE126 /* ClassListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassListRequest.h; sourceTree = "<group>"; };
@@ -2471,6 +2477,10 @@
 				E91E5DA12047B8E300052FBA /* IMTextMessageSender.m */,
 				7CBC5BCE20522E0A004ACA04 /* IMImageMessageSender.h */,
 				7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */,
+				7C7A9ED2206B5008003EE15B /* IMHistoryMessageFetcher.h */,
+				7C7A9ED3206B5008003EE15B /* IMHistoryMessageFetcher.m */,
+				7C7A9ED5206B50E0003EE15B /* IMHistoryFetchRecord.h */,
+				7C7A9ED6206B50E0003EE15B /* IMHistoryFetchRecord.m */,
 			);
 			name = Http;
 			sourceTree = "<group>";
@@ -2804,6 +2814,7 @@
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
+				7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */,
 				E90C515C204FD6DF0008F92A /* IMMessageTableView.m in Sources */,
 				7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
@@ -3041,6 +3052,7 @@
 				E91E5DA92047B8E300052FBA /* GetTopicMsgsRequest.m in Sources */,
 				7CBC5BA620493F64004ACA04 /* ProfessorDetailViewController.m in Sources */,
 				7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */,
+				7C7A9ED4206B5008003EE15B /* IMHistoryMessageFetcher.m in Sources */,
 				E91E5D8B2047B8C900052FBA /* IMEventHandler.m in Sources */,
 				E91E5D7D2047B8AF00052FBA /* IM.xcdatamodeld in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,

@@ -22,9 +22,6 @@
 @property (nonatomic, strong) NSMutableArray<IMTopic *> *dataArray;
 @property (nonatomic, strong) IMTopic *chattingTopic;
 @property (nonatomic, assign) NSInteger privateTopicIndex;
-
-@property (nonatomic, strong) NSMutableArray<IMTopic *> *fetchHistoryTopicArray;
-@property (nonatomic, assign) BOOL isHistoryMsgFetching;
 @end
 
 @implementation ChatListViewController
@@ -37,9 +34,7 @@
         STRONG_SELF
         [YXDrawerController showDrawer];
     }];
-    self.fetchHistoryTopicArray = [NSMutableArray array];
-    self.isHistoryMsgFetching = NO;
-//    [[IMManager sharedInstance] startConnection];
+
     [self setupNavRightView];
     [self setupUI];
     [self setupData];
@@ -92,11 +87,13 @@
     for (IMTopic *topic in self.dataArray) {
         if (topic.type == TopicType_Group) {
             self.privateTopicIndex++;
-            if (!topic.latestMessage) {
-                [self addHistoryTopic:topic];
-            }
         }else {
             break;
+        }
+    }
+    for (IMTopic *topic in self.dataArray) {
+        if (!topic.latestMessage) {
+            [IMUserInterface findMessagesInTopic:topic count:15 beforeMsg:nil];
         }
     }
 }
@@ -133,7 +130,8 @@
                         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                     }else {
                         NSInteger targetIndex = topic.type==TopicType_Group? 0:self.privateTopicIndex;
-                        [self.dataArray exchangeObjectAtIndex:index withObjectAtIndex:targetIndex];
+                        [self.dataArray removeObjectAtIndex:index];
+                        [self.dataArray insertObject:topic atIndex:targetIndex];
                         [self.tableView reloadData];
                     }
                 }
@@ -163,9 +161,9 @@
         [self.tableView reloadData];
         if (topic.type == TopicType_Group) {
             self.privateTopicIndex++;
-            if (!topic.latestMessage) {
-                [self addHistoryTopic:topic];
-            }
+        }
+        if (!topic.latestMessage) {
+            [IMUserInterface findMessagesInTopic:topic count:15 beforeMsg:nil];
         }
     }];
     
@@ -207,6 +205,26 @@
                 [self.dataArray replaceObjectAtIndex:index withObject:item];
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
+            }
+        }
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMHistoryMessageDidUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        int64_t topicID = ((NSNumber *)[noti.userInfo valueForKey:kIMHistoryMessageTopicKey]).longLongValue;
+        NSArray *array = [noti.userInfo valueForKey:kIMHistoryMessageKey];
+        NSError *error = [noti.userInfo valueForKey:kIMHistoryMessageErrorKey];
+        if (error || array.count==0) {
+            return;
+        }
+        for (IMTopic *item in self.dataArray) {
+            if (item.topicID == topicID) {
+                if (!item.latestMessage) {
+                    item.latestMessage = array.firstObject;
+                    NSUInteger index = [self.dataArray indexOfObject:item];
+                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                }
+                break;
             }
         }
     }];
@@ -252,19 +270,6 @@
         [self clearChattingTopicUnreadCount];
         self.chattingTopic = nil;
     }];
-    [chatVC setHistoryMsgReceiveBlock:^(IMTopicMessage *lastMsg) {
-        STRONG_SELF
-        for (IMTopic *item in self.dataArray) {
-            if (item.topicID == topic.topicID) {
-                if (!item.latestMessage) {
-                    item.latestMessage = lastMsg;
-                    NSUInteger index = [self.dataArray indexOfObject:item];
-                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-                }
-                break;
-            }
-        }
-    }];
     [self.navigationController pushViewController:chatVC animated:YES];
     if (topic.type == TopicType_Group) {
         [TalkingData trackEvent:@"点击班级群聊"];
@@ -283,36 +288,4 @@
 //    }
 //}
 
-#pragma mark - 抓取新加入的群聊的历史消息
-- (void)addHistoryTopic:(IMTopic *)topic {
-    [self.fetchHistoryTopicArray addObject:topic];
-    [self checkAndUpdate];
-}
-
-- (void)checkAndUpdate{
-    if (!self.isHistoryMsgFetching && self.fetchHistoryTopicArray.count>0) {
-        self.isHistoryMsgFetching = YES;
-        IMTopic *topic = [self.fetchHistoryTopicArray firstObject];
-        WEAK_SELF
-        [IMUserInterface findMessagesInTopic:topic count:15 beforeMsg:nil completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore, NSError *error) {
-            STRONG_SELF
-            if (error || array.count==0) {
-                return;
-            }
-            for (IMTopic *item in self.dataArray) {
-                if (item.topicID == topic.topicID) {
-                    if (!item.latestMessage) {
-                        item.latestMessage = array.firstObject;
-                        NSUInteger index = [self.dataArray indexOfObject:item];
-                        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-                    }
-                    break;
-                }
-            }
-            [self.fetchHistoryTopicArray removeObjectAtIndex:0];
-            self.isHistoryMsgFetching = NO;
-            [self checkAndUpdate];
-        }];
-    }
-}
 @end

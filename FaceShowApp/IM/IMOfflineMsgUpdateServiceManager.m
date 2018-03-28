@@ -40,9 +40,6 @@
         WEAK_SELF
         [service startWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
-            if (error) {
-                return;
-            }
             [self.serviceArray removeObjectAtIndex:0];
             self.isServiceRunning = NO;
             [self checkAndUpdate];

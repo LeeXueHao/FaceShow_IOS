@@ -124,18 +124,27 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
     }
 }
 
-- (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages{
-    if (messages.count == 0) {
-        return;
-    }
+- (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages
+              completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock{
+    NSMutableArray<IMTopicMessage *> *array = [NSMutableArray array];
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(messages.firstObject.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        for (IMTopicMessage *msg in messages) {
+            NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && uniqueID = %@ && curMember.memberID = %@",@(msg.topicID),msg.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
+            IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:searchPredicate inContext:localContext];
+            if (!entity) {
+                [array addObject:msg];
+            }
+        }
+        if (array.count == 0) {
+            return;
+        }
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(array.firstObject.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         NSArray *localMsgs = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
         for (IMTopicMessageEntity *msg in localMsgs) {
-            msg.primaryKey += messages.count;
+            msg.primaryKey += array.count;
         }
-        int64_t key = messages.count;
-        for (IMTopicMessage *message in messages) {
+        int64_t key = array.count;
+        for (IMTopicMessage *message in array) {
             IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_createEntityInContext:localContext];
             entity.channel = message.channel;
             entity.sendState = message.sendState;
@@ -159,7 +168,7 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
             IMMemberEntity *senderEntity = [IMMemberEntity MR_findFirstWithPredicate:senderPredicate inContext:localContext];
             entity.sender = senderEntity;
             
-            if ([messages indexOfObject:message] == 0) {
+            if ([array indexOfObject:message] == 0) {
                 NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(message.topicID),@([IMManager sharedInstance].currentMember.memberID)];
                 IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
                 if (!topicEntity.latestMessage) {
@@ -174,6 +183,7 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
             message.sender.memberID = senderEntity.memberID;
         }
     }];
+    completeBlock(array);
 }
 
 - (void)saveTopic:(IMTopic *)topic {

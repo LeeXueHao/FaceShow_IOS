@@ -360,6 +360,39 @@
         };
         return;
     }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMHistoryMessageDidUpdateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        int64_t topicID = ((NSNumber *)[noti.userInfo valueForKey:kIMHistoryMessageTopicKey]).longLongValue;
+        NSArray *array = [noti.userInfo valueForKey:kIMHistoryMessageKey];
+        BOOL hasMore = ((NSNumber *)[noti.userInfo valueForKey:kIMHistoryMessageHasMoreKey]).boolValue;
+        NSError *error = [noti.userInfo valueForKey:kIMHistoryMessageErrorKey];
+        if (self.topic.topicID != topicID) {
+            return;
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.activity stopAnimating];
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                self.isRefresh = NO;
+                return;
+            }
+            self.hasMore = hasMore;
+            if (array.count > 0) {
+                NSMutableArray *resultArray = [NSMutableArray array];
+                for (NSInteger i = 0; i < array.count; i ++) {
+                    IMChatViewModel *model = [[IMChatViewModel alloc]init];
+                    model.topicType = self.topic ? self.topic.type : TopicType_Private;
+                    model.message = array[i];
+                    [self.dataArray insertObject:model atIndex:0];
+                    [resultArray insertObject:model atIndex:0];
+                }
+                [self handelTimeForDataSource:resultArray];
+                [self.tableView reloadData];
+            }
+            self.isRefresh = NO;
+        });
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -407,36 +440,10 @@
 }
 
 - (void)loadMoreHistoryData {
-    WEAK_SELF
     [self.activity startAnimating];
     self.isRefresh = YES;
     IMChatViewModel *model = self.dataArray.firstObject;
-    [IMUserInterface findMessagesInTopic:self.topic count:15 beforeMsg:model.message completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore, NSError *error) {
-        STRONG_SELF
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.activity stopAnimating];
-            if (error) {
-                [self.view nyx_showToast:error.localizedDescription];
-                self.isRefresh = NO;
-                return;
-            }
-            self.hasMore = hasMore;
-            if (array.count > 0) {
-                NSMutableArray *resultArray = [NSMutableArray array];
-                for (NSInteger i = 0; i < array.count; i ++) {
-                    IMChatViewModel *model = [[IMChatViewModel alloc]init];
-                    model.topicType = self.topic ? self.topic.type : TopicType_Private;
-                    model.message = array[i];
-                    [self.dataArray insertObject:model atIndex:0];
-                    [resultArray insertObject:model atIndex:0];
-                }
-                [self handelTimeForDataSource:resultArray];
-                [self.tableView reloadData];
-                BLOCK_EXEC(self.historyMsgReceiveBlock,array.firstObject);
-            }
-            self.isRefresh = NO;
-        });
-    }];
+    [IMUserInterface findMessagesInTopic:self.topic count:15 beforeMsg:model.message];
 }
 
 #pragma mark - IMMessageCellDelegate
