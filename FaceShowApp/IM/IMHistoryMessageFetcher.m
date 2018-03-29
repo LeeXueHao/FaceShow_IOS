@@ -19,6 +19,7 @@ NSString * const kIMHistoryMessageErrorKey = @"kIMHistoryMessageErrorKey";
 @interface IMHistoryMessageFetcher()
 @property (nonatomic, strong) NSMutableArray<IMHistoryFetchRecord *> *recordArray;
 @property (nonatomic, assign) BOOL isMsgFetching;
+@property (nonatomic, strong) IMRequestManager *requestManager;
 @end
 
 @implementation IMHistoryMessageFetcher
@@ -29,6 +30,7 @@ NSString * const kIMHistoryMessageErrorKey = @"kIMHistoryMessageErrorKey";
         manager = [[IMHistoryMessageFetcher alloc] init];
         manager.recordArray = [NSMutableArray array];
         manager.isMsgFetching = NO;
+        manager.requestManager = [[IMRequestManager alloc]init];
     });
     return manager;
 }
@@ -66,7 +68,7 @@ NSString * const kIMHistoryMessageErrorKey = @"kIMHistoryMessageErrorKey";
                 }
                 // 有真实messageID时，返回的消息会包含当前的message，所以需要多取一个
                 NSInteger offset = record.beforeMsg.messageID!=INT64_MAX;
-                [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:record.topic.topicID startID:record.beforeMsg.messageID asending:NO dataNum:record.count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
+                [self.requestManager requestTopicMsgsWithTopicID:record.topic.topicID startID:record.beforeMsg.messageID asending:NO dataNum:record.count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
                     if (error) {
                         [self postNotificationWithError:error topicID:record.topic.topicID];
                         [self fetchNext];
