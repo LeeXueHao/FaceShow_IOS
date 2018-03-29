@@ -29,6 +29,7 @@
 #import "ChatListViewController.h"
 #import "ChatPlaceViewController.h"
 #import "ClassSelectionViewController.h"
+#import "IMUserInterface.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -287,6 +288,29 @@
         vc = vc.presentedViewController;
     }
     return vc;
+}
+
+- (void)handleRemoveFromOneClass {
+    NSArray *topicsArray = [IMUserInterface findAllTopics];
+    if (topicsArray.count == 0) {
+        [UserManager sharedInstance].loginStatus = NO;
+        return;
+    }
+    [UserManager sharedInstance].hasUsedBefore = NO;
+    BOOL hasGroup = NO;
+    for (IMTopic *topic in topicsArray) {
+        if (topic.type == TopicType_Group) {
+            hasGroup = YES;
+            break;
+        }
+    }
+    if (hasGroup) {
+        ClassSelectionViewController *selectionVC = [[ClassSelectionViewController alloc] init];
+        FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:selectionVC];
+        [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+    }else {
+        [UserManager sharedInstance].loginStatus = NO;
+    }
 }
 
 @end

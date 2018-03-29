@@ -56,4 +56,7 @@
     
 }
 
+- (void)handleRemoveFromOneClass {
+    
+}
 @end

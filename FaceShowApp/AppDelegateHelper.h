@@ -28,4 +28,5 @@
 // Apns
 - (void)handleApnsData:(YXApnsContentModel *)apns;
 
+- (void)handleRemoveFromOneClass;
 @end

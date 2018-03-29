@@ -14,6 +14,7 @@
 #import "UserPromptsManager.h"
 #import "YXInitRequest.h"
 #import "IMManager.h"
+#import "IMUserInterface.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -74,6 +75,13 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kClassDidSelectNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [self.appDelegateHelper handleClassChange];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kIMTopicDidRemoveNotification object:nil] subscribeNext:^(id x) {
+       STRONG_SELF
+        NSNotification *noti = (NSNotification *)x;
+        IMTopic *topic = noti.object;
+        [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@班",topic.group]];
+        [self.appDelegateHelper handleRemoveFromOneClass];
     }];
 }
 

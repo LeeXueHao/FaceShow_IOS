@@ -461,7 +461,20 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     if (self.member) {//有member说明是私聊
         return;
     }
+
     if (self.topic && self.topic.type == TopicType_Group) {//有topic的情况下 且是群聊
+        BOOL isContainedUser = NO;
+        for (IMMember *member  in self.topic.members) {
+            if (member.memberID == user.memberID) {
+                isContainedUser = YES;
+                break;
+            }
+        }
+        if (!isContainedUser) {
+            [self.view nyx_showToast:@"此学员已被删除"];
+            return;
+        }
+        
         ChatViewController *chatVC = [[ChatViewController alloc]init];
         IMMember *member = user;
         //如果是自己则返回
