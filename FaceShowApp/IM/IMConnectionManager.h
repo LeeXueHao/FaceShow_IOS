@@ -23,5 +23,6 @@ UIKIT_EXTERN NSNotificationName const kIMConnectionDidCloseNotification;
 - (void)disconnect;
 
 - (void)subscribeTopic:(NSString *)topic;
+- (void)unsubscribeTopic:(NSString *)topic;
 
 @end

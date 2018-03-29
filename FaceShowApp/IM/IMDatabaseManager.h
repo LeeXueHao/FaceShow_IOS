@@ -21,6 +21,7 @@
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock;
 - (void)saveTopic:(IMTopic *)topic;
 - (void)updateTopicInfo:(IMTopic *)topic;//用于更新话题名称，成员信息
+- (void)clearTopic:(IMTopic *)topic;
 
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 - (int64_t)generateTempTopicID;

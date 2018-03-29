@@ -60,6 +60,10 @@ NSString * const kIMConnectionDidCloseNotification = @"kIMConnectionDidCloseNoti
     }];
 }
 
+- (void)unsubscribeTopic:(NSString *)topic {
+    [self.mySession unsubscribeTopic:topic unsubscribeHandler:nil];
+}
+
 - (BOOL)isConnectionOpen {
     return self.mySession.status != MQTTSessionStatusClosed;
 }

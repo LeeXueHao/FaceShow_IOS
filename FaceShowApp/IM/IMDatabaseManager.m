@@ -22,6 +22,8 @@ NSString * const kIMUnreadMessageCountKey = @"kIMUnreadMessageCountKey";
 
 NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotification";
 
+NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification";
+
 @implementation IMDatabaseManager
 + (IMDatabaseManager *)sharedInstance {
     static IMDatabaseManager *manager;
@@ -277,6 +279,14 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
         }
     }];
     [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicInfoUpdateNotification object:topic];
+}
+
+- (void)clearTopic:(IMTopic *)topic {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        [IMTopicEntity MR_deleteAllMatchingPredicate:topicPredicate inContext:localContext];
+    }];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidRemoveNotification object:topic];
 }
 
 - (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {

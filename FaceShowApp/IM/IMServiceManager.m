@@ -102,9 +102,27 @@
         if (error) {
             return;
         }
+        [self clearDeletedTopicsWithTopics:topics];
         [self updateTopics:topics];
         [self connectAndSubscribeWithTopics:topics];
     }];
+}
+
+- (void)clearDeletedTopicsWithTopics:(NSArray *)topics {
+    NSArray *localTopics = [[IMDatabaseManager sharedInstance]findAllTopics];
+    for (IMTopic *localItem in localTopics) {
+        BOOL deleted = YES;
+        for (IMTopic *item in topics) {
+            if (item.topicID == localItem.topicID) {
+                deleted = NO;
+                break;
+            }
+        }
+        if (deleted) {
+            [[IMConnectionManager sharedInstance]unsubscribeTopic:[IMConfig topicForTopicID:localItem.topicID]];
+            [[IMDatabaseManager sharedInstance]clearTopic:localItem];
+        }
+    }
 }
 
 - (void)updateTopics:(NSArray *)topics {

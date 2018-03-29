@@ -69,6 +69,8 @@
 UIKIT_EXTERN NSNotificationName const kIMMessageDidUpdateNotification;
 
 UIKIT_EXTERN NSNotificationName const kIMTopicDidUpdateNotification;
+UIKIT_EXTERN NSNotificationName const kIMTopicInfoUpdateNotification;//更新话题的名称，成员信息
+UIKIT_EXTERN NSNotificationName const kIMTopicDidRemoveNotification;
 
 UIKIT_EXTERN NSNotificationName const kIMUnreadMessageCountDidUpdateNotification;
 UIKIT_EXTERN NSString * const kIMUnreadMessageCountTopicKey;
@@ -78,8 +80,6 @@ UIKIT_EXTERN NSNotificationName const kIMImageUploadDidUpdateNotification; // �
 UIKIT_EXTERN NSString * const kIMImageUploadTopicKey; // topicID
 UIKIT_EXTERN NSString * const kIMImageUploadMessageKey; // uniqueID
 UIKIT_EXTERN NSString * const kIMImageUploadProgressKey; // percent e.g. 0.25
-
-UIKIT_EXTERN NSNotificationName const kIMTopicInfoUpdateNotification;//更新话题的名称，成员信息
 
 //历史消息
 UIKIT_EXTERN NSNotificationName const kIMHistoryMessageDidUpdateNotification;
