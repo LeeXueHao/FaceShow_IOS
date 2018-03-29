@@ -98,11 +98,6 @@
             break;
         }
     }
-    for (IMTopic *topic in self.dataArray) {
-        if (!topic.latestMessage) {
-            [IMUserInterface findMessagesInTopic:topic count:15 beforeMsg:nil];
-        }
-    }
 }
 
 - (void)updateUnreadPromptView {
