@@ -388,6 +388,12 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
     return [self messageFromEntity:msgEntity];
 }
 
+- (IMTopicMessage *)findFirstSuccessfulMessageInTopic:(int64_t)topicID {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@ && sendState = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Success)];
+    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate sortedBy:@"messageID" ascending:YES];
+    return [self messageFromEntity:msgEntity];
+}
+
 - (IMTopic *)findTopicWithMember:(IMMember *)member {
     NSArray *topicArray = [self findAllTopics];
     for (IMTopic *topic in topicArray) {

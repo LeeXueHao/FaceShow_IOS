@@ -66,14 +66,17 @@ NSString * const kIMHistoryMessageErrorKey = @"kIMHistoryMessageErrorKey";
             msg.index = INT64_MAX;
             record.beforeMsg = msg;
         }
-        if (record.beforeMsg.messageID == 0) {
-            record.beforeMsg.messageID = INT64_MAX;
-        }
         [[IMDatabaseManager sharedInstance]findMessagesInTopic:record.topic.topicID count:record.count beforeIndex:record.beforeMsg.index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
             if (array.count > 0) {
                 [self postNotificationWithMsgs:array topicID:record.topic.topicID hasMore:YES];
                 [self fetchNext];
             }else {
+                IMTopicMessage *firstMsg = [[IMDatabaseManager sharedInstance]findFirstSuccessfulMessageInTopic:record.topic.topicID];
+                if (firstMsg) {
+                    record.beforeMsg = firstMsg;
+                }else {
+                    record.beforeMsg.messageID = INT64_MAX;
+                }
                 // 有真实messageID时，返回的消息会包含当前的message，所以需要多取一个
                 NSInteger offset = record.beforeMsg.messageID!=INT64_MAX;
                 [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:record.topic.topicID startID:record.beforeMsg.messageID asending:NO dataNum:record.count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
