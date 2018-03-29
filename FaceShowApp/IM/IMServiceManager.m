@@ -15,6 +15,7 @@
 #import "IMOfflineMsgUpdateService.h"
 #import "IMOfflineMsgUpdateServiceManager.h"
 #import "IMManager.h"
+#import "IMHistoryMessageFetcher.h"
 
 @interface IMServiceManager()
 @property (nonatomic, strong) Reachability *hostReachability;
@@ -60,8 +61,6 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kIMConnectionDidCloseNotification object:nil];
     [[IMConnectionManager sharedInstance]disconnect];
-    [self.topicUpdateService removeAllTopics];
-    [self.offlineServiceManager removeAllServices];
 }
 
 -(void)listenNetWorkingStatus{
@@ -98,6 +97,9 @@
 }
 
 - (void)startServicesForNetworkReachable {
+    [self.topicUpdateService removeAllTopics];
+    [self.offlineServiceManager removeAllServices];
+    [[IMHistoryMessageFetcher sharedInstance]removeAllAutomaticRecords];
     WEAK_SELF
     [[IMRequestManager sharedInstance]requestTopicsWithCompleteBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
         STRONG_SELF
@@ -126,7 +128,7 @@
         }else if (dbTopic) {
             lastID = dbTopic.latestMsgId;
         }
-        if ((lastID > 0 || self.shouldFetchFromFirstMsg) && topic.latestMsgId > lastID) {
+        if (lastID > 0 && topic.latestMsgId > lastID) {
             IMTopicOfflineMsgFetchRecord *record = [[IMTopicOfflineMsgFetchRecord alloc]init];
             record.topicID = topic.topicID;
             record.startID = lastID;
@@ -137,18 +139,15 @@
             IMOfflineMsgUpdateService *offlineService = [[IMOfflineMsgUpdateService alloc]initWithTopicID:item.topicID startID:item.startID];
             [self.offlineServiceManager addService:offlineService];
         }
+        // history msgs
+        if (lastID == 0 && !dbTopic.latestMessage) {
+            IMHistoryFetchRecord *record = [[IMHistoryFetchRecord alloc]init];
+            record.topic = dbTopic;
+            record.count = 15;
+            record.automaticFetch = YES;
+            [[IMHistoryMessageFetcher sharedInstance]addRecord:record];
+        }
     }
-    self.shouldFetchFromFirstMsg = YES;
-}
-
-- (BOOL)shouldFetchFromFirstMsg {
-    NSString *key = [NSString stringWithFormat:@"%@_im_topic_fetch_all",@([IMManager sharedInstance].currentMember.memberID)];
-    return [[NSUserDefaults standardUserDefaults]boolForKey:key];
-}
-
-- (void)setShouldFetchFromFirstMsg:(BOOL)shouldFetchFromFirstMsg {
-    NSString *key = [NSString stringWithFormat:@"%@_im_topic_fetch_all",@([IMManager sharedInstance].currentMember.memberID)];
-    [[NSUserDefaults standardUserDefaults]setBool:shouldFetchFromFirstMsg forKey:key];
 }
 
 #pragma mark - 连接断开处理

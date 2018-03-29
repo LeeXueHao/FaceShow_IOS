@@ -42,10 +42,12 @@
         WEAK_SELF
         [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(topic.topicID)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
             STRONG_SELF
-            for (IMTopic *topic in topics) {
-                [[IMDatabaseManager sharedInstance]saveTopic:topic];
+            if (self.topicArray.firstObject == topic) {
+                for (IMTopic *topic in topics) {
+                    [[IMDatabaseManager sharedInstance]saveTopic:topic];
+                }
+                [self.topicArray removeObjectAtIndex:0];
             }
-            [self.topicArray removeObjectAtIndex:0];
             self.isTopicUpdating = NO;
             [self checkAndUpdate];
         }];

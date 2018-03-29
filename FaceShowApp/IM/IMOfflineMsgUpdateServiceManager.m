@@ -30,6 +30,7 @@
 }
 
 - (void)removeAllServices {
+    [self.serviceArray.firstObject stop];
     self.serviceArray = [NSMutableArray array];
 }
 
@@ -40,7 +41,9 @@
         WEAK_SELF
         [service startWithCompleteBlock:^(NSError *error) {
             STRONG_SELF
-            [self.serviceArray removeObjectAtIndex:0];
+            if (self.serviceArray.firstObject == service) {
+                [self.serviceArray removeObjectAtIndex:0];
+            }
             self.isServiceRunning = NO;
             [self checkAndUpdate];
         }];
