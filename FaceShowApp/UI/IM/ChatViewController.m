@@ -372,6 +372,9 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         if (self.topic.topicID != topicID) {
             return;
         }
+        if (!self.isRefresh && self.dataArray.count > 0) {
+            return;
+        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.activity stopAnimating];
             if (error) {

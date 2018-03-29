@@ -14,7 +14,6 @@
 @property (nonatomic, assign) int64_t topicID;
 @property (nonatomic, assign) int64_t startID;
 @property (nonatomic, strong) void(^completeBlock)(NSError *error);
-@property (nonatomic, assign) BOOL stopped;
 @end
 
 @implementation IMOfflineMsgUpdateService
@@ -35,7 +34,7 @@
     WEAK_SELF
     [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:self.topicID startID:self.startID asending:YES dataNum:20 completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
         STRONG_SELF
-        if (error || self.stopped) {
+        if (error) {
             self.completeBlock(error);
             return;
         }
@@ -62,7 +61,4 @@
     }];
 }
 
-- (void)stop {
-    self.stopped = YES;
-}
 @end

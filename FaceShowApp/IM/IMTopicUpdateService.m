@@ -31,10 +31,6 @@
     [self checkAndUpdate];
 }
 
-- (void)removeAllTopics {
-    self.topicArray = [NSMutableArray array];
-}
-
 - (void)checkAndUpdate{
     if (!self.isTopicUpdating && self.topicArray.count>0) {
         self.isTopicUpdating = YES;
@@ -42,12 +38,10 @@
         WEAK_SELF
         [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(topic.topicID)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
             STRONG_SELF
-            if (self.topicArray.firstObject == topic) {
-                for (IMTopic *topic in topics) {
-                    [[IMDatabaseManager sharedInstance]saveTopic:topic];
-                }
-                [self.topicArray removeObjectAtIndex:0];
+            for (IMTopic *topic in topics) {
+                [[IMDatabaseManager sharedInstance]saveTopic:topic];
             }
+            [self.topicArray removeObjectAtIndex:0];
             self.isTopicUpdating = NO;
             [self checkAndUpdate];
         }];

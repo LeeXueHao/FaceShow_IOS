@@ -24,7 +24,6 @@
 @property (nonatomic, strong) IMOfflineMsgUpdateServiceManager *offlineServiceManager;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, strong) NSTimer *reconnectTimer;
-@property (nonatomic, assign) BOOL shouldFetchFromFirstMsg;
 @end
 
 @implementation IMServiceManager
@@ -97,9 +96,6 @@
 }
 
 - (void)startServicesForNetworkReachable {
-    [self.topicUpdateService removeAllTopics];
-    [self.offlineServiceManager removeAllServices];
-    [[IMHistoryMessageFetcher sharedInstance]removeAllAutomaticRecords];
     WEAK_SELF
     [[IMRequestManager sharedInstance]requestTopicsWithCompleteBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
         STRONG_SELF
@@ -142,9 +138,8 @@
         // history msgs
         if (offlineRecords.count == 0 && !dbTopic.latestMessage) {
             IMHistoryFetchRecord *record = [[IMHistoryFetchRecord alloc]init];
-            record.topic = dbTopic;
+            record.topic = topic;
             record.count = 15;
-            record.automaticFetch = YES;
             [[IMHistoryMessageFetcher sharedInstance]addRecord:record];
         }
     }

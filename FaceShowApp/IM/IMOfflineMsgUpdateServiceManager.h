@@ -11,5 +11,4 @@
 
 @interface IMOfflineMsgUpdateServiceManager : NSObject
 - (void)addService:(IMOfflineMsgUpdateService *)service;
-- (void)removeAllServices;
 @end

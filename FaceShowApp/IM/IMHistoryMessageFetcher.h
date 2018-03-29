@@ -13,5 +13,4 @@
 + (IMHistoryMessageFetcher *)sharedInstance;
 
 - (void)addRecord:(IMHistoryFetchRecord *)record;
-- (void)removeAllAutomaticRecords;
 @end

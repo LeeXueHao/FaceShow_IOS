@@ -36,24 +36,11 @@ NSString * const kIMHistoryMessageErrorKey = @"kIMHistoryMessageErrorKey";
 - (void)addRecord:(IMHistoryFetchRecord *)record {
     for (IMHistoryFetchRecord *item in self.recordArray) {
         if (item.topic.topicID == record.topic.topicID) {
-            if (!record.automaticFetch) {
-                item.automaticFetch = record.automaticFetch;
-            }
             return;
         }
     }
     [self.recordArray addObject:record];
     [self checkAndUpdate];
-}
-
-- (void)removeAllAutomaticRecords {
-    NSMutableArray *array = [NSMutableArray array];
-    for (IMHistoryFetchRecord *record in self.recordArray) {
-        if (!record.automaticFetch) {
-            [array addObject:record];
-        }
-    }
-    self.recordArray = array;
 }
 
 - (void)checkAndUpdate{
@@ -80,11 +67,6 @@ NSString * const kIMHistoryMessageErrorKey = @"kIMHistoryMessageErrorKey";
                 // 有真实messageID时，返回的消息会包含当前的message，所以需要多取一个
                 NSInteger offset = record.beforeMsg.messageID!=INT64_MAX;
                 [[IMRequestManager sharedInstance]requestTopicMsgsWithTopicID:record.topic.topicID startID:record.beforeMsg.messageID asending:NO dataNum:record.count+1+offset completeBlock:^(NSArray<IMTopicMessage *> *msgs, NSError *error) {
-                    if (self.recordArray.firstObject != record) {
-                        self.isMsgFetching = NO;
-                        [self checkAndUpdate];
-                        return;
-                    }
                     if (error) {
                         [self postNotificationWithError:error topicID:record.topic.topicID];
                         [self fetchNext];

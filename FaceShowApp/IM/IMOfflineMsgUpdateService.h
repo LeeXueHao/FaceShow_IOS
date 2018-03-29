@@ -13,5 +13,4 @@
 
 - (void)startWithCompleteBlock:(void(^)(NSError *error))completeBlock;
 
-- (void)stop;
 @end

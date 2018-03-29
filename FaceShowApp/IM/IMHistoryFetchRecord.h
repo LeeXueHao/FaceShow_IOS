@@ -13,5 +13,4 @@
 @property (nonatomic, strong) IMTopic *topic;
 @property (nonatomic, strong) IMTopicMessage *beforeMsg;
 @property (nonatomic, assign) NSInteger count;
-@property (nonatomic, assign) BOOL automaticFetch;
 @end

@@ -169,9 +169,6 @@
         if (topic.type == TopicType_Group) {
             self.privateTopicIndex++;
         }
-        if (!topic.latestMessage) {
-            [IMUserInterface findMessagesInTopic:topic count:15 beforeMsg:nil];
-        }
     }];
     
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMUnreadMessageCountDidUpdateNotification object:nil]subscribeNext:^(id x) {

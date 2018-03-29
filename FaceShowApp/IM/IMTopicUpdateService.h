@@ -11,5 +11,4 @@
 
 @interface IMTopicUpdateService : NSObject
 - (void)addTopic:(IMTopic *)topic;
-- (void)removeAllTopics;
 @end
