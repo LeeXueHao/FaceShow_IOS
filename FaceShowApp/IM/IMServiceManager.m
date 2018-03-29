@@ -140,7 +140,7 @@
             [self.offlineServiceManager addService:offlineService];
         }
         // history msgs
-        if (lastID == 0 && !dbTopic.latestMessage) {
+        if (offlineRecords.count == 0 && !dbTopic.latestMessage) {
             IMHistoryFetchRecord *record = [[IMHistoryFetchRecord alloc]init];
             record.topic = dbTopic;
             record.count = 15;
