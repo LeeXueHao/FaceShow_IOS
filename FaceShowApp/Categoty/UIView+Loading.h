@@ -13,5 +13,6 @@
 - (void)nyx_startLoading;
 - (void)nyx_stopLoading;
 - (void)nyx_showToast:(NSString *)text;
+- (void)nyx_showToast:(NSString *)text duration:(NSTimeInterval)duration;
 
 @end

@@ -26,14 +26,18 @@
 }
 
 - (void)nyx_showToast:(NSString *)text {
+    [self nyx_showToast:text duration:1];
+}
+
+- (void)nyx_showToast:(NSString *)text duration:(NSTimeInterval)duration{
     [MBProgressHUD hideAllHUDsForView:self animated:NO];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
     hud.mode = MBProgressHUDModeText;
-//    hud.labelText = text;
+    //    hud.labelText = text;
     hud.detailsLabelText = text;
     hud.detailsLabelFont = hud.labelFont;
     hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:1];
+    [hud hide:YES afterDelay:duration];
 }
 
 @end
