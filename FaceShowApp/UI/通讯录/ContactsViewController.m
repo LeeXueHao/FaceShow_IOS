@@ -179,6 +179,8 @@
     alert.contentView = filterView;
     self.alertView = alert;
     CGFloat selectionViewHeight = [self.classFilterView heightForContactsClassFilterView];
+    CGFloat maxHeight = SCREEN_HEIGHT - (self.tableView.y) - CGRectGetMaxY(self.navigationController.navigationBar.frame) - SafeAreaBottomHeight(self.view);
+    selectionViewHeight = MIN(selectionViewHeight, maxHeight);
     WEAK_SELF
     [alert setHideBlock:^(AlertView *view) {
         STRONG_SELF
