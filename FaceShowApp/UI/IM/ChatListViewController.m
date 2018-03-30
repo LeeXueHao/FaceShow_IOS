@@ -216,7 +216,15 @@
                 if (!item.latestMessage) {
                     item.latestMessage = array.firstObject;
                     NSUInteger index = [self.dataArray indexOfObject:item];
-                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                    if ((index==self.privateTopicIndex && item.type==TopicType_Private)
+                        || (index==0 && item.type==TopicType_Group)) {
+                        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                    }else {
+                        NSInteger targetIndex = item.type==TopicType_Group? 0:self.privateTopicIndex;
+                        [self.dataArray removeObjectAtIndex:index];
+                        [self.dataArray insertObject:item atIndex:targetIndex];
+                        [self.tableView reloadData];
+                    }
                 }
                 break;
             }

@@ -115,7 +115,7 @@
     
     CIImage * outputImage = [_kernel applyWithExtent:[inputImage extent]
                                          roiCallback:^CGRect(int index, CGRect destRect) {
-                                             return CGRectMake(0, 0, CGRectGetWidth(inputImage.extent), CGRectGetHeight(inputImage.extent));
+                                             return CGRectMake(0, 0, CGRectGetWidth(self->inputImage.extent), CGRectGetHeight(self->inputImage.extent));
                                          } arguments:@[ inputImage, inputThreshold]];
     
     

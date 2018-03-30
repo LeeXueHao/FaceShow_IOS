@@ -45,14 +45,6 @@
     self.devlist = [[NSArray alloc] initWithArray:[self.devActionDictionary allKeys]];
 }
 
-- (void)viewDidUnload
-{
-    self.devActionDictionary = nil;
-    self.devlist = nil;
-    
-    [super viewDidUnload];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -98,10 +98,10 @@
             _statusLabel.text = MJRefreshHeaderReleaseToRefresh;
             // 执行动画
             [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
-                _arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
-                UIEdgeInsets inset = _scrollView.contentInset;
-                inset.top = _scrollViewInitInset.top;
-                _scrollView.contentInset = inset;
+                self->_arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
+                UIEdgeInsets inset = self->_scrollView.contentInset;
+                inset.top = self->_scrollViewInitInset.top;
+                self->_scrollView.contentInset = inset;
             }];
 			break;
         }
@@ -112,10 +112,10 @@
 			_statusLabel.text = MJRefreshHeaderPullToRefresh;
             // 执行动画
             [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
-                _arrowImage.transform = CGAffineTransformIdentity;
-                UIEdgeInsets inset = _scrollView.contentInset;
-                inset.top = _scrollViewInitInset.top;
-                _scrollView.contentInset = inset;
+                self->_arrowImage.transform = CGAffineTransformIdentity;
+                UIEdgeInsets inset = self->_scrollView.contentInset;
+                inset.top = self->_scrollViewInitInset.top;
+                self->_scrollView.contentInset = inset;
             }];
             
             // 刷新完毕
@@ -133,13 +133,13 @@
             // 执行动画
             [UIView animateWithDuration:MJRefreshAnimationDuration delay:0.1 options:0
                              animations:^{
-                                 _arrowImage.transform = CGAffineTransformIdentity;
+                                 self->_arrowImage.transform = CGAffineTransformIdentity;
                                  // 1.增加65的滚动区域
-                                 UIEdgeInsets inset = _scrollView.contentInset;
-                                 inset.top = _scrollViewInitInset.top + MJRefreshViewHeight;
-                                 _scrollView.contentInset = inset;
+                                 UIEdgeInsets inset = self->_scrollView.contentInset;
+                                 inset.top = self->_scrollViewInitInset.top + MJRefreshViewHeight;
+                                 self->_scrollView.contentInset = inset;
                                  // 2.设置滚动位置
-                                 _scrollView.contentOffset = CGPointMake(0, - inset.top);
+                                 self->_scrollView.contentOffset = CGPointMake(0, - inset.top);
                              } completion:nil];
 			break;
         }

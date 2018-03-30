@@ -98,10 +98,10 @@
         _activityView.hidden = YES;
         _arrowImage.hidden = YES;
         [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
-            _arrowImage.transform = CGAffineTransformIdentity;
-            UIEdgeInsets inset = _scrollView.contentInset;
-            inset.bottom = _scrollViewInitInset.bottom;
-            _scrollView.contentInset = inset;
+            self->_arrowImage.transform = CGAffineTransformIdentity;
+            UIEdgeInsets inset = self->_scrollView.contentInset;
+            inset.bottom = self->_scrollViewInitInset.bottom;
+            self->_scrollView.contentInset = inset;
         }];
     }
     else
@@ -118,10 +118,10 @@
                 _statusLabel.text = MJRefreshFooterReleaseToRefresh;
                 _arrowImage.hidden = YES;
                 [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
-                    _arrowImage.transform = CGAffineTransformIdentity;
-                    UIEdgeInsets inset = _scrollView.contentInset;
-                    inset.bottom = _scrollViewInitInset.bottom;
-                    _scrollView.contentInset = inset;
+                    self->_arrowImage.transform = CGAffineTransformIdentity;
+                    UIEdgeInsets inset = self->_scrollView.contentInset;
+                    inset.bottom = self->_scrollViewInitInset.bottom;
+                    self->_scrollView.contentInset = inset;
                 }];
                 break;
             }
@@ -142,10 +142,10 @@
                 }
                 _arrowImage.hidden = YES;
                 [UIView animateWithDuration:animDuration animations:^{
-                    _arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
-                    UIEdgeInsets inset = _scrollView.contentInset;
-                    inset.bottom = _scrollViewInitInset.bottom;
-                    _scrollView.contentInset = inset;
+                    self->_arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
+                    UIEdgeInsets inset = self->_scrollView.contentInset;
+                    inset.bottom = self->_scrollViewInitInset.bottom;
+                    self->_scrollView.contentInset = inset;
                 }];
                 
                 if (animDuration == 0) {
@@ -162,14 +162,14 @@
                 _statusLabel.text = MJRefreshFooterRefreshing;
                 _arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
                 [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
-                    UIEdgeInsets inset = _scrollView.contentInset;
-                    CGFloat bottom = MJRefreshViewHeight + _scrollViewInitInset.bottom;
+                    UIEdgeInsets inset = self->_scrollView.contentInset;
+                    CGFloat bottom = MJRefreshViewHeight + self->_scrollViewInitInset.bottom;
                     CGFloat deltaH = [self contentBreakView];
                     if (deltaH < 0) { // 如果内容高度小于view的高度
                         bottom -= deltaH;
                     }
                     inset.bottom = bottom;
-                    _scrollView.contentInset = inset;
+                    self->_scrollView.contentInset = inset;
                 }];
                 break;
             }

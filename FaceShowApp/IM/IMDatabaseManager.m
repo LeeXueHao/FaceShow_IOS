@@ -128,6 +128,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 
 - (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock{
+    __block BOOL unreadMsg = NO;
+    __block int64_t topicID = 0;
+    __block int64_t unreadCount = 0;
     NSMutableArray<IMTopicMessage *> *array = [NSMutableArray array];
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         for (IMTopicMessage *msg in messages) {
@@ -140,6 +143,12 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         if (array.count == 0) {
             return;
         }
+        NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
+        IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
+        
+        NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(array.firstObject.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+        
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(array.firstObject.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         NSArray *localMsgs = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
         for (IMTopicMessageEntity *msg in localMsgs) {
@@ -161,9 +170,6 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             entity.height = message.height;
             entity.sendTime = message.sendTime;
             entity.primaryKey = key--;
-            
-            NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
-            IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
             entity.curMember = curMemberEntity;
             
             NSPredicate *senderPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(message.sender.memberID)];
@@ -171,8 +177,6 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             entity.sender = senderEntity;
             
             if ([array indexOfObject:message] == 0) {
-                NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(message.topicID),@([IMManager sharedInstance].currentMember.memberID)];
-                IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
                 if (!topicEntity.latestMessage) {
                     topicEntity.latestMessage = entity;
                 }
@@ -184,7 +188,23 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             message.sender.name = senderEntity.name;
             message.sender.memberID = senderEntity.memberID;
         }
+        
+        if (localMsgs.count == 0) {
+            for (IMTopicMessage *message in array) {
+                if (message.sender.memberID != [IMManager sharedInstance].currentMember.memberID) {
+                    topicEntity.unreadCount += 1;
+                    unreadMsg = YES;
+                    topicID = topicEntity.topicID;
+                    unreadCount = topicEntity.unreadCount;
+                }
+            }
+        }
     }];
+    if (unreadMsg) {
+        NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
+                               kIMUnreadMessageCountKey:@(unreadCount)};
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
+    }
     completeBlock(array);
 }
 

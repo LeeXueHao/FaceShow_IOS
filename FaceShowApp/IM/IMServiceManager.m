@@ -111,6 +111,9 @@
 - (void)clearDeletedTopicsWithTopics:(NSArray *)topics {
     NSArray *localTopics = [[IMDatabaseManager sharedInstance]findAllTopics];
     for (IMTopic *localItem in localTopics) {
+        if ([[IMDatabaseManager sharedInstance]isTempTopicID:localItem.topicID]) {
+            continue;
+        }
         BOOL deleted = YES;
         for (IMTopic *item in topics) {
             if (item.topicID == localItem.topicID) {
