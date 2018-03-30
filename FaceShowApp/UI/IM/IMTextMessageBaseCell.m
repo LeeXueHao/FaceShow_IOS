@@ -34,7 +34,7 @@
     [super setupLayout];
     [self.messageBackgroundView addSubview:self.messageTextLabel];
     [self.messageTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(12.f, 10.f, 12.f, 10.f));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(12.f, 14.f, 12.f, 10.f));
     }];
 }
 

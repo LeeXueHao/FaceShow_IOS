@@ -31,6 +31,13 @@
     return self;
 }
 
+- (void)setupLayout {
+    [super setupLayout];
+    [self.messageTextLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(12.f, 10.f, 12.f, 14.f));
+    }];
+}
+
 - (void)setModel:(IMChatViewModel *)model {
     [super setModel:model];
     
