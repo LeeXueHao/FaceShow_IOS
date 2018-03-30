@@ -80,8 +80,7 @@
        STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
-        [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@班",topic.group]];
-        [self.appDelegateHelper handleRemoveFromOneClass];
+        [self.appDelegateHelper handleRemoveFromOneClass:topic];
     }];
 }
 

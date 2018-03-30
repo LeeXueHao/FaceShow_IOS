@@ -56,7 +56,7 @@
     
 }
 
-- (void)handleRemoveFromOneClass {
+- (void)handleRemoveFromOneClass:(IMTopic *)topic {
     
 }
 @end

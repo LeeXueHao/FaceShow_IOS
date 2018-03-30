@@ -290,13 +290,12 @@
     return vc;
 }
 
-- (void)handleRemoveFromOneClass {
-    NSArray *topicsArray = [IMUserInterface findAllTopics];
-    if (topicsArray.count == 0) {
-        [UserManager sharedInstance].loginStatus = NO;
+- (void)handleRemoveFromOneClass:(IMTopic *)topic {
+    if ([[self lastPresentedViewController] isKindOfClass:[ClassSelectionViewController class]]) {
         return;
     }
-    [UserManager sharedInstance].hasUsedBefore = NO;
+    [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@班",topic.group]];
+    NSArray *topicsArray = [IMUserInterface findAllTopics];
     BOOL hasGroup = NO;
     for (IMTopic *topic in topicsArray) {
         if (topic.type == TopicType_Group) {
@@ -305,6 +304,7 @@
         }
     }
     if (hasGroup) {
+        [UserManager sharedInstance].hasUsedBefore = NO;
         ClassSelectionViewController *selectionVC = [[ClassSelectionViewController alloc] init];
         FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:selectionVC];
         [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YXApnsContentModel.h"
+#import "IMTopic.h"
 
 @interface AppDelegateHelper : NSObject
 
@@ -28,5 +29,5 @@
 // Apns
 - (void)handleApnsData:(YXApnsContentModel *)apns;
 
-- (void)handleRemoveFromOneClass;
+- (void)handleRemoveFromOneClass:(IMTopic *)topic;
 @end
