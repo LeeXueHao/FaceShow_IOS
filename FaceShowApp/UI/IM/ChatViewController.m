@@ -262,6 +262,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 NSUInteger index = [self.dataArray indexOfObject:model];
                 model.message = message;
                 [self.dataArray replaceObjectAtIndex:index withObject:model];
+                [self handelTimeForDataSource:self.dataArray];
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                 return;
             }
