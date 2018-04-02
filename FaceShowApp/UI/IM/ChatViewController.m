@@ -399,7 +399,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             self.isRefresh = NO;
         });
     }];
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillTerminateNotification object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillResignActiveNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountClearNotification object:self.topic];
     }];
