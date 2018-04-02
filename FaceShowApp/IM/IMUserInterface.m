@@ -25,12 +25,22 @@
     msg.text = text;
     msg.topicID = topicID;
     msg.uniqueID = uniqueID;
+    if ([[IMDatabaseManager sharedInstance]isTempTopicID:topicID]) {
+        IMTopic *topic = [[IMDatabaseManager sharedInstance]findTopicWithID:topicID];
+        msg.groupID = topic.groupID;
+        for (IMMember *member in topic.members) {
+            if (member.memberID != [IMManager sharedInstance].currentMember.memberID) {
+                msg.otherMember = member;
+                break;
+            }
+        }
+    }
     
     [[IMTextMessageSender sharedInstance]addTextMessage:msg];
 }
 
 + (void)sendTextMessageWithText:(NSString *)text toMember:(IMMember *)member fromGroup:(int64_t)groupID{
-    IMTopic *tempTopic = [IMUserInterface generateTempTopicWithMember:member];
+    IMTopic *tempTopic = [IMUserInterface generateTempTopicWithMember:member groupID:groupID];
     IMTextMessage *msg = [[IMTextMessage alloc]init];
     msg.text = text;
     msg.otherMember = member;
@@ -49,12 +59,22 @@
     msg.image = image;
     msg.topicID = topicID;
     msg.uniqueID = uniqueID;
+    if ([[IMDatabaseManager sharedInstance]isTempTopicID:topicID]) {
+        IMTopic *topic = [[IMDatabaseManager sharedInstance]findTopicWithID:topicID];
+        msg.groupID = topic.groupID;
+        for (IMMember *member in topic.members) {
+            if (member.memberID != [IMManager sharedInstance].currentMember.memberID) {
+                msg.otherMember = member;
+                break;
+            }
+        }
+    }
     
     [[IMImageMessageSender sharedInstance]addImageMessage:msg];
 }
 
 + (void)sendImageMessageWithImage:(UIImage *)image toMember:(IMMember *)member fromGroup:(int64_t)groupID{
-    IMTopic *tempTopic = [IMUserInterface generateTempTopicWithMember:member];
+    IMTopic *tempTopic = [IMUserInterface generateTempTopicWithMember:member groupID:groupID];
     IMImageMessage *msg = [[IMImageMessage alloc]init];
     msg.image = image;
     msg.otherMember = member;
@@ -64,9 +84,10 @@
     [[IMImageMessageSender sharedInstance]addImageMessage:msg];
 }
 
-+ (IMTopic *)generateTempTopicWithMember:(IMMember *)member {
++ (IMTopic *)generateTempTopicWithMember:(IMMember *)member groupID:(int64_t)groupID {
     IMTopic *topic = [[IMTopic alloc]init];
     topic.type = TopicType_Private;
+    topic.groupID = groupID;
     topic.topicID = [[IMDatabaseManager sharedInstance]generateTempTopicID];
     topic.members = @[member,[IMManager sharedInstance].currentMember];
     [[IMDatabaseManager sharedInstance]saveTopic:topic];

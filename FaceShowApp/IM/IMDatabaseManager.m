@@ -224,6 +224,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         }
         topicEntity.name = topic.name;
         topicEntity.group = topic.group;
+        topicEntity.groupID = topic.groupID;
         topicEntity.channel = topic.channel;
         topicEntity.topicID = topic.topicID;
         topicEntity.type = topic.type;
@@ -455,6 +456,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     topic.topicID = entity.topicID;
     topic.name = entity.name;
     topic.group = entity.group;
+    topic.groupID = entity.groupID;
     topic.channel = entity.channel;
     topic.topicChange = entity.topicChange;
     topic.latestMsgId = entity.latestMsgId;
