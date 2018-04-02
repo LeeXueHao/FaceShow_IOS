@@ -260,6 +260,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         topicEntity.latestMessage = msgEntity;
         
         // 补充topic缺少的latest message信息
+        topic.unreadCount = topicEntity.unreadCount;
         topic.latestMessage = [self messageFromEntity:msgEntity];
     }];
     [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:topic];
