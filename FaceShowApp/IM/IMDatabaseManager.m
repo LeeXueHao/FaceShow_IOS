@@ -174,6 +174,13 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             
             NSPredicate *senderPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(message.sender.memberID)];
             IMMemberEntity *senderEntity = [IMMemberEntity MR_findFirstWithPredicate:senderPredicate inContext:localContext];
+            if (!senderEntity) {
+                senderEntity = [IMMemberEntity MR_createEntityInContext:localContext];
+                senderEntity.name = message.sender.name;
+                senderEntity.avatar = message.sender.avatar;
+                senderEntity.memberID = message.sender.memberID;
+                senderEntity.userID = message.sender.userID;
+            }
             entity.sender = senderEntity;
             
             if ([array indexOfObject:message] == 0) {
