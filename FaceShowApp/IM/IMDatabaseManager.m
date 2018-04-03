@@ -54,6 +54,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     __block BOOL unreadMsg = NO;
     __block int64_t topicID = 0;
     __block int64_t unreadCount = 0;
+    __block IMTopicMessage *dbMsg = nil;
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueID = %@ && curMember.memberID = %@",message.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate inContext:localContext];
@@ -108,16 +109,10 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             unreadCount = topicEntity.unreadCount;
         }
         
-        // 补充message缺少的字段值，保证通知出去的message是完整的
-        message.sendTime = entity.sendTime;
-        message.index = entity.primaryKey;
-        message.sender.userID = senderEntity.userID;
-        message.sender.avatar = senderEntity.avatar;
-        message.sender.name = senderEntity.name;
-        message.sender.memberID = senderEntity.memberID;
+        dbMsg = [self messageFromEntity:entity];
     }];
     if (!repeatedMsg) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:kIMMessageDidUpdateNotification object:message];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMMessageDidUpdateNotification object:dbMsg];
     }
     if (unreadMsg) {
         NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
@@ -131,8 +126,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     __block BOOL unreadMsg = NO;
     __block int64_t topicID = 0;
     __block int64_t unreadCount = 0;
-    NSMutableArray<IMTopicMessage *> *array = [NSMutableArray array];
+    NSMutableArray<IMTopicMessage *> *dbMsgArray = [NSMutableArray array];
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSMutableArray<IMTopicMessage *> *array = [NSMutableArray array];
         for (IMTopicMessage *msg in messages) {
             NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && uniqueID = %@ && curMember.memberID = %@",@(msg.topicID),msg.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
             IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:searchPredicate inContext:localContext];
@@ -188,12 +184,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                     topicEntity.latestMessage = entity;
                 }
             }
-            // 补充message缺少的字段值，保证通知出去的message是完整的
-            message.index = entity.primaryKey;
-            message.sender.userID = senderEntity.userID;
-            message.sender.avatar = senderEntity.avatar;
-            message.sender.name = senderEntity.name;
-            message.sender.memberID = senderEntity.memberID;
+            [dbMsgArray addObject:[self messageFromEntity:entity]];
         }
         
         if (localMsgs.count == 0) {
@@ -212,10 +203,11 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                                kIMUnreadMessageCountKey:@(unreadCount)};
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
     }
-    completeBlock(array);
+    completeBlock(dbMsgArray);
 }
 
 - (void)saveTopic:(IMTopic *)topic {
+    __block IMTopic *dbTopic = nil;
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
@@ -259,11 +251,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:msgPredicate sortedBy:@"primaryKey" ascending:NO inContext:localContext];
         topicEntity.latestMessage = msgEntity;
         
-        // 补充topic缺少的latest message信息
-        topic.unreadCount = topicEntity.unreadCount;
-        topic.latestMessage = [self messageFromEntity:msgEntity];
+        dbTopic = [self topicFromEntity:topicEntity];
     }];
-    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:topic];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:dbTopic];
 }
 
 - (void)migrateTempMessagesIfNeededToTopicEntity:(IMTopicEntity *)topicEntity inContext:(NSManagedObjectContext *)context {

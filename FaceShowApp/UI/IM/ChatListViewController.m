@@ -223,9 +223,10 @@
                         || (index==0 && item.type==TopicType_Group)) {
                         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                     }else {
+                        IMTopic *topic = item;
                         NSInteger targetIndex = item.type==TopicType_Group? 0:self.privateTopicIndex;
                         [self.dataArray removeObjectAtIndex:index];
-                        [self.dataArray insertObject:item atIndex:targetIndex];
+                        [self.dataArray insertObject:topic atIndex:targetIndex];
                         [self.tableView reloadData];
                     }
                 }
