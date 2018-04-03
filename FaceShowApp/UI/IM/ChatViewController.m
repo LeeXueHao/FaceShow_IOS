@@ -138,6 +138,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }];
     [self.imInputView setCameraButtonClickBlock:^{
         STRONG_SELF
+        [self scrollToBottom];
         [self.imageHandler pickImageWithMaxCount:9 completeBlock:^(NSArray *array) {
             STRONG_SELF
             for (UIImage *image in array) {
@@ -149,7 +150,6 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 }
             }
         }];
-        [self scrollToBottom];
         [TalkingData trackEvent:@"点击聊聊相机"];
     }];
     [self.view addSubview:self.imInputView];
