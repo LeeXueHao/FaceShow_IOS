@@ -124,11 +124,24 @@
 
 - (void)setupLayout {
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.edges.equalTo(self.view);
+            // Fallback on earlier versions
+        }
+        
     }];
     [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-10.0f);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-10.f);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom).offset(-10.0f);
+            // Fallback on earlier versions
+        }
         make.size.mas_equalTo(CGSizeMake(20 * self.imageModelMutableArray.count, 10));
     }];
     
