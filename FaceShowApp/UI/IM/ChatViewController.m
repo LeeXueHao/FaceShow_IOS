@@ -149,6 +149,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 }
             }
         }];
+        [self scrollToBottom];
         [TalkingData trackEvent:@"点击聊聊相机"];
     }];
     [self.view addSubview:self.imInputView];
