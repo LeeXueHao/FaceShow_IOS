@@ -497,6 +497,9 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 }
 
 - (void)messageCellTap:(IMMessageBaseCell *)cell {
+    [self.imInputView endEditing:YES];
+    [self.imInputView resignFirstResponder];
+    
     self.isPreview = YES;
     IMChatViewModel *model = cell.model;
     CGRect rect = cell.messageBackgroundView.bounds;
