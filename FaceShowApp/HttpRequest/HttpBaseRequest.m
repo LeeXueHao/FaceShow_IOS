@@ -106,6 +106,7 @@
         NSString *json = [[NSString alloc] initWithData:[self request].responseData encoding:NSUTF8StringEncoding];
         json = [json stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\\\""];
         json = [json stringByReplacingHTMLEntities];
+        json = [json stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\\\""];
         [self dealWithResponseJson:json];
     }];
     [[self request] setFailedBlock:^{
