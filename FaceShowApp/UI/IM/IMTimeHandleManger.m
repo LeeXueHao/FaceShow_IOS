@@ -61,9 +61,13 @@
     NSDateComponents *comp = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:myDate];
     
     if (nowCmps.year != myCmps.year) {
-        dateFmt.dateFormat = @"yyyy-MM-dd hh:mm";
-    } else if (nowCmps.month != myCmps.month) {
-        dateFmt.dateFormat = @"MM-dd hh:mm";
+        dateFmt.AMSymbol = @"上午";
+        dateFmt.PMSymbol = @"下午";
+        dateFmt.dateFormat = @"yyyy-MM-dd aaahh:mm";
+    }else if (nowCmps.month != myCmps.month) {
+        dateFmt.AMSymbol = @"上午";
+        dateFmt.PMSymbol = @"下午";
+        dateFmt.dateFormat = @"MM-dd aaahh:mm";
     }else {
         if (nowCmps.day == myCmps.day) {
             dateFmt.AMSymbol = @"上午";
@@ -100,7 +104,9 @@
                     break;
             }
         }else {
-            dateFmt.dateFormat = @"MM-dd hh:mm";
+            dateFmt.AMSymbol = @"上午";
+            dateFmt.PMSymbol = @"下午";
+            dateFmt.dateFormat = @"MM-dd aaahh:mm";
         }
     }
     return [dateFmt stringFromDate:myDate];

@@ -149,8 +149,8 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                     [IMUserInterface sendImageMessageWithImage:resultImage toMember:self.member fromGroup:self.groupId.integerValue];
                 }
             }
+            [self scrollToBottom];
         }];
-        [self scrollToBottom];
         [TalkingData trackEvent:@"点击聊聊相机"];
     }];
     [self.view addSubview:self.imInputView];
