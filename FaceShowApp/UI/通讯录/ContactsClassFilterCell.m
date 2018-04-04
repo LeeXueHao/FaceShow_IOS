@@ -69,9 +69,6 @@
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    while (![[_title stringByReplacingHTMLEntities]isEqualToString:_title]) {
-        _title = [_title stringByReplacingHTMLEntities];
-    }
     self.titleLabel.text = _title;
 }
 

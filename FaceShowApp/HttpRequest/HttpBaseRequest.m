@@ -104,6 +104,7 @@
     [[self request] setCompletionBlock:^{
         @strongify(self); if (!self) return;
         NSString *json = [[NSString alloc] initWithData:[self request].responseData encoding:NSUTF8StringEncoding];
+        json = [json stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
         json = [json stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\\\""];
         json = [json stringByReplacingHTMLEntities];
         [self dealWithResponseJson:json];
