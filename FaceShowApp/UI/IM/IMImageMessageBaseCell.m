@@ -89,11 +89,9 @@
     [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
     }];
-    if ([message imageWaitForSending]) {
-        self.messageImageview.image = [message imageWaitForSending];
-    }else {
-        [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
-    }
+    UIImage *localImage = [message imageWaitForSending];
+    UIImage *placeholderImage = localImage? localImage:[UIImage imageNamed:@"图片发送失败"];
+    [self.messageImageview sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:placeholderImage];
 }
 
 - (void)updateSendStateWithMessage:(IMTopicMessage *)message {
