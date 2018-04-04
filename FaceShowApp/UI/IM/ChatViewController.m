@@ -621,6 +621,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             }else if (message.type == MessageType_Image) {
                 [IMUserInterface sendImageMessageWithImage:[message imageWaitForSending] topicID:self.topic.topicID uniqueID:message.uniqueID];
             }
+            [self scrollToBottom];
         }
     }];
     

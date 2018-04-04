@@ -79,6 +79,9 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
         msg.width = msg.image.size.width * msg.image.scale;
         msg.height = msg.image.size.height * msg.image.scale;
         message = [self imageTopicMsgFromMessage:msg];
+    }else {
+        msg.width = message.width;
+        msg.height = message.height;
     }
     message.sendState = MessageSendState_Sending;
     message.sendTime = [[NSDate date]timeIntervalSince1970]*1000 + [IMRequestManager sharedInstance].timeoffset;
