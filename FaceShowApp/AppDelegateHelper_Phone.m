@@ -294,7 +294,7 @@
     if ([[self lastPresentedViewController] isKindOfClass:[ClassSelectionViewController class]]) {
         return;
     }
-    [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@班",topic.group]duration:2];
+    [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@",topic.group]duration:2];
     NSArray *topicsArray = [IMUserInterface findAllTopics];
     BOOL hasGroup = NO;
     for (IMTopic *topic in topicsArray) {

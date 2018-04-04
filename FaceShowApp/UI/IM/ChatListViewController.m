@@ -167,6 +167,7 @@
         if (topic.type == TopicType_Group) {
             self.privateTopicIndex++;
         }
+        [self updateUnreadPromptView];
     }];
     
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMUnreadMessageCountDidUpdateNotification object:nil]subscribeNext:^(id x) {
