@@ -10,6 +10,7 @@
 #import "IMSlideImageView.h"
 #import "AlertView.h"
 #import "IMTopicMessage.h"
+#import "IMImageMessageBaseCell.h"
 
 @interface IMPhotoBrowserView ()<IMSlideViewDataSource, IMSlideViewDelegate>
 
@@ -55,7 +56,16 @@
 
 - (QASlideItemBaseView *)slideView:(IMSlideView *)slideView itemViewAtIndex:(NSInteger)index {
     IMTopicMessage *message = self.imageMessageArray[index];
-    IMSlideImageView *imageView = [[IMSlideImageView alloc] initWithImageWidth:message.width imageHeight:message.height];
+    CGFloat width = 0;
+    CGFloat height = 0;
+    if (message.width > 0 && message.height > 0) {
+        width = message.width;
+        height = message.height;
+    }else {
+        width = kMaxImageSizeWidth;
+        height = kMaxImageSizeWidth;
+    }
+    IMSlideImageView *imageView = [[IMSlideImageView alloc] initWithImageWidth:width imageHeight:height];
     if (![message imageWaitForSending]) {
         [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
     }else {
