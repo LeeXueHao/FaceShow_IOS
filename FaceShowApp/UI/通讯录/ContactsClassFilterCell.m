@@ -7,6 +7,7 @@
 //
 
 #import "ContactsClassFilterCell.h"
+#import <NSString+HTML.h>
 
 @interface ContactsClassFilterCell ()
 @property(nonatomic, strong) UILabel *titleLabel;
@@ -68,7 +69,10 @@
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    self.titleLabel.text = title;
+    while (![[_title stringByReplacingHTMLEntities]isEqualToString:_title]) {
+        _title = [_title stringByReplacingHTMLEntities];
+    }
+    self.titleLabel.text = _title;
 }
 
 - (void)setIsChoosed:(BOOL)isChoosed {
