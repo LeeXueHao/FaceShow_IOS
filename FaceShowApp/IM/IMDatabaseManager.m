@@ -304,8 +304,8 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         [IMTopicEntity MR_deleteAllMatchingPredicate:topicPredicate inContext:localContext];
-        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidRemoveNotification object:topic];
     }];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidRemoveNotification object:topic];
 }
 
 - (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {

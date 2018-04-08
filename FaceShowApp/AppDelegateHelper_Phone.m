@@ -291,11 +291,15 @@
 }
 
 - (void)handleRemoveFromOneClass:(IMTopic *)topic {
+    NSArray *topicsArray = [IMUserInterface findAllTopics];
     if ([[self lastPresentedViewController] isKindOfClass:[ClassSelectionViewController class]]) {
+        if (topicsArray.count == 0) {
+            [UserManager sharedInstance].loginStatus = NO;
+        }
         return;
     }
     [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@",topic.group]duration:2];
-    NSArray *topicsArray = [IMUserInterface findAllTopics];
+    
     BOOL hasGroup = NO;
     for (IMTopic *topic in topicsArray) {
         if (topic.type == TopicType_Group) {
