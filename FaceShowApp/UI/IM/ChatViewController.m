@@ -523,7 +523,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         
         UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
 //        foldImgView.backgroundColor = [UIColor blackColor];
-        foldImgView.contentMode = UIViewContentModeScaleAspectFit;
+        foldImgView.contentMode = UIViewContentModeScaleToFill;
         foldImgView.image = foldSlideImageV.image;
         [self.view.window addSubview:foldImgView];
         foldImgView.userInteractionEnabled = YES;
