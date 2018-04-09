@@ -55,9 +55,12 @@
     //聊天内容图片的高
     CGSize size;
     if (model.message.height <= 0 ) {
-        size = CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth);
+        size = CGSizeMake(kMaxImageSizeHeight, kMaxImageSizeHeight);
     }else {
-        size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeWidth, kMaxImageSizeWidth)];
+        size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeHeight, kMaxImageSizeHeight)];
+        if (size.height < kMinImageSizeHeight) {
+            size.height = kMinImageSizeHeight;
+        }
     }
     height += size.height;
     

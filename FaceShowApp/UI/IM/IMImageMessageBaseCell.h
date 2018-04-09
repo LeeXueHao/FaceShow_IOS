@@ -9,7 +9,8 @@
 #import "IMMessageBaseCell.h"
 #import "IMImageSendingProgressView.h"
 
-static const CGFloat kMaxImageSizeWidth = 140;
+static const CGFloat kMaxImageSizeHeight = 140;
+static const CGFloat kMinImageSizeHeight = 55;
 
 @interface IMImageMessageBaseCell : IMMessageBaseCell
 

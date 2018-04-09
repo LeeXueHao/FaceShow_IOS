@@ -62,8 +62,8 @@
         width = message.width;
         height = message.height;
     }else {
-        width = kMaxImageSizeWidth;
-        height = kMaxImageSizeWidth;
+        width = kMaxImageSizeHeight;
+        height = kMaxImageSizeHeight;
     }
     IMSlideImageView *imageView = [[IMSlideImageView alloc] initWithImageWidth:width imageHeight:height];
     if (![message imageWaitForSending]) {
