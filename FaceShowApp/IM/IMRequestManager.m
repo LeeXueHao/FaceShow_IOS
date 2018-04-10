@@ -25,6 +25,7 @@
 @property (nonatomic, strong) SaveTextMsgRequest *saveTextMsgRequest;
 @property (nonatomic, strong) SaveImageMsgRequest *saveImageMsgRequest;
 @property (nonatomic, strong) GetTopicsRequest *getTopicInfoRequest;
+@property (nonatomic, strong) MqttServerRequest *mqttServerRequest;
 
 @property (nonatomic, assign) NSTimeInterval timeoffset;
 @end
@@ -203,4 +204,23 @@
         BLOCK_EXEC(completeBlock,[topic toIMTopic],nil);
     }];
 }
+
+- (void)requestMqttServerWithCompleteBlock:(void(^)(MqttServerConfig *config,NSError *error))completeBlock {
+    [self.mqttServerRequest stopRequest];
+    self.mqttServerRequest = [[MqttServerRequest alloc]init];
+    WEAK_SELF
+    [self.mqttServerRequest startRequestWithRetClass:[MqttServerRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            NSString *json = [[NSUserDefaults standardUserDefaults]valueForKey:@"kMqttServerKey"];
+            MqttServerRequestItem *item = [[MqttServerRequestItem alloc]initWithString:json error:nil];
+            BLOCK_EXEC(completeBlock,[item.data toServerConfig],error);
+            return;
+        }
+        MqttServerRequestItem *item = (MqttServerRequestItem *)retItem;
+        BLOCK_EXEC(completeBlock,[item.data toServerConfig],nil);
+        [[NSUserDefaults standardUserDefaults]setValue:[item toJSONString] forKey:@"kMqttServerKey"];
+    }];
+}
+
 @end

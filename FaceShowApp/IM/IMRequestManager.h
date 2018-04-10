@@ -10,6 +10,7 @@
 #import "IMDatabaseManager.h"
 #import "IMTextMessage.h"
 #import "IMImageMessage.h"
+#import "MqttServerRequest.h"
 
 @interface IMRequestManager : NSObject
 + (IMRequestManager *)sharedInstance;
@@ -38,5 +39,7 @@
 
 - (void)requestTopicInfoWithTopicId:(NSString *)topicId
                       completeBlock:(void(^)(IMTopic *topic,NSError *error))completeBlock;
+
+- (void)requestMqttServerWithCompleteBlock:(void(^)(MqttServerConfig *config,NSError *error))completeBlock;
 
 @end

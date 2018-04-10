@@ -12,8 +12,6 @@
 NSString * const kIMRequestUrlHead = @"http://orz.yanxiu.com/im/platform/data.api";
 NSString * const kUsername = @"admin";
 NSString * const kPassword = @"public";
-NSString * const kHost = @"orz.yanxiu.com";
-NSUInteger const kPort = 7914;
 
 NSString * const kBizSourse = @"22";
 

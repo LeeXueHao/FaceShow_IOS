@@ -88,11 +88,18 @@
 }
 
 - (void)connectAndSubscribeWithTopics:(NSArray *)topics {
-    [[IMConnectionManager sharedInstance]connectWithHost:kHost port:kPort username:kUsername password:kPassword];
-    [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForCurrentMember]];
-    for (IMTopic *topic in topics) {
-        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
-    }
+    WEAK_SELF
+    [[IMRequestManager sharedInstance]requestMqttServerWithCompleteBlock:^(MqttServerConfig *config, NSError *error) {
+        STRONG_SELF
+        if (!config) {
+            return;
+        }
+        [[IMConnectionManager sharedInstance]connectWithHost:config.server port:config.port username:kUsername password:kPassword];
+        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForCurrentMember]];
+        for (IMTopic *topic in topics) {
+            [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
+        }
+    }];
 }
 
 - (void)startServicesForNetworkReachable {

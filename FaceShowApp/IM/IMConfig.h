@@ -11,8 +11,6 @@
 extern NSString * const kIMRequestUrlHead;
 extern NSString * const kUsername;
 extern NSString * const kPassword;
-extern NSString * const kHost;
-extern NSUInteger const kPort;
 
 extern NSString * const kBizSourse;
 
