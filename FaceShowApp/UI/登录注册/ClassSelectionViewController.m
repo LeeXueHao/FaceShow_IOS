@@ -152,4 +152,7 @@
     self.navRightBtn.enabled = !isEmpty(self.selectedClass);
 }
 
+- (void)refreshClasses {
+    [self requestClasses];
+}
 @end

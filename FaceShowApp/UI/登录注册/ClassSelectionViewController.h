@@ -10,4 +10,5 @@
 
 @interface ClassSelectionViewController : BaseViewController
 
+- (void)refreshClasses;
 @end

@@ -57,12 +57,12 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLoginNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [[YXGeTuiManager sharedInstance] loginSuccess];
-        [self.appDelegateHelper handleLoginSuccess];
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];
         [[IMManager sharedInstance]setupWithCurrentMember:[[UserManager sharedInstance].userModel.imInfo.imMember toIMMember] token:[UserManager sharedInstance].userModel.imInfo.imToken];
         [[IMManager sharedInstance]setupWithSceneID:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
         [[IMManager sharedInstance] startConnection];
+        [self.appDelegateHelper handleLoginSuccess];
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kUserDidLogoutNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
