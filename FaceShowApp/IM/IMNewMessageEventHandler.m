@@ -9,6 +9,7 @@
 #import "IMNewMessageEventHandler.h"
 #import "TopicMsg.pbobjc.h"
 #import "IMDatabaseManager.h"
+#import <NSString+HTML.h>
 
 @implementation IMNewMessageEventHandler
 - (void)handleData:(NSData *)data inTopic:(NSString *)topic {
@@ -31,6 +32,9 @@
     message.sendState = MessageSendState_Success;
     message.width = msg.contentData.width;
     message.height = msg.contentData.height;
+    while (![[message.text stringByReplacingHTMLEntities]isEqualToString:message.text]) {
+        message.text = [message.text stringByReplacingHTMLEntities];
+    }
     
     IMMember *sender = [[IMMember alloc]init];
     sender.memberID = msg.senderId;
