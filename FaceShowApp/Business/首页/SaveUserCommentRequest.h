@@ -6,9 +6,9 @@
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "YXGetRequest.h"
+#import "YXPostRequest.h"
 
-@interface SaveUserCommentRequest : YXGetRequest
+@interface SaveUserCommentRequest : YXPostRequest
 @property (nonatomic, strong) NSString *stepId;
 @property (nonatomic, strong) NSString *content;
 @end
