@@ -118,6 +118,10 @@
                 break;
             }
         }
+        if (!self.selectedClass) {
+            self.selectedIndex = 0;
+            self.selectedClass = item.data.clazsInfos.firstObject;
+        }
         [self.tableview reloadData];
         if (item.data.clazsInfos.count > 0) {
             self.navRightBtn.enabled = YES;
