@@ -30,6 +30,7 @@
 #import "ChatPlaceViewController.h"
 #import "ClassSelectionViewController.h"
 #import "IMUserInterface.h"
+#import "UIViewController+VisibleViewController.h"
 
 @interface AppDelegateHelper_Phone()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -140,7 +141,7 @@
 }
 
 - (void)handleLogoutSuccess {
-    [self.window.rootViewController presentViewController:[self loginViewController] animated:YES completion:nil];
+    [[self lastPresentedViewController] presentViewController:[self loginViewController] animated:YES completion:nil];
 }
 
 - (void)handleClassChange {
@@ -292,13 +293,18 @@
 
 - (void)handleRemoveFromOneClass:(IMTopic *)topic {
     NSArray *topicsArray = [IMUserInterface findAllTopics];
-    if ([[self lastPresentedViewController] isKindOfClass:[ClassSelectionViewController class]]) {
-        if (topicsArray.count == 0) {
-            [UserManager sharedInstance].loginStatus = NO;
-        }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@",topic.group]duration:2];
+    });
+    if (topicsArray.count == 0) {
+        [UserManager sharedInstance].loginStatus = NO;
         return;
     }
-    [self.window nyx_showToast:[NSString stringWithFormat:@"已被移出%@",topic.group]duration:2];
+    if ([[self.window.rootViewController nyx_visibleViewController] isKindOfClass:[ClassSelectionViewController class]]) {
+        ClassSelectionViewController *vc = (ClassSelectionViewController *)[self.window.rootViewController nyx_visibleViewController];
+        [vc refreshClasses];
+        return;
+    }
     
     BOOL hasGroup = NO;
     for (IMTopic *topic in topicsArray) {

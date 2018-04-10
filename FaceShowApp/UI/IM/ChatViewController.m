@@ -474,7 +474,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             }
         }
         if (!isContainedUser) {
-            [self.view nyx_showToast:@"此学员已被删除"];
+            [self.view nyx_showToast:@"已被移出此班"];
             return;
         }
         
