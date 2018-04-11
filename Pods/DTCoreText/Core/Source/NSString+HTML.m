@@ -731,7 +731,9 @@ static NSDictionary *entityReverseLookup = nil;
 					[output appendString:@"&"];
 					[output appendString:afterAmpersand];
 				}
-			}
+            }else {
+                [output appendString:@"&"];
+            }
 		}
 	}
 	
