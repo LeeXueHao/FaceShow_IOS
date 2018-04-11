@@ -56,19 +56,13 @@
 }
 
 - (void)setupNavRightView {
-    UIButton *navRightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    navRightBtn.frame = CGRectMake(0, 0, 75, 30);
-    navRightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [navRightBtn setTitle:@"通讯录" forState:UIControlStateNormal];
-    [navRightBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
-    [navRightBtn addTarget:self action:@selector(navRightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self nyx_setupRightWithCustomView:navRightBtn];
-}
-
-- (void)navRightBtnAction:(UIButton *)sender {
-    ContactsViewController *contactsVC = [[ContactsViewController alloc] init];
-    [self.navigationController pushViewController:contactsVC animated:YES];
-    [TalkingData trackEvent:@"通讯录"];
+    WEAK_SELF
+    [self nyx_setupRightWithTitle:@"通讯录" action:^{
+        STRONG_SELF
+        ContactsViewController *contactsVC = [[ContactsViewController alloc] init];
+        [self.navigationController pushViewController:contactsVC animated:YES];
+        [TalkingData trackEvent:@"通讯录"];
+    }];
 }
 
 #pragma mark - setupUI

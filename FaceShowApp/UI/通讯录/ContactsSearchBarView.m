@@ -82,6 +82,7 @@
 
 - (void)deleteBtnAction {
     self.textField.text = nil;
+    self.deleteButton.hidden = isEmpty(self.textField.text);
     BLOCK_EXEC(self.searchBlock,self.textField.text);
 }
 

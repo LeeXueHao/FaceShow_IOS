@@ -72,7 +72,7 @@
     }];
     
     self.timeLabel = [[UILabel alloc] init];
-    self.timeLabel.font = [UIFont systemFontOfSize:14];
+    self.timeLabel.font = [UIFont systemFontOfSize:12];
     self.timeLabel.textColor = [UIColor colorWithHexString:@"999999"];
     self.timeLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:self.timeLabel];
