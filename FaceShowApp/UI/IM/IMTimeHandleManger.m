@@ -74,7 +74,7 @@
             dateFmt.PMSymbol = @"下午";
             dateFmt.dateFormat = @"aaahh:mm";
             
-        }else if ((nowCmps.day - myCmps.day) <= 7) {
+        }else if ((nowCmps.day - myCmps.day) < 7) {
             dateFmt.AMSymbol = @"上午";
             dateFmt.PMSymbol = @"下午";
             
