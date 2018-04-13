@@ -61,6 +61,9 @@
         if (size.height < kMinImageSizeHeight) {
             size.height = kMinImageSizeHeight;
         }
+        if (size.width < kMinImageSizeHeight) {
+            size.width = kMinImageSizeHeight;
+        }
     }
     height += size.height;
     

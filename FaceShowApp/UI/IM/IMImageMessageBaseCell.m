@@ -88,6 +88,9 @@
         if (size.height < kMinImageSizeHeight) {
             size.height = kMinImageSizeHeight;
         }
+        if (size.width < kMinImageSizeHeight) {
+            size.width = kMinImageSizeHeight;
+        }
     }
     [self.messageImageview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(size.width, size.height)).priorityHigh();
@@ -124,6 +127,9 @@
         size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeHeight, kMaxImageSizeHeight)];
         if (size.height < kMinImageSizeHeight) {
             size.height = kMinImageSizeHeight;
+        }
+        if (size.width < kMinImageSizeHeight) {
+            size.width = kMinImageSizeHeight;
         }
     }
     height += size.height;
