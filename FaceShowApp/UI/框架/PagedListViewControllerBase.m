@@ -183,7 +183,9 @@
                 [self.view nyx_showToast:error.localizedDescription];
                 return;
             }
-            
+            if (retItemArray.count==0) {
+                return;
+            }
             [self.dataArray addObjectsFromArray:retItemArray];
             self.total = total;
             [self.tableView reloadData];
