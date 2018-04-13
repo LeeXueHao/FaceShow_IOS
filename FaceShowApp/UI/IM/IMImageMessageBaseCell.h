@@ -11,6 +11,7 @@
 
 static const CGFloat kMaxImageSizeHeight = 140;
 static const CGFloat kMinImageSizeHeight = 55;
+static const CGFloat kMinImageSizewidth = 70;
 
 @interface IMImageMessageBaseCell : IMMessageBaseCell
 
