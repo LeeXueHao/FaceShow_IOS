@@ -25,7 +25,6 @@
     
     self.messageImageview = [[UIImageView alloc]init];
     self.messageImageview.contentMode = UIViewContentModeScaleAspectFill;
-    self.messageImageview.backgroundColor = [UIColor redColor];
     self.messageImageview.layer.cornerRadius = 6.0f;
     self.messageImageview.clipsToBounds = YES;
     

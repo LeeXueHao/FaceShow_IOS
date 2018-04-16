@@ -555,6 +555,9 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {
 //    DDLogDebug(@"long press to do ...");
+    if (model.message.type != MessageType_Text) {
+        return;
+    }
     NSInteger row = [self.dataArray indexOfObject:model];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     CGRect cellRect = [self.tableView rectForRowAtIndexPath:indexPath];
