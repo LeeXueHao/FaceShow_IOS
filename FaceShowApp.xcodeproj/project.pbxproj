@@ -260,6 +260,8 @@
 		7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BD220522E23004ACA04 /* IMImageMessage.m */; };
 		7CBC5BDC20567184004ACA04 /* SaveImageMsgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */; };
 		7CEBA7A0207C6750009754F5 /* MqttServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA79F207C6750009754F5 /* MqttServerRequest.m */; };
+		7CEBA90A2085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7CEBA9092085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf */; };
+		7CEBA90C2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7CEBA90B2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -875,6 +877,8 @@
 		7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveImageMsgRequest.m; sourceTree = "<group>"; };
 		7CEBA79E207C6750009754F5 /* MqttServerRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MqttServerRequest.h; sourceTree = "<group>"; };
 		7CEBA79F207C6750009754F5 /* MqttServerRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MqttServerRequest.m; sourceTree = "<group>"; };
+		7CEBA9092085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "研修宝“聊聊”集成文档v1.0.pdf"; sourceTree = "<group>"; };
+		7CEBA90B2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "研修宝‘‘聊聊’’实现方案.pdf"; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -2367,6 +2371,8 @@
 		E91E5CA12047AE1A00052FBA /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7CEBA90B2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf */,
+				7CEBA9092085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf */,
 				E91E5D5B2047B83C00052FBA /* IMConfig.h */,
 				E91E5D5C2047B83C00052FBA /* IMConfig.m */,
 				E91E5D5E2047B83C00052FBA /* IMManager.h */,
@@ -2695,6 +2701,7 @@
 				435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */,
 				7C24E1F81F72568D00A6921B /* QuestionRequestItem_mock.json in Resources */,
 				7C2519341F68EB2A0001B577 /* neterror_mock.json in Resources */,
+				7CEBA90A2085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf in Resources */,
 				928386221F7123ED00205028 /* classMomentList_mock.json in Resources */,
 				7C24E1F01F7241B300A6921B /* GetCourseListRequest_mock.json in Resources */,
 				7C2519321F68EB2A0001B577 /* errorcode_mock.json in Resources */,
@@ -2709,6 +2716,7 @@
 				7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */,
 				43538D2E1FDFB7C40052A9D3 /* StageSubject.json in Resources */,
 				43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */,
+				7CEBA90C2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf in Resources */,
 				43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
