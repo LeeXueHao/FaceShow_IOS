@@ -11,5 +11,4 @@
 
 @interface ChatListCell : UITableViewCell
 @property (nonatomic, strong) IMTopic *topic;
-@property (nonatomic, assign) BOOL isLastRow;
 @end

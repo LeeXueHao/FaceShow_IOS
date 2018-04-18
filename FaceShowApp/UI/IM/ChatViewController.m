@@ -9,17 +9,15 @@
 #import "ChatViewController.h"
 #import "IMTopicMessage.h"
 #import "IMManager.h"
-#import "IMConnectionManager.h"
 #import "IMUserInterface.h"
-#import "IMRequestManager.h"
+#import "IMMessageCellFactory.h"
+#import "IMMessageCellDelegate.h"
 #import "IMMessageBaseCell.h"
 #import "IMTextMessageBaseCell.h"
-#import "IMMessageCellFactory.h"
 #import "IMImageMessageBaseCell.h"
 #import "IMImageMessageLeftCell.h"
 #import "IMImageMessageRightCell.h"
 #import "IMInputView.h"
-#import "IMMessageCellDelegate.h"
 #import "IMMessageMenuView.h"
 #import "IMMessageTableView.h"
 #import "IMTimeHandleManger.h"
@@ -78,7 +76,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     if (self.topic) {
         [self setupTitleWithTopic:self.topic];
     }else {
-        self.title = self.member.name;
+        self.title = self.anotherMember.name;
     }
     self.imageHandler = [[ImageSelectionHandler alloc]init];
     [self setupUI];
@@ -122,7 +120,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         if (self.topic) {
             [IMUserInterface sendTextMessageWithText:text topicID:self.topic.topicID];
         }else {
-            [IMUserInterface sendTextMessageWithText:text toMember:self.member fromGroup:self.groupId.integerValue];
+            [IMUserInterface sendTextMessageWithText:text toMember:self.anotherMember fromGroup:self.groupId.integerValue];
         }
         if (self.imInputView.height > 50) {
             [UIView animateWithDuration:.3f animations:^{
@@ -146,7 +144,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 if (self.topic) {
                     [IMUserInterface sendImageMessageWithImage:resultImage topicID:self.topic.topicID];
                 }else {
-                    [IMUserInterface sendImageMessageWithImage:resultImage toMember:self.member fromGroup:self.groupId.integerValue];
+                    [IMUserInterface sendImageMessageWithImage:resultImage toMember:self.anotherMember fromGroup:self.groupId.integerValue];
                 }
             }
             [self scrollToBottom];
@@ -175,7 +173,6 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     [self.tableView registerClass:[IMImageMessageBaseCell class] forCellReuseIdentifier:@"IMImageMessageBaseCell"];
     [self.tableView registerClass:[IMImageMessageLeftCell class] forCellReuseIdentifier:@"IMImageMessageLeftCell"];
     [self.tableView registerClass:[IMImageMessageRightCell class] forCellReuseIdentifier:@"IMImageMessageRightCell"];
-    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.estimatedRowHeight = 0.0f;
@@ -189,7 +186,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     self.automaticallyAdjustsScrollViewInsets = false;  //第一个cell和顶部有留白，scrollerview遗留下来的，用来取消它
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
     self.activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activity.frame = CGRectMake(headerView.frame.size.width/2, 0, 20, 20);;
+    self.activity.frame = CGRectMake(headerView.frame.size.width/2, 0, 20, 20);
     [headerView addSubview:self.activity];
     self.tableView.tableHeaderView = headerView;
     headerView.hidden = YES;
@@ -319,7 +316,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             };
             return;
         }
-        if ([IMUserInterface topic:topic isWithMember:self.member]) {//topic不存在 判断是否为当前的
+        if ([IMUserInterface topic:topic isWithMember:self.anotherMember]) {//topic不存在 判断是否为当前的
             self.topic = topic;
             return;
         }
@@ -461,7 +458,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 #pragma mark - IMMessageCellDelegate
 - (void)messageCellDidClickAvatarForUser:(IMMember *)user {
 //    [self.view nyx_showToast:@"click avatar to do ..."];
-    if (self.member) {//有member说明是私聊
+    if (self.anotherMember) {//有member说明是私聊
         return;
     }
 
@@ -490,7 +487,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         if (topic) {
             chatVC.topic = topic;
         }else {
-            chatVC.member = member;
+            chatVC.anotherMember = member;
             chatVC.groupId = groupId;
         }
         [self.navigationController pushViewController:chatVC animated:YES];

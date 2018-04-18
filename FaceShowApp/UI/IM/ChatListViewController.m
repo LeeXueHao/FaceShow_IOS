@@ -10,9 +10,7 @@
 #import "ContactsViewController.h"
 #import "ChatListCell.h"
 #import "IMManager.h"
-#import "IMConnectionManager.h"
 #import "IMUserInterface.h"
-#import "IMRequestManager.h"
 #import "ChatViewController.h"
 #import "IMTimeHandleManger.h"
 #import "YXDrawerController.h"
@@ -36,13 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"聊聊";
-    WEAK_SELF
-    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
-        STRONG_SELF
-        [YXDrawerController showDrawer];
-    }];
-
-    [self setupNavRightView];
+    [self setupNavView];
     [self setupUI];
     [self setupData];
     [self updateUnreadPromptView];
@@ -55,8 +47,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setupNavRightView {
+- (void)setupNavView {
     WEAK_SELF
+    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
+        STRONG_SELF
+        [YXDrawerController showDrawer];
+    }];
     [self nyx_setupRightWithTitle:@"通讯录" action:^{
         STRONG_SELF
         ContactsViewController *contactsVC = [[ContactsViewController alloc] init];
@@ -261,7 +257,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatListCell *cell = [[ChatListCell alloc]init]; //[tableView dequeueReusableCellWithIdentifier:@"ChatListCell" forIndexPath:indexPath];
     cell.topic = self.dataArray[indexPath.row];
-    cell.isLastRow = indexPath.row == self.dataArray.count - 1;
     return cell;
 }
 

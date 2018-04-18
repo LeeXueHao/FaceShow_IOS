@@ -270,7 +270,7 @@
     if (topic) {
         chatVC.topic = topic;
     }else {
-        chatVC.member = member;
+        chatVC.anotherMember = member;
         chatVC.groupId = groupId;
     }
     [self.navigationController pushViewController:chatVC animated:YES];

@@ -160,11 +160,6 @@
     self.tipImageView.hidden = topic.unreadCount==0;
 }
 
-- (void)setIsLastRow:(BOOL)isLastRow {
-    _isLastRow = isLastRow;
-    self.lineView.hidden = isLastRow;
-}
-
 - (void)setupMockData {
     self.avatarImageView.image = [UIImage imageNamed:@"群聊-背景"];
     self.nameLabel.text = @"这是标题啦这是标题啦";
