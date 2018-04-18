@@ -32,7 +32,7 @@
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
 
 /**
- 从通讯录选择某一个联系人进入聊天界面的时候调用
+ 从通讯录选择某一个联系人/群聊界面点击某个联系人的头像进入聊天界面的时候调用
  
  @param member 联系人信息
  @return 聊天信息
