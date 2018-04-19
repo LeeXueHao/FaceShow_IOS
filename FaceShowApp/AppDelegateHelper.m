@@ -52,6 +52,10 @@
     
 }
 
+- (void)handleApnsDataOnForeground:(YXApnsContentModel *)apns {
+    
+}
+
 - (void)handleOpenUrl:(NSURL *)url {
     
 }

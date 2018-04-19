@@ -15,6 +15,8 @@
 #import "YXInitRequest.h"
 #import "IMManager.h"
 #import "IMUserInterface.h"
+#import "TalkingDataConfig.h"
+#import "BMKLocationConfig.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -27,12 +29,12 @@
     // Talking Data统计
     [TalkingData setExceptionReportEnabled:YES];
     [TalkingData setSignalReportEnabled:YES];
-    [TalkingData sessionStarted:[ConfigManager sharedInstance].TalkingDataAppID withChannelId:[ConfigManager sharedInstance].channel];
+    [TalkingData sessionStarted:kTalkingDataAppKey withChannelId:kTalkingDataChannel];
     // 初始化请求，检测版本更新等
     [[YXInitHelper sharedHelper] requestCompeletion:nil];
     
     [[YXGeTuiManager sharedInstance] registerGeTuiWithDelegate:self];
-    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:[ConfigManager sharedInstance].BaiduLocAppKey authDelegate:self];
+    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:kBMKLocationKey authDelegate:self];
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
@@ -140,6 +142,10 @@
 #pragma mark - Apns Delegate
 - (void)handleApnsData:(YXApnsContentModel *)apns {
     [self.appDelegateHelper handleApnsData:apns];
+}
+
+- (void)handleApnsDataOnForeground:(YXApnsContentModel *)apns {
+    [self.appDelegateHelper handleApnsDataOnForeground:apns];
 }
 
 #pragma mark - BMKLocationAuthDelegate

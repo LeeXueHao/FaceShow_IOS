@@ -9,18 +9,12 @@
 #import "YXGeTuiManager.h"
 #import "YXApnsContentModel.h"
 #import <UserNotifications/UserNotifications.h>
-
-#ifdef DEBUG
-#define isDevEnvironment YES
-#else
-#define isDevEnvironment NO
-#endif
+#import "GeTuiConfig.h"
 
 @interface YXGeTuiManager() <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 @property (nonatomic, strong) NSString *currentUid;
 @property (nonatomic, assign) BOOL sdkResumedMessage;
 @property (nonatomic, assign) BOOL handleddByAPNS;
-@property (nonatomic, assign) CGFloat notificationViewHeight;
 
 @end
 
@@ -46,12 +40,7 @@
         self.handleddByAPNS = NO;
         
         [GeTuiSdk runBackgroundEnable:YES];
-        
-        if (isDevEnvironment) {
-            [GeTuiSdk startSdkWithAppId:[[ConfigManager sharedInstance] GeTuiAppId_Dev] appKey:[[ConfigManager sharedInstance] GeTuiAppKey_Dev] appSecret:[[ConfigManager sharedInstance] GeTuiAppSecret_Dev] delegate:self];
-        } else {
-            [GeTuiSdk startSdkWithAppId:[[ConfigManager sharedInstance] GeTuiAppId_Rel] appKey:[[ConfigManager sharedInstance] GeTuiAppKey_Rel] appSecret:[[ConfigManager sharedInstance] GeTuiAppSecret_Rel] delegate:self];
-        }
+        [GeTuiSdk startSdkWithAppId:kGeTuiAppID appKey:kGeTuiAppKey appSecret:kGeTuiAppSecret delegate:self];
         
         [self registerUserNotification];
     }
@@ -128,11 +117,7 @@
     
     [GeTuiSdk runBackgroundEnable:YES];
     
-    if (isDevEnvironment) {
-        [GeTuiSdk startSdkWithAppId:[[ConfigManager sharedInstance] GeTuiAppId_Dev] appKey:[[ConfigManager sharedInstance] GeTuiAppKey_Dev] appSecret:[[ConfigManager sharedInstance] GeTuiAppSecret_Dev] delegate:self];
-    } else {
-        [GeTuiSdk startSdkWithAppId:[[ConfigManager sharedInstance] GeTuiAppId_Rel] appKey:[[ConfigManager sharedInstance] GeTuiAppKey_Rel] appSecret:[[ConfigManager sharedInstance] GeTuiAppSecret_Rel] delegate:self];
-    }
+    [GeTuiSdk startSdkWithAppId:kGeTuiAppID appKey:kGeTuiAppKey appSecret:kGeTuiAppSecret delegate:self];
     
     [self registerUserNotification];
 }
@@ -146,7 +131,7 @@
     apns = [[YXApnsContentModel alloc] initWithString:content error:&error];
     NSLog(@"[Receive GeTui]:%@\n\n", content);
     
-    [self showNotificationView:apns];    
+    SAFE_CALL_OneParam(self.delegate, handleApnsDataOnForeground, apns);  
 }
 
 // 处理来自苹果的推送 App后台或者杀死
@@ -157,71 +142,6 @@
     
     YXApnsContentModel *apns = [[YXApnsContentModel alloc]initWithString:[dict valueForKey:@"payload"] error:nil];
     SAFE_CALL_OneParam(self.delegate, handleApnsData, apns);
-}
-
-- (void)showNotificationView:(YXApnsContentModel *)apns {
-    UIView *rootView = [UIApplication sharedApplication].keyWindow;
-    
-    self.notificationViewHeight = 0;
-    CGFloat width = rootView.frame.size.width;
-    CGFloat textWidth = width - 30 - 4;
-    
-    UILabel *alertTitle = [[UILabel alloc] init];
-    alertTitle.text = apns.content;
-    alertTitle.textColor = [UIColor whiteColor];
-    alertTitle.font = [UIFont systemFontOfSize:16];
-    alertTitle.numberOfLines = 0;
-    alertTitle.textAlignment = NSTextAlignmentCenter;
-    CGSize titleSize = [apns.content boundingRectWithSize:CGSizeMake(textWidth , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:alertTitle.font} context:nil].size;
-    self.notificationViewHeight = titleSize.height + 50;
-    
-    UIView *notificationView = [[UIView alloc] init];
-    notificationView.frame = CGRectMake(0, -self.notificationViewHeight, CGRectGetWidth(rootView.frame), self.notificationViewHeight);
-    notificationView.backgroundColor = [UIColor whiteColor];
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:notificationView.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(6, 6)];    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.frame = notificationView.bounds;
-    maskLayer.path = maskPath.CGPath;
-    notificationView.layer.mask = maskLayer;
-    [rootView addSubview:notificationView];
-    
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(2, 2, width - 4, self.notificationViewHeight - 4)];
-    bgView.backgroundColor = [UIColor colorWithHexString:@"89e00d"];
-    UIBezierPath *bgMaskPath = [UIBezierPath bezierPathWithRoundedRect:bgView.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(6, 6)];    CAShapeLayer *bgMaskLayer = [CAShapeLayer layer];
-    bgMaskLayer.frame = bgView.bounds;
-    bgMaskLayer.path = bgMaskPath.CGPath;
-    bgView.layer.mask = bgMaskLayer;
-    bgView.clipsToBounds = YES;
-    [notificationView addSubview:bgView];
-    
-    [notificationView addSubview:alertTitle];
-    alertTitle.frame = CGRectMake(15, 25, textWidth, titleSize.height);
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
-    [notificationView addGestureRecognizer:tapRecognizer];
-    WEAK_SELF;
-    [[tapRecognizer rac_gestureSignal] subscribeNext:^(UIPanGestureRecognizer *paramSender) {
-        STRONG_SELF;
-        [self hideNotificationView:notificationView];
-        SAFE_CALL_OneParam(self.delegate, handleApnsData, apns);
-    }];
-    
-    // auto hide after 2 seconds
-    [UIView animateWithDuration:0.3 animations:^{
-        notificationView.frame = CGRectMake(0, 0, CGRectGetWidth(rootView.frame), self.notificationViewHeight);
-    } completion:^(BOOL finished) {
-        STRONG_SELF;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self hideNotificationView:notificationView];
-        });
-    }];
-}
-
-- (void)hideNotificationView:(UIView *)view {
-    [UIView animateWithDuration:0.3 animations:^{
-        view.frame = CGRectMake(0, -self.notificationViewHeight, CGRectGetWidth(view.frame), self.notificationViewHeight);
-    } completion:^(BOOL finished) {
-        [view removeFromSuperview];
-    }];
 }
 
 -(void)scheduleLocalNotification:(NSDictionary *)userInfo {

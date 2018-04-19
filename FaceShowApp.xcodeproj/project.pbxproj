@@ -143,8 +143,6 @@
 		7C2518EF1F68E68D0001B577 /* UIView+YXShadowColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518DD1F68E68D0001B577 /* UIView+YXShadowColor.m */; };
 		7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518DF1F68E68D0001B577 /* UIViewController+NavigationItem.m */; };
 		7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518E11F68E68D0001B577 /* UIViewController+VisibleViewController.m */; };
-		7C2518F41F68E8000001B577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518F31F68E8000001B577 /* Config.plist */; };
-		7C2518F61F68E8130001B577 /* Empty.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518F51F68E8130001B577 /* Empty.xib */; };
 		7C2518F81F68E8510001B577 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2518F71F68E8510001B577 /* Default-568h@2x.png */; };
 		7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518FB1F68E8A80001B577 /* AlertView.m */; };
 		7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519061F68E90C0001B577 /* TestsRootViewController.m */; };
@@ -194,10 +192,8 @@
 		7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B11F690DB00001B577 /* MessageViewController.m */; };
 		7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B41F690EB50001B577 /* ClassMomentViewController.m */; };
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
-		7C2519BA1F6917960001B577 /* env_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2519B91F6917960001B577 /* env_config.json */; };
 		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
 		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
-		7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */; };
 		7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E628200DCD71006704E7 /* TestQiniuViewController.m */; };
 		7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */; };
 		7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E632200EF48C006704E7 /* QiniuDataManager.m */; };
@@ -262,6 +258,13 @@
 		7CEBA7A0207C6750009754F5 /* MqttServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA79F207C6750009754F5 /* MqttServerRequest.m */; };
 		7CEBA90A2085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7CEBA9092085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf */; };
 		7CEBA90C2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7CEBA90B2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf */; };
+		7CEBA91520884C01009754F5 /* TalkingDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA91420884C01009754F5 /* TalkingDataConfig.m */; };
+		7CEBA91820884F76009754F5 /* GeTuiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA91720884F76009754F5 /* GeTuiConfig.m */; };
+		7CEBA91B2088699F009754F5 /* QiniuConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA91A2088699F009754F5 /* QiniuConfig.m */; };
+		7CEBA91E20886B39009754F5 /* BMKLocationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA91D20886B39009754F5 /* BMKLocationConfig.m */; };
+		7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92420886C92009754F5 /* YXInitRequest.m */; };
+		7CEBA92820886D5D009754F5 /* UpgradeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92720886D5D009754F5 /* UpgradeConfig.m */; };
+		7CEBA92B2088853D009754F5 /* UpgradePromptHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -651,8 +654,6 @@
 		7C2518E01F68E68D0001B577 /* UIViewController+VisibleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+VisibleViewController.h"; sourceTree = "<group>"; };
 		7C2518E11F68E68D0001B577 /* UIViewController+VisibleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+VisibleViewController.m"; sourceTree = "<group>"; };
 		7C2518F21F68E6BC0001B577 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		7C2518F31F68E8000001B577 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
-		7C2518F51F68E8130001B577 /* Empty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Empty.xib; sourceTree = "<group>"; };
 		7C2518F71F68E8510001B577 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7C2518FB1F68E8A80001B577 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		7C2519051F68E90C0001B577 /* TestsRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsRootViewController.h; sourceTree = "<group>"; };
@@ -748,13 +749,10 @@
 		7C2519B41F690EB50001B577 /* ClassMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentViewController.m; sourceTree = "<group>"; };
 		7C2519B61F690ECB0001B577 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		7C2519B71F690ECB0001B577 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
-		7C2519B91F6917960001B577 /* env_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env_config.json; sourceTree = "<group>"; };
 		7C29F3121FEA361E007A4076 /* GetUserPromptsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserPromptsRequest.h; sourceTree = "<group>"; };
 		7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserPromptsRequest.m; sourceTree = "<group>"; };
 		7C29F3151FEA3AA6007A4076 /* UserPromptsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptsManager.h; sourceTree = "<group>"; };
 		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
-		7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXInitRequest.m; sourceTree = "<group>"; };
-		7C29F3191FEB4FAD007A4076 /* YXInitRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXInitRequest.h; sourceTree = "<group>"; };
 		7C33E627200DCD71006704E7 /* TestQiniuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestQiniuViewController.h; sourceTree = "<group>"; };
 		7C33E628200DCD71006704E7 /* TestQiniuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestQiniuViewController.m; sourceTree = "<group>"; };
 		7C33E62E200EF3F6006704E7 /* QiniuTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuTokenRequest.h; sourceTree = "<group>"; };
@@ -879,6 +877,20 @@
 		7CEBA79F207C6750009754F5 /* MqttServerRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MqttServerRequest.m; sourceTree = "<group>"; };
 		7CEBA9092085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "研修宝“聊聊”集成文档v1.0.pdf"; sourceTree = "<group>"; };
 		7CEBA90B2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "研修宝‘‘聊聊’’实现方案.pdf"; sourceTree = "<group>"; };
+		7CEBA91320884C01009754F5 /* TalkingDataConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TalkingDataConfig.h; sourceTree = "<group>"; };
+		7CEBA91420884C01009754F5 /* TalkingDataConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TalkingDataConfig.m; sourceTree = "<group>"; };
+		7CEBA91620884F76009754F5 /* GeTuiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeTuiConfig.h; sourceTree = "<group>"; };
+		7CEBA91720884F76009754F5 /* GeTuiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeTuiConfig.m; sourceTree = "<group>"; };
+		7CEBA9192088699F009754F5 /* QiniuConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QiniuConfig.h; sourceTree = "<group>"; };
+		7CEBA91A2088699F009754F5 /* QiniuConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QiniuConfig.m; sourceTree = "<group>"; };
+		7CEBA91C20886B39009754F5 /* BMKLocationConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMKLocationConfig.h; sourceTree = "<group>"; };
+		7CEBA91D20886B39009754F5 /* BMKLocationConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMKLocationConfig.m; sourceTree = "<group>"; };
+		7CEBA92320886C92009754F5 /* YXInitRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXInitRequest.h; sourceTree = "<group>"; };
+		7CEBA92420886C92009754F5 /* YXInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXInitRequest.m; sourceTree = "<group>"; };
+		7CEBA92620886D5D009754F5 /* UpgradeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeConfig.h; sourceTree = "<group>"; };
+		7CEBA92720886D5D009754F5 /* UpgradeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeConfig.m; sourceTree = "<group>"; };
+		7CEBA9292088853D009754F5 /* UpgradePromptHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePromptHandler.h; sourceTree = "<group>"; };
+		7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePromptHandler.m; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -1249,6 +1261,8 @@
 			children = (
 				43578CC71FE25EA100D37B72 /* TalkingData.h */,
 				43578CC81FE25EA100D37B72 /* libTalkingData.a */,
+				7CEBA91320884C01009754F5 /* TalkingDataConfig.h */,
+				7CEBA91420884C01009754F5 /* TalkingDataConfig.m */,
 			);
 			path = TalkingData;
 			sourceTree = "<group>";
@@ -1257,6 +1271,8 @@
 			isa = PBXGroup;
 			children = (
 				435DFCFE1FD1034900CEA9C2 /* BMKLocationKit.framework */,
+				7CEBA91C20886B39009754F5 /* BMKLocationConfig.h */,
+				7CEBA91D20886B39009754F5 /* BMKLocationConfig.m */,
 			);
 			path = "百度定位";
 			sourceTree = "<group>";
@@ -1432,9 +1448,6 @@
 				7C2519A71F690C900001B577 /* AppDelegateHelper_Phone.m */,
 				7C2518B61F68E5C70001B577 /* Assets.xcassets */,
 				7C2518BB1F68E5C70001B577 /* Info.plist */,
-				7C2518F31F68E8000001B577 /* Config.plist */,
-				7C2518F51F68E8130001B577 /* Empty.xib */,
-				7C2519B91F6917960001B577 /* env_config.json */,
 				43538D2D1FDFB7C40052A9D3 /* StageSubject.json */,
 				7C2518F21F68E6BC0001B577 /* PrefixHeader.pch */,
 				7C2518AA1F68E5C70001B577 /* Supporting Files */,
@@ -1644,6 +1657,7 @@
 		7C2519641F68EBCD0001B577 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7CEBA91F20886C30009754F5 /* 升级 */,
 				E91E5D072047B0A600052FBA /* 通讯录 */,
 				7C37A5762016CFA80073FDE2 /* 工具箱 */,
 				7C33E62A200EF37D006704E7 /* 七牛 */,
@@ -1681,8 +1695,6 @@
 				7CEFC7C21F99A267001D8C84 /* UpdateUserInfoRequest.m */,
 				7CEFC7E61F99EE70001D8C84 /* GetSigninRequest.h */,
 				7CEFC7E71F99EE70001D8C84 /* GetSigninRequest.m */,
-				7C29F3191FEB4FAD007A4076 /* YXInitRequest.h */,
-				7C29F3181FEB4FAD007A4076 /* YXInitRequest.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2001,6 +2013,8 @@
 				7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */,
 				7C33E631200EF48C006704E7 /* QiniuDataManager.h */,
 				7C33E632200EF48C006704E7 /* QiniuDataManager.m */,
+				7CEBA9192088699F009754F5 /* QiniuConfig.h */,
+				7CEBA91A2088699F009754F5 /* QiniuConfig.m */,
 			);
 			path = "七牛";
 			sourceTree = "<group>";
@@ -2017,6 +2031,8 @@
 		7C4D54131F9728DA0053DB12 /* Push */ = {
 			isa = PBXGroup;
 			children = (
+				7CEBA91620884F76009754F5 /* GeTuiConfig.h */,
+				7CEBA91720884F76009754F5 /* GeTuiConfig.m */,
 				7C4D54171F9729230053DB12 /* YXGeTuiManager.h */,
 				7C4D54151F9729230053DB12 /* YXGeTuiManager.m */,
 				7C4D54161F9729230053DB12 /* YXApnsContentModel.h */,
@@ -2201,6 +2217,19 @@
 				7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */,
 			);
 			name = "日程";
+			sourceTree = "<group>";
+		};
+		7CEBA91F20886C30009754F5 /* 升级 */ = {
+			isa = PBXGroup;
+			children = (
+				7CEBA92320886C92009754F5 /* YXInitRequest.h */,
+				7CEBA92420886C92009754F5 /* YXInitRequest.m */,
+				7CEBA9292088853D009754F5 /* UpgradePromptHandler.h */,
+				7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */,
+				7CEBA92620886D5D009754F5 /* UpgradeConfig.h */,
+				7CEBA92720886D5D009754F5 /* UpgradeConfig.m */,
+			);
+			path = "升级";
 			sourceTree = "<group>";
 		};
 		7CEFC7B71F989F41001D8C84 /* View */ = {
@@ -2691,13 +2720,10 @@
 			files = (
 				7C24E2141F739F8A00A6921B /* LikeCommentRequest_mock.json in Resources */,
 				923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */,
-				7C2518F61F68E8130001B577 /* Empty.xib in Resources */,
 				435274FB1F7358220050B177 /* GetSignInRecordList_Mock.json in Resources */,
-				7C2519BA1F6917960001B577 /* env_config.json in Resources */,
 				7C2519331F68EB2A0001B577 /* MockConfig.plist in Resources */,
 				E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */,
 				7C2518F81F68E8510001B577 /* Default-568h@2x.png in Resources */,
-				7C2518F41F68E8000001B577 /* Config.plist in Resources */,
 				435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */,
 				7C24E1F81F72568D00A6921B /* QuestionRequestItem_mock.json in Resources */,
 				7C2519341F68EB2A0001B577 /* neterror_mock.json in Resources */,
@@ -2821,6 +2847,7 @@
 				43210E581F724B3D0049C381 /* LoginRequest.m in Sources */,
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
+				7CEBA91B2088699F009754F5 /* QiniuConfig.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
@@ -2829,7 +2856,6 @@
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */,
 				E90C515C204FD6DF0008F92A /* IMMessageTableView.m in Sources */,
-				7C29F31A1FEB4FAE007A4076 /* YXInitRequest.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				E91E5DA22047B8E300052FBA /* GetTopicsRequest.m in Sources */,
 				E91E5D442047B22800052FBA /* IMMessageMenuView.m in Sources */,
@@ -2871,6 +2897,7 @@
 				7C66B2792027F6050067E242 /* HeadImageHandler.m in Sources */,
 				7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */,
 				E91E5DAB2047B8E300052FBA /* IMTextMessageSender.m in Sources */,
+				7CEBA92B2088853D009754F5 /* UpgradePromptHandler.m in Sources */,
 				438FFC871FD4E1B9006F3FB3 /* BaseDownloader.m in Sources */,
 				7C2519261F68EACF0001B577 /* MJRefreshBaseView.m in Sources */,
 				92BDD702201194E200B05B6F /* ClassMomentDetailRequest.m in Sources */,
@@ -2913,6 +2940,7 @@
 				7CBC5BCD204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m in Sources */,
 				7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */,
 				438FFC881FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel in Sources */,
+				7CEBA91520884C01009754F5 /* TalkingDataConfig.m in Sources */,
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
 				438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */,
@@ -2954,6 +2982,7 @@
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
 				4322CA3C1FD941F500E7B565 /* StageSubjectCell.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
+				7CEBA91820884F76009754F5 /* GeTuiConfig.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
 				7CBC5BC7204E298C004ACA04 /* SysUserItem.m in Sources */,
 				E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */,
@@ -2968,6 +2997,7 @@
 				7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */,
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
 				7CEFC7B61F989C1C001D8C84 /* ForgotPasswordViewController.m in Sources */,
+				7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */,
 				7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */,
 				7CBC5B922049326E004ACA04 /* CourseInfoViewController.m in Sources */,
 				E91E5D892047B8C900052FBA /* IMEventHandlerFactory.m in Sources */,
@@ -3052,6 +3082,7 @@
 				E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
+				7CEBA92820886D5D009754F5 /* UpgradeConfig.m in Sources */,
 				431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */,
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
@@ -3124,6 +3155,7 @@
 				922084291F6BC4D200F8AAC6 /* UserInfoHeaderCell.m in Sources */,
 				7C24E1E91F721C7B00A6921B /* HttpBaseRequestItem_Error.m in Sources */,
 				E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */,
+				7CEBA91E20886B39009754F5 /* BMKLocationConfig.m in Sources */,
 				7CBC5B902049326E004ACA04 /* CourseTaskViewController.m in Sources */,
 				438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */,
 			);

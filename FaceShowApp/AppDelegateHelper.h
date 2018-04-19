@@ -28,6 +28,7 @@
 
 // Apns
 - (void)handleApnsData:(YXApnsContentModel *)apns;
+- (void)handleApnsDataOnForeground:(YXApnsContentModel *)apns;
 
 - (void)handleRemoveFromOneClass:(IMTopic *)topic;
 @end

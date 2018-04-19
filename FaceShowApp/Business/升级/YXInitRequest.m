@@ -8,6 +8,8 @@
 
 #import "YXInitRequest.h"
 #import "NSString+YXString.h"
+#import "UpgradeConfig.h"
+#import "UpgradePromptHandler.h"
 
 NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
 
@@ -49,7 +51,7 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
     self = [super init];
     if (self) {
         self.token = nil;
-        _productLine = @"4";
+        _productLine = kProductLine;
         _did = [ConfigManager sharedInstance].deviceID;
         _brand = [ConfigManager sharedInstance].deviceType;
         [self setCurrentNetType];
@@ -61,10 +63,10 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
         _operType = @"app.upload.log";
         _phone = [UserManager sharedInstance].userModel.mobilePhone? :@"";
         _remoteIp = @"";
-        _mode = [ConfigManager sharedInstance].mode;
+        _mode = kUpgradeMode;
         _debugtoken = @"";
         _osType = @"1";
-        self.urlHead = [ConfigManager sharedInstance].initializeUrl;
+        self.urlHead = kUpgradeServer;
     }
 
     return self;
@@ -101,6 +103,7 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
 
 @interface YXInitHelper()
 @property (nonatomic, strong) YXInitRequestItem_Body *body;
+@property (nonatomic, strong) UpgradePromptHandler *promptHandler;
 @end
 
 @implementation YXInitHelper
@@ -116,6 +119,7 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         helper = [[self alloc] init];
+        helper.promptHandler = [[UpgradePromptHandler alloc]init];
         [helper registerNotifications];
     });
     return helper;
@@ -190,27 +194,7 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
     if (![self.body.fileURL yx_isHttpLink]) { //http链接
         return;
     }
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.body.title message:self.body.content preferredStyle:UIAlertControllerStyleAlert];
-    WEAK_SELF
-    UIAlertAction *updateAction = [UIAlertAction actionWithTitle:@"立即更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        STRONG_SELF
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.body.fileURL]];
-    }];
-    UIAlertAction *laterAction = [UIAlertAction actionWithTitle:@"以后再说" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction *exitAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        exit(0);
-    }];
-    if (self.body.isForce) {
-        [alert addAction:exitAction];
-        [alert addAction:updateAction];
-    }
-    else {
-        [alert addAction:laterAction];
-        [alert addAction:updateAction];
-    }
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+    [self.promptHandler handleWithUpgradeBody:self.body];
 }
 
 #pragma mark -

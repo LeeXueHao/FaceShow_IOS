@@ -12,6 +12,7 @@
 
 @protocol YXApnsDelegate <NSObject>
 - (void)handleApnsData:(YXApnsContentModel *)apns;
+- (void)handleApnsDataOnForeground:(YXApnsContentModel *)apns;
 @end
 
 @interface YXGeTuiManager : NSObject <GeTuiSdkDelegate>

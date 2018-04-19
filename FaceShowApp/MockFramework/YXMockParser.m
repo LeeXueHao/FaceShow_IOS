@@ -8,6 +8,8 @@
 
 #import "YXMockParser.h"
 
+UIKIT_EXTERN BOOL mockFrameworkOn;
+
 @interface YXMockItemConfig : NSObject
 @property (nonatomic, assign) BOOL mockEnable;
 @property (nonatomic, strong) NSArray *fileArray;
@@ -42,7 +44,7 @@
     NSString *filepath = [[NSBundle mainBundle] pathForResource:filename ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filepath];
     
-    self.mockEnable = [ConfigManager sharedInstance].mockFrameworkOn.boolValue;
+    self.mockEnable = mockFrameworkOn;
     self.maxTimeUse = ((NSNumber *)[dict valueForKey:@"maxTimeUse"]).integerValue;
     if (!self.mockEnable) {
         return;

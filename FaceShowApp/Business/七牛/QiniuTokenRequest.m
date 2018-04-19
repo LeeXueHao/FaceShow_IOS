@@ -7,6 +7,7 @@
 //
 
 #import "QiniuTokenRequest.h"
+#import "QiniuConfig.h"
 
 @implementation QiniuTokenRequestItem_data
 @end
@@ -22,7 +23,7 @@
 @implementation QiniuTokenRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.urlHead = [ConfigManager sharedInstance].qiniuServer;
+        self.urlHead = kQiniuServer;
         self.method = @"upload.token";
         self.from = @"100";
         self.dtype = @"app";
