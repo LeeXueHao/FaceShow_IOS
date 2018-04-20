@@ -47,7 +47,7 @@
     self.textfield.textColor = [UIColor colorWithHexString:@"333333"];
     self.textfield.returnKeyType = UIReturnKeyDone;
     self.textfield.font = [UIFont systemFontOfSize:14];
-    self.textfield.attributedPlaceholder = [[NSMutableAttributedString alloc]initWithString:@"姓名" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"999999"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
+    self.textfield.attributedPlaceholder = [[NSMutableAttributedString alloc]initWithString:@"最多20个字" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"999999"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     self.textfield.delegate = self;
     [bottomView addSubview:self.textfield];
     [self.textfield mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,7 +66,7 @@
     [self.textfield resignFirstResponder];
     [self.request stopRequest];
     self.request = [[UpdateUserInfoRequest alloc]init];
-    self.request.schoolName = self.textfield.text;
+    self.request.school = self.textfield.text;
     WEAK_SELF
     [self.view nyx_startLoading];
     [self.request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -91,6 +91,19 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([[[textField textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textField textInputMode] primaryLanguage] || [self stringContainsEmoji:string]) {
+        return NO;
+    }
+    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (str.length > 20) {
+        str = [str substringToIndex:20];
+        textField.text = str;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            UITextPosition* beginning = textField.beginningOfDocument;
+            UITextPosition* startPosition = [textField positionFromPosition:beginning offset:20];
+            UITextPosition* endPosition = [textField positionFromPosition:beginning offset:20];
+            UITextRange* selectionRange = [textField textRangeFromPosition:startPosition toPosition:endPosition];
+            [textField setSelectedTextRange:selectionRange];
+        });
         return NO;
     }
     return YES;
