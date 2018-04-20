@@ -21,6 +21,7 @@
 #import "CompleteInfoHeaderView.h"
 #import "MessagePromptView.h"
 #import "AlertView.h"
+#import "ModifySchoolViewController.h"
 
 @interface CompleteUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -38,7 +39,8 @@
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
        [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
+       [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"学校",@"content": [UserManager sharedInstance].userModel.school?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
     [self setupUI];
     [self setupLayout];
     
@@ -128,6 +130,15 @@
             [self.contentMutableArray[3] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.section == 4) {
+        ModifySchoolViewController *vc = [[ModifySchoolViewController alloc]init];
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            [self.contentMutableArray[4] setValue:[UserManager sharedInstance].userModel.school forKey:@"content"];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

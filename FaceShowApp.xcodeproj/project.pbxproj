@@ -265,6 +265,7 @@
 		7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92420886C92009754F5 /* YXInitRequest.m */; };
 		7CEBA92820886D5D009754F5 /* UpgradeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92720886D5D009754F5 /* UpgradeConfig.m */; };
 		7CEBA92B2088853D009754F5 /* UpgradePromptHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */; };
+		7CEBA92E20898454009754F5 /* ModifySchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -891,6 +892,8 @@
 		7CEBA92720886D5D009754F5 /* UpgradeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeConfig.m; sourceTree = "<group>"; };
 		7CEBA9292088853D009754F5 /* UpgradePromptHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePromptHandler.h; sourceTree = "<group>"; };
 		7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePromptHandler.m; sourceTree = "<group>"; };
+		7CEBA92C20898454009754F5 /* ModifySchoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifySchoolViewController.h; sourceTree = "<group>"; };
+		7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifySchoolViewController.m; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -1854,6 +1857,8 @@
 				7CEFC7BC1F9990CF001D8C84 /* ModifySexViewController.m */,
 				7CEFC7BE1F999A88001D8C84 /* ModifyNameViewController.h */,
 				7CEFC7BF1F999A88001D8C84 /* ModifyNameViewController.m */,
+				7CEBA92C20898454009754F5 /* ModifySchoolViewController.h */,
+				7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2849,6 +2854,7 @@
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				7CEBA91B2088699F009754F5 /* QiniuConfig.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
+				7CEBA92E20898454009754F5 /* ModifySchoolViewController.m in Sources */,
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,

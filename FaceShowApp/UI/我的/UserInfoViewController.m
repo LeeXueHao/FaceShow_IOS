@@ -22,7 +22,7 @@
 #import "ModifyNameViewController.h"
 #import "StageSubjectViewController.h"
 #import "HeadImageHandler.h"
-
+#import "ModifySchoolViewController.h"
 
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -49,7 +49,8 @@
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
        [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
+       [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"学校",@"content": [UserManager sharedInstance].userModel.school?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
     [self setupUI];
     [self setupLayout];
     [self requestForUserInfo];
@@ -235,6 +236,16 @@
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.section == 5) {
+        ModifySchoolViewController *vc = [[ModifySchoolViewController alloc]init];
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            [self.contentMutableArray[4] setValue:[UserManager sharedInstance].userModel.school forKey:@"content"];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            BLOCK_EXEC(self.completeBlock);
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -271,6 +282,7 @@
             self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";
             self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sexName?:@"暂无";
             self.contentMutableArray[3][@"content"] = [self stageSubjectString]?:@"暂无";
+            self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.school?:@"暂无";
             [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
         }
