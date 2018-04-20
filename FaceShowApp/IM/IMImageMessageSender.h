@@ -15,4 +15,6 @@
 - (void)addImageMessage:(IMImageMessage *)msg;
 
 - (UIImage *)cacheImageWithMessageUniqueID:(NSString *)uniqueID;
+
+- (void)resendUncompleteMessage:(IMImageMessage *)msg;
 @end

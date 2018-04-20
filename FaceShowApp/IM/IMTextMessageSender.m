@@ -109,4 +109,9 @@
     [self checkAndSend];
 }
 
+#pragma mark - 重发为完成消息
+- (void)resendUncompleteMessage:(IMTextMessage *)msg {
+    [self.msgArray addObject:msg];
+    [self checkAndSend];
+}
 @end

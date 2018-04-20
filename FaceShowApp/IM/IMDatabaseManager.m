@@ -437,6 +437,16 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     return nil;
 }
 
+- (NSArray<IMTopicMessage *> *)findAllUncompletedMessages {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sender.memberID = %@ && sendState = %@",@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Sending)];
+    NSArray *msgs = [IMTopicMessageEntity MR_findAllSortedBy:@"topicID" ascending:YES withPredicate:predicate];
+    NSMutableArray *array = [NSMutableArray array];
+    for (IMTopicMessageEntity *entity in msgs) {
+        [array addObject:[self messageFromEntity:entity]];
+    }
+    return array;
+}
+
 #pragma mark - 转换
 - (IMTopic *)topicFromEntity:(IMTopicEntity *)entity {
     if (!entity) {

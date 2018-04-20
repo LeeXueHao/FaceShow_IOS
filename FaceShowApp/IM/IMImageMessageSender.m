@@ -181,4 +181,9 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
     [self checkAndSend];
 }
 
+#pragma mark - 重发为完成消息
+- (void)resendUncompleteMessage:(IMImageMessage *)msg {
+    [self.msgArray addObject:msg];
+    [self checkAndSend];
+}
 @end

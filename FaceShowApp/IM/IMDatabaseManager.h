@@ -45,6 +45,7 @@
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
 
 - (IMTopic *)findTopicWithMember:(IMMember *)member;
+- (NSArray<IMTopicMessage *> *)findAllUncompletedMessages;
 
 #pragma mark - 离线消息抓取相关
 - (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsWithTopicID:(int64_t)topicID;
