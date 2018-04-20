@@ -27,7 +27,7 @@
     self.messageTextLabel = [[UILabel alloc] init];
     self.messageTextLabel.numberOfLines = 0;
     self.messageTextLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.messageTextLabel.font = [UIFont systemFontOfSize:14.0f];
+    self.messageTextLabel.font = [UIFont systemFontOfSize:16.0f];
 }
 
 - (void)setupLayout {
@@ -54,7 +54,7 @@
         height += 0;
     }
     //聊天内容文字的高
-    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth], MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
+    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth], MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.f]} context:nil].size;
     height += ceil(textSize.height);
     //文字距离背景上下的高度
     height += 24;

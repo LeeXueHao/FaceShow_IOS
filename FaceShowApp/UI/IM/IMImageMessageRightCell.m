@@ -50,23 +50,13 @@
 }
 
 - (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
-    CGFloat height = 15;
-    //时间的高度 放到外面进行
-    //聊天内容图片的高
-    CGSize size;
-    if (model.message.height <= 0 ) {
-        size = CGSizeMake(kMaxImageSizeHeight, kMaxImageSizeHeight);
+    CGFloat height = [super heigthtForMessageModel:model];
+    //名字的高度
+    if (model.topicType == TopicType_Group) {//群聊显示名字
+        height -= 20;
     }else {
-        size = [self aspectFitOriginalSize:CGSizeMake(model.message.width / [UIScreen mainScreen].scale, model.message.height / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(kMaxImageSizeHeight, kMaxImageSizeHeight)];
-        if (size.height < kMinImageSizeHeight) {
-            size.height = kMinImageSizeHeight;
-        }
-        if (size.width < kMinImageSizewidth) {
-            size.width = kMinImageSizewidth;
-        }
+        height -= 0;
     }
-    height += size.height;
-    
     return height;
 }
 

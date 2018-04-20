@@ -31,6 +31,11 @@
     return self;
 }
 
+- (void)setupUI {
+    [super setupUI];
+    self.messageTextLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
+}
+
 - (void)setupLayout {
     [super setupLayout];
     [self.messageTextLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -67,15 +72,13 @@
 }
 
 - (CGFloat)heigthtForMessageModel:(IMChatViewModel *)model {
-    IMTopicMessage *message = model.message;
-    CGFloat height = 15;
-    //时间的高度 放到外面进行
-    //聊天内容文字的高
-    CGSize textSize = [message.text boundingRectWithSize:CGSizeMake([self textMaxWidth] , MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.f]} context:nil].size;
-    height += ceil(textSize.height);
-    //文字距离背景上下的高度
-    height += 24;
-    
+    CGFloat height = [super heigthtForMessageModel:model];
+    //名字的高度
+    if (model.topicType == TopicType_Group) {//群聊显示名字
+        height -= 20;
+    }else {
+        height -= 0;
+    }
     return height;
 }
 
