@@ -520,7 +520,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         newRect = [foldSlideImageV.imageView convertRect:newRect toView:self.view.window];
         UIImageView *foldImgView = [[UIImageView alloc]initWithFrame:newRect];
         foldImgView.backgroundColor = [UIColor blackColor];
-        foldImgView.contentMode = UIViewContentModeScaleAspectFill;
+        foldImgView.contentMode = UIViewContentModeScaleToFill;
         foldImgView.image = foldSlideImageV.imageView.image;
         [self.view.window addSubview:foldImgView];
         foldImgView.userInteractionEnabled = YES;
@@ -538,7 +538,21 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     if ([model.message imageWaitForSending]) {
         openImgView.image = [photoBrowserView.imageMessageArray[photoBrowserView.currentIndex] imageWaitForSending];
     }else {
-        [openImgView sd_setImageWithURL:[NSURL URLWithString:photoBrowserView.imageMessageArray[photoBrowserView.currentIndex].viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]];
+        WEAK_SELF
+        NSString *urlString = photoBrowserView.imageMessageArray[photoBrowserView.currentIndex].viewUrl;
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSString *key = [manager cacheKeyForURL:[NSURL URLWithString:urlString]];
+        SDImageCache *cache = [SDImageCache sharedImageCache];
+        UIImage *image = [cache imageFromDiskCacheForKey:key];
+        if (image) {
+            openImgView.image = image;
+        }else {
+            [openImgView nyx_startLoading];
+            [openImgView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"图片发送失败"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                STRONG_SELF
+                [openImgView nyx_stopLoading];
+            }];
+        }
     }
     openImgView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view.window addSubview:openImgView];
