@@ -182,6 +182,7 @@
 - (void)loginBtnAction:(UIButton *)sender {
     [self.view endEditing:YES];
     [self.view nyx_startLoading];
+    self.usernameTF.text = [self.usernameTF.text yx_stringByTrimmingCharacters];
     WEAK_SELF
     [LoginDataManager loginWithName:self.usernameTF.text password:self.passwordTF.text completeBlock:^(NSError *error) {
         STRONG_SELF
