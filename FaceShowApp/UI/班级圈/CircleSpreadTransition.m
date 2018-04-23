@@ -53,6 +53,7 @@
         [fromVC.animateView removeFromSuperview];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
+    [[UIApplication sharedApplication]setStatusBarHidden:NO];
 }
 
 - (void)presentAnimation:(id<UIViewControllerContextTransitioning>)transitionContext{
@@ -61,6 +62,7 @@
     toVC.view.frame = toVC.animateRect;
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
         toVC.view.frame = [UIScreen mainScreen].bounds;
+        [[UIApplication sharedApplication]setStatusBarHidden:YES];
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];

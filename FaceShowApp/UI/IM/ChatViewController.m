@@ -559,10 +559,10 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     [self.view.window addSubview:openImgView];
     [UIView animateWithDuration:.3 animations:^{
         openImgView.frame = fixRect;
+        [[UIApplication sharedApplication]setStatusBarHidden:YES];
     }completion:^(BOOL finished) {
         [openImgView removeFromSuperview];
         photoBrowserView.hidden = NO;
-        [[UIApplication sharedApplication]setStatusBarHidden:YES];
     }];
 }
 

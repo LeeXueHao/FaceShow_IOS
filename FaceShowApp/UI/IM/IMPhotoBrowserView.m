@@ -67,12 +67,21 @@
     }
     IMSlideImageView *imageView = [[IMSlideImageView alloc] initWithImageWidth:width imageHeight:height];
     if (![message imageWaitForSending]) {
-        [imageView.imageView nyx_startLoading];
         WEAK_SELF
-        [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            STRONG_SELF
-            [imageView.imageView nyx_stopLoading];
-        }];
+        NSString *urlString = message.viewUrl;
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSString *key = [manager cacheKeyForURL:[NSURL URLWithString:urlString]];
+        SDImageCache *cache = [SDImageCache sharedImageCache];
+        UIImage *image = [cache imageFromDiskCacheForKey:key];
+        if (image) {
+            imageView.imageView.image = image;
+        }else {
+            [imageView.imageView nyx_startLoading];
+            [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                STRONG_SELF
+                [imageView.imageView nyx_stopLoading];
+            }];
+        }
     }else {
         imageView.image = [message imageWaitForSending];
     }
