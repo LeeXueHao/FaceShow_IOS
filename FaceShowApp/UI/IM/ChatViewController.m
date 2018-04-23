@@ -529,6 +529,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         }completion:^(BOOL finished) {
             [foldImgView removeFromSuperview];
         }];
+        [[UIApplication sharedApplication]setStatusBarHidden:NO];
     }];
     [self.view.window addSubview:photoBrowserView];
     photoBrowserView.hidden = YES;
@@ -561,6 +562,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }completion:^(BOOL finished) {
         [openImgView removeFromSuperview];
         photoBrowserView.hidden = NO;
+        [[UIApplication sharedApplication]setStatusBarHidden:YES];
     }];
 }
 
