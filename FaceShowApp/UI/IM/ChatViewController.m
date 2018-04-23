@@ -514,7 +514,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
-        view.hidden = YES;
+        [view removeFromSuperview];
         IMSlideImageView *foldSlideImageV = [view.slideView itemViewAtIndex:view.currentIndex];
         CGRect newRect = foldSlideImageV.imageView.bounds;
         newRect = [foldSlideImageV.imageView convertRect:newRect toView:self.view.window];
@@ -539,7 +539,6 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     if ([model.message imageWaitForSending]) {
         openImgView.image = [photoBrowserView.imageMessageArray[photoBrowserView.currentIndex] imageWaitForSending];
     }else {
-        WEAK_SELF
         NSString *urlString = photoBrowserView.imageMessageArray[photoBrowserView.currentIndex].viewUrl;
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSString *key = [manager cacheKeyForURL:[NSURL URLWithString:urlString]];
@@ -550,7 +549,6 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         }else {
             [openImgView nyx_startLoading];
             [openImgView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"图片发送失败"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                STRONG_SELF
                 [openImgView nyx_stopLoading];
             }];
         }
