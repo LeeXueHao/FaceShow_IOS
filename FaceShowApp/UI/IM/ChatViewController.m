@@ -556,6 +556,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         }
     }
     openImgView.contentMode = UIViewContentModeScaleAspectFit;
+    openImgView.userInteractionEnabled = YES;
     [self.view.window addSubview:openImgView];
     [UIView animateWithDuration:.3 animations:^{
         openImgView.frame = fixRect;

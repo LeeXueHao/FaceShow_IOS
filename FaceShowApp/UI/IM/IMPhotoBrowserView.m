@@ -74,7 +74,7 @@
         SDImageCache *cache = [SDImageCache sharedImageCache];
         UIImage *image = [cache imageFromDiskCacheForKey:key];
         if (image) {
-            imageView.imageView.image = image;
+            imageView.image = image;
         }else {
             [imageView.imageView nyx_startLoading];
             [imageView.imageView sd_setImageWithURL:[NSURL URLWithString:message.viewUrl] placeholderImage:[UIImage imageNamed:@"图片发送失败"]options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
