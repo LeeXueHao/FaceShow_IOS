@@ -72,15 +72,12 @@
                 [self sendNext];
                 return;
             }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//Bug1440 安卓接收不到新话题的第一条消息,ios端作延时处理
-                STRONG_SELF
-                // 订阅新的topic
-                [[IMDatabaseManager sharedInstance]saveTopic:topic];
-                [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
-                
-                msg.topicID = topic.topicID;
-                [self sendMessage:msg];
-            });
+            // 订阅新的topic
+            [[IMDatabaseManager sharedInstance]saveTopic:topic];
+            [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:topic.topicID]];
+            
+            msg.topicID = topic.topicID;
+            [self sendMessage:msg];
         }];
     }else {
         [self sendMessage:msg];
