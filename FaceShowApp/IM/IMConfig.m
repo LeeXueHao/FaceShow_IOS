@@ -9,7 +9,12 @@
 #import "IMConfig.h"
 #import "IMManager.h"
 
+#ifdef DEBUG
 NSString * const kIMRequestUrlHead = @"http://orz.yanxiu.com/im/platform/data.api";
+#else
+NSString * const kIMRequestUrlHead = @"http://im.yanxiu.com/im/platform/data.api";
+#endif
+
 NSString * const kUsername = @"admin";
 NSString * const kPassword = @"public";
 
