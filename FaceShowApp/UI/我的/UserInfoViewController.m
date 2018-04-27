@@ -278,11 +278,11 @@
         GetUserInfoRequestItem *item = retItem;
         if (item.data != nil) {
             [[UserManager sharedInstance].userModel updateFromUserInfo:item.data];
-            self.contentMutableArray[0][@"content"] = [UserManager sharedInstance].userModel.realName?:@"暂无";
-            self.contentMutableArray[1][@"content"] = [UserManager sharedInstance].userModel.mobilePhone?:@"暂无";
-            self.contentMutableArray[2][@"content"] = [UserManager sharedInstance].userModel.sexName?:@"暂无";
-            self.contentMutableArray[3][@"content"] = [self stageSubjectString]?:@"暂无";
-            self.contentMutableArray[4][@"content"] = [UserManager sharedInstance].userModel.school?:@"暂无";
+            self.contentMutableArray[0][@"content"] = isEmpty([UserManager sharedInstance].userModel.realName)? @"暂无" : [UserManager sharedInstance].userModel.realName;
+            self.contentMutableArray[1][@"content"] = isEmpty([UserManager sharedInstance].userModel.mobilePhone)? @"暂无" : [UserManager sharedInstance].userModel.mobilePhone;
+            self.contentMutableArray[2][@"content"] = isEmpty([UserManager sharedInstance].userModel.sexName)? @"暂无" : [UserManager sharedInstance].userModel.sexName;
+            self.contentMutableArray[3][@"content"] = isEmpty([self stageSubjectString])? @"暂无" : [self stageSubjectString];
+            self.contentMutableArray[4][@"content"] = isEmpty([UserManager sharedInstance].userModel.school)? @"暂无" : [UserManager sharedInstance].userModel.school;
             [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
         }
