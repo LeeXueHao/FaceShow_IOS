@@ -894,6 +894,7 @@
 		7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePromptHandler.m; sourceTree = "<group>"; };
 		7CEBA92C20898454009754F5 /* ModifySchoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifySchoolViewController.h; sourceTree = "<group>"; };
 		7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifySchoolViewController.m; sourceTree = "<group>"; };
+		7CEBA96220944949009754F5 /* env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -1453,6 +1454,7 @@
 				7C2518BB1F68E5C70001B577 /* Info.plist */,
 				43538D2D1FDFB7C40052A9D3 /* StageSubject.json */,
 				7C2518F21F68E6BC0001B577 /* PrefixHeader.pch */,
+				7CEBA96220944949009754F5 /* env.h */,
 				7C2518AA1F68E5C70001B577 /* Supporting Files */,
 			);
 			path = FaceShowApp;
