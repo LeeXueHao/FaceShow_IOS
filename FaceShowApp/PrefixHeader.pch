@@ -9,6 +9,8 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#undef DEBUG
+
 #define SAFE_CALL(obj,method) \
 ([obj respondsToSelector:@selector(method)] ? [obj method] : nil)
 
