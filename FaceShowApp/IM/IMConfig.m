@@ -11,12 +11,13 @@
 
 #ifdef DEBUG
 NSString * const kIMRequestUrlHead = @"http://orz.yanxiu.com/im/platform/data.api";
-#else
-NSString * const kIMRequestUrlHead = @"http://im.yanxiu.com/im/platform/data.api";
-#endif
-
 NSString * const kUsername = @"admin";
 NSString * const kPassword = @"public";
+#else
+NSString * const kIMRequestUrlHead = @"http://im.yanxiu.com/im/platform/data.api";
+NSString * const kUsername = @"yxwork";
+NSString * const kPassword = @"79A6g3pHb4tz2Bs8";
+#endif
 
 NSString * const kBizSourse = @"22";
 
