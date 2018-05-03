@@ -515,6 +515,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
         [view removeFromSuperview];
+        self.isPreview = NO;
         IMSlideImageView *foldSlideImageV = [view.slideView itemViewAtIndex:view.currentIndex];
         CGRect newRect = foldSlideImageV.imageView.bounds;
         newRect = [foldSlideImageV.imageView convertRect:newRect toView:self.view.window];
