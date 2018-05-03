@@ -271,7 +271,10 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         model.topicType = self.topic ? self.topic.type : TopicType_Private;
         [self.dataArray addObject:model];
         [self handelTimeForDataSource:self.dataArray];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [UIView performWithoutAnimation:^{
+            STRONG_SELF
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }];
         if (!self.isPreview) {
             [self scrollToBottom];
         }
