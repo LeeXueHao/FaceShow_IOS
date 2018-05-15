@@ -7,6 +7,7 @@
 //
 
 #import "IMImageMessage.h"
+#import "IMMember.h"
 
 @implementation IMImageMessage
 

@@ -10,5 +10,7 @@
 #import "IMTopic.h"
 
 @interface IMTopicUpdateService : NSObject
-- (void)addTopic:(IMTopic *)topic;
++ (IMTopicUpdateService *)sharedInstance;
+- (void)addTopic:(IMTopic *)topic withCompleteBlock:(void(^)(NSArray<IMTopic *> *topics, NSError * error))completeBlock;
+
 @end

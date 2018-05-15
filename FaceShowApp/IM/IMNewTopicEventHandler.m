@@ -13,6 +13,7 @@
 #import "IMConfig.h"
 #import "IMDatabaseManager.h"
 #import "IMHistoryMessageFetcher.h"
+#import "IMTopicUpdateService.h"
 
 @implementation IMNewTopicEventHandler
 - (void)handleData:(NSData *)data inTopic:(NSString *)topic {
@@ -32,13 +33,6 @@
     record.count = 15;
     [[IMHistoryMessageFetcher sharedInstance]addRecord:record];
     
-    [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(msg.topicId)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
-        if (error) {
-            return;
-        }
-        for (IMTopic *topic in topics) {
-            [[IMDatabaseManager sharedInstance]saveTopic:topic];
-        }
-    }];
+    [[IMTopicUpdateService sharedInstance] addTopic:imtopic withCompleteBlock:nil];
 }
 @end

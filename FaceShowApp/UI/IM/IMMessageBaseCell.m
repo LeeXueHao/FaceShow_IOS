@@ -192,14 +192,10 @@
 }
 
 - (void)setupSendStateWithMessage:(IMTopicMessage *)message {
-    if (message.sendState == MessageSendState_Sending) {
+    if (message.sendState == MessageSendState_Sending || message.sendState == MessageSendState_Failed) {
         [self.stateButton setImage:[UIImage nyx_animatedGIFNamed:@"加载动效"] forState:UIControlStateNormal];
         self.stateButton.hidden = NO;
         self.stateButton.enabled = NO;
-    }else if (message.sendState == MessageSendState_Failed) {
-        [self.stateButton setImage:[UIImage imageNamed:@"发送失败"] forState:UIControlStateNormal];
-        self.stateButton.hidden = NO;
-        self.stateButton.enabled = YES;
     }else {
         self.stateButton.hidden = YES;
         self.stateButton.enabled = NO;

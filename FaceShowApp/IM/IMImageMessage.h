@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class IMMember;
+
 @interface IMImageMessage : NSObject
 @property (nonatomic, assign) int64_t topicID;
 @property (nonatomic, assign) int64_t groupID;

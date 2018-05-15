@@ -26,6 +26,8 @@
 #import "IMChatViewModel.h"
 #import "IMPhotoBrowserView.h"
 #import "IMSlideImageView.h"
+#import "IMGroupSettingViewController.h"
+#import "IMPrivateSettingViewController.h"
 
 NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCountClearNotification";
 
@@ -78,6 +80,19 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }else {
         self.title = self.anotherMember.name;
     }
+    WEAK_SELF
+    [self nyx_setupRightWithTitle:@"设置" action:^{
+        STRONG_SELF
+        if (self.topic.type == TopicType_Group) {
+            IMGroupSettingViewController *vc = [[IMGroupSettingViewController alloc]init];
+            vc.topic = self.topic;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            IMPrivateSettingViewController *vc = [[IMPrivateSettingViewController alloc]init];
+            vc.topic = self.topic;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
     self.imageHandler = [[ImageSelectionHandler alloc]init];
     [self setupUI];
     [self setupData];
@@ -92,7 +107,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 
 - (void)setupTitleWithTopic:(IMTopic *)topic {
     if (topic.type == TopicType_Group) {
-        self.title = [NSString stringWithFormat:@"%@(%@)",@"班级群聊",@(self.topic.members.count)];
+        self.title = [NSString stringWithFormat:@"%@(%@)",self.topic.group,@(self.topic.members.count)];
     }else {
         [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
             if (item.memberID == [IMManager sharedInstance].currentMember.memberID) {
@@ -507,12 +522,16 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     CGRect rect = cell.messageBackgroundView.bounds;
     rect = [cell.messageBackgroundView convertRect:rect toView:self.view.window];
     
-    CGRect fixRect = CGRectMake(0, SafeAreaTopHeight(self.view.window), SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight(self.view.window) - SafeAreaBottomHeight(self.view.window));
+    CGRect fixRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     IMPhotoBrowserView *photoBrowserView = [[IMPhotoBrowserView alloc]initWithFrame:fixRect];
     NSMutableArray *array = [NSMutableArray array];
-    [array addObject:model.message];
+    for (IMChatViewModel *model in self.dataArray) {
+        if (model.message.type == MessageType_Image) {
+            [array addObject:model.message];
+        }
+    }
     photoBrowserView.imageMessageArray = array;
-    photoBrowserView.currentIndex = 0;
+    photoBrowserView.currentIndex = [array indexOfObject:model.message];
 
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
@@ -559,14 +578,30 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }
     openImgView.contentMode = UIViewContentModeScaleAspectFit;
     openImgView.userInteractionEnabled = YES;
+    CGSize size = [self aspectFitOriginalSize:openImgView.image.size withReferenceSize:rect.size];
+    openImgView.frame = CGRectMake(0, 0, size.width, size.height);
+    openImgView.center = CGPointMake(rect.origin.x+rect.size.width/2, rect.origin.y+rect.size.height/2);
     [self.view.window addSubview:openImgView];
+    UIView *openBgView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    openBgView.backgroundColor = [UIColor blackColor];
+    [self.view.window insertSubview:openBgView belowSubview:openImgView];
     [UIView animateWithDuration:.3 animations:^{
-        openImgView.frame = fixRect;
+        CGSize size = [self aspectFitOriginalSize:openImgView.image.size withReferenceSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
+        openImgView.frame = CGRectMake(0, 0, size.width, size.height);
+        openImgView.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
         [[UIApplication sharedApplication]setStatusBarHidden:YES];
     }completion:^(BOOL finished) {
         [openImgView removeFromSuperview];
+        [openBgView removeFromSuperview];
         photoBrowserView.hidden = NO;
     }];
+}
+
+- (CGSize)aspectFitOriginalSize:(CGSize)originalSize withReferenceSize:(CGSize)referenceSize {
+    CGFloat scaleW = originalSize.width / referenceSize.width;
+    CGFloat scale = MAX(scaleW, 1);
+    CGSize scaledSize = CGSizeMake(originalSize.width / scale, originalSize.height / scale);
+    return scaledSize;
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {

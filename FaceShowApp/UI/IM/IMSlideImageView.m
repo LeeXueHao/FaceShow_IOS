@@ -65,13 +65,11 @@
 }
 
 - (void)setupLayout {
-    CGSize size = [self aspectFitOriginalSize:CGSizeMake(self.imageWidth / [UIScreen mainScreen].scale, self.imageHeight / [UIScreen mainScreen].scale) withReferenceSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(0);
-        make.size.mas_equalTo(size);
-    }];
+    CGSize size = [self aspectFitOriginalSize:CGSizeMake(self.imageWidth, self.imageHeight) withReferenceSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
+    
+    self.imageView.frame = CGRectMake((SCREEN_WIDTH-size.width)/2, MAX((SCREEN_HEIGHT-size.height)/2, 0), size.width, size.height);
     self.scrollView.contentSize = size;
-    self.scrollView.contentOffset = CGPointZero;
+    self.scrollView.contentOffset = CGPointMake(0, MAX((size.height-SCREEN_HEIGHT)/2, 0));
 }
 
 #pragma mark UIScrollViewDelegate
@@ -126,8 +124,7 @@
 
 - (CGSize)aspectFitOriginalSize:(CGSize)originalSize withReferenceSize:(CGSize)referenceSize {
     CGFloat scaleW = originalSize.width / referenceSize.width;
-    CGFloat scaleH = originalSize.height / referenceSize.height;
-    CGFloat scale = MAX(scaleH, scaleW);
+    CGFloat scale = MAX(scaleW, 1);
     CGSize scaledSize = CGSizeMake(originalSize.width / scale, originalSize.height / scale);
     return scaledSize;
 }

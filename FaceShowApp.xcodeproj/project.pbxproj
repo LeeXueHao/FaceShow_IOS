@@ -286,6 +286,11 @@
 		7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7FD1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m */; };
 		7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC8001F9ED915001D8C84 /* ApnsResourceDisplayViewController.m */; };
 		7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC8021F9F2598001D8C84 /* LoginUtils.m */; };
+		7CFA798120AC23770097A4A7 /* IMSwitchSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA798020AC23770097A4A7 /* IMSwitchSettingView.m */; };
+		7CFA798420AC25400097A4A7 /* IMGroupSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA798320AC25400097A4A7 /* IMGroupSettingViewController.m */; };
+		7CFA798720AC3E030097A4A7 /* IMTitleContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA798620AC3E030097A4A7 /* IMTitleContentView.m */; };
+		7CFA798A20AD18D20097A4A7 /* IMMemberInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA798920AD18D20097A4A7 /* IMMemberInfoView.m */; };
+		7CFA798D20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA798C20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m */; };
 		921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */; };
 		921FF6B5200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */; };
 		921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */; };
@@ -935,6 +940,16 @@
 		7CEFC8001F9ED915001D8C84 /* ApnsResourceDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsResourceDisplayViewController.m; sourceTree = "<group>"; };
 		7CEFC8021F9F2598001D8C84 /* LoginUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginUtils.m; sourceTree = "<group>"; };
 		7CEFC8031F9F2598001D8C84 /* LoginUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginUtils.h; sourceTree = "<group>"; };
+		7CFA797F20AC23770097A4A7 /* IMSwitchSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSwitchSettingView.h; sourceTree = "<group>"; };
+		7CFA798020AC23770097A4A7 /* IMSwitchSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSwitchSettingView.m; sourceTree = "<group>"; };
+		7CFA798220AC25400097A4A7 /* IMGroupSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMGroupSettingViewController.h; sourceTree = "<group>"; };
+		7CFA798320AC25400097A4A7 /* IMGroupSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMGroupSettingViewController.m; sourceTree = "<group>"; };
+		7CFA798520AC3E030097A4A7 /* IMTitleContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMTitleContentView.h; sourceTree = "<group>"; };
+		7CFA798620AC3E030097A4A7 /* IMTitleContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMTitleContentView.m; sourceTree = "<group>"; };
+		7CFA798820AD18D20097A4A7 /* IMMemberInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMMemberInfoView.h; sourceTree = "<group>"; };
+		7CFA798920AD18D20097A4A7 /* IMMemberInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMMemberInfoView.m; sourceTree = "<group>"; };
+		7CFA798B20AD1C5F0097A4A7 /* IMPrivateSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMPrivateSettingViewController.h; sourceTree = "<group>"; };
+		7CFA798C20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMPrivateSettingViewController.m; sourceTree = "<group>"; };
 		921FF6B0200DCD8F002CD071 /* ClassMomentDiscardRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDiscardRequest.h; sourceTree = "<group>"; };
 		921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDiscardRequest.m; sourceTree = "<group>"; };
 		921FF6B3200DCDAB002CD071 /* ClassMomentCancelLikeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentCancelLikeRequest.h; sourceTree = "<group>"; };
@@ -2283,6 +2298,19 @@
 			path = "推送";
 			sourceTree = "<group>";
 		};
+		7CFA797820AC146C0097A4A7 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				7CFA798520AC3E030097A4A7 /* IMTitleContentView.h */,
+				7CFA798620AC3E030097A4A7 /* IMTitleContentView.m */,
+				7CFA797F20AC23770097A4A7 /* IMSwitchSettingView.h */,
+				7CFA798020AC23770097A4A7 /* IMSwitchSettingView.m */,
+				7CFA798820AD18D20097A4A7 /* IMMemberInfoView.h */,
+				7CFA798920AD18D20097A4A7 /* IMMemberInfoView.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		9220840E1F6BB6A700F8AAC6 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -2455,6 +2483,7 @@
 		E91E5D2B2047B1FE00052FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7CFA797820AC146C0097A4A7 /* Setting */,
 				E997064520566DCB0096DAB0 /* Model */,
 				E95ED5D72052236C006ECCEA /* IMMessageCell */,
 				E90C514D204E73010008F92A /* 加载动效.gif */,
@@ -2642,6 +2671,10 @@
 				E91E5D222047B1F800052FBA /* ChatListViewController.m */,
 				E91E5D232047B1F900052FBA /* ChatViewController.h */,
 				E91E5D1C2047B1F700052FBA /* ChatViewController.m */,
+				7CFA798220AC25400097A4A7 /* IMGroupSettingViewController.h */,
+				7CFA798320AC25400097A4A7 /* IMGroupSettingViewController.m */,
+				7CFA798B20AD1C5F0097A4A7 /* IMPrivateSettingViewController.h */,
+				7CFA798C20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2874,6 +2907,7 @@
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
 				7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
+				7CFA798D20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m in Sources */,
 				7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */,
 				7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */,
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,
@@ -2891,6 +2925,7 @@
 				922600CA200F47150076AD05 /* ClassMomentUserViewController.m in Sources */,
 				7CBC5B792047E137004ACA04 /* YXDrawerViewController.m in Sources */,
 				9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */,
+				7CFA798420AC25400097A4A7 /* IMGroupSettingViewController.m in Sources */,
 				7C2518F01F68E68D0001B577 /* UIViewController+NavigationItem.m in Sources */,
 				435F77B91F7A61C400247BD8 /* ResourceTypeMapping.m in Sources */,
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
@@ -3075,6 +3110,7 @@
 				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
 				E91E5D1B2047B1C300052FBA /* ContactsCell.m in Sources */,
 				7C7A9ECB206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m in Sources */,
+				7CFA798A20AD18D20097A4A7 /* IMMemberInfoView.m in Sources */,
 				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
 				7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
@@ -3133,6 +3169,7 @@
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
 				E90C5146204D41220008F92A /* ContactsClassFilterView.m in Sources */,
+				7CFA798720AC3E030097A4A7 /* IMTitleContentView.m in Sources */,
 				F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */,
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
@@ -3164,6 +3201,7 @@
 				7C24E1E91F721C7B00A6921B /* HttpBaseRequestItem_Error.m in Sources */,
 				E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */,
 				7CEBA91E20886B39009754F5 /* BMKLocationConfig.m in Sources */,
+				7CFA798120AC23770097A4A7 /* IMSwitchSettingView.m in Sources */,
 				7CBC5B902049326E004ACA04 /* CourseTaskViewController.m in Sources */,
 				438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */,
 			);

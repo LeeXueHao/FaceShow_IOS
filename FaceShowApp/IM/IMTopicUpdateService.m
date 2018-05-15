@@ -10,37 +10,51 @@
 #import "IMRequestManager.h"
 #import "IMDatabaseManager.h"
 
+@interface IMTopicUpdateItem : NSObject
+@property (nonatomic, strong) IMTopic *topic;
+@property (nonatomic, strong) void(^completeBlock)(NSArray<IMTopic *> *,NSError *error);
+@end
+
+@implementation IMTopicUpdateItem
+@end
+
 @interface IMTopicUpdateService()
-@property (nonatomic, strong) NSMutableArray<IMTopic *> *topicArray;
+@property (nonatomic, strong) NSMutableArray<IMTopicUpdateItem *> *topicArray;
 @property (nonatomic, assign) BOOL isTopicUpdating;
 @end
 
 @implementation IMTopicUpdateService
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.topicArray = [NSMutableArray array];
-        self.isTopicUpdating = NO;
-    }
-    return self;
++ (IMTopicUpdateService *)sharedInstance {
+    static IMTopicUpdateService *manager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[IMTopicUpdateService alloc] init];
+        manager.topicArray = [NSMutableArray array];
+        manager.isTopicUpdating = NO;
+    });
+    return manager;
 }
 
-- (void)addTopic:(IMTopic *)topic {
-    [self.topicArray addObject:topic];
+- (void)addTopic:(IMTopic *)topic withCompleteBlock:(void (^)(NSArray<IMTopic *> *, NSError *))completeBlock{
+    IMTopicUpdateItem *item = [[IMTopicUpdateItem alloc]init];
+    item.topic = topic;
+    item.completeBlock = completeBlock;
+    [self.topicArray addObject:item];
     [self checkAndUpdate];
 }
 
 - (void)checkAndUpdate{
     if (!self.isTopicUpdating && self.topicArray.count>0) {
         self.isTopicUpdating = YES;
-        IMTopic *topic = [self.topicArray firstObject];
+        IMTopicUpdateItem *item = [self.topicArray firstObject];
         WEAK_SELF
-        [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(topic.topicID)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
+        [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(item.topic.topicID)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
             STRONG_SELF
             for (IMTopic *topic in topics) {
                 [[IMDatabaseManager sharedInstance]saveTopic:topic];
             }
+            BLOCK_EXEC(item.completeBlock,topics,error);
             [self.topicArray removeObjectAtIndex:0];
             self.isTopicUpdating = NO;
             [self checkAndUpdate];

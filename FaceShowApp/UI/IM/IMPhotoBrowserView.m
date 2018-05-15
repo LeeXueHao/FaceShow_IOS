@@ -28,6 +28,11 @@
     return self;
 }
 
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    _currentIndex = currentIndex;
+    self.slideView.currentIndex = currentIndex;
+}
+
 #pragma mark - setupUI
 - (void)setupUI {
     

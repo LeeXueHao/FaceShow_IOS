@@ -33,52 +33,7 @@
     self.currentMember = member;
     self.token = token;
     [[IMDatabaseManager sharedInstance]saveMember:member];
-    // 稍微加点延迟再发是为了等所有的配置都完成。
-    [self performSelector:@selector(resendAllUncompletedMessages) withObject:nil afterDelay:0.1];
-}
-
-- (void)resendAllUncompletedMessages {
-    NSArray *messages = [[IMDatabaseManager sharedInstance]findAllUncompletedMessages];
-    for (IMTopicMessage *msg in messages) {
-        IMTopic *topic = [[IMDatabaseManager sharedInstance]findTopicWithID:msg.topicID];
-        if (msg.type == MessageType_Image) {
-            [self resendUncompleteImageMessage:msg inTopic:topic];
-        }else if (msg.type == MessageType_Text) {
-            [self resendUncompleteTextMessage:msg inTopic:topic];
-        }
-    }
-}
-
-- (void)resendUncompleteImageMessage:(IMTopicMessage *)msg inTopic:(IMTopic *)topic {
-    IMImageMessage *imageMsg = [[IMImageMessage alloc]init];
-    imageMsg.topicID = msg.topicID;
-    imageMsg.groupID = topic.groupID;
-    imageMsg.image = [[IMImageMessageSender sharedInstance]cacheImageWithMessageUniqueID:msg.uniqueID];
-    imageMsg.width = msg.width;
-    imageMsg.height = msg.height;
-    imageMsg.uniqueID = msg.uniqueID;
-    for (IMMember *member in topic.members) {
-        if (member.memberID != msg.sender.memberID) {
-            imageMsg.otherMember = member;
-            break;
-        }
-    }
-    [[IMImageMessageSender sharedInstance]resendUncompleteMessage:imageMsg];
-}
-
-- (void)resendUncompleteTextMessage:(IMTopicMessage *)msg inTopic:(IMTopic *)topic {
-    IMTextMessage *textMsg = [[IMTextMessage alloc]init];
-    textMsg.topicID = msg.topicID;
-    textMsg.groupID = topic.groupID;
-    textMsg.text = msg.text;
-    textMsg.uniqueID = msg.uniqueID;
-    for (IMMember *member in topic.members) {
-        if (member.memberID != msg.sender.memberID) {
-            textMsg.otherMember = member;
-            break;
-        }
-    }
-    [[IMTextMessageSender sharedInstance]resendUncompleteMessage:textMsg];
+    [[IMDatabaseManager sharedInstance]markAllUncompleteMessagesFailed];
 }
 
 - (void)setupWithSceneID:(NSString *)sceneID {

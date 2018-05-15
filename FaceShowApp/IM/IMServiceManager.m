@@ -16,11 +16,13 @@
 #import "IMOfflineMsgUpdateServiceManager.h"
 #import "IMManager.h"
 #import "IMHistoryMessageFetcher.h"
+#import "IMDatabaseManager.h"
+#import "IMTextMessageSender.h"
+#import "IMImageMessageSender.h"
 
 @interface IMServiceManager()
 @property (nonatomic, strong) Reachability *hostReachability;
 @property (nonatomic, assign) NetworkStatus networkStatus;
-@property (nonatomic, strong) IMTopicUpdateService *topicUpdateService;
 @property (nonatomic, strong) IMOfflineMsgUpdateServiceManager *offlineServiceManager;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, strong) NSTimer *reconnectTimer;
@@ -33,7 +35,6 @@
     dispatch_once(&onceToken, ^{
         manager = [[IMServiceManager alloc] init];
         manager.networkStatus = NotReachable;
-        manager.topicUpdateService = [[IMTopicUpdateService alloc]init];
         manager.offlineServiceManager = [[IMOfflineMsgUpdateServiceManager alloc]init];
         manager.running = NO;
     });
@@ -103,6 +104,7 @@
 }
 
 - (void)startServicesForNetworkReachable {
+    [self resendAllFailedMessages];
     WEAK_SELF
     [[IMRequestManager sharedInstance]requestTopicsWithCompleteBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
         STRONG_SELF
@@ -142,7 +144,7 @@
         if (topic.topicChange != dbTopic.topicChange) {
             topic.topicChange = dbTopic.topicChange;
             [[IMDatabaseManager sharedInstance]saveTopic:topic];
-            [self.topicUpdateService addTopic:topic];
+            [[IMTopicUpdateService sharedInstance] addTopic:topic withCompleteBlock:nil];
         }
         // update offline msgs
         IMTopicMessage *lastMsg = [[IMDatabaseManager sharedInstance]findLastSuccessfulMessageInTopic:topic.topicID];
@@ -171,6 +173,51 @@
             [[IMHistoryMessageFetcher sharedInstance]addRecord:record];
         }
     }
+}
+
+#pragma mark - 重发失败消息
+- (void)resendAllFailedMessages {
+    NSArray *messages = [[IMDatabaseManager sharedInstance]findAllFailedMessages];
+    for (IMTopicMessage *msg in messages) {
+        IMTopic *topic = [[IMDatabaseManager sharedInstance]findTopicWithID:msg.topicID];
+        if (msg.type == MessageType_Image) {
+            [self resendFailedImageMessage:msg inTopic:topic];
+        }else if (msg.type == MessageType_Text) {
+            [self resendFailedTextMessage:msg inTopic:topic];
+        }
+    }
+}
+
+- (void)resendFailedImageMessage:(IMTopicMessage *)msg inTopic:(IMTopic *)topic {
+    IMImageMessage *imageMsg = [[IMImageMessage alloc]init];
+    imageMsg.topicID = msg.topicID;
+    imageMsg.groupID = topic.groupID;
+    imageMsg.image = [[IMImageMessageSender sharedInstance]cacheImageWithMessageUniqueID:msg.uniqueID];
+    imageMsg.width = msg.width;
+    imageMsg.height = msg.height;
+    imageMsg.uniqueID = msg.uniqueID;
+    for (IMMember *member in topic.members) {
+        if (member.memberID != msg.sender.memberID) {
+            imageMsg.otherMember = member;
+            break;
+        }
+    }
+    [[IMImageMessageSender sharedInstance]addImageMessage:imageMsg];
+}
+
+- (void)resendFailedTextMessage:(IMTopicMessage *)msg inTopic:(IMTopic *)topic {
+    IMTextMessage *textMsg = [[IMTextMessage alloc]init];
+    textMsg.topicID = msg.topicID;
+    textMsg.groupID = topic.groupID;
+    textMsg.text = msg.text;
+    textMsg.uniqueID = msg.uniqueID;
+    for (IMMember *member in topic.members) {
+        if (member.memberID != msg.sender.memberID) {
+            textMsg.otherMember = member;
+            break;
+        }
+    }
+    [[IMTextMessageSender sharedInstance]addTextMessage:textMsg];
 }
 
 #pragma mark - 连接断开处理

@@ -13,6 +13,7 @@
 #import "IMManager.h"
 #import "IMConnectionManager.h"
 #import "IMConfig.h"
+#import "IMTopicUpdateService.h"
 
 @implementation IMTopicChangeEventHandler
 - (void)handleData:(NSData *)data inTopic:(NSString *)topic {
@@ -22,9 +23,11 @@
         NSLog(@"parse error:%@",error.localizedDescription);
         return;
     }
-    [[IMRequestManager sharedInstance]requestTopicDetailWithTopicIds:[NSString stringWithFormat:@"%@",@(msg.topicId)] completeBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
+    IMTopic *imtopic = [[IMTopic alloc]init];
+    imtopic.topicID = msg.topicId;
+    
+    [[IMTopicUpdateService sharedInstance] addTopic:imtopic withCompleteBlock:^(NSArray<IMTopic *> *topics, NSError *error) {
         for (IMTopic *topic in topics) {
-            [[IMDatabaseManager sharedInstance]saveTopic:topic];
             BOOL isIn = NO;
             for (IMMember *member in topic.members) {
                 if (member.memberID == [IMManager sharedInstance].currentMember.memberID) {

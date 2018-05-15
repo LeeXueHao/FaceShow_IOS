@@ -27,6 +27,8 @@
 - (int64_t)generateTempTopicID;
 - (BOOL)isTempTopicID:(int64_t)topicID;
 
+- (void)markAllUncompleteMessagesFailed;
+
 - (NSArray<IMTopic *> *)findAllTopics;
 - (IMTopic *)findTopicWithID:(int64_t)topicID;
 
@@ -45,7 +47,7 @@
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock;
 
 - (IMTopic *)findTopicWithMember:(IMMember *)member;
-- (NSArray<IMTopicMessage *> *)findAllUncompletedMessages;
+- (NSArray<IMTopicMessage *> *)findAllFailedMessages;
 
 #pragma mark - 离线消息抓取相关
 - (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsWithTopicID:(int64_t)topicID;

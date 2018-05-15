@@ -15,5 +15,4 @@
 
 - (void)addTextMessage:(IMTextMessage *)msg;
 
-- (void)resendUncompleteMessage:(IMTextMessage *)msg;
 @end

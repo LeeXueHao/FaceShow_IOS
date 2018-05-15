@@ -167,6 +167,9 @@
     if (topic.topicID == anotherTopic.topicID) {
         return YES;
     }
+    if (topic.type == TopicType_Group) {
+        return NO;
+    }
     NSMutableArray *topicMembers = [NSMutableArray arrayWithCapacity:topic.members.count];
     NSMutableArray *anotherTopicMembers = [NSMutableArray arrayWithCapacity:anotherTopic.members.count];
     [topic.members enumerateObjectsUsingBlock:^(IMMember * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
