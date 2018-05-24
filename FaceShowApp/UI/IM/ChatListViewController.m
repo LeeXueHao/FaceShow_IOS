@@ -109,7 +109,8 @@
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMMessageDidUpdateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
-        IMTopicMessage *message = noti.object;
+        NSArray *msgArray = noti.object;
+        IMTopicMessage *message = msgArray.lastObject;
         for (IMTopic *item in self.dataArray) {
             if (item.topicID == message.topicID) {
                 NSUInteger index = [self.dataArray indexOfObject:item];

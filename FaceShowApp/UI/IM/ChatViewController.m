@@ -266,29 +266,36 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kIMMessageDidUpdateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
-        IMTopicMessage *message = noti.object;
+        NSArray<IMTopicMessage *> *msgArray = noti.object;
+        IMTopicMessage *message = msgArray.lastObject;
         if (message.topicID != self.topic.topicID) {
             return;
         }
-        for (IMChatViewModel *model in self.dataArray) {
-            IMTopicMessage *item = model.message;
-            if ([item.uniqueID isEqualToString:message.uniqueID]) {
-                NSUInteger index = [self.dataArray indexOfObject:model];
-                model.message = message;
-                [self.dataArray replaceObjectAtIndex:index withObject:model];
-                [self handelTimeForDataSource:self.dataArray];
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-                return;
+        if (msgArray.count == 1) {
+            for (IMChatViewModel *model in self.dataArray) {
+                IMTopicMessage *item = model.message;
+                if ([item.uniqueID isEqualToString:message.uniqueID]) {
+                    NSUInteger index = [self.dataArray indexOfObject:model];
+                    model.message = message;
+                    [self.dataArray replaceObjectAtIndex:index withObject:model];
+                    [self handelTimeForDataSource:self.dataArray];
+                    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                    return;
+                }
             }
         }
-        IMChatViewModel *model = [[IMChatViewModel alloc]init];
-        model.message = message;
-        model.topicType = self.topic ? self.topic.type : TopicType_Private;
-        [self.dataArray addObject:model];
+        NSMutableArray *indexPathArray = [NSMutableArray array];
+        for (IMTopicMessage *message in msgArray) {
+            IMChatViewModel *model = [[IMChatViewModel alloc]init];
+            model.message = message;
+            model.topicType = self.topic ? self.topic.type : TopicType_Private;
+            [self.dataArray addObject:model];
+            [indexPathArray addObject:[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]];
+        }
         [self handelTimeForDataSource:self.dataArray];
         [UIView performWithoutAnimation:^{
             STRONG_SELF
-            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
         }];
         if (!self.isPreview) {
             [self scrollToBottom];

@@ -17,6 +17,7 @@
 
 - (void)saveMember:(IMMember *)member;
 - (void)saveMessage:(IMTopicMessage *)message;
+- (void)saveMessages:(NSArray<IMTopicMessage *> *)messages;
 - (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock;
 - (void)saveTopic:(IMTopic *)topic;

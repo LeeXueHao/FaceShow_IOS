@@ -39,6 +39,7 @@
             return;
         }
         BOOL hasMore = msgs.count==20;
+        NSMutableArray *array = [NSMutableArray array];
         for (IMTopicMessage *message in msgs) {
             if (message.messageID == self.startID) {
                 continue;
@@ -48,8 +49,9 @@
                 hasMore = NO;
                 break;
             }
-            [[IMDatabaseManager sharedInstance]saveMessage:message];
+            [array addObject:message];
         }
+        [[IMDatabaseManager sharedInstance]saveMessages:array];
         if (hasMore) {
             [[IMDatabaseManager sharedInstance]updateOfflineMsgFetchRecordStartIDInTopic:self.topicID from:self.startID to:msgs.lastObject.messageID];
             self.startID = msgs.lastObject.messageID;

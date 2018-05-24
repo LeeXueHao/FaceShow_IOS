@@ -24,18 +24,29 @@ NSString * const kIMTopicInfoUpdateNotification = @"kIMTopicInfoUpdateNotificati
 
 NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification";
 
+@interface IMDatabaseManager ()
+@property (nonatomic, strong) dispatch_queue_t operationQueue;
+@end
+
 @implementation IMDatabaseManager
 + (IMDatabaseManager *)sharedInstance {
     static IMDatabaseManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[IMDatabaseManager alloc] init];
+        manager.operationQueue = dispatch_queue_create("im_operation_queue", DISPATCH_QUEUE_CONCURRENT);
     });
     return manager;
 }
 
 #pragma mark - 保存
 - (void)saveMember:(IMMember *)member {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self saveMemberInQueue:member];
+    });
+}
+
+- (void)saveMemberInQueue:(IMMember *)member {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(member.memberID)];
         IMMemberEntity *entity = [IMMemberEntity MR_findFirstWithPredicate:predicate inContext:localContext];
@@ -50,78 +61,103 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)saveMessage:(IMTopicMessage *)message {
-    __block BOOL repeatedMsg = NO;
+    [self saveMessages:@[message]];
+}
+
+- (void)saveMessages:(NSArray<IMTopicMessage *> *)messages {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self saveMessagesInQueue:messages];
+    });
+}
+
+- (void)saveMessagesInQueue:(NSArray<IMTopicMessage *> *)messages {
+    NSMutableArray *savedMsgArray = [NSMutableArray array];
     __block BOOL unreadMsg = NO;
     __block int64_t topicID = 0;
     __block int64_t unreadCount = 0;
-    __block IMTopicMessage *dbMsg = nil;
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueID = %@ && curMember.memberID = %@",message.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
-        IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate inContext:localContext];
-        if (entity.sendState == MessageSendState_Success) {
-            repeatedMsg = YES;
-            return;
+        NSMutableArray *array = [NSMutableArray array];
+        for (IMTopicMessage *item in messages) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueID = %@ && curMember.memberID = %@",item.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
+            IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate inContext:localContext];
+            if (entity.sendState == MessageSendState_Success) {
+                continue;
+            }
+            [array addObject:item];
         }
-        if (!entity) {
-            entity = [IMTopicMessageEntity MR_createEntityInContext:localContext];
+        for (IMTopicMessage *message in array) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueID = %@ && curMember.memberID = %@",message.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
+            IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate inContext:localContext];
+            if (!entity) {
+                entity = [IMTopicMessageEntity MR_createEntityInContext:localContext];
+            }
+            entity.channel = message.channel;
+            entity.sendState = message.sendState;
+            entity.text = message.text;
+            entity.thumbnail = message.thumbnail;
+            entity.viewUrl = message.viewUrl;
+            entity.topicID = message.topicID;
+            entity.type = message.type;
+            entity.uniqueID = message.uniqueID;
+            entity.messageID = message.messageID;
+            entity.width = message.width;
+            entity.height = message.height;
+            if (entity.sendTime == 0) {
+                entity.sendTime = message.sendTime;
+            }
+            if (!entity.primaryKey) {
+                IMTopicMessageEntity *lastEntity = [IMTopicMessageEntity MR_findFirstOrderedByAttribute:@"primaryKey" ascending:NO inContext:localContext];
+                entity.primaryKey = lastEntity.primaryKey + 1;
+            }
+            
+            NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
+            IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
+            entity.curMember = curMemberEntity;
+            
+            NSPredicate *senderPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(message.sender.memberID)];
+            IMMemberEntity *senderEntity = [IMMemberEntity MR_findFirstWithPredicate:senderPredicate inContext:localContext];
+            if (!senderEntity) {
+                senderEntity = [IMMemberEntity MR_createEntityInContext:localContext];
+                senderEntity.name = message.sender.name;
+                senderEntity.avatar = message.sender.avatar;
+                senderEntity.memberID = message.sender.memberID;
+                senderEntity.userID = message.sender.userID;
+            }
+            entity.sender = senderEntity;
+            
+            NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(message.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+            IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+            topicEntity.latestMessage = entity;
+            if (message.sender.memberID != [IMManager sharedInstance].currentMember.memberID) {
+                topicEntity.unreadCount += 1;
+                unreadMsg = YES;
+                topicID = topicEntity.topicID;
+                unreadCount = topicEntity.unreadCount;
+            }
+            
+            [savedMsgArray addObject:[self messageFromEntity:entity]];
         }
-        entity.channel = message.channel;
-        entity.sendState = message.sendState;
-        entity.text = message.text;
-        entity.thumbnail = message.thumbnail;
-        entity.viewUrl = message.viewUrl;
-        entity.topicID = message.topicID;
-        entity.type = message.type;
-        entity.uniqueID = message.uniqueID;
-        entity.messageID = message.messageID;
-        entity.width = message.width;
-        entity.height = message.height;
-        if (entity.sendTime == 0) {
-            entity.sendTime = message.sendTime;
-        }
-        if (!entity.primaryKey || message.sendState == MessageSendState_Sending) {
-            IMTopicMessageEntity *lastEntity = [IMTopicMessageEntity MR_findFirstOrderedByAttribute:@"primaryKey" ascending:NO inContext:localContext];
-            entity.primaryKey = lastEntity.primaryKey + 1;
-        }
-        
-        NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
-        IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
-        entity.curMember = curMemberEntity;
-        
-        NSPredicate *senderPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@(message.sender.memberID)];
-        IMMemberEntity *senderEntity = [IMMemberEntity MR_findFirstWithPredicate:senderPredicate inContext:localContext];
-        if (!senderEntity) {
-            senderEntity = [IMMemberEntity MR_createEntityInContext:localContext];
-            senderEntity.name = message.sender.name;
-            senderEntity.avatar = message.sender.avatar;
-            senderEntity.memberID = message.sender.memberID;
-            senderEntity.userID = message.sender.userID;
-        }
-        entity.sender = senderEntity;
-        
-        NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(message.topicID),@([IMManager sharedInstance].currentMember.memberID)];
-        IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
-        topicEntity.latestMessage = entity;
-        if (message.sender.memberID != [IMManager sharedInstance].currentMember.memberID) {
-            topicEntity.unreadCount += 1;
-            unreadMsg = YES;
-            topicID = topicEntity.topicID;
-            unreadCount = topicEntity.unreadCount;
-        }
-        
-        dbMsg = [self messageFromEntity:entity];
     }];
-    if (!repeatedMsg) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:kIMMessageDidUpdateNotification object:dbMsg];
-    }
-    if (unreadMsg) {
-        NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
-                               kIMUnreadMessageCountKey:@(unreadCount)};
-        [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (savedMsgArray.count > 0) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:kIMMessageDidUpdateNotification object:savedMsgArray];
+        }
+        if (unreadMsg) {
+            NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
+                                   kIMUnreadMessageCountKey:@(unreadCount)};
+            [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
+        }
+    });
 }
 
 - (void)saveHistoryMessages:(NSArray<IMTopicMessage *> *)messages
+              completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self saveHistoryMessagesInQueue:messages completeBlock:completeBlock];
+    });
+}
+
+- (void)saveHistoryMessagesInQueue:(NSArray<IMTopicMessage *> *)messages
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock{
     __block BOOL unreadMsg = NO;
     __block int64_t topicID = 0;
@@ -198,15 +234,23 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             }
         }
     }];
-    if (unreadMsg) {
-        NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
-                               kIMUnreadMessageCountKey:@(unreadCount)};
-        [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
-    }
-    completeBlock(dbMsgArray);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (unreadMsg) {
+            NSDictionary *info = @{kIMUnreadMessageCountTopicKey:@(topicID),
+                                   kIMUnreadMessageCountKey:@(unreadCount)};
+            [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountDidUpdateNotification object:nil userInfo:info];
+        }
+        completeBlock(dbMsgArray);
+    });
 }
 
 - (void)saveTopic:(IMTopic *)topic {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self saveTopicInQueue:topic];
+    });
+}
+
+- (void)saveTopicInQueue:(IMTopic *)topic {
     __block IMTopic *dbTopic = nil;
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
@@ -226,7 +270,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
         IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
         topicEntity.curMember = curMemberEntity;
-        
+
         if (topic.members.count > 0) {
             NSMutableArray *memberIDArray = [NSMutableArray array];
             for (IMMember *member in topic.members) {
@@ -253,7 +297,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         
         dbTopic = [self topicFromEntity:topicEntity inContext:localContext];
     }];
-    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:dbTopic];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:dbTopic];
+    });
 }
 
 - (void)migrateTempMessagesIfNeededToTopicEntity:(IMTopicEntity *)topicEntity inContext:(NSManagedObjectContext *)context {
@@ -275,7 +321,30 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     }
 }
 
+- (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {
+    if (entity.topicID == anotherEntity.topicID) {
+        return YES;
+    }
+    NSArray *entityMemberIDs = [entity.memberIDs componentsSeparatedByString:@","];
+    NSArray *anotherEntityMemberIDs = [anotherEntity.memberIDs componentsSeparatedByString:@","];
+    if (entity.type == anotherEntity.type && entityMemberIDs.count == anotherEntityMemberIDs.count) {
+        for (NSString *memberID in entityMemberIDs) {
+            if (![anotherEntityMemberIDs containsObject:memberID]) {
+                return NO;
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
+
 - (void)updateTopicInfo:(IMTopic *)topic {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self updateTopicInfoInQueue:topic];
+    });
+}
+
+- (void)updateTopicInfoInQueue:(IMTopic *)topic {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
@@ -297,35 +366,34 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             memberEntity.avatar = member.avatar;
         }
     }];
-    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicInfoUpdateNotification object:topic];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicInfoUpdateNotification object:topic];
+    });
 }
 
 - (void)clearTopic:(IMTopic *)topic {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self clearTopicInQueue:topic];
+    });
+}
+
+- (void)clearTopicInQueue:(IMTopic *)topic {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         [IMTopicEntity MR_deleteAllMatchingPredicate:topicPredicate inContext:localContext];
     }];
-    [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidRemoveNotification object:topic];
-}
-
-- (BOOL)isSameTopicWithOneEntity:(IMTopicEntity *)entity anotherEntity:(IMTopicEntity *)anotherEntity {
-    if (entity.topicID == anotherEntity.topicID) {
-        return YES;
-    }
-    NSArray *entityMemberIDs = [entity.memberIDs componentsSeparatedByString:@","];
-    NSArray *anotherEntityMemberIDs = [anotherEntity.memberIDs componentsSeparatedByString:@","];
-    if (entity.type == anotherEntity.type && entityMemberIDs.count == anotherEntityMemberIDs.count) {
-        for (NSString *memberID in entityMemberIDs) {
-            if (![anotherEntityMemberIDs containsObject:memberID]) {
-                return NO;
-            }
-        }
-        return YES;
-    }
-    return NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidRemoveNotification object:topic];
+    });
 }
 
 - (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self resetUnreadMessageCountInQueueWithTopicID:topicID];
+    });
+}
+
+- (void)resetUnreadMessageCountInQueueWithTopicID:(int64_t)topicID {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
@@ -334,8 +402,17 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (int64_t)generateTempTopicID {
+    __block int64_t topicID = -1;
+    dispatch_sync(self.operationQueue, ^{
+        topicID = [self generateTempTopicIDInQueue];
+    });
+    return topicID;
+}
+
+- (int64_t)generateTempTopicIDInQueue {
     NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID < 0 && curMember.memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
-    IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate sortedBy:@"topicID" ascending:YES];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate sortedBy:@"topicID" ascending:YES inContext:context];
     if (topicEntity) {
         return topicEntity.topicID - 1;
     }
@@ -347,6 +424,12 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)markAllUncompleteMessagesFailed {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self markAllUncompleteMessagesFailedInQueue];
+    });
+}
+
+- (void)markAllUncompleteMessagesFailedInQueue {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"curMember.memberID = %@ && sendState = %@",@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Sending)];
         NSArray *msgs = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
@@ -358,6 +441,14 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 
 #pragma mark - 查询
 - (NSArray<IMTopic *> *)findAllTopics {
+    __block NSArray *topics;
+    dispatch_sync(self.operationQueue, ^{
+        topics = [self findAllTopicsInQueue];
+    });
+    return topics;
+}
+
+- (NSArray<IMTopic *> *)findAllTopicsInQueue {
     NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"curMember.memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
     NSArray *topics = [IMTopicEntity MR_findAllWithPredicate:topicPredicate inContext:context];
@@ -369,6 +460,14 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (IMTopic *)findTopicWithID:(int64_t)topicID {
+    __block IMTopic *topic;
+    dispatch_sync(self.operationQueue, ^{
+        topic = [self findTopicInQueueWithID:topicID];
+    });
+    return topic;
+}
+
+- (IMTopic *)findTopicInQueueWithID:(int64_t)topicID {
     NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"curMember.memberID = %@ && topicID = %@",@([IMManager sharedInstance].currentMember.memberID),@(topicID)];
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
     IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:context];
@@ -379,10 +478,24 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                       count:(NSUInteger)count
                    asending:(BOOL)asending
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
+    dispatch_async(self.operationQueue, ^{
+        [self findMessagesInQueueInTopic:topicID count:count asending:asending completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(array, hasMore);
+            });
+        }];
+    });
+}
+
+- (void)findMessagesInQueueInTopic:(int64_t)topicID
+                      count:(NSUInteger)count
+                   asending:(BOOL)asending
+              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
-    NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:asending withPredicate:predicate];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:asending withPredicate:predicate inContext:context];
     [request setFetchLimit:count+1];
-    NSArray *results = [IMTopicMessageEntity MR_executeFetchRequest:request];
+    NSArray *results = [IMTopicMessageEntity MR_executeFetchRequest:request inContext:context];
     NSMutableArray *array = [NSMutableArray array];
     for (IMTopicMessageEntity *entity in results) {
         IMTopicMessage *message = [self messageFromEntity:entity];
@@ -400,10 +513,24 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                       count:(NSUInteger)count
                 beforeIndex:(int64_t)index
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
+    dispatch_async(self.operationQueue, ^{
+        [self findMessagesInQueueInTopic:topicID count:count beforeIndex:index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(array, hasMore);
+            });
+        }];
+    });
+}
+
+- (void)findMessagesInQueueInTopic:(int64_t)topicID
+                      count:(NSUInteger)count
+                beforeIndex:(int64_t)index
+              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@ && primaryKey < %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID),@(index)];
-    NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:NO withPredicate:predicate];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:NO withPredicate:predicate inContext:context];
     [request setFetchLimit:count+1];
-    NSArray *results = [IMTopicMessageEntity MR_executeFetchRequest:request];
+    NSArray *results = [IMTopicMessageEntity MR_executeFetchRequest:request inContext:context];
     NSMutableArray *array = [NSMutableArray array];
     for (IMTopicMessageEntity *entity in results) {
         IMTopicMessage *message = [self messageFromEntity:entity];
@@ -418,24 +545,59 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (IMTopicMessage *)findMessageWithUniqueID:(NSString *)uniqueID {
+    __block IMTopicMessage *message;
+    dispatch_sync(self.operationQueue, ^{
+        message = [self findMessageInQueueWithUniqueID:uniqueID];
+    });
+    return message;
+}
+
+- (IMTopicMessage *)findMessageInQueueWithUniqueID:(NSString *)uniqueID {
     NSPredicate *msgPredicate = [NSPredicate predicateWithFormat:@"curMember.memberID = %@ && uniqueID = %@",@([IMManager sharedInstance].currentMember.memberID),uniqueID];
-    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:msgPredicate];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:msgPredicate inContext:context];
     return [self messageFromEntity:msgEntity];
 }
 
 - (IMTopicMessage *)findLastSuccessfulMessageInTopic:(int64_t)topicID {
+    __block IMTopicMessage *message;
+    dispatch_sync(self.operationQueue, ^{
+        message = [self findLastSuccessfulMessageInQueueInTopic:topicID];
+    });
+    return message;
+}
+
+- (IMTopicMessage *)findLastSuccessfulMessageInQueueInTopic:(int64_t)topicID {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@ && sendState = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Success)];
-    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate sortedBy:@"messageID" ascending:NO];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate sortedBy:@"messageID" ascending:NO inContext:context];
     return [self messageFromEntity:msgEntity];
 }
 
 - (IMTopicMessage *)findFirstSuccessfulMessageInTopic:(int64_t)topicID {
+    __block IMTopicMessage *message;
+    dispatch_sync(self.operationQueue, ^{
+        message = [self findFirstSuccessfulMessageInQueueInTopic:topicID];
+    });
+    return message;
+}
+
+- (IMTopicMessage *)findFirstSuccessfulMessageInQueueInTopic:(int64_t)topicID {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@ && sendState = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Success)];
-    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate sortedBy:@"messageID" ascending:YES];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate sortedBy:@"messageID" ascending:YES inContext:context];
     return [self messageFromEntity:msgEntity];
 }
 
 - (IMTopic *)findTopicWithMember:(IMMember *)member {
+    __block IMTopic *topic;
+    dispatch_sync(self.operationQueue, ^{
+        topic = [self findTopicInQueueWithMember:member];
+    });
+    return topic;
+}
+
+- (IMTopic *)findTopicInQueueWithMember:(IMMember *)member {
     NSArray *topicArray = [self findAllTopics];
     for (IMTopic *topic in topicArray) {
         if (topic.type == TopicType_Private) {
@@ -450,6 +612,14 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (NSArray<IMTopicMessage *> *)findAllFailedMessages {
+    __block NSArray *array;
+    dispatch_sync(self.operationQueue, ^{
+        array = [self findAllFailedMessagesInQueue];
+    });
+    return array;
+}
+
+- (NSArray<IMTopicMessage *> *)findAllFailedMessagesInQueue {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sender.memberID = %@ && sendState = %@",@([IMManager sharedInstance].currentMember.memberID),@(MessageSendState_Failed)];
     NSFetchedResultsController *controller = [IMTopicMessageEntity MR_fetchAllGroupedBy:@"topicID" withPredicate:predicate sortedBy:@"primaryKey" ascending:YES];
     NSMutableArray *array = [NSMutableArray array];
@@ -528,9 +698,18 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 #pragma mark - 离线消息待抓取记录
-- (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsWithTopicID:(int64_t)topicID {
+- (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsWithTopicID:(int64_t)topicID  {
+    __block NSArray *array;
+    dispatch_sync(self.operationQueue, ^{
+        array = [self findAllOfflineMsgFetchRecordsInQueueWithTopicID:topicID];
+    });
+    return array;
+}
+
+- (NSArray<IMTopicOfflineMsgFetchRecord *> *)findAllOfflineMsgFetchRecordsInQueueWithTopicID:(int64_t)topicID {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
-    NSArray *entities = [IMTopicOfflineMsgFetchEntity MR_findAllSortedBy:@"startID" ascending:YES withPredicate:predicate];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+    NSArray *entities = [IMTopicOfflineMsgFetchEntity MR_findAllSortedBy:@"startID" ascending:YES withPredicate:predicate inContext:context];
     NSMutableArray *array = [NSMutableArray array];
     for (IMTopicOfflineMsgFetchEntity *entity in entities) {
         [array addObject:[self offlineMsgFetchRecordFromEntity:entity]];
@@ -549,6 +728,12 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)saveOfflineMsgFetchRecord:(IMTopicOfflineMsgFetchRecord *)record {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self saveOfflineMsgFetchRecordInQueue:record];
+    });
+}
+
+- (void)saveOfflineMsgFetchRecordInQueue:(IMTopicOfflineMsgFetchRecord *)record {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && startID = %@ && curMember.memberID = %@",@(record.topicID),@(record.startID),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicOfflineMsgFetchEntity *entity = [IMTopicOfflineMsgFetchEntity MR_findFirstWithPredicate:predicate inContext:localContext];
@@ -566,6 +751,11 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)updateOfflineMsgFetchRecordStartIDInTopic:(int64_t)topicID from:(int64_t)from to:(int64_t)to {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self updateOfflineMsgFetchRecordStartIDInQueueInTopic:topicID from:from to:to];
+    });
+}
+- (void)updateOfflineMsgFetchRecordStartIDInQueueInTopic:(int64_t)topicID from:(int64_t)from to:(int64_t)to {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && startID = %@ && curMember.memberID = %@",@(topicID),@(from),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicOfflineMsgFetchEntity *entity = [IMTopicOfflineMsgFetchEntity MR_findFirstWithPredicate:predicate inContext:localContext];
@@ -575,6 +765,12 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)removeOfflineMsgFetchRecordInTopic:(int64_t)topicID withStartID:(int64_t)startID {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self removeOfflineMsgFetchRecordInQueueInTopic:topicID withStartID:startID];
+    });
+}
+
+- (void)removeOfflineMsgFetchRecordInQueueInTopic:(int64_t)topicID withStartID:(int64_t)startID {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && startID = %@ && curMember.memberID = %@",@(topicID),@(startID),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicOfflineMsgFetchEntity *entity = [IMTopicOfflineMsgFetchEntity MR_findFirstWithPredicate:predicate inContext:localContext];
