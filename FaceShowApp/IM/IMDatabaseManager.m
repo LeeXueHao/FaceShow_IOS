@@ -158,7 +158,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)saveHistoryMessagesInQueue:(NSArray<IMTopicMessage *> *)messages
-              completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock{
+                     completeBlock:(void(^)(NSArray<IMTopicMessage *> *savedMsgs))completeBlock{
     __block BOOL unreadMsg = NO;
     __block int64_t topicID = 0;
     __block int64_t unreadCount = 0;
@@ -270,7 +270,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
         IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
         topicEntity.curMember = curMemberEntity;
-
+        
         if (topic.members.count > 0) {
             NSMutableArray *memberIDArray = [NSMutableArray array];
             for (IMMember *member in topic.members) {
@@ -478,6 +478,21 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                       count:(NSUInteger)count
                    asending:(BOOL)asending
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
+    __block NSArray *msgArray;
+    __block BOOL more;
+    dispatch_sync(self.operationQueue, ^{
+        [self findMessagesInQueueInTopic:topicID count:count asending:asending completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+            msgArray = array;
+            more = hasMore;
+        }];
+    });
+    BLOCK_EXEC(completeBlock, msgArray, more);
+}
+
+- (void)findMessagesInQueueInTopic:(int64_t)topicID
+                             count:(NSUInteger)count
+                          asending:(BOOL)asending
+                     completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
     NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:asending withPredicate:predicate inContext:context];
@@ -500,6 +515,21 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                       count:(NSUInteger)count
                 beforeIndex:(int64_t)index
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
+    __block NSArray *msgArray;
+    __block BOOL more;
+    dispatch_sync(self.operationQueue, ^{
+        [self findMessagesInQueueInTopic:topicID count:count beforeIndex:index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
+            msgArray = array;
+            more = hasMore;
+        }];
+    });
+    BLOCK_EXEC(completeBlock, msgArray, more);
+}
+
+- (void)findMessagesInQueueInTopic:(int64_t)topicID
+                             count:(NSUInteger)count
+                       beforeIndex:(int64_t)index
+                     completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@ && primaryKey < %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID),@(index)];
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
     NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:NO withPredicate:predicate inContext:context];
@@ -753,3 +783,4 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 @end
+
