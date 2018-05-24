@@ -478,19 +478,6 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
                       count:(NSUInteger)count
                    asending:(BOOL)asending
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
-    dispatch_async(self.operationQueue, ^{
-        [self findMessagesInQueueInTopic:topicID count:count asending:asending completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completeBlock(array, hasMore);
-            });
-        }];
-    });
-}
-
-- (void)findMessagesInQueueInTopic:(int64_t)topicID
-                      count:(NSUInteger)count
-                   asending:(BOOL)asending
-              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
     NSFetchRequest *request = [IMTopicMessageEntity MR_requestAllSortedBy:@"primaryKey" ascending:asending withPredicate:predicate inContext:context];
@@ -510,19 +497,6 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
 }
 
 - (void)findMessagesInTopic:(int64_t)topicID
-                      count:(NSUInteger)count
-                beforeIndex:(int64_t)index
-              completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
-    dispatch_async(self.operationQueue, ^{
-        [self findMessagesInQueueInTopic:topicID count:count beforeIndex:index completeBlock:^(NSArray<IMTopicMessage *> *array, BOOL hasMore) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completeBlock(array, hasMore);
-            });
-        }];
-    });
-}
-
-- (void)findMessagesInQueueInTopic:(int64_t)topicID
                       count:(NSUInteger)count
                 beforeIndex:(int64_t)index
               completeBlock:(void(^)(NSArray<IMTopicMessage *> *array, BOOL hasMore))completeBlock {
