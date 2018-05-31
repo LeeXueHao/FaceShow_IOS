@@ -18,6 +18,8 @@
 #import "MessagePromptView.h"
 #import "AlertView.h"
 #import "GetStudentClazsRequest.h"
+#import "SignInPlaceViewController.h"
+#import "UIButton+ExpandHitArea.h"
 
 @interface ScanCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
     AVCaptureSession *_session;
@@ -37,6 +39,7 @@
 @property (nonatomic, strong) ClassCodeItem *classCodeItem;
 @property (nonatomic, strong) ScanCodeMaskView *scanCodeMaskView;
 @property (nonatomic, strong) AlertView *alertView;
+@property (nonatomic, strong) UIButton *signInPlaceButton;
 @end
 
 @implementation ScanCodeViewController
@@ -97,6 +100,38 @@
     [self.scanCodeMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
+    
+    UIButton *signInPlaceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.signInPlaceButton = signInPlaceButton;
+    [signInPlaceButton setImage:[UIImage imageNamed:@"位置签到"] forState:UIControlStateNormal];
+    signInPlaceButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    signInPlaceButton.titleLabel.textColor = [UIColor colorWithHexString:@"a6b0bf"];
+    [signInPlaceButton setTitle:@"位置签到" forState:UIControlStateNormal];
+    CGSize size = [signInPlaceButton.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+    [signInPlaceButton setImageEdgeInsets:UIEdgeInsetsMake(-7 - size.height, size.width/2, 7 + size.height, -size.width/2)];
+    [signInPlaceButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -15,0, 15)];
+    [signInPlaceButton setHitTestEdgeInsets:UIEdgeInsetsMake(-30, -30, -30, -30)];
+    WEAK_SELF
+    [[signInPlaceButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        SignInPlaceViewController *vc = [[SignInPlaceViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [self.view addSubview:signInPlaceButton];
+    [signInPlaceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-20);
+        } else {
+            make.bottom.mas_equalTo(-20);
+        }
+        make.centerX.mas_equalTo(0);
+    }];
+    if (self.isHideSignInPlace) {
+        self.signInPlaceButton.hidden = YES;
+    }else {
+        self.signInPlaceButton.hidden = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -186,9 +221,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(imageBuffer, 0);
-//    size_t width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0);
-//    size_t height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
-//    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
+    //    size_t width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0);
+    //    size_t height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
+    //    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
     
     CIImage* input = [CIImage imageWithCVImageBuffer: imageBuffer];
     CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
@@ -218,7 +253,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     NSString *ret = nil;
     while ((ret == nil) && (threhold < 1.0)) {
         CIImage *output = [self change:img threshold:threhold];
-//        NSArray *arr = [_qrDetector featuresInImage:output];
+        //        NSArray *arr = [_qrDetector featuresInImage:output];
         for (CIQRCodeFeature *feature in [_qrDetector featuresInImage:output]) {
             ret = feature.messageString;
             break;
@@ -382,4 +417,12 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     }];
 }
 
+- (void)setIsHideSignInLocBtn:(BOOL)isHideSignInPlace {
+    _isHideSignInPlace = isHideSignInPlace;
+    if (isHideSignInPlace) {
+        self.signInPlaceButton.hidden = YES;
+    }else {
+        self.signInPlaceButton.hidden = NO;
+    }
+}
 @end

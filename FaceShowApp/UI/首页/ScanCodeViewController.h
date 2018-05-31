@@ -11,4 +11,6 @@
 @interface ScanCodeViewController : BaseViewController
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSString *prompt;
+@property (nonatomic, assign) BOOL isHideSignInPlace;
+
 @end

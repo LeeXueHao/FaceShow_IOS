@@ -395,6 +395,8 @@
 		E91E5DBA2047D6DE00052FBA /* YXGCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DB92047D6DE00052FBA /* YXGCDTimer.m */; };
 		E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */; };
 		E91E5DC62047DB5500052FBA /* IMConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5DC52047DB5500052FBA /* IMConnectionManager.m */; };
+		E932CD8F20BFE01C009F5BC6 /* SignInPLaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E932CD8E20BFE01B009F5BC6 /* SignInPLaceCell.m */; };
+		E932CD9220BFE050009F5BC6 /* SignInPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E932CD9120BFE050009F5BC6 /* SignInPlaceViewController.m */; };
 		E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EC206342F000CED82E /* IMSlideImageView.m */; };
 		E93327F020638DF800CED82E /* IMSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EF20638DF800CED82E /* IMSlideView.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
@@ -1153,6 +1155,10 @@
 		E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDatabaseManager.m; sourceTree = "<group>"; };
 		E91E5DC42047DB5500052FBA /* IMConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConnectionManager.h; sourceTree = "<group>"; };
 		E91E5DC52047DB5500052FBA /* IMConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConnectionManager.m; sourceTree = "<group>"; };
+		E932CD8D20BFE01A009F5BC6 /* SignInPLaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInPLaceCell.h; sourceTree = "<group>"; };
+		E932CD8E20BFE01B009F5BC6 /* SignInPLaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInPLaceCell.m; sourceTree = "<group>"; };
+		E932CD9020BFE04F009F5BC6 /* SignInPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInPlaceViewController.h; sourceTree = "<group>"; };
+		E932CD9120BFE050009F5BC6 /* SignInPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInPlaceViewController.m; sourceTree = "<group>"; };
 		E93327EB206342F000CED82E /* IMSlideImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSlideImageView.h; sourceTree = "<group>"; };
 		E93327EC206342F000CED82E /* IMSlideImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideImageView.m; sourceTree = "<group>"; };
 		E93327EE20638DF800CED82E /* IMSlideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSlideView.h; sourceTree = "<group>"; };
@@ -1250,6 +1256,8 @@
 			children = (
 				43510A961F6B63FA006B2645 /* ScanCodeMaskView.h */,
 				43510A951F6B63FA006B2645 /* ScanCodeMaskView.m */,
+				E932CD8D20BFE01A009F5BC6 /* SignInPLaceCell.h */,
+				E932CD8E20BFE01B009F5BC6 /* SignInPLaceCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2176,6 +2184,8 @@
 				431D75971F6EB43E00E0073B /* ScanCodeResultViewController.m */,
 				43578CC31FE2295E00D37B72 /* SubScanCodeResultViewController.h */,
 				43578CC41FE2295E00D37B72 /* SubScanCodeResultViewController.m */,
+				E932CD9020BFE04F009F5BC6 /* SignInPlaceViewController.h */,
+				E932CD9120BFE050009F5BC6 /* SignInPlaceViewController.m */,
 			);
 			name = "扫一扫";
 			sourceTree = "<group>";
@@ -2934,6 +2944,7 @@
 				E90C5149204D41A80008F92A /* ContactsClassFilterCell.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,
 				7C24E1E31F70FF2B00A6921B /* CommentInputView.m in Sources */,
+				E932CD8F20BFE01C009F5BC6 /* SignInPLaceCell.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
 				E91E5D672047B86B00052FBA /* IMOfflineMsgUpdateService.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
@@ -2949,6 +2960,7 @@
 				E91E5D8C2047B8C900052FBA /* IMNewTopicEventHandler.m in Sources */,
 				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
 				7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */,
+				E932CD9220BFE050009F5BC6 /* SignInPlaceViewController.m in Sources */,
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
 				7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */,
 				7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */,
