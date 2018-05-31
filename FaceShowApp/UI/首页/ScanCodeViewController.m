@@ -127,10 +127,10 @@
         }
         make.centerX.mas_equalTo(0);
     }];
-    if (self.isHideSignInPlace) {
-        self.signInPlaceButton.hidden = YES;
-    }else {
+    if (self.isShowSignInPlace) {
         self.signInPlaceButton.hidden = NO;
+    }else {
+        self.signInPlaceButton.hidden = YES;
     }
 }
 
@@ -417,12 +417,12 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     }];
 }
 
-- (void)setIsHideSignInLocBtn:(BOOL)isHideSignInPlace {
-    _isHideSignInPlace = isHideSignInPlace;
-    if (isHideSignInPlace) {
-        self.signInPlaceButton.hidden = YES;
-    }else {
+- (void)setIsHideSignInLocBtn:(BOOL)isShowSignInPlace {
+    _isShowSignInPlace = isShowSignInPlace;
+    if (isShowSignInPlace) {
         self.signInPlaceButton.hidden = NO;
+    }else {
+        self.signInPlaceButton.hidden = YES;
     }
 }
 @end
