@@ -19,7 +19,10 @@
 @property (nonatomic, strong) UILabel *signedInTimeLabel;
 @property (nonatomic, strong) UILabel *tipsLabel;
 @property (nonatomic, strong) UIButton *signInBtn;
-
+@property (nonatomic, strong) UILabel *typeNameLabel;
+@property (nonatomic, strong) UILabel *placeLabel;
+@property (nonatomic, strong) UILabel *placeNameLabel;
+@property (nonatomic, strong) UILabel *statusTitleLabel;
 @end
 
 @implementation SignInDetailViewController
@@ -77,15 +80,41 @@
         make.centerX.mas_equalTo(0);
     }];
     
+    UILabel *typeLabel = [timeScheduleTitleLabel clone];
+    typeLabel.text = @"签到类型";
+    [self.contentView addSubview:typeLabel];
+    [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.timeScheduleLabel.mas_bottom).offset(29);
+        make.centerX.mas_equalTo(0);
+    }];
+    self.typeNameLabel = [self.timeScheduleLabel clone];
+    [self.contentView addSubview:self.typeNameLabel];
+    [self.typeNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(typeLabel.mas_bottom).offset(10);
+        make.centerX.mas_equalTo(0);
+    }];
+    
+    UILabel *placeLabel = [typeLabel clone];
+    placeLabel.text = @"签到地点";
+    self.placeLabel = placeLabel;
+    [self.contentView addSubview:placeLabel];
+    [placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.typeNameLabel.mas_bottom).offset(29);
+        make.centerX.mas_equalTo(0);
+    }];
+    self.placeNameLabel = [self.typeNameLabel clone];
+    [self.contentView addSubview:self.placeNameLabel];
+    [self.placeNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(placeLabel.mas_bottom).offset(10);
+        make.centerX.mas_equalTo(0);
+    }];
+    
     UILabel *statusTitleLabel = [[UILabel alloc] init];
     statusTitleLabel.font = [UIFont systemFontOfSize:13];
     statusTitleLabel.textColor = [UIColor colorWithHexString:@"999999"];
     statusTitleLabel.text = @"本次签到";
     [self.contentView addSubview:statusTitleLabel];
-    [statusTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.timeScheduleLabel.mas_bottom).offset(29);
-        make.centerX.mas_equalTo(0);
-    }];
+    self.statusTitleLabel = statusTitleLabel;
     
     self.statusLabel = [[UILabel alloc] init];
     self.statusLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -182,6 +211,23 @@
         self.timeTitleLabel.hidden = NO;
         self.signedInTimeLabel.hidden = NO;
         self.signedInTimeLabel.text = [self.signIn.userSignIn.signinTime omitSecondOfFullDateString];
+    }
+    BOOL placeSignin = YES;
+    if (placeSignin) {
+        self.typeNameLabel.text = @"位置签到";
+        self.placeNameLabel.text = @"北京市西城区北广大厦";
+        [self.statusTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.placeNameLabel.mas_bottom).offset(29);
+            make.centerX.mas_equalTo(0);
+        }];
+    }else {
+        self.typeNameLabel.text = @"扫码签到";
+        [self.statusTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.typeNameLabel.mas_bottom).offset(29);
+            make.centerX.mas_equalTo(0);
+        }];
+        self.placeLabel.hidden = YES;
+        self.placeNameLabel.hidden = YES;
     }
 }
 
