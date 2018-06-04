@@ -46,6 +46,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.centerY.mas_equalTo(0);
+        make.right.mas_equalTo(-30);
     }];
     
     self.selectedImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"选择图标"]];
