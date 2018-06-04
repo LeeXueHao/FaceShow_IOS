@@ -71,6 +71,7 @@
     }];
     
     self.passwordTF = [[UITextField alloc] init];
+    self.passwordTF.tintColor = [UIColor whiteColor];
     self.passwordTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
     self.passwordTF.layer.borderWidth = 2;
     self.passwordTF.layer.cornerRadius = 6;
@@ -116,6 +117,7 @@
     }];
 
     self.usernameTF = [[UITextField alloc] init];
+    self.usernameTF.tintColor = [UIColor whiteColor];
     self.usernameTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
     self.usernameTF.layer.borderWidth = 2;
     self.usernameTF.layer.cornerRadius = 6;
