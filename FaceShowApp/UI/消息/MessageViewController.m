@@ -12,7 +12,6 @@
 #import "NoticeListFetcher.h"
 #import "GetNoticeListRequest.h"
 #import "UserMessageManager.h"
-#import "YXDrawerController.h"
 
 @interface MessageViewController ()
 
@@ -25,11 +24,6 @@
     fetcher.clazzId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     self.dataFetcher = fetcher;
     [super viewDidLoad];
-    WEAK_SELF
-    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
-        STRONG_SELF
-        [YXDrawerController showDrawer];
-    }];
     self.emptyView.title = @"暂无通知";
     [self setupUI];
     [self setupObserver];
@@ -46,6 +40,7 @@
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
+    self.tableView.estimatedRowHeight = 0;
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:@"MessageCell"];
 }
 
@@ -88,4 +83,9 @@
     [self.navigationController pushViewController:messageDetailVC animated:YES];
 }
 
+#pragma mark - RefreshDelegate
+- (void)refreshUI {
+    [self.view nyx_startLoading];
+    [self firstPageFetch];
+}
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "PagedListViewControllerBase.h"
+#import "RefreshDelegate.h"
 
-@interface MessageViewController : PagedListViewControllerBase
+@interface MessageViewController : PagedListViewControllerBase<RefreshDelegate>
 
 @end

@@ -17,11 +17,14 @@
 #import "GetSigninRequest.h"
 #import "SignInDetailViewController.h"
 #import "UserPromptsManager.h"
+#import "YXDrawerController.h"
+#import "MJRefresh.h"
 
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) MJRefreshHeaderView *header;
 @property (nonatomic, strong) GetTaskRequest *request;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -30,8 +33,17 @@
 
 @implementation TaskListViewController
 
+- (void)dealloc {
+    [self.header free];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    WEAK_SELF
+    [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
+        STRONG_SELF
+        [YXDrawerController showDrawer];
+    }];
     [self setupUI];
     [self setupObserver];
     [self requestTaskInfo];
@@ -50,6 +62,7 @@
     self.request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     [self.request startRequestWithRetClass:[GetTaskRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self.header endRefreshing];
         [self.view nyx_stopLoading];
         self.errorView.hidden = YES;
         self.emptyView.hidden = YES;
@@ -98,6 +111,13 @@
         make.edges.mas_equalTo(0);
     }];
     self.errorView.hidden = YES;
+    
+    self.header = [MJRefreshHeaderView header];
+    self.header.scrollView = self.tableView;
+    self.header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        STRONG_SELF
+        [self requestTaskInfo];
+    };
 }
 
 #pragma mark - Observer
@@ -195,11 +215,6 @@
         }
     }
     [UserPromptsManager sharedInstance].taskNewView.hidden = YES;
-}
-
-#pragma mark - RefreshDelegate
-- (void)refreshUI {
-    [self requestTaskInfo];;
 }
 
 @end

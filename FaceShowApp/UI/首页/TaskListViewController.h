@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 #import "RefreshDelegate.h"
 
-@interface TaskListViewController : BaseViewController<RefreshDelegate>
+@interface TaskListViewController : BaseViewController
 
 @end

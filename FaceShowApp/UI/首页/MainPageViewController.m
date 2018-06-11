@@ -14,7 +14,6 @@
 #import "CourseListViewController.h"
 #import "ResourceListViewController.h"
 #import "ScheduleViewController.h"
-#import "TaskListViewController.h"
 #import "ScanCodeViewController.h"
 #import "UserPromptsManager.h"
 #import "GetCurrentClazsRequest.h"
@@ -23,6 +22,7 @@
 #import "GetToolsRequest.h"
 #import "ResourceDisplayViewController.h"
 #import "YXDrawerController.h"
+#import "MessageViewController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -85,7 +85,7 @@
     }];
     self.topView = topView;
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
-    NSArray *tabNames = @[@"课程",@"日程",@"任务",@"资源"];
+    NSArray *tabNames = @[@"课程",@"日程",@"通知",@"资源"];
     tabContainerView.tabNameArray = tabNames;
     WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
@@ -108,7 +108,7 @@
     self.tabControllers = [NSMutableArray array];
     [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]];
     [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
-    [self.tabControllers addObject:[[TaskListViewController alloc]init]];
+    [self.tabControllers addObject:[[MessageViewController alloc]init]];
     ResourceListViewController *resVC = [[ResourceListViewController alloc]init];
     resVC.mainVC = self;
     [self.tabControllers addObject:resVC];

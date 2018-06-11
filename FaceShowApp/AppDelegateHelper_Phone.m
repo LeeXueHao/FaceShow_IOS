@@ -9,7 +9,6 @@
 #import "AppDelegateHelper_Phone.h"
 #import "LoginViewController.h"
 #import "MainPageViewController.h"
-#import "MessageViewController.h"
 #import "ClassMomentViewController.h"
 #import "MineViewController.h"
 #import "YXTestViewController.h"
@@ -31,6 +30,7 @@
 #import "ClassSelectionViewController.h"
 #import "IMUserInterface.h"
 #import "UIViewController+VisibleViewController.h"
+#import "TaskListViewController.h"
 
 UIKIT_EXTERN BOOL testFrameworkOn;
 
@@ -78,8 +78,8 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     [self configTabbarItem:mainVC.tabBarItem image:@"首页icon" selectedImage:@"首页icon选择"];
     FSNavigationController *mainNavi = [[FSNavigationController alloc] initWithRootViewController:mainVC];
     
-    UIViewController *messageVC = [[MessageViewController alloc]init];
-    messageVC.title = @"通知";
+    UIViewController *messageVC = [[TaskListViewController alloc]init];
+    messageVC.title = @"任务";
     [self configTabbarItem:messageVC.tabBarItem image:@"通知icon" selectedImage:@"通知icon选择"];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
     

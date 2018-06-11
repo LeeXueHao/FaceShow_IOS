@@ -9,6 +9,6 @@
 #ifndef env_h
 #define env_h
 
-#undef DEBUG
+//#undef DEBUG
 
 #endif /* env_h */
