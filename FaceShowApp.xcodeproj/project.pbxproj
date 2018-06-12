@@ -399,6 +399,7 @@
 		E932CD9220BFE050009F5BC6 /* SignInPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E932CD9120BFE050009F5BC6 /* SignInPlaceViewController.m */; };
 		E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EC206342F000CED82E /* IMSlideImageView.m */; };
 		E93327F020638DF800CED82E /* IMSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EF20638DF800CED82E /* IMSlideView.m */; };
+		E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434A420CF683100BCF63C /* DoHomeworkViewController.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1163,6 +1164,8 @@
 		E93327EC206342F000CED82E /* IMSlideImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideImageView.m; sourceTree = "<group>"; };
 		E93327EE20638DF800CED82E /* IMSlideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSlideView.h; sourceTree = "<group>"; };
 		E93327EF20638DF800CED82E /* IMSlideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideView.m; sourceTree = "<group>"; };
+		E95434A320CF683100BCF63C /* DoHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoHomeworkViewController.h; sourceTree = "<group>"; };
+		E95434A420CF683100BCF63C /* DoHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoHomeworkViewController.m; sourceTree = "<group>"; };
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
@@ -2196,6 +2199,8 @@
 				4378DFA31F6F8201005CFE56 /* View */,
 				7C212DC81F6A5D5A0007AE01 /* TaskListViewController.h */,
 				7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */,
+				E95434A320CF683100BCF63C /* DoHomeworkViewController.h */,
+				E95434A420CF683100BCF63C /* DoHomeworkViewController.m */,
 			);
 			name = "任务";
 			sourceTree = "<group>";
@@ -3160,6 +3165,7 @@
 				438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */,
 				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
 				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
+				E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */,
 				7CBC5BAF204CEAF2004ACA04 /* GetCheckCodeRequest.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
 				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,
