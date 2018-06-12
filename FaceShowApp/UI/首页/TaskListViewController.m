@@ -19,7 +19,7 @@
 #import "UserPromptsManager.h"
 #import "YXDrawerController.h"
 #import "MJRefresh.h"
-#import "DoHomeworkViewController.h"
+#import "HomeworkRequirementViewController.h"
 
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -91,7 +91,8 @@
     [self.tableView registerClass:[TaskCell class] forCellReuseIdentifier:@"TaskCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.top.mas_equalTo(5);
+        make.left.right.bottom.mas_equalTo(0);
     }];
     
     self.emptyView = [[EmptyView alloc]init];
@@ -158,9 +159,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GetTaskRequestItem_Task *task = self.dataArray[indexPath.row];
     InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
-    DoHomeworkViewController *vc = [[DoHomeworkViewController alloc]init];
-    FSNavigationController *navi = [[FSNavigationController alloc]initWithRootViewController:vc];
-    [self presentViewController:navi animated:YES completion:nil];
+    HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     return;
     if (type == InteractType_Vote) {
         if (task.stepFinished.boolValue) {

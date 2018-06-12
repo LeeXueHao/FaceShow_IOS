@@ -15,9 +15,12 @@
 #import "FDActionSheetView.h"
 #import "ImageAttachmentContainerView.h"
 #import "QiniuDataManager.h"
+#import "FinishedHomeworkViewController.h"
 
 @interface DoHomeworkViewController ()<UITextViewDelegate>
-@property (nonatomic, strong) SAMTextView *titleView;
+@property (nonatomic, strong) UIView *titleView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) SAMTextView *titleTextView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) SAMTextView *contentTextView;
@@ -43,7 +46,6 @@
     self.navigationItem.title = @"研修总结";
     [self setupNavView];
     [self setupUI];
-    [self setupLayout];
     [self setupObservers];
 }
 
@@ -53,22 +55,6 @@
 }
 
 - (void)setupNavView {
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
-    [leftButton setTitle:@"取消" forState:UIControlStateNormal];
-    [leftButton setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-    leftButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-    WEAK_SELF
-    [[leftButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        STRONG_SELF
-        if (self.imageArray.count == 0 && self.contentTextView.text.length == 0 && self.titleView.text.length == 0) {
-            [self dismiss];
-        }else {
-            [self showAlertView];
-        }
-    }];
-    [self nyx_setupLeftWithCustomView:leftButton];
-    
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:@"提交" forState:UIControlStateNormal];
     if (self.imageArray.count == 0) {
@@ -78,24 +64,29 @@
     [rightButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     [rightButton setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
     rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    WEAK_SELF
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
         NSLog(@"--------UIControlEventTouchUpInside--------");
-        [self.view nyx_startLoading];
-        if (self.imageArray.count == 0) {
-            [self requestForPublishMoment:nil];
-        }else {
-            [self requestForUploadImage];
-        }
+//        [self.view nyx_startLoading];
+//        if (self.imageArray.count == 0) {
+//            [self requestForPublishMoment:nil];
+//        }else {
+//            [self requestForUploadImage];
+//        }
+        FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     self.submitButton = rightButton;
     [self nyx_setupRightWithCustomView:rightButton];
 }
 
-- (void)dismiss {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+- (void)backAction {
+    if (self.imageArray.count == 0 && self.contentTextView.text.length == 0 && self.titleTextView.text.length == 0) {
+        [super backAction];
+    }else {
+        [self showAlertView];
+    }
 }
 
 - (void)showAlertView {
@@ -106,43 +97,86 @@
         
     }];
     [alertVC addAction:cancleAction];
-    UIAlertAction *backAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *exitAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         STRONG_SELF
-        [self dismiss];
+        [super backAction];
     }];
-    [alertVC addAction:backAction];
+    [alertVC addAction:exitAction];
     [[self nyx_visibleViewController] presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.titleView = [[SAMTextView alloc]init];
+    [self setupTitleView];
+    [self setupContentView];
+}
+
+- (void)setupTitleView {
+    self.titleView = [[UIView alloc]init];
     self.titleView.backgroundColor = [UIColor whiteColor];
-    self.titleView.font = [UIFont boldSystemFontOfSize:16];
-    self.titleView.textColor = [UIColor colorWithHexString:@"333333"];
-    NSString *placeholderStr = @"作业标题（最多20字）";
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
-    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"cccccc"] range:NSMakeRange(0, placeholderStr.length)];
-    [attrStr addAttribute:NSFontAttributeName value:self.titleView.font range:NSMakeRange(0, placeholderStr.length)];
-    self.titleView.attributedPlaceholder = attrStr;
-    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    paraStyle.lineHeightMultiple = 1.2;
-    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont boldSystemFontOfSize:16]};
-    self.titleView.typingAttributes = dic;
-    self.titleView.textContainerInset = UIEdgeInsetsMake(20, 15, 20, 15);
-    self.titleView.delegate = self;
-    self.titleView.scrollEnabled = NO;
     [self.view addSubview:self.titleView];
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(45);
+    }];
     
+    self.titleLabel = [[UILabel alloc]init];
+    self.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    self.titleLabel.text = @"标题:";
+    [self.titleView addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.top.bottom.mas_equalTo(0);
+    }];
+    
+    self.titleTextView = [[SAMTextView alloc]init];
+    self.titleTextView.backgroundColor = [UIColor whiteColor];
+    self.titleTextView.font = [UIFont systemFontOfSize:14];
+    self.titleTextView.textColor = [UIColor colorWithHexString:@"333333"];
+//    NSString *placeholderStr = @"作业标题（最多20字）";
+//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
+//    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"cccccc"] range:NSMakeRange(0, placeholderStr.length)];
+//    [attrStr addAttribute:NSFontAttributeName value:self.titleTextView.font range:NSMakeRange(0, placeholderStr.length)];
+//    self.titleTextView.attributedPlaceholder = attrStr;
+//    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+//    paraStyle.lineHeightMultiple = 1.2;
+//    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
+//    self.titleTextView.typingAttributes = dic;
+    self.titleTextView.textContainerInset = UIEdgeInsetsMake(14, 0, 11, 0);
+    self.titleTextView.delegate = self;
+    self.titleTextView.scrollEnabled = NO;
+    [self.titleView addSubview:self.titleTextView];
+    [self.titleTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.mas_equalTo(0);
+        make.left.mas_equalTo(self.titleLabel.mas_right);
+        make.right.mas_equalTo(-15);
+    }];
+}
+
+- (void)setupContentView {
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64.0f);
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"dfe2e6"];
+    self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleView.mas_bottom);
+        make.left.right.bottom.mas_equalTo(0);
+    }];
+    
     
     self.contentView = [[UIView alloc] init];
     self.contentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.top.equalTo(self.scrollView.mas_top);
+        make.height.mas_offset(180.0f+[ImageAttachmentContainerView heightForCount:0]);
+    }];
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
@@ -153,16 +187,23 @@
         make.top.equalTo(self.contentView.mas_top);
         make.height.mas_offset(5.0f);
     }];
+    
     self.contentTextView = [[SAMTextView alloc] init];
     self.contentTextView.delegate = self;
     self.contentTextView.font = [UIFont systemFontOfSize:14.0f];
     self.contentTextView.textColor = [UIColor colorWithHexString:@"333333"];
-    self.contentTextView.placeholder = @"作业内容......(最多200字)";
+    self.contentTextView.placeholder = @"此处编辑内容";
     NSMutableParagraphStyle *paraStyle1 = [[NSMutableParagraphStyle alloc] init];
-    paraStyle.lineHeightMultiple = 1.2;
+    paraStyle1.lineHeightMultiple = 1.2;
     NSDictionary *dic1 = @{NSParagraphStyleAttributeName:paraStyle1,NSFontAttributeName:[UIFont systemFontOfSize:14]};
     self.contentTextView.typingAttributes = dic1;
     [self.contentView addSubview:self.contentTextView];
+    [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(15.0f);
+        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
+        make.top.equalTo(self.contentView.mas_top).offset(20.0f);
+        make.height.mas_offset(self.imageArray.count > 0 ? 90.0f : 140.0f);
+    }];
     
     UIView *containerView = [[UIView alloc] init];
     [self.contentView addSubview:containerView];
@@ -194,38 +235,8 @@
         make.edges.mas_equalTo(0);
     }];
 }
-
-- (void)setupLayout {
-    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
-        make.left.right.mas_equalTo(0);
-        //        make.height.mas_greaterThanOrEqualTo(60);
-        make.height.mas_equalTo(60);
-    }];
-    
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
-        make.top.mas_equalTo(self.titleView.mas_bottom);
-        //        make.edges.equalTo(self.view);
-    }];
-    
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.top.equalTo(self.scrollView.mas_top);
-        make.height.mas_offset(180.0f+[ImageAttachmentContainerView heightForCount:0]);
-    }];
-    
-    [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).offset(15.0f);
-        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-        make.top.equalTo(self.contentView.mas_top).offset(20.0f);
-        make.height.mas_offset(self.imageArray.count > 0 ? 90.0f : 140.0f);
-    }];
-}
-
 - (void)refreshSubmitButtonEnable {
-    BOOL hasTitle = [self.titleView.text yx_stringByTrimmingCharacters].length != 0;
+    BOOL hasTitle = [self.titleTextView.text yx_stringByTrimmingCharacters].length != 0;
     BOOL publishEnabled = [self.contentTextView.text yx_stringByTrimmingCharacters].length != 0;
     if (!isEmpty(self.imageArray)) {
         publishEnabled = publishEnabled || YES;
@@ -318,6 +329,11 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
     [self refreshSubmitButtonEnable];
+    if ([textView isEqual:self.titleTextView]) {
+        if ([textView.text length] > 20) {
+            textView.text = [textView.text substringToIndex:20];
+        }
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -410,7 +426,9 @@
                 [self nyx_enableRightNavigationItem];
                 [self.view nyx_stopLoading];
                 BLOCK_EXEC(self.submitHomeworkBlock,item.data);
-                [self dismiss];
+                FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
+//                [self dismiss];
             });
             
         }

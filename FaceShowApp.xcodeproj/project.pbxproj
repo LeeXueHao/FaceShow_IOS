@@ -400,6 +400,9 @@
 		E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EC206342F000CED82E /* IMSlideImageView.m */; };
 		E93327F020638DF800CED82E /* IMSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EF20638DF800CED82E /* IMSlideView.m */; };
 		E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434A420CF683100BCF63C /* DoHomeworkViewController.m */; };
+		E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */; };
+		E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */; };
+		E95434B420D0F5BF00BCF63C /* HomeworkRequirementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B320D0F5BF00BCF63C /* HomeworkRequirementViewController.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1166,6 +1169,12 @@
 		E93327EF20638DF800CED82E /* IMSlideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideView.m; sourceTree = "<group>"; };
 		E95434A320CF683100BCF63C /* DoHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoHomeworkViewController.h; sourceTree = "<group>"; };
 		E95434A420CF683100BCF63C /* DoHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoHomeworkViewController.m; sourceTree = "<group>"; };
+		E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedHomeworkViewController.h; sourceTree = "<group>"; };
+		E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinishedHomeworkViewController.m; sourceTree = "<group>"; };
+		E95434AF20CFC74A00BCF63C /* HomeworkTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkTitleView.h; sourceTree = "<group>"; };
+		E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkTitleView.m; sourceTree = "<group>"; };
+		E95434B220D0F5BF00BCF63C /* HomeworkRequirementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkRequirementViewController.h; sourceTree = "<group>"; };
+		E95434B320D0F5BF00BCF63C /* HomeworkRequirementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkRequirementViewController.m; sourceTree = "<group>"; };
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
@@ -1321,6 +1330,8 @@
 			children = (
 				4378DFA41F6F8217005CFE56 /* TaskCell.h */,
 				4378DFA51F6F8217005CFE56 /* TaskCell.m */,
+				E95434AF20CFC74A00BCF63C /* HomeworkTitleView.h */,
+				E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2201,6 +2212,10 @@
 				7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */,
 				E95434A320CF683100BCF63C /* DoHomeworkViewController.h */,
 				E95434A420CF683100BCF63C /* DoHomeworkViewController.m */,
+				E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */,
+				E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */,
+				E95434B220D0F5BF00BCF63C /* HomeworkRequirementViewController.h */,
+				E95434B320D0F5BF00BCF63C /* HomeworkRequirementViewController.m */,
 			);
 			name = "任务";
 			sourceTree = "<group>";
@@ -2906,6 +2921,7 @@
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				7CEBA92E20898454009754F5 /* ModifySchoolViewController.m in Sources */,
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
+				E95434B420D0F5BF00BCF63C /* HomeworkRequirementViewController.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
@@ -2921,6 +2937,7 @@
 				7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */,
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
 				7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */,
+				E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				7CFA798D20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m in Sources */,
 				7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */,
@@ -2970,6 +2987,7 @@
 				7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */,
 				7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,
+				E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */,
 				92BDD708201195DB00B05B6F /* ClassMomentNotificationViewController.m in Sources */,
 				7CBC5BAC204CE94A004ACA04 /* VerifyPhoneViewController.m in Sources */,
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,

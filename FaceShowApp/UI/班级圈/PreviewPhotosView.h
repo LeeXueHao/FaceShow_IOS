@@ -42,5 +42,10 @@
  */
 @property (nonatomic, assign) BOOL doubleRow;
 
+/**
+ PreviewPhotosView的总高度
+ */
+@property (nonatomic, assign) CGFloat heightFloat;
+//@property (nonatomic, copy) void(^heightFloatBlock)(CGFloat heightFloat);
 - (void)reloadData;
 @end

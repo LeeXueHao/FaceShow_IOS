@@ -108,6 +108,7 @@
 
 - (void)setupPhotos:(NSArray<UIImageView *>*)photos {
     if (self.imageModelMutableArray.count == 1) {
+        self.heightFloat = 0;
         [photos enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.mas_left);
@@ -116,16 +117,22 @@
                 make.height.equalTo(obj.mas_width).multipliedBy(348.0f/590.0f).priorityHigh();
                 make.bottom.equalTo(self.mas_bottom);
             }];
+            self.heightFloat = self.widthFloat * 348.0f/590.f;
         }];
     }else if (self.imageModelMutableArray.count == 4 && self.doubleRow) {
+        self.heightFloat = 0;
         [photos enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(self.mas_top).offset((self.photoSize.height + self.verticalMargin) * (idx / 2) + self.photoSize.height/2.0f).priorityHigh();
                 make.left.equalTo(self.mas_left).offset((self.photoSize.width + self.horizontalMargin) * (idx % 2));
                 make.size.mas_offset(self.photoSize).priorityHigh();
             }];
+            if (idx % 2 == 0) {
+                self.heightFloat += self.photoSize.height + self.verticalMargin * (idx / 2);
+            }
         }];
     }else {
+        self.heightFloat = 0;
         [photos enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(self.mas_top).offset((self.photoSize.height + self.verticalMargin) * (idx / 3) + self.photoSize.height/2.0f).priorityHigh();
@@ -134,6 +141,9 @@
             }];
             if (idx == photos.count -1 || idx == self.photosMaxCount - 1) {
                 *stop = YES;
+            }
+            if (idx % 3 == 0) {
+                self.heightFloat += self.photoSize.height + self.verticalMargin * (idx / 3);
             }
         }];
     }

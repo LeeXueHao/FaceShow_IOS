@@ -29,9 +29,7 @@
 }
 
 #pragma mark - setupUI
-- (void)setupUI {
-    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    
+- (void)setupUI {    
     self.statusLabel = [[UILabel alloc] init];
     self.statusLabel.font = [UIFont systemFontOfSize:13];
     self.statusLabel.textColor = [UIColor colorWithHexString:@"666666"];
