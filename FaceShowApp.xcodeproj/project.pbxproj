@@ -403,6 +403,7 @@
 		E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */; };
 		E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */; };
 		E95434B420D0F5BF00BCF63C /* HomeworkRequirementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B320D0F5BF00BCF63C /* HomeworkRequirementViewController.m */; };
+		E95434B720D10DAC00BCF63C /* MainPageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B620D10DAC00BCF63C /* MainPageTipView.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1175,6 +1176,8 @@
 		E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkTitleView.m; sourceTree = "<group>"; };
 		E95434B220D0F5BF00BCF63C /* HomeworkRequirementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkRequirementViewController.h; sourceTree = "<group>"; };
 		E95434B320D0F5BF00BCF63C /* HomeworkRequirementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkRequirementViewController.m; sourceTree = "<group>"; };
+		E95434B520D10DAC00BCF63C /* MainPageTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageTipView.h; sourceTree = "<group>"; };
+		E95434B620D10DAC00BCF63C /* MainPageTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageTipView.m; sourceTree = "<group>"; };
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
@@ -1968,6 +1971,8 @@
 				7C2519AE1F690DA00001B577 /* MainPageViewController.m */,
 				7C212DF21F6BA72F0007AE01 /* MainPageTopView.h */,
 				7C212DF31F6BA72F0007AE01 /* MainPageTopView.m */,
+				E95434B520D10DAC00BCF63C /* MainPageTipView.h */,
+				E95434B620D10DAC00BCF63C /* MainPageTipView.m */,
 				7C212DCC1F6A60900007AE01 /* MainPageTabContainerView.h */,
 				7C212DCD1F6A60900007AE01 /* MainPageTabContainerView.m */,
 				7C212DCB1F6A5E020007AE01 /* RefreshDelegate.h */,
@@ -2999,6 +3004,7 @@
 				438FFC741FD4E1B9006F3FB3 /* YXFileDownloadProgressView.m in Sources */,
 				E91E5DA72047B8E300052FBA /* TopicData.m in Sources */,
 				7CBC5BA9204CE6E5004ACA04 /* ClassCodeItem.m in Sources */,
+				E95434B720D10DAC00BCF63C /* MainPageTipView.m in Sources */,
 				7C24E1FE1F72582B00A6921B /* GetQuestionnaireRequest.m in Sources */,
 				E91E5D2A2047B1F900052FBA /* ChatListViewController.m in Sources */,
 				7C212DEB1F6B72330007AE01 /* CourseCommentHeaderView.m in Sources */,

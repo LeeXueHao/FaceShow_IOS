@@ -76,9 +76,13 @@
     
     self.appraiseLabel = [[UILabel alloc]init];
     self.appraiseLabel.font = [UIFont boldSystemFontOfSize:14];
-    self.appraiseLabel.textAlignment = NSTextAlignmentCenter;
-    self.appraiseLabel.text = @"班主任评价:优秀";
     self.appraiseLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    self.appraiseLabel.textAlignment = NSTextAlignmentCenter;
+    NSString *appraise = @"班主任评价:优秀";
+    NSMutableAttributedString *appraiseAttStr = [[NSMutableAttributedString alloc]initWithString:appraise];
+    [appraiseAttStr addAttributes:@{NSFontAttributeName:self.appraiseLabel.font,NSForegroundColorAttributeName:self.appraiseLabel.textColor} range:NSMakeRange(0,[appraise length])];
+    [appraiseAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"f56f5d"] range:NSMakeRange(6, [appraise length] - 6)];
+    self.appraiseLabel.attributedText = appraiseAttStr;
     [self.contentView addSubview:self.appraiseLabel];
     [self.appraiseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(11);

@@ -23,12 +23,14 @@
 #import "ResourceDisplayViewController.h"
 #import "YXDrawerController.h"
 #import "MessageViewController.h"
+#import "MainPageTipView.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
 @property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
 @property (nonatomic, strong) MainPageTopView *topView;
+@property (nonatomic, strong) MainPageTipView *tipView;
 @property (nonatomic, strong) GetToolsRequest *toolsRequest;
 @property (nonatomic, strong) GetToolsRequestItem *toolsItem;
 @end
@@ -84,10 +86,23 @@
         make.height.mas_equalTo(135);
     }];
     self.topView = topView;
+    
+    self.tipView = [[MainPageTipView alloc]init];
+    self.tipView.item = [UserManager sharedInstance].userModel.projectClassInfo;
+    WEAK_SELF
+    [self.tipView setSelectedTipBlock:^(GetCurrentClazsRequestItem *item) {
+        STRONG_SELF
+    }];
+    [self.view addSubview:self.tipView];
+    [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.topView.mas_bottom);
+        make.height.mas_equalTo(50);
+    }];
+    
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     NSArray *tabNames = @[@"课程",@"日程",@"通知",@"资源"];
     tabContainerView.tabNameArray = tabNames;
-    WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
         [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
@@ -102,7 +117,7 @@
     [self.view addSubview:tabContainerView];
     [tabContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(topView.mas_bottom);
+        make.top.mas_equalTo(self.tipView.mas_bottom).offset(5);
         make.height.mas_equalTo(40);
     }];
     self.tabControllers = [NSMutableArray array];

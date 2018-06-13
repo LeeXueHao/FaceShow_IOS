@@ -190,7 +190,7 @@
     
     self.contentTextView = [[SAMTextView alloc] init];
     self.contentTextView.delegate = self;
-    self.contentTextView.font = [UIFont systemFontOfSize:14.0f];
+    self.contentTextView.font = [UIFont systemFontOfSize:15.0f];
     self.contentTextView.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentTextView.placeholder = @"此处编辑内容";
     NSMutableParagraphStyle *paraStyle1 = [[NSMutableParagraphStyle alloc] init];
