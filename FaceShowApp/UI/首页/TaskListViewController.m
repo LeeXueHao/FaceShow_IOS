@@ -20,16 +20,20 @@
 #import "YXDrawerController.h"
 #import "MJRefresh.h"
 #import "HomeworkRequirementViewController.h"
+#import "TaskFilterView.h"
 
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) TaskFilterView *filterView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) MJRefreshHeaderView *header;
 @property (nonatomic, strong) GetTaskRequest *request;
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSArray <GetTaskRequestItem_Task *> *tasksArray;//任务列表所有数据
+@property (nonatomic, strong) NSArray <GetTaskRequestItem_Task *> *dataArray;//当前选中类型的任务数据
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
 @property (nonatomic, strong) GetSignInRecordListRequestItem_SignIn *signIn;
+@property (nonatomic, assign) InteractType currentType;
 @end
 
 @implementation TaskListViewController
@@ -45,6 +49,7 @@
         STRONG_SELF
         [YXDrawerController showDrawer];
     }];
+    self.currentType = InteractType_SignIn;
     [self setupUI];
     [self setupObserver];
     [self requestTaskInfo];
@@ -76,13 +81,25 @@
             self.emptyView.hidden = NO;
             return;
         }
-        self.dataArray = [NSArray arrayWithArray:item.data];
-        [self.tableView reloadData];
+        self.tasksArray = [NSArray arrayWithArray:item.data];
+        [self filterWithType:self.currentType];
     }];
 }
 
 #pragma mark - setupUI
 - (void)setupUI {
+    self.filterView = [[TaskFilterView alloc]init];
+    WEAK_SELF
+    [self.filterView setTaskFilterItemChooseBlock:^(TaskFilterItem *item) {
+        STRONG_SELF
+        [self filterWithType:item.type];
+    }];
+    [self.view addSubview:self.filterView];
+    [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.height.mas_equalTo(90);
+    }];
+    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -91,7 +108,7 @@
     [self.tableView registerClass:[TaskCell class] forCellReuseIdentifier:@"TaskCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
+        make.top.mas_equalTo(self.filterView.mas_bottom);
         make.left.right.bottom.mas_equalTo(0);
     }];
     
@@ -103,7 +120,6 @@
     }];
     self.emptyView.hidden = YES;
     self.errorView = [[ErrorView alloc]init];
-    WEAK_SELF
     [self.errorView setRetryBlock:^{
         STRONG_SELF
         [self requestTaskInfo];
@@ -120,6 +136,20 @@
         STRONG_SELF
         [self requestTaskInfo];
     };
+}
+
+#pragma mark - filter
+- (void)filterWithType:(InteractType)type {
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (int i = 0; i < self.tasksArray.count; i++) {
+        GetTaskRequestItem_Task *task = self.tasksArray[i];
+        InteractType taskType = [FSDataMappingTable InteractTypeWithKey:task.interactType];
+        if (taskType == type) {
+            [resultArray addObject:task];
+        }
+    }
+    self.dataArray = resultArray;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Observer

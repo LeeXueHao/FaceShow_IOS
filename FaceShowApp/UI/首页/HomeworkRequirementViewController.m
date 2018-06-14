@@ -97,7 +97,7 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
 
 - (void)setupMockData {
     NSMutableArray *mutableArray = [NSMutableArray array];
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 9; i++) {
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
         model.thumbnail = @"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090037.jpg";
         model.original = @"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090024.jpg";
