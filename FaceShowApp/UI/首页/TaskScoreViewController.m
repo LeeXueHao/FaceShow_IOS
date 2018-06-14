@@ -7,13 +7,13 @@
 //
 
 #import "TaskScoreViewController.h"
-#import "ScoreTopView.h"
+#import "TaskTopView.h"
 #import "TaskNameCell.h"
 #import "ErrorView.h"
 
 @interface TaskScoreViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
-@property(nonatomic, strong) ScoreTopView *topView;
+@property(nonatomic, strong) TaskTopView *topView;
 @property(nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataArray;
 @end
@@ -32,7 +32,7 @@
 }
 
 - (void)setupUI {
-    self.topView = [[ScoreTopView alloc]init];
+    self.topView = [[TaskTopView alloc]init];
     self.topView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,7 +62,12 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(tipLabel.mas_bottom);
-        make.left.right.bottom.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(0);
+        }
     }];
     
     self.errorView = [[ErrorView alloc]init];
@@ -70,7 +75,6 @@
     [self.errorView setRetryBlock:^{
         STRONG_SELF
     }];
-    
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate

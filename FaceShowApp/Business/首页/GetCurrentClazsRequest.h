@@ -43,6 +43,8 @@
 @interface GetCurrentClazsRequestItem_data : JSONModel
 @property (nonatomic, strong) GetCurrentClazsRequestItem_projectInfo<Optional> *projectInfo;
 @property (nonatomic, strong) GetCurrentClazsRequestItem_clazsInfo<Optional> *clazsInfo;
+@property (nonatomic, strong) NSString<Optional> *taskCompletion;
+@property (nonatomic, strong) NSString<Optional> *userScore;
 @end
 
 @interface GetCurrentClazsRequestItem : HttpBaseRequestItem

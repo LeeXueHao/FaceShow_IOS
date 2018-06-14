@@ -1,5 +1,5 @@
 //
-//  ScoreTopView.h
+//  TaskTopView.h
 //  FaceShowApp
 //
 //  Created by ZLL on 2018/6/14.
@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class GetUserClazsScoreRequestItem;
 
-@interface ScoreTopView : UIView
+@interface TaskTopView : UIView
 @property (nonatomic, copy) void(^rankingChoosedBlock)(void);
-@property(nonatomic, strong) GetUserClazsScoreRequestItem *item;
 @end

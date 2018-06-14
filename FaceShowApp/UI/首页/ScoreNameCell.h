@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetUserClazsScoreRequestItem_userScoreItem;
 
 @interface ScoreNameCell : UITableViewCell
-
+@property(nonatomic, strong) GetUserClazsScoreRequestItem_userScoreItem *item;
 @end

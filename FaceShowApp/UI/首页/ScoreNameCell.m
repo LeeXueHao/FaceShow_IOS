@@ -7,6 +7,7 @@
 //
 
 #import "ScoreNameCell.h"
+#import "GetUserClazsScoreRequest.h"
 
 @interface ScoreNameCell()
 @property(nonatomic, strong) UILabel *nameLabel;
@@ -46,7 +47,7 @@
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.centerY.mas_equalTo(0);
+        make.centerY.mas_equalTo(0).offset(-10);
     }];
     
     self.descLabel = [[UILabel alloc]init];
@@ -83,4 +84,10 @@
     self.scoreLabel.text = @"2分";
 }
 
+- (void)setItem:(GetUserClazsScoreRequestItem_userScoreItem *)item {
+    _item = item;
+    self.nameLabel.text = item.scoreName;
+    self.descLabel.text = [NSString stringWithFormat:@"每个%@分",item.scoreDefine];
+    self.scoreLabel.text = item.scoreValue;
+}
 @end

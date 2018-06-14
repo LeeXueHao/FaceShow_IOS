@@ -91,25 +91,22 @@
     self.scoreLabel.attributedText = scoreAttStr;
 }
 
-//- (void)setItem:(GetCurrentClazsRequestItem *)item {
-//    _item = item;
-//    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-//    paraStyle.lineHeightMultiple = 1.2;
-//    paraStyle.alignment = NSTextAlignmentCenter;
-//    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
-//    NSString *project = item.data.projectInfo.projectName;
-//    NSAttributedString *projectAttributeStr = [[NSAttributedString alloc] initWithString:project attributes:dic];
-//    self.progressLabel.attributedText = projectAttributeStr;
-//
-//    self.scoreLabel.text = item.data.clazsInfo.clazsName;
-//    [self.scoreLabel sizeToFit];
-//    [self.scoreLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(self.scoreLabel.width+20);
-//    }];
-//    [self setNeedsLayout];
-//    if (self.scoreLabel.text.length == 0) {
-//        self.scoreLabel.hidden = YES;
-//    }
-//}
+- (void)setItem:(GetCurrentClazsRequestItem *)item {
+    _item = item;
+    item.data.taskCompletion = @"0.11";
+    item.data.userScore = @"30";
+    float task = [item.data.taskCompletion floatValue];
+    NSString *progress = [NSString stringWithFormat:@"任务进度  %.0f%@",task * 100,@"%"];
+    NSMutableAttributedString *progressAttStr = [[NSMutableAttributedString alloc]initWithString:progress];
+    [progressAttStr addAttributes:@{NSFontAttributeName:self.progressLabel.font,NSForegroundColorAttributeName:self.progressLabel.textColor} range:NSMakeRange(0,[progress length])];
+    [progressAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [progress length] - 5)];
+    self.progressLabel.attributedText = progressAttStr;
+    
+    NSString *score = [NSString stringWithFormat:@"学习积分  %.0f",[item.data.userScore floatValue]];
+    NSMutableAttributedString *scoreAttStr = [[NSMutableAttributedString alloc]initWithString:score];
+    [scoreAttStr addAttributes:@{NSFontAttributeName:self.progressLabel.font,NSForegroundColorAttributeName:self.progressLabel.textColor} range:NSMakeRange(0,[score length])];
+    [scoreAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [score length] - 5)];
+    self.scoreLabel.attributedText = scoreAttStr;
+}
 
 @end

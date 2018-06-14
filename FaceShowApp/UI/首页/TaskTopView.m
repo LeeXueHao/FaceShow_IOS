@@ -1,15 +1,14 @@
 //
-//  ScoreTopView.m
+//  TaskTopView.m
 //  FaceShowApp
 //
 //  Created by ZLL on 2018/6/14.
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "ScoreTopView.h"
-#import "GetUserClazsScoreRequest.h"
+#import "TaskTopView.h"
 
-@interface ScoreTopView()
+@interface TaskTopView()
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *scoreLabel;
 @property (nonatomic, strong) UILabel *rankingLabel;
@@ -17,13 +16,13 @@
 
 @end
 
-@implementation ScoreTopView
+@implementation TaskTopView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setupUI];
-//        [self setupMock];
+        [self setupMock];
     }
     return self;
 }
@@ -44,7 +43,6 @@
     self.titleLabel = [[UILabel alloc]init];
     self.titleLabel.font = [UIFont systemFontOfSize:13];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    self.titleLabel.text = @"当前积分";
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(25);
@@ -89,17 +87,6 @@
     self.titleLabel.text = @"任务完成率";
     self.scoreLabel.text = @"80%";
     NSString *ranking = @"班级排名:第六名";
-    NSMutableAttributedString *rankingAttStr = [[NSMutableAttributedString alloc]initWithString:ranking];
-    [rankingAttStr addAttributes:@{NSFontAttributeName:self.rankingLabel.font,NSForegroundColorAttributeName:self.rankingLabel.textColor} range:NSMakeRange(0,[ranking length])];
-    [rankingAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [ranking length] - 5)];
-    self.rankingLabel.attributedText = rankingAttStr;
-}
-
-- (void)setItem:(GetUserClazsScoreRequestItem *)item {
-    _item = item;
-    GetUserClazsScoreRequestItem_userScore *userScore = item.data.userScore;
-    self.scoreLabel.text = userScore.totalScore;
-    NSString *ranking = [NSString stringWithFormat:@"班级排名:第%@名",item.data.scoreRanking];
     NSMutableAttributedString *rankingAttStr = [[NSMutableAttributedString alloc]initWithString:ranking];
     [rankingAttStr addAttributes:@{NSFontAttributeName:self.rankingLabel.font,NSForegroundColorAttributeName:self.rankingLabel.textColor} range:NSMakeRange(0,[ranking length])];
     [rankingAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [ranking length] - 5)];

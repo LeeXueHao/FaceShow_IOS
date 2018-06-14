@@ -399,6 +399,7 @@
 		E932CD9220BFE050009F5BC6 /* SignInPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E932CD9120BFE050009F5BC6 /* SignInPlaceViewController.m */; };
 		E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EC206342F000CED82E /* IMSlideImageView.m */; };
 		E93327F020638DF800CED82E /* IMSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EF20638DF800CED82E /* IMSlideView.m */; };
+		E94DDDE220D2661200729A67 /* TaskTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDE120D2661200729A67 /* TaskTopView.m */; };
 		E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434A420CF683100BCF63C /* DoHomeworkViewController.m */; };
 		E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */; };
 		E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */; };
@@ -413,6 +414,7 @@
 		E95434CE20D220E200BCF63C /* ScoreTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434CD20D220E200BCF63C /* ScoreTopView.m */; };
 		E95434D120D227AE00BCF63C /* TaskNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434D020D227AE00BCF63C /* TaskNameCell.m */; };
 		E95434D420D227C100BCF63C /* ScoreNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434D320D227C100BCF63C /* ScoreNameCell.m */; };
+		E95434DB20D2550B00BCF63C /* GetUserClazsScoreRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434DA20D2550B00BCF63C /* GetUserClazsScoreRequest.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1177,6 +1179,8 @@
 		E93327EC206342F000CED82E /* IMSlideImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideImageView.m; sourceTree = "<group>"; };
 		E93327EE20638DF800CED82E /* IMSlideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMSlideView.h; sourceTree = "<group>"; };
 		E93327EF20638DF800CED82E /* IMSlideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideView.m; sourceTree = "<group>"; };
+		E94DDDE020D2661200729A67 /* TaskTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskTopView.h; sourceTree = "<group>"; };
+		E94DDDE120D2661200729A67 /* TaskTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskTopView.m; sourceTree = "<group>"; };
 		E95434A320CF683100BCF63C /* DoHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoHomeworkViewController.h; sourceTree = "<group>"; };
 		E95434A420CF683100BCF63C /* DoHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoHomeworkViewController.m; sourceTree = "<group>"; };
 		E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedHomeworkViewController.h; sourceTree = "<group>"; };
@@ -1205,6 +1209,8 @@
 		E95434D020D227AE00BCF63C /* TaskNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskNameCell.m; sourceTree = "<group>"; };
 		E95434D220D227C100BCF63C /* ScoreNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreNameCell.h; sourceTree = "<group>"; };
 		E95434D320D227C100BCF63C /* ScoreNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreNameCell.m; sourceTree = "<group>"; };
+		E95434D920D2550B00BCF63C /* GetUserClazsScoreRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserClazsScoreRequest.h; sourceTree = "<group>"; };
+		E95434DA20D2550B00BCF63C /* GetUserClazsScoreRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserClazsScoreRequest.m; sourceTree = "<group>"; };
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
@@ -1847,6 +1853,7 @@
 		7C2519701F68EBCD0001B577 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				E95434D520D253E000BCF63C /* 积分 */,
 				7C24E1E41F72041D00A6921B /* GetCurrentClazsRequest.h */,
 				7C24E1E51F72041D00A6921B /* GetCurrentClazsRequest.m */,
 				7C24E1EA1F721ED600A6921B /* GetCurrentClazsRequest_mock.json */,
@@ -2717,6 +2724,8 @@
 			children = (
 				E95434C920D217D000BCF63C /* ScroeDetailTabContainerView.h */,
 				E95434CA20D217D000BCF63C /* ScroeDetailTabContainerView.m */,
+				E94DDDE020D2661200729A67 /* TaskTopView.h */,
+				E94DDDE120D2661200729A67 /* TaskTopView.m */,
 				E95434CC20D220E200BCF63C /* ScoreTopView.h */,
 				E95434CD20D220E200BCF63C /* ScoreTopView.m */,
 				E95434CF20D227AE00BCF63C /* TaskNameCell.h */,
@@ -2725,6 +2734,15 @@
 				E95434D320D227C100BCF63C /* ScoreNameCell.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		E95434D520D253E000BCF63C /* 积分 */ = {
+			isa = PBXGroup;
+			children = (
+				E95434D920D2550B00BCF63C /* GetUserClazsScoreRequest.h */,
+				E95434DA20D2550B00BCF63C /* GetUserClazsScoreRequest.m */,
+			);
+			path = "积分";
 			sourceTree = "<group>";
 		};
 		E95ED5D72052236C006ECCEA /* IMMessageCell */ = {
@@ -3147,6 +3165,7 @@
 				7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */,
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
 				7CEFC7B61F989C1C001D8C84 /* ForgotPasswordViewController.m in Sources */,
+				E95434DB20D2550B00BCF63C /* GetUserClazsScoreRequest.m in Sources */,
 				7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */,
 				7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */,
 				E95434BD20D1380900BCF63C /* TaskFilterItemView.m in Sources */,
@@ -3304,6 +3323,7 @@
 				7C2518AC1F68E5C70001B577 /* main.m in Sources */,
 				7C2519621F68EBA90001B577 /* YXPostRequest.m in Sources */,
 				7C2519861F68FF980001B577 /* ErrorView.m in Sources */,
+				E94DDDE220D2661200729A67 /* TaskTopView.m in Sources */,
 				431D758F1F6E171700E0073B /* MessageCell.m in Sources */,
 				7C212DC41F6A5CF60007AE01 /* CourseListViewController.m in Sources */,
 				43210E661F726E3D0049C381 /* NoticeListFetcher.m in Sources */,

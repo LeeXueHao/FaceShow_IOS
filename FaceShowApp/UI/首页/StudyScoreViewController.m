@@ -10,19 +10,28 @@
 #import "ScoreTopView.h"
 #import "ScoreNameCell.h"
 #import "ErrorView.h"
+#import "GetUserClazsScoreRequest.h"
 
 @interface StudyScoreViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
 @property(nonatomic, strong) ScoreTopView *topView;
 @property(nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) GetUserClazsScoreRequest *request;
+@property (nonatomic, strong) GetUserClazsScoreRequestItem *item;
+@property (nonatomic, assign) BOOL isLayoutComplete;
 @end
 
 @implementation StudyScoreViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupUI];
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestUserScore];
+    }];
+    [self requestUserScore];
     // Do any additional setup after loading the view.
 }
 
@@ -49,7 +58,7 @@
     [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.topView.mas_bottom).offset(5);
         make.left.mas_equalTo(15);
-        make.left.right.mas_equalTo(0);
+        make.right.mas_equalTo(0);
         make.height.mas_equalTo(45);
     }];
     
@@ -62,33 +71,58 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(tipLabel.mas_bottom);
-        make.left.right.bottom.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(0);
+        }
     }];
-    
-    self.errorView = [[ErrorView alloc]init];
+}
+
+- (void)requestUserScore {
+    [self.request stopRequest];
+    self.request = [[GetUserClazsScoreRequest alloc]init];
+    self.request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     WEAK_SELF
-    [self.errorView setRetryBlock:^{
+    [self.view nyx_startLoading];
+    [self.request startRequestWithRetClass:[GetUserClazsScoreRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view addSubview:self.errorView];
+            [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(0);
+            }];
+            return;
+        }
+        [self.errorView removeFromSuperview];
+        if (!self.isLayoutComplete) {
+            [self setupUI];
+            self.isLayoutComplete = YES;
+        }
+        self.item = retItem;
+        self.topView.item = self.item;
+        [self.tableView reloadData];
     }];
-    
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ScoreNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScoreNameCell"];
-    //    cell.task = self.dataArray[indexPath.row];
+    cell.item = self.item.data.userScore.userScoreItems[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 70;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;//self.dataArray.count;
+    return self.item.data.userScore.userScoreItems.count;
 }
 
 - (void)refreshUI {
-    
+    [self requestUserScore];
 }
 @end
