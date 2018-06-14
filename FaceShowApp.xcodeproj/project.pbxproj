@@ -400,6 +400,13 @@
 		E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EC206342F000CED82E /* IMSlideImageView.m */; };
 		E93327F020638DF800CED82E /* IMSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93327EF20638DF800CED82E /* IMSlideView.m */; };
 		E94DDDE220D2661200729A67 /* TaskTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDE120D2661200729A67 /* TaskTopView.m */; };
+		E94DDDE520D269E400729A67 /* GetClazsSocresRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDE420D269E400729A67 /* GetClazsSocresRequest.m */; };
+		E94DDDE820D273E700729A67 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDE720D273E700729A67 /* RankingViewController.m */; };
+		E94DDDEB20D2747B00729A67 /* TaskRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDEA20D2747B00729A67 /* TaskRankingViewController.m */; };
+		E94DDDEE20D2748900729A67 /* ScoreRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDED20D2748900729A67 /* ScoreRankingViewController.m */; };
+		E94DDDF120D277EC00729A67 /* ScoreRankingFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDF020D277EC00729A67 /* ScoreRankingFetcher.m */; };
+		E94DDDF420D2791E00729A67 /* TaskRankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDF320D2791E00729A67 /* TaskRankingCell.m */; };
+		E94DDDF720D2792D00729A67 /* ScoreRankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDF620D2792D00729A67 /* ScoreRankingCell.m */; };
 		E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434A420CF683100BCF63C /* DoHomeworkViewController.m */; };
 		E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */; };
 		E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */; };
@@ -1181,6 +1188,20 @@
 		E93327EF20638DF800CED82E /* IMSlideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMSlideView.m; sourceTree = "<group>"; };
 		E94DDDE020D2661200729A67 /* TaskTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskTopView.h; sourceTree = "<group>"; };
 		E94DDDE120D2661200729A67 /* TaskTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskTopView.m; sourceTree = "<group>"; };
+		E94DDDE320D269E400729A67 /* GetClazsSocresRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetClazsSocresRequest.h; sourceTree = "<group>"; };
+		E94DDDE420D269E400729A67 /* GetClazsSocresRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetClazsSocresRequest.m; sourceTree = "<group>"; };
+		E94DDDE620D273E700729A67 /* RankingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
+		E94DDDE720D273E700729A67 /* RankingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
+		E94DDDE920D2747B00729A67 /* TaskRankingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskRankingViewController.h; sourceTree = "<group>"; };
+		E94DDDEA20D2747B00729A67 /* TaskRankingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskRankingViewController.m; sourceTree = "<group>"; };
+		E94DDDEC20D2748900729A67 /* ScoreRankingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreRankingViewController.h; sourceTree = "<group>"; };
+		E94DDDED20D2748900729A67 /* ScoreRankingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreRankingViewController.m; sourceTree = "<group>"; };
+		E94DDDEF20D277EC00729A67 /* ScoreRankingFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreRankingFetcher.h; sourceTree = "<group>"; };
+		E94DDDF020D277EC00729A67 /* ScoreRankingFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreRankingFetcher.m; sourceTree = "<group>"; };
+		E94DDDF220D2791E00729A67 /* TaskRankingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskRankingCell.h; sourceTree = "<group>"; };
+		E94DDDF320D2791E00729A67 /* TaskRankingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskRankingCell.m; sourceTree = "<group>"; };
+		E94DDDF520D2792D00729A67 /* ScoreRankingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreRankingCell.h; sourceTree = "<group>"; };
+		E94DDDF620D2792D00729A67 /* ScoreRankingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreRankingCell.m; sourceTree = "<group>"; };
 		E95434A320CF683100BCF63C /* DoHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoHomeworkViewController.h; sourceTree = "<group>"; };
 		E95434A420CF683100BCF63C /* DoHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoHomeworkViewController.m; sourceTree = "<group>"; };
 		E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedHomeworkViewController.h; sourceTree = "<group>"; };
@@ -2715,6 +2736,12 @@
 				E95434C020D2157F00BCF63C /* TaskScoreViewController.m */,
 				E95434C220D215AD00BCF63C /* StudyScoreViewController.h */,
 				E95434C320D215AD00BCF63C /* StudyScoreViewController.m */,
+				E94DDDE620D273E700729A67 /* RankingViewController.h */,
+				E94DDDE720D273E700729A67 /* RankingViewController.m */,
+				E94DDDE920D2747B00729A67 /* TaskRankingViewController.h */,
+				E94DDDEA20D2747B00729A67 /* TaskRankingViewController.m */,
+				E94DDDEC20D2748900729A67 /* ScoreRankingViewController.h */,
+				E94DDDED20D2748900729A67 /* ScoreRankingViewController.m */,
 			);
 			name = "积分";
 			sourceTree = "<group>";
@@ -2732,6 +2759,10 @@
 				E95434D020D227AE00BCF63C /* TaskNameCell.m */,
 				E95434D220D227C100BCF63C /* ScoreNameCell.h */,
 				E95434D320D227C100BCF63C /* ScoreNameCell.m */,
+				E94DDDF220D2791E00729A67 /* TaskRankingCell.h */,
+				E94DDDF320D2791E00729A67 /* TaskRankingCell.m */,
+				E94DDDF520D2792D00729A67 /* ScoreRankingCell.h */,
+				E94DDDF620D2792D00729A67 /* ScoreRankingCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2741,6 +2772,10 @@
 			children = (
 				E95434D920D2550B00BCF63C /* GetUserClazsScoreRequest.h */,
 				E95434DA20D2550B00BCF63C /* GetUserClazsScoreRequest.m */,
+				E94DDDE320D269E400729A67 /* GetClazsSocresRequest.h */,
+				E94DDDE420D269E400729A67 /* GetClazsSocresRequest.m */,
+				E94DDDEF20D277EC00729A67 /* ScoreRankingFetcher.h */,
+				E94DDDF020D277EC00729A67 /* ScoreRankingFetcher.m */,
 			);
 			path = "积分";
 			sourceTree = "<group>";
@@ -2966,6 +3001,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E90C513D2049493E0008F92A /* IMImageMessageRightCell.m in Sources */,
+				E94DDDF720D2792D00729A67 /* ScoreRankingCell.m in Sources */,
 				7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */,
 				7C2519AF1F690DA00001B577 /* MainPageViewController.m in Sources */,
 				7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */,
@@ -2996,6 +3032,7 @@
 				9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
 				7CEFC7FB1F9DC36D001D8C84 /* ApnsCourseDetailViewController.m in Sources */,
+				E94DDDF120D277EC00729A67 /* ScoreRankingFetcher.m in Sources */,
 				4378DFAC1F6FA4CB005CFE56 /* SignInRecordHeaderView.m in Sources */,
 				922084261F6BC47600F8AAC6 /* UserInfoViewController.m in Sources */,
 				43210E581F724B3D0049C381 /* LoginRequest.m in Sources */,
@@ -3011,6 +3048,7 @@
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
+				E94DDDEB20D2747B00729A67 /* TaskRankingViewController.m in Sources */,
 				7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */,
 				E90C515C204FD6DF0008F92A /* IMMessageTableView.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
@@ -3099,6 +3137,7 @@
 				92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */,
 				E90C513A204949150008F92A /* IMImageMessageLeftCell.m in Sources */,
 				E91E5DAA2047B8E300052FBA /* IMRequestManager.m in Sources */,
+				E94DDDF420D2791E00729A67 /* TaskRankingCell.m in Sources */,
 				E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */,
 				7CBC5B932049326E004ACA04 /* CourseResourceViewController.m in Sources */,
 				923F73811F72552500D7EA6F /* ClassMomentClickLikeRequest.m in Sources */,
@@ -3114,6 +3153,7 @@
 				438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */,
 				E91E5D602047B83C00052FBA /* IMManager.m in Sources */,
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
+				E94DDDEE20D2748900729A67 /* ScoreRankingViewController.m in Sources */,
 				E91E5D412047B22800052FBA /* IMTextMessageLeftCell.m in Sources */,
 				7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */,
 				7CBC5BA2204932BA004ACA04 /* CourseInfoTabContainerView.m in Sources */,
@@ -3212,6 +3252,7 @@
 				7C2519A51F690C840001B577 /* AppDelegateHelper.m in Sources */,
 				7CEFC7F51F9DA514001D8C84 /* ApnsQuestionnaireViewController.m in Sources */,
 				E91E5DB62047B90E00052FBA /* TopicGet.pbobjc.m in Sources */,
+				E94DDDE520D269E400729A67 /* GetClazsSocresRequest.m in Sources */,
 				7C212DF41F6BA72F0007AE01 /* MainPageTopView.m in Sources */,
 				7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */,
 				7C2519A81F690C900001B577 /* AppDelegateHelper_Phone.m in Sources */,
@@ -3224,6 +3265,7 @@
 				435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				E91E5D722047B88600052FBA /* IMTopic.m in Sources */,
+				E94DDDE820D273E700729A67 /* RankingViewController.m in Sources */,
 				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
 				7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,

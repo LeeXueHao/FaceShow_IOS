@@ -44,5 +44,6 @@
 @end
 
 @interface GetUserClazsScoreRequest : YXGetRequest
-@property (nonatomic, strong) NSString<Optional> *clazsId;
+@property (nonatomic, strong) NSString *clazsId;
+@property (nonatomic, strong) NSString<Optional> *userId;//不填就是当前登录用户
 @end

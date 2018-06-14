@@ -83,4 +83,10 @@ static const CGFloat kSlideWidth = 100;
     BLOCK_EXEC(self.tabClickBlock,index);
 }
 
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+    if (selectedIndex < self.tabButtonArray.count) {
+        [self btnAction:self.tabButtonArray[selectedIndex]];
+    }
+}
 @end

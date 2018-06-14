@@ -11,6 +11,7 @@
 #import "ScoreNameCell.h"
 #import "ErrorView.h"
 #import "GetUserClazsScoreRequest.h"
+#import "RankingViewController.h"
 
 @interface StudyScoreViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -43,6 +44,13 @@
 - (void)setupUI {
     self.topView = [[ScoreTopView alloc]init];
     self.topView.backgroundColor = [UIColor whiteColor];
+    WEAK_SELF
+    [self.topView setRankingChoosedBlock:^{
+        STRONG_SELF
+        RankingViewController *vc = [[RankingViewController alloc]init];
+        vc.selectedIndex = 1;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);

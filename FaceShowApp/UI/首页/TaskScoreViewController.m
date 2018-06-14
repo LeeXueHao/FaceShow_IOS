@@ -10,7 +10,7 @@
 #import "TaskTopView.h"
 #import "TaskNameCell.h"
 #import "ErrorView.h"
-
+#import "RankingViewController.h"
 @interface TaskScoreViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
 @property(nonatomic, strong) TaskTopView *topView;
@@ -22,7 +22,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupUI];
+    self.errorView = [[ErrorView alloc]init];
+    WEAK_SELF
+    [self.errorView setRetryBlock:^{
+        STRONG_SELF
+        [self requestTaskScore];
+    }];
+    [self requestTaskScore];
     // Do any additional setup after loading the view.
 }
 
@@ -34,6 +40,13 @@
 - (void)setupUI {
     self.topView = [[TaskTopView alloc]init];
     self.topView.backgroundColor = [UIColor whiteColor];
+    WEAK_SELF
+    [self.topView setRankingChoosedBlock:^{
+        STRONG_SELF
+        RankingViewController *vc = [[RankingViewController alloc]init];
+        vc.selectedIndex = 0;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
@@ -69,12 +82,10 @@
             make.bottom.mas_equalTo(0);
         }
     }];
+}
+
+- (void)requestTaskScore {
     
-    self.errorView = [[ErrorView alloc]init];
-    WEAK_SELF
-    [self.errorView setRetryBlock:^{
-        STRONG_SELF
-    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate

@@ -1,24 +1,23 @@
 //
-//  ScoreDetialViewController.m
+//  RankingViewController.m
 //  FaceShowApp
 //
 //  Created by ZLL on 2018/6/14.
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "ScoreDetialViewController.h"
+#import "RankingViewController.h"
 #import "ScroeDetailTabContainerView.h"
-#import "TaskScoreViewController.h"
-#import "StudyScoreViewController.h"
+#import "TaskRankingViewController.h"
+#import "ScoreRankingViewController.h"
 #import "RefreshDelegate.h"
 
-@interface ScoreDetialViewController ()
+@interface RankingViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
-
 @end
 
-@implementation ScoreDetialViewController
+@implementation RankingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,13 +32,14 @@
 }
 
 - (void)setupUI {
-
+    
     ScroeDetailTabContainerView *tabContainerView = [[ScroeDetailTabContainerView alloc]init];
     NSArray *tabNames = @[@"任务进度",@"学习积分"];
     tabContainerView.tabNameArray = tabNames;
     WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
+        //        [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", tabNames[index]]];
         self.selectedIndex = index;
         [self switchToVCWithIndex:index];
     }];
@@ -50,8 +50,8 @@
     }];
     
     self.tabControllers = [NSMutableArray array];
-    [self.tabControllers addObject:[[TaskScoreViewController alloc]init]];
-    [self.tabControllers addObject:[[StudyScoreViewController alloc]init]];
+    [self.tabControllers addObject:[[TaskRankingViewController alloc]init]];
+    [self.tabControllers addObject:[[ScoreRankingViewController alloc]init]];
     for (UIViewController *vc in self.tabControllers) {
         [self addChildViewController:vc];
     }
@@ -61,7 +61,10 @@
         make.left.right.bottom.mas_equalTo(0);
         make.top.mas_equalTo(tabContainerView.mas_bottom);
     }];
-    [self switchToVCWithIndex:0];
+    
+    if (self.selectedIndex < self.tabControllers.count) {
+        tabContainerView.selectedIndex = self.selectedIndex;
+    }
 }
 
 - (void)switchToVCWithIndex:(NSInteger)index {
@@ -76,6 +79,6 @@
     SAFE_CALL(self.tabControllers[index], refreshUI);
 }
 
-
 @end
+
 
