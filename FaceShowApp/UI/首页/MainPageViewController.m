@@ -24,6 +24,7 @@
 #import "YXDrawerController.h"
 #import "MessageViewController.h"
 #import "MainPageTipView.h"
+#import "ScoreDetialViewController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -92,6 +93,8 @@
     WEAK_SELF
     [self.tipView setSelectedTipBlock:^(GetCurrentClazsRequestItem *item) {
         STRONG_SELF
+        ScoreDetialViewController *vc = [[ScoreDetialViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     [self.view addSubview:self.tipView];
     [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {

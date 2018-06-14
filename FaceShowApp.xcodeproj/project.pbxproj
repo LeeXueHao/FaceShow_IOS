@@ -406,6 +406,13 @@
 		E95434B720D10DAC00BCF63C /* MainPageTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B620D10DAC00BCF63C /* MainPageTipView.m */; };
 		E95434BA20D130FE00BCF63C /* TaskFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B920D130FE00BCF63C /* TaskFilterView.m */; };
 		E95434BD20D1380900BCF63C /* TaskFilterItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434BC20D1380900BCF63C /* TaskFilterItemView.m */; };
+		E95434C120D2157F00BCF63C /* TaskScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434C020D2157F00BCF63C /* TaskScoreViewController.m */; };
+		E95434C420D215AD00BCF63C /* StudyScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434C320D215AD00BCF63C /* StudyScoreViewController.m */; };
+		E95434C720D2160E00BCF63C /* ScoreDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434C620D2160E00BCF63C /* ScoreDetialViewController.m */; };
+		E95434CB20D217D000BCF63C /* ScroeDetailTabContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434CA20D217D000BCF63C /* ScroeDetailTabContainerView.m */; };
+		E95434CE20D220E200BCF63C /* ScoreTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434CD20D220E200BCF63C /* ScoreTopView.m */; };
+		E95434D120D227AE00BCF63C /* TaskNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434D020D227AE00BCF63C /* TaskNameCell.m */; };
+		E95434D420D227C100BCF63C /* ScoreNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434D320D227C100BCF63C /* ScoreNameCell.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1184,6 +1191,20 @@
 		E95434B920D130FE00BCF63C /* TaskFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskFilterView.m; sourceTree = "<group>"; };
 		E95434BB20D1380900BCF63C /* TaskFilterItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskFilterItemView.h; sourceTree = "<group>"; };
 		E95434BC20D1380900BCF63C /* TaskFilterItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskFilterItemView.m; sourceTree = "<group>"; };
+		E95434BF20D2157F00BCF63C /* TaskScoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskScoreViewController.h; sourceTree = "<group>"; };
+		E95434C020D2157F00BCF63C /* TaskScoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskScoreViewController.m; sourceTree = "<group>"; };
+		E95434C220D215AD00BCF63C /* StudyScoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudyScoreViewController.h; sourceTree = "<group>"; };
+		E95434C320D215AD00BCF63C /* StudyScoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudyScoreViewController.m; sourceTree = "<group>"; };
+		E95434C520D2160E00BCF63C /* ScoreDetialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreDetialViewController.h; sourceTree = "<group>"; };
+		E95434C620D2160E00BCF63C /* ScoreDetialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreDetialViewController.m; sourceTree = "<group>"; };
+		E95434C920D217D000BCF63C /* ScroeDetailTabContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScroeDetailTabContainerView.h; sourceTree = "<group>"; };
+		E95434CA20D217D000BCF63C /* ScroeDetailTabContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScroeDetailTabContainerView.m; sourceTree = "<group>"; };
+		E95434CC20D220E200BCF63C /* ScoreTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreTopView.h; sourceTree = "<group>"; };
+		E95434CD20D220E200BCF63C /* ScoreTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreTopView.m; sourceTree = "<group>"; };
+		E95434CF20D227AE00BCF63C /* TaskNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskNameCell.h; sourceTree = "<group>"; };
+		E95434D020D227AE00BCF63C /* TaskNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskNameCell.m; sourceTree = "<group>"; };
+		E95434D220D227C100BCF63C /* ScoreNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreNameCell.h; sourceTree = "<group>"; };
+		E95434D320D227C100BCF63C /* ScoreNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreNameCell.m; sourceTree = "<group>"; };
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
@@ -1972,6 +1993,7 @@
 		7C25197F1F68FE900001B577 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				E95434BE20D2147200BCF63C /* 积分 */,
 				7CBDAB851F6925C30096C4BA /* 日程 */,
 				7CBDAB841F6925C00096C4BA /* 课程 */,
 				7CBDAB831F6925BC0096C4BA /* 资源 */,
@@ -2676,6 +2698,35 @@
 			name = Connection;
 			sourceTree = "<group>";
 		};
+		E95434BE20D2147200BCF63C /* 积分 */ = {
+			isa = PBXGroup;
+			children = (
+				E95434C820D2161600BCF63C /* View */,
+				E95434C520D2160E00BCF63C /* ScoreDetialViewController.h */,
+				E95434C620D2160E00BCF63C /* ScoreDetialViewController.m */,
+				E95434BF20D2157F00BCF63C /* TaskScoreViewController.h */,
+				E95434C020D2157F00BCF63C /* TaskScoreViewController.m */,
+				E95434C220D215AD00BCF63C /* StudyScoreViewController.h */,
+				E95434C320D215AD00BCF63C /* StudyScoreViewController.m */,
+			);
+			name = "积分";
+			sourceTree = "<group>";
+		};
+		E95434C820D2161600BCF63C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E95434C920D217D000BCF63C /* ScroeDetailTabContainerView.h */,
+				E95434CA20D217D000BCF63C /* ScroeDetailTabContainerView.m */,
+				E95434CC20D220E200BCF63C /* ScoreTopView.h */,
+				E95434CD20D220E200BCF63C /* ScoreTopView.m */,
+				E95434CF20D227AE00BCF63C /* TaskNameCell.h */,
+				E95434D020D227AE00BCF63C /* TaskNameCell.m */,
+				E95434D220D227C100BCF63C /* ScoreNameCell.h */,
+				E95434D320D227C100BCF63C /* ScoreNameCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E95ED5D72052236C006ECCEA /* IMMessageCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2934,6 +2985,7 @@
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				7CEBA91B2088699F009754F5 /* QiniuConfig.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
+				E95434CB20D217D000BCF63C /* ScroeDetailTabContainerView.m in Sources */,
 				7CEBA92E20898454009754F5 /* ModifySchoolViewController.m in Sources */,
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
 				E95434B420D0F5BF00BCF63C /* HomeworkRequirementViewController.m in Sources */,
@@ -2953,6 +3005,7 @@
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
 				7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */,
 				E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */,
+				E95434C420D215AD00BCF63C /* StudyScoreViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				7CFA798D20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m in Sources */,
 				7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */,
@@ -2987,6 +3040,7 @@
 				E91E5D672047B86B00052FBA /* IMOfflineMsgUpdateService.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
 				7C66B2792027F6050067E242 /* HeadImageHandler.m in Sources */,
+				E95434D120D227AE00BCF63C /* TaskNameCell.m in Sources */,
 				7C6EE55C2008547E00B47892 /* ImageSelectionHandler.m in Sources */,
 				E91E5DAB2047B8E300052FBA /* IMTextMessageSender.m in Sources */,
 				7CEBA92B2088853D009754F5 /* UpgradePromptHandler.m in Sources */,
@@ -3036,6 +3090,7 @@
 				7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */,
 				438FFC881FD4E1B9006F3FB3 /* DownloadModel.xcdatamodel in Sources */,
 				7CEBA91520884C01009754F5 /* TalkingDataConfig.m in Sources */,
+				E95434D420D227C100BCF63C /* ScoreNameCell.m in Sources */,
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
 				438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */,
@@ -3155,6 +3210,7 @@
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,
+				E95434CE20D220E200BCF63C /* ScoreTopView.m in Sources */,
 				7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */,
 				E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
@@ -3162,6 +3218,7 @@
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
 				92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */,
 				E91E5D1B2047B1C300052FBA /* ContactsCell.m in Sources */,
+				E95434C120D2157F00BCF63C /* TaskScoreViewController.m in Sources */,
 				7C7A9ECB206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m in Sources */,
 				7CFA798A20AD18D20097A4A7 /* IMMemberInfoView.m in Sources */,
 				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
@@ -3222,6 +3279,7 @@
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
+				E95434C720D2160E00BCF63C /* ScoreDetialViewController.m in Sources */,
 				E90C5146204D41220008F92A /* ContactsClassFilterView.m in Sources */,
 				7CFA798720AC3E030097A4A7 /* IMTitleContentView.m in Sources */,
 				F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */,
