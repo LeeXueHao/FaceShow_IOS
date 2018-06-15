@@ -13,7 +13,10 @@
     NSDictionary *mappingDic = @{@"3":@(InteractType_Vote),
                                  @"4":@(InteractType_Comment),
                                  @"5":@(InteractType_Questionare),
-                                 @"6":@(InteractType_SignIn)};
+                                 @"6":@(InteractType_SignIn),
+                                 @"7":@(InteractType_Appraise),
+                                 @"8":@(InteractType_Homework)
+                                 };
     NSNumber *number = [mappingDic valueForKey:key];
     if (number) {
         return number.integerValue;

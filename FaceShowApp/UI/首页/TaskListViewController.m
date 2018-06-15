@@ -96,8 +96,9 @@
     }];
     [self.view addSubview:self.filterView];
     [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
-        make.height.mas_equalTo(90);
+        make.top.mas_equalTo(5);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(191);
     }];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
@@ -108,7 +109,7 @@
     [self.tableView registerClass:[TaskCell class] forCellReuseIdentifier:@"TaskCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.filterView.mas_bottom);
+        make.top.mas_equalTo(self.filterView.mas_bottom).offset(5);
         make.left.right.bottom.mas_equalTo(0);
     }];
     
@@ -189,38 +190,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GetTaskRequestItem_Task *task = self.dataArray[indexPath.row];
     InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
-    HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-    if (type == InteractType_Vote) {
-        if (task.stepFinished.boolValue) {
-            QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:task.stepId];
-            vc.name = task.interactName;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
-            vc.name = task.interactName;
-            WEAK_SELF
-            [vc setCompleteBlock:^{
-                STRONG_SELF
-                task.stepFinished = @"1";
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                [self checkIfHasUncompleteTask];
-            }];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }else if (type == InteractType_Questionare) {
-        QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
-        vc.name = task.interactName;
-        WEAK_SELF
-        [vc setCompleteBlock:^{
-            STRONG_SELF
-            task.stepFinished = @"1";
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            [self checkIfHasUncompleteTask];
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (type == InteractType_SignIn) {
+    if (type == InteractType_SignIn) {
         [self.getSigninRequest stopRequest];
         self.getSigninRequest = [[GetSigninRequest alloc]init];
         self.getSigninRequest.stepId = task.stepId;
@@ -239,6 +209,42 @@
             signInDetailVC.currentIndexPath = indexPath;
             [self.navigationController pushViewController:signInDetailVC animated:YES];
         }];
+    }else if (type == InteractType_Homework) {
+        HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (type == InteractType_Appraise) {
+        
+    }else if (type == InteractType_Questionare) {
+        QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
+        vc.name = task.interactName;
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            task.stepFinished = @"1";
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self checkIfHasUncompleteTask];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (type == InteractType_Vote) {
+        if (task.stepFinished.boolValue) {
+            QuestionnaireResultViewController *vc = [[QuestionnaireResultViewController alloc]initWithStepId:task.stepId];
+            vc.name = task.interactName;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
+            vc.name = task.interactName;
+            WEAK_SELF
+            [vc setCompleteBlock:^{
+                STRONG_SELF
+                task.stepFinished = @"1";
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [self checkIfHasUncompleteTask];
+            }];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if (type == InteractType_Comment) {
+        
     }
 }
 

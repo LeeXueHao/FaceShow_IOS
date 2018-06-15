@@ -18,5 +18,6 @@
 
 @interface TaskFilterItemView : UIView
 @property(nonatomic, strong) TaskFilterItem *item;
+@property(nonatomic, assign) BOOL isSelected;
 @property(nonatomic, copy) void(^taskFilterItemChooseBlock)(TaskFilterItem *item);
 @end

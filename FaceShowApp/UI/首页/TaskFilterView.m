@@ -8,9 +8,9 @@
 
 #import "TaskFilterView.h"
 
-static const CGFloat kMargin = 10;
+static const CGFloat kMargin = 1;
 static const NSInteger kVerticalMaxCount = 3;
-static const CGFloat kItemHeight = 30;
+static const CGFloat kItemHeight = 95;
 
 @interface TaskFilterView()
 @property(nonatomic, strong) NSArray *dataArray;
@@ -49,7 +49,7 @@ static const CGFloat kItemHeight = 30;
     item1.title = @"作业";
 
     TaskFilterItem *item2 = [[TaskFilterItem alloc]init];
-    item2.type = InteractType_Comment;
+    item2.type = InteractType_Appraise;
     item2.finishedTask = 1;
     item2.totalTask = 3;
     item2.title = @"评价";
@@ -67,7 +67,7 @@ static const CGFloat kItemHeight = 30;
     item4.title = @"投票";
     
     TaskFilterItem *item5 = [[TaskFilterItem alloc]init];
-    item5.type = InteractType_Discuss;
+    item5.type = InteractType_Comment;
     item5.finishedTask = 1;
     item5.totalTask = 3;
     item5.title = @"讨论";
@@ -79,19 +79,32 @@ static const CGFloat kItemHeight = 30;
     WEAK_SELF
     [self.dataArray enumerateObjectsUsingBlock:^(TaskFilterItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         STRONG_SELF
-        CGFloat width = (SCREEN_WIDTH - (kVerticalMaxCount + 1)*kMargin )/ kVerticalMaxCount;
+        CGFloat width = (SCREEN_WIDTH - (kVerticalMaxCount - 1)*kMargin )/ kVerticalMaxCount;
         TaskFilterItemView *itemView = [[TaskFilterItemView alloc]init];
-        itemView.backgroundColor = [UIColor randomColor];
+        itemView.backgroundColor = [UIColor whiteColor];
         itemView.item = obj;
+        if (idx == 0) {
+            itemView.isSelected = YES;
+        }
         [itemView setTaskFilterItemChooseBlock:^(TaskFilterItem *item) {
             STRONG_SELF
             [self nyx_showToast:[NSString stringWithFormat:@"选中了%@项",item.title]];
+            [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger index, BOOL * _Nonnull stop) {
+                STRONG_SELF
+                if ([obj isKindOfClass:[TaskFilterItemView class]]) {
+                    TaskFilterItemView *subView = obj;
+                    subView.isSelected = NO;
+                    if (idx == index) {
+                        subView.isSelected = YES;
+                    }
+                }
+            }];
             BLOCK_EXEC(self.taskFilterItemChooseBlock,item);
         }];
         [self addSubview:itemView];
         [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kMargin + (kMargin + kItemHeight) * (idx/3));
-            make.left.mas_equalTo(kMargin + (kMargin + width) * (idx%3));
+            make.top.mas_equalTo((kMargin + kItemHeight) * (idx/3));
+            make.left.mas_equalTo((kMargin + width) * (idx%3));
             make.width.mas_equalTo(width);
             make.height.mas_equalTo(kItemHeight);
         }];

@@ -13,8 +13,8 @@ typedef NS_ENUM(NSUInteger, InteractType) {
     InteractType_Comment,
     InteractType_Questionare,
     InteractType_SignIn,
+    InteractType_Appraise,
     InteractType_Homework,
-    InteractType_Discuss,
     InteractType_Unknown
 };
 
