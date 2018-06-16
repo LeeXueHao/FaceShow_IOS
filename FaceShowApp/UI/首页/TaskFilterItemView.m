@@ -79,7 +79,8 @@
 
 - (void)setItem:(GetAllTasksRequestItem_interactType *)item {
     _item = item;
-    self.iconImageView.image = [UIImage imageNamed:item.interactTypeName];
+    self.iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@未选择", item.interactTypeName]];
+    self.iconImageView.highlightedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@选择",item.interactTypeName]];
     self.titleLabel.text = item.interactTypeName;
     self.completionLabel.text = [NSString stringWithFormat:@"%@/%@",item.finishNum,item.taskNum];
 }
