@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TaskFilterItemView.h"
+@class GetAllTasksRequestItem_interactType;
 
 @interface TaskFilterView : UIView
-@property(nonatomic, copy) void(^taskFilterItemChooseBlock)(TaskFilterItem *item);
+@property(nonatomic, strong) NSArray *dataArray;
+@property(nonatomic, assign) NSInteger selectedIndex;
+@property(nonatomic, copy) void(^taskFilterItemChooseBlock)(GetAllTasksRequestItem_interactType *item);
+- (instancetype)initWithDataArray:(NSArray *)dataArray;
+- (void)reloadTaskFilterWithIndex:(NSInteger)index;
 @end

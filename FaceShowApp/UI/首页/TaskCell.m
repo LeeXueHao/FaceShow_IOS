@@ -86,7 +86,7 @@
     }];
 }
 
-- (void)setTask:(GetTaskRequestItem_Task *)task {
+- (void)setTask:(GetAllTasksRequestItem_task *)task {
     _task = task;
     self.titleLabel.text = task.interactName;
     self.timeLabel.text = [task.createTime omitSecondOfFullDateString];

@@ -8,16 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FSDataMappingTable.h"
-
-@interface TaskFilterItem : UIView
-@property(nonatomic, strong) NSString *title;
-@property(nonatomic, assign) InteractType type;
-@property(nonatomic, assign) NSInteger finishedTask;
-@property(nonatomic, assign) NSInteger totalTask;
-@end
+@class GetAllTasksRequestItem_interactType;
 
 @interface TaskFilterItemView : UIView
-@property(nonatomic, strong) TaskFilterItem *item;
+@property(nonatomic, strong) GetAllTasksRequestItem_interactType *item;
 @property(nonatomic, assign) BOOL isSelected;
-@property(nonatomic, copy) void(^taskFilterItemChooseBlock)(TaskFilterItem *item);
+@property(nonatomic, copy) void(^taskFilterItemChooseBlock)(GetAllTasksRequestItem_interactType *item);
 @end

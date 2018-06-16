@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GetTaskRequest.h"
+#import "GetAllTasksRequest.h"
 
 @interface TaskCell : UITableViewCell
-@property (nonatomic, strong) GetTaskRequestItem_Task *task;
+@property (nonatomic, strong) GetAllTasksRequestItem_task *task;
 @end

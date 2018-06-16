@@ -7,9 +7,7 @@
 //
 
 #import "TaskFilterItemView.h"
-
-@implementation TaskFilterItem
-@end
+#import "GetAllTasksRequest.h"
 
 @interface TaskFilterItemView()
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -79,10 +77,10 @@
     }
 }
 
-- (void)setItem:(TaskFilterItem *)item {
+- (void)setItem:(GetAllTasksRequestItem_interactType *)item {
     _item = item;
-    self.iconImageView.image = [UIImage imageNamed:item.title];
-    self.titleLabel.text = item.title;
-    self.completionLabel.text = [NSString stringWithFormat:@"%@/%@",@(item.finishedTask),@(item.totalTask)];
+    self.iconImageView.image = [UIImage imageNamed:item.interactTypeName];
+    self.titleLabel.text = item.interactTypeName;
+    self.completionLabel.text = [NSString stringWithFormat:@"%@/%@",item.finishNum,item.taskNum];
 }
 @end

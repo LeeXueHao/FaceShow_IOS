@@ -407,6 +407,10 @@
 		E94DDDF120D277EC00729A67 /* ScoreRankingFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDF020D277EC00729A67 /* ScoreRankingFetcher.m */; };
 		E94DDDF420D2791E00729A67 /* TaskRankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDF320D2791E00729A67 /* TaskRankingCell.m */; };
 		E94DDDF720D2792D00729A67 /* ScoreRankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDDF620D2792D00729A67 /* ScoreRankingCell.m */; };
+		E94DDE2820D3C82B00729A67 /* GetTasksRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE2720D3C82A00729A67 /* GetTasksRequest.m */; };
+		E94DDE2E20D3CAFA00729A67 /* GetTasksByTypeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE2D20D3CAFA00729A67 /* GetTasksByTypeRequest.m */; };
+		E94DDE3420D4A62A00729A67 /* GetAllTasksRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE3320D4A62A00729A67 /* GetAllTasksRequest.m */; };
+		E94DDE3620D4AEB600729A67 /* GetAllTasksRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E94DDE3520D4AEB600729A67 /* GetAllTasksRequest_mock.json */; };
 		E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434A420CF683100BCF63C /* DoHomeworkViewController.m */; };
 		E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */; };
 		E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */; };
@@ -1202,6 +1206,13 @@
 		E94DDDF320D2791E00729A67 /* TaskRankingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskRankingCell.m; sourceTree = "<group>"; };
 		E94DDDF520D2792D00729A67 /* ScoreRankingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreRankingCell.h; sourceTree = "<group>"; };
 		E94DDDF620D2792D00729A67 /* ScoreRankingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreRankingCell.m; sourceTree = "<group>"; };
+		E94DDE2620D3C82A00729A67 /* GetTasksRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTasksRequest.h; sourceTree = "<group>"; };
+		E94DDE2720D3C82A00729A67 /* GetTasksRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTasksRequest.m; sourceTree = "<group>"; };
+		E94DDE2C20D3CAFA00729A67 /* GetTasksByTypeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTasksByTypeRequest.h; sourceTree = "<group>"; };
+		E94DDE2D20D3CAFA00729A67 /* GetTasksByTypeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTasksByTypeRequest.m; sourceTree = "<group>"; };
+		E94DDE3220D4A62A00729A67 /* GetAllTasksRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetAllTasksRequest.h; sourceTree = "<group>"; };
+		E94DDE3320D4A62A00729A67 /* GetAllTasksRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetAllTasksRequest.m; sourceTree = "<group>"; };
+		E94DDE3520D4AEB600729A67 /* GetAllTasksRequest_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetAllTasksRequest_mock.json; sourceTree = "<group>"; };
 		E95434A320CF683100BCF63C /* DoHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoHomeworkViewController.h; sourceTree = "<group>"; };
 		E95434A420CF683100BCF63C /* DoHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoHomeworkViewController.m; sourceTree = "<group>"; };
 		E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedHomeworkViewController.h; sourceTree = "<group>"; };
@@ -1874,6 +1885,7 @@
 		7C2519701F68EBCD0001B577 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				E94DDE2520D3C7FB00729A67 /* 任务 */,
 				E95434D520D253E000BCF63C /* 积分 */,
 				7C24E1E41F72041D00A6921B /* GetCurrentClazsRequest.h */,
 				7C24E1E51F72041D00A6921B /* GetCurrentClazsRequest.m */,
@@ -2726,6 +2738,20 @@
 			name = Connection;
 			sourceTree = "<group>";
 		};
+		E94DDE2520D3C7FB00729A67 /* 任务 */ = {
+			isa = PBXGroup;
+			children = (
+				E94DDE2620D3C82A00729A67 /* GetTasksRequest.h */,
+				E94DDE2720D3C82A00729A67 /* GetTasksRequest.m */,
+				E94DDE2C20D3CAFA00729A67 /* GetTasksByTypeRequest.h */,
+				E94DDE2D20D3CAFA00729A67 /* GetTasksByTypeRequest.m */,
+				E94DDE3220D4A62A00729A67 /* GetAllTasksRequest.h */,
+				E94DDE3320D4A62A00729A67 /* GetAllTasksRequest.m */,
+				E94DDE3520D4AEB600729A67 /* GetAllTasksRequest_mock.json */,
+			);
+			name = "任务";
+			sourceTree = "<group>";
+		};
 		E95434BE20D2147200BCF63C /* 积分 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2914,6 +2940,7 @@
 				E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */,
 				7C2518F81F68E8510001B577 /* Default-568h@2x.png in Resources */,
 				435550711F78DBCD00264C5B /* UserSignIn_Mock.json in Resources */,
+				E94DDE3620D4AEB600729A67 /* GetAllTasksRequest_mock.json in Resources */,
 				7C24E1F81F72568D00A6921B /* QuestionRequestItem_mock.json in Resources */,
 				7C2519341F68EB2A0001B577 /* neterror_mock.json in Resources */,
 				7CEBA90A2085EF36009754F5 /* 研修宝“聊聊”集成文档v1.0.pdf in Resources */,
@@ -3021,6 +3048,7 @@
 				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
 				7C2519111F68EA820001B577 /* GlobalUtils.m in Sources */,
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
+				E94DDE2E20D3CAFA00729A67 /* GetTasksByTypeRequest.m in Sources */,
 				438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */,
 				7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */,
 				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
@@ -3161,6 +3189,7 @@
 				E91E5D462047B22800052FBA /* IMMessageMenuItem.m in Sources */,
 				7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */,
 				7C2519601F68EBA90001B577 /* UploadRequest.m in Sources */,
+				E94DDE2820D3C82B00729A67 /* GetTasksRequest.m in Sources */,
 				438FFC891FD4E1B9006F3FB3 /* PersistentUrlDownloader.m in Sources */,
 				921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */,
 				E90C5140204CF5410008F92A /* IMImageSendingProgressView.m in Sources */,
@@ -3198,6 +3227,7 @@
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
+				E94DDE3420D4A62A00729A67 /* GetAllTasksRequest.m in Sources */,
 				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
 				7CEFC7F21F9DA351001D8C84 /* ApnsSignInDetailViewController.m in Sources */,
 				9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */,
