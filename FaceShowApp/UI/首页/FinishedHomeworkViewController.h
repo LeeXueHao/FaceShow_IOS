@@ -7,7 +7,10 @@
 //
 
 #import "ScrollBaseViewController.h"
+@class GetHomeworkRequestItem_userHomework;
+@class GetHomeworkRequestItem_homework;
 
 @interface FinishedHomeworkViewController : ScrollBaseViewController
-
+@property(nonatomic, strong) GetHomeworkRequestItem_userHomework *userHomework;
+@property(nonatomic, strong) GetHomeworkRequestItem_homework *homework;
 @end

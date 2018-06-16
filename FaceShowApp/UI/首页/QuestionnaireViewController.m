@@ -17,6 +17,8 @@
 #import "SaveUserQuestionnaireRequest.h"
 #import "QuestionnaireResultViewController.h"
 #import "QuestionnaireHeaderView.h"
+#import "GetEvaluateRequest.h"
+#import "SaveUserEvaluateRequest.h"
 
 @interface QuestionnaireViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -24,10 +26,11 @@
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) GetVoteRequest *voteRequest;
 @property (nonatomic, strong) GetQuestionnaireRequest *questionnaireRequest;
+@property(nonatomic, strong) GetEvaluateRequest *evaluateRequest;
 @property (nonatomic, strong) QuestionRequestItem *requestItem;
-
 @property (nonatomic, strong) SaveUserVoteRequest *saveVoteRequest;
 @property (nonatomic, strong) SaveUserQuestionnaireRequest *saveQuestionnaireRequest;
+@property(nonatomic, strong) SaveUserEvaluateRequest *saveEvaluateRequest;
 @end
 
 @implementation QuestionnaireViewController
@@ -45,6 +48,8 @@
     // Do any additional setup after loading the view.
     if (self.interactType == InteractType_Vote) {
         self.navigationItem.title = @"投票";
+    }else if (self.interactType == InteractType_Evaluate) {
+        self.navigationItem.title = @"评价";
     }else {
         self.navigationItem.title = @"问卷";
     }
@@ -76,6 +81,26 @@
         [self.view nyx_startLoading];
         WEAK_SELF
         [self.voteRequest startRequestWithRetClass:[QuestionRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            self.errorView.hidden = YES;
+            if (error) {
+                if ([self isNetworkReachable]) {
+                    [self.view nyx_showToast:error.localizedDescription];
+                    return;
+                }
+                self.errorView.hidden = NO;
+                return;
+            }
+            [self refreshUIWithItem:retItem];
+        }];
+    }else if (self.interactType == InteractType_Evaluate) {
+        [self.evaluateRequest stopRequest];
+        self.evaluateRequest = [[GetEvaluateRequest alloc]init];
+        self.evaluateRequest.stepId = self.stepId;
+        [self.view nyx_startLoading];
+        WEAK_SELF
+        [self.evaluateRequest startRequestWithRetClass:[QuestionRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
             [self.view nyx_stopLoading];
             self.errorView.hidden = YES;
@@ -122,7 +147,7 @@
     headerView.title = title;
     headerView.desc = desc;
     self.tableView.tableHeaderView = headerView;
-
+    
     [self.submitButton setTitleColor:[UIColor colorWithHexString:@"e2e2e2"] forState:UIControlStateNormal];
     [self.submitButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"a6abad"]] forState:UIControlStateNormal];
     if (!item.data.isAnswer.boolValue) {
@@ -238,6 +263,24 @@
             BLOCK_EXEC(self.completeBlock);
             [self goVoteResult];
         }];
+    }else if (self.interactType == InteractType_Evaluate) {
+        [self.saveEvaluateRequest stopRequest];
+        self.saveEvaluateRequest = [[SaveUserEvaluateRequest alloc]init];
+        self.saveEvaluateRequest.stepId = self.stepId;
+        self.saveEvaluateRequest.answers = answer;
+        [self.view nyx_startLoading];
+        WEAK_SELF
+        [self.saveEvaluateRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            if (error) {
+                [self dealWithError:error];
+                return;
+            }
+            [self.view.window nyx_showToast:@"提交成功"];
+            BLOCK_EXEC(self.completeBlock);
+            [self goEvaluateResult];
+        }];
     }else {
         [self.saveQuestionnaireRequest stopRequest];
         self.saveQuestionnaireRequest = [[SaveUserQuestionnaireRequest alloc]init];
@@ -260,12 +303,12 @@
 }
 
 - (void)dealWithError:(NSError *)error {
-//    if ([self isNetworkReachable]) {
-//        [self.view nyx_showToast:@"你的输入内容中可能存在表情，请修改后再次提交!"];
-//    }else
-//    {
-        [self.view nyx_showToast:error.localizedDescription];
-//    }
+    //    if ([self isNetworkReachable]) {
+    //        [self.view nyx_showToast:@"你的输入内容中可能存在表情，请修改后再次提交!"];
+    //    }else
+    //    {
+    [self.view nyx_showToast:error.localizedDescription];
+    //    }
 }
 
 - (void)goVoteResult {
@@ -275,6 +318,12 @@
 }
 
 - (void)goQuestionnaireResult {
+    QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:self.stepId interactType:self.interactType];
+    vc.name = self.name;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)goEvaluateResult {
     QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:self.stepId interactType:self.interactType];
     vc.name = self.name;
     [self.navigationController pushViewController:vc animated:YES];

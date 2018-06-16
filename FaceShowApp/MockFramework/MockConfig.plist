@@ -286,6 +286,34 @@
 				</dict>
 			</array>
 		</dict>
+		<key>GetHomeworkRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>GetHomeworkRequest_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>UpdateHomeworkRequest</key>
+		<dict>
+			<key>mockEnable</key>
+			<true/>
+			<key>mockFile</key>
+			<array>
+				<dict>
+					<key>fileName</key>
+					<string>UpdateHomeworkRequest_mock.json</string>
+					<key>percent</key>
+					<integer>100</integer>
+				</dict>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>

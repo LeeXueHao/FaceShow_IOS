@@ -21,6 +21,10 @@
 #import "MJRefresh.h"
 #import "HomeworkRequirementViewController.h"
 #import "TaskFilterView.h"
+#import "FinishedHomeworkViewController.h"
+#import "GetHomeworkRequest.h"
+#import "TaskCommentViewController.h"
+#import "DoHomeworkViewController.h"
 
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) EmptyView *emptyView;
@@ -36,6 +40,7 @@
 @property (nonatomic, strong) GetSignInRecordListRequestItem_SignIn *signIn;
 @property (nonatomic, assign) InteractType currentType;
 @property (nonatomic, assign) BOOL isLayoutComplete;
+@property(nonatomic, strong) GetHomeworkRequest *getHomeworkRequest;
 @end
 
 @implementation TaskListViewController
@@ -92,10 +97,11 @@
         [self resetFilter];
     }];
     [self.view addSubview:self.filterView];
+    NSInteger rowcount = ceilf(self.filterArray.count / 3.0);
     [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(191);
+        make.height.mas_equalTo(95 * rowcount);
     }];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
@@ -183,6 +189,18 @@
         task.stepFinished = @"1";
         [self.tableView reloadRowsAtIndexPaths:@[currentIndex] withRowAnimation:UITableViewRowAnimationNone];
     }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHomeworkFinishedNotification object:nil] subscribeNext:^(NSNotification *x) {
+        STRONG_SELF
+        NSDictionary *dic = (NSDictionary *)x.object;
+        NSString *stepId = [dic objectForKey:kHomeworkFinishedKey];
+        [self.dataArray enumerateObjectsUsingBlock:^(GetAllTasksRequestItem_task * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            STRONG_SELF
+            if ([obj.stepId isEqualToString:stepId]) {
+                obj.stepFinished = @"1";
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -224,11 +242,42 @@
             [self.navigationController pushViewController:signInDetailVC animated:YES];
         }];
     }else if (type == InteractType_Homework) {
-        HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
+        [self.getHomeworkRequest stopRequest];
+        self.getHomeworkRequest = [[GetHomeworkRequest alloc]init];
+        self.getHomeworkRequest.stepId = task.stepId;
+        WEAK_SELF
+        [self.view nyx_startLoading];
+        [self.getHomeworkRequest startRequestWithRetClass:[GetHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
+            GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
+            if (item.data.userHomework) {
+                FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
+                vc.userHomework = item.data.userHomework;
+                vc.homework = item.data.homework;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
+                vc.homework = item.data.homework;
+                vc.isFinished = NO;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+    }else if (type == InteractType_Evaluate) {
+        QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
+        vc.name = task.interactName;
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            task.stepFinished = @"1";
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self checkIfHasUncompleteTask];
+        }];
         [self.navigationController pushViewController:vc animated:YES];
-        
-    }else if (type == InteractType_Appraise) {
-        
     }else if (type == InteractType_Questionare) {
         QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:task.stepId interactType:type];
         vc.name = task.interactName;
@@ -258,7 +307,16 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (type == InteractType_Comment) {
-        
+        TaskCommentViewController *vc = [[TaskCommentViewController alloc]initWithStepId:task.stepId];
+        vc.title = task.interactName;
+        WEAK_SELF
+        [vc setCompleteBlock:^{
+            STRONG_SELF
+            task.stepFinished = @"1";
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self checkIfHasUncompleteTask];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

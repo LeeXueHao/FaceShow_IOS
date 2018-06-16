@@ -14,7 +14,7 @@
                                  @"4":@(InteractType_Comment),
                                  @"5":@(InteractType_Questionare),
                                  @"6":@(InteractType_SignIn),
-                                 @"7":@(InteractType_Appraise),
+                                 @"7":@(InteractType_Evaluate),
                                  @"8":@(InteractType_Homework)
                                  };
     NSNumber *number = [mappingDic valueForKey:key];

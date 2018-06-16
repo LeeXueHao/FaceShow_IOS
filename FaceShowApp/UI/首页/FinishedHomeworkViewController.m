@@ -10,6 +10,7 @@
 #import "PreviewPhotosView.h"
 #import "HomeworkRequirementViewController.h"
 #import "DoHomeworkViewController.h"
+#import "GetHomeworkRequest.h"
 
 @interface FinishedHomeworkViewController ()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -24,7 +25,8 @@
     [super viewDidLoad];
     [self setupUI];
     [self setupNavView];
-    [self setupMockData];
+//    [self setupMockData];
+    [self setupData];
     // Do any additional setup after loading the view.
 }
 
@@ -37,17 +39,14 @@
     [super viewWillAppear:animated];
     NSMutableArray *vcArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     for (UIViewController *vc in vcArray) {
-        if ([vc isKindOfClass:[DoHomeworkViewController class]]) {
+        if ([vc isKindOfClass:[HomeworkRequirementViewController class]]) {
             [vcArray removeObject:vc];
             break;
         }
     }
     for (UIViewController *vc in vcArray) {
-        if ([vc isKindOfClass:[HomeworkRequirementViewController class]]) {
-            HomeworkRequirementViewController *homeVc = (HomeworkRequirementViewController *)vc;
-            if (!homeVc.isFinished) {
-                [vcArray removeObject:vc];
-            }
+        if ([vc isKindOfClass:[DoHomeworkViewController class]]) {
+            [vcArray removeObject:vc];
             break;
         }
     }
@@ -55,6 +54,8 @@
 }
 
 - (void)setupUI {
+    self.title = self.homework.title;
+    
     self.contentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
@@ -78,11 +79,6 @@
     self.appraiseLabel.font = [UIFont boldSystemFontOfSize:14];
     self.appraiseLabel.textColor = [UIColor colorWithHexString:@"999999"];
     self.appraiseLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *appraise = @"班主任评价:优秀";
-    NSMutableAttributedString *appraiseAttStr = [[NSMutableAttributedString alloc]initWithString:appraise];
-    [appraiseAttStr addAttributes:@{NSFontAttributeName:self.appraiseLabel.font,NSForegroundColorAttributeName:self.appraiseLabel.textColor} range:NSMakeRange(0,[appraise length])];
-    [appraiseAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"f56f5d"] range:NSMakeRange(6, [appraise length] - 6)];
-    self.appraiseLabel.attributedText = appraiseAttStr;
     [self.contentView addSubview:self.appraiseLabel];
     [self.appraiseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(11);
@@ -123,8 +119,34 @@
     [self nyx_setupRightWithTitle:@"作业要求" action:^{
         STRONG_SELF
         HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
+        vc.homework = self.homework;
         vc.isFinished = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }];
+}
+
+- (void)setupData {
+    self.titleLabel.text = self.userHomework.title;
+    NSString *appraise = [NSString stringWithFormat:@"班主任评价:%@",self.userHomework.assess];
+    NSMutableAttributedString *appraiseAttStr = [[NSMutableAttributedString alloc]initWithString:appraise];
+    [appraiseAttStr addAttributes:@{NSFontAttributeName:self.appraiseLabel.font,NSForegroundColorAttributeName:self.appraiseLabel.textColor} range:NSMakeRange(0,[appraise length])];
+    [appraiseAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"f56f5d"] range:NSMakeRange(6, [appraise length] - 6)];
+    self.appraiseLabel.attributedText = appraiseAttStr;
+    self.contentLabel.text = self.userHomework.content;
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    
+    for (int i = 0; i < self.userHomework.attachmentInfos.count; i++) {
+        GetHomeworkRequestItem_attachmentInfo *attachmentInfo = self.userHomework.attachmentInfos[i];
+        PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
+        model.thumbnail = attachmentInfo.resThumb;//@"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090037.jpg";
+#warning 此处应该用down 还是pre
+        model.original = attachmentInfo.downloadUrl;//@"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090024.jpg";
+        [mutableArray addObject:model];
+    }
+    self.photosView.imageModelMutableArray = mutableArray;
+    [self.photosView reloadData];
+    [self.photosView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.photosView.heightFloat);
     }];
 }
 
@@ -142,28 +164,6 @@
         make.height.mas_equalTo(self.photosView.heightFloat);
     }];
 }
-//- (void)setupPhoto:(NSArray<ClassMomentListRequestItem_Data_Moment_Album> *)albums {
-//    NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
-//    [albums enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Album *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-//        model.thumbnail = obj.attachment.resThumb;
-//        model.original = obj.attachment.resThumb;
-//        [mutableArray addObject:model];
-//
-//    }];
-//    self.photosView.imageModelMutableArray = mutableArray;
-//    [self.photosView reloadData];
-//    if (mutableArray.count == 0) {
-//        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.photosView.mas_bottom).offset(10.0f);
-//        }];
-//        self.photosView.hidden = YES;
-//    }else {
-//        self.photosView.hidden = NO;
-//        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.photosView.mas_bottom).offset(20.0f);
-//        }];
-//    }
-//}
+
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import "ScrollBaseViewController.h"
+@class GetHomeworkRequestItem_homework;
 
 @interface HomeworkRequirementViewController : ScrollBaseViewController
 @property (nonatomic, assign) BOOL isFinished;
+@property(nonatomic, strong) GetHomeworkRequestItem_homework *homework;
 @end

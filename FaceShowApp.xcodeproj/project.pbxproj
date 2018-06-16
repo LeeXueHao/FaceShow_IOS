@@ -414,6 +414,16 @@
 		E94DDE3920D4C36F00729A67 /* GetUserTaskProgressRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE3820D4C36F00729A67 /* GetUserTaskProgressRequest.m */; };
 		E94DDE3C20D4C39200729A67 /* GetUserTasksProgressRankRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE3B20D4C39200729A67 /* GetUserTasksProgressRankRequest.m */; };
 		E94DDE3F20D4DD0300729A67 /* TaskRankingFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE3E20D4DD0300729A67 /* TaskRankingFetcher.m */; };
+		E94DDE4220D4F98400729A67 /* GetHomeworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE4120D4F98400729A67 /* GetHomeworkRequest.m */; };
+		E94DDE4420D5002B00729A67 /* GetHomeworkRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E94DDE4320D5002B00729A67 /* GetHomeworkRequest_mock.json */; };
+		E94DDE4720D5096400729A67 /* UpdateHomeworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE4620D5096400729A67 /* UpdateHomeworkRequest.m */; };
+		E94DDE4920D50A8C00729A67 /* UpdateHomeworkRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = E94DDE4820D50A8B00729A67 /* UpdateHomeworkRequest_mock.json */; };
+		E94DDE4C20D8A43D00729A67 /* TaskCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE4B20D8A43D00729A67 /* TaskCommentViewController.m */; };
+		E94DDE4F20D8AB9200729A67 /* GetEvaluateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE4E20D8AB9200729A67 /* GetEvaluateRequest.m */; };
+		E94DDE5220D8AD2700729A67 /* SaveUserEvaluateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE5120D8AD2700729A67 /* SaveUserEvaluateRequest.m */; };
+		E94DDE5520D8D5AB00729A67 /* GetCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE5420D8D5AB00729A67 /* GetCommentRequest.m */; };
+		E94DDE5820D8D8A000729A67 /* GetCommentRecordsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE5720D8D8A000729A67 /* GetCommentRecordsRequest.m */; };
+		E94DDE5B20D8DA3500729A67 /* TaskCommentFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E94DDE5A20D8DA3500729A67 /* TaskCommentFetcher.m */; };
 		E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434A420CF683100BCF63C /* DoHomeworkViewController.m */; };
 		E95434AB20CFAF0D00BCF63C /* FinishedHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */; };
 		E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434B020CFC74A00BCF63C /* HomeworkTitleView.m */; };
@@ -1222,6 +1232,24 @@
 		E94DDE3B20D4C39200729A67 /* GetUserTasksProgressRankRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserTasksProgressRankRequest.m; sourceTree = "<group>"; };
 		E94DDE3D20D4DD0300729A67 /* TaskRankingFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskRankingFetcher.h; sourceTree = "<group>"; };
 		E94DDE3E20D4DD0300729A67 /* TaskRankingFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskRankingFetcher.m; sourceTree = "<group>"; };
+		E94DDE4020D4F98400729A67 /* GetHomeworkRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetHomeworkRequest.h; sourceTree = "<group>"; };
+		E94DDE4120D4F98400729A67 /* GetHomeworkRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetHomeworkRequest.m; sourceTree = "<group>"; };
+		E94DDE4320D5002B00729A67 /* GetHomeworkRequest_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetHomeworkRequest_mock.json; sourceTree = "<group>"; };
+		E94DDE4520D5096400729A67 /* UpdateHomeworkRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateHomeworkRequest.h; sourceTree = "<group>"; };
+		E94DDE4620D5096400729A67 /* UpdateHomeworkRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateHomeworkRequest.m; sourceTree = "<group>"; };
+		E94DDE4820D50A8B00729A67 /* UpdateHomeworkRequest_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UpdateHomeworkRequest_mock.json; sourceTree = "<group>"; };
+		E94DDE4A20D8A43D00729A67 /* TaskCommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskCommentViewController.h; sourceTree = "<group>"; };
+		E94DDE4B20D8A43D00729A67 /* TaskCommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskCommentViewController.m; sourceTree = "<group>"; };
+		E94DDE4D20D8AB9200729A67 /* GetEvaluateRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetEvaluateRequest.h; sourceTree = "<group>"; };
+		E94DDE4E20D8AB9200729A67 /* GetEvaluateRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetEvaluateRequest.m; sourceTree = "<group>"; };
+		E94DDE5020D8AD2700729A67 /* SaveUserEvaluateRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveUserEvaluateRequest.h; sourceTree = "<group>"; };
+		E94DDE5120D8AD2700729A67 /* SaveUserEvaluateRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveUserEvaluateRequest.m; sourceTree = "<group>"; };
+		E94DDE5320D8D5AB00729A67 /* GetCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCommentRequest.h; sourceTree = "<group>"; };
+		E94DDE5420D8D5AB00729A67 /* GetCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCommentRequest.m; sourceTree = "<group>"; };
+		E94DDE5620D8D8A000729A67 /* GetCommentRecordsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCommentRecordsRequest.h; sourceTree = "<group>"; };
+		E94DDE5720D8D8A000729A67 /* GetCommentRecordsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCommentRecordsRequest.m; sourceTree = "<group>"; };
+		E94DDE5920D8DA3500729A67 /* TaskCommentFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskCommentFetcher.h; sourceTree = "<group>"; };
+		E94DDE5A20D8DA3500729A67 /* TaskCommentFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskCommentFetcher.m; sourceTree = "<group>"; };
 		E95434A320CF683100BCF63C /* DoHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoHomeworkViewController.h; sourceTree = "<group>"; };
 		E95434A420CF683100BCF63C /* DoHomeworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoHomeworkViewController.m; sourceTree = "<group>"; };
 		E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedHomeworkViewController.h; sourceTree = "<group>"; };
@@ -2302,6 +2330,8 @@
 				E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */,
 				E95434B220D0F5BF00BCF63C /* HomeworkRequirementViewController.h */,
 				E95434B320D0F5BF00BCF63C /* HomeworkRequirementViewController.m */,
+				E94DDE4A20D8A43D00729A67 /* TaskCommentViewController.h */,
+				E94DDE4B20D8A43D00729A67 /* TaskCommentViewController.m */,
 			);
 			name = "任务";
 			sourceTree = "<group>";
@@ -2757,6 +2787,22 @@
 				E94DDE3220D4A62A00729A67 /* GetAllTasksRequest.h */,
 				E94DDE3320D4A62A00729A67 /* GetAllTasksRequest.m */,
 				E94DDE3520D4AEB600729A67 /* GetAllTasksRequest_mock.json */,
+				E94DDE4020D4F98400729A67 /* GetHomeworkRequest.h */,
+				E94DDE4120D4F98400729A67 /* GetHomeworkRequest.m */,
+				E94DDE4320D5002B00729A67 /* GetHomeworkRequest_mock.json */,
+				E94DDE4520D5096400729A67 /* UpdateHomeworkRequest.h */,
+				E94DDE4620D5096400729A67 /* UpdateHomeworkRequest.m */,
+				E94DDE4820D50A8B00729A67 /* UpdateHomeworkRequest_mock.json */,
+				E94DDE4D20D8AB9200729A67 /* GetEvaluateRequest.h */,
+				E94DDE4E20D8AB9200729A67 /* GetEvaluateRequest.m */,
+				E94DDE5020D8AD2700729A67 /* SaveUserEvaluateRequest.h */,
+				E94DDE5120D8AD2700729A67 /* SaveUserEvaluateRequest.m */,
+				E94DDE5320D8D5AB00729A67 /* GetCommentRequest.h */,
+				E94DDE5420D8D5AB00729A67 /* GetCommentRequest.m */,
+				E94DDE5620D8D8A000729A67 /* GetCommentRecordsRequest.h */,
+				E94DDE5720D8D8A000729A67 /* GetCommentRecordsRequest.m */,
+				E94DDE5920D8DA3500729A67 /* TaskCommentFetcher.h */,
+				E94DDE5A20D8DA3500729A67 /* TaskCommentFetcher.m */,
 			);
 			name = "任务";
 			sourceTree = "<group>";
@@ -2964,6 +3010,7 @@
 				7C2519321F68EB2A0001B577 /* errorcode_mock.json in Resources */,
 				7C2519A21F690BA70001B577 /* readme.txt in Resources */,
 				43210E631F726DF00049C381 /* GetNoticeList_Mock.json in Resources */,
+				E94DDE4920D50A8C00729A67 /* UpdateHomeworkRequest_mock.json in Resources */,
 				923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */,
 				7C24E2031F736B6E00A6921B /* GetCourseCommentRequest_mock.json in Resources */,
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
@@ -2974,6 +3021,7 @@
 				43538D2E1FDFB7C40052A9D3 /* StageSubject.json in Resources */,
 				43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */,
 				7CEBA90C2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf in Resources */,
+				E94DDE4420D5002B00729A67 /* GetHomeworkRequest_mock.json in Resources */,
 				43210E6B1F7273380049C381 /* GetNoticeDetail_Mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3084,6 +3132,7 @@
 				7CEBA91B2088699F009754F5 /* QiniuConfig.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				E95434CB20D217D000BCF63C /* ScroeDetailTabContainerView.m in Sources */,
+				E94DDE4C20D8A43D00729A67 /* TaskCommentViewController.m in Sources */,
 				7CEBA92E20898454009754F5 /* ModifySchoolViewController.m in Sources */,
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
 				E95434B420D0F5BF00BCF63C /* HomeworkRequirementViewController.m in Sources */,
@@ -3163,6 +3212,7 @@
 				922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */,
 				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
 				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
+				E94DDE5520D8D5AB00729A67 /* GetCommentRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
 				7C2519431F68EB780001B577 /* ExtendTextField.m in Sources */,
 				438FFC741FD4E1B9006F3FB3 /* YXFileDownloadProgressView.m in Sources */,
@@ -3291,6 +3341,7 @@
 				7CEFC7F81F9DBE7B001D8C84 /* ApnsMessageDetailViewController.m in Sources */,
 				4322CA4E1FD9535700E7B565 /* SlideImageView.m in Sources */,
 				E91E5D262047B1F900052FBA /* ChatViewController.m in Sources */,
+				E94DDE4220D4F98400729A67 /* GetHomeworkRequest.m in Sources */,
 				43510A981F6B63FA006B2645 /* ScanCodeMaskView.m in Sources */,
 				43210E5B1F724ECE0049C381 /* LoginDataManager.m in Sources */,
 				7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */,
@@ -3320,6 +3371,7 @@
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,
 				E95434CE20D220E200BCF63C /* ScoreTopView.m in Sources */,
+				E94DDE5820D8D8A000729A67 /* GetCommentRecordsRequest.m in Sources */,
 				7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */,
 				E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
@@ -3337,6 +3389,7 @@
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
 				7C6EE5532007422300B47892 /* AlbumListCell.m in Sources */,
 				7C6EE559200750AE00B47892 /* PhotoCell.m in Sources */,
+				E94DDE4720D5096400729A67 /* UpdateHomeworkRequest.m in Sources */,
 				E91E5D432047B22800052FBA /* IMMessageBaseCell.m in Sources */,
 				7C2518E61F68E68D0001B577 /* NSObject+YXNetworkMethod.m in Sources */,
 				7C2518AF1F68E5C70001B577 /* AppDelegate.m in Sources */,
@@ -3350,6 +3403,7 @@
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
 				E93327F020638DF800CED82E /* IMSlideView.m in Sources */,
+				E94DDE5220D8AD2700729A67 /* SaveUserEvaluateRequest.m in Sources */,
 				E91E5D682047B86B00052FBA /* IMServiceManager.m in Sources */,
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
@@ -3386,6 +3440,7 @@
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
 				43578CC51FE2295E00D37B72 /* SubScanCodeResultViewController.m in Sources */,
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
+				E94DDE5B20D8DA3500729A67 /* TaskCommentFetcher.m in Sources */,
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
 				E95434C720D2160E00BCF63C /* ScoreDetialViewController.m in Sources */,
@@ -3426,6 +3481,7 @@
 				7CFA798120AC23770097A4A7 /* IMSwitchSettingView.m in Sources */,
 				7CBC5B902049326E004ACA04 /* CourseTaskViewController.m in Sources */,
 				438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */,
+				E94DDE4F20D8AB9200729A67 /* GetEvaluateRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

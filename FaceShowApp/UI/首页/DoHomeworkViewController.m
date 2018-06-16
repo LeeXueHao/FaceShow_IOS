@@ -16,6 +16,11 @@
 #import "ImageAttachmentContainerView.h"
 #import "QiniuDataManager.h"
 #import "FinishedHomeworkViewController.h"
+#import "UpdateHomeworkRequest.h"
+#import "GetHomeworkRequest.h"
+
+NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
+NSString *kHomeworkFinishedKey = @"kHomeworkFinishedKey";
 
 @interface DoHomeworkViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIView *titleView;
@@ -28,7 +33,8 @@
 @property (nonatomic, strong) ImageAttachmentContainerView *imageContainerView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
-@property (nonatomic, strong) ClassMomentPublishRequest *publishRequest;
+@property (nonatomic, strong) UpdateHomeworkRequest *submitRequest;
+@property(nonatomic, strong) GetHomeworkRequest *getHomeworkRequest;
 @property (nonatomic, assign) NSInteger imageIndex;
 @property (nonatomic, strong) NSMutableArray *resIdArray;
 
@@ -68,14 +74,12 @@
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
         NSLog(@"--------UIControlEventTouchUpInside--------");
-//        [self.view nyx_startLoading];
-//        if (self.imageArray.count == 0) {
-//            [self requestForPublishMoment:nil];
-//        }else {
-//            [self requestForUploadImage];
-//        }
-        FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.view nyx_startLoading];
+        if (self.imageArray.count == 0) {
+            [self requestForSubmitHomework:nil];
+        }else {
+            [self requestForUploadImage];
+        }
     }];
     self.submitButton = rightButton;
     [self nyx_setupRightWithCustomView:rightButton];
@@ -135,15 +139,15 @@
     self.titleTextView.backgroundColor = [UIColor whiteColor];
     self.titleTextView.font = [UIFont systemFontOfSize:14];
     self.titleTextView.textColor = [UIColor colorWithHexString:@"333333"];
-//    NSString *placeholderStr = @"作业标题（最多20字）";
-//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
-//    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"cccccc"] range:NSMakeRange(0, placeholderStr.length)];
-//    [attrStr addAttribute:NSFontAttributeName value:self.titleTextView.font range:NSMakeRange(0, placeholderStr.length)];
-//    self.titleTextView.attributedPlaceholder = attrStr;
-//    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-//    paraStyle.lineHeightMultiple = 1.2;
-//    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
-//    self.titleTextView.typingAttributes = dic;
+    //    NSString *placeholderStr = @"作业标题（最多20字）";
+    //    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
+    //    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"cccccc"] range:NSMakeRange(0, placeholderStr.length)];
+    //    [attrStr addAttribute:NSFontAttributeName value:self.titleTextView.font range:NSMakeRange(0, placeholderStr.length)];
+    //    self.titleTextView.attributedPlaceholder = attrStr;
+    //    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    //    paraStyle.lineHeightMultiple = 1.2;
+    //    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    //    self.titleTextView.typingAttributes = dic;
     self.titleTextView.textContainerInset = UIEdgeInsetsMake(14, 0, 11, 0);
     self.titleTextView.delegate = self;
     self.titleTextView.scrollEnabled = NO;
@@ -403,37 +407,56 @@
         if (self.imageIndex < self.imageArray.count) {
             [self uploadImageWithIndex:self.imageIndex];
         }else {
-            [self requestForPublishMoment:[self.resIdArray componentsJoinedByString:@","]];
+            [self requestForSubmitHomework:[self.resIdArray componentsJoinedByString:@","]];
         }
     }];
 }
-- (void)requestForPublishMoment:(NSString *)resourceIds{
-    ClassMomentPublishRequest *request = [[ClassMomentPublishRequest alloc] init];
-    request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
-    request.content = self.contentTextView.text;
-    request.resourceIds = resourceIds;
+- (void)requestForSubmitHomework:(NSString *)resourceIds{
+    [self.submitRequest stopRequest];
+    self.submitRequest = [[UpdateHomeworkRequest alloc] init];
+    self.submitRequest.stepId = self.homework.stepId;
+    self.submitRequest.title = self.titleTextView.text;
+    self.submitRequest.content = self.contentTextView.text;
+    self.submitRequest.resourceKey = resourceIds;
     [self nyx_disableRightNavigationItem];
     WEAK_SELF
-    [request startRequestWithRetClass:[ClassMomentPublishRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [self.submitRequest startRequestWithRetClass:[UpdateHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        ClassMomentPublishRequestItem *item = retItem;
-        if (item.data == nil) {
+        if (error) {
             [self nyx_enableRightNavigationItem];
             [self.view nyx_stopLoading];
-            [self.view nyx_showToast:@"发布失败请重试"];
+            [self.view nyx_showToast:@"提交失败请重试"];
         }else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
                 [self nyx_enableRightNavigationItem];
                 [self.view nyx_stopLoading];
-                BLOCK_EXEC(self.submitHomeworkBlock,item.data);
-                FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
-//                [self dismiss];
+                [self requestHomework];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:@{kHomeworkFinishedKey : self.homework.stepId}];
             });
-            
         }
     }];
-    self.publishRequest = request;
 }
+
+- (void)requestHomework {
+    [self.getHomeworkRequest stopRequest];
+    self.getHomeworkRequest = [[GetHomeworkRequest alloc]init];
+    self.getHomeworkRequest.stepId = self.homework.stepId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.getHomeworkRequest startRequestWithRetClass:[GetHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
+        FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
+        vc.userHomework = item.data.userHomework;
+        vc.homework = item.data.homework;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+}
+
 @end
 

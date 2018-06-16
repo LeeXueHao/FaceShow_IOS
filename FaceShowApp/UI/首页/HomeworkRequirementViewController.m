@@ -9,6 +9,8 @@
 #import "HomeworkRequirementViewController.h"
 #import "PreviewPhotosView.h"
 #import "DoHomeworkViewController.h"
+#import "GetAllTasksRequest.h"
+#import "GetHomeworkRequest.h"
 
 static const CGFloat kHomeworkButtonHeight = 45.f;
 
@@ -23,7 +25,8 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    [self setupMockData];
+//    [self setupMockData];
+    [self setupData];
     // Do any additional setup after loading the view.
 }
 
@@ -33,6 +36,8 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
 }
 
 - (void)setupUI {
+    self.title = self.homework.title;
+    
     self.contentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
@@ -92,7 +97,27 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
 
 - (void)homeworkButtonClick:(UIButton *)sender {
     DoHomeworkViewController *vc = [[DoHomeworkViewController alloc]init];
+    vc.homework = self.homework;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)setupData {
+    self.contentLabel.text = self.homework.desc;
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    
+    for (int i = 0; i < self.homework.attachmentInfos.count; i++) {
+        GetHomeworkRequestItem_attachmentInfo *attachmentInfo = self.homework.attachmentInfos[i];
+        PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
+        model.thumbnail = attachmentInfo.resThumb;//@"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090037.jpg";
+#warning 此处应该用down 还是pre
+        model.original = attachmentInfo.downloadUrl;//@"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090024.jpg";
+        [mutableArray addObject:model];
+    }
+    self.photosView.imageModelMutableArray = mutableArray;
+    [self.photosView reloadData];
+    [self.photosView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.photosView.heightFloat);
+    }];
 }
 
 - (void)setupMockData {
@@ -109,29 +134,6 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
         make.height.mas_equalTo(self.photosView.heightFloat);
     }];
 }
-//- (void)setupPhoto:(NSArray<ClassMomentListRequestItem_Data_Moment_Album> *)albums {
-//    NSMutableArray<PreviewPhotosModel*> *mutableArray = [[NSMutableArray<PreviewPhotosModel*> alloc] init];
-//    [albums enumerateObjectsUsingBlock:^(ClassMomentListRequestItem_Data_Moment_Album *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-//        model.thumbnail = obj.attachment.resThumb;
-//        model.original = obj.attachment.resThumb;
-//        [mutableArray addObject:model];
-//
-//    }];
-//    self.photosView.imageModelMutableArray = mutableArray;
-//    [self.photosView reloadData];
-//    if (mutableArray.count == 0) {
-//        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.photosView.mas_bottom).offset(10.0f);
-//        }];
-//        self.photosView.hidden = YES;
-//    }else {
-//        self.photosView.hidden = NO;
-//        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.photosView.mas_bottom).offset(20.0f);
-//        }];
-//    }
-//}
 
 @end
 

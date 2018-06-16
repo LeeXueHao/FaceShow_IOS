@@ -31,7 +31,7 @@
 
 @protocol GetAllTasksRequestItem_interactType <NSObject>
 @end
-@interface GetAllTasksRequestItem_interactType : HttpBaseRequestItem
+@interface GetAllTasksRequestItem_interactType : JSONModel
 @property (nonatomic, strong) NSString<Optional> *interactType;
 @property (nonatomic, strong) NSString<Optional> *taskNum;
 @property (nonatomic, strong) NSString<Optional> *finishNum;
@@ -39,7 +39,7 @@
 @property (nonatomic, strong) NSString<Optional> *interactTypeName;
 @end
 
-@interface GetAllTasksRequestItem_data : HttpBaseRequestItem
+@interface GetAllTasksRequestItem_data : JSONModel
 @property (nonatomic, strong) NSArray<GetAllTasksRequestItem_task, Optional> *tasks;
 @property (nonatomic, strong) NSArray<GetAllTasksRequestItem_interactType, Optional> *interactTypes;
 

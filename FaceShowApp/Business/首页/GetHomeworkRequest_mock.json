@@ -1,0 +1,37 @@
+{
+    "code": 0,
+    "message": "",
+    "data": {
+        "userHomework": null,
+        "homework": {
+            "id": 2,
+            "title": "一个新作业",
+            "description": "222222xxxx",
+            "resourceKey": "s1x",
+            "resourceSource": "qiniu",
+            "homeworkStatus": 1,
+            "bizId": 153,
+            "bizSource": "clazs",
+            "createTime": "2018-06-14 16:11:57",
+            "stepId": null,
+            "attachmentInfos": [{
+                                "resId": 0,
+                                "resKey": "s1x",
+                                "resName": "",
+                                "resType": "",
+                                "ext": "",
+                                "downloadUrl": "http://p2xuvkfak.bkt.clouddn.com/s1x",
+                                "previewUrl": "http://p2xuvkfak.bkt.clouddn.com/s1x",
+                                "transcodeStatus": 0,
+                                "resThumb": "http://p2xuvkfak.bkt.clouddn.com/s1x",
+                                "resSource": null
+                                }],
+            "totalUserNum": 0,
+            "finishUserNum": 0,
+            "finishPercent": 0.0
+        }
+    },
+    "currentUser": "",
+    "currentTime": 1529031115458,
+    "error": null
+}

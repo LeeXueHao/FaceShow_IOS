@@ -7,9 +7,11 @@
 //
 
 #import "BaseViewController.h"
-#import "ClassMomentPublishRequest.h"
+@class GetHomeworkRequestItem_homework;
+extern NSString *kHomeworkFinishedNotification;
+extern NSString *kHomeworkFinishedKey;
 
 @interface DoHomeworkViewController : BaseViewController
 @property (nonatomic, strong) NSMutableArray *imageArray;
-@property (nonatomic, copy) void(^submitHomeworkBlock)(ClassMomentListRequestItem_Data_Moment *moment);
+@property(nonatomic, strong) GetHomeworkRequestItem_homework *homework;
 @end
