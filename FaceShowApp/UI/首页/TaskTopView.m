@@ -7,6 +7,7 @@
 //
 
 #import "TaskTopView.h"
+#import "GetUserTaskProgressRequest.h"
 
 @interface TaskTopView()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -30,14 +31,14 @@
 - (void)setupUI {
     self.backgroundColor = [UIColor whiteColor];
     
-    self.enterImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"单选未选择"] highlightedImage:[UIImage imageNamed:@"单选已选择"]];
+    self.enterImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"进入页面按钮正常态"] highlightedImage:[UIImage imageNamed:@"进入页面按钮点击态"]];
     self.enterImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.enterImageView.clipsToBounds = YES;
     [self addSubview:self.enterImageView];
     [self.enterImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
         make.right.mas_equalTo(-10);
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     
     self.titleLabel = [[UILabel alloc]init];
@@ -93,4 +94,13 @@
     self.rankingLabel.attributedText = rankingAttStr;
 }
 
+- (void)setItem:(GetUserTaskProgressRequestItem *)item {
+    _item = item;
+    self.scoreLabel.text = [NSString stringWithFormat:@"%.0f%@",[item.data.finishPercent floatValue]* 100,@"%"];
+    NSString *ranking = [NSString stringWithFormat:@"班级排名:第%@名",item.data.clazsRank];
+    NSMutableAttributedString *rankingAttStr = [[NSMutableAttributedString alloc]initWithString:ranking];
+    [rankingAttStr addAttributes:@{NSFontAttributeName:self.rankingLabel.font,NSForegroundColorAttributeName:self.rankingLabel.textColor} range:NSMakeRange(0,[ranking length])];
+    [rankingAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [ranking length] - 5)];
+    self.rankingLabel.attributedText = rankingAttStr;
+}
 @end

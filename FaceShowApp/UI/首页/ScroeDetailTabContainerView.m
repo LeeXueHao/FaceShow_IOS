@@ -49,9 +49,6 @@ static const CGFloat kSlideWidth = 100;
             make.width.mas_equalTo(tabWidth);
         }];
         [self.tabButtonArray addObject:b];
-        if (idx == 0) {
-            b.selected = YES;
-        }
     }];
     self.sliderView = [[UIView alloc]init];
     self.sliderView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];

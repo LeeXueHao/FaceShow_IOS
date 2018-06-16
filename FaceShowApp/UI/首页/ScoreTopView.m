@@ -31,14 +31,14 @@
 - (void)setupUI {
     self.backgroundColor = [UIColor whiteColor];
     
-    self.enterImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"单选未选择"] highlightedImage:[UIImage imageNamed:@"单选已选择"]];
+    self.enterImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"进入页面按钮正常态"] highlightedImage:[UIImage imageNamed:@"进入页面按钮点击态"]];
     self.enterImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.enterImageView.clipsToBounds = YES;
     [self addSubview:self.enterImageView];
     [self.enterImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
         make.right.mas_equalTo(-10);
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     
     self.titleLabel = [[UILabel alloc]init];

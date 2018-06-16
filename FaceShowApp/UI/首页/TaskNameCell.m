@@ -7,6 +7,7 @@
 //
 
 #import "TaskNameCell.h"
+#import "GetUserTaskProgressRequest.h"
 
 @interface TaskNameCell()
 @property(nonatomic, strong) UILabel *nameLabel;
@@ -70,5 +71,11 @@
 - (void)setupMock {
     self.nameLabel.text = @"作业总数";
     self.progressLabel.text = @"2/20";
+}
+
+- (void)setTask:(GetUserTaskProgressRequestItem_interactType *)task {
+    task = task;
+    self.nameLabel.text = task.interactTypeName;
+    self.progressLabel.text = [NSString stringWithFormat:@"%@/%@",task.finishNum,task.taskNum];
 }
 @end

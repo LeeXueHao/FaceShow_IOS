@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetUserTaskProgressRequestItem;
 
 @interface TaskTopView : UIView
 @property (nonatomic, copy) void(^rankingChoosedBlock)(void);
+@property(nonatomic, strong) GetUserTaskProgressRequestItem *item;
 @end

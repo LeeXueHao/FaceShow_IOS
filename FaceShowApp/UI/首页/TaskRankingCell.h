@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetUserTasksProgressRankRequestItem_element;
+
+@interface TaskRankingCellItem : NSObject
+@property (nonatomic, strong) GetUserTasksProgressRankRequestItem_element *element;
+@property(nonatomic, assign) NSInteger rank;
+@end
 
 @interface TaskRankingCell : UITableViewCell
-
+@property (nonatomic, strong) TaskRankingCellItem *item;
+@property(nonatomic, assign) BOOL isShowLine;
 @end

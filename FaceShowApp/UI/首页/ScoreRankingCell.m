@@ -9,11 +9,15 @@
 #import "ScoreRankingCell.h"
 #import "GetClazsSocresRequest.h"
 
-@interface ScoreRankingCell()
-@property(nonatomic, strong) UILabel *nameLabel;
-@property(nonatomic, strong) UILabel *scoreLabel;
-@property(nonatomic, strong) UILabel *descLabel;
-@property(nonatomic, strong) UIView *lineView;
+@implementation ScoreRankingCellItem
+@end
+
+@interface ScoreRankingCell ()
+@property (nonatomic, strong) UILabel *rankLabel;
+@property (nonatomic, strong) UIImageView *avatarImageView;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *progressLabel;
+@property (nonatomic, strong) UIView *lineView;
 @end
 
 @implementation ScoreRankingCell
@@ -21,7 +25,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setupMock];
     }
     return self;
 }
@@ -40,54 +43,82 @@
 #pragma mark - setupUI
 - (void)setupUI {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.contentView.backgroundColor = [UIColor whiteColor];
     
-    self.nameLabel = [[UILabel alloc]init];
+    self.rankLabel = [[UILabel alloc] init];
+    self.rankLabel.font = [UIFont systemFontOfSize:14];
+    self.rankLabel.textColor = [UIColor colorWithHexString:@"666666"];
+    self.rankLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:self.rankLabel];
+    [self.rankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.centerY.mas_equalTo(0);
+        make.width.mas_equalTo(60);
+    }];
+    
+    self.avatarImageView = [[UIImageView alloc] init];
+    self.avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.avatarImageView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
+    self.avatarImageView.clipsToBounds = YES;
+    self.avatarImageView.layer.cornerRadius = 5;
+    self.avatarImageView.userInteractionEnabled = YES;
+    [self.contentView addSubview:self.avatarImageView];
+    [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.rankLabel.mas_right);
+        make.centerY.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
+    
+    self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:14];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.centerY.mas_equalTo(0).offset(-10);
+        make.left.mas_equalTo(self.avatarImageView.mas_right).offset(10);
+        make.centerY.mas_equalTo(0);
     }];
     
-    self.descLabel = [[UILabel alloc]init];
-    self.descLabel.font = [UIFont systemFontOfSize:12];
-    self.descLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    [self.contentView addSubview:self.descLabel];
-    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.nameLabel);
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(6);
-    }];
-    
-    self.scoreLabel = [[UILabel alloc]init];
-    self.scoreLabel.font = [UIFont boldSystemFontOfSize:14];
-    self.scoreLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
-    [self.contentView addSubview:self.scoreLabel];
-    [self.scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.progressLabel = [[UILabel alloc]init];
+    self.progressLabel.font = [UIFont boldSystemFontOfSize:16];
+    self.progressLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
+    [self.contentView addSubview:self.progressLabel];
+    [self.progressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(0);
     }];
     
-    self.lineView = [[UIView alloc]init];
+    self.lineView = [[UIView alloc] init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self.contentView addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.nameLabel);
+        make.left.mas_equalTo(15);
         make.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
 }
 
-- (void)setupMock {
-    self.nameLabel.text = @"作业总数";
-    self.descLabel.text = @"每个2分";
-    self.scoreLabel.text = @"2分";
+- (void)setItem:(ScoreRankingCellItem *)item {
+    _item = item;
+    
+    GetClazsSocresRequestItem_element *element = item.element;
+    self.rankLabel.text = [NSString stringWithFormat:@"%@",@(item.rank)];
+    self.avatarImageView.contentMode = UIViewContentModeCenter;
+    WEAK_SELF
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:element.avatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        STRONG_SELF
+        self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
+    }];
+    self.nameLabel.text = element.realName;
+    self.progressLabel.text = element.totalScore;
 }
 
-- (void)setElement:(GetClazsSocresRequestItem_element *)element {
-    _element = element;
-    self.nameLabel.text = element.realName;
-    self.scoreLabel.text = element.totalScore;
+- (void)setIsShowLine:(BOOL)isShowLine {
+    _isShowLine = isShowLine;
+    if (isShowLine) {
+        self.lineView.hidden = NO;
+    }else {
+        self.lineView.hidden = YES;
+    }
 }
 
 @end

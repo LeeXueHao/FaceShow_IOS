@@ -11,11 +11,17 @@
 #import "TaskNameCell.h"
 #import "ErrorView.h"
 #import "RankingViewController.h"
+#import "GetUserTaskProgressRequest.h"
+
 @interface TaskScoreViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ErrorView *errorView;
 @property(nonatomic, strong) TaskTopView *topView;
 @property(nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) GetUserTaskProgressRequest *request;
+@property (nonatomic, strong) GetUserTaskProgressRequestItem *item;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, assign) BOOL isLayoutComplete;
+
 @end
 
 @implementation TaskScoreViewController
@@ -85,22 +91,45 @@
 }
 
 - (void)requestTaskScore {
-    
+    [self.request stopRequest];
+    self.request = [[GetUserTaskProgressRequest alloc]init];
+    self.request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.request startRequestWithRetClass:[GetUserTaskProgressRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view addSubview:self.errorView];
+            [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(0);
+            }];
+            return;
+        }
+        [self.errorView removeFromSuperview];
+        if (!self.isLayoutComplete) {
+            [self setupUI];
+            self.isLayoutComplete = YES;
+        }
+        self.item = retItem;
+        self.topView.item = self.item;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TaskNameCell"];
-//    cell.task = self.dataArray[indexPath.row];
+    cell.task = self.item.data.interactTypes[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;//self.dataArray.count;
+    return self.item.data.interactTypes.count;
 }
 
 - (void)refreshUI {

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetUserTaskProgressRequestItem_interactType;
 
 @interface TaskNameCell : UITableViewCell
-
+@property(nonatomic, strong) GetUserTaskProgressRequestItem_interactType *task;
 @end

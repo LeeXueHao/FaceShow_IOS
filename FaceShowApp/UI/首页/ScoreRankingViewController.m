@@ -36,6 +36,7 @@
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.estimatedRowHeight = 0;
     [self.tableView registerClass:[ScoreRankingCell class] forCellReuseIdentifier:@"ScoreRankingCell"];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -51,13 +52,20 @@
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ScoreRankingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScoreRankingCell"];
-    GetClazsSocresRequestItem_element *element = self.dataArray[indexPath.row];
-    cell.element = element;
+    ScoreRankingCellItem *item = [[ScoreRankingCellItem alloc]init];
+    item.element = self.dataArray[indexPath.row];
+    item.rank = indexPath.row;
+    cell.item = item;
+    if (indexPath.row == self.dataArray.count - 1) {
+        cell.isShowLine = NO;
+    }else {
+        cell.isShowLine = YES;
+    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 61;
+    return 70;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
