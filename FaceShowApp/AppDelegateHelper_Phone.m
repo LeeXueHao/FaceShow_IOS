@@ -108,7 +108,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     redPointView.hidden = YES;
     [tabBarController.tabBar addSubview:redPointView];
     [tabBarController.tabBar bringSubviewToFront:redPointView];
-    [UserMessageManager sharedInstance].redPointView = redPointView;
+    [UserPromptsManager sharedInstance].taskNewView = redPointView;
     
     UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 2, 6, 9, 9)];
     momentNewView.layer.cornerRadius = 4.5f;

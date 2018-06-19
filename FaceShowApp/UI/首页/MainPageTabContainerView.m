@@ -8,6 +8,7 @@
 
 #import "MainPageTabContainerView.h"
 #import "UserPromptsManager.h"
+#import "UserMessageManager.h"
 
 @interface MainPageTabContainerView()
 @property (nonatomic, strong) NSMutableArray *tabButtonArray;
@@ -76,7 +77,7 @@
     momentNewView.hidden = YES;
     [self addSubview:momentNewView];
     [self bringSubviewToFront:momentNewView];
-    [UserPromptsManager sharedInstance].taskNewView = momentNewView;
+    [UserMessageManager sharedInstance].redPointView = momentNewView;
 }
 
 - (void)btnAction:(UIButton *)sender {

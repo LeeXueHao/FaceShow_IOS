@@ -323,7 +323,7 @@
 - (void)checkIfHasUncompleteTask {
     for (GetAllTasksRequestItem_task *task in self.dataArray) {
         InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
-        if (task.stepFinished.integerValue!=1 && (type==InteractType_Vote || type==InteractType_Questionare)) {
+        if (task.stepFinished.integerValue!=1 && (type==InteractType_Vote || type==InteractType_Questionare || type == InteractType_Comment || type == InteractType_Evaluate || type == InteractType_Homework)) {
             return;
         }
     }

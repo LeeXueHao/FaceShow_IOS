@@ -13,7 +13,7 @@
             "bizId": 153,
             "bizSource": "clazs",
             "createTime": "2018-06-14 16:11:57",
-            "stepId": null,
+            "stepId": 1,
             "attachmentInfos": [{
                                 "resId": 0,
                                 "resKey": "s1x",

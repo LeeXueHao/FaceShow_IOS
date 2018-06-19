@@ -108,9 +108,8 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
     for (int i = 0; i < self.homework.attachmentInfos.count; i++) {
         GetHomeworkRequestItem_attachmentInfo *attachmentInfo = self.homework.attachmentInfos[i];
         PreviewPhotosModel *model  = [[PreviewPhotosModel alloc] init];
-        model.thumbnail = attachmentInfo.resThumb;//@"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090037.jpg";
-#warning 此处应该用down 还是pre
-        model.original = attachmentInfo.downloadUrl;//@"http://i0.sinaimg.cn/edu/2014/0607/U6360P352DT20140607090024.jpg";
+        model.thumbnail = attachmentInfo.previewUrl;
+        model.original = attachmentInfo.downloadUrl;
         [mutableArray addObject:model];
     }
     self.photosView.imageModelMutableArray = mutableArray;
