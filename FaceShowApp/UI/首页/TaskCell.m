@@ -101,13 +101,17 @@
     self.statusImageView.image = [UIImage imageNamed:task.stepFinished.boolValue ? @"已完成" : @"未完成"];
     InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
     if (type == InteractType_Vote) {
-        self.iconImageView.image = [UIImage imageNamed:@"投票icon"];
+        self.iconImageView.image = [UIImage imageNamed:@"投票"];
     } else if (type == InteractType_Questionare) {
         self.iconImageView.image = [UIImage imageNamed:@"问卷"];
     } else if (type == InteractType_Comment) {
-        self.iconImageView.image = [UIImage imageNamed:@"评论icon"];
+        self.iconImageView.image = [UIImage imageNamed:@"讨论"];
     } else if (type == InteractType_SignIn) {
         self.iconImageView.image = [UIImage imageNamed:@"签到icon"];
+    } else if (type == InteractType_Homework) {
+        self.iconImageView.image = [UIImage imageNamed:@"作业"];
+    }else if (type == InteractType_Evaluate) {
+        self.iconImageView.image = [UIImage imageNamed:@"评价"];
     }
 }
 

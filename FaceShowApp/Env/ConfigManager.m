@@ -10,7 +10,7 @@
 #import <FCUUID.h>
 #import <UIDevice+HardwareName.h>
 
-BOOL mockFrameworkOn = YES;
+BOOL mockFrameworkOn = NO;
 BOOL testFrameworkOn = NO;
 
 #ifdef DEBUG

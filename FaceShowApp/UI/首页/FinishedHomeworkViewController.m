@@ -127,6 +127,9 @@
 
 - (void)setupData {
     self.titleLabel.text = self.userHomework.title;
+    if (!self.userHomework.assess) {
+        self.userHomework.assess = @"暂无";
+    }
     NSString *appraise = [NSString stringWithFormat:@"班主任评价:%@",self.userHomework.assess];
     NSMutableAttributedString *appraiseAttStr = [[NSMutableAttributedString alloc]initWithString:appraise];
     [appraiseAttStr addAttributes:@{NSFontAttributeName:self.appraiseLabel.font,NSForegroundColorAttributeName:self.appraiseLabel.textColor} range:NSMakeRange(0,[appraise length])];
