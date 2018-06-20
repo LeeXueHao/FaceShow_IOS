@@ -8,7 +8,11 @@
 
 #import "BMKLocationConfig.h"
 
+#ifdef HuBeiApp
+NSString * const kBMKLocationKey = @"hhNPvGYCsUBlucjjeUmPKPMf5rjZfHXR";
+#else
 NSString * const kBMKLocationKey = @"4Bf04BnzjHNH4xgQvONE8c3MNhGfwiBK";
+#endif
 
 @implementation BMKLocationConfig
 

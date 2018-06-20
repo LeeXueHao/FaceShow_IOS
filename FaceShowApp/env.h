@@ -11,4 +11,6 @@
 
 //#undef DEBUG
 
+//#define HuBeiApp
+
 #endif /* env_h */
