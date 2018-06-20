@@ -12,7 +12,7 @@
 @interface TaskCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UILabel *sourceLabel;
 @property (nonatomic, strong) UIImageView *statusImageView;
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) UIView *lineView;
@@ -66,13 +66,13 @@
         make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
     }];
     
-    self.timeLabel = [[UILabel alloc] init];
-    self.timeLabel.font = [UIFont systemFontOfSize:11];
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    [self.contentView addSubview:self.timeLabel];
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.sourceLabel = [[UILabel alloc] init];
+    self.sourceLabel.font = [UIFont systemFontOfSize:11];
+    self.sourceLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    [self.contentView addSubview:self.sourceLabel];
+    [self.sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel.mas_left);
-        make.bottom.mas_equalTo(self.statusImageView.mas_bottom).offset(2);
+        make.bottom.mas_equalTo(self.statusImageView.mas_bottom).offset(5);
         make.right.mas_equalTo(self.titleLabel.mas_right);
     }];
     
@@ -89,7 +89,7 @@
 - (void)setTask:(GetAllTasksRequestItem_task *)task {
     _task = task;
     self.titleLabel.text = task.interactName;
-    self.timeLabel.text = [task.createTime omitSecondOfFullDateString];
+    self.sourceLabel.text = @"所属课程:课程或任务名字";//[task.createTime omitSecondOfFullDateString];
     if (task.stepFinished.boolValue) {
         self.statusLabel.text = @"已完成";
         self.statusLabel.textColor = [UIColor colorWithHexString:@"666666"];
