@@ -10,19 +10,26 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "SignInPLaceCell.h"
+#import "PositionSignInRequest.h"
+#import "UserSignInRequest.h"
+#import "ScanCodeResultViewController.h"
+#import "MJRefresh.h"
 
 @interface SignInPlaceViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) MJRefreshHeaderView *header;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
-//@property (nonatomic, strong) GetResourceRequest *request;
-//@property (nonatomic, strong) GetResourceDetailRequest *detailRequest;
+@property (nonatomic, strong) PositionSignInRequest *positionListRequest;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) UserSignInRequest *signInRequest;
 
 @end
 
 @implementation SignInPlaceViewController
-
+- (void)dealloc {
+    [self.header free];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"位置签到";
@@ -70,47 +77,104 @@
             make.bottom.mas_equalTo(0);
         }
     }];
+    WEAK_SELF
+    self.header = [MJRefreshHeaderView header];
+    self.header.scrollView = self.tableView;
+    self.header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        STRONG_SELF
+        [self requestSignInfo];
+    };
     
     self.emptyView = [[EmptyView alloc]init];
-    self.emptyView.title = @"暂无资源";
-//    [self.view addSubview:self.emptyView];
-//    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(0);
-//    }];
+    self.emptyView.title = @"暂无位置签到";
+    [self.view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     self.errorView = [[ErrorView alloc]init];
-    WEAK_SELF
     [self.errorView setRetryBlock:^{
         STRONG_SELF
-//        [self requestResourceInfo];
+        [self requestSignInfo];
     }];
-//    [self.view addSubview:self.errorView];
-//    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(0);
-//    }];
+    [self.view addSubview:self.errorView];
+    [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    self.emptyView.hidden = YES;
+    self.errorView.hidden = YES;
 }
 
 - (void)requestSignInfo {
-    
+    [self.view nyx_startLoading];
+    [self.positionListRequest stopRequest];
+    self.positionListRequest = [[PositionSignInRequest alloc]init];
+    self.positionListRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    WEAK_SELF
+    [self.positionListRequest startRequestWithRetClass:[PositionSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.header endRefreshing];
+        [self.view nyx_stopLoading];
+        self.errorView.hidden = YES;
+        self.emptyView.hidden = YES;
+        if (error) {
+            self.errorView.hidden = NO;
+            return;
+        }
+        PositionSignInRequestItem *item = (PositionSignInRequestItem *)retItem;
+        if (item.data.signIns.count == 0) {
+            self.emptyView.hidden = NO;
+            return;
+        }
+        self.dataArray = item.data.signIns;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;//self.dataArray.count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SignInPLaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SignInPLaceCell"];
-//    cell.data = self.dataArray[indexPath.row];
+    GetSignInRecordListRequestItem_SignIn *data = self.dataArray[indexPath.row];
+    cell.data = data;
     WEAK_SELF
     [cell setSignInPlaceBlock:^{
         STRONG_SELF
-        [self.view nyx_showToast:@"请求签到"];
+        [self signInWithData:data];
     }];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 121;
+}
+
+#pragma mark - 位置签到
+- (void)signInWithData:(GetSignInRecordListRequestItem_SignIn *)data {
+    [self.view nyx_startLoading];
+    [self.signInRequest stopRequest];
+    self.signInRequest = [[UserSignInRequest alloc] init];
+    self.signInRequest.stepId = data.stepId;
+    self.signInRequest.positionSignIn = YES;
+    self.signInRequest.positionRange = data.positionRange;
+    self.signInRequest.signinPosition = data.signinPosition;
+    WEAK_SELF
+    [self.signInRequest startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error && (error.code == 1||error.code == -1)) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
+        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+        scanCodeResultVC.data = error ? nil : item.data;
+        scanCodeResultVC.error = error ? item.error : nil;
+        scanCodeResultVC.positionSignIn = YES;
+        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+    }];
 }
 
 @end

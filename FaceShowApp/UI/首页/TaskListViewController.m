@@ -236,6 +236,7 @@
                 return;
             }
             GetSigninRequestItem *item = retItem;
+            item.data.signIn.stepId = task.stepId;
             SignInDetailViewController *signInDetailVC = [[SignInDetailViewController alloc] init];
             signInDetailVC.signIn = item.data.signIn;
             signInDetailVC.currentIndexPath = indexPath;

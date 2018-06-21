@@ -38,6 +38,10 @@
 @property (nonatomic, strong) NSString<Optional> *signInUserNum;
 @property (nonatomic, strong) NSString<Optional> *opentStatusName;
 @property (nonatomic, strong) NSString<Optional> *percent;
+@property (nonatomic, strong) NSString<Optional> *signinType; // 签到类型：1-二维码签到 2-位置签到
+@property (nonatomic, strong) NSString<Optional> *signinPosition;
+@property (nonatomic, strong) NSString<Optional> *positionSite;
+@property (nonatomic, strong) NSString<Optional> *positionRange;
 @property (nonatomic, strong) GetSignInRecordListRequestItem_UserSignIn<Optional> *userSignIn;
 @end
 

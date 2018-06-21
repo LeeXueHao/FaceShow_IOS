@@ -36,7 +36,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        [self setupMockData];
     }
     return self;
 }
@@ -129,10 +128,11 @@
     }];
 }
 
-- (void)setupMockData {
-    self.titleLabel.text = @"这是标题了啦";
-    self.timeLabel.text = @"2018-06-01 8:00-10:00";
-    self.placeLabel.text = @"北京西城区北广大厦";
+- (void)setData:(GetSignInRecordListRequestItem_SignIn *)data {
+    self.titleLabel.text = data.title;
+    self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@",[data.startTime omitSecondOfFullDateString],[data.endTime omitSecondOfFullDateString]];
+    self.placeLabel.text = data.positionSite;
+    self.timeLabel.text = [data.createTime omitSecondOfFullDateString];;
 }
 
 - (void)setSignInPlaceBlock:(SignInPlaceBlock)block {

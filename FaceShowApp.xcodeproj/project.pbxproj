@@ -198,6 +198,7 @@
 		7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */; };
 		7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E632200EF48C006704E7 /* QiniuDataManager.m */; };
 		7C37A5792016CFEB0073FDE2 /* GetToolsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C37A5782016CFEB0073FDE2 /* GetToolsRequest.m */; };
+		7C3F759620DA5A0F00F4F418 /* PositionSignInRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F759520DA5A0F00F4F418 /* PositionSignInRequest.m */; };
 		7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54151F9729230053DB12 /* YXGeTuiManager.m */; };
 		7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D54141F9729230053DB12 /* YXApnsContentModel.m */; };
 		7C4D54471F972D350053DB12 /* libGtExtensionSdk-1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */; };
@@ -809,6 +810,8 @@
 		7C33E632200EF48C006704E7 /* QiniuDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QiniuDataManager.m; sourceTree = "<group>"; };
 		7C37A5772016CFEB0073FDE2 /* GetToolsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetToolsRequest.h; sourceTree = "<group>"; };
 		7C37A5782016CFEB0073FDE2 /* GetToolsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetToolsRequest.m; sourceTree = "<group>"; };
+		7C3F759420DA5A0F00F4F418 /* PositionSignInRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PositionSignInRequest.h; sourceTree = "<group>"; };
+		7C3F759520DA5A0F00F4F418 /* PositionSignInRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PositionSignInRequest.m; sourceTree = "<group>"; };
 		7C4D54121F970B280053DB12 /* 研修宝.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "研修宝.entitlements"; sourceTree = "<group>"; };
 		7C4D54141F9729230053DB12 /* YXApnsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXApnsContentModel.m; sourceTree = "<group>"; };
 		7C4D54151F9729230053DB12 /* YXGeTuiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXGeTuiManager.m; sourceTree = "<group>"; };
@@ -1967,6 +1970,8 @@
 				435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */,
 				432F90BD1F75050700FCF655 /* GetScheduleListRequest.h */,
 				432F90BE1F75050700FCF655 /* GetScheduleListRequest.m */,
+				7C3F759420DA5A0F00F4F418 /* PositionSignInRequest.h */,
+				7C3F759520DA5A0F00F4F418 /* PositionSignInRequest.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -3455,6 +3460,7 @@
 				7C24E1F61F72514C00A6921B /* QuestionRequestItem.m in Sources */,
 				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
+				7C3F759620DA5A0F00F4F418 /* PositionSignInRequest.m in Sources */,
 				4369597F1FDE27B5009E5C43 /* ClassEmptyViewController.m in Sources */,
 				4322CA491FD9531600E7B565 /* QASlideItemBaseView.m in Sources */,
 				7CBC5B8F2049326E004ACA04 /* CourseDetailViewController.m in Sources */,

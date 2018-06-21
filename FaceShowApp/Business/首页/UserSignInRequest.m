@@ -8,6 +8,7 @@
 
 #import "UserSignInRequest.h"
 #import <BMKLocationKit/BMKLocationComponent.h>
+#import <CoreLocation/CoreLocation.h>
 
 @implementation UserSignInRequestItem_Data
 + (JSONKeyMapper *)keyMapper {
@@ -52,6 +53,22 @@
     WEAK_SELF
     [self.locationManager requestLocationWithReGeocode:YES withNetworkState:NO completionBlock:^(BMKLocation * _Nullable location, BMKLocationNetworkState state, NSError * _Nullable error) {
         STRONG_SELF
+        if (self.positionSignIn) {
+            if (error) {
+                NSError *positionErr = [NSError errorWithDomain:@"position_domain" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"获取位置信息失败"}];
+                completeBlock(nil,positionErr,NO);
+                return;
+            }
+            CLLocation *location1 = [[CLLocation alloc] initWithLatitude:location.location.coordinate.latitude longitude:location.location.coordinate.longitude];
+            NSArray<NSString *> *arr = [self.signinPosition componentsSeparatedByString:@","];
+            CLLocation *location2 = [[CLLocation alloc] initWithLatitude:arr.lastObject.floatValue longitude:arr.firstObject.floatValue];
+            CLLocationDistance distance = [location1 distanceFromLocation:location2];
+            if (distance > self.positionRange.floatValue) {
+                NSError *positionErr = [NSError errorWithDomain:@"position_domain" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"您不在签到范围内"}];
+                completeBlock(nil,positionErr,NO);
+                return;
+            }
+        }
         if (error) {
             NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
         }

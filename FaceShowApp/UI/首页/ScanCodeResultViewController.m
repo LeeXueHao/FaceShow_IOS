@@ -100,7 +100,7 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     BOOL hasSignedIn = !isEmpty(self.error) && self.error.code.integerValue == SignInErrorHasSignedIn;
     if (!isEmpty(self.data) || hasSignedIn) {
         self.signInImageView.image = [UIImage imageNamed:hasSignedIn ? @"签到失败图标" : @"签到成功图标"];
-        self.titleLabel.text = hasSignedIn ? self.error.message : self.data.successPrompt;
+        self.titleLabel.text = hasSignedIn ? self.error.message : @"签到成功";
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
@@ -122,7 +122,8 @@ typedef NS_ENUM(NSUInteger, SignInError) {
         self.signInImageView.image = [UIImage imageNamed:@"签到失败图标"];
         self.titleLabel.text = @"签到失败";
         self.blackLabel.text = self.error.message;
-        self.grayLabel.text = (self.error.code.integerValue == SignInErrorUnstart || self.error.code.integerValue == SignInErrorHasFinished) ? [NSString stringWithFormat:@"%@ - %@", [self.error.data.startTime omitSecondOfFullDateString], [self.error.data.endTime omitSecondOfFullDateString]] : @"请扫描最新签到二维码";
+        NSString *defaultStr = self.positionSignIn? @"":@"请扫描最新签到二维码";
+        self.grayLabel.text = (self.error.code.integerValue == SignInErrorUnstart || self.error.code.integerValue == SignInErrorHasFinished) ? [NSString stringWithFormat:@"%@ - %@", [self.error.data.startTime omitSecondOfFullDateString], [self.error.data.endTime omitSecondOfFullDateString]] : defaultStr;
         [self.blackLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
             make.centerX.mas_equalTo(0);
@@ -132,6 +133,9 @@ typedef NS_ENUM(NSUInteger, SignInError) {
             make.centerX.mas_equalTo(0);
         }];
         [self.confirmBtn setTitle:@"重新签到" forState:UIControlStateNormal];
+        if (self.positionSignIn) {
+            [self.confirmBtn setTitle:@"确 定" forState:UIControlStateNormal];
+        }
         [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.grayLabel.mas_bottom).offset(50);
             make.centerX.mas_equalTo(0);
@@ -157,7 +161,11 @@ typedef NS_ENUM(NSUInteger, SignInError) {
             if (self.presentingViewController) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             } else {
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                if (self.positionSignIn) {
+                    [super backAction];
+                }else {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
             }
         }
     } else {

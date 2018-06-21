@@ -30,6 +30,9 @@
 @property (nonatomic, strong) NSString<Optional> *timestamp;
 @property (nonatomic, strong) NSString<Optional> *position;
 @property (nonatomic, strong) NSString<Optional> *site;
+@property (nonatomic, assign) BOOL positionSignIn;
+@property (nonatomic, strong) NSString<Ignore> *signinPosition;
+@property (nonatomic, strong) NSString<Ignore> *positionRange;
 @end
 
 #define kStepId @"stepId"

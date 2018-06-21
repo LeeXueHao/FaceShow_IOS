@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PositionSignInRequest.h"
 
 typedef void(^SignInPlaceBlock)(void);
 @interface SignInPLaceCell : UITableViewCell
-
+@property (nonatomic, strong) GetSignInRecordListRequestItem_SignIn *data;
 - (void)setSignInPlaceBlock:(SignInPlaceBlock)block;
 @end

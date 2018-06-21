@@ -9,6 +9,8 @@
 #import "SignInDetailViewController.h"
 #import "ScanCodeViewController.h"
 #import "GetSignInRecordListRequest.h"
+#import "UserSignInRequest.h"
+#import "ScanCodeResultViewController.h"
 
 @interface SignInDetailViewController ()
 
@@ -23,6 +25,7 @@
 @property (nonatomic, strong) UILabel *placeLabel;
 @property (nonatomic, strong) UILabel *placeNameLabel;
 @property (nonatomic, strong) UILabel *statusTitleLabel;
+@property (nonatomic, strong) UserSignInRequest *signInRequest;
 @end
 
 @implementation SignInDetailViewController
@@ -150,7 +153,8 @@
     self.tipsLabel = [[UILabel alloc] init];
     self.tipsLabel.font = [UIFont systemFontOfSize:13];
     self.tipsLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    self.tipsLabel.text = @"请点击下面按钮，扫描二维码进行现场签到";
+    NSString *tips = [self.signIn.signinType isEqualToString:@"1"]? @"请点击下面按钮，扫描二维码进行现场签到":@"请点击下面按钮，进行位置签到";
+    self.tipsLabel.text = tips;
     self.tipsLabel.hidden = YES;
     [self.contentView addSubview:self.tipsLabel];
     [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -181,10 +185,40 @@
 
 - (void)signInBtnAction:(UIButton *)sender {
     [TalkingData trackEvent:@"点击签到详情中的签到按钮"];
-    ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
-    scanCodeVC.navigationItem.title = @"签到";
-    scanCodeVC.currentIndexPath = self.currentIndexPath;
-    [self.navigationController pushViewController:scanCodeVC animated:YES];
+    if ([self.signIn.signinType isEqualToString:@"1"]) {
+        ScanCodeViewController *scanCodeVC = [[ScanCodeViewController alloc] init];
+        scanCodeVC.navigationItem.title = @"签到";
+        scanCodeVC.currentIndexPath = self.currentIndexPath;
+        [self.navigationController pushViewController:scanCodeVC animated:YES];
+    }else {
+        [self signInWithData:self.signIn];
+    }    
+}
+
+- (void)signInWithData:(GetSignInRecordListRequestItem_SignIn *)data {
+    [self.view nyx_startLoading];
+    [self.signInRequest stopRequest];
+    self.signInRequest = [[UserSignInRequest alloc] init];
+    self.signInRequest.stepId = data.stepId;
+    self.signInRequest.positionSignIn = YES;
+    self.signInRequest.positionRange = data.positionRange;
+    self.signInRequest.signinPosition = data.signinPosition;
+    WEAK_SELF
+    [self.signInRequest startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error && (error.code == 1||error.code == -1)) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
+        ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+        scanCodeResultVC.data = error ? nil : item.data;
+        scanCodeResultVC.error = error ? item.error : nil;
+        scanCodeResultVC.positionSignIn = YES;
+        scanCodeResultVC.currentIndexPath = self.currentIndexPath;
+        [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+    }];
 }
 
 - (void)setModel {
@@ -212,10 +246,10 @@
         self.signedInTimeLabel.hidden = NO;
         self.signedInTimeLabel.text = [self.signIn.userSignIn.signinTime omitSecondOfFullDateString];
     }
-    BOOL placeSignin = YES;
+    BOOL placeSignin = [self.signIn.signinType isEqualToString:@"2"];
     if (placeSignin) {
         self.typeNameLabel.text = @"位置签到";
-        self.placeNameLabel.text = @"北京市西城区北广大厦";
+        self.placeNameLabel.text = self.signIn.positionSite;
         [self.statusTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.placeNameLabel.mas_bottom).offset(29);
             make.centerX.mas_equalTo(0);
