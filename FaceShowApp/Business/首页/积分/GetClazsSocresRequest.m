@@ -11,6 +11,9 @@
 @implementation GetClazsSocresRequestItem_element
 @end
 
+@implementation GetClazsSocresRequestItem_clazsUserScore
+@end
+
 @implementation GetClazsSocresRequestItem_data
 @end
 

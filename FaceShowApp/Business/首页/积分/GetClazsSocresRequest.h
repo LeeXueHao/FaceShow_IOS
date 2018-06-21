@@ -27,13 +27,18 @@
 @property (nonatomic, strong) NSArray<Optional,GetUserClazsScoreRequestItem_userScoreItem> *userScoreItems;
 @end
 
-@interface GetClazsSocresRequestItem_data : JSONModel
+@interface GetClazsSocresRequestItem_clazsUserScore : JSONModel
 @property (nonatomic, strong) NSArray<Optional,GetClazsSocresRequestItem_element> *elements;
 @property (nonatomic, strong) NSString<Optional> *pageSize;
 @property (nonatomic, strong) NSString<Optional> *pageNum;
 @property (nonatomic, strong) NSString<Optional> *offset;
 @property (nonatomic, strong) NSString<Optional> *totalElements;
 @property (nonatomic, strong) NSString<Optional> *lastPageNumber;
+@end
+
+@interface GetClazsSocresRequestItem_data : JSONModel
+@property (nonatomic, strong) GetClazsSocresRequestItem_clazsUserScore<Optional> *clazsUserScore;
+@property (nonatomic, strong) NSString<Optional> *studentAvgScore;
 @end
 
 @interface GetClazsSocresRequestItem : HttpBaseRequestItem

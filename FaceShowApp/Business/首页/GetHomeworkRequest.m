@@ -30,7 +30,7 @@
 @implementation GetHomeworkRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.method = @"app.manage.interact.getHomework";
+        self.method = @"app.interact.getHomework";
     }
     return self;
 }
