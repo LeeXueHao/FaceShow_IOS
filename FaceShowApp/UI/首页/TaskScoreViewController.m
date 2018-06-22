@@ -133,6 +133,6 @@
 }
 
 - (void)refreshUI {
-    
+    [self requestTaskScore];
 }
 @end

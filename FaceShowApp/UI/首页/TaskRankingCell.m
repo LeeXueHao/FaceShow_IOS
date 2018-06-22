@@ -121,7 +121,7 @@
         self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
     }];
     self.nameLabel.text = element.userName;
-    self.progressLabel.text = [NSString stringWithFormat:@"%.0f%@",[element.taskProgress floatValue]* 100,@"%"];
+    self.progressLabel.text = [NSString stringWithFormat:@"%.0f%@",[element.finishPercent floatValue]* 100,@"%"];
 }
 
 - (void)setIsShowLine:(BOOL)isShowLine {

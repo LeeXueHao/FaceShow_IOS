@@ -12,10 +12,14 @@
 @end
 
 @interface GetUserTasksProgressRankRequestItem_element : JSONModel
-@property (nonatomic, strong) NSString<Optional> *avator;
-@property (nonatomic, strong) NSString<Optional> *userName;
-@property (nonatomic, strong) NSString<Optional> *taskProgress;
 @property (nonatomic, strong) NSString<Optional> *userId;
+@property (nonatomic, strong) NSString<Optional> *userName;
+@property (nonatomic, strong) NSString<Optional> *avator;
+@property (nonatomic, strong) NSString<Optional> *finishPercent;
+@property (nonatomic, strong) NSString<Optional> *interactType;
+@property (nonatomic, strong) NSString<Optional> *taskNum;
+@property (nonatomic, strong) NSString<Optional> *finishNum;
+@property (nonatomic, strong) NSString<Optional> *interactTypeName;
 @end
 
 @interface GetUserTasksProgressRankRequestItem_userRank : JSONModel
