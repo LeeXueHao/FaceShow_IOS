@@ -16,11 +16,10 @@
 #import "ImageAttachmentContainerView.h"
 #import "QiniuDataManager.h"
 #import "FinishedHomeworkViewController.h"
-#import "UpdateHomeworkRequest.h"
+#import "SubmitUserHomeworkRequest.h"
 #import "GetHomeworkRequest.h"
 
 NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
-NSString *kHomeworkFinishedKey = @"kHomeworkFinishedKey";
 
 @interface DoHomeworkViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIView *titleView;
@@ -33,7 +32,7 @@ NSString *kHomeworkFinishedKey = @"kHomeworkFinishedKey";
 @property (nonatomic, strong) ImageAttachmentContainerView *imageContainerView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 
-@property (nonatomic, strong) UpdateHomeworkRequest *submitRequest;
+@property (nonatomic, strong) SubmitUserHomeworkRequest *submitRequest;
 @property(nonatomic, strong) GetHomeworkRequest *getHomeworkRequest;
 @property (nonatomic, assign) NSInteger imageIndex;
 @property (nonatomic, strong) NSMutableArray *resIdArray;
@@ -413,14 +412,14 @@ NSString *kHomeworkFinishedKey = @"kHomeworkFinishedKey";
 }
 - (void)requestForSubmitHomework:(NSString *)resourceIds{
     [self.submitRequest stopRequest];
-    self.submitRequest = [[UpdateHomeworkRequest alloc] init];
+    self.submitRequest = [[SubmitUserHomeworkRequest alloc] init];
     self.submitRequest.stepId = self.homework.stepId;
     self.submitRequest.title = self.titleTextView.text;
     self.submitRequest.content = self.contentTextView.text;
     self.submitRequest.resourceKey = resourceIds;
     [self nyx_disableRightNavigationItem];
     WEAK_SELF
-    [self.submitRequest startRequestWithRetClass:[UpdateHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [self.submitRequest startRequestWithRetClass:[SubmitUserHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         if (error) {
             [self nyx_enableRightNavigationItem];
@@ -431,7 +430,7 @@ NSString *kHomeworkFinishedKey = @"kHomeworkFinishedKey";
                 [self nyx_enableRightNavigationItem];
                 [self.view nyx_stopLoading];
                 [self requestHomework];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:@{kHomeworkFinishedKey : self.homework.stepId}];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:nil];
             });
         }
     }];

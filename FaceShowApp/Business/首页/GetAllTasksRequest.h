@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSString<Optional> *totalStudentNum;
 @property (nonatomic, strong) NSString<Optional> *finishedStudentNum;
 @property (nonatomic, strong) NSString<Optional> *percent;
-
+@property (nonatomic, strong) NSString<Optional> *courseName;
 @end
 
 @protocol GetAllTasksRequestItem_interactType <NSObject>

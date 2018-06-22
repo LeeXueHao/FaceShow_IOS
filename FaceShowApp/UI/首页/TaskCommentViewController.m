@@ -164,6 +164,7 @@
         }
         self.inputView.textView.text = nil;
         [self.view nyx_showToast:@"提交成功"];
+        BLOCK_EXEC(self.completeBlock);
         [self firstPageFetch];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }];
@@ -184,7 +185,6 @@
             return;
         }
         [self.view nyx_showToast:@"提交成功"];
-        BLOCK_EXEC(self.completeBlock);
         LikeCommentRequestItem *item = (LikeCommentRequestItem *)retItem;
         element.likeNum = item.data.userNum;
         element.userLiked = @"1";

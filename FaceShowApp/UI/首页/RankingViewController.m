@@ -62,8 +62,13 @@
         make.top.mas_equalTo(tabContainerView.mas_bottom);
     }];
     
-    if (self.selectedIndex < self.tabControllers.count) {
-        tabContainerView.selectedIndex = self.selectedIndex;
+    if (self.selectedIndex) {
+        if (self.selectedIndex < self.tabControllers.count) {
+            [self switchToVCWithIndex:self.selectedIndex];
+            tabContainerView.selectedIndex = self.selectedIndex;
+        }
+    }else {
+        [self switchToVCWithIndex:0];
     }
 }
 

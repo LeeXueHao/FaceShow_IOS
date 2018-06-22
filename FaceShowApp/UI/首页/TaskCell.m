@@ -89,7 +89,10 @@
 - (void)setTask:(GetAllTasksRequestItem_task *)task {
     _task = task;
     self.titleLabel.text = task.interactName;
-    self.sourceLabel.text = @"所属课程:课程或任务名字";//[task.createTime omitSecondOfFullDateString];
+    if (!task.courseName) {
+        task.courseName = @"班级任务";
+    }
+    self.sourceLabel.text = [NSString stringWithFormat:@"所属课程:%@",task.courseName];
     if (task.stepFinished.boolValue) {
         self.statusLabel.text = @"已完成";
         self.statusLabel.textColor = [UIColor colorWithHexString:@"666666"];

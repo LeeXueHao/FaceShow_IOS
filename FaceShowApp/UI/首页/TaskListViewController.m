@@ -178,27 +178,25 @@
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kReloadSignInRecordNotification" object:nil] subscribeNext:^(NSNotification *x) {
         STRONG_SELF
-        NSDictionary *dic = (NSDictionary *)x.object;
-        NSIndexPath *currentIndex = [dic objectForKey:@"kSignInRecordCurrentIndexPath"];
+//        NSDictionary *dic = (NSDictionary *)x.object;
+//        NSIndexPath *currentIndex = [dic objectForKey:@"kSignInRecordCurrentIndexPath"];
 //        NSString *signInTime = [dic valueForKey:@"kCurrentIndexPathSucceedSigninTime"];
 //        GetSignInRecordListRequestItem_SignIn *signIn = self.signIn;
 //        GetSignInRecordListRequestItem_UserSignIn *userSignIn = [GetSignInRecordListRequestItem_UserSignIn new];
 //        userSignIn.signinTime = signInTime;
 //        signIn.userSignIn = userSignIn;
-        GetAllTasksRequestItem_task *task = self.dataArray[currentIndex.row];
-        task.stepFinished = @"1";
-        [self.tableView reloadRowsAtIndexPaths:@[currentIndex] withRowAnimation:UITableViewRowAnimationNone];
+//        GetAllTasksRequestItem_task *task = self.dataArray[currentIndex.row];
+//        task.stepFinished = @"1";
+//        [self.tableView reloadRowsAtIndexPaths:@[currentIndex] withRowAnimation:UITableViewRowAnimationNone];
+        self.currentType = InteractType_SignIn;
+        [self requestTaskInfo];
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHomeworkFinishedNotification object:nil] subscribeNext:^(NSNotification *x) {
         STRONG_SELF
-        NSDictionary *dic = (NSDictionary *)x.object;
-        NSString *stepId = [dic objectForKey:kHomeworkFinishedKey];
         [self.dataArray enumerateObjectsUsingBlock:^(GetAllTasksRequestItem_task * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             STRONG_SELF
-            if ([obj.stepId isEqualToString:stepId]) {
-                obj.stepFinished = @"1";
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            }
+            self.currentType = InteractType_Homework;
+            [self requestTaskInfo];
         }];
     }];
 }
@@ -274,8 +272,8 @@
         WEAK_SELF
         [vc setCompleteBlock:^{
             STRONG_SELF
-            task.stepFinished = @"1";
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            self.currentType = InteractType_Evaluate;
+            [self requestTaskInfo];
             [self checkIfHasUncompleteTask];
         }];
         [self.navigationController pushViewController:vc animated:YES];
@@ -285,8 +283,8 @@
         WEAK_SELF
         [vc setCompleteBlock:^{
             STRONG_SELF
-            task.stepFinished = @"1";
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            self.currentType = InteractType_Questionare;
+            [self requestTaskInfo];
             [self checkIfHasUncompleteTask];
         }];
         [self.navigationController pushViewController:vc animated:YES];
@@ -301,8 +299,8 @@
             WEAK_SELF
             [vc setCompleteBlock:^{
                 STRONG_SELF
-                task.stepFinished = @"1";
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                self.currentType = InteractType_Vote;
+                [self requestTaskInfo];
                 [self checkIfHasUncompleteTask];
             }];
             [self.navigationController pushViewController:vc animated:YES];
@@ -313,8 +311,8 @@
         WEAK_SELF
         [vc setCompleteBlock:^{
             STRONG_SELF
-            task.stepFinished = @"1";
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            self.currentType = InteractType_Comment;
+            [self requestTaskInfo];
             [self checkIfHasUncompleteTask];
         }];
         [self.navigationController pushViewController:vc animated:YES];

@@ -54,7 +54,7 @@
     TaskRankingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TaskRankingCell"];
     TaskRankingCellItem *item = [[TaskRankingCellItem alloc]init];
     item.element = self.dataArray[indexPath.row];
-    item.rank = indexPath.row;
+    item.rank = indexPath.row + 1;
     cell.item = item;
     if (indexPath.row == self.dataArray.count - 1) {
         cell.isShowLine = NO;
