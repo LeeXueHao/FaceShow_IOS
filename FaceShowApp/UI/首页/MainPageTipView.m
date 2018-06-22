@@ -41,8 +41,8 @@
     CGFloat x = SCREEN_WIDTH/4.0;
     
     self.progressLabel = [[UILabel alloc]init];
-    self.progressLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    self.progressLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.progressLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.progressLabel.font = [UIFont boldSystemFontOfSize:15];
     self.progressLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.progressLabel];
     [self.progressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -51,8 +51,8 @@
     }];
     
     self.scoreLabel = [[UILabel alloc]init];
-    self.scoreLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    self.scoreLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.scoreLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.scoreLabel.font = [UIFont boldSystemFontOfSize:15];
     self.scoreLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.scoreLabel];
     [self.scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
