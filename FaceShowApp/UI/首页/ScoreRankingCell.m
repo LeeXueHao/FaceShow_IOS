@@ -109,7 +109,7 @@
         self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
     }];
     self.nameLabel.text = element.realName;
-    self.progressLabel.text = element.totalScore;
+    self.progressLabel.text = element.totalScore ? element.totalScore : @"0";
 }
 
 - (void)setIsShowLine:(BOOL)isShowLine {

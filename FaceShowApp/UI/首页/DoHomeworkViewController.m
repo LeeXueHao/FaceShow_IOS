@@ -161,9 +161,8 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 - (void)setupContentView {
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64.0f);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64.0f - 50);
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"dfe2e6"];
-    self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleView.mas_bottom);
