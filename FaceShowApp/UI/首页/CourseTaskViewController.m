@@ -14,10 +14,14 @@
 #import "SignInDetailViewController.h"
 #import "EmptyView.h"
 #import "QuestionnaireResultViewController.h"
-
+#import "GetHomeworkRequest.h"
+#import "FinishedHomeworkViewController.h"
+#import "HomeworkRequirementViewController.h"
 @interface CourseTaskViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
+@property(nonatomic, strong) GetHomeworkRequest *getHomeworkRequest;
+
 @end
 
 @implementation CourseTaskViewController
@@ -79,11 +83,15 @@
     cell.title = info.interactName;
     InteractType type = [FSDataMappingTable InteractTypeWithKey:info.interactType];
     if (type == InteractType_Vote) {
-        cell.iconName = @"投票icon";
+        cell.iconName = @"投票";
     } else if (type == InteractType_Questionare) {
         cell.iconName = @"问卷";
     } else if (type == InteractType_Comment) {
-        cell.iconName = @"评论icon";
+        cell.iconName = @"讨论";
+    } else if (type == InteractType_Homework) {
+        cell.iconName = @"作业";
+    }else if (type == InteractType_Evaluate) {
+        cell.iconName = @"评价";
     }
     return cell;
 }
@@ -115,9 +123,39 @@
         QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:info.stepId interactType:type];
         vc.name = info.interactName;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (type == InteractType_Evaluate) {
+        QuestionnaireViewController *vc = [[QuestionnaireViewController alloc]initWithStepId:info.stepId interactType:type];
+        vc.name = info.interactName;
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (type == InteractType_Comment) {
         CourseCommentViewController *vc = [[CourseCommentViewController alloc]initWithStepId:info.stepId];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (type == InteractType_Homework) {
+        [self.getHomeworkRequest stopRequest];
+        self.getHomeworkRequest = [[GetHomeworkRequest alloc]init];
+        self.getHomeworkRequest.stepId = info.stepId;
+        WEAK_SELF
+        [self.view nyx_startLoading];
+        [self.getHomeworkRequest startRequestWithRetClass:[GetHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+            STRONG_SELF
+            [self.view nyx_stopLoading];
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
+            GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
+            if (item.data.userHomework) {
+                FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
+                vc.userHomework = item.data.userHomework;
+                vc.homework = item.data.homework;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
+                vc.homework = item.data.homework;
+                vc.isFinished = NO;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
     }
 }
 
