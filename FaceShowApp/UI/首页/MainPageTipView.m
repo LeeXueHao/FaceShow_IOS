@@ -93,11 +93,17 @@
 
 - (void)setItem:(GetCurrentClazsRequestItem *)item {
     _item = item;
-    float task = [item.data.taskCompletion floatValue];
-    NSString *progress = [NSString stringWithFormat:@"任务进度  %.0f%@",task * 100,@"%"];
-    NSMutableAttributedString *progressAttStr = [[NSMutableAttributedString alloc]initWithString:progress];
-    [progressAttStr addAttributes:@{NSFontAttributeName:self.progressLabel.font,NSForegroundColorAttributeName:self.progressLabel.textColor} range:NSMakeRange(0,[progress length])];
-    [progressAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [progress length] - 5)];
+    float task = [item.data.taskCompletion floatValue] * 100;
+    NSString *progressStr = [NSString stringWithFormat:@"%@",@(task)];
+    if ([progressStr containsString:@"."]) {
+        progressStr = [NSString stringWithFormat:@"%.2f%@",[progressStr floatValue],@"%"];
+    }else {
+        progressStr = [NSString stringWithFormat:@"%.0f%@",[progressStr floatValue],@"%"];
+    }
+    progressStr = [NSString stringWithFormat:@"任务进度  %@",progressStr];
+    NSMutableAttributedString *progressAttStr = [[NSMutableAttributedString alloc]initWithString:progressStr];
+    [progressAttStr addAttributes:@{NSFontAttributeName:self.progressLabel.font,NSForegroundColorAttributeName:self.progressLabel.textColor} range:NSMakeRange(0,[progressStr length])];
+    [progressAttStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"1da1f2"] range:NSMakeRange(5, [progressStr length] - 5)];
     self.progressLabel.attributedText = progressAttStr;
     
     NSString *score = [NSString stringWithFormat:@"学习积分  %.0f",[item.data.userScore floatValue]];
