@@ -53,6 +53,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.top.mas_equalTo(20);
+        make.right.mas_equalTo(-65);
     }];
     
     self.timeTipLabel = [[UILabel alloc] init];
@@ -76,7 +77,7 @@
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.timeTipLabel.mas_right).mas_offset(10);
         make.centerY.mas_equalTo(self.timeTipLabel);
-        make.right.mas_equalTo(-15);
+        make.right.mas_equalTo(-65);
     }];
     
     self.placeTipLabel = [[UILabel alloc] init];
@@ -130,9 +131,10 @@
 
 - (void)setData:(GetSignInRecordListRequestItem_SignIn *)data {
     self.titleLabel.text = data.title;
-    self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@",[data.startTime omitSecondOfFullDateString],[data.endTime omitSecondOfFullDateString]];
+    NSString *endTime = [data.endTime omitSecondOfFullDateString];
+    endTime = [endTime componentsSeparatedByString:@" "].lastObject;
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ - %@",[data.startTime omitSecondOfFullDateString],endTime];
     self.placeLabel.text = data.positionSite;
-    self.timeLabel.text = [data.createTime omitSecondOfFullDateString];;
 }
 
 - (void)setSignInPlaceBlock:(SignInPlaceBlock)block {

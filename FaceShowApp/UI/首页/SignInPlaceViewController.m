@@ -66,6 +66,7 @@
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.allowsSelection = NO;
     [self.tableView registerClass:[SignInPLaceCell class] forCellReuseIdentifier:@"SignInPLaceCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
