@@ -14,10 +14,10 @@ BOOL mockFrameworkOn = NO;
 BOOL testFrameworkOn = NO;
 
 #ifdef DEBUG
-NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
-NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
-NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
-NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
+NSString * const kServer = @"http://hbyxb.ymd.yanxiu.com/pxt/platform/data.api";
+NSString * const kServer1_1 = @"http://hbyxb.ymd.yanxiu.com/pxt/v1.1/platform/data.api";
+NSString * const kLoginServer = @"http://hbyxb.ymd.yanxiu.com/uc/appLogin";
+NSString * const kEasygoServer = @"http://hbyxb.ymd.yanxiu.com/easygo/multiUpload";
 #else
 NSString * const kServer = @"http://yxb.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://yxb.yanxiu.com/pxt/v1.1/platform/data.api";
