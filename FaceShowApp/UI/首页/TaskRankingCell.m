@@ -116,7 +116,7 @@
     self.rankLabel.text = [NSString stringWithFormat:@"%@",@(item.rank)];
     self.avatarImageView.contentMode = UIViewContentModeCenter;
     WEAK_SELF
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:element.avator] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:element.avatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         STRONG_SELF
         self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
     }];
