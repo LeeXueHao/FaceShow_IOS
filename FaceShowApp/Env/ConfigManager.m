@@ -20,7 +20,7 @@ NSString * const kServer = @"http://hbyxb.ymd.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://hbyxb.ymd.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://hbyxb.ymd.yanxiu.com/uc/appLogin";
 NSString * const kEasygoServer = @"http://hbyxb.ymd.yanxiu.com/easygo/multiUpload";
-NSString * const kQiNiuUpload = @"http://paayos450.bkt.clouddn.com";
+NSString * const kQiNiuUpload = @"http://pavlal4my.bkt.clouddn.com";
 #else
 NSString * const kServer = @"http://jspx1.e21.cn/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://jspx1.e21.cn/pxt/v1.1/platform/data.api";
