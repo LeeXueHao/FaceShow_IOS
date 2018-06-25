@@ -148,6 +148,9 @@
         self.tasksArray = [NSArray arrayWithArray:item.data.tasks];
         self.filterArray = [NSArray arrayWithArray:item.data.interactTypes];
         self.dataArray = [self filterWithType:self.currentType];
+        if (self.dataArray.count == 0) {
+            [self.view nyx_showToast:@"暂无此类型的任务哦"];
+        }
         if (!self.isLayoutComplete) {
             [self setupUI];
             self.currentType = InteractType_SignIn;
@@ -332,6 +335,9 @@
 - (void)resetFilter {
     self.dataArray = [self filterWithType:self.currentType];
     [self.tableView reloadData];
+    if (self.dataArray.count == 0) {
+        [self.view nyx_showToast:@"暂无此类型的任务哦"];
+    }
 }
 
 - (NSInteger)indexForInteractType:(InteractType)type {
