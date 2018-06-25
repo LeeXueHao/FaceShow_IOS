@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"研修宝";
+    self.navigationItem.title = [ConfigManager sharedInstance].appName;
     WEAK_SELF
     [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
         STRONG_SELF
