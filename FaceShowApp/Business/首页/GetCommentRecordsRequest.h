@@ -34,6 +34,8 @@
 @property (nonatomic, strong) NSString<Ignore> *offset;
 @property (nonatomic, strong) NSString<Optional> *totalElements;
 @property (nonatomic, strong) NSString<Ignore> *lastPageNumber;
+
+@property (nonatomic, strong) NSString<Ignore> *title;
 @end
 
 @interface GetCommentRecordsRequestItem : HttpBaseRequestItem

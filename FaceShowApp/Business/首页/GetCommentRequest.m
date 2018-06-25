@@ -8,6 +8,16 @@
 
 #import "GetCommentRequest.h"
 
+@implementation GetCommentRequestItem_data
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"description":@"desc"}];
+}
+@end
+
+@implementation GetCommentRequestItem
+
+@end
+
 @implementation GetCommentRequest
 - (instancetype)init {
     if (self = [super init]) {

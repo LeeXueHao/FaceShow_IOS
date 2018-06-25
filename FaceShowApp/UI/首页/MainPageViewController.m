@@ -166,6 +166,7 @@
         }
         GetCurrentClazsRequestItem *item = retItem;
         self.topView.item = item;
+        self.tipView.item = item;
     }];
 }
 

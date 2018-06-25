@@ -45,7 +45,7 @@
         STRONG_SELF
         self.commentRequestItem = item;
         if (!self.tableView.tableHeaderView) {
-            NSString *title = self.title;//item.data.title;
+            NSString *title = item.data.title;
             CGFloat height = [CourseCommentTitleView heightForTitle:title];
             CourseCommentTitleView *headerView = [[CourseCommentTitleView alloc]initWithFrame:CGRectMake(0, 0, 100, height)];
             headerView.title = title;
@@ -166,7 +166,7 @@
         [self.view nyx_showToast:@"提交成功"];
         BLOCK_EXEC(self.completeBlock);
         [self firstPageFetch];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:NSNotFound inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }];
 }
 

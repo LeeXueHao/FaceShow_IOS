@@ -48,7 +48,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"研修总结";
+    self.title = self.homework.title;
     [self setupNavView];
     [self setupUI];
     [self setupObservers];

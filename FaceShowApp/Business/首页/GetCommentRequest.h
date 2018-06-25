@@ -8,6 +8,15 @@
 
 #import "YXGetRequest.h"
 
+@interface GetCommentRequestItem_data : JSONModel
+@property (nonatomic, strong) NSString<Optional> *title;
+@property (nonatomic, strong) NSString<Optional> *desc;
+@end
+
+@interface GetCommentRequestItem : HttpBaseRequestItem
+@property (nonatomic, strong) GetCommentRequestItem_data<Optional> *data;
+@end
+
 @interface GetCommentRequest : YXGetRequest
 @property (nonatomic, strong) NSString *stepId;
 @end
