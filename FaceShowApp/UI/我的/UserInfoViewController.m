@@ -23,6 +23,7 @@
 #import "StageSubjectViewController.h"
 #import "HeadImageHandler.h"
 #import "ModifySchoolViewController.h"
+#import "QiniuDataManager.h"
 
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -295,30 +296,16 @@
         return;
     }
     NSData *data = [UIImage compressionImage:image limitSize:2*1024*1024];
-    [self.uploadHeadImgRequest stopRequest];
-    self.uploadHeadImgRequest = [[UploadHeadImgRequest alloc] init];
-    [self.uploadHeadImgRequest.request setData:data
-                                  withFileName:@"head.jpg"
-                                andContentType:nil
-                                        forKey:@"easyfile"];
     [self.view nyx_startLoading];
     WEAK_SELF
-    [self.uploadHeadImgRequest startRequestWithRetClass:[UploadHeadImgItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key, NSError *error) {
         STRONG_SELF
-        UploadHeadImgItem *item = retItem;
         if (error) {
             [self.view nyx_stopLoading];
-
-            [self.view nyx_showToast:error.localizedDescription];
+            [self.view nyx_showToast:@"上传失败请重试"];
             return;
         }
-        if (item.tplData.data.count != 0) {
-            UploadHeadImgItem_TplData_Data *data = item.tplData.data[0];
-            [self requestForUploadAvatar:data.url?:data.shortUrl];
-        } else {
-            [self.view nyx_stopLoading];
-            [self.view nyx_showToast:item.tplData.message];
-        }
+        [self requestForUploadAvatar:[NSString stringWithFormat:@"%@/%@",[ConfigManager sharedInstance].qiNiuUpLoad,key]];
     }];
 }
 - (void)requestForUploadAvatar:(NSString *)url {

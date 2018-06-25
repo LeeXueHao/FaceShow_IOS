@@ -8,7 +8,11 @@
 
 #import "UpgradeConfig.h"
 
+#ifdef HuBeiApp
 NSString * const kProductLine = @"4";
+#else
+NSString * const kProductLine = @"4";
+#endif
 
 #ifdef DEBUG
 NSString * const kUpgradeServer = @"http://test.hwk.yanxiu.com/app/log/uploadDeviceLog/release.do";

@@ -13,16 +13,38 @@
 BOOL mockFrameworkOn = NO;
 BOOL testFrameworkOn = NO;
 
+#ifdef HuBeiApp
+
 #ifdef DEBUG
 NSString * const kServer = @"http://hbyxb.ymd.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://hbyxb.ymd.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://hbyxb.ymd.yanxiu.com/uc/appLogin";
 NSString * const kEasygoServer = @"http://hbyxb.ymd.yanxiu.com/easygo/multiUpload";
+NSString * const kQiNiuUpload = @"http://paayos450.bkt.clouddn.com";
+#else
+NSString * const kServer = @"http://jspx1.e21.cn/pxt/platform/data.api";
+NSString * const kServer1_1 = @"http://jspx1.e21.cn/pxt/v1.1/platform/data.api";
+NSString * const kLoginServer = @"http://jspx1.e21.cn/uc/appLogin";
+NSString * const kEasygoServer = @"http://jspx1.e21.cn/easygo/multiUpload";
+NSString * const kQiNiuUpload = @"http://hubeiyxb.jsyxw.cn";
+#endif
+
+#else
+
+#ifdef DEBUG
+NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
+NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
+NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
+NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
+NSString * const kQiNiuUpload = @"http://p2xuvkfak.bkt.clouddn.com";
 #else
 NSString * const kServer = @"http://yxb.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://yxb.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://pp.yanxiu.com/uc/appLogin";
 NSString * const kEasygoServer = @"http://b.yanxiu.com/easygo/multiUpload";
+NSString * const kQiNiuUpload = @"http://niuugcupload.yanxiu.com";
+#endif
+
 #endif
 
 @implementation ConfigManager

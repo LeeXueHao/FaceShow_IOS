@@ -9,14 +9,30 @@
 #import "IMConfig.h"
 #import "IMManager.h"
 
+#ifdef HuBeiApp
+
 #ifdef DEBUG
 NSString * const kIMRequestUrlHead = @"http://hbyxb.ymd.yanxiu.com/im/platform/data.api";
+NSString * const kUsername = @"admin";
+NSString * const kPassword = @"public";
+#else
+NSString * const kIMRequestUrlHead = @"http://jspx1.e21.cn/im/platform/data.api";
+NSString * const kUsername = @"yxwork";
+NSString * const kPassword = @"79A6g3pHb4tz2Bs8";
+#endif
+
+#else
+
+#ifdef DEBUG
+NSString * const kIMRequestUrlHead = @"http://orz.yanxiu.com/im/platform/data.api";
 NSString * const kUsername = @"admin";
 NSString * const kPassword = @"public";
 #else
 NSString * const kIMRequestUrlHead = @"http://im.yanxiu.com/im/platform/data.api";
 NSString * const kUsername = @"yxwork";
 NSString * const kPassword = @"79A6g3pHb4tz2Bs8";
+#endif
+
 #endif
 
 NSString * const kBizSourse = @"22";
