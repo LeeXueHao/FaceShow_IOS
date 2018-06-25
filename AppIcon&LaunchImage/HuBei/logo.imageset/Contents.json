@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "学员端.png",
+      "filename" : "湖北师训.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "学员端@2x.png",
+      "filename" : "湖北师训@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "学员端@3x.png",
+      "filename" : "湖北师训@3x.png",
       "scale" : "3x"
     }
   ],
