@@ -121,7 +121,6 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(45);
     }];
     
     self.titleLabel = [[UILabel alloc]init];
@@ -132,6 +131,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.top.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(40);
     }];
     
     self.titleTextView = [[SAMTextView alloc]init];
@@ -155,6 +155,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
         make.top.bottom.mas_equalTo(0);
         make.left.mas_equalTo(self.titleLabel.mas_right);
         make.right.mas_equalTo(-15);
+        make.height.mas_greaterThanOrEqualTo(45);
     }];
 }
 
