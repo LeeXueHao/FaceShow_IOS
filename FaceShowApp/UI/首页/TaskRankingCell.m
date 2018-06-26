@@ -9,9 +9,6 @@
 #import "TaskRankingCell.h"
 #import "GetUserTasksProgressRankRequest.h"
 
-@implementation TaskRankingCellItem
-@end
-
 @interface TaskRankingCell ()
 @property (nonatomic, strong) UILabel *rankLabel;
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -110,10 +107,9 @@
 //    //    self.numberLabel.text = data.mobilePhone;
 //}
 
-- (void)setItem:(TaskRankingCellItem *)item {
-    _item = item;
-    GetUserTasksProgressRankRequestItem_element *element = item.element;
-    self.rankLabel.text = [NSString stringWithFormat:@"%@",@(item.rank)];
+- (void)setElement:(GetUserTasksProgressRankRequestItem_element *)element {
+    _element = element;
+    self.rankLabel.text = element.userRank;
     self.avatarImageView.contentMode = UIViewContentModeCenter;
     WEAK_SELF
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:element.avatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {

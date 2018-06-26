@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 @class GetClazsSocresRequestItem_element;
 
-@interface ScoreRankingCellItem : NSObject
-@property (nonatomic, strong) GetClazsSocresRequestItem_element *element;
-@property(nonatomic, assign) NSInteger rank;
-@end
-
 @interface ScoreRankingCell : UITableViewCell
-@property(nonatomic, strong) ScoreRankingCellItem *item;
+@property(nonatomic, strong) GetClazsSocresRequestItem_element *element;
 @property(nonatomic, assign) BOOL isShowLine;
 @end

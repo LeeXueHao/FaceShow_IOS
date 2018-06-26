@@ -14,6 +14,7 @@
 @interface GetClazsSocresRequestItem_element : JSONModel
 @property (nonatomic, strong) NSString<Optional> *userId;
 @property (nonatomic, strong) NSString<Optional> *realName;
+@property (nonatomic, strong) NSString<Optional> *userRank;
 @property (nonatomic, strong) NSString<Optional> *mobilePhone;
 @property (nonatomic, strong) NSString<Optional> *email;
 @property (nonatomic, strong) NSString<Optional> *stage;

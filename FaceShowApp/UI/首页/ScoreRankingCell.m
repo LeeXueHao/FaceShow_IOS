@@ -9,9 +9,6 @@
 #import "ScoreRankingCell.h"
 #import "GetClazsSocresRequest.h"
 
-@implementation ScoreRankingCellItem
-@end
-
 @interface ScoreRankingCell ()
 @property (nonatomic, strong) UILabel *rankLabel;
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -97,11 +94,9 @@
     }];
 }
 
-- (void)setItem:(ScoreRankingCellItem *)item {
-    _item = item;
-    
-    GetClazsSocresRequestItem_element *element = item.element;
-    self.rankLabel.text = [NSString stringWithFormat:@"%@",@(item.rank)];
+- (void)setElement:(GetClazsSocresRequestItem_element *)element {
+    _element = element;
+    self.rankLabel.text = element.userRank;
     self.avatarImageView.contentMode = UIViewContentModeCenter;
     WEAK_SELF
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:element.avatar] placeholderImage:[UIImage imageNamed:@"班级圈小默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
