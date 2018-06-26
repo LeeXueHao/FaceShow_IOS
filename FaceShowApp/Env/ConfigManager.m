@@ -75,6 +75,10 @@ NSString * const kQiNiuUpload = @"http://niuugcupload.yanxiu.com";
     return kEasygoServer;
 }
 
+- (NSString *)qiNiuUpLoad {
+    return kQiNiuUpload;
+}
+
 - (NSString *)appName {
     if (!_appName) {
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
