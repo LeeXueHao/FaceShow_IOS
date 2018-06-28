@@ -100,7 +100,7 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     BOOL hasSignedIn = !isEmpty(self.error) && self.error.code.integerValue == SignInErrorHasSignedIn;
     if (!isEmpty(self.data) || hasSignedIn) {
         self.signInImageView.image = [UIImage imageNamed:hasSignedIn ? @"签到失败图标" : @"签到成功图标"];
-        self.titleLabel.text = hasSignedIn ? self.error.message : @"签到成功";
+        self.titleLabel.text = hasSignedIn ? self.error.message : self.data.successPrompt;
         self.grayLabel.text = @"签到时间";
         [self.grayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(40);
