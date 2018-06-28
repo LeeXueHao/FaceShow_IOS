@@ -12,6 +12,7 @@
 @property (nonatomic, strong) NSString<Optional> *token;
 @property (nonatomic, strong) NSString<Optional> *uid;
 @property (nonatomic, strong) NSString<Optional> *uname;
+@property (nonatomic, strong) NSString<Optional> *host;
 @end
 
 @interface QiniuTokenRequestItem : HttpBaseRequestItem

@@ -376,7 +376,7 @@
     UIImage *img = self.imageArray[index];
     NSData *data = [UIImage compressionImage:img limitSize:0.1 * 1024 * 1024];
     WEAK_SELF
-    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key, NSError *error) {
+    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key,NSString *host, NSError *error) {
         STRONG_SELF
         if (error) {
             [self.view nyx_stopLoading];

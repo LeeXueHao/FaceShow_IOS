@@ -298,14 +298,14 @@
     NSData *data = [UIImage compressionImage:image limitSize:2*1024*1024];
     [self.view nyx_startLoading];
     WEAK_SELF
-    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key, NSError *error) {
+    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key,NSString *host, NSError *error) {
         STRONG_SELF
         if (error) {
             [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"上传失败请重试"];
             return;
         }
-        [self requestForUploadAvatar:[NSString stringWithFormat:@"%@/%@",[ConfigManager sharedInstance].qiNiuUpLoad,key]];
+        [self requestForUploadAvatar:[NSString stringWithFormat:@"%@/%@",host,key]];
     }];
 }
 - (void)requestForUploadAvatar:(NSString *)url {

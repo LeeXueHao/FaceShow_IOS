@@ -14,7 +14,7 @@
 
 - (void)uploadData:(NSData *)data
  withProgressBlock:(void(^)(CGFloat percent))progressBlock
-     completeBlock:(void(^)(NSString *key,NSError *error))completeBlock;
+     completeBlock:(void(^)(NSString *key,NSString *host,NSError *error))completeBlock;
 
 #pragma mark - Utils
 + (NSString *)resizedUrlStringWithOriString:(NSString *)oriStr

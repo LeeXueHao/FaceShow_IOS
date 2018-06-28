@@ -11,6 +11,7 @@
 
 @interface QiniuDataManager ()
 @property (nonatomic, strong) QiniuTokenRequest *tokenRequest;
+@property (nonatomic, strong) QiniuTokenRequestItem *tokenRequestItem;
 @property (nonatomic, strong) QNUploadManager *upManager;
 @end
 
@@ -41,14 +42,15 @@
 
 - (void)uploadData:(NSData *)data
  withProgressBlock:(void(^)(CGFloat percent))progressBlock
-     completeBlock:(void(^)(NSString *key,NSError *error))completeBlock {
+     completeBlock:(void(^)(NSString *key,NSString *host,NSError *error))completeBlock {
     WEAK_SELF
     [self updateTokenWithCompleteBlock:^(QiniuTokenRequestItem *item, NSError *error) {
         STRONG_SELF
         if (error) {
-            BLOCK_EXEC(completeBlock,nil,error);
+            BLOCK_EXEC(completeBlock,nil,nil,error);
             return;
         }
+        self.tokenRequestItem = item;
         [self uploadData:data withToken:item.data.token progressBlock:progressBlock completeBlock:completeBlock];
     }];
 }
@@ -56,7 +58,7 @@
 - (void)uploadData:(NSData *)data
          withToken:(NSString *)token
      progressBlock:(void(^)(CGFloat percent))progressBlock
-     completeBlock:(void(^)(NSString *key,NSError *error))completeBlock {
+     completeBlock:(void(^)(NSString *key,NSString *host,NSError *error))completeBlock {
     QNUploadOption *uploadOption = [[QNUploadOption alloc]initWithProgressHandler:^(NSString *key, float percent) {
         BLOCK_EXEC(progressBlock,percent);
     }];
@@ -67,11 +69,11 @@
         STRONG_SELF
         if (!resp) {
             NSError *err = [NSError errorWithDomain:@"QiniuUploadError" code:1 userInfo:@{NSLocalizedDescriptionKey:@"上传数据失败"}];
-            BLOCK_EXEC(completeBlock,nil,err);
+            BLOCK_EXEC(completeBlock,nil,nil,err);
             return;
         }
         NSString *qiniu_key = [resp valueForKey:@"key"];
-        BLOCK_EXEC(completeBlock,qiniu_key,nil);
+        BLOCK_EXEC(completeBlock,qiniu_key,self.tokenRequestItem.data.host,nil);
     } option:uploadOption];
 }
 

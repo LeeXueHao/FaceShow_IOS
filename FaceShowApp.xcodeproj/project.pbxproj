@@ -194,6 +194,7 @@
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
 		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
+		7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E222520E475E10055843D /* RefreshBaseViewController.m */; };
 		7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E628200DCD71006704E7 /* TestQiniuViewController.m */; };
 		7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */; };
 		7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E632200EF48C006704E7 /* QiniuDataManager.m */; };
@@ -802,6 +803,8 @@
 		7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserPromptsRequest.m; sourceTree = "<group>"; };
 		7C29F3151FEA3AA6007A4076 /* UserPromptsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptsManager.h; sourceTree = "<group>"; };
 		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
+		7C2E222420E475E00055843D /* RefreshBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBaseViewController.h; sourceTree = "<group>"; };
+		7C2E222520E475E10055843D /* RefreshBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshBaseViewController.m; sourceTree = "<group>"; };
 		7C33E627200DCD71006704E7 /* TestQiniuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestQiniuViewController.h; sourceTree = "<group>"; };
 		7C33E628200DCD71006704E7 /* TestQiniuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestQiniuViewController.m; sourceTree = "<group>"; };
 		7C33E62E200EF3F6006704E7 /* QiniuTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuTokenRequest.h; sourceTree = "<group>"; };
@@ -2033,6 +2036,8 @@
 				7C25199B1F6901560001B577 /* BaseViewController.m */,
 				7C25199D1F69066F0001B577 /* ScrollBaseViewController.h */,
 				7C25199E1F69066F0001B577 /* ScrollBaseViewController.m */,
+				7C2E222420E475E00055843D /* RefreshBaseViewController.h */,
+				7C2E222520E475E10055843D /* RefreshBaseViewController.m */,
 			);
 			path = "框架";
 			sourceTree = "<group>";
@@ -3100,6 +3105,7 @@
 				7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */,
 				7C2519AF1F690DA00001B577 /* MainPageViewController.m in Sources */,
 				7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */,
+				7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */,
 				7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */,
 				438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */,
 				7C2518E71F68E68D0001B577 /* NSString+YXString.m in Sources */,

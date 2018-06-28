@@ -46,7 +46,7 @@
     NSData *data = UIImageJPEGRepresentation(img, 1);
     
     WEAK_SELF
-    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key, NSError *error) {
+    [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key,NSString *host, NSError *error) {
         STRONG_SELF
         if (error) {
             [self.view nyx_showToast:error.localizedDescription];

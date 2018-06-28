@@ -143,7 +143,7 @@ NSString * const kIMImageUploadProgressKey = @"kIMImageUploadProgressKey";
                                kIMImageUploadProgressKey:@(percent)
                                };
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMImageUploadDidUpdateNotification object:nil userInfo:info];
-    } completeBlock:^(NSString *key, NSError *error) {
+    } completeBlock:^(NSString *key,NSString *host, NSError *error) {
         STRONG_SELF
         if (error) {
             [self messageSentFailed:imageMsg];
