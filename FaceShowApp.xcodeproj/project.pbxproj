@@ -195,6 +195,8 @@
 		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
 		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
 		7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E222520E475E10055843D /* RefreshBaseViewController.m */; };
+		7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */; };
+		7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223820E61B380055843D /* AppUseRecordManager.m */; };
 		7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E628200DCD71006704E7 /* TestQiniuViewController.m */; };
 		7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */; };
 		7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E632200EF48C006704E7 /* QiniuDataManager.m */; };
@@ -805,6 +807,10 @@
 		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
 		7C2E222420E475E00055843D /* RefreshBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBaseViewController.h; sourceTree = "<group>"; };
 		7C2E222520E475E10055843D /* RefreshBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshBaseViewController.m; sourceTree = "<group>"; };
+		7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAppUseRecordRequest.m; sourceTree = "<group>"; };
+		7C2E223620E61B370055843D /* AppUseRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUseRecordManager.h; sourceTree = "<group>"; };
+		7C2E223720E61B380055843D /* AddAppUseRecordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAppUseRecordRequest.h; sourceTree = "<group>"; };
+		7C2E223820E61B380055843D /* AppUseRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUseRecordManager.m; sourceTree = "<group>"; };
 		7C33E627200DCD71006704E7 /* TestQiniuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestQiniuViewController.h; sourceTree = "<group>"; };
 		7C33E628200DCD71006704E7 /* TestQiniuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestQiniuViewController.m; sourceTree = "<group>"; };
 		7C33E62E200EF3F6006704E7 /* QiniuTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuTokenRequest.h; sourceTree = "<group>"; };
@@ -1814,6 +1820,7 @@
 		7C2519641F68EBCD0001B577 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7C2E223420E61B1F0055843D /* 用户使用统计 */,
 				7CEBA91F20886C30009754F5 /* 升级 */,
 				E91E5D072047B0A600052FBA /* 通讯录 */,
 				7C37A5762016CFA80073FDE2 /* 工具箱 */,
@@ -2172,6 +2179,17 @@
 				7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */,
 			);
 			path = "消息提示";
+			sourceTree = "<group>";
+		};
+		7C2E223420E61B1F0055843D /* 用户使用统计 */ = {
+			isa = PBXGroup;
+			children = (
+				7C2E223720E61B380055843D /* AddAppUseRecordRequest.h */,
+				7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */,
+				7C2E223620E61B370055843D /* AppUseRecordManager.h */,
+				7C2E223820E61B380055843D /* AppUseRecordManager.m */,
+			);
+			path = "用户使用统计";
 			sourceTree = "<group>";
 		};
 		7C33E62A200EF37D006704E7 /* 七牛 */ = {
@@ -3152,6 +3170,7 @@
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				E94DDDEB20D2747B00729A67 /* TaskRankingViewController.m in Sources */,
+				7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */,
 				7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */,
 				E90C515C204FD6DF0008F92A /* IMMessageTableView.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
@@ -3375,6 +3394,7 @@
 				435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				E91E5D722047B88600052FBA /* IMTopic.m in Sources */,
+				7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */,
 				E94DDDE820D273E700729A67 /* RankingViewController.m in Sources */,
 				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
 				7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */,

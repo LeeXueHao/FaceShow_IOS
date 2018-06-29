@@ -10,6 +10,7 @@
 #import "LoginRequest.h"
 #import "GetCurrentClazsRequest.h"
 #import "GetUserInfoRequest.h"
+#import "AppUseRecordManager.h"
 
 @interface LoginDataManager()
 @property (nonatomic, strong) LoginRequest *loginRequest;
@@ -61,6 +62,15 @@
                 BLOCK_EXEC(completeBlock, emptyError);
                 return;
             }
+            //使用情况统计
+            AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
+            request.platId = item.data.clazsInfo.platId;
+            request.projectId = item.data.clazsInfo.projectId;
+            request.clazsId = item.data.clazsInfo.clazsId;
+            request.methord = manager.getClassRequest.method;
+            request.token = userModel.token;
+            [[AppUseRecordManager sharedInstance]addRecord:request];
+            
             userModel.projectClassInfo = item;
             
             [manager.getUserInfoRequest stopRequest];

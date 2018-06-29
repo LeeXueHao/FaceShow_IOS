@@ -12,6 +12,7 @@
 #import "EmptyView.h"
 #import "GetCurrentClazsRequest.h"
 #import "GetStudentClazsRequest.h"
+#import "AppUseRecordManager.h"
 
 @interface ClassSelectionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) EmptyView *emptyView;
@@ -71,6 +72,14 @@
             return;
         }
         GetCurrentClazsRequestItem *item = retItem;
+        //使用情况统计
+        AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
+        request.platId = item.data.clazsInfo.platId;
+        request.projectId = item.data.clazsInfo.projectId;
+        request.clazsId = item.data.clazsInfo.clazsId;
+        request.methord = self.clazsRefreshRequest.method;
+        [[AppUseRecordManager sharedInstance]addRecord:request];
+        
         [UserManager sharedInstance].userModel.projectClassInfo = item;
         [[UserManager sharedInstance]saveData];
         [UserManager sharedInstance].hasUsedBefore = YES;

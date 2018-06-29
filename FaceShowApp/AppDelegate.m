@@ -17,6 +17,7 @@
 #import "IMUserInterface.h"
 #import "TalkingDataConfig.h"
 #import "BMKLocationConfig.h"
+#import "AppUseRecordManager.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -44,6 +45,14 @@
         [[IMManager sharedInstance]setupWithCurrentMember:[[UserManager sharedInstance].userModel.imInfo.imMember toIMMember] token:[UserManager sharedInstance].userModel.imInfo.imToken];
         [[IMManager sharedInstance]setupWithSceneID:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
         [[IMManager sharedInstance] startConnection];
+        //使用情况统计
+        GetCurrentClazsRequestItem_clazsInfo *info = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo;
+        AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
+        request.platId = info.platId;
+        request.projectId = info.projectId;
+        request.clazsId = info.clazsId;
+        request.methord = @"app.clazs.getCurrentClazs";
+        [[AppUseRecordManager sharedInstance]addRecord:request];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
