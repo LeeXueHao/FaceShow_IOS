@@ -80,7 +80,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     
     UIViewController *messageVC = [[TaskListViewController alloc]init];
     messageVC.title = @"任务";
-    [self configTabbarItem:messageVC.tabBarItem image:@"通知icon" selectedImage:@"通知icon选择"];
+    [self configTabbarItem:messageVC.tabBarItem image:@"任务" selectedImage:@"任务选择"];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];

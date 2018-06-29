@@ -25,6 +25,7 @@
 #import "GetHomeworkRequest.h"
 #import "TaskCommentViewController.h"
 #import "DoHomeworkViewController.h"
+#import "FSTabBarController.h"
 
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) EmptyView *emptyView;
@@ -201,6 +202,12 @@
             self.currentType = InteractType_Homework;
             [self requestTaskInfo];
         }];
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTabBarDidSelectNotification object:nil]subscribeNext:^(NSNotification *x) {
+        STRONG_SELF
+        if (self.navigationController == x.object) {
+            [self requestTaskInfo];
+        }
     }];
 }
 
