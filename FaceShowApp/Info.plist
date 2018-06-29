@@ -42,18 +42,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>需要访问您的相机</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>是否允许此APP保存图片到相册?</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>需要访问您的相册</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -83,5 +71,17 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>扫描二维码,上传照片是否允许打开相机?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>签到功能需要使用您的位置信息,是否允许打开定位?</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>签到功能需要使用您的位置信息,是否允许打开定位?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>签到功能需要使用您的位置信息,是否允许打开定位?</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>是否允许此APP保存图片到相册?</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>上传照片是否允许打开相册?</string>
 </dict>
 </plist>
