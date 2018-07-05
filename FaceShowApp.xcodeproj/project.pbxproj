@@ -447,6 +447,7 @@
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */; };
+		E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1299,6 +1300,8 @@
 		E9970649205900070096DAB0 /* TopicMsg.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicMsg.pbobjc.h; sourceTree = "<group>"; };
 		E997064B205A0A010096DAB0 /* IMPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMPhotoBrowserView.h; sourceTree = "<group>"; };
 		E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMPhotoBrowserView.m; sourceTree = "<group>"; };
+		E9B39A1D20EE1B2B007ABA54 /* ScheduleDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleDetailViewController.h; sourceTree = "<group>"; };
+		E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleDetailViewController.m; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -2411,6 +2414,8 @@
 			children = (
 				7C212DBF1F6A599A0007AE01 /* ScheduleViewController.h */,
 				7C212DC01F6A599A0007AE01 /* ScheduleViewController.m */,
+				E9B39A1D20EE1B2B007ABA54 /* ScheduleDetailViewController.h */,
+				E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */,
 			);
 			name = "日程";
 			sourceTree = "<group>";
@@ -3343,6 +3348,7 @@
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				7CBC5BBB204D2AEF004ACA04 /* MineNameInputView.m in Sources */,
+				E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */,
 				7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */,
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,

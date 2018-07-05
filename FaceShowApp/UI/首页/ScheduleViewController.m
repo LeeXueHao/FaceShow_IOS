@@ -11,13 +11,14 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "GetScheduleListRequest.h"
+#import "ScheduleDetailViewController.h"
 
-@interface ScheduleViewController ()
+@interface ScheduleViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIImageView *detailImageView;
+@property (nonatomic, strong) UIWebView *webview;
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) GetScheduleListRequest *request;
 @property (nonatomic, strong) GetScheduleListRequestItem_Schedule *schedule;
 
@@ -67,29 +68,23 @@
 
 #pragma mark - setupUI
 - (void)setupUI {
-    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     
-    self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.numberOfLines = 0;
-    [self.contentView addSubview:self.titleLabel];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(25);
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
-    }];
-    
-    self.detailImageView = [[UIImageView alloc] init];
-    self.detailImageView.userInteractionEnabled = YES;
-    self.detailImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:self.detailImageView];
-    [self.detailImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(20);
+    self.webview = [[UIWebView alloc]init];
+    self.webview.scalesPageToFit = YES;
+    self.webview.delegate = self;
+    [self.view addSubview:self.webview];
+    [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(15);
         make.left.mas_equalTo(15);
         make.right.bottom.mas_equalTo(-15);
+        make.height.mas_equalTo(self.webview.mas_width).multipliedBy(1.5);
     }];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    [self.detailImageView addGestureRecognizer:tap];
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    self.tap.numberOfTouchesRequired = 1;
+    self.tap.delegate = self;
+    self.webview.userInteractionEnabled = YES;
+    [self.webview addGestureRecognizer:self.tap];
     
     self.emptyView = [[EmptyView alloc]init];
     self.emptyView.title = @"暂无日程";
@@ -112,37 +107,47 @@
 }
 
 - (void)setModel {
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.minimumLineHeight = 22;
-    style.alignment = NSTextAlignmentCenter;
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:self.schedule.subject attributes:@{
-                                                                                                                                NSFontAttributeName : [UIFont boldSystemFontOfSize:16],
-                                                                                                                                NSForegroundColorAttributeName : [UIColor colorWithHexString:@"333333"],
-                                                                                                                                NSParagraphStyleAttributeName : style
-                                                                                                                                }];
-    self.titleLabel.attributedText = attributedStr;
-    [self.detailImageView sd_setImageWithURL:[NSURL URLWithString:self.schedule.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image) {
-            self.detailImageView.image = [image nyx_aspectFitImageWithSize:CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) / image.size.width * image.size.height)];
-        }
-    }];
+    [self loadWebViewWithUrl:self.schedule.imageUrl];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)sender {
-    ShowPhotosViewController *showPhotosVC = [[ShowPhotosViewController alloc] init];
-    PreviewPhotosModel *model = [[PreviewPhotosModel alloc] init];
-    model.original = self.schedule.imageUrl;
-    NSMutableArray *photoArr = [NSMutableArray arrayWithObject:model];
-    showPhotosVC.animateRect = [self.view convertRect:self.detailImageView.frame toView:self.view.window.rootViewController.view];
-    showPhotosVC.imageModelMutableArray = photoArr;
-    showPhotosVC.startInteger = 0;
-    [self.view.window.rootViewController presentViewController:showPhotosVC animated:YES completion:nil];
+    ScheduleDetailViewController *vc = [[ScheduleDetailViewController alloc]init];
+    vc.urlStr = self.schedule.imageUrl;
+    vc.name = self.schedule.subject;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - RefreshDelegate
 - (void)refreshUI {
     NSLog(@"refresh called!");
     [self requestScheduleInfo];
+}
+
+#pragma mark - UIWebView
+- (void)loadWebViewWithUrl:(NSString *)url {
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:url]];
+    [self.webview loadRequest:request];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [self.view nyx_startLoading];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.view nyx_stopLoading];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.view nyx_stopLoading];
+    [self.view nyx_showToast:@"加载失败"];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (gestureRecognizer == self.tap)
+    {
+        return YES;
+    }
+    return NO;
 }
 
 @end
