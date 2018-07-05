@@ -1,12 +1,12 @@
 //
-//  UserInfoViewController.m
+//  HuBeiUserInfoViewController.m
 //  FaceShowApp
 //
-//  Created by 郑小龙 on 2017/9/15.
-//  Copyright © 2017年 niuzhaowang. All rights reserved.
+//  Created by 郑小龙 on 2018/7/5.
+//  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "UserInfoViewController.h"
+#import "HuBeiUserInfoViewController.h"
 #import "FDActionSheetView.h"
 #import "AlertView.h"
 #import "YXNoFloatingHeaderFooterTableView.h"
@@ -24,7 +24,16 @@
 #import "HeadImageHandler.h"
 #import "ModifySchoolViewController.h"
 #import "QiniuDataManager.h"
-@interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
+#import "AreaSubjectViewController.h"
+#import "ModifyCardViewController.h"
+#import "ModifySchoolAreaViewController.h"
+#import "ModifySchoolTypeViewController.h"
+#import "ModifyNationViewController.h"
+#import "ModifyTitleViewController.h"
+#import "ModifyEducationViewController.h"
+#import "ModifyGraduationViewController.h"
+#import "ModifyProfessionalViewController.h"
+@interface HuBeiUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AlertView *alertView;
 @property (nonatomic, strong) NSMutableArray *contentMutableArray;
@@ -37,7 +46,8 @@
 @property (nonatomic, strong) UpdateUserInfoRequest *updateUserInfoRequest;
 @end
 
-@implementation UserInfoViewController
+@implementation HuBeiUserInfoViewController
+
 - (void)dealloc {
     DDLogDebug(@"release========>>%@",[self class]);
 }
@@ -45,12 +55,22 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我的";
     self.imageHandler = [[HeadImageHandler alloc]init];
-    self.contentMutableArray =
+    //头像-姓名-联系电话-性别-学段-学科-省市区-学校-身份证号-学校所在区域-学校类别-民族-职称-最高学历-毕业院校-所学专业 
+   self.contentMutableArray =
     [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
        [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
        [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学校",@"content": [UserManager sharedInstance].userModel.school?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
+       [@{@"title":@"学校",@"content": [UserManager sharedInstance].userModel.school?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"省市区",@"content":[self areaSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"身份证号",@"content":[UserManager sharedInstance].userModel.aui.idCard?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"学校所在区域",@"content":[UserManager sharedInstance].userModel.aui.area?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"学校类别",@"content":[UserManager sharedInstance].userModel.aui.schoolType?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"民族",@"content":[UserManager sharedInstance].userModel.aui.nation?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"职称",@"content":[UserManager sharedInstance].userModel.aui.title?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"最高学历",@"content":[UserManager sharedInstance].userModel.aui.recordeducation?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"毕业院校",@"content":[UserManager sharedInstance].userModel.aui.graduation?:@"暂无",@"next":@(YES)} mutableCopy],
+       [@{@"title":@"所学专业",@"content":[UserManager sharedInstance].userModel.aui.professional?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
     [self setupUI];
     [self setupLayout];
     [self requestForUserInfo];
@@ -66,6 +86,12 @@
         return nil;
     }
     return [NSString stringWithFormat:@"%@-%@", [UserManager sharedInstance].userModel.stageName, [UserManager sharedInstance].userModel.subjectName];
+}
+- (NSString *)areaSubjectString {
+    if (isEmpty([UserManager sharedInstance].userModel.aui.provinceName) || isEmpty([UserManager sharedInstance].userModel.aui.cityName) || isEmpty([UserManager sharedInstance].userModel.aui.countryName)) {
+        return nil;
+    }
+    return [NSString stringWithFormat:@"%@-%@-%@", [UserManager sharedInstance].userModel.aui.provinceName, [UserManager sharedInstance].userModel.aui.cityName, [UserManager sharedInstance].userModel.aui.countryName];
 }
 
 #pragma  mark - get
@@ -105,7 +131,7 @@
     UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         STRONG_SELF
         [self pickImageFromCamera];
-//        [self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera];
+        //        [self pickImageWithSourceType:UIImagePickerControllerSourceTypeCamera];
     }];
     [alertVC addAction:cameraAction];
     UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -211,41 +237,189 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 0) {
-        [self showAlertView];
-    }else if (indexPath.section == 3) {
-        [self showUpdateSexAlertViewWithIndex:indexPath];
-    }else if (indexPath.section == 1) {
-        ModifyNameViewController *vc = [[ModifyNameViewController alloc]init];
-        WEAK_SELF
-        [vc setCompleteBlock:^{
-            STRONG_SELF
-            [self.contentMutableArray[0] setValue:[UserManager sharedInstance].userModel.realName forKey:@"content"];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            BLOCK_EXEC(self.completeBlock);
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.section == 4) {
-        [TalkingData trackEvent:@"点击修改学段学科"];
-        StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
-        vc.selectedStageSubjectString = [self stageSubjectString];
-        WEAK_SELF
-        vc.completeBlock = ^{
-            STRONG_SELF
-            [self.contentMutableArray[3] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        };
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.section == 5) {
-        ModifySchoolViewController *vc = [[ModifySchoolViewController alloc]init];
-        WEAK_SELF
-        [vc setCompleteBlock:^{
-            STRONG_SELF
-            [self.contentMutableArray[4] setValue:[UserManager sharedInstance].userModel.school forKey:@"content"];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            BLOCK_EXEC(self.completeBlock);
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
+    switch (indexPath.section) {
+        case 0:
+        {
+             [self showAlertView];
+        }
+            break;
+        case 1:
+        {
+            ModifyNameViewController *vc = [[ModifyNameViewController alloc]init];
+            WEAK_SELF
+            [vc setCompleteBlock:^{
+                STRONG_SELF
+                [self.contentMutableArray[0] setValue:[UserManager sharedInstance].userModel.realName forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                BLOCK_EXEC(self.completeBlock);
+            }];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        case 3:
+        {
+            [self showUpdateSexAlertViewWithIndex:indexPath];
+        }
+            break;
+        case 4:
+        {
+            [TalkingData trackEvent:@"点击修改学段学科"];
+            StageSubjectViewController *vc = [[StageSubjectViewController alloc] init];
+            vc.selectedStageSubjectString = [self stageSubjectString];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[3] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 5:
+        {
+            ModifySchoolViewController *vc = [[ModifySchoolViewController alloc]init];
+            WEAK_SELF
+            [vc setCompleteBlock:^{
+                STRONG_SELF
+                [self.contentMutableArray[4] setValue:[UserManager sharedInstance].userModel.school forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                BLOCK_EXEC(self.completeBlock);
+            }];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 6:
+        {
+            [TalkingData trackEvent:@"点击修改省市区"];
+            AreaSubjectViewController *vc = [[AreaSubjectViewController alloc] init];
+            vc.dataArray = [AreaManager sharedInstance].areaModel.data;
+            AreaSubjectItem *province = [[AreaSubjectItem alloc] init];
+            province.chooseId = [UserManager sharedInstance].userModel.aui.province;
+            province.chooseName = [UserManager sharedInstance].userModel.aui.provinceName;
+            vc.provinceItem = province;
+            AreaSubjectItem *city = [[AreaSubjectItem alloc] init];
+            city.chooseId = [UserManager sharedInstance].userModel.aui.city;
+            city.chooseName = [UserManager sharedInstance].userModel.aui.cityName;
+            vc.cityItem = city;
+            AreaSubjectItem *country = [[AreaSubjectItem alloc] init];
+            country.chooseId = [UserManager sharedInstance].userModel.aui.country;
+            country.chooseName = [UserManager sharedInstance].userModel.aui.countryName;
+            vc.countryItem = province;
+            vc.status = AreaSubject_Province;
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 7:
+        {
+            ModifyCardViewController *vc = [[ModifyCardViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.idCard?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 8:
+        {
+            ModifySchoolAreaViewController *vc = [[ModifySchoolAreaViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.area?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 9:
+        {
+            ModifySchoolTypeViewController *vc = [[ModifySchoolTypeViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.schoolType?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 10:
+        {
+            ModifyNationViewController *vc = [[ModifyNationViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.nation?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 11:
+        {
+            ModifyTitleViewController *vc = [[ModifyTitleViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.title?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 12:
+        {
+            ModifyEducationViewController *vc = [[ModifyEducationViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.recordeducation?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 13:
+        {
+            ModifyGraduationViewController *vc = [[ModifyGraduationViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.graduation?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 14:
+        {
+            ModifyProfessionalViewController *vc = [[ModifyProfessionalViewController alloc] init];
+            WEAK_SELF
+            vc.completeBlock = ^{
+                STRONG_SELF
+                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.professional?:@"暂无" forKey:@"content"];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+            
+            
+        default:
+            break;
     }
 }
 
@@ -269,7 +443,7 @@
 }
 #pragma mark - request
 - (void)requestForUserInfo{
-   GetUserInfoRequest *request = [[GetUserInfoRequest alloc] init];
+    GetUserInfoRequest *request = [[GetUserInfoRequest alloc] init];
     [self.view nyx_startLoading];
     WEAK_SELF
     [request startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -343,6 +517,5 @@
         [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
-
 
 @end

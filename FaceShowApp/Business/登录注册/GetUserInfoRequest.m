@@ -7,7 +7,8 @@
 //
 
 #import "GetUserInfoRequest.h"
-
+@implementation GetUserInfoRequestItem_Data_Aui
+@end
 @implementation GetUserInfoRequestItem_imMember
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"memberID"}];

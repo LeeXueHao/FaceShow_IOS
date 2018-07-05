@@ -8,6 +8,24 @@
 
 #import "YXGetRequest.h"
 #import "IMMember.h"
+@interface GetUserInfoRequestItem_Data_Aui : JSONModel
+@property (nonatomic, copy) NSString<Optional> *userId;
+@property (nonatomic, copy) NSString<Optional> *idCard;
+@property (nonatomic, copy) NSString<Optional> *province;
+@property (nonatomic, copy) NSString<Optional> *city;
+@property (nonatomic, copy) NSString<Optional> *country;
+@property (nonatomic, copy) NSString<Optional> *area;
+@property (nonatomic, copy) NSString<Optional> *schoolType;
+@property (nonatomic, copy) NSString<Optional> *nation;
+@property (nonatomic, copy) NSString<Optional> *title;
+@property (nonatomic, copy) NSString<Optional> *recordeducation;
+@property (nonatomic, copy) NSString<Optional> *graduation;
+@property (nonatomic, copy) NSString<Optional> *professional;
+
+@property (nonatomic, copy) NSString<Ignore> *provinceName;
+@property (nonatomic, copy) NSString<Ignore> *cityName;
+@property (nonatomic, copy) NSString<Ignore> *countryName;
+@end
 
 @interface GetUserInfoRequestItem_imMember : JSONModel
 @property (nonatomic, copy) NSString<Optional> *memberID;
@@ -41,6 +59,7 @@
 @property (nonatomic, copy) NSString<Optional> *subjectName;
 @property (nonatomic, copy) NSString<Optional> *sexName;
 @property (nonatomic, strong) GetUserInfoRequestItem_imTokenInfo<Optional> *imTokenInfo;
+@property (nonatomic, strong) GetUserInfoRequestItem_Data_Aui<Optional> *aui;
 
 @end
 

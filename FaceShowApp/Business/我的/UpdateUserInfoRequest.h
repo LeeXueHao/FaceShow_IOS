@@ -16,4 +16,8 @@
 @property (nonatomic, strong) NSString<Optional> *school;
 @property (nonatomic, strong) NSString<Optional> *url;
 @property (nonatomic, strong) NSString<Optional> *userId;
+
+@property (nonatomic, strong) NSString<Optional> *province;
+@property (nonatomic, strong) NSString<Optional> *city;
+@property (nonatomic, strong) NSString<Optional> *country;
 @end

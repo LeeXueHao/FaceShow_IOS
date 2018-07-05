@@ -17,6 +17,7 @@
 #import "UserModel.h"
 #import "FeedbackViewController.h"
 #import "ClassSelectionViewController.h"
+#import "HuBeiUserInfoViewController.h"
 
 @interface MineViewController ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -164,7 +165,6 @@
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
-    
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [logoutBtn setTitle:@"退出" forState:UIControlStateNormal];
@@ -251,6 +251,18 @@
         FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] init];
         [self.navigationController pushViewController:feedbackVC animated:YES];
     } else if ([sender.titleLabel.text isEqualToString:@"我的资料"]) {
+#ifdef HuBeiApp
+        HuBeiUserInfoViewController *VC = [[HuBeiUserInfoViewController alloc] init];
+        WEAK_SELF
+        [VC setCompleteBlock:^{
+            STRONG_SELF
+            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"班级圈大默认头像"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
+            }];
+            self.nameLabel.text = [UserManager sharedInstance].userModel.realName;
+        }];
+        [self.navigationController pushViewController:VC animated:YES];
+#else
         UserInfoViewController *VC = [[UserInfoViewController alloc] init];
         WEAK_SELF
         [VC setCompleteBlock:^{
@@ -261,6 +273,7 @@
             self.nameLabel.text = [UserManager sharedInstance].userModel.realName;
         }];
         [self.navigationController pushViewController:VC animated:YES];
+#endif
     }
 }
 

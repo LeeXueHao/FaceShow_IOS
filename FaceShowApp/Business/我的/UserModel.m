@@ -7,9 +7,10 @@
 //
 
 #import "UserModel.h"
-
+#import "AreaManager.h"
 NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
-
+@implementation UserModel_Aui
+@end
 @implementation UserModel
 
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo {
@@ -31,6 +32,46 @@ NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
     if (userInfo.imTokenInfo) {
         model.imInfo = userInfo.imTokenInfo;
     }
+    UserModel_Aui *aui = [[UserModel_Aui alloc] init];
+    aui.userId = userInfo.aui.userId;
+    aui.idCard = userInfo.aui.idCard;
+    aui.province = userInfo.aui.province;
+    aui.city = userInfo.aui.city;
+    aui.country = userInfo.aui.country;
+    aui.area = userInfo.aui.area;
+    aui.schoolType = userInfo.aui.schoolType;
+    aui.nation = userInfo.aui.nation;
+    aui.title = userInfo.aui.title;
+    aui.recordeducation = userInfo.aui.recordeducation;
+    aui.graduation = userInfo.aui.graduation;
+    aui.professional = userInfo.aui.professional;
+    
+    __block Area *province = nil;
+    [[AreaManager sharedInstance].areaModel.data enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.areaID isEqualToString:aui.province]) {
+            province = obj;
+            aui.provinceName = obj.name;
+            *stop = YES;
+        }
+    }];
+    __block Area *city = nil;
+    [province.sub enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.areaID isEqualToString:aui.city]) {
+            city = obj;
+            aui.cityName = obj.name;
+            *stop = YES;
+        }
+    }];
+    
+    __block Area *country = nil;
+    [city.sub enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.areaID isEqualToString:aui.country]) {
+            country = obj;
+            aui.countryName = obj.name;
+            *stop = YES;
+        }
+    }];
+    model.aui = aui;
     return model;
 }
 - (void)updateFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo {
@@ -51,5 +92,45 @@ NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
     if (userInfo.imTokenInfo) {
         self.imInfo = userInfo.imTokenInfo;
     }
+    UserModel_Aui *aui = [[UserModel_Aui alloc] init];
+    aui.userId = userInfo.aui.userId;
+    aui.idCard = userInfo.aui.idCard;
+    aui.province = userInfo.aui.province;
+    aui.city = userInfo.aui.city;
+    aui.country = userInfo.aui.country;
+    aui.area = userInfo.aui.area;
+    aui.schoolType = userInfo.aui.schoolType;
+    aui.nation = userInfo.aui.nation;
+    aui.title = userInfo.aui.title;
+    aui.recordeducation = userInfo.aui.recordeducation;
+    aui.graduation = userInfo.aui.graduation;
+    aui.professional = userInfo.aui.professional;
+    
+    __block Area *province = nil;
+    [[AreaManager sharedInstance].areaModel.data enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.areaID isEqualToString:aui.province]) {
+            province = obj;
+            aui.provinceName = obj.name;
+            *stop = YES;
+        }
+    }];
+    __block Area *city = nil;
+    [province.sub enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.areaID isEqualToString:aui.city]) {
+            city = obj;
+            aui.cityName = obj.name;
+            *stop = YES;
+        }
+    }];
+    
+    __block Area *country = nil;
+    [city.sub enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.areaID isEqualToString:aui.country]) {
+            country = obj;
+            aui.countryName = obj.name;
+            *stop = YES;
+        }
+    }];
+    self.aui = aui;
 }
 @end
