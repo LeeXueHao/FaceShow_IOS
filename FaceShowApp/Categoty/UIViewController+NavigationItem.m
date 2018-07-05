@@ -15,7 +15,8 @@
     [b setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     b.titleLabel.font = [UIFont systemFontOfSize:15];
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:b.titleLabel.font}];
-    b.frame = CGRectMake(0, 0, ceilf(size.width), ceilf(size.height));
+    b.frame = CGRectMake(0, 0, ceilf(size.width)+20, ceilf(size.height)+10);
+    b.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 10);
     [self nyx_adjustFrameForView:b];
     [[b rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         BLOCK_EXEC(action);
@@ -28,7 +29,8 @@
 - (void)nyx_setupLeftWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action{
     UIImage *normalImage = [UIImage imageNamed:imageName];
     UIImage *highlightImage = [UIImage imageNamed:highlightImageName];
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, normalImage.size.width, normalImage.size.height)];
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, normalImage.size.width+20, normalImage.size.height+10)];
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 10);
     [self nyx_adjustFrameForView:backButton];
     [backButton setImage:normalImage forState:UIControlStateNormal];
     [backButton setImage:highlightImage forState:UIControlStateHighlighted];
@@ -41,7 +43,8 @@
 }
 
 - (void)nyx_setupLeftWithImage:(UIImage *)image action:(ActionBlock)action {
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, image.size.width+20, image.size.height+10)];
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 10);
     [self nyx_adjustFrameForView:backButton];
     [backButton setImage:image forState:UIControlStateNormal];
     [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
@@ -67,7 +70,8 @@
 - (void)nyx_setupRightWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action{
     UIImage *normalImage = [UIImage imageNamed:imageName];
     UIImage *highlightImage = [UIImage imageNamed:highlightImageName];
-    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, normalImage.size.width, normalImage.size.height)];
+    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, normalImage.size.width+20, normalImage.size.height+10)];
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
     [self nyx_adjustFrameForView:rightButton];
     [rightButton setImage:normalImage forState:UIControlStateNormal];
     [rightButton setImage:highlightImage forState:UIControlStateHighlighted];
@@ -80,7 +84,8 @@
 }
 
 - (void)nyx_setupRightWithImage:(UIImage *)image action:(ActionBlock)action{
-    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, image.size.width+20, image.size.height+10)];
+    rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
     [self nyx_adjustFrameForView:rightButton];
     [rightButton setImage:image forState:UIControlStateNormal];
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
@@ -97,7 +102,8 @@
     [b setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     b.titleLabel.font = [UIFont systemFontOfSize:15];
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:b.titleLabel.font}];
-    b.frame = CGRectMake(0, 0, ceilf(size.width), ceilf(size.height));
+    b.frame = CGRectMake(0, 0, ceilf(size.width)+20, ceilf(size.height)+10);
+    b.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
     [self nyx_adjustFrameForView:b];
     [[b rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         BLOCK_EXEC(action);
