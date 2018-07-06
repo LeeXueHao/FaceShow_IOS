@@ -8,6 +8,9 @@
 
 #import "GetScheduleListRequest.h"
 
+@implementation GetScheduleListRequestItem_attachmentInfo
+@end
+
 @implementation GetScheduleListRequestItem_Schedule
 + (JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"scheduleId"}];
@@ -27,6 +30,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.method = @"schedule.list";
+        self.isApp = @"1";
     }
     return self;
 }

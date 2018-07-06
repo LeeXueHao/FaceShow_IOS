@@ -8,6 +8,19 @@
 
 #import "YXGetRequest.h"
 
+@interface GetScheduleListRequestItem_attachmentInfo : JSONModel
+@property (nonatomic, strong) NSString<Optional> *resId;
+@property (nonatomic, strong) NSString<Optional> *resKey;
+@property (nonatomic, strong) NSString<Optional> *resName;
+@property (nonatomic, strong) NSString<Optional> *resType;
+@property (nonatomic, strong) NSString<Optional> *ext;
+@property (nonatomic, strong) NSString<Optional> *downloadUrl;
+@property (nonatomic, strong) NSString<Optional> *previewUrl;
+@property (nonatomic, strong) NSString<Optional> *transcodeStatus;
+@property (nonatomic, strong) NSString<Optional> *resThumb;
+@property (nonatomic, strong) NSString<Optional> *resSource;
+@end
+
 @protocol GetScheduleListRequestItem_Schedule <NSObject>
 @end
 @interface GetScheduleListRequestItem_Schedule : JSONModel
@@ -19,6 +32,7 @@
 @property (nonatomic, strong) NSString<Optional> *remark;
 @property (nonatomic, strong) NSString<Optional> *status;
 @property (nonatomic, strong) NSString<Optional> *imageUrl;
+@property (nonatomic, strong) GetScheduleListRequestItem_attachmentInfo<Optional> *attachmentInfo;
 @end
 
 @interface GetScheduleListRequestItem_Data_Schedule : JSONModel
@@ -35,4 +49,6 @@
 
 @interface GetScheduleListRequest : YXGetRequest
 @property (nonatomic, strong) NSString *clazsId;
+@property (nonatomic, strong) NSString<Optional> *isApp;
+
 @end
