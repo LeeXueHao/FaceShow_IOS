@@ -293,6 +293,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
             return;
         }
         GetSigninRequestItem *item = retItem;
+        item.data.signIn.stepId = data.objectId;
         ApnsSignInDetailViewController *signInDetailVC = [[ApnsSignInDetailViewController alloc] init];
         signInDetailVC.signIn = item.data.signIn;
         FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:signInDetailVC];
