@@ -29,6 +29,8 @@
     [self setDefaultArea];
 }
 - (void)setDefaultArea {
+    UIBarButtonItem *item =  self.navigationItem.rightBarButtonItems[1];
+    item.enabled = NO;
     NSString *chooseId = @"";
     if (self.status == AreaSubject_Province) {
         chooseId = self.provinceItem.chooseId;
@@ -43,6 +45,7 @@
             [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             [cell setSelected:YES animated:YES];
+            item.enabled = YES;
             *stop = YES;
         }
     }];
@@ -68,9 +71,9 @@
         [UserManager sharedInstance].userModel.aui.cityName = self.cityItem.chooseName;
         [UserManager sharedInstance].userModel.aui.country = self.countryItem.chooseId;
         [UserManager sharedInstance].userModel.aui.countryName = self.countryItem.chooseName;
-        [[UserManager sharedInstance]saveData];
+        [[UserManager sharedInstance] saveData];
         BLOCK_EXEC(self.completeBlock);
-        NSInteger index = self.navigationController.viewControllers.count-3;
+        NSInteger index = self.navigationController.viewControllers.count-4;
         [self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
     }];
 }
@@ -179,6 +182,8 @@
     }else {
         self.countryItem = item;
     }
+    UIBarButtonItem *barItem =  self.navigationItem.rightBarButtonItems[1];
+    barItem.enabled = YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

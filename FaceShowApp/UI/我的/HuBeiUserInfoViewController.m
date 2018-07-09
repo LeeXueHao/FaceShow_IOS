@@ -33,10 +33,11 @@
 #import "ModifyEducationViewController.h"
 #import "ModifyGraduationViewController.h"
 #import "ModifyProfessionalViewController.h"
+#import "UserInfoNameModel.h"
+#import "UpdateTextInfoViewController.h"
 @interface HuBeiUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AlertView *alertView;
-@property (nonatomic, strong) NSMutableArray *contentMutableArray;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) HeadImageHandler *imageHandler;
 
@@ -55,22 +56,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我的";
     self.imageHandler = [[HeadImageHandler alloc]init];
-    //头像-姓名-联系电话-性别-学段-学科-省市区-学校-身份证号-学校所在区域-学校类别-民族-职称-最高学历-毕业院校-所学专业 
-   self.contentMutableArray =
-    [@[[@{@"title":@"姓名",@"content": [UserManager sharedInstance].userModel.realName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"联系电话",@"content":[UserManager sharedInstance].userModel.mobilePhone?:@"暂无"} mutableCopy],
-       [@{@"title":@"性别",@"content":[UserManager sharedInstance].userModel.sexName?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学段学科",@"content":[self stageSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学校",@"content": [UserManager sharedInstance].userModel.school?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"省市区",@"content":[self areaSubjectString]?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"身份证号",@"content":[UserManager sharedInstance].userModel.aui.idCard?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学校所在区域",@"content":[UserManager sharedInstance].userModel.aui.area?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"学校类别",@"content":[UserManager sharedInstance].userModel.aui.schoolType?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"民族",@"content":[UserManager sharedInstance].userModel.aui.nation?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"职称",@"content":[UserManager sharedInstance].userModel.aui.title?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"最高学历",@"content":[UserManager sharedInstance].userModel.aui.recordeducation?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"毕业院校",@"content":[UserManager sharedInstance].userModel.aui.graduation?:@"暂无",@"next":@(YES)} mutableCopy],
-       [@{@"title":@"所学专业",@"content":[UserManager sharedInstance].userModel.aui.professional?:@"暂无",@"next":@(YES)} mutableCopy]] mutableCopy];
+    //头像-0姓名-1手机号-2性别-3学段学科-4省市区-5学校-6身份证号-7子项目编号-8子项目名称-9承训单位-10学校所在区域-11学校类别-12民族-13职称-14职务(非必填)-15最高学历-16毕业院校-17所学专业-18电话(非必填)-19电子邮件(非必填)
     [self setupUI];
     [self setupLayout];
     [self requestForUserInfo];
@@ -240,20 +226,7 @@
     switch (indexPath.section) {
         case 0:
         {
-             [self showAlertView];
-        }
-            break;
-        case 1:
-        {
-            ModifyNameViewController *vc = [[ModifyNameViewController alloc]init];
-            WEAK_SELF
-            [vc setCompleteBlock:^{
-                STRONG_SELF
-                [self.contentMutableArray[0] setValue:[UserManager sharedInstance].userModel.realName forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                BLOCK_EXEC(self.completeBlock);
-            }];
-            [self.navigationController pushViewController:vc animated:YES];
+            [self showAlertView];
         }
             break;
         case 2:
@@ -274,26 +247,12 @@
             WEAK_SELF
             vc.completeBlock = ^{
                 STRONG_SELF
-                [self.contentMutableArray[3] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 5:
-        {
-            ModifySchoolViewController *vc = [[ModifySchoolViewController alloc]init];
-            WEAK_SELF
-            [vc setCompleteBlock:^{
-                STRONG_SELF
-                [self.contentMutableArray[4] setValue:[UserManager sharedInstance].userModel.school forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                BLOCK_EXEC(self.completeBlock);
-            }];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 6:
         {
             [TalkingData trackEvent:@"点击修改省市区"];
             AreaSubjectViewController *vc = [[AreaSubjectViewController alloc] init];
@@ -309,123 +268,35 @@
             AreaSubjectItem *country = [[AreaSubjectItem alloc] init];
             country.chooseId = [UserManager sharedInstance].userModel.aui.country;
             country.chooseName = [UserManager sharedInstance].userModel.aui.countryName;
-            vc.countryItem = province;
+            vc.countryItem = country;
             vc.status = AreaSubject_Province;
             WEAK_SELF
             vc.completeBlock = ^{
                 STRONG_SELF
-                [self.contentMutableArray[6] setValue:[self stageSubjectString]?:@"暂无" forKey:@"content"];
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 7:
-        {
-            ModifyCardViewController *vc = [[ModifyCardViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.idCard?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 8:
-        {
-            ModifySchoolAreaViewController *vc = [[ModifySchoolAreaViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.area?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 9:
-        {
-            ModifySchoolTypeViewController *vc = [[ModifySchoolTypeViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.schoolType?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 10:
-        {
-            ModifyNationViewController *vc = [[ModifyNationViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.nation?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 11:
-        {
-            ModifyTitleViewController *vc = [[ModifyTitleViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.title?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 12:
-        {
-            ModifyEducationViewController *vc = [[ModifyEducationViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.recordeducation?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 13:
-        {
-            ModifyGraduationViewController *vc = [[ModifyGraduationViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.graduation?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 14:
-        {
-            ModifyProfessionalViewController *vc = [[ModifyProfessionalViewController alloc] init];
-            WEAK_SELF
-            vc.completeBlock = ^{
-                STRONG_SELF
-                [self.contentMutableArray[6] setValue:[UserManager sharedInstance].userModel.aui.professional?:@"暂无" forKey:@"content"];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-            
-            
         default:
+        {
+            UpdateTextInfoViewController *vc = [[UpdateTextInfoViewController alloc] init];
+            vc.infoType = indexPath.section - 1;
+            WEAK_SELF
+            [vc setCompleteBlock:^{
+                STRONG_SELF
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                BLOCK_EXEC(self.completeBlock);
+            }];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
     }
 }
 
 #pragma mark - UITableViewDataScource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.contentMutableArray.count + 1;
+    return 21;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -437,7 +308,51 @@
         return cell;
     }else {
         UserInfoDefaultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoDefaultCell" forIndexPath:indexPath];
-        cell.contenDictionary = self.contentMutableArray[indexPath.section - 1];
+        if (indexPath.section == 1) {
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.realName)?[UserManager sharedInstance].userModel.realName:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 2){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.mobilePhone)?[UserManager sharedInstance].userModel.mobilePhone:@"暂无"};
+        }else if (indexPath.section == 3){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.sexName)?[UserManager sharedInstance].userModel.sexName:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 4){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": [self stageSubjectString]?:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 5){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": [self areaSubjectString]?:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 6){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.school)?[UserManager sharedInstance].userModel.school:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 7){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.idCard)?[UserManager sharedInstance].userModel.aui.idCard:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 8){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.childProjectId)?[UserManager sharedInstance].userModel.aui.childProjectId:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 9){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.childProjectName)?[UserManager sharedInstance].userModel.aui.childProjectName:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 10){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.organizer)?[UserManager sharedInstance].userModel.aui.organizer:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 11){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.area)?[UserManager sharedInstance].userModel.aui.area:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 12){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.schoolType)?[UserManager sharedInstance].userModel.aui.schoolType:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 13){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content":!isEmpty([UserManager sharedInstance].userModel.aui.nation)?[UserManager sharedInstance].userModel.aui.nation:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 14){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.title)?[UserManager sharedInstance].userModel.aui.title:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 15){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.job)?[UserManager sharedInstance].userModel.aui.job:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 16){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.recordeducation)?[UserManager sharedInstance].userModel.aui.recordeducation:@"暂无",@"next":@(YES)};
+        }else if (indexPath.section == 17){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.graduation)?[UserManager sharedInstance].userModel.aui.graduation:@"暂无",@"next":@(YES)};
+        }
+        else if (indexPath.section == 18){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.professional)?[UserManager sharedInstance].userModel.aui.professional:@"暂无",@"next":@(YES)};
+        }
+        else if (indexPath.section == 19){
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.aui.telephone)?[UserManager sharedInstance].userModel.aui.telephone:@"暂无",@"next":@(YES)};
+        }
+        else {
+            cell.contenDictionary = @{@"title": [UserInfoNameModel userInfoName:indexPath.section - 1], @"content": !isEmpty([UserManager sharedInstance].userModel.email)?[UserManager sharedInstance].userModel.email:@"暂无",@"next":@(YES)};
+        }
+        
         return cell;
     }
 }
@@ -452,11 +367,7 @@
         GetUserInfoRequestItem *item = retItem;
         if (item.data != nil) {
             [[UserManager sharedInstance].userModel updateFromUserInfo:item.data];
-            self.contentMutableArray[0][@"content"] = isEmpty([UserManager sharedInstance].userModel.realName)? @"暂无" : [UserManager sharedInstance].userModel.realName;
-            self.contentMutableArray[1][@"content"] = isEmpty([UserManager sharedInstance].userModel.mobilePhone)? @"暂无" : [UserManager sharedInstance].userModel.mobilePhone;
-            self.contentMutableArray[2][@"content"] = isEmpty([UserManager sharedInstance].userModel.sexName)? @"暂无" : [UserManager sharedInstance].userModel.sexName;
-            self.contentMutableArray[3][@"content"] = isEmpty([self stageSubjectString])? @"暂无" : [self stageSubjectString];
-            self.contentMutableArray[4][@"content"] = isEmpty([UserManager sharedInstance].userModel.school)? @"暂无" : [UserManager sharedInstance].userModel.school;
+            [[UserManager sharedInstance] saveData];
             [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kYXUploadUserPicSuccessNotification" object:nil];
         }
@@ -513,7 +424,6 @@
         [UserManager sharedInstance].userModel.sexID = [NSString stringWithFormat:@"%@", @(sexID)];
         [[UserManager sharedInstance]saveData];
         [self.alertView hide];
-        [self.contentMutableArray[2] setValue:[UserManager sharedInstance].userModel.sexName forKey:@"content"];
         [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }

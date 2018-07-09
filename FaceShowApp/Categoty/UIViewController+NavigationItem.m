@@ -100,6 +100,8 @@
     UIButton *b = [[UIButton alloc]init];
     [b setTitle:title forState:UIControlStateNormal];
     [b setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    [b setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
+
     b.titleLabel.font = [UIFont systemFontOfSize:15];
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:b.titleLabel.font}];
     b.frame = CGRectMake(0, 0, ceilf(size.width)+20, ceilf(size.height)+10);

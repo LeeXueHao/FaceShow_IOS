@@ -26,8 +26,25 @@
         [self saveName];
     }];
     [self setupUI];
+    [self addObserver];
 }
-
+- (void)addObserver {
+    UIBarButtonItem *item =  self.navigationItem.rightBarButtonItems[1];
+    @weakify(self);
+    RACSignal *textSignal =
+    [self.textfield.rac_textSignal
+     map:^id(NSString *text) {
+         @strongify(self);
+         return @([self.textfield.text yx_stringByTrimmingCharacters].length > 0);
+     }];
+    [[RACSignal combineLatest:@[textSignal]
+                       reduce:^id(NSNumber *text) {
+                           return @([text boolValue]);
+                       }] subscribeNext:^(NSNumber *x) {
+                           STRONG_SELF
+                           item.enabled = [x boolValue];
+                       }] ;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -47,7 +64,7 @@
     self.textfield.textColor = [UIColor colorWithHexString:@"333333"];
     self.textfield.returnKeyType = UIReturnKeyDone;
     self.textfield.font = [UIFont systemFontOfSize:14];
-    self.textfield.attributedPlaceholder = [[NSMutableAttributedString alloc]initWithString:@"最多20个字" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"999999"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
+    self.textfield.attributedPlaceholder = [[NSMutableAttributedString alloc]initWithString:@"毕业院校" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"999999"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     self.textfield.delegate = self;
     [bottomView addSubview:self.textfield];
     [self.textfield mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,7 +83,7 @@
     [self.textfield resignFirstResponder];
     [self.request stopRequest];
     self.request = [[UpdateUserInfoRequest alloc]init];
-    self.request.school = self.textfield.text;
+    self.request.graduation = [self.textfield.text yx_stringByTrimmingCharacters];
     WEAK_SELF
     [self.view nyx_startLoading];
     [self.request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -76,7 +93,7 @@
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
-        [UserManager sharedInstance].userModel.aui.graduation = self.textfield.text;
+        [UserManager sharedInstance].userModel.aui.graduation = [self.textfield.text yx_stringByTrimmingCharacters];
         [[UserManager sharedInstance]saveData];
         BLOCK_EXEC(self.completeBlock);
         [self backAction];
@@ -94,13 +111,13 @@
         return NO;
     }
     NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (str.length > 20) {
-        str = [str substringToIndex:20];
+    if (str.length > 200) {
+        str = [str substringToIndex:200];
         textField.text = str;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UITextPosition* beginning = textField.beginningOfDocument;
-            UITextPosition* startPosition = [textField positionFromPosition:beginning offset:20];
-            UITextPosition* endPosition = [textField positionFromPosition:beginning offset:20];
+            UITextPosition* startPosition = [textField positionFromPosition:beginning offset:200];
+            UITextPosition* endPosition = [textField positionFromPosition:beginning offset:200];
             UITextRange* selectionRange = [textField textRangeFromPosition:startPosition toPosition:endPosition];
             [textField setSelectedTextRange:selectionRange];
         });

@@ -46,6 +46,12 @@ NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
     aui.graduation = userInfo.aui.graduation;
     aui.professional = userInfo.aui.professional;
     
+    aui.childProjectId = userInfo.aui.childprojectId;
+    aui.childProjectName = userInfo.aui.childprojectName;
+    aui.organizer = userInfo.aui.organizer;
+    aui.job = userInfo.aui.job;
+    aui.telephone = userInfo.aui.telephone;
+    
     __block Area *province = nil;
     [[AreaManager sharedInstance].areaModel.data enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.areaID isEqualToString:aui.province]) {
@@ -105,6 +111,12 @@ NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
     aui.recordeducation = userInfo.aui.recordeducation;
     aui.graduation = userInfo.aui.graduation;
     aui.professional = userInfo.aui.professional;
+    
+    aui.childProjectId = userInfo.aui.childprojectId;
+    aui.childProjectName = userInfo.aui.childprojectName;
+    aui.organizer = userInfo.aui.organizer;
+    aui.job = userInfo.aui.job;
+    aui.telephone = userInfo.aui.telephone;
     
     __block Area *province = nil;
     [[AreaManager sharedInstance].areaModel.data enumerateObjectsUsingBlock:^(Area *obj, NSUInteger idx, BOOL * _Nonnull stop) {

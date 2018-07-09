@@ -25,6 +25,13 @@ extern NSString * const kClassDidSelectNotification;
 @property (nonatomic, copy) NSString<Optional> *graduation;
 @property (nonatomic, copy) NSString<Optional> *professional;
 
+@property (nonatomic, copy) NSString<Optional> *childProjectId;
+@property (nonatomic, copy) NSString<Optional> *childProjectName;
+@property (nonatomic, copy) NSString<Optional> *organizer;
+@property (nonatomic, copy) NSString<Optional> *job;
+@property (nonatomic, copy) NSString<Optional> *telephone;
+
+
 @property (nonatomic, copy) NSString<Ignore> *provinceName;
 @property (nonatomic, copy) NSString<Ignore> *cityName;
 @property (nonatomic, copy) NSString<Ignore> *countryName;

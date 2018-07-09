@@ -16,6 +16,11 @@
             self.method = @"app.sysUser.updateUserInfo";
             self.userId = [UserManager sharedInstance].userModel.userID;
         }
+#ifdef HuBeiApp
+        self.urlHead = [ConfigManager sharedInstance].server1_1;
+#else
+        self.urlHead = [ConfigManager sharedInstance].server;
+#endif
     }
     return self;
 }

@@ -322,6 +322,8 @@
 		9273C15020EDD67C0035954F /* HuBeiUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273C14F20EDD67C0035954F /* HuBeiUserInfoViewController.m */; };
 		9273C15320EDD7870035954F /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273C15220EDD7870035954F /* AreaManager.m */; };
 		9273C15520EDD7C20035954F /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 9273C15420EDD7C20035954F /* area.json */; };
+		9276958720F5F48200677ABA /* UpdateTextInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */; };
+		9276958A20F5F7F000677ABA /* UserInfoNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9276958920F5F7F000677ABA /* UserInfoNameModel.m */; };
 		9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */; };
 		9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EB1F6A5771004A1E2B /* ClassMomentTableHeaderView.m */; };
 		9279A6EF1F6A578E004A1E2B /* ClassMomentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6EE1F6A578E004A1E2B /* ClassMomentHeaderView.m */; };
@@ -1068,6 +1070,10 @@
 		9273C15120EDD7870035954F /* AreaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaManager.h; sourceTree = "<group>"; };
 		9273C15220EDD7870035954F /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
 		9273C15420EDD7C20035954F /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
+		9276958520F5F48200677ABA /* UpdateTextInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateTextInfoViewController.h; sourceTree = "<group>"; };
+		9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateTextInfoViewController.m; sourceTree = "<group>"; };
+		9276958820F5F7F000677ABA /* UserInfoNameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoNameModel.h; sourceTree = "<group>"; };
+		9276958920F5F7F000677ABA /* UserInfoNameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoNameModel.m; sourceTree = "<group>"; };
 		9279A6E71F6A5754004A1E2B /* ClassMomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentCell.h; sourceTree = "<group>"; };
 		9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentCell.m; sourceTree = "<group>"; };
 		9279A6EA1F6A5771004A1E2B /* ClassMomentTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMomentTableHeaderView.h; sourceTree = "<group>"; };
@@ -1901,6 +1907,8 @@
 				92C5699C1F73AF780025815B /* UpdateAvatarRequest.m */,
 				7CEFC7C11F99A267001D8C84 /* UpdateUserInfoRequest.h */,
 				7CEFC7C21F99A267001D8C84 /* UpdateUserInfoRequest.m */,
+				9276958820F5F7F000677ABA /* UserInfoNameModel.h */,
+				9276958920F5F7F000677ABA /* UserInfoNameModel.m */,
 				7CEFC7E61F99EE70001D8C84 /* GetSigninRequest.h */,
 				7CEFC7E71F99EE70001D8C84 /* GetSigninRequest.m */,
 			);
@@ -2088,6 +2096,8 @@
 				929B422A20F34AA70034E608 /* ModifyGraduationViewController.m */,
 				929B422C20F34AE60034E608 /* ModifyProfessionalViewController.h */,
 				929B422D20F34AE60034E608 /* ModifyProfessionalViewController.m */,
+				9276958520F5F48200677ABA /* UpdateTextInfoViewController.h */,
+				9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -3266,6 +3276,7 @@
 				7CBC5BB5204CF46C004ACA04 /* MessagePromptView.m in Sources */,
 				7C24E20F1F7398AA00A6921B /* SaveUserCommentRequest.m in Sources */,
 				7CEFC7BA1F998E20001D8C84 /* SexItemView.m in Sources */,
+				9276958A20F5F7F000677ABA /* UserInfoNameModel.m in Sources */,
 				43510A971F6B63FA006B2645 /* ScanCodeViewController.m in Sources */,
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				E91E5DA52047B8E300052FBA /* TopicMsgData.m in Sources */,
@@ -3281,6 +3292,7 @@
 				7C2519291F68EACF0001B577 /* MJRefreshHeaderView.m in Sources */,
 				4376E7471F712DE9003E2057 /* QADataManager.m in Sources */,
 				7C24E21D1F78F25000A6921B /* QuestionnaireHeaderView.m in Sources */,
+				9276958720F5F48200677ABA /* UpdateTextInfoViewController.m in Sources */,
 				E90C5149204D41A80008F92A /* ContactsClassFilterCell.m in Sources */,
 				E95434BA20D130FE00BCF63C /* TaskFilterView.m in Sources */,
 				7C2519351F68EB2A0001B577 /* YXMockManager.m in Sources */,

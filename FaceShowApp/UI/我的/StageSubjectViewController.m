@@ -38,28 +38,35 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
 }
 
 -(void)setDefaultStage{
+    UIBarButtonItem *barItem =  self.navigationItem.rightBarButtonItems[1];
+    barItem.enabled = NO;
     NSString *currentStage = [self.selectedStageSubjectString componentsSeparatedByString:@"-"].firstObject;
     for (int i = 0; i < [UserManager sharedInstance].stages.count; i ++) {
         StageSubjectItem_Stage *stage = [UserManager sharedInstance].stages[i];
         if ([stage.name isEqualToString:currentStage]) {
             NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
             [self.tableView selectRowAtIndexPath:index animated:YES scrollPosition:UITableViewScrollPositionNone];
+            barItem.enabled = YES;
             return;
         }
     }
 }
 
 -(void)setDefaultSubject{
+    UIBarButtonItem *barItem =  self.navigationItem.rightBarButtonItems[1];
     NSString *currentStage = [self.selectedStageSubjectString componentsSeparatedByString:@"-"].firstObject;
     if (![currentStage isEqualToString:self.selectedStage.name]) {
+        barItem.enabled = NO;
         return;
     }else{
+        barItem.enabled = NO;
         NSString *currentSubject = [self.selectedStageSubjectString componentsSeparatedByString:@"-"].lastObject;
         for (int i = 0; i < self.selectedStage.subjects.count; i ++) {
             StageSubjectItem_Subject *subject = self.selectedStage.subjects[i];
             if ([subject.name isEqualToString:currentSubject]) {
                 NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
                 [self.tableView selectRowAtIndexPath:index animated:YES scrollPosition:UITableViewScrollPositionNone];
+                barItem.enabled = YES;
                 return;
             }
         }
@@ -178,6 +185,8 @@ static  NSString *const kStageNavigationItemtitle = @"选择学段";
         StageSubjectItem_Subject *subject = self.selectedStage.subjects[indexPath.row];
         self.selectedSubject = subject;
     }
+    UIBarButtonItem *barItem =  self.navigationItem.rightBarButtonItems[1];
+    barItem.enabled = YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

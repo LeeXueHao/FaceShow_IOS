@@ -27,7 +27,7 @@
     _contenDictionary = contenDictionary;
     self.titleLabel.text = _contenDictionary[@"title"];
     self.contentLabel.text = _contenDictionary[@"content"];
-    id next = [contenDictionary valueForKey:@"next"];
+    id next = [_contenDictionary valueForKey:@"next"];
     if (next) {
         self.nextImageView.hidden = NO;        
         [self.nextImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -54,6 +54,7 @@
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+
     [self.contentView addSubview:self.titleLabel];
     
     self.contentLabel = [[UILabel alloc] init];
@@ -71,13 +72,16 @@
 }
 - (void)setupLayout {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).offset(15.0f).priorityHigh();
+        make.left.equalTo(self.contentView.mas_left).offset(15.0f);
         make.centerY.equalTo(self.contentView.mas_centerY);
     }];
+    [self.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [self.titleLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.left.greaterThanOrEqualTo(self.titleLabel.mas_right).offset(15.0f);
+        make.left.equalTo(self.titleLabel.mas_right).offset(15.0f);
     }];
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {

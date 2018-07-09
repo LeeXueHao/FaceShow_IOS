@@ -37,6 +37,10 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.method = @"app.sysUser.userInfo";
+#ifdef HuBeiApp
+        self.urlHead = [ConfigManager sharedInstance].server1_1;
+#else
+#endif
     }
     return self;
 }

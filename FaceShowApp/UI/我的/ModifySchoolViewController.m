@@ -26,8 +26,25 @@
         [self saveName];
     }];
     [self setupUI];
+    [self addObserver];
 }
-
+- (void)addObserver {
+    UIBarButtonItem *item =  self.navigationItem.rightBarButtonItems[1];
+    @weakify(self);
+    RACSignal *textSignal =
+    [self.textfield.rac_textSignal
+     map:^id(NSString *text) {
+         @strongify(self);
+         return @([self.textfield.text yx_stringByTrimmingCharacters].length > 0);
+     }];
+    [[RACSignal combineLatest:@[textSignal]
+                       reduce:^id(NSNumber *text) {
+                           return @([text boolValue]);
+                       }] subscribeNext:^(NSNumber *x) {
+                           STRONG_SELF
+                           item.enabled = [x boolValue];
+                       }] ;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -55,7 +72,6 @@
         make.right.mas_equalTo(-15);
         make.top.bottom.mas_equalTo(0);
     }];
-    
     self.textfield.text = [UserManager sharedInstance].userModel.school;
 }
 
@@ -66,7 +82,7 @@
     [self.textfield resignFirstResponder];
     [self.request stopRequest];
     self.request = [[UpdateUserInfoRequest alloc]init];
-    self.request.school = self.textfield.text;
+    self.request.school = [self.textfield.text yx_stringByTrimmingCharacters];
     WEAK_SELF
     [self.view nyx_startLoading];
     [self.request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -76,7 +92,7 @@
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
-        [UserManager sharedInstance].userModel.school = self.textfield.text;
+        [UserManager sharedInstance].userModel.school = [self.textfield.text yx_stringByTrimmingCharacters];
         [[UserManager sharedInstance]saveData];
         BLOCK_EXEC(self.completeBlock);
         [self backAction];
