@@ -29,7 +29,7 @@
                                  @"excel":@(ResourceType_Excel),
                                  @"ppt":@(ResourceType_PPT),
                                  @"pdf":@(ResourceType_PDF),
-                                 @"txt":@(ResourceType_TXT),
+                                 @"text":@(ResourceType_TXT),
                                  @"video":@(ResourceType_Video),
                                  @"audio":@(ResourceType_Audio),
                                  @"image":@(ResourceType_Image)};

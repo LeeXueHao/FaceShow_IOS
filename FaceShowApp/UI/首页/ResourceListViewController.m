@@ -14,6 +14,7 @@
 #import "ResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "UserPromptsManager.h"
+#import "FSDataMappingTable.h"
 
 @interface ResourceListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -92,7 +93,7 @@
         ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
         vc.urlString = isAttachment ? item.data.ai.previewUrl : item.data.url;
         vc.name = item.data.resName;
-        vc.needDownload = isAttachment;
+        vc.needDownload = isAttachment && [FSDataMappingTable ResourceTypeWithKey:item.data.ai.resType] != ResourceType_Image;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }
