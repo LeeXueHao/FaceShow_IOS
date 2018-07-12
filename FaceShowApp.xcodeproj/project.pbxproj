@@ -336,14 +336,6 @@
 		928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 928386241F7124F300205028 /* ClassMomentListFetcher.m */; };
 		929B421320F335740034E608 /* AreaSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B421220F335740034E608 /* AreaSubjectViewController.m */; };
 		929B421620F336810034E608 /* AreaSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B421520F336810034E608 /* AreaSubjectCell.m */; };
-		929B421920F349D80034E608 /* ModifyCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B421820F349D80034E608 /* ModifyCardViewController.m */; };
-		929B421C20F34A1A0034E608 /* ModifySchoolAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B421B20F34A1A0034E608 /* ModifySchoolAreaViewController.m */; };
-		929B421F20F34A370034E608 /* ModifySchoolTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B421E20F34A370034E608 /* ModifySchoolTypeViewController.m */; };
-		929B422220F34A4C0034E608 /* ModifyNationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B422120F34A4C0034E608 /* ModifyNationViewController.m */; };
-		929B422520F34A620034E608 /* ModifyTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B422420F34A610034E608 /* ModifyTitleViewController.m */; };
-		929B422820F34A8C0034E608 /* ModifyEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B422720F34A8C0034E608 /* ModifyEducationViewController.m */; };
-		929B422B20F34AA70034E608 /* ModifyGraduationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B422A20F34AA70034E608 /* ModifyGraduationViewController.m */; };
-		929B422E20F34AE60034E608 /* ModifyProfessionalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929B422D20F34AE60034E608 /* ModifyProfessionalViewController.m */; };
 		92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */; };
 		92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACC1F6A84FC0038D6D1 /* ShowPhotosViewController.m */; };
 		92A7CAD11F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A7CACE1F6A84FC0038D6D1 /* UITableView+TemplateLayoutHeaderView.m */; };
@@ -1097,22 +1089,6 @@
 		929B421220F335740034E608 /* AreaSubjectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaSubjectViewController.m; sourceTree = "<group>"; };
 		929B421420F336810034E608 /* AreaSubjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaSubjectCell.h; sourceTree = "<group>"; };
 		929B421520F336810034E608 /* AreaSubjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaSubjectCell.m; sourceTree = "<group>"; };
-		929B421720F349D80034E608 /* ModifyCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyCardViewController.h; sourceTree = "<group>"; };
-		929B421820F349D80034E608 /* ModifyCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyCardViewController.m; sourceTree = "<group>"; };
-		929B421A20F34A1A0034E608 /* ModifySchoolAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifySchoolAreaViewController.h; sourceTree = "<group>"; };
-		929B421B20F34A1A0034E608 /* ModifySchoolAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifySchoolAreaViewController.m; sourceTree = "<group>"; };
-		929B421D20F34A370034E608 /* ModifySchoolTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifySchoolTypeViewController.h; sourceTree = "<group>"; };
-		929B421E20F34A370034E608 /* ModifySchoolTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifySchoolTypeViewController.m; sourceTree = "<group>"; };
-		929B422020F34A4C0034E608 /* ModifyNationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyNationViewController.h; sourceTree = "<group>"; };
-		929B422120F34A4C0034E608 /* ModifyNationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyNationViewController.m; sourceTree = "<group>"; };
-		929B422320F34A610034E608 /* ModifyTitleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyTitleViewController.h; sourceTree = "<group>"; };
-		929B422420F34A610034E608 /* ModifyTitleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyTitleViewController.m; sourceTree = "<group>"; };
-		929B422620F34A8C0034E608 /* ModifyEducationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyEducationViewController.h; sourceTree = "<group>"; };
-		929B422720F34A8C0034E608 /* ModifyEducationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyEducationViewController.m; sourceTree = "<group>"; };
-		929B422920F34AA70034E608 /* ModifyGraduationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyGraduationViewController.h; sourceTree = "<group>"; };
-		929B422A20F34AA70034E608 /* ModifyGraduationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyGraduationViewController.m; sourceTree = "<group>"; };
-		929B422C20F34AE60034E608 /* ModifyProfessionalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyProfessionalViewController.h; sourceTree = "<group>"; };
-		929B422D20F34AE60034E608 /* ModifyProfessionalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyProfessionalViewController.m; sourceTree = "<group>"; };
 		92A7CAC91F6A84FC0038D6D1 /* PreviewPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPhotosView.h; sourceTree = "<group>"; };
 		92A7CACA1F6A84FC0038D6D1 /* PreviewPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPhotosView.m; sourceTree = "<group>"; };
 		92A7CACB1F6A84FC0038D6D1 /* ShowPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPhotosViewController.h; sourceTree = "<group>"; };
@@ -2080,22 +2056,6 @@
 				7CEFC7BF1F999A88001D8C84 /* ModifyNameViewController.m */,
 				7CEBA92C20898454009754F5 /* ModifySchoolViewController.h */,
 				7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */,
-				929B421720F349D80034E608 /* ModifyCardViewController.h */,
-				929B421820F349D80034E608 /* ModifyCardViewController.m */,
-				929B421A20F34A1A0034E608 /* ModifySchoolAreaViewController.h */,
-				929B421B20F34A1A0034E608 /* ModifySchoolAreaViewController.m */,
-				929B421D20F34A370034E608 /* ModifySchoolTypeViewController.h */,
-				929B421E20F34A370034E608 /* ModifySchoolTypeViewController.m */,
-				929B422020F34A4C0034E608 /* ModifyNationViewController.h */,
-				929B422120F34A4C0034E608 /* ModifyNationViewController.m */,
-				929B422320F34A610034E608 /* ModifyTitleViewController.h */,
-				929B422420F34A610034E608 /* ModifyTitleViewController.m */,
-				929B422620F34A8C0034E608 /* ModifyEducationViewController.h */,
-				929B422720F34A8C0034E608 /* ModifyEducationViewController.m */,
-				929B422920F34AA70034E608 /* ModifyGraduationViewController.h */,
-				929B422A20F34AA70034E608 /* ModifyGraduationViewController.m */,
-				929B422C20F34AE60034E608 /* ModifyProfessionalViewController.h */,
-				929B422D20F34AE60034E608 /* ModifyProfessionalViewController.m */,
 				9276958520F5F48200677ABA /* UpdateTextInfoViewController.h */,
 				9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */,
 			);
@@ -3224,7 +3184,6 @@
 				438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */,
 				7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */,
 				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
-				929B422220F34A4C0034E608 /* ModifyNationViewController.m in Sources */,
 				7C212DE61F6B6DEA0007AE01 /* CourseListHeaderView.m in Sources */,
 				7CBC5BC1204D3325004ACA04 /* CompleteUserInfoViewController.m in Sources */,
 				E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */,
@@ -3264,7 +3223,6 @@
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
 				7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */,
 				E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */,
-				929B421920F349D80034E608 /* ModifyCardViewController.m in Sources */,
 				E95434C420D215AD00BCF63C /* StudyScoreViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				7CFA798D20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m in Sources */,
@@ -3337,7 +3295,6 @@
 				E91E5D2A2047B1F900052FBA /* ChatListViewController.m in Sources */,
 				7C212DEB1F6B72330007AE01 /* CourseCommentHeaderView.m in Sources */,
 				7C2519931F6900610001B577 /* PagedListFetcherBase.m in Sources */,
-				929B422E20F34AE60034E608 /* ModifyProfessionalViewController.m in Sources */,
 				7CEFC7E81F99EE70001D8C84 /* GetSigninRequest.m in Sources */,
 				E91E5D472047B22800052FBA /* IMInputView.m in Sources */,
 				43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */,
@@ -3425,7 +3382,6 @@
 				7CBC5B922049326E004ACA04 /* CourseInfoViewController.m in Sources */,
 				9273C15320EDD7870035954F /* AreaManager.m in Sources */,
 				E91E5D892047B8C900052FBA /* IMEventHandlerFactory.m in Sources */,
-				929B421C20F34A1A0034E608 /* ModifySchoolAreaViewController.m in Sources */,
 				E91E5D8D2047B8C900052FBA /* IMNewMessageEventHandler.m in Sources */,
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
 				7C24E1E01F70ED5D00A6921B /* CourseCommentTitleView.m in Sources */,
@@ -3445,7 +3401,6 @@
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				4369598A1FDE83E7009E5C43 /* FDActionSheetFooterView.m in Sources */,
 				43578CCE1FE262C100D37B72 /* PageNameMappingTable.m in Sources */,
-				929B421F20F34A370034E608 /* ModifySchoolTypeViewController.m in Sources */,
 				E91E5DBA2047D6DE00052FBA /* YXGCDTimer.m in Sources */,
 				438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */,
 				7CBC5B912049326E004ACA04 /* CourseLecturerViewController.m in Sources */,
@@ -3487,7 +3442,6 @@
 				7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */,
 				E94DDDE820D273E700729A67 /* RankingViewController.m in Sources */,
 				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
-				929B422520F34A620034E608 /* ModifyTitleViewController.m in Sources */,
 				7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
@@ -3520,7 +3474,6 @@
 				E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
-				929B422B20F34AA70034E608 /* ModifyGraduationViewController.m in Sources */,
 				7CEBA92820886D5D009754F5 /* UpgradeConfig.m in Sources */,
 				E94DDEE620DBBD9E00729A67 /* SubmitUserHomeworkRequest.m in Sources */,
 				431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */,
@@ -3566,7 +3519,6 @@
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
 				E94DDE5B20D8DA3500729A67 /* TaskCommentFetcher.m in Sources */,
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
-				929B422820F34A8C0034E608 /* ModifyEducationViewController.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
 				E95434C720D2160E00BCF63C /* ScoreDetialViewController.m in Sources */,
 				E90C5146204D41220008F92A /* ContactsClassFilterView.m in Sources */,
