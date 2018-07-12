@@ -66,10 +66,17 @@
     return [NSString stringWithFormat:@"%@-%@", [UserManager sharedInstance].userModel.stageName, [UserManager sharedInstance].userModel.subjectName];
 }
 - (NSString *)areaSubjectString {
-    if (isEmpty([UserManager sharedInstance].userModel.aui.provinceName) || isEmpty([UserManager sharedInstance].userModel.aui.cityName) || isEmpty([UserManager sharedInstance].userModel.aui.countryName)) {
+    NSString *areaString = [UserManager sharedInstance].userModel.aui.provinceName;
+    if (!isEmpty([UserManager sharedInstance].userModel.aui.cityName)) {
+        areaString = [areaString stringByAppendingString:[NSString stringWithFormat:@"-%@",[UserManager sharedInstance].userModel.aui.cityName]];
+    }
+    if (!isEmpty([UserManager sharedInstance].userModel.aui.countryName)) {
+           areaString = [areaString stringByAppendingString:[NSString stringWithFormat:@"-%@",[UserManager sharedInstance].userModel.aui.countryName]];
+    }
+    if (isEmpty(areaString)) {
         return nil;
     }
-    return [NSString stringWithFormat:@"%@-%@-%@", [UserManager sharedInstance].userModel.aui.provinceName, [UserManager sharedInstance].userModel.aui.cityName, [UserManager sharedInstance].userModel.aui.countryName];
+    return areaString;
 }
 
 #pragma  mark - get

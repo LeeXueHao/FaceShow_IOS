@@ -12,7 +12,12 @@ NSString * const kClassDidSelectNotification = @"kClassDidSelectNotification";
 @implementation UserModel_Aui
 @end
 @implementation UserModel
-
+- (NSString<Optional> *)stageName {
+    if ([_stageName isEqualToString:@"通识"]) {
+        return @"跨学段";
+    }
+    return _stageName;
+}
 + (UserModel *)modelFromUserInfo:(GetUserInfoRequestItem_Data *)userInfo {
     UserModel *model = [[UserModel alloc]init];
     model.userID = userInfo.userId;

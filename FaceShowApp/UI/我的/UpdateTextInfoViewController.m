@@ -71,7 +71,7 @@
     self.textfield.textColor = [UIColor colorWithHexString:@"333333"];
     self.textfield.returnKeyType = UIReturnKeyDone;
     self.textfield.font = [UIFont systemFontOfSize:14];
-    if (self.infoType == UserInfoNameType_IdCard) {
+    if (self.infoType == UserInfoNameType_IdCard || self.infoType == UserInfoNameType_Telephone) {
         self.textfield.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     if (self.infoType == UserInfoNameType_Email) {

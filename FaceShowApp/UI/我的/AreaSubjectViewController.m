@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupNavigation];
+    [self setupNavigationNext:YES];
     [self setupUI];
 }
 
@@ -46,6 +46,9 @@
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             [cell setSelected:YES animated:YES];
             item.enabled = YES;
+            if (obj.sub.count == 0) {
+                [self setupNavigationNext:NO];
+            }
             *stop = YES;
         }
     }];
@@ -73,15 +76,24 @@
         [UserManager sharedInstance].userModel.aui.countryName = self.countryItem.chooseName;
         [[UserManager sharedInstance] saveData];
         BLOCK_EXEC(self.completeBlock);
-        NSInteger index = self.navigationController.viewControllers.count-4;
-        [self.navigationController popToViewController:self.navigationController.viewControllers[index] animated:YES];
+        if (self.navigationController.viewControllers.count > 0) {
+            [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+        }else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }];
 }
 
 #pragma mark - setupNavigation
-- (void)setupNavigation {
+- (void)setupNavigationNext:(BOOL)isNext{
     if (self.status == AreaSubject_Province) {
         self.navigationItem.title = @"请选择省";
+        if (!isNext) {
+            self.cityItem = nil;
+            self.countryItem = nil;
+            [self setupNavigationConfirm];
+            return;
+        }
         WEAK_SELF
         [self nyx_setupRightWithTitle:@"下一步" action:^{
             STRONG_SELF
@@ -106,6 +118,11 @@
         
     }else if (self.status == AreaSubject_city) {
         self.navigationItem.title = self.provinceItem.chooseName;
+        if (!isNext) {
+            self.countryItem = nil;
+            [self setupNavigationConfirm];
+            return;
+        }
         WEAK_SELF
         [self nyx_setupRightWithTitle:@"下一步" action:^{
             STRONG_SELF
@@ -129,17 +146,20 @@
         }];
     }else {
         self.navigationItem.title = self.cityItem.chooseName;
-        WEAK_SELF
-        [self nyx_setupRightWithTitle:@"确定" action:^{
-            STRONG_SELF
-            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            if (isEmpty(indexPath)) {
-                [self.view nyx_showToast:@"请选择区"];
-                return;
-            }
-            [self updateUserInfo];
-        }];
+        [self setupNavigationConfirm];
     }
+}
+- (void)setupNavigationConfirm {
+    WEAK_SELF
+    [self nyx_setupRightWithTitle:@"确定" action:^{
+        STRONG_SELF
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        if (isEmpty(indexPath)) {
+            [self.view nyx_showToast:@"请选择区"];
+            return;
+        }
+        [self updateUserInfo];
+    }];
 }
 
 #pragma mark - setupUI
@@ -184,6 +204,9 @@
     }
     UIBarButtonItem *barItem =  self.navigationItem.rightBarButtonItems[1];
     barItem.enabled = YES;
+    if (data.sub.count == 0) {
+        [self setupNavigationNext:NO];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
