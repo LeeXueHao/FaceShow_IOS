@@ -68,8 +68,8 @@
 
 - (void)setItem:(QuestionRequestItem_voteItems *)item {
     _item = item;
-    char c = 'A' + self.index;
-    NSString *cString = [NSString stringWithFormat:@"%c. ", c];
+//    char c = 'A' + self.index;
+    NSString *cString = [NSString stringWithFormat:@"(%@). ", @(self.index+1)];
     NSString *option = [cString stringByAppendingString:item.itemName];
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineHeightMultiple = 1.2;

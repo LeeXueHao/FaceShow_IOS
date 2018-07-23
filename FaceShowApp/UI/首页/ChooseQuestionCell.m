@@ -140,8 +140,8 @@
 }
 
 - (OptionItemView *)itemViewWithOption:(NSString *)option index:(NSInteger)index{
-    char c = 'A' + index;
-    NSString *cString = [NSString stringWithFormat:@"%c. ", c];
+//    char c = 'A' + index;
+    NSString *cString = [NSString stringWithFormat:@"(%@). ", @(index+1)];
     OptionItemView *itemView = [[OptionItemView alloc]init];
     itemView.option = [cString stringByAppendingString:option];
     WEAK_SELF
