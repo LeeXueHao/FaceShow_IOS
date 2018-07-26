@@ -9,6 +9,7 @@
 #import "IMMessageBaseCell.h"
 #import "IMTimeHandleManger.h"
 #import "UIImage+GIF.h"
+#import "QiniuDataManager.h"
 
 @interface IMMessageBaseCell()
 @end
@@ -167,7 +168,7 @@
         }];
     }
     [self.usernameLabel setText:message.sender.name];
-    [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:message.sender.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
+    [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:[QiniuDataManager resizedUrlStringWithOriString:message.sender.avatar maxLongEdge:100 maxShortEdge:100]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
     [self setupSendStateWithMessage:message];
     DDLogDebug(@"内容为:%@-----状态为%@",message.text,@(message.sendState));
     
