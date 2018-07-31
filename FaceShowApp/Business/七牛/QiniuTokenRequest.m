@@ -25,7 +25,7 @@
     if (self = [super init]) {
         self.urlHead = kQiniuServer;
         self.method = @"upload.token";
-        self.from = @"22";
+        self.from = @"100";
         self.dtype = @"app";
     }
     return self;
