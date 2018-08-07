@@ -14,6 +14,7 @@
 #import "UserSignInRequest.h"
 #import "ScanCodeResultViewController.h"
 #import "MJRefresh.h"
+#import "NSObject+LocationPermissions.h"
 
 @interface SignInPlaceViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) MJRefreshHeaderView *header;
@@ -154,6 +155,10 @@
 
 #pragma mark - 位置签到
 - (void)signInWithData:(GetSignInRecordListRequestItem_SignIn *)data {
+    if (![self determineWhetherTheAPPOpensTheLocation]) {
+        [self showAlertView];
+        return;
+    }
     [self.view nyx_startLoading];
     [self.signInRequest stopRequest];
     self.signInRequest = [[UserSignInRequest alloc] init];
@@ -175,7 +180,16 @@
         scanCodeResultVC.error = error ? item.error : nil;
         scanCodeResultVC.positionSignIn = YES;
         [self.navigationController pushViewController:scanCodeResultVC animated:YES];
+        [self requestSignInfo];
     }];
 }
 
+- (void)showAlertView {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请到“设置->隐私->定位”中设置为允许使用位置！" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+    [alertController addAction:action];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 @end

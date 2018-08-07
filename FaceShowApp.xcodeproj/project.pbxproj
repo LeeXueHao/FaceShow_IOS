@@ -455,6 +455,7 @@
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */; };
 		E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */; };
+		E9B39A642119B672007ABA54 /* NSObject+LocationPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1322,6 +1323,8 @@
 		E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMPhotoBrowserView.m; sourceTree = "<group>"; };
 		E9B39A1D20EE1B2B007ABA54 /* ScheduleDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleDetailViewController.h; sourceTree = "<group>"; };
 		E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleDetailViewController.m; sourceTree = "<group>"; };
+		E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LocationPermissions.m"; sourceTree = "<group>"; };
+		E9B39A632119B671007ABA54 /* NSObject+LocationPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LocationPermissions.h"; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -1686,6 +1689,8 @@
 				7C2518DF1F68E68D0001B577 /* UIViewController+NavigationItem.m */,
 				7C2518E01F68E68D0001B577 /* UIViewController+VisibleViewController.h */,
 				7C2518E11F68E68D0001B577 /* UIViewController+VisibleViewController.m */,
+				E9B39A632119B671007ABA54 /* NSObject+LocationPermissions.h */,
+				E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */,
 			);
 			path = Categoty;
 			sourceTree = "<group>";
@@ -3258,6 +3263,7 @@
 				E932CD8F20BFE01C009F5BC6 /* SignInPLaceCell.m in Sources */,
 				431D75981F6EB43E00E0073B /* ScanCodeResultViewController.m in Sources */,
 				E91E5D672047B86B00052FBA /* IMOfflineMsgUpdateService.m in Sources */,
+				E9B39A642119B672007ABA54 /* NSObject+LocationPermissions.m in Sources */,
 				43210E691F7271D30049C381 /* GetNoticeDetailRequest.m in Sources */,
 				7C66B2792027F6050067E242 /* HeadImageHandler.m in Sources */,
 				E95434D120D227AE00BCF63C /* TaskNameCell.m in Sources */,
