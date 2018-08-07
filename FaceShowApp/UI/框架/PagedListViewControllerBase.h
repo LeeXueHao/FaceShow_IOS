@@ -38,5 +38,5 @@
 - (void)setPulldownViewHidden:(BOOL)hidden;
 - (void)setPullupViewHidden:(BOOL)hidden;
 - (void)checkHasMore;
-
+- (void)hideErrorView;
 @end

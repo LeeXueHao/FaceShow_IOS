@@ -121,10 +121,6 @@
             [self checkHasMore];
             return;
         }
-        
-        // 隐藏失败界面
-        [self hideErrorView];
-        
         [self->_header setLastUpdateTime:[NSDate date]];
         self.total = total;
         [self.dataArray removeAllObjects];
@@ -137,6 +133,8 @@
             [self checkHasMore];
             [self.dataFetcher saveToCache];
         }
+        // 隐藏失败界面
+        [self hideErrorView];
         [self.tableView reloadData];
     }];
 }

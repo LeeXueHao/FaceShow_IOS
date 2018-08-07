@@ -9,7 +9,7 @@
 #ifndef env_h
 #define env_h
 
-//#undef DEBUG
+#undef DEBUG
 
 //#define HuBeiApp
 

@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
 @property (nonatomic, strong) CommentInputView *inputView;
 @property (nonatomic, strong) AlertView *alertView;
+@property (nonatomic, strong) UIView *footerView;
 
 @property (nonatomic, assign) NSInteger commtentInteger;
 @property (nonatomic, strong) NSIndexPath *replyIndexPath;
@@ -205,6 +206,13 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
     [self.view addGestureRecognizer:self.tapGesture];
     self.tapGesture.enabled = NO;
+    [self.emptyView removeFromSuperview];
+    self.footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64.0f - 157.0f)];
+    self.emptyView.hidden = NO;
+    [self.footerView addSubview:self.emptyView];
+    [self.emptyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.footerView);
+    }];
 }
 - (void)tapAction {
     [self hideFloatingView];
@@ -232,6 +240,15 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     [super stopAnimation];
     [self.headerView reload];
     self.headerView.hidden = NO;
+}
+- (void)hideErrorView {
+    [super hideErrorView];
+    if (self.dataArray.count == 0) {
+        self.emptyView.hidden = NO;
+        self.tableView.tableFooterView = self.footerView;
+    }else {
+        self.tableView.tableFooterView = nil;
+    }
 }
 - (void)showAlertView:(NSIndexPath *)indexPath {
     [self hiddenInputTextView];
