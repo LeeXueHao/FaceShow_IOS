@@ -123,7 +123,9 @@
     WEAK_SELF
     [vc setClippedBlock:^(UIImage *clippedImage){
         STRONG_SELF
-        [self.imagePickerController dismissViewControllerAnimated:NO completion:nil];
+        [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
+            [UIApplication sharedApplication].statusBarHidden = NO;
+        }];
 //        [self.photoSelectionNavi dismissViewControllerAnimated:NO completion:nil];
         BLOCK_EXEC(self.pickImageBlock,clippedImage);
     }];
