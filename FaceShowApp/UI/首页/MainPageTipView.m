@@ -93,13 +93,7 @@
 
 - (void)setItem:(GetCurrentClazsRequestItem *)item {
     _item = item;
-    float task = [item.data.taskCompletion floatValue] * 100;
-    NSString *progressStr = [NSString stringWithFormat:@"%@",@(task)];
-    if ([progressStr containsString:@"."]) {
-        progressStr = [NSString stringWithFormat:@"%.2f%@",[progressStr floatValue],@"%"];
-    }else {
-        progressStr = [NSString stringWithFormat:@"%.0f%@",[progressStr floatValue],@"%"];
-    }
+    NSString *progressStr = [NSString stringWithFormat:@"%.0f%%",[item.data.taskCompletion floatValue]*100];
     progressStr = [NSString stringWithFormat:@"任务进度  %@",progressStr];
     NSMutableAttributedString *progressAttStr = [[NSMutableAttributedString alloc]initWithString:progressStr];
     [progressAttStr addAttributes:@{NSFontAttributeName:self.progressLabel.font,NSForegroundColorAttributeName:self.progressLabel.textColor} range:NSMakeRange(0,[progressStr length])];

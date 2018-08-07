@@ -96,13 +96,7 @@
 
 - (void)setItem:(GetUserTaskProgressRequestItem *)item {
     _item = item;
-    CGFloat progress = [item.data.finishPercent floatValue] * 100;
-    NSString *progressStr = [NSString stringWithFormat:@"%@",@(progress)];
-    if ([progressStr containsString:@"."]) {
-        self.scoreLabel.text = [NSString stringWithFormat:@"%.2f%@",[progressStr floatValue],@"%"];
-    }else {
-        self.scoreLabel.text = [NSString stringWithFormat:@"%.0f%@",[progressStr floatValue],@"%"];
-    }
+    self.scoreLabel.text = [NSString stringWithFormat:@"%.0f%%",[item.data.finishPercent floatValue] * 100];
     NSString *ranking = [NSString stringWithFormat:@"班级排名:第%@名",item.data.clazsRank];
     NSMutableAttributedString *rankingAttStr = [[NSMutableAttributedString alloc]initWithString:ranking];
     [rankingAttStr addAttributes:@{NSFontAttributeName:self.rankingLabel.font,NSForegroundColorAttributeName:self.rankingLabel.textColor} range:NSMakeRange(0,[ranking length])];
