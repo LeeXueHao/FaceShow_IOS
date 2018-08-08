@@ -107,12 +107,12 @@
 }
 
 - (void)setModel {
-    [self loadWebViewWithUrl:self.schedule.attachmentInfo.previewUrl ? self.schedule.attachmentInfo.previewUrl : self.schedule.imageUrl];
+    [self loadWebViewWithUrl:self.schedule.imageUrl ? self.schedule.imageUrl : self.schedule.attachmentInfo.previewUrl];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)sender {
     ScheduleDetailViewController *vc = [[ScheduleDetailViewController alloc]init];
-    vc.urlStr = self.schedule.attachmentInfo.previewUrl ? self.schedule.attachmentInfo.previewUrl : self.schedule.imageUrl;
+    vc.urlStr = self.schedule.imageUrl ? self.schedule.imageUrl : self.schedule.attachmentInfo.previewUrl;
     vc.name = self.schedule.subject;
     [self.navigationController pushViewController:vc animated:YES];
 }
