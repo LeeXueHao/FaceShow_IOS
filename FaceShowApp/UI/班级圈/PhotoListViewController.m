@@ -133,7 +133,9 @@
         }];
         NSMutableArray *array = [NSMutableArray array];
         for (PhotoItem *item in selectedArray) {
-            [array addObject:item.image];
+            if (item.image != nil) {
+                [array addObject:item.image];
+            }
         }
         BLOCK_EXEC(self.completeBlock,array);
         [self dismissViewControllerAnimated:YES completion:nil];
