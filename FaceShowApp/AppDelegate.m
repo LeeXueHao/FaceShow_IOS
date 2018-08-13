@@ -18,6 +18,7 @@
 #import "TalkingDataConfig.h"
 #import "BMKLocationConfig.h"
 #import "AppUseRecordManager.h"
+#import "BasicDataManager.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
@@ -33,6 +34,8 @@
     [TalkingData sessionStarted:kTalkingDataAppKey withChannelId:kTalkingDataChannel];
     // 初始化请求，检测版本更新等
     [[YXInitHelper sharedHelper] requestCompeletion:nil];
+    // 检查基础数据更新
+    [[BasicDataManager sharedInstance]checkAndUpdataBasicData];
     
     [[YXGeTuiManager sharedInstance] registerGeTuiWithDelegate:self];
     [[BMKLocationAuth sharedInstance] checkPermisionWithKey:kBMKLocationKey authDelegate:self];

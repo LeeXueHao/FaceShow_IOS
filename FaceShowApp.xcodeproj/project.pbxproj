@@ -197,6 +197,11 @@
 		7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E222520E475E10055843D /* RefreshBaseViewController.m */; };
 		7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */; };
 		7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223820E61B380055843D /* AppUseRecordManager.m */; };
+		7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6321216D88000705E8 /* BasicDataConfig.m */; };
+		7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6421216D88000705E8 /* AreaManager.m */; };
+		7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6621216D88000705E8 /* BasicDataRequest.m */; };
+		7C32AD6E21216D88000705E8 /* BasicDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6721216D88000705E8 /* BasicDataManager.m */; };
+		7C32AD7121216F2C000705E8 /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C32AD7021216F2C000705E8 /* area.json */; };
 		7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E628200DCD71006704E7 /* TestQiniuViewController.m */; };
 		7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E62F200EF3F7006704E7 /* QiniuTokenRequest.m */; };
 		7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33E632200EF48C006704E7 /* QiniuDataManager.m */; };
@@ -320,8 +325,6 @@
 		923F73891F725DDF00D7EA6F /* classMomentComment_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 923F73881F725DDF00D7EA6F /* classMomentComment_mock.json */; };
 		924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */; };
 		9273C15020EDD67C0035954F /* HuBeiUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273C14F20EDD67C0035954F /* HuBeiUserInfoViewController.m */; };
-		9273C15320EDD7870035954F /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273C15220EDD7870035954F /* AreaManager.m */; };
-		9273C15520EDD7C20035954F /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 9273C15420EDD7C20035954F /* area.json */; };
 		9276958720F5F48200677ABA /* UpdateTextInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */; };
 		9276958A20F5F7F000677ABA /* UserInfoNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9276958920F5F7F000677ABA /* UserInfoNameModel.m */; };
 		9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9279A6E81F6A5754004A1E2B /* ClassMomentCell.m */; };
@@ -820,6 +823,15 @@
 		7C2E223620E61B370055843D /* AppUseRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUseRecordManager.h; sourceTree = "<group>"; };
 		7C2E223720E61B380055843D /* AddAppUseRecordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAppUseRecordRequest.h; sourceTree = "<group>"; };
 		7C2E223820E61B380055843D /* AppUseRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUseRecordManager.m; sourceTree = "<group>"; };
+		7C32AD6321216D88000705E8 /* BasicDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataConfig.m; sourceTree = "<group>"; };
+		7C32AD6421216D88000705E8 /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
+		7C32AD6521216D88000705E8 /* BasicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataManager.h; sourceTree = "<group>"; };
+		7C32AD6621216D88000705E8 /* BasicDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataRequest.m; sourceTree = "<group>"; };
+		7C32AD6721216D88000705E8 /* BasicDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataManager.m; sourceTree = "<group>"; };
+		7C32AD6821216D88000705E8 /* AreaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaManager.h; sourceTree = "<group>"; };
+		7C32AD6921216D88000705E8 /* BasicDataConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataConfig.h; sourceTree = "<group>"; };
+		7C32AD6A21216D88000705E8 /* BasicDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataRequest.h; sourceTree = "<group>"; };
+		7C32AD7021216F2C000705E8 /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
 		7C33E627200DCD71006704E7 /* TestQiniuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestQiniuViewController.h; sourceTree = "<group>"; };
 		7C33E628200DCD71006704E7 /* TestQiniuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestQiniuViewController.m; sourceTree = "<group>"; };
 		7C33E62E200EF3F6006704E7 /* QiniuTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuTokenRequest.h; sourceTree = "<group>"; };
@@ -1060,9 +1072,6 @@
 		924ABA4A1F72403D00ABD453 /* ClassMomentPublishRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMomentPublishRequest.m; sourceTree = "<group>"; };
 		9273C14E20EDD67C0035954F /* HuBeiUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HuBeiUserInfoViewController.h; sourceTree = "<group>"; };
 		9273C14F20EDD67C0035954F /* HuBeiUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HuBeiUserInfoViewController.m; sourceTree = "<group>"; };
-		9273C15120EDD7870035954F /* AreaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaManager.h; sourceTree = "<group>"; };
-		9273C15220EDD7870035954F /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
-		9273C15420EDD7C20035954F /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
 		9276958520F5F48200677ABA /* UpdateTextInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateTextInfoViewController.h; sourceTree = "<group>"; };
 		9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateTextInfoViewController.m; sourceTree = "<group>"; };
 		9276958820F5F7F000677ABA /* UserInfoNameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoNameModel.h; sourceTree = "<group>"; };
@@ -1848,6 +1857,7 @@
 		7C2519641F68EBCD0001B577 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7C32AD6221216D88000705E8 /* 基础数据 */,
 				7C2E223420E61B1F0055843D /* 用户使用统计 */,
 				7CEBA91F20886C30009754F5 /* 升级 */,
 				E91E5D072047B0A600052FBA /* 通讯录 */,
@@ -1873,9 +1883,6 @@
 				435274F61F73551F0050B177 /* Request */,
 				7C2519661F68EBCD0001B577 /* UserManager.h */,
 				7C2519671F68EBCD0001B577 /* UserManager.m */,
-				9273C15420EDD7C20035954F /* area.json */,
-				9273C15120EDD7870035954F /* AreaManager.h */,
-				9273C15220EDD7870035954F /* AreaManager.m */,
 				7C2519681F68EBCD0001B577 /* UserModel.h */,
 				7C2519691F68EBCD0001B577 /* UserModel.m */,
 				43538D2F1FDFBD2D0052A9D3 /* StageSubjectItem.h */,
@@ -2229,6 +2236,30 @@
 				7C2E223820E61B380055843D /* AppUseRecordManager.m */,
 			);
 			path = "用户使用统计";
+			sourceTree = "<group>";
+		};
+		7C32AD6221216D88000705E8 /* 基础数据 */ = {
+			isa = PBXGroup;
+			children = (
+				7C32AD6F21216D91000705E8 /* 地区 */,
+				7C32AD6521216D88000705E8 /* BasicDataManager.h */,
+				7C32AD6621216D88000705E8 /* BasicDataRequest.m */,
+				7C32AD6A21216D88000705E8 /* BasicDataRequest.h */,
+				7C32AD6721216D88000705E8 /* BasicDataManager.m */,
+				7C32AD6921216D88000705E8 /* BasicDataConfig.h */,
+				7C32AD6321216D88000705E8 /* BasicDataConfig.m */,
+			);
+			path = "基础数据";
+			sourceTree = "<group>";
+		};
+		7C32AD6F21216D91000705E8 /* 地区 */ = {
+			isa = PBXGroup;
+			children = (
+				7C32AD7021216F2C000705E8 /* area.json */,
+				7C32AD6421216D88000705E8 /* AreaManager.m */,
+				7C32AD6821216D88000705E8 /* AreaManager.h */,
+			);
+			path = "地区";
 			sourceTree = "<group>";
 		};
 		7C33E62A200EF37D006704E7 /* 七牛 */ = {
@@ -3087,10 +3118,10 @@
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
 				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,
 				7C24E1EB1F72262F00A6921B /* GetCurrentClazsRequest_mock.json in Resources */,
-				9273C15520EDD7C20035954F /* area.json in Resources */,
 				E90C514E204E73010008F92A /* 加载动效.gif in Resources */,
 				7C2518B71F68E5C70001B577 /* Assets.xcassets in Resources */,
 				43538D2E1FDFB7C40052A9D3 /* StageSubject.json in Resources */,
+				7C32AD7121216F2C000705E8 /* area.json in Resources */,
 				43210E5D1F7256880049C381 /* GetCourse_Mock.json in Resources */,
 				7CEBA90C2085EF42009754F5 /* 研修宝‘‘聊聊’’实现方案.pdf in Resources */,
 				E94DDE4420D5002B00729A67 /* GetHomeworkRequest_mock.json in Resources */,
@@ -3162,6 +3193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */,
 				9273C15020EDD67C0035954F /* HuBeiUserInfoViewController.m in Sources */,
 				E90C513D2049493E0008F92A /* IMImageMessageRightCell.m in Sources */,
 				E94DDDF720D2792D00729A67 /* ScoreRankingCell.m in Sources */,
@@ -3204,6 +3236,7 @@
 				7C212DB81F6A51A70007AE01 /* FillQuestionCell.m in Sources */,
 				7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */,
 				7CEBA91B2088699F009754F5 /* QiniuConfig.m in Sources */,
+				7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */,
 				7C6EE55020073E3000B47892 /* AlbumListViewController.m in Sources */,
 				E95434CB20D217D000BCF63C /* ScroeDetailTabContainerView.m in Sources */,
 				E94DDE4C20D8A43D00729A67 /* TaskCommentViewController.m in Sources */,
@@ -3289,6 +3322,7 @@
 				7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */,
 				922600C1200DF2220076AD05 /* ClassMomentDiscardCommentRequest.m in Sources */,
 				4369598E1FDE8899009E5C43 /* FDActionSheetHeaderView.m in Sources */,
+				7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */,
 				7C24E21A1F75F91F00A6921B /* GetCourseCommentTitleRequest.m in Sources */,
 				E94DDE5520D8D5AB00729A67 /* GetCommentRequest.m in Sources */,
 				7C2518FC1F68E8A80001B577 /* AlertView.m in Sources */,
@@ -3386,7 +3420,6 @@
 				7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */,
 				E95434BD20D1380900BCF63C /* TaskFilterItemView.m in Sources */,
 				7CBC5B922049326E004ACA04 /* CourseInfoViewController.m in Sources */,
-				9273C15320EDD7870035954F /* AreaManager.m in Sources */,
 				E91E5D892047B8C900052FBA /* IMEventHandlerFactory.m in Sources */,
 				E91E5D8D2047B8C900052FBA /* IMNewMessageEventHandler.m in Sources */,
 				7C24E1DD1F70BA8000A6921B /* FillQuestionResultCell.m in Sources */,
@@ -3467,6 +3500,7 @@
 				9283861A1F6FC58700205028 /* ClassMomentFooterView.m in Sources */,
 				929B421620F336810034E608 /* AreaSubjectCell.m in Sources */,
 				7C24E2061F736BF400A6921B /* CourseCommentDataFetcher.m in Sources */,
+				7C32AD6E21216D88000705E8 /* BasicDataManager.m in Sources */,
 				7C2519461F68EB780001B577 /* YXSmartDashLineView.m in Sources */,
 				7C66B27E2027F8510067E242 /* QAPhotoClipBottomView.m in Sources */,
 				7C2519831F68FF7F0001B577 /* EmptyView.m in Sources */,
@@ -3793,6 +3827,7 @@
 				PROVISIONING_PROFILE = "92a3763c-84e3-4ca7-9f54-96595ac3f31f";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};
 			name = Debug;
 		};
@@ -3909,6 +3944,7 @@
 				PROVISIONING_PROFILE = "9e3d72a0-21b5-40ec-8ef9-9ad33e6c42b3";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Rel;
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};
 			name = Release;
 		};

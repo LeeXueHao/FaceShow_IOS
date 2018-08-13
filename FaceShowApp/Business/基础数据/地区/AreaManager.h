@@ -24,4 +24,6 @@
 + (AreaManager *)sharedInstance;
 
 @property (nonatomic, strong) AreaModel *areaModel;
+
+- (void)updateWithLatestVersion:(NSString *)version url:(NSString *)url;
 @end
