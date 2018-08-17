@@ -195,7 +195,7 @@
     }];
     actionSheetView.actionSheetBlock = ^(NSInteger integer) {
         STRONG_SELF
-        if ([UserManager sharedInstance].userModel.sexID.integerValue == integer%2) {
+        if ([UserManager sharedInstance].userModel.sexID.integerValue == integer%2 || integer == 0) {
             [self.alertView hide];
             return;
         }
