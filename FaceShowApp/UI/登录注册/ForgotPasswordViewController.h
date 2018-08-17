@@ -10,4 +10,5 @@
 
 @interface ForgotPasswordViewController : ScrollBaseViewController
 @property (nonatomic, strong) NSString *phoneNum;
+@property (nonatomic, assign) BOOL isModify;
 @end

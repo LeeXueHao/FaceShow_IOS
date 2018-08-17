@@ -18,6 +18,7 @@
 #import "FeedbackViewController.h"
 #import "ClassSelectionViewController.h"
 #import "HuBeiUserInfoViewController.h"
+#import "ForgotPasswordViewController.h"
 
 @interface MineViewController ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -165,6 +166,15 @@
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
+    
+    UIButton *passwordBtn = [self optionBtnWithTitle:@"修改密码" normalImage:@"忘记密码icon正常态" highlightedImage:@"忘记密码icon选择态"];
+    [self.view addSubview:passwordBtn];
+    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(feedbackInfoBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+    }];
+    
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [logoutBtn setTitle:@"退出" forState:UIControlStateNormal];
@@ -274,6 +284,12 @@
         }];
         [self.navigationController pushViewController:VC animated:YES];
 #endif
+    }else if ([sender.titleLabel.text isEqualToString:@"修改密码"]) {
+        [TalkingData trackEvent:@"修改密码"];
+        ForgotPasswordViewController *vc = [[ForgotPasswordViewController alloc] init];
+        vc.isModify = YES;
+        vc.phoneNum = [UserManager sharedInstance].userModel.mobilePhone;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

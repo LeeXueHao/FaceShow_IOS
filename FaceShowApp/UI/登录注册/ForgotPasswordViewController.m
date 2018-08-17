@@ -30,6 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"忘记密码";
+    if (self.isModify) {
+        self.navigationItem.title = @"修改密码";
+    }
     [self setupUI];
 //    WEAK_SELF
 //    [self nyx_setupLeftWithImageName:@"关闭当前页面icon正常态" highlightImageName:@"关闭当前页面icon点击态" action:^{
@@ -66,6 +69,9 @@
     self.accountView.inputView.textField.text = self.phoneNum;
     self.accountView.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
     self.accountView.inputView.placeHolder = @"手机号";
+    if (self.isModify) {
+        self.accountView.userInteractionEnabled = NO;
+    }
     WEAK_SELF
     [self.accountView setTextChangeBlock:^{
         STRONG_SELF
