@@ -80,19 +80,19 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }else {
         self.title = self.anotherMember.name;
     }
-//    WEAK_SELF
-//    [self nyx_setupRightWithTitle:@"设置" action:^{
-//        STRONG_SELF
-//        if (self.topic.type == TopicType_Group) {
-//            IMGroupSettingViewController *vc = [[IMGroupSettingViewController alloc]init];
-//            vc.topic = self.topic;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }else {
-//            IMPrivateSettingViewController *vc = [[IMPrivateSettingViewController alloc]init];
-//            vc.topic = self.topic;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//    }];
+    WEAK_SELF
+    [self nyx_setupRightWithTitle:@"设置" action:^{
+        STRONG_SELF
+        if (self.topic.type == TopicType_Group) {
+            IMGroupSettingViewController *vc = [[IMGroupSettingViewController alloc]init];
+            vc.topic = self.topic;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            IMPrivateSettingViewController *vc = [[IMPrivateSettingViewController alloc]init];
+            vc.topic = self.topic;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
     self.imageHandler = [[ImageSelectionHandler alloc]init];
     [self setupUI];
     [self setupData];
