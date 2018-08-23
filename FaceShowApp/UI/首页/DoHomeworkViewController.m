@@ -341,13 +341,13 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *str = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    if (str.length > 200) {
-        str = [str substringToIndex:200];
+    if (str.length > 1500) {
+        str = [str substringToIndex:1500];
         textView.text = str;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UITextPosition* beginning = textView.beginningOfDocument;
-            UITextPosition* startPosition = [textView positionFromPosition:beginning offset:200];
-            UITextPosition* endPosition = [textView positionFromPosition:beginning offset:200];
+            UITextPosition* startPosition = [textView positionFromPosition:beginning offset:1500];
+            UITextPosition* endPosition = [textView positionFromPosition:beginning offset:1500];
             UITextRange* selectionRange = [textView textRangeFromPosition:startPosition toPosition:endPosition];
             [textView setSelectedTextRange:selectionRange];
         });

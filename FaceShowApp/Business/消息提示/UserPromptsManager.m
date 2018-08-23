@@ -8,7 +8,6 @@
 
 #import "UserPromptsManager.h"
 #import "YXGCDTimer.h"
-#import "GetUserPromptsRequest.h"
 
 NSString * const kHasNewTaskNotification = @"kHasNewTaskNotification";
 NSString * const kHasNewMomentNotification = @"kHasNewMomentNotification";
@@ -40,21 +39,18 @@ NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
             return;
         }
         GetUserPromptsRequestItem *item = (GetUserPromptsRequestItem *)retItem;
+        self.data = item.data;
         self.taskNewView.hidden = item.data.taskNew.promptNum.integerValue==0;
         self.resourceNewView.hidden = item.data.resourceNew.promptNum.integerValue==0;
-        self.momentNewView.hidden = item.data.momentNew.promptNum.integerValue==0;
+        self.momentNewView.hidden = item.data.momentNew.promptNum.integerValue==0&&item.data.momentMsgNew.promptNum.integerValue==0;
         if (item.data.taskNew.promptNum.integerValue > 0) {
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewTaskNotification object:nil];
         }
         if (item.data.resourceNew.promptNum.integerValue > 0) {
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewResourceNotification object:nil];
         }
-        if (item.data.momentNew.promptNum.integerValue > 0) {
+        if (item.data.momentNew.promptNum.integerValue > 0 || item.data.momentMsgNew.promptNum.integerValue > 0) {
             [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
-        }
-        
-        if (item.data.momentMsgNew.promptNum.integerValue > 0) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:item.data.momentMsgNew.promptNum];
         }
     }];
 }

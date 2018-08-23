@@ -31,6 +31,7 @@
 #import "ClassMomentNotificationViewController.h"
 #import "FSTabBarController.h"
 #import "YXDrawerController.h"
+#import "UserPromptsManager.h"
 typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     ClassMomentComment_Normal = 0,
     ClassMomentComment_Comment = 1,
@@ -148,6 +149,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             VC.classMomentNotificationReloadBlock = ^{
                 self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f);
                 self.tableView.tableHeaderView = self.headerView;
+                [UserPromptsManager sharedInstance].data.momentMsgNew.promptNum = nil;
+                if ([UserPromptsManager sharedInstance].data.momentNew.promptNum.integerValue == 0) {
+                    [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+                }
             };
             [self.navigationController pushViewController:VC animated:YES];
         }
@@ -376,25 +381,17 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewMomentNotification object:nil] subscribeNext:^(id x) {
         STRONG_SELF
-        NSNotification *noti = (NSNotification *)x;
-        if ([noti.object integerValue] > 0) {
+        NSInteger msgCount = [UserPromptsManager sharedInstance].data.momentMsgNew.promptNum.integerValue;
+        if (msgCount > 0) {
             self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f);
-            self.headerView.messageInteger = [noti.object integerValue];
+            self.headerView.messageInteger = msgCount;
             self.tableView.tableHeaderView = self.headerView;
-        }else {
-            if (self.tabBarController.selectedIndex == 2) {
-                [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
-//                [self firstPageFetch];
-            }
         }
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTabBarDidSelectNotification object:nil]subscribeNext:^(NSNotification *x) {
         STRONG_SELF
         if (self.navigationController == x.object) {
-            if (![UserPromptsManager sharedInstance].momentNewView.hidden) {
-                [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
-                [self firstPageFetch];
-            }
+            [self firstPageFetch];
         }
     }];
     
@@ -410,6 +407,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             }
         }];
     }];
+}
+
+- (void)firstPageFetch {
+    [super firstPageFetch];
+    [UserPromptsManager sharedInstance].data.momentNew.promptNum = nil;
+    if ([UserPromptsManager sharedInstance].data.momentMsgNew.promptNum.integerValue == 0) {
+        [UserPromptsManager sharedInstance].momentNewView.hidden = YES;
+    }
 }
 
 #pragma mark - UITableViewDataSource

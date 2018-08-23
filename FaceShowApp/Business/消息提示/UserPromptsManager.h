@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GetUserPromptsRequest.h"
 
 extern NSString * const kHasNewTaskNotification;
 extern NSString * const kHasNewMomentNotification;
@@ -16,6 +17,8 @@ extern NSString * const kHasNewResourceNotification;
 @property (nonatomic, strong) UIView *taskNewView;
 @property (nonatomic, strong) UIView *resourceNewView;
 @property (nonatomic, strong) UIView *momentNewView;
+
+@property (nonatomic, strong) GetUserPromptsRequestItem_data *data;
 
 + (UserPromptsManager *)sharedInstance;
 
