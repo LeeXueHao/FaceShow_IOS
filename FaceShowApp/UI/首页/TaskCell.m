@@ -13,10 +13,10 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *sourceLabel;
-@property (nonatomic, strong) UIImageView *statusImageView;
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIButton *draftButton;
 @end
 
 @implementation TaskCell
@@ -39,13 +39,15 @@
         make.centerY.mas_equalTo(0);
     }];
     
-    self.statusImageView = [[UIImageView alloc] init];
-    self.statusImageView.hidden = YES;
-    [self.contentView addSubview:self.statusImageView];
-    [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.draftButton = [[UIButton alloc]init];
+    [self.draftButton setBackgroundImage:[UIImage imageNamed:@"草稿"] forState:UIControlStateNormal];
+    self.draftButton.userInteractionEnabled = NO;
+    [self.contentView addSubview:self.draftButton];
+    [self.draftButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.statusLabel.mas_left).offset(-5);
         make.centerY.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(40);
     }];
     
     self.iconImageView = [[UIImageView alloc] init];
@@ -62,8 +64,8 @@
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconImageView.mas_right).mas_offset(15);
-        make.top.mas_equalTo(self.statusImageView.mas_top).offset(-2);
-        make.right.mas_lessThanOrEqualTo(self.statusImageView.mas_left).offset(-5);
+        make.top.mas_equalTo(self.draftButton.mas_top).offset(-2);
+        make.right.mas_lessThanOrEqualTo(self.draftButton.mas_left).offset(-5);
     }];
     
     self.sourceLabel = [[UILabel alloc] init];
@@ -72,7 +74,7 @@
     [self.contentView addSubview:self.sourceLabel];
     [self.sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel.mas_left);
-        make.bottom.mas_equalTo(self.statusImageView.mas_bottom).offset(5);
+        make.bottom.mas_equalTo(self.draftButton.mas_bottom).offset(5);
         make.right.mas_equalTo(self.titleLabel.mas_right);
     }];
     
@@ -100,8 +102,7 @@
         self.statusLabel.text = @"未完成";
         self.statusLabel.textColor = [UIColor colorWithHexString:@"f56f5d"];
     }
-    
-    self.statusImageView.image = [UIImage imageNamed:task.stepFinished.boolValue ? @"已完成" : @"未完成"];
+
     InteractType type = [FSDataMappingTable InteractTypeWithKey:task.interactType];
     if (type == InteractType_Vote) {
         self.iconImageView.image = [UIImage imageNamed:@"投票"];
@@ -115,6 +116,16 @@
         self.iconImageView.image = [UIImage imageNamed:@"作业"];
     }else if (type == InteractType_Evaluate) {
         self.iconImageView.image = [UIImage imageNamed:@"评价"];
+    }
+    
+    if (type == InteractType_Homework && [task.draft isEqualToString:@"1"]) {
+        [self.draftButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(40);
+        }];
+    }else {
+        [self.draftButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
     }
 }
 

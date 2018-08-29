@@ -264,7 +264,7 @@
                 return;
             }
             GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
-            if (item.data.userHomework) {
+            if ([item.data.userHomework.finishStatus isEqualToString:@"1"]) {
                 FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
                 vc.userHomework = item.data.userHomework;
                 vc.homework = item.data.homework;
@@ -272,6 +272,7 @@
             }else {
                 HomeworkRequirementViewController *vc = [[HomeworkRequirementViewController alloc]init];
                 vc.homework = item.data.homework;
+                vc.userHomework = item.data.userHomework;
                 vc.isFinished = NO;
                 [self.navigationController pushViewController:vc animated:YES];
             }

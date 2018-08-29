@@ -57,9 +57,13 @@
     BLOCK_EXEC(self.deleteBlock)
 }
 
-- (void)setImage:(UIImage *)image {
-    _image = image;
-    self.imageView.image = image;
+- (void)setImageAttach:(ImageAttachment *)imageAttach {
+    _imageAttach = imageAttach;
+    if (imageAttach.image) {
+        self.imageView.image = imageAttach.image;
+    }else{
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageAttach.url]];
+    }
 }
 
 @end

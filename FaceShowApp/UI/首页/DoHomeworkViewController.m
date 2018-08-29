@@ -18,8 +18,11 @@
 #import "FinishedHomeworkViewController.h"
 #import "SubmitUserHomeworkRequest.h"
 #import "GetHomeworkRequest.h"
+#import "HomeworkAttachmentView.h"
+#import "AttachmentUploadGuideViewController.h"
 
 NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
+extern NSString * const kPCCodeResultBackNotification;
 
 @interface DoHomeworkViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIView *titleView;
@@ -37,6 +40,9 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 @property (nonatomic, assign) NSInteger imageIndex;
 @property (nonatomic, strong) NSMutableArray *resIdArray;
 
+@property (nonatomic, strong) NSMutableArray *attachmentViewArray;
+@property (nonatomic, strong) UIView *attachTitleView;
+@property (nonatomic, assign) BOOL isDraft;
 @end
 
 @implementation DoHomeworkViewController
@@ -48,12 +54,40 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.attachmentViewArray = [NSMutableArray array];
     self.title = self.homework.title;
+//    [self setupMock];
     [self setupNavView];
     [self setupUI];
     [self setupObservers];
 }
-
+- (void)setupMock {
+    GetHomeworkRequestItem_attachmentInfo *attach1 = [[GetHomeworkRequestItem_attachmentInfo alloc]init];
+    attach1.resName = @"附件1";
+    attach1.ext = @"doc";
+    attach1.previewUrl = @"http://pic.58pic.com/58pic/15/23/09/74T58PICZjg_1024.jpg";
+    GetHomeworkRequestItem_attachmentInfo *attach2 = [[GetHomeworkRequestItem_attachmentInfo alloc]init];
+    attach2.resName = @"附件2";
+    attach2.ext = @"xlsx";
+    attach2.previewUrl = @"http://fc.topitme.com/c/46/4b/11204201334c04b46cl.jpg";
+    GetHomeworkRequestItem_attachmentInfo *attach3 = [[GetHomeworkRequestItem_attachmentInfo alloc]init];
+    attach3.resName = @"附件3";
+    attach3.ext = @"ppt";
+    attach3.previewUrl = @"http://pic.58pic.com/58pic/13/19/88/82X58PICteS_1024.jpg";
+    GetHomeworkRequestItem_attachmentInfo *attach4 = [[GetHomeworkRequestItem_attachmentInfo alloc]init];
+    attach4.resName = @"附件4";
+    attach4.ext = @"jpg";
+    attach4.previewUrl = @"http://imgsrc.baidu.com/imgad/pic/item/b21bb051f8198618076e0ba640ed2e738bd4e6e3.jpg";
+    GetHomeworkRequestItem_attachmentInfo *attach5 = [[GetHomeworkRequestItem_attachmentInfo alloc]init];
+    attach5.resName = @"附件5";
+    attach5.ext = @"mp4";
+    attach5.previewUrl = @"http://pic.58pic.com/58pic/13/68/96/68x58PICrws_1024.jpg";
+    self.userHomework = [[GetHomeworkRequestItem_userHomework alloc]init];
+    self.userHomework.attachmentInfos2 = @[attach1,attach2,attach3,attach4,attach5];
+    self.userHomework.title = @"ahsdioahsiofhoiasf";
+    self.userHomework.content = @"迆你弄已热弄热欧冠no工农人工 工农热弄拜佛问佛跟我跟博物馆北外波纹管版本噢吧宫本 讴歌吧不改波哥噢 能喔";
+    self.userHomework.attachmentInfos = @[attach1,attach2,attach3,attach4,attach5];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -73,6 +107,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF
         NSLog(@"--------UIControlEventTouchUpInside--------");
+        self.isDraft = NO;
         [self.view nyx_startLoading];
         if (self.imageArray.count == 0) {
             [self requestForSubmitHomework:nil];
@@ -138,18 +173,10 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     self.titleTextView.backgroundColor = [UIColor whiteColor];
     self.titleTextView.font = [UIFont systemFontOfSize:14];
     self.titleTextView.textColor = [UIColor colorWithHexString:@"333333"];
-    //    NSString *placeholderStr = @"作业标题（最多20字）";
-    //    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:placeholderStr];
-    //    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"cccccc"] range:NSMakeRange(0, placeholderStr.length)];
-    //    [attrStr addAttribute:NSFontAttributeName value:self.titleTextView.font range:NSMakeRange(0, placeholderStr.length)];
-    //    self.titleTextView.attributedPlaceholder = attrStr;
-    //    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    //    paraStyle.lineHeightMultiple = 1.2;
-    //    NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle,NSFontAttributeName:[UIFont systemFontOfSize:14]};
-    //    self.titleTextView.typingAttributes = dic;
     self.titleTextView.textContainerInset = UIEdgeInsetsMake(14, 0, 11, 0);
     self.titleTextView.delegate = self;
     self.titleTextView.scrollEnabled = NO;
+    self.titleTextView.text = self.userHomework.title;
     [self.titleView addSubview:self.titleTextView];
     [self.titleTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(0);
@@ -167,27 +194,27 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleView.mas_bottom);
-        make.left.right.bottom.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-47);
+        } else {
+            make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-47);
+        }
     }];
-    
     
     self.contentView = [[UIView alloc] init];
     self.contentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.top.equalTo(self.scrollView.mas_top);
-        make.height.mas_offset(180.0f+[ImageAttachmentContainerView heightForCount:0]);
+        make.edges.mas_equalTo(0);
+        make.width.mas_equalTo(self.scrollView.mas_width);
     }];
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self.scrollView addSubview:topView];
+    [self.contentView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left);
-        make.right.equalTo(self.contentView.mas_right);
-        make.top.equalTo(self.contentView.mas_top);
+        make.left.right.top.mas_equalTo(0);
         make.height.mas_offset(5.0f);
     }];
     
@@ -200,44 +227,171 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     paraStyle1.lineHeightMultiple = 1.2;
     NSDictionary *dic1 = @{NSParagraphStyleAttributeName:paraStyle1,NSFontAttributeName:[UIFont systemFontOfSize:14]};
     self.contentTextView.typingAttributes = dic1;
+    if (self.userHomework.content) {
+        self.contentTextView.attributedText = [[NSAttributedString alloc]initWithString:self.userHomework.content attributes:dic1];
+    }
     [self.contentView addSubview:self.contentTextView];
     [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).offset(15.0f);
-        make.right.equalTo(self.contentView.mas_right).offset(-15.0f);
-        make.top.equalTo(self.contentView.mas_top).offset(20.0f);
-        make.height.mas_offset(self.imageArray.count > 0 ? 90.0f : 140.0f);
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(topView.mas_bottom).mas_offset(20);
+        make.height.mas_equalTo(90);
     }];
-    
-    UIView *containerView = [[UIView alloc] init];
-    [self.contentView addSubview:containerView];
-    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).offset(0.0f);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(0.0f);
-        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH, [ImageAttachmentContainerView heightForCount:0]));
-    }];
+
     self.imageContainerView = [[ImageAttachmentContainerView alloc]init];
+    NSMutableArray<ImageAttachment *> *attachArray = [NSMutableArray array];
+    for (GetHomeworkRequestItem_attachmentInfo *attach in self.userHomework.attachmentInfos) {
+        ImageAttachment *item = [[ImageAttachment alloc]init];
+        item.url = attach.previewUrl;
+        item.resId = attach.resKey;
+        [attachArray addObject:item];
+    }
+    [self.imageContainerView addImages:attachArray];
     WEAK_SELF
     [self.imageContainerView setImagesChangeBlock:^(NSArray *images) {
         STRONG_SELF
         self.imageArray = [NSMutableArray arrayWithArray:images];
         [self refreshSubmitButtonEnable];
-        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view.mas_left);
-            make.right.equalTo(self.view.mas_right);
-            make.top.equalTo(self.scrollView.mas_top);
-            make.height.mas_offset(180.0f+[ImageAttachmentContainerView heightForCount:images.count]);
-        }];
-        [containerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView.mas_left).offset(0.0f);
-            make.bottom.equalTo(self.contentView.mas_bottom).offset(0.0f);
-            make.size.mas_offset(CGSizeMake(SCREEN_WIDTH, [ImageAttachmentContainerView heightForCount:images.count]));
+        [self.imageContainerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo([ImageAttachmentContainerView heightForCount:images.count]);
         }];
     }];
-    [containerView addSubview:self.imageContainerView];
+    [self.contentView addSubview:self.imageContainerView];
     [self.imageContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.contentTextView.mas_bottom).mas_equalTo(10);
+        make.height.mas_equalTo([ImageAttachmentContainerView heightForCount:self.userHomework.attachmentInfos.count]);
+    }];
+    UIView *sepView = [[UIView alloc] init];
+    sepView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.contentView addSubview:sepView];
+    [sepView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.imageContainerView.mas_bottom);
+        make.height.mas_offset(5.0f);
+    }];
+    UIView *attachmentContainerView = [[UIView alloc]init];
+    [self.contentView addSubview:attachmentContainerView];
+    [attachmentContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
+        make.top.mas_equalTo(sepView.mas_bottom);
+        
+    }];
+    UIView *titleView = [[UIView alloc]init];
+    self.attachTitleView = titleView;
+    [attachmentContainerView addSubview:titleView];
+    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(0);
+        make.height.mas_equalTo(45);
+        if (self.userHomework.attachmentInfos2.count == 0) {
+            make.bottom.mas_equalTo(0);
+        }
+    }];
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.text = @"作业附件:";
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [titleView addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.centerY.mas_equalTo(0);
+    }];
+    UIView *top = titleView;
+    for (GetHomeworkRequestItem_attachmentInfo *item in self.userHomework.attachmentInfos2) {
+        HomeworkAttachmentView *attach = [[HomeworkAttachmentView alloc]init];
+        attach.data = item;
+        WEAK_SELF
+        [attach setDeleteAction:^(HomeworkAttachmentView *attachment){
+            STRONG_SELF
+            [self deleteAttachWithIndex:[self.attachmentViewArray indexOfObject:attachment]];
+        }];
+        [attachmentContainerView addSubview:attach];
+        [attach mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(60);
+            CGFloat t = [self.userHomework.attachmentInfos2 indexOfObject:item]==0? 0:5;
+            make.top.mas_equalTo(top.mas_bottom).mas_offset(t);
+            if (self.userHomework.attachmentInfos2.lastObject == item) {
+                make.bottom.mas_equalTo(0);
+            }
+        }];
+        [self.attachmentViewArray addObject:attach];
+        top = attach;
+    }
+    UIButton *uploadAttachButton = [[UIButton alloc]init];
+    [uploadAttachButton setTitle:@"上传附件" forState:UIControlStateNormal];
+    [uploadAttachButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    uploadAttachButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    [[uploadAttachButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self uploadAttachment];
+    }];
+    [self.view addSubview:uploadAttachButton];
+    [uploadAttachButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(self.scrollView.mas_bottom);
+        make.height.mas_equalTo(47);
+        make.width.mas_equalTo(self.view.mas_width).multipliedBy(0.5);
+    }];
+    UIButton *draftButton = [uploadAttachButton clone];
+    [draftButton setTitle:@"存草稿" forState:UIControlStateNormal];
+    [[draftButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self saveDraft];
+    }];
+    [self.view addSubview:draftButton];
+    [draftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.scrollView.mas_bottom);
+        make.height.mas_equalTo(47);
+        make.width.mas_equalTo(self.view.mas_width).multipliedBy(0.5);
     }];
 }
+
+- (void)deleteAttachWithIndex:(NSInteger)index {
+    UIView *deleteView = self.attachmentViewArray[index];
+    [deleteView removeFromSuperview];
+    if (index+1 < self.attachmentViewArray.count) {
+        HomeworkAttachmentView *back = self.attachmentViewArray[index+1];
+        UIView *top = self.attachTitleView;
+        if (index-1>=0) {
+            top = self.attachmentViewArray[index-1];
+        }
+        [back mas_updateConstraints:^(MASConstraintMaker *make) {
+            CGFloat t = top==self.attachTitleView? 0:5;
+            make.top.mas_equalTo(top.mas_bottom).mas_offset(t);
+        }];
+    }else{
+        if (index-1>=0) {
+            UIView *top = self.attachmentViewArray[index-1];
+            [top mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(0);
+            }];
+        }
+    }
+    [self.attachmentViewArray removeObjectAtIndex:index];
+    if (self.attachmentViewArray.count == 0) {
+        [self.attachTitleView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(0);
+        }];
+    }
+}
+
+- (void)uploadAttachment {
+    AttachmentUploadGuideViewController *vc = [[AttachmentUploadGuideViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)saveDraft {
+    self.isDraft = YES;
+    [self.view nyx_startLoading];
+    if (self.imageArray.count == 0) {
+        [self requestForSubmitHomework:nil];
+    }else {
+        [self requestForUploadImage];
+    }
+}
+
 - (void)refreshSubmitButtonEnable {
     BOOL hasTitle = [self.titleTextView.text yx_stringByTrimmingCharacters].length != 0;
     BOOL publishEnabled = [self.contentTextView.text yx_stringByTrimmingCharacters].length != 0;
@@ -263,70 +417,10 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y, 0);
         }];
     }];
-}
-
-#pragma mark - imagePicker
-- (YXImagePickerController *)imagePickerController
-{
-    if (_imagePickerController == nil) {
-        _imagePickerController = [[YXImagePickerController alloc] init];
-    }
-    return _imagePickerController;
-}
-
-- (void)showImagePicker {
-    FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    actionSheetView.titleArray = @[@{@"title":@"拍照"}, @{@"title":@"相册"}];
-    AlertView *alertView = [[AlertView alloc] init];
-    alertView.backgroundColor = [UIColor clearColor];
-    alertView.hideWhenMaskClicked = YES;
-    alertView.contentView = actionSheetView;
-    WEAK_SELF
-    [alertView setHideBlock:^(AlertView *view) {
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kPCCodeResultBackNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
-        [UIView animateWithDuration:0.3 animations:^{
-            [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(view.mas_left);
-                make.right.equalTo(view.mas_right);
-                make.top.equalTo(view.mas_bottom);
-                make.height.mas_offset(155.0f);
-            }];
-            [view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
+        [self.navigationController popToViewController:self animated:YES];
     }];
-    [alertView showWithLayout:^(AlertView *view) {
-        STRONG_SELF
-        [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(view.mas_left);
-            make.right.equalTo(view.mas_right);
-            make.top.equalTo(view.mas_bottom);
-            make.height.mas_offset(155.0f );
-        }];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.3 animations:^{
-                [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(view.mas_left);
-                    make.right.equalTo(view.mas_right);
-                    make.bottom.equalTo(view.mas_bottom);
-                    make.height.mas_offset(155.0f);
-                }];
-                [view layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                
-            }];
-        });
-    }];
-    actionSheetView.actionSheetBlock = ^(NSInteger integer) {
-        STRONG_SELF
-        [self.imagePickerController pickImageWithSourceType:integer == 1 ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
-            STRONG_SELF
-            [self.imageArray addObject:selectedImage];
-            [self refreshSubmitButtonEnable];
-        }];
-        [alertView hide];
-    };
 }
 
 #pragma mark - UITextViewDelegate
@@ -390,7 +484,18 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 }
 
 - (void)uploadImageWithIndex:(NSInteger)index {
-    UIImage *img = self.imageArray[index];
+    ImageAttachment *attach = self.imageArray[index];
+    if (!isEmpty(attach.resId)) {
+        [self.resIdArray addObject:attach.resId];
+        self.imageIndex++;
+        if (self.imageIndex < self.imageArray.count) {
+            [self uploadImageWithIndex:self.imageIndex];
+        }else {
+            [self requestForSubmitHomework:[self.resIdArray componentsJoinedByString:@","]];
+        }
+        return;
+    }
+    UIImage *img = self.imageArray[index].image;
     NSData *data = [UIImage compressionImage:img limitSize:0.1 * 1024 * 1024];
     WEAK_SELF
     [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key,NSString *host, NSError *error) {
@@ -417,6 +522,12 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     self.submitRequest.title = self.titleTextView.text;
     self.submitRequest.content = self.contentTextView.text;
     self.submitRequest.resourceKey = resourceIds;
+    self.submitRequest.finishStatus = self.isDraft? @"0":@"1";
+    NSMutableArray *attachIdArray = [NSMutableArray array];
+    for (HomeworkAttachmentView *attach in self.attachmentViewArray) {
+        [attachIdArray addObject:attach.data.resId];
+    }
+    self.submitRequest.attachment2 = [attachIdArray componentsJoinedByString:@","];
     [self nyx_disableRightNavigationItem];
     WEAK_SELF
     [self.submitRequest startRequestWithRetClass:[SubmitUserHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
@@ -426,12 +537,16 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
             [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"提交失败请重试"];
         }else {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
-                [self nyx_enableRightNavigationItem];
-                [self.view nyx_stopLoading];
-                [self requestHomework];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:nil];
-            });
+            if (self.isDraft) {
+                [self.view nyx_showToast:@"保存成功"];
+            }else {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
+                    [self nyx_enableRightNavigationItem];
+                    [self.view nyx_stopLoading];
+                    [self requestHomework];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:nil];
+                });
+            }            
         }
     }];
 }

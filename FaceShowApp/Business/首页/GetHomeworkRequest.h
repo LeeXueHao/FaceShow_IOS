@@ -35,6 +35,7 @@
 @property (nonatomic, strong) NSString<Optional> *finishStatus;
 @property (nonatomic, strong) NSString<Optional> *assess;
 @property (nonatomic, strong) NSArray<GetHomeworkRequestItem_attachmentInfo, Optional> *attachmentInfos;
+@property (nonatomic, strong) NSArray<GetHomeworkRequestItem_attachmentInfo, Optional> *attachmentInfos2;
 
 @end
 

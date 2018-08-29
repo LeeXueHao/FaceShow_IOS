@@ -53,7 +53,13 @@
 
 - (void)addAction {
     [self.imageHandler pickImageWithMaxCount:9-self.itemArray.count completeBlock:^(NSArray *array) {
-        [self addImages:array];
+        NSMutableArray<ImageAttachment *> *attachArray = [NSMutableArray array];
+        for (UIImage *image in array) {
+            ImageAttachment *attach = [[ImageAttachment alloc]init];
+            attach.image = image;
+            [attachArray addObject:attach];
+        }
+        [self addImages:attachArray];
     }];
 }
 
@@ -75,15 +81,15 @@
     }
     NSMutableArray *array = [NSMutableArray array];
     for (ImageAttachmentView *item in self.itemArray) {
-        [array addObject:item.image];
+        [array addObject:item.imageAttach];
     }
     BLOCK_EXEC(self.imagesChangeBlock,array);
 }
 
-- (void)addImages:(NSArray *)images {
-    for (UIImage *image in images) {
+- (void)addImages:(NSArray<ImageAttachment *> *)images {
+    for (ImageAttachment *attach in images) {
         ImageAttachmentView *view = [[ImageAttachmentView alloc]init];
-        view.image = image;
+        view.imageAttach = attach;
         __weak ImageAttachmentView *curView = view;
         WEAK_SELF
         [view setTapBlock:^{
@@ -104,7 +110,7 @@
     NSInteger curIndex = [self.itemArray indexOfObject:view];
     NSMutableArray *array = [NSMutableArray array];
     for (ImageAttachmentView *item in self.itemArray) {
-        [array addObject:item.image];
+        [array addObject:item.imageAttach];
     }
     WEAK_SELF
     [self.imageHandler browseImageWithArray:array index:curIndex deleteBlock:^(NSInteger index) {

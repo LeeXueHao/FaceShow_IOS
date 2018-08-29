@@ -28,8 +28,8 @@
 
 - (void)setupUI {
     UIView *bgView = [[UIView alloc]init];
-    bgView.backgroundColor = [UIColor redColor];
-    bgView.layer.cornerRadius = 20;
+    bgView.backgroundColor = [UIColor colorWithHexString:@"fc5236"];
+    bgView.layer.cornerRadius = 10.5;
     bgView.clipsToBounds = YES;
     [self addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -37,23 +37,23 @@
     }];
     self.firstHandView = [[UIView alloc]init];
     self.firstHandView.backgroundColor = [UIColor whiteColor];
-    self.firstHandView.layer.cornerRadius = 2.5;
+    self.firstHandView.layer.cornerRadius = 1;
     self.firstHandView.clipsToBounds = YES;
     [self addSubview:self.firstHandView];
     [self.firstHandView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(0);
-        make.width.mas_equalTo(self.mas_width).multipliedBy(0.75);
-        make.height.mas_equalTo(5);
+        make.width.mas_equalTo(13);
+        make.height.mas_equalTo(2);
     }];
     self.secondHandView = [[UIView alloc]init];
     self.secondHandView.backgroundColor = [UIColor whiteColor];
-    self.secondHandView.layer.cornerRadius = 2.5;
+    self.secondHandView.layer.cornerRadius = 1;
     self.secondHandView.clipsToBounds = YES;
     [self addSubview:self.secondHandView];
     [self.secondHandView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(0);
-        make.width.mas_equalTo(self.mas_width).multipliedBy(0.75);
-        make.height.mas_equalTo(5);
+        make.width.mas_equalTo(13);
+        make.height.mas_equalTo(2);
     }];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
@@ -64,7 +64,7 @@
     if (self.deleteOpened) {
         self.deleteBlock();
     }else {
-        [UIView animateWithDuration:.5 animations:^{
+        [UIView animateWithDuration:.3 animations:^{
             self.firstHandView.transform = CGAffineTransformMakeRotation(M_PI_4);
             self.secondHandView.transform = CGAffineTransformMakeRotation(M_PI_4*3);
         } completion:^(BOOL finished) {

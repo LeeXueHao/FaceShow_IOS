@@ -182,22 +182,22 @@
     [self refreshImages];
 }
 
-- (void)imageBtnAction:(UIButton *)sender {
-    [self.publicationMomentTextView resignFirstResponder];
-    if (isEmpty(self.imageArray)) {
-        [self showImagePicker];
-    } else {
-        PhotoBrowserController *vc = [[PhotoBrowserController alloc] init];
-        vc.images = self.imageArray;
-        vc.currentIndex = 0;
-        WEAK_SELF
-        vc.didDeleteImage = ^{
-            STRONG_SELF
-            [self refreshImages];
-        };
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-}
+//- (void)imageBtnAction:(UIButton *)sender {
+//    [self.publicationMomentTextView resignFirstResponder];
+//    if (isEmpty(self.imageArray)) {
+//        [self showImagePicker];
+//    } else {
+//        PhotoBrowserController *vc = [[PhotoBrowserController alloc] init];
+//        vc.images = self.imageArray;
+//        vc.currentIndex = 0;
+//        WEAK_SELF
+//        vc.didDeleteImage = ^{
+//            STRONG_SELF
+//            [self refreshImages];
+//        };
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//}
 
 - (void)refreshImages {
     BOOL publishEnabled = [self.publicationMomentTextView.text yx_stringByTrimmingCharacters].length != 0;
@@ -247,70 +247,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
-}
-
-#pragma mark - imagePicker
-- (YXImagePickerController *)imagePickerController
-{
-    if (_imagePickerController == nil) {
-        _imagePickerController = [[YXImagePickerController alloc] init];
-    }
-    return _imagePickerController;
-}
-
-- (void)showImagePicker {
-    FDActionSheetView *actionSheetView = [[FDActionSheetView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    actionSheetView.titleArray = @[@{@"title":@"拍照"}, @{@"title":@"相册"}];
-    AlertView *alertView = [[AlertView alloc] init];
-    alertView.backgroundColor = [UIColor clearColor];
-    alertView.hideWhenMaskClicked = YES;
-    alertView.contentView = actionSheetView;
-    WEAK_SELF
-    [alertView setHideBlock:^(AlertView *view) {
-        STRONG_SELF
-        [UIView animateWithDuration:0.3 animations:^{
-            [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(view.mas_left);
-                make.right.equalTo(view.mas_right);
-                make.top.equalTo(view.mas_bottom);
-                make.height.mas_offset(155.0f);
-            }];
-            [view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
-    }];
-    [alertView showWithLayout:^(AlertView *view) {
-        STRONG_SELF
-        [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(view.mas_left);
-            make.right.equalTo(view.mas_right);
-            make.top.equalTo(view.mas_bottom);
-            make.height.mas_offset(155.0f );
-        }];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.3 animations:^{
-                [actionSheetView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(view.mas_left);
-                    make.right.equalTo(view.mas_right);
-                    make.bottom.equalTo(view.mas_bottom);
-                    make.height.mas_offset(155.0f);
-                }];
-                [view layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                
-            }];
-        });
-    }];
-    actionSheetView.actionSheetBlock = ^(NSInteger integer) {
-        STRONG_SELF
-        [self.imagePickerController pickImageWithSourceType:integer == 1 ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary completion:^(UIImage *selectedImage) {
-            STRONG_SELF
-            [self.imageArray addObject:selectedImage];
-            [self refreshImages];
-        }];
-        [alertView hide];
-    };
 }
 
 #pragma mark - UITextViewDelegate
@@ -373,7 +309,7 @@
 }
 
 - (void)uploadImageWithIndex:(NSInteger)index {
-    UIImage *img = self.imageArray[index];
+    UIImage *img = self.imageArray[index].image;
     NSData *data = [UIImage compressionImage:img limitSize:0.1 * 1024 * 1024];
     WEAK_SELF
     [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key,NSString *host, NSError *error) {

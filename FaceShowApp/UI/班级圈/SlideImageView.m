@@ -57,9 +57,13 @@
     [self.imageView addGestureRecognizer:self.doubleTap];
 }
 
-- (void)setImage:(UIImage *)image {
+- (void)setImage:(ImageAttachment *)image {
     _image = image;
-    self.imageView.image = image;
+    if (image.image) {
+        self.imageView.image = image.image;
+    }else{
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
+    }
 }
 
 - (void)layoutSubviews {

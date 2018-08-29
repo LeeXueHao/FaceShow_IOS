@@ -32,7 +32,7 @@
     CFAbsoluteTime _lastScanTime;
     CIDetector *_qrDetector;
 }
-
+@property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) UserSignInRequest *request;
 @property (nonatomic, strong) ScanClazsCodeRequest *clazsCodeRequest;
 @property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
@@ -232,6 +232,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         NSString *qrcode = [self stringWithImage:input];
         if (qrcode) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.session stopRunning];
+                [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
                 [self dealWithQrcode:qrcode];
             });
         }
@@ -267,9 +269,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (void)dealWithQrcode:(NSString *)code {
     NSString *stringValue = code;
     printf("%s , %s\n", "我扫到的结果是: ", [stringValue cStringUsingEncoding:kCFStringEncodingUTF8]);
-    [_session stopRunning];
-    [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
-    
     NSDictionary *parametersDic = [UserSignInHelper getParametersFromUrlString:stringValue];
     if (!isEmpty(parametersDic)) {
         if (![UserManager sharedInstance].loginStatus) {
@@ -370,6 +369,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         stringValue = metadataObject.stringValue;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.session stopRunning];
+        [self.scanCodeMaskView.scanTimer setFireDate:[NSDate distantFuture]];
         [self dealWithQrcode:stringValue];
     });
 }

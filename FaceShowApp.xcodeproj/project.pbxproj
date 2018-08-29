@@ -215,6 +215,11 @@
 		7C4D544D1F972DFD0053DB12 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544C1F972DFD0053DB12 /* libz.tbd */; };
 		7C4D544F1F972E070053DB12 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4D544E1F972E070053DB12 /* libc++.tbd */; };
 		7C5912DA212EA51800CE548F /* DeleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912D9212EA51700CE548F /* DeleteView.m */; };
+		7C5912E12134F89B00CE548F /* HomeworkAttachmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912E02134F89B00CE548F /* HomeworkAttachmentView.m */; };
+		7C5912E42136324600CE548F /* ImageAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912E32136324600CE548F /* ImageAttachment.m */; };
+		7C5912E72136751D00CE548F /* AttachmentUploadGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912E62136751D00CE548F /* AttachmentUploadGuideViewController.m */; };
+		7C5912EA2136806E00CE548F /* ScanPCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912E92136806E00CE548F /* ScanPCCodeViewController.m */; };
+		7C5912ED2136848F00CE548F /* ScanPCCodeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912EC2136848F00CE548F /* ScanPCCodeResultViewController.m */; };
 		7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */; };
 		7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26C2027F6030067E242 /* HeadImageClipView.m */; };
 		7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */; };
@@ -858,6 +863,16 @@
 		7C4D544E1F972E070053DB12 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		7C5912D8212EA51700CE548F /* DeleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteView.h; sourceTree = "<group>"; };
 		7C5912D9212EA51700CE548F /* DeleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteView.m; sourceTree = "<group>"; };
+		7C5912DF2134F89B00CE548F /* HomeworkAttachmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkAttachmentView.h; sourceTree = "<group>"; };
+		7C5912E02134F89B00CE548F /* HomeworkAttachmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkAttachmentView.m; sourceTree = "<group>"; };
+		7C5912E22136324600CE548F /* ImageAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachment.h; sourceTree = "<group>"; };
+		7C5912E32136324600CE548F /* ImageAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAttachment.m; sourceTree = "<group>"; };
+		7C5912E52136751D00CE548F /* AttachmentUploadGuideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentUploadGuideViewController.h; sourceTree = "<group>"; };
+		7C5912E62136751D00CE548F /* AttachmentUploadGuideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentUploadGuideViewController.m; sourceTree = "<group>"; };
+		7C5912E82136806E00CE548F /* ScanPCCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanPCCodeViewController.h; sourceTree = "<group>"; };
+		7C5912E92136806E00CE548F /* ScanPCCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanPCCodeViewController.m; sourceTree = "<group>"; };
+		7C5912EB2136848F00CE548F /* ScanPCCodeResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanPCCodeResultViewController.h; sourceTree = "<group>"; };
+		7C5912EC2136848F00CE548F /* ScanPCCodeResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanPCCodeResultViewController.m; sourceTree = "<group>"; };
 		7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImagePickerOptionItemView.h; sourceTree = "<group>"; };
 		7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImagePickerOptionItemView.m; sourceTree = "<group>"; };
 		7C66B26C2027F6030067E242 /* HeadImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipView.m; sourceTree = "<group>"; };
@@ -1496,6 +1511,8 @@
 				E95434B920D130FE00BCF63C /* TaskFilterView.m */,
 				E95434BB20D1380900BCF63C /* TaskFilterItemView.h */,
 				E95434BC20D1380900BCF63C /* TaskFilterItemView.m */,
+				7C5912DF2134F89B00CE548F /* HomeworkAttachmentView.h */,
+				7C5912E02134F89B00CE548F /* HomeworkAttachmentView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2342,6 +2359,8 @@
 			children = (
 				7C6EE545200736D200B47892 /* ImageAttachmentView.h */,
 				7C6EE546200736D200B47892 /* ImageAttachmentView.m */,
+				7C5912E22136324600CE548F /* ImageAttachment.h */,
+				7C5912E32136324600CE548F /* ImageAttachment.m */,
 				7C6EE5482007396000B47892 /* ImageAttachmentContainerView.h */,
 				7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */,
 				7C6EE55A2008547E00B47892 /* ImageSelectionHandler.h */,
@@ -2432,6 +2451,12 @@
 				7C212DC91F6A5D5A0007AE01 /* TaskListViewController.m */,
 				E95434A320CF683100BCF63C /* DoHomeworkViewController.h */,
 				E95434A420CF683100BCF63C /* DoHomeworkViewController.m */,
+				7C5912E52136751D00CE548F /* AttachmentUploadGuideViewController.h */,
+				7C5912E62136751D00CE548F /* AttachmentUploadGuideViewController.m */,
+				7C5912E82136806E00CE548F /* ScanPCCodeViewController.h */,
+				7C5912E92136806E00CE548F /* ScanPCCodeViewController.m */,
+				7C5912EB2136848F00CE548F /* ScanPCCodeResultViewController.h */,
+				7C5912EC2136848F00CE548F /* ScanPCCodeResultViewController.m */,
 				E95434A920CFAF0D00BCF63C /* FinishedHomeworkViewController.h */,
 				E95434AA20CFAF0D00BCF63C /* FinishedHomeworkViewController.m */,
 				E95434B220D0F5BF00BCF63C /* HomeworkRequirementViewController.h */,
@@ -3322,6 +3347,7 @@
 				4322CA4B1FD9531600E7B565 /* QASlideView.m in Sources */,
 				7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */,
 				E932CD9220BFE050009F5BC6 /* SignInPlaceViewController.m in Sources */,
+				7C5912EA2136806E00CE548F /* ScanPCCodeViewController.m in Sources */,
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
 				7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */,
 				7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */,
@@ -3438,6 +3464,7 @@
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				7CBC5BBB204D2AEF004ACA04 /* MineNameInputView.m in Sources */,
 				E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */,
+				7C5912E42136324600CE548F /* ImageAttachment.m in Sources */,
 				7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */,
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
 				9279A6E91F6A5754004A1E2B /* ClassMomentCell.m in Sources */,
@@ -3487,10 +3514,12 @@
 				9220841A1F6BB8D200F8AAC6 /* MineUserHeaderCell.m in Sources */,
 				7CEFC8041F9F2598001D8C84 /* LoginUtils.m in Sources */,
 				435DFCFC1FD0FAE100CEA9C2 /* ReportRequest.m in Sources */,
+				7C5912E72136751D00CE548F /* AttachmentUploadGuideViewController.m in Sources */,
 				7C212DC11F6A599A0007AE01 /* ScheduleViewController.m in Sources */,
 				E91E5D722047B88600052FBA /* IMTopic.m in Sources */,
 				7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */,
 				E94DDDE820D273E700729A67 /* RankingViewController.m in Sources */,
+				7C5912E12134F89B00CE548F /* HomeworkAttachmentView.m in Sources */,
 				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
 				7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
@@ -3579,6 +3608,7 @@
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
 				E91E5D752047B88600052FBA /* IMMember.m in Sources */,
+				7C5912ED2136848F00CE548F /* ScanPCCodeResultViewController.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
 				7C25190A1F68E90C0001B577 /* YXTestViewController.m in Sources */,
 				7C24E1F61F72514C00A6921B /* QuestionRequestItem.m in Sources */,

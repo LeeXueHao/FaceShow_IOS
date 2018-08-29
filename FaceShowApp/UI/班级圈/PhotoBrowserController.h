@@ -7,9 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "ImageAttachment.h"
 
 @interface PhotoBrowserController : BaseViewController
-@property (nonatomic, strong) NSMutableArray *images;
+@property (nonatomic, strong) NSMutableArray<ImageAttachment *> *images;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, copy) void (^didDeleteImage)(void);
 @property (nonatomic, copy) void (^deleteImageBlock)(NSInteger index);

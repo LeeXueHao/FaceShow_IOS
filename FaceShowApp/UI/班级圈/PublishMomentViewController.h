@@ -8,7 +8,8 @@
 
 #import "BaseViewController.h"
 #import "ClassMomentPublishRequest.h"
+#import "ImageAttachment.h"
 @interface PublishMomentViewController : BaseViewController
-@property (nonatomic, strong) NSMutableArray *imageArray;
+@property (nonatomic, strong) NSMutableArray<ImageAttachment *> *imageArray;
 @property (nonatomic, copy) void(^publishMomentDataBlock)(ClassMomentListRequestItem_Data_Moment *moment);
 @end

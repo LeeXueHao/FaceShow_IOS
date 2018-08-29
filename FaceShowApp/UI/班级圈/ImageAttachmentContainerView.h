@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageAttachment.h"
 
 @interface ImageAttachmentContainerView : UIView
 + (CGFloat)heightForCount:(NSInteger)count;
 
 @property (nonatomic, strong) void(^imagesChangeBlock)(NSArray *images);
+
+- (void)addImages:(NSArray<ImageAttachment *> *)images;
 @end

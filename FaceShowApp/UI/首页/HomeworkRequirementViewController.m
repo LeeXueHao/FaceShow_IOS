@@ -98,6 +98,7 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
 - (void)homeworkButtonClick:(UIButton *)sender {
     DoHomeworkViewController *vc = [[DoHomeworkViewController alloc]init];
     vc.homework = self.homework;
+    vc.userHomework = self.userHomework;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageAttachment.h"
 
 @interface ImageAttachmentView : UIView
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) ImageAttachment *imageAttach;
 @property (nonatomic, strong) void(^tapBlock)(void);
 @property (nonatomic, strong) void(^deleteBlock)(void);
 @end

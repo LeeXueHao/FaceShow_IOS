@@ -8,9 +8,12 @@
 
 #import "BaseViewController.h"
 @class GetHomeworkRequestItem_homework;
+@class GetHomeworkRequestItem_userHomework;
+@class ImageAttachment;
 extern NSString *kHomeworkFinishedNotification;
 
 @interface DoHomeworkViewController : BaseViewController
-@property (nonatomic, strong) NSMutableArray *imageArray;
+@property (nonatomic, strong) NSMutableArray<ImageAttachment *> *imageArray;
 @property(nonatomic, strong) GetHomeworkRequestItem_homework *homework;
+@property(nonatomic, strong) GetHomeworkRequestItem_userHomework *userHomework;
 @end
