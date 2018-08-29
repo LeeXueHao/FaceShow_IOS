@@ -18,6 +18,7 @@
 #import "ContactMemberContactsRequest.h"
 #import "IMMember.h"
 #import "IMUserInterface.h"
+#import "IMTopicInfoItem.h"
 
 @interface ContactsViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -265,13 +266,15 @@
     if (member.memberID == [info.imMember toIMMember].memberID) {
         return;
     }
-    NSString *groupId = self.groupsArray[self.currentSelectedGroupIndex].groupId;
+    ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group = self.groupsArray[self.currentSelectedGroupIndex];
     IMTopic *topic = [IMUserInterface findTopicWithMember:member];
     if (topic) {
         chatVC.topic = topic;
     }else {
-        chatVC.anotherMember = member;
-        chatVC.groupId = groupId;
+        IMTopicInfoItem *item = [[IMTopicInfoItem alloc]init];
+        item.member = member;
+        item.group = group;
+        chatVC.info = item;
     }
     [self.navigationController pushViewController:chatVC animated:YES];
     [TalkingData trackEvent:@"点击通讯录中头像"];

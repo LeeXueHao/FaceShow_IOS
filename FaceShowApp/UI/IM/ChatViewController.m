@@ -28,6 +28,8 @@
 #import "IMSlideImageView.h"
 #import "IMGroupSettingViewController.h"
 #import "IMPrivateSettingViewController.h"
+#import "IMTopicInfoItem.h"
+#import "ContactMemberContactsRequest.h"
 
 NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCountClearNotification";
 
@@ -78,7 +80,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     if (self.topic) {
         [self setupTitleWithTopic:self.topic];
     }else {
-        self.title = self.anotherMember.name;
+        self.title = self.info.member.name;
     }
     WEAK_SELF
     [self nyx_setupRightWithTitle:@"设置" action:^{
@@ -89,7 +91,11 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             [self.navigationController pushViewController:vc animated:YES];
         }else {
             IMPrivateSettingViewController *vc = [[IMPrivateSettingViewController alloc]init];
-            vc.topic = self.topic;
+            if (self.topic) {
+                vc.topic = self.topic;
+            }else {
+                vc.info = self.info;
+            }
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];
@@ -135,7 +141,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         if (self.topic) {
             [IMUserInterface sendTextMessageWithText:text topicID:self.topic.topicID];
         }else {
-            [IMUserInterface sendTextMessageWithText:text toMember:self.anotherMember fromGroup:self.groupId.integerValue];
+            [IMUserInterface sendTextMessageWithText:text toMember:self.info.member fromGroup:self.info.group.groupId.integerValue];
         }
         if (self.imInputView.height > 50) {
             [UIView animateWithDuration:.3f animations:^{
@@ -159,7 +165,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 if (self.topic) {
                     [IMUserInterface sendImageMessageWithImage:resultImage topicID:self.topic.topicID];
                 }else {
-                    [IMUserInterface sendImageMessageWithImage:resultImage toMember:self.anotherMember fromGroup:self.groupId.integerValue];
+                    [IMUserInterface sendImageMessageWithImage:resultImage toMember:self.info.member fromGroup:self.info.group.groupId.integerValue];
                 }
             }
             [self scrollToBottom];
@@ -341,7 +347,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             };
             return;
         }
-        if ([IMUserInterface topic:topic isWithMember:self.anotherMember]) {//topic不存在 判断是否为当前的
+        if ([IMUserInterface topic:topic isWithMember:self.info.member]) {//topic不存在 判断是否为当前的
             self.topic = topic;
             return;
         }
@@ -483,7 +489,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 #pragma mark - IMMessageCellDelegate
 - (void)messageCellDidClickAvatarForUser:(IMMember *)user {
 //    [self.view nyx_showToast:@"click avatar to do ..."];
-    if (self.anotherMember) {//有member说明是私聊
+    if (self.info.member) {//有member说明是私聊
         return;
     }
 
@@ -507,13 +513,22 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         if (member.memberID == [info.imMember toIMMember].memberID) {
             return;
         }
-        NSString *groupId = self.groupId ? self.groupId : @"0";
         IMTopic *topic = [IMUserInterface findTopicWithMember:member];
         if (topic) {
             chatVC.topic = topic;
         }else {
-            chatVC.anotherMember = member;
-            chatVC.groupId = groupId;
+            ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group;
+            if (self.info.group) {
+                group = self.info.group;
+            }else {
+                group = [[ContactMemberContactsRequestItem_Data_Gcontacts_Groups alloc]init];
+                group.groupId = self.topic.groupID ? [NSString stringWithFormat:@"%@",@(self.topic.groupID)] : @"0";
+                group.groupName = self.topic.group;
+            }
+            IMTopicInfoItem *item = [[IMTopicInfoItem alloc]init];
+            item.member = member;
+            item.group = group;
+            chatVC.info = item;
         }
         [self.navigationController pushViewController:chatVC animated:YES];
         [TalkingData trackEvent:@"点击班级群聊头像"];

@@ -11,6 +11,8 @@
 #import "IMTitleContentView.h"
 #import "IMSwitchSettingView.h"
 #import "IMManager.h"
+#import "IMTopicInfoItem.h"
+#import "ContactMemberContactsRequest.h"
 
 @interface IMPrivateSettingViewController ()
 
@@ -32,11 +34,15 @@
 
 - (void)setupUI {
     IMMemberInfoView *infoView = [[IMMemberInfoView alloc]init];
-    for (IMMember *member in self.topic.members) {
-        if (member.memberID != [IMManager sharedInstance].currentMember.memberID) {
-            infoView.member = member;
-            break;
+    if (self.topic) {
+        for (IMMember *member in self.topic.members) {
+            if (member.memberID != [IMManager sharedInstance].currentMember.memberID) {
+                infoView.member = member;
+                break;
+            }
         }
+    }else {
+        infoView.member = self.info.member;
     }
     [self.view addSubview:infoView];
     [infoView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,7 +52,7 @@
     }];
     IMTitleContentView *classNameView = [[IMTitleContentView alloc]init];
     classNameView.title = @"来自";
-    classNameView.name = self.topic.group;
+    classNameView.name = self.topic ? self.topic.group : self.info.group.groupName;
     [self.view addSubview:classNameView];
     [classNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);

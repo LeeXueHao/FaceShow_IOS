@@ -456,6 +456,7 @@
 		E95434DB20D2550B00BCF63C /* GetUserClazsScoreRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95434DA20D2550B00BCF63C /* GetUserClazsScoreRequest.m */; };
 		E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */; };
 		E95ED5DC205291BA006ECCEA /* ContactMemberContactsRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */; };
+		E97D2E8921364F9F00FECFE0 /* IMTopicInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E97D2E8721364F9F00FECFE0 /* IMTopicInfoItem.m */; };
 		E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */; };
 		E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */; };
@@ -1329,6 +1330,8 @@
 		E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactMemberContactsRequest.h; sourceTree = "<group>"; };
 		E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactMemberContactsRequest.m; sourceTree = "<group>"; };
 		E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactMemberContactsRequest.json; sourceTree = "<group>"; };
+		E97D2E8721364F9F00FECFE0 /* IMTopicInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMTopicInfoItem.m; sourceTree = "<group>"; };
+		E97D2E8821364F9F00FECFE0 /* IMTopicInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMTopicInfoItem.h; sourceTree = "<group>"; };
 		E9970648205900060096DAB0 /* TopicMsg.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicMsg.pbobjc.m; sourceTree = "<group>"; };
 		E9970649205900070096DAB0 /* TopicMsg.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicMsg.pbobjc.h; sourceTree = "<group>"; };
 		E997064B205A0A010096DAB0 /* IMPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMPhotoBrowserView.h; sourceTree = "<group>"; };
@@ -2715,6 +2718,8 @@
 			children = (
 				E91E5D1F2047B1F800052FBA /* IMTimeHandleManger.h */,
 				E91E5D1E2047B1F800052FBA /* IMTimeHandleManger.m */,
+				E97D2E8821364F9F00FECFE0 /* IMTopicInfoItem.h */,
+				E97D2E8721364F9F00FECFE0 /* IMTopicInfoItem.m */,
 				E91E5D2B2047B1FE00052FBA /* View */,
 				E99706472058D2590096DAB0 /* Controller */,
 				7C6ECFC32057CD82008D0E8A /* ChatPlaceViewController.h */,
@@ -3409,6 +3414,7 @@
 				7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */,
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
 				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
+				E97D2E8921364F9F00FECFE0 /* IMTopicInfoItem.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
 				E94DDE3420D4A62A00729A67 /* GetAllTasksRequest.m in Sources */,
 				7CEFC7B31F98926B001D8C84 /* MinePasswordInputView.m in Sources */,
