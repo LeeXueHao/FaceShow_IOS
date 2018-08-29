@@ -27,4 +27,5 @@ typedef NS_ENUM(int64_t, TopicType) {
 @property (nonatomic, assign) int64_t unreadCount;
 @property (nonatomic, strong) IMTopicMessage *latestMessage;
 @property (nonatomic, strong) NSArray<IMMember *> *members;
+@property (nonatomic, assign) BOOL isClearedHistory;
 @end

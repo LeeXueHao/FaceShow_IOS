@@ -143,6 +143,10 @@
     [[IMDatabaseManager sharedInstance] resetUnreadMessageCountWithTopicID:topicID];
 }
 
++ (void)clearTheHistoryRecordsInTopic:(int64_t)topicID {
+    [[IMDatabaseManager sharedInstance] clearTheHistoryRecordsInTopic:topicID];
+}
+
 + (IMTopic *)findTopicWithMember:(IMMember *)member {
    return [[IMDatabaseManager sharedInstance] findTopicWithMember:member];
 }

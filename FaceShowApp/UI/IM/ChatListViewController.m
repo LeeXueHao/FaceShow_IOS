@@ -83,14 +83,7 @@
 
 - (void)setupData {
     self.dataArray = [NSMutableArray arrayWithArray:[IMUserInterface findAllTopics]];
-    self.privateTopicIndex = 0;
-    for (IMTopic *topic in self.dataArray) {
-        if (topic.type == TopicType_Group) {
-            self.privateTopicIndex++;
-        }else {
-            break;
-        }
-    }
+    [self updatePrivateTopicIndex];
 }
 
 - (void)updateUnreadPromptView {
@@ -140,7 +133,7 @@
         STRONG_SELF
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
-        if (topic.members.count == 0) {
+        if (topic.members.count == 0 || topic.type == 0) {
             return;
         }
         for (IMTopic *item in self.dataArray) {
@@ -273,16 +266,26 @@
     }
 }
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-////        IMTopic *topic = self.dataArray[indexPath.row];
-////        if (topic.type == TopicType_Group) {//群聊不可删除
-////            return;
-////        }
-//        //删除聊天
-////        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//        DDLogDebug(@"删除");
-//    }
-//}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        IMTopic *topic = self.dataArray[indexPath.row];
+        [self clearChattingTopicUnreadCount:topic];
+        [IMUserInterface clearTheHistoryRecordsInTopic:topic.topicID];
+        [self.dataArray removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self updatePrivateTopicIndex];
+        [self.view nyx_showToast:@"删除此聊天"];
+    }
+}
 
+- (void)updatePrivateTopicIndex {
+    self.privateTopicIndex = 0;
+    for (IMTopic *topic in self.dataArray) {
+        if (topic.type == TopicType_Group) {
+            self.privateTopicIndex++;
+        }else {
+            break;
+        }
+    }
+}
 @end

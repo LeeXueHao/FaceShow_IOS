@@ -55,4 +55,7 @@
 - (void)saveOfflineMsgFetchRecord:(IMTopicOfflineMsgFetchRecord *)record;
 - (void)updateOfflineMsgFetchRecordStartIDInTopic:(int64_t)topicID from:(int64_t)from to:(int64_t)to;
 - (void)removeOfflineMsgFetchRecordInTopic:(int64_t)topicID withStartID:(int64_t)startID;
+
+#pragma mark - 清空历史消息
+- (void)clearTheHistoryRecordsInTopic:(int64_t)topicID;
 @end

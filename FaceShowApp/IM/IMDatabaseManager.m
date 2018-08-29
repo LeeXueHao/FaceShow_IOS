@@ -75,6 +75,8 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     __block BOOL unreadMsg = NO;
     __block int64_t topicID = 0;
     __block int64_t unreadCount = 0;
+    __block BOOL stateChanged = NO;
+    __block IMTopic *dbTopic = nil;
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSMutableArray *array = [NSMutableArray array];
         for (IMTopicMessage *item in messages) {
@@ -85,6 +87,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             }
             [array addObject:item];
         }
+        
         for (IMTopicMessage *message in array) {
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueID = %@ && curMember.memberID = %@",message.uniqueID,@([IMManager sharedInstance].currentMember.memberID)];
             IMTopicMessageEntity *entity = [IMTopicMessageEntity MR_findFirstWithPredicate:predicate inContext:localContext];
@@ -128,6 +131,14 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
             NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(message.topicID),@([IMManager sharedInstance].currentMember.memberID)];
             IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
             topicEntity.latestMessage = entity;
+            if (entity.messageID > topicEntity.latestMsgId) {
+                topicEntity.latestMsgId = entity.messageID;
+            }
+            if (topicEntity.isClearedHistory) {
+                topicEntity.isClearedHistory = NO;
+                stateChanged = YES;
+                dbTopic = [self topicFromEntity:topicEntity inContext:localContext];
+            }
             if (message.sender.memberID != [IMManager sharedInstance].currentMember.memberID) {
                 topicEntity.unreadCount += 1;
                 unreadMsg = YES;
@@ -140,6 +151,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     }];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (savedMsgArray.count > 0) {
+            if (stateChanged) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:dbTopic];
+            }
             [[NSNotificationCenter defaultCenter]postNotificationName:kIMMessageDidUpdateNotification object:savedMsgArray];
         }
         if (unreadMsg) {
@@ -298,6 +312,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         dbTopic = [self topicFromEntity:topicEntity inContext:localContext];
     }];
     dispatch_async(dispatch_get_main_queue(), ^{
+        if (dbTopic.isClearedHistory) {
+            return ;
+        }
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:dbTopic];
     });
 }
@@ -458,7 +475,9 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     NSArray *topics = [IMTopicEntity MR_findAllWithPredicate:topicPredicate inContext:context];
     [context performBlockAndWait:^{
         for (IMTopicEntity *entity in topics) {
-            [array addObject:[self topicFromEntity:entity inContext:context]];
+            if (!entity.isClearedHistory) {
+                [array addObject:[self topicFromEntity:entity inContext:context]];
+            }
         }
     }];
     
@@ -677,6 +696,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     topic.latestMsgId = entity.latestMsgId;
     topic.unreadCount = entity.unreadCount;
     topic.latestMessage = [self messageFromEntity:entity.latestMessage];
+    topic.isClearedHistory = entity.isClearedHistory;
     
     NSArray *memberIDArray = [entity.memberIDs componentsSeparatedByString:@","];
     NSMutableArray *conditionArray = [NSMutableArray array];
@@ -809,6 +829,23 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         [entity MR_deleteEntityInContext:localContext];
     }];
 }
+#pragma mark - 清空历史消息
+- (void)clearTheHistoryRecordsInTopic:(int64_t)topicID {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self clearTheHistoryRecordsInQueueInTopic:topicID];
+    });
+}
 
+- (void)clearTheHistoryRecordsInQueueInTopic:(int64_t)topicID {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        NSArray *localMsgs = [IMTopicMessageEntity MR_findAllWithPredicate:predicate inContext:localContext];
+        for (IMTopicMessageEntity *msg in localMsgs) {
+            [msg MR_deleteEntityInContext:localContext];
+        }
+        IMTopicEntity *entity = [IMTopicEntity MR_findFirstWithPredicate:predicate inContext:localContext];
+        entity.isClearedHistory = YES;
+    }];
+}
 @end
 
