@@ -220,6 +220,14 @@
 		7C5912E72136751D00CE548F /* AttachmentUploadGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912E62136751D00CE548F /* AttachmentUploadGuideViewController.m */; };
 		7C5912EA2136806E00CE548F /* ScanPCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912E92136806E00CE548F /* ScanPCCodeViewController.m */; };
 		7C5912ED2136848F00CE548F /* ScanPCCodeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912EC2136848F00CE548F /* ScanPCCodeResultViewController.m */; };
+		7C5912FB213791BE00CE548F /* YXPlayerBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912F0213791BB00CE548F /* YXPlayerBottomView.m */; };
+		7C5912FC213791BE00CE548F /* YXPlayerBufferingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912F3213791BB00CE548F /* YXPlayerBufferingView.m */; };
+		7C5912FD213791BE00CE548F /* YXPlayerTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912F4213791BB00CE548F /* YXPlayerTopView.m */; };
+		7C5912FE213791BE00CE548F /* PreventHangingCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912F5213791BC00CE548F /* PreventHangingCourseView.m */; };
+		7C5912FF213791BE00CE548F /* YXPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912F9213791BC00CE548F /* YXPlayerViewController.m */; };
+		7C591300213791BE00CE548F /* YXSlideProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912FA213791BD00CE548F /* YXSlideProgressView.m */; };
+		7C5913092137936600CE548F /* LePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5913072137936500CE548F /* LePlayer.m */; };
+		7C59130A2137936600CE548F /* LePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5913082137936500CE548F /* LePlayerView.m */; };
 		7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */; };
 		7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26C2027F6030067E242 /* HeadImageClipView.m */; };
 		7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */; };
@@ -873,6 +881,25 @@
 		7C5912E92136806E00CE548F /* ScanPCCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanPCCodeViewController.m; sourceTree = "<group>"; };
 		7C5912EB2136848F00CE548F /* ScanPCCodeResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanPCCodeResultViewController.h; sourceTree = "<group>"; };
 		7C5912EC2136848F00CE548F /* ScanPCCodeResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanPCCodeResultViewController.m; sourceTree = "<group>"; };
+		7C5912EF213791BA00CE548F /* YXPlayerBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXPlayerBottomView.h; sourceTree = "<group>"; };
+		7C5912F0213791BB00CE548F /* YXPlayerBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXPlayerBottomView.m; sourceTree = "<group>"; };
+		7C5912F1213791BB00CE548F /* YXPlayerBufferingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXPlayerBufferingView.h; sourceTree = "<group>"; };
+		7C5912F2213791BB00CE548F /* PreventHangingCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreventHangingCourseView.h; sourceTree = "<group>"; };
+		7C5912F3213791BB00CE548F /* YXPlayerBufferingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXPlayerBufferingView.m; sourceTree = "<group>"; };
+		7C5912F4213791BB00CE548F /* YXPlayerTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXPlayerTopView.m; sourceTree = "<group>"; };
+		7C5912F5213791BC00CE548F /* PreventHangingCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreventHangingCourseView.m; sourceTree = "<group>"; };
+		7C5912F6213791BC00CE548F /* YXPlayerTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXPlayerTopView.h; sourceTree = "<group>"; };
+		7C5912F7213791BC00CE548F /* YXPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXPlayerViewController.h; sourceTree = "<group>"; };
+		7C5912F8213791BC00CE548F /* YXSlideProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXSlideProgressView.h; sourceTree = "<group>"; };
+		7C5912F9213791BC00CE548F /* YXPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXPlayerViewController.m; sourceTree = "<group>"; };
+		7C5912FA213791BD00CE548F /* YXSlideProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXSlideProgressView.m; sourceTree = "<group>"; };
+		7C5913012137928000CE548F /* YXBrowserExitDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXBrowserExitDelegate.h; sourceTree = "<group>"; };
+		7C5913032137928000CE548F /* YXPlayProgressDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXPlayProgressDelegate.h; sourceTree = "<group>"; };
+		7C5913042137936400CE548F /* LePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LePlayer.h; sourceTree = "<group>"; };
+		7C5913052137936400CE548F /* SpacemanBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpacemanBlocks.h; sourceTree = "<group>"; };
+		7C5913062137936500CE548F /* LePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LePlayerView.h; sourceTree = "<group>"; };
+		7C5913072137936500CE548F /* LePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LePlayer.m; sourceTree = "<group>"; };
+		7C5913082137936500CE548F /* LePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LePlayerView.m; sourceTree = "<group>"; };
 		7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImagePickerOptionItemView.h; sourceTree = "<group>"; };
 		7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImagePickerOptionItemView.m; sourceTree = "<group>"; };
 		7C66B26C2027F6030067E242 /* HeadImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipView.m; sourceTree = "<group>"; };
@@ -1520,6 +1547,7 @@
 		438FFC2C1FD4E1B8006F3FB3 /* ResourceBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				7C5912EE213791A200CE548F /* Video */,
 				7C212DDB1F6B69010007AE01 /* ResourceDisplayViewController.h */,
 				7C212DDC1F6B69010007AE01 /* ResourceDisplayViewController.m */,
 				438FFC541FD4E1B8006F3FB3 /* FileDownloadHelper.h */,
@@ -2331,6 +2359,32 @@
 				7C4D54431F972B040053DB12 /* libGtExtensionSdk-1.1.0.a */,
 			);
 			path = "个推";
+			sourceTree = "<group>";
+		};
+		7C5912EE213791A200CE548F /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				7C5913042137936400CE548F /* LePlayer.h */,
+				7C5913072137936500CE548F /* LePlayer.m */,
+				7C5913062137936500CE548F /* LePlayerView.h */,
+				7C5913082137936500CE548F /* LePlayerView.m */,
+				7C5913052137936400CE548F /* SpacemanBlocks.h */,
+				7C5912F2213791BB00CE548F /* PreventHangingCourseView.h */,
+				7C5912F5213791BC00CE548F /* PreventHangingCourseView.m */,
+				7C5912EF213791BA00CE548F /* YXPlayerBottomView.h */,
+				7C5912F0213791BB00CE548F /* YXPlayerBottomView.m */,
+				7C5912F1213791BB00CE548F /* YXPlayerBufferingView.h */,
+				7C5912F3213791BB00CE548F /* YXPlayerBufferingView.m */,
+				7C5912F6213791BC00CE548F /* YXPlayerTopView.h */,
+				7C5912F4213791BB00CE548F /* YXPlayerTopView.m */,
+				7C5912F7213791BC00CE548F /* YXPlayerViewController.h */,
+				7C5912F9213791BC00CE548F /* YXPlayerViewController.m */,
+				7C5912F8213791BC00CE548F /* YXSlideProgressView.h */,
+				7C5912FA213791BD00CE548F /* YXSlideProgressView.m */,
+				7C5913012137928000CE548F /* YXBrowserExitDelegate.h */,
+				7C5913032137928000CE548F /* YXPlayProgressDelegate.h */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		7C66B2692027F5DA0067E242 /* 图像选取 */ = {
@@ -3391,6 +3445,7 @@
 				E95434D420D227C100BCF63C /* ScoreNameCell.m in Sources */,
 				7C25199C1F6901560001B577 /* BaseViewController.m in Sources */,
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
+				7C5912FC213791BE00CE548F /* YXPlayerBufferingView.m in Sources */,
 				438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */,
 				E91E5D602047B83C00052FBA /* IMManager.m in Sources */,
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
@@ -3414,6 +3469,7 @@
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
 				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
 				7CEBA7A0207C6750009754F5 /* MqttServerRequest.m in Sources */,
+				7C5912FE213791BE00CE548F /* PreventHangingCourseView.m in Sources */,
 				7C24E2011F73695B00A6921B /* GetCourseCommentRequest.m in Sources */,
 				92EF77161F6FAA2F007C3835 /* ClassMomentLikeView.m in Sources */,
 				E91E5D742047B88600052FBA /* IMUserInterface.m in Sources */,
@@ -3477,6 +3533,7 @@
 				928386201F71053400205028 /* ClassMomentListRequest.m in Sources */,
 				7C24E2091F7390E200A6921B /* SaveUserVoteRequest.m in Sources */,
 				4369598A1FDE83E7009E5C43 /* FDActionSheetFooterView.m in Sources */,
+				7C5912FD213791BE00CE548F /* YXPlayerTopView.m in Sources */,
 				43578CCE1FE262C100D37B72 /* PageNameMappingTable.m in Sources */,
 				E91E5DBA2047D6DE00052FBA /* YXGCDTimer.m in Sources */,
 				438FFC791FD4E1B9006F3FB3 /* FileDownloadHelper.m in Sources */,
@@ -3555,6 +3612,7 @@
 				E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
+				7C59130A2137936600CE548F /* LePlayerView.m in Sources */,
 				7CEBA92820886D5D009754F5 /* UpgradeConfig.m in Sources */,
 				E94DDEE620DBBD9E00729A67 /* SubmitUserHomeworkRequest.m in Sources */,
 				431D75921F6E2D9300E0073B /* MessageDetailViewController.m in Sources */,
@@ -3583,6 +3641,7 @@
 				7CBC5BAF204CEAF2004ACA04 /* GetCheckCodeRequest.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
 				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,
+				7C5912FB213791BE00CE548F /* YXPlayerBottomView.m in Sources */,
 				432F90BC1F74FDB700FCF655 /* GetResourceRequest.m in Sources */,
 				7CB9C8F620105558005BE126 /* GetStudentClazsRequest.m in Sources */,
 				7C2519731F68EBCD0001B577 /* UserModel.m in Sources */,
@@ -3598,6 +3657,7 @@
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
 				43578CC51FE2295E00D37B72 /* SubScanCodeResultViewController.m in Sources */,
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
+				7C5913092137936600CE548F /* LePlayer.m in Sources */,
 				E94DDE5B20D8DA3500729A67 /* TaskCommentFetcher.m in Sources */,
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
@@ -3625,6 +3685,8 @@
 				E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */,
+				7C5912FF213791BE00CE548F /* YXPlayerViewController.m in Sources */,
+				7C591300213791BE00CE548F /* YXSlideProgressView.m in Sources */,
 				7C2518AC1F68E5C70001B577 /* main.m in Sources */,
 				7C2519621F68EBA90001B577 /* YXPostRequest.m in Sources */,
 				7C2519861F68FF980001B577 /* ErrorView.m in Sources */,
