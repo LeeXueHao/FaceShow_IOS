@@ -16,4 +16,5 @@ extern NSString *kHomeworkFinishedNotification;
 @property (nonatomic, strong) NSMutableArray<ImageAttachment *> *imageArray;
 @property(nonatomic, strong) GetHomeworkRequestItem_homework *homework;
 @property(nonatomic, strong) GetHomeworkRequestItem_userHomework *userHomework;
+@property (nonatomic, strong) void(^userHomeworkUpdateBlock)(GetHomeworkRequestItem_userHomework *data);
 @end

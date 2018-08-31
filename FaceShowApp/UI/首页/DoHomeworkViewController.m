@@ -555,16 +555,12 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
             [self.view nyx_stopLoading];
             [self.view nyx_showToast:@"提交失败请重试"];
         }else {
-            if (self.isDraft) {
-                [self.view nyx_showToast:@"保存成功"];
-            }else {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
-                    [self nyx_enableRightNavigationItem];
-                    [self.view nyx_stopLoading];
-                    [self requestHomework];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:nil];
-                });
-            }            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
+                [self nyx_enableRightNavigationItem];
+                [self.view nyx_stopLoading];
+                [self requestHomework];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHomeworkFinishedNotification object:nil];
+            });
         }
     }];
 }
@@ -583,18 +579,17 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
             return;
         }
         GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
+        BLOCK_EXEC(self.userHomeworkUpdateBlock,item.data.userHomework);
         if ([self.userHomework.finishStatus isEqualToString:@"1"]) {
-            FinishedHomeworkViewController *vc = self.navigationController.viewControllers[self.navigationController.viewControllers.count-2];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else if (self.isDraft) {
+            [self.view nyx_showToast:@"保存成功"];
+        }else {
+            FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
             vc.userHomework = item.data.userHomework;
             vc.homework = item.data.homework;
-            [vc setupData];
-            [self.navigationController popToViewController:vc animated:YES];
-            return;
+            [self.navigationController pushViewController:vc animated:YES];
         }
-        FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
-        vc.userHomework = item.data.userHomework;
-        vc.homework = item.data.homework;
-        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 

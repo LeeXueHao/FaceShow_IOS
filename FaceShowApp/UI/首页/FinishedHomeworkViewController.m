@@ -177,6 +177,12 @@
     DoHomeworkViewController *vc = [[DoHomeworkViewController alloc]init];
     vc.homework = self.homework;
     vc.userHomework = self.userHomework;
+    WEAK_SELF
+    [vc setUserHomeworkUpdateBlock:^(GetHomeworkRequestItem_userHomework *data) {
+        STRONG_SELF
+        self.userHomework = data;
+        [self setupData];
+    }];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
