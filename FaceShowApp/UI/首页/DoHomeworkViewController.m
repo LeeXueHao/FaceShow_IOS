@@ -524,7 +524,9 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
             [self.view nyx_showToast:@"发布失败请重试"];
             return;
         }
-        [self.resIdArray addObject:[NSString stringWithFormat:@"%@|jpeg",key]];
+        NSString *resId = [NSString stringWithFormat:@"%@|jpeg",key];
+        [self.resIdArray addObject:resId];
+        self.imageArray[self.imageIndex].resId = resId;
         self.imageIndex++;
         if (self.imageIndex < self.imageArray.count) {
             [self uploadImageWithIndex:self.imageIndex];
