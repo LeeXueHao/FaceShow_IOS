@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *appraiseLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) PreviewPhotosView *photosView;
+@property (nonatomic, strong) UIButton *homeworkButton;
 @end
 
 @implementation FinishedHomeworkViewController
@@ -59,7 +60,13 @@
     self.contentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
-        make.left.right.bottom.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        CGFloat bottom = isEmpty(self.userHomework.assess)? -45:0;
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(bottom);
+        } else {
+            make.bottom.mas_equalTo(bottom);
+        }
     }];
     
     self.titleLabel = [[UILabel alloc]init];
@@ -112,6 +119,20 @@
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-15.f);
         make.height.mas_equalTo(0.1);
     }];
+    if (isEmpty(self.userHomework.assess)) {
+        self.homeworkButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.homeworkButton.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
+        self.homeworkButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.homeworkButton setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+        [self.homeworkButton setTitle:@"修 改" forState:UIControlStateNormal];
+        [self.homeworkButton addTarget:self action:@selector(homeworkButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.homeworkButton];
+        [self.homeworkButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.scrollView.mas_bottom);
+            make.height.mas_equalTo(45);
+        }];
+    }
 }
 
 - (void)setupNavView {
@@ -150,6 +171,13 @@
     [self.photosView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.photosView.heightFloat);
     }];
+}
+
+- (void)homeworkButtonClick:(UIButton *)sender {
+    DoHomeworkViewController *vc = [[DoHomeworkViewController alloc]init];
+    vc.homework = self.homework;
+    vc.userHomework = self.userHomework;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupMockData {

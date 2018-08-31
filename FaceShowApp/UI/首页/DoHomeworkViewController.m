@@ -339,6 +339,7 @@ extern NSString * const kPCCodeResultBackNotification;
     }];
     UIButton *draftButton = [uploadAttachButton clone];
     [draftButton setTitle:@"存草稿" forState:UIControlStateNormal];
+    [draftButton setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
     [[draftButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         STRONG_SELF
         [self saveDraft];
@@ -350,6 +351,9 @@ extern NSString * const kPCCodeResultBackNotification;
         make.height.mas_equalTo(47);
         make.width.mas_equalTo(self.view.mas_width).multipliedBy(0.5);
     }];
+    if ([self.userHomework.finishStatus isEqualToString:@"1"]) {
+        draftButton.enabled = NO;
+    }
 }
 
 - (void)deleteAttachWithIndex:(NSInteger)index {
