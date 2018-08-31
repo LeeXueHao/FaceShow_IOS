@@ -27,6 +27,8 @@
 #import "DoHomeworkViewController.h"
 #import "FSTabBarController.h"
 
+extern NSString * const kPCCodeResultBackNotification;
+
 @interface TaskListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
@@ -208,6 +210,10 @@
         if (self.navigationController == x.object) {
             [self requestTaskInfo];
         }
+    }];
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kPCCodeResultBackNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self.navigationController popToViewController:self animated:YES];
     }];
 }
 

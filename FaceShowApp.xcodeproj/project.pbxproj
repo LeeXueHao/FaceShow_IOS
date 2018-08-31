@@ -3826,6 +3826,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "FaceShowApp/研修宝.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = P8ZS8UUN27;
@@ -3928,7 +3929,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
 				PRODUCT_NAME = "研修宝";
-				PROVISIONING_PROFILE = "92a3763c-84e3-4ca7-9f54-96595ac3f31f";
+				PROVISIONING_PROFILE = "16c942e8-ba40-42fb-a720-aebeb213a5c2";
 				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";

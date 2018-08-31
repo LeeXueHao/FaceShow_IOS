@@ -25,7 +25,6 @@
 #import "YXPlayerViewController.h"
 
 NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
-extern NSString * const kPCCodeResultBackNotification;
 
 @interface DoHomeworkViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIView *titleView;
@@ -439,10 +438,6 @@ extern NSString * const kPCCodeResultBackNotification;
         [UIView animateWithDuration:duration.floatValue animations:^{
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y, 0);
         }];
-    }];
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kPCCodeResultBackNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        [self.navigationController popToViewController:self animated:YES];
     }];
 }
 
