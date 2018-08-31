@@ -13,4 +13,6 @@
 @interface FinishedHomeworkViewController : ScrollBaseViewController
 @property(nonatomic, strong) GetHomeworkRequestItem_userHomework *userHomework;
 @property(nonatomic, strong) GetHomeworkRequestItem_homework *homework;
+
+- (void)setupData;
 @end

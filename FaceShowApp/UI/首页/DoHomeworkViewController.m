@@ -63,6 +63,7 @@ extern NSString * const kPCCodeResultBackNotification;
     [self setupNavView];
     [self setupUI];
     [self setupObservers];
+    [self refreshSubmitButtonEnable];
 }
 - (void)setupMock {
     GetHomeworkRequestItem_attachmentInfo *attach1 = [[GetHomeworkRequestItem_attachmentInfo alloc]init];
@@ -587,6 +588,14 @@ extern NSString * const kPCCodeResultBackNotification;
             return;
         }
         GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
+        if ([self.userHomework.finishStatus isEqualToString:@"1"]) {
+            FinishedHomeworkViewController *vc = self.navigationController.viewControllers[self.navigationController.viewControllers.count-2];
+            vc.userHomework = item.data.userHomework;
+            vc.homework = item.data.homework;
+            [vc setupData];
+            [self.navigationController popToViewController:vc animated:YES];
+            return;
+        }
         FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
         vc.userHomework = item.data.userHomework;
         vc.homework = item.data.homework;

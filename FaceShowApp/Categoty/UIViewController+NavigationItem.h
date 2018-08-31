@@ -11,13 +11,13 @@
 typedef void(^ActionBlock)(void);
 
 @interface UIViewController (NavigationItem)
-- (void)nyx_setupLeftWithTitle:(NSString *)title action:(ActionBlock)action;
-- (void)nyx_setupLeftWithImage:(UIImage *)image action:(ActionBlock)action;
-- (void)nyx_setupLeftWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action;
+- (UIButton *)nyx_setupLeftWithTitle:(NSString *)title action:(ActionBlock)action;
+- (UIButton *)nyx_setupLeftWithImage:(UIImage *)image action:(ActionBlock)action;
+- (UIButton *)nyx_setupLeftWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action;
 - (void)nyx_setupLeftWithCustomView:(UIView *)view;
-- (void)nyx_setupRightWithImage:(UIImage *)image action:(ActionBlock)action;
-- (void)nyx_setupRightWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action;
-- (void)nyx_setupRightWithTitle:(NSString *)title action:(ActionBlock)action;
+- (UIButton *)nyx_setupRightWithImage:(UIImage *)image action:(ActionBlock)action;
+- (UIButton *)nyx_setupRightWithImageName:(NSString *)imageName highlightImageName:(NSString *)highlightImageName action:(ActionBlock)action;
+- (UIButton *)nyx_setupRightWithTitle:(NSString *)title action:(ActionBlock)action;
 - (void)nyx_setupRightWithCustomView:(UIView *)view;
 
 - (void)nyx_enableRightNavigationItem;
