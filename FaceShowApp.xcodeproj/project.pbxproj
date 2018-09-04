@@ -228,6 +228,9 @@
 		7C591300213791BE00CE548F /* YXSlideProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5912FA213791BD00CE548F /* YXSlideProgressView.m */; };
 		7C5913092137936600CE548F /* LePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5913072137936500CE548F /* LePlayer.m */; };
 		7C59130A2137936600CE548F /* LePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5913082137936500CE548F /* LePlayerView.m */; };
+		7C59130D213E20E600CE548F /* MemberOnline.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C59130C213E20E600CE548F /* MemberOnline.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7C591310213E2D5600CE548F /* IMHeartbeatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C59130F213E2D5600CE548F /* IMHeartbeatManager.m */; };
+		7C591313213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C591312213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m */; };
 		7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */; };
 		7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26C2027F6030067E242 /* HeadImageClipView.m */; };
 		7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */; };
@@ -900,6 +903,12 @@
 		7C5913062137936500CE548F /* LePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LePlayerView.h; sourceTree = "<group>"; };
 		7C5913072137936500CE548F /* LePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LePlayer.m; sourceTree = "<group>"; };
 		7C5913082137936500CE548F /* LePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LePlayerView.m; sourceTree = "<group>"; };
+		7C59130B213E20E500CE548F /* MemberOnline.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberOnline.pbobjc.h; sourceTree = "<group>"; };
+		7C59130C213E20E600CE548F /* MemberOnline.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberOnline.pbobjc.m; sourceTree = "<group>"; };
+		7C59130E213E2D5600CE548F /* IMHeartbeatManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMHeartbeatManager.h; sourceTree = "<group>"; };
+		7C59130F213E2D5600CE548F /* IMHeartbeatManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMHeartbeatManager.m; sourceTree = "<group>"; };
+		7C591311213E2F3A00CE548F /* IMOnlineHeartbeatRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMOnlineHeartbeatRequest.h; sourceTree = "<group>"; };
+		7C591312213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMOnlineHeartbeatRequest.m; sourceTree = "<group>"; };
 		7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImagePickerOptionItemView.h; sourceTree = "<group>"; };
 		7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImagePickerOptionItemView.m; sourceTree = "<group>"; };
 		7C66B26C2027F6030067E242 /* HeadImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipView.m; sourceTree = "<group>"; };
@@ -2872,6 +2881,8 @@
 				E91E5DAE2047B90D00052FBA /* MqttMsg.pbobjc.m */,
 				E91E5DB22047B90D00052FBA /* TopicGet.pbobjc.h */,
 				E91E5DAF2047B90D00052FBA /* TopicGet.pbobjc.m */,
+				7C59130B213E20E500CE548F /* MemberOnline.pbobjc.h */,
+				7C59130C213E20E600CE548F /* MemberOnline.pbobjc.m */,
 			);
 			name = Protos;
 			sourceTree = "<group>";
@@ -2964,6 +2975,10 @@
 			children = (
 				E91E5DC42047DB5500052FBA /* IMConnectionManager.h */,
 				E91E5DC52047DB5500052FBA /* IMConnectionManager.m */,
+				7C59130E213E2D5600CE548F /* IMHeartbeatManager.h */,
+				7C59130F213E2D5600CE548F /* IMHeartbeatManager.m */,
+				7C591311213E2F3A00CE548F /* IMOnlineHeartbeatRequest.h */,
+				7C591312213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -3314,6 +3329,7 @@
 				7CBC5BC1204D3325004ACA04 /* CompleteUserInfoViewController.m in Sources */,
 				E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */,
 				7C2519441F68EB780001B577 /* YXGradientView.m in Sources */,
+				7C591310213E2D5600CE548F /* IMHeartbeatManager.m in Sources */,
 				E90C5159204FC4C30008F92A /* IMChatViewModel.m in Sources */,
 				9220843B1F6BD3BF00F8AAC6 /* PhotoChooseViewController.m in Sources */,
 				7C2519801F68FE900001B577 /* FSNavigationController.m in Sources */,
@@ -3333,6 +3349,7 @@
 				E91E5D5F2047B83C00052FBA /* IMConfig.m in Sources */,
 				E95434B420D0F5BF00BCF63C /* HomeworkRequirementViewController.m in Sources */,
 				7CEFC7EB1F9D78FF001D8C84 /* GetVerifyCodeRequest.m in Sources */,
+				7C591313213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m in Sources */,
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
@@ -3685,6 +3702,7 @@
 				E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,
 				4376E7321F70B5C8003E2057 /* CourseDetailHeaderView.m in Sources */,
+				7C59130D213E20E600CE548F /* MemberOnline.pbobjc.m in Sources */,
 				7C5912FF213791BE00CE548F /* YXPlayerViewController.m in Sources */,
 				7C591300213791BE00CE548F /* YXSlideProgressView.m in Sources */,
 				7C2518AC1F68E5C70001B577 /* main.m in Sources */,

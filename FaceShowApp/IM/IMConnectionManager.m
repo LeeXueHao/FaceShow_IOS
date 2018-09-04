@@ -11,6 +11,10 @@
 #import "MqttMsg.pbobjc.h"
 #import "ImMqtt.pbobjc.h"
 #import "IMEventHandlerFactory.h"
+#import "MemberOnline.pbobjc.h"
+#import "IMConfig.h"
+#import "IMManager.h"
+#import "IMHeartbeatManager.h"
 
 NSString * const kIMConnectionDidCloseNotification = @"kIMConnectionDidCloseNotification";
 
@@ -41,13 +45,33 @@ NSString * const kIMConnectionDidCloseNotification = @"kIMConnectionDidCloseNoti
     self.mySession.delegate = self;
     self.mySession.userName = username;
     self.mySession.password = password;
-    [self.mySession connectAndWaitTimeout:3];
+    self.mySession.willFlag = YES;
+    self.mySession.willTopic = @"im/v1.0/upstream/online";
+    self.mySession.willQoS = MQTTQosLevelAtLeastOnce;
+    MemberOnline *online = [[MemberOnline alloc]init];
+    online.bizSource = kBizSourse.intValue;
+    online.memberId = [IMManager sharedInstance].currentMember.memberID;
+    online.token = [IMManager sharedInstance].token;
+    online.onlineType = 1;
+    online.onlineState = 0;
+    ImMqtt *im = [[ImMqtt alloc]init];
+    im.imEvent = 221001;
+    im.reqId = [IMConfig generateUniqueID];
+    im.bodyArray = [NSMutableArray arrayWithObject:[online data]];
+    MqttMsg *msg = [[MqttMsg alloc]init];
+    msg.data_p = [im data];
+    self.mySession.willMsg = [msg data];
+    BOOL success = [self.mySession connectAndWaitTimeout:3];
+    if (success) {
+        [[IMHeartbeatManager sharedInstance]resumeHeartbeat];
+    }
 }
 
 - (void)disconnect {
     [self.mySession closeWithDisconnectHandler:^(NSError *error) {
         
     }];
+    [[IMHeartbeatManager sharedInstance]suspendHeartbeat];
 }
 
 - (void)subscribeTopic:(NSString *)topic {
