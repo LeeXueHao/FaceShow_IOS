@@ -48,26 +48,32 @@ NSString * const kIMConnectionDidCloseNotification = @"kIMConnectionDidCloseNoti
     self.mySession.willFlag = YES;
     self.mySession.willTopic = @"im/v1.0/upstream/online";
     self.mySession.willQoS = MQTTQosLevelAtLeastOnce;
+    self.mySession.willMsg = [self willData:NO];
+    BOOL success = [self.mySession connectAndWaitTimeout:3];
+    if (success) {
+        [self.mySession publishData:[self willData:YES] onTopic:@"im/v1.0/upstream/online"];
+        [[IMHeartbeatManager sharedInstance]resumeHeartbeat];
+    }
+}
+
+- (NSData *)willData:(BOOL)onlineState {
     MemberOnline *online = [[MemberOnline alloc]init];
     online.bizSource = kBizSourse.intValue;
     online.memberId = [IMManager sharedInstance].currentMember.memberID;
     online.token = [IMManager sharedInstance].token;
     online.onlineType = 1;
-    online.onlineState = 0;
+    online.onlineState = onlineState;
     ImMqtt *im = [[ImMqtt alloc]init];
     im.imEvent = 221001;
     im.reqId = [IMConfig generateUniqueID];
     im.bodyArray = [NSMutableArray arrayWithObject:[online data]];
     MqttMsg *msg = [[MqttMsg alloc]init];
     msg.data_p = [im data];
-    self.mySession.willMsg = [msg data];
-    BOOL success = [self.mySession connectAndWaitTimeout:3];
-    if (success) {
-        [[IMHeartbeatManager sharedInstance]resumeHeartbeat];
-    }
+    return [msg data];
 }
 
 - (void)disconnect {
+    [self.mySession publishData:[self willData:NO] onTopic:@"im/v1.0/upstream/online"];
     [self.mySession closeWithDisconnectHandler:^(NSError *error) {
         
     }];
