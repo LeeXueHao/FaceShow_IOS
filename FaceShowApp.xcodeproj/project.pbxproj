@@ -406,7 +406,6 @@
 		E91E5D732047B88600052FBA /* IMTopicMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D6D2047B88500052FBA /* IMTopicMessage.m */; };
 		E91E5D742047B88600052FBA /* IMUserInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D6F2047B88600052FBA /* IMUserInterface.m */; };
 		E91E5D752047B88600052FBA /* IMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D702047B88600052FBA /* IMMember.m */; };
-		E91E5D7D2047B8AF00052FBA /* IM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D792047B8AE00052FBA /* IM.xcdatamodeld */; };
 		E91E5D892047B8C900052FBA /* IMEventHandlerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D822047B8C800052FBA /* IMEventHandlerFactory.m */; };
 		E91E5D8A2047B8C900052FBA /* IMTopicChangeEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D832047B8C800052FBA /* IMTopicChangeEventHandler.m */; };
 		E91E5D8B2047B8C900052FBA /* IMEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E91E5D852047B8C800052FBA /* IMEventHandler.m */; };
@@ -479,6 +478,9 @@
 		E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */; };
 		E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */; };
 		E9B39A642119B672007ABA54 /* NSObject+LocationPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */; };
+		E9F33E23213FBAF00008EFCD /* IM.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E22213FBAEF0008EFCD /* IM.xcdatamodel */; };
+		E9F33E26213FBD830008EFCD /* UpdatePersonalConfigRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E25213FBD830008EFCD /* UpdatePersonalConfigRequest.m */; };
+		E9F33E29213FC19D0008EFCD /* ForbidTalkingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E28213FC19D0008EFCD /* ForbidTalkingView.m */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1256,7 +1258,6 @@
 		E91E5D6F2047B88600052FBA /* IMUserInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMUserInterface.m; path = FaceShowApp/IM/IMUserInterface.m; sourceTree = SOURCE_ROOT; };
 		E91E5D702047B88600052FBA /* IMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMMember.m; path = FaceShowApp/IM/IMMember.m; sourceTree = SOURCE_ROOT; };
 		E91E5D712047B88600052FBA /* IMTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMTopic.h; path = FaceShowApp/IM/IMTopic.h; sourceTree = SOURCE_ROOT; };
-		E91E5D7A2047B8AE00052FBA /* IM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IM.xcdatamodel; sourceTree = "<group>"; };
 		E91E5D7F2047B8C800052FBA /* IMNewTopicEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMNewTopicEventHandler.h; sourceTree = "<group>"; };
 		E91E5D802047B8C800052FBA /* IMEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMEventHandler.h; sourceTree = "<group>"; };
 		E91E5D812047B8C800052FBA /* IMEventHandlerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMEventHandlerFactory.h; sourceTree = "<group>"; };
@@ -1397,6 +1398,11 @@
 		E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleDetailViewController.m; sourceTree = "<group>"; };
 		E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LocationPermissions.m"; sourceTree = "<group>"; };
 		E9B39A632119B671007ABA54 /* NSObject+LocationPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LocationPermissions.h"; sourceTree = "<group>"; };
+		E9F33E22213FBAEF0008EFCD /* IM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IM.xcdatamodel; sourceTree = "<group>"; };
+		E9F33E24213FBD830008EFCD /* UpdatePersonalConfigRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePersonalConfigRequest.h; sourceTree = "<group>"; };
+		E9F33E25213FBD830008EFCD /* UpdatePersonalConfigRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePersonalConfigRequest.m; sourceTree = "<group>"; };
+		E9F33E27213FC19D0008EFCD /* ForbidTalkingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForbidTalkingView.h; sourceTree = "<group>"; };
+		E9F33E28213FC19D0008EFCD /* ForbidTalkingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForbidTalkingView.m; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -2460,6 +2466,8 @@
 		7CBC5B812049061F004ACA04 /* request */ = {
 			isa = PBXGroup;
 			children = (
+				E9F33E24213FBD830008EFCD /* UpdatePersonalConfigRequest.h */,
+				E9F33E25213FBD830008EFCD /* UpdatePersonalConfigRequest.m */,
 				E91E5D992047B8E000052FBA /* SaveTextMsgRequest.h */,
 				E91E5D8F2047B8DF00052FBA /* SaveTextMsgRequest.m */,
 				7CBC5BDA20567184004ACA04 /* SaveImageMsgRequest.h */,
@@ -2659,6 +2667,8 @@
 				7CFA798020AC23770097A4A7 /* IMSwitchSettingView.m */,
 				7CFA798820AD18D20097A4A7 /* IMMemberInfoView.h */,
 				7CFA798920AD18D20097A4A7 /* IMMemberInfoView.m */,
+				E9F33E27213FC19D0008EFCD /* ForbidTalkingView.h */,
+				E9F33E28213FC19D0008EFCD /* ForbidTalkingView.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2971,11 +2981,11 @@
 		E91E5DBF2047DAFB00052FBA /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				E9F33E22213FBAEF0008EFCD /* IM.xcdatamodel */,
 				E91E5DC02047DB2C00052FBA /* IMDatabaseManager.h */,
 				E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */,
 				7C7A9EC9206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.h */,
 				7C7A9ECA206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.m */,
-				E91E5D792047B8AE00052FBA /* IM.xcdatamodeld */,
 			);
 			name = DB;
 			sourceTree = "<group>";
@@ -3393,6 +3403,7 @@
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				E91E5DA52047B8E300052FBA /* TopicMsgData.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
+				E9F33E23213FBAF00008EFCD /* IM.xcdatamodel in Sources */,
 				7CB9C8F3201038D1005BE126 /* ClassListCell.m in Sources */,
 				7C212DDD1F6B69010007AE01 /* ResourceDisplayViewController.m in Sources */,
 				922600CA200F47150076AD05 /* ClassMomentUserViewController.m in Sources */,
@@ -3511,6 +3522,7 @@
 				923F73871F725C4700D7EA6F /* ClassMomentCommentRequest.m in Sources */,
 				E900D7A31FEB5806005B9163 /* FeedbackRequest.m in Sources */,
 				929B421320F335740034E608 /* AreaSubjectViewController.m in Sources */,
+				E9F33E29213FC19D0008EFCD /* ForbidTalkingView.m in Sources */,
 				43538D311FDFBD2D0052A9D3 /* StageSubjectItem.m in Sources */,
 				7C2518ED1F68E68D0001B577 /* UIImage+YXResize.m in Sources */,
 				E91E5DA82047B8E300052FBA /* GetMemberTopicsRequest.m in Sources */,
@@ -3524,6 +3536,7 @@
 				E93327ED206342F000CED82E /* IMSlideImageView.m in Sources */,
 				7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */,
 				7CEFC7C31F99A267001D8C84 /* UpdateUserInfoRequest.m in Sources */,
+				E9F33E26213FBD830008EFCD /* UpdatePersonalConfigRequest.m in Sources */,
 				4322CA391FD941D700E7B565 /* StageSubjectViewController.m in Sources */,
 				E97D2E8921364F9F00FECFE0 /* IMTopicInfoItem.m in Sources */,
 				7C2519361F68EB2A0001B577 /* YXMockParser.m in Sources */,
@@ -3661,7 +3674,6 @@
 				7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */,
 				7C7A9ED4206B5008003EE15B /* IMHistoryMessageFetcher.m in Sources */,
 				E91E5D8B2047B8C900052FBA /* IMEventHandler.m in Sources */,
-				E91E5D7D2047B8AF00052FBA /* IM.xcdatamodeld in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
 				438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */,
 				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
@@ -4105,19 +4117,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E91E5D792047B8AE00052FBA /* IM.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E91E5D7A2047B8AE00052FBA /* IM.xcdatamodel */,
-			);
-			currentVersion = E91E5D7A2047B8AE00052FBA /* IM.xcdatamodel */;
-			path = IM.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 7C25189F1F68E5C70001B577 /* Project object */;
 }

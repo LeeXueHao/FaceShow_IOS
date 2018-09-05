@@ -9,9 +9,11 @@
 #import "IMGroupSettingViewController.h"
 #import "IMTitleContentView.h"
 #import "IMSwitchSettingView.h"
+#import "IMUserInterface.h"
 
 @interface IMGroupSettingViewController ()
-
+@property(nonatomic, strong) IMSwitchSettingView *hushView;
+@property(nonatomic, strong) IMSwitchSettingView *unremindView;
 @end
 
 @implementation IMGroupSettingViewController
@@ -42,6 +44,8 @@
     IMSwitchSettingView *hushView = [[IMSwitchSettingView alloc]init];
     hushView.title = @"学员禁言";
     hushView.desc = @"开启后，学员不可以发送消息，只有班主任可以发";
+    hushView.isOn = [self.topic.personalConfig.speak isEqualToString:@"0"] ? YES : NO;
+    self.hushView = hushView;
     WEAK_SELF
     [hushView setStateChangeBlock:^(BOOL isOn) {
         STRONG_SELF
@@ -49,9 +53,20 @@
     
     IMSwitchSettingView *unremindView = [[IMSwitchSettingView alloc]init];
     unremindView.title = @"消息免打扰";
-    unremindView.desc = @"开启后，不会受到消息提醒";
+    unremindView.desc = @"开启后，不会收到消息提醒";
+    BOOL isOnState = [self.topic.personalConfig.quite isEqualToString:@"1"] ? YES : NO;
+    unremindView.isOn = isOnState;
+    self.unremindView = unremindView;
     [unremindView setStateChangeBlock:^(BOOL isOn) {
         STRONG_SELF
+        [IMUserInterface updatePersonalConfigWithTopicId:self.topic.topicID quite:isOn ? @"1" : @"0"  completeBlock:^(NSError *error) {
+            STRONG_SELF
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                self.unremindView.isOn = isOnState;
+                return;
+            }
+        }];
     }];
     
     if (self.isManager) {

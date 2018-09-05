@@ -9,6 +9,10 @@
 #import <JSONModel/JSONModel.h>
 #import "IMTopic.h"
 
+@interface TopicData_personalConfig : JSONModel
+@property (nonatomic, strong) NSString<Optional> *quite;//个人配置 免打扰：1-开启   0-关闭
+@end
+
 @interface TopicData_memberInfo : JSONModel
 @property (nonatomic, strong) NSString<Optional> *memberID;
 @property (nonatomic, strong) NSString<Optional> *memberType;
@@ -26,6 +30,7 @@
 @property (nonatomic, strong) NSString<Optional> *talkMemberId;
 @property (nonatomic, strong) NSString<Optional> *receivedMemberOpId;
 @property (nonatomic, strong) NSString<Optional> *createTime;
+@property (nonatomic, strong) NSString<Optional> *memberRole;
 @property (nonatomic, strong) TopicData_memberInfo<Optional> *memberInfo;
 
 - (IMMember *)toIMMember;
@@ -38,11 +43,14 @@
 @property (nonatomic, strong) NSString<Optional> *topicName;
 @property (nonatomic, strong) NSString<Optional> *topicType;
 @property (nonatomic, strong) NSString<Optional> *topicGroup;
+@property (nonatomic, strong) NSString<Optional> *fromGroupTopicId;
 @property (nonatomic, strong) NSString<Optional> *state;
 @property (nonatomic, strong) NSString<Optional> *topicChange;
 @property (nonatomic, strong) NSString<Optional> *createTime;
 @property (nonatomic, strong) NSString<Optional> *latestMsgId;
 @property (nonatomic, strong) NSString<Optional> *latestMsgTime;
+@property (nonatomic, strong) NSString<Optional> *speak;
+@property (nonatomic, strong) TopicData_personalConfig<Optional> *personalConfigInfo;
 @property (nonatomic, strong) NSArray<TopicData_member, Optional> *members;
 
 - (IMTopic *)toIMTopic;

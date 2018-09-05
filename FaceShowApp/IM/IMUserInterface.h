@@ -30,12 +30,14 @@
                   beforeMsg:(IMTopicMessage *)msg;
 
 + (void)resetUnreadMessageCountWithTopicID:(int64_t)topicID;
+
 /**
  清空某个话题的历史消息
  
  @param topicID 话题id
  */
 + (void)clearTheHistoryRecordsInTopic:(int64_t)topicID;
+
 /**
  从通讯录选择某一个联系人/群聊界面点击某个联系人的头像进入聊天界面的时候调用
  
@@ -46,7 +48,7 @@
 
 /**
  记录server时间和本地时间偏差，在消息发送中用本地时间加上偏差的值模拟server时间时使用。
-
+ 
  @return 时间差
  */
 + (NSTimeInterval)obtainTimeoffset;
@@ -69,6 +71,14 @@
  @param topicID topicID
  */
 + (void)updateTopicInfoWithTopicID:(int64_t)topicID;
+
+/**
+ 目前指 免打扰 设置 -2018.9.3
+ */
++ (void)updatePersonalConfigWithTopicId:(int64_t)topicID
+                                  quite:(NSString *)quite
+                          completeBlock:(void(^)(NSError *error))completeBlock;;
+
 
 // Notifications
 UIKIT_EXTERN NSNotificationName const kIMMessageDidUpdateNotification;

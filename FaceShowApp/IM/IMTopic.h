@@ -15,6 +15,14 @@ typedef NS_ENUM(int64_t, TopicType) {
     TopicType_Private = 1
 };
 
+@interface IMPersonalConfig : JSONModel
+@property (nonatomic, assign) int64_t topicID;
+@property (nonatomic, strong) IMMember *curMember;
+@property (nonatomic, strong) NSString *speak;//禁言：1-非禁言 0-禁言
+@property (nonatomic, strong) NSString *quite;//个人配置 免打扰：1-开启   0-关闭
+@end
+
+
 @interface IMTopic : NSObject
 @property (nonatomic, assign) TopicType type;
 @property (nonatomic, assign) int64_t topicID;
@@ -28,4 +36,6 @@ typedef NS_ENUM(int64_t, TopicType) {
 @property (nonatomic, strong) IMTopicMessage *latestMessage;
 @property (nonatomic, strong) NSArray<IMMember *> *members;
 @property (nonatomic, assign) BOOL isClearedHistory;
+@property (nonatomic, strong) IMPersonalConfig *personalConfig;
+@property (nonatomic, strong) NSString *curMemberRole; // 当前用户在该话题的角色 1-普通成员  2-管理者
 @end

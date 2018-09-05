@@ -8,6 +8,9 @@
 
 #import "IMTopic.h"
 
+@implementation IMPersonalConfig
+@end
+
 @implementation IMTopic
 
 @end

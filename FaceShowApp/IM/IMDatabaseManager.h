@@ -58,4 +58,6 @@
 
 #pragma mark - 清空历史消息
 - (void)clearTheHistoryRecordsInTopic:(int64_t)topicID;
+#pragma mark - 免打扰更新
+- (void)updateConfigInTopic:(IMTopic *)topic;
 @end

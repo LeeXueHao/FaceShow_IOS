@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIImageView *tipImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIImageView *stateImageView;
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong) UIView *lineView;
 @end
@@ -81,6 +82,16 @@
         make.top.mas_equalTo(15);
     }];
     
+    self.stateImageView = [[UIImageView alloc] init];
+    self.stateImageView.userInteractionEnabled = YES;
+    self.stateImageView.image = [UIImage imageNamed:@"免打扰"];
+    [self.contentView addSubview:self.stateImageView];
+    [self.stateImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(9);
+        make.right.mas_equalTo(self.timeLabel);
+        make.size.mas_equalTo(CGSizeMake(14, 16));
+    }];
+    
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:14];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
@@ -133,11 +144,11 @@
                     STRONG_SELF
                     self.avatarImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
                 }];
-//                if (topic.group) {
-//                    self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
-//                }else {
-//                    self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
-//                }
+                //                if (topic.group) {
+                //                    self.nameLabel.text =[NSString stringWithFormat:@"%@(%@)",obj.name,topic.group];
+                //                }else {
+                //                    self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
+                //                }
                 //私聊暂不显示班级来源
                 self.nameLabel.text =[NSString stringWithFormat:@"%@",obj.name];
                 *stop = YES;
@@ -158,6 +169,7 @@
         self.timeLabel.text = @"";
     }
     self.tipImageView.hidden = topic.unreadCount==0;
+    self.stateImageView.hidden = [topic.personalConfig.quite isEqualToString:@"1"] ? NO : YES;
 }
 
 - (void)setupMockData {

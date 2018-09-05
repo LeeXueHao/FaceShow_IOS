@@ -13,9 +13,10 @@
 #import "IMManager.h"
 #import "IMTopicInfoItem.h"
 #import "ContactMemberContactsRequest.h"
+#import "IMUserInterface.h"
 
 @interface IMPrivateSettingViewController ()
-
+@property(nonatomic, strong) IMSwitchSettingView *unremindView;
 @end
 
 @implementation IMPrivateSettingViewController
@@ -44,6 +45,7 @@
     }else {
         infoView.member = self.info.member;
     }
+    
     [self.view addSubview:infoView];
     [infoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
@@ -62,10 +64,21 @@
     
     IMSwitchSettingView *unremindView = [[IMSwitchSettingView alloc]init];
     unremindView.title = @"消息免打扰";
-    unremindView.desc = @"开启后，不会受到消息提醒";
+    unremindView.desc = @"开启后，不会收到消息提醒";
+    BOOL isOnState = self.topic ? ([self.topic.personalConfig.quite isEqualToString:@"1"] ? YES : NO) : NO;
+    unremindView.isOn = isOnState;
+    self.unremindView = unremindView;
     WEAK_SELF
     [unremindView setStateChangeBlock:^(BOOL isOn) {
         STRONG_SELF
+        [IMUserInterface updatePersonalConfigWithTopicId:self.topic.topicID quite:isOn ? @"1" : @"0"  completeBlock:^(NSError *error) {
+            STRONG_SELF
+            if (error) {
+                [self.view nyx_showToast:error.localizedDescription];
+                self.unremindView.isOn = isOnState;
+                return;
+            }
+        }];
     }];
     [self.view addSubview:unremindView];
     [unremindView mas_makeConstraints:^(MASConstraintMaker *make) {

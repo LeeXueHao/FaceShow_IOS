@@ -10,6 +10,7 @@
 #import "IMMemberEntity+CoreDataClass.h"
 #import "IMTopicEntity+CoreDataClass.h"
 #import "IMTopicMessageEntity+CoreDataClass.h"
+#import "IMPersonalConfigEntity+CoreDataClass.h"
 #import "IMTopicOfflineMsgFetchEntity+CoreDataClass.h"
 #import "IMManager.h"
 
@@ -280,6 +281,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         topicEntity.type = topic.type;
         topicEntity.topicChange = topic.topicChange;
         topicEntity.latestMsgId = topic.latestMsgId;
+        topicEntity.curMemberRole = topic.curMemberRole;
         
         NSPredicate *curMemberPredicate = [NSPredicate predicateWithFormat:@"memberID = %@",@([IMManager sharedInstance].currentMember.memberID)];
         IMMemberEntity *curMemberEntity = [IMMemberEntity MR_findFirstWithPredicate:curMemberPredicate inContext:localContext];
@@ -308,6 +310,17 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         NSPredicate *msgPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
         IMTopicMessageEntity *msgEntity = [IMTopicMessageEntity MR_findFirstWithPredicate:msgPredicate sortedBy:@"primaryKey" ascending:NO inContext:localContext];
         topicEntity.latestMessage = msgEntity;
+        
+        IMPersonalConfigEntity *configEntity = [IMPersonalConfigEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+        if (!configEntity) {
+            configEntity = [IMPersonalConfigEntity MR_createEntityInContext:localContext];
+            configEntity.topicID = topic.personalConfig.topicID;
+            configEntity.curMember = topicEntity.curMember;
+        }
+        configEntity.quite = topic.personalConfig.quite;
+        configEntity.speak = topic.personalConfig.speak;
+        topicEntity.personalConfig = configEntity;
+        
         
         dbTopic = [self topicFromEntity:topicEntity inContext:localContext];
     }];
@@ -697,6 +710,8 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     topic.unreadCount = entity.unreadCount;
     topic.latestMessage = [self messageFromEntity:entity.latestMessage];
     topic.isClearedHistory = entity.isClearedHistory;
+    topic.personalConfig = [self configFromEntity:entity.personalConfig];
+    topic.curMemberRole = entity.curMemberRole;
     
     NSArray *memberIDArray = [entity.memberIDs componentsSeparatedByString:@","];
     NSMutableArray *conditionArray = [NSMutableArray array];
@@ -745,6 +760,17 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     member.name = entity.name;
     member.avatar = entity.avatar;
     return member;
+}
+
+- (IMPersonalConfig *)configFromEntity:(IMPersonalConfigEntity *)entity {
+    if (!entity) {
+        return nil;
+    }
+    IMPersonalConfig *config = [[IMPersonalConfig alloc]init];
+    config.speak = entity.speak;
+    config.quite = entity.quite;
+    config.topicID = entity.topicID;
+    return config;
 }
 
 #pragma mark - 离线消息待抓取记录
@@ -847,5 +873,37 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         entity.isClearedHistory = YES;
     }];
 }
+#pragma mark - 免打扰
+- (void)updateConfigInTopic:(IMTopic *)topic {
+    dispatch_barrier_async(self.operationQueue, ^{
+        [self updateConfigInQueue:topic];
+    });
+}
+
+- (void)updateConfigInQueue:(IMTopic *)topic {
+    __block IMTopic *dbTopic = nil;
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *topicPredicate = [NSPredicate predicateWithFormat:@"topicID = %@ && curMember.memberID = %@",@(topic.topicID),@([IMManager sharedInstance].currentMember.memberID)];
+        IMTopicEntity *topicEntity = [IMTopicEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+        if (!topicEntity) {
+            return;
+        }
+        
+        IMPersonalConfigEntity *configEntity = [IMPersonalConfigEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
+        if (!configEntity) {
+            configEntity = [IMPersonalConfigEntity MR_createEntityInContext:localContext];
+            configEntity.curMember = topicEntity.curMember;
+        }
+        configEntity.quite = topic.personalConfig.quite;
+        configEntity.speak = topic.personalConfig.speak;
+        topicEntity.personalConfig = configEntity;
+        
+        dbTopic = [self topicFromEntity:topicEntity inContext:localContext];
+    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]postNotificationName:kIMTopicDidUpdateNotification object:dbTopic];
+    });
+}
+
 @end
 

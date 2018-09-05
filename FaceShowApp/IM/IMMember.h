@@ -13,4 +13,5 @@
 @property (nonatomic, assign) int64_t userID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *avatar;
+@property (nonatomic, strong) NSString *memberRole;
 @end

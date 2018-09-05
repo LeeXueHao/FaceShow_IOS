@@ -30,11 +30,13 @@
 #import "IMPrivateSettingViewController.h"
 #import "IMTopicInfoItem.h"
 #import "ContactMemberContactsRequest.h"
+#import "ForbidTalkingView.h"
 
 NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCountClearNotification";
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,IMMessageCellDelegate>
-@property (strong,nonatomic)UIActivityIndicatorView *activity;
+@property (nonatomic, strong) ForbidTalkingView *forbidTalkingView;
+@property (nonatomic, strong,)UIActivityIndicatorView *activity;
 @property (nonatomic, strong) IMMessageTableView *tableView;
 @property (nonatomic, strong) IMInputView *imInputView;
 @property (nonatomic, strong) ImageSelectionHandler *imageHandler;
@@ -96,6 +98,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             }else {
                 vc.info = self.info;
             }
+            
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];
@@ -103,12 +106,28 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     [self setupUI];
     [self setupData];
     [self setupObserver];
+    BOOL forbid = [self.topic.personalConfig.speak isEqualToString:@"0"] ? YES : NO;
+    [self updateForbidTalkingState:self.topic ? forbid : NO];
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateForbidTalkingState:(BOOL)isForbidden {
+    if (isForbidden) {
+        self.forbidTalkingView.hidden = NO;
+        [self.forbidTalkingView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(45);
+        }];
+    }else {
+        self.forbidTalkingView.hidden = YES;
+        [self.forbidTalkingView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
 }
 
 - (void)setupTitleWithTopic:(IMTopic *)topic {
@@ -125,6 +144,13 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 
 - (void)setupUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"dfe3e5"];
+    
+    self.forbidTalkingView = [[ForbidTalkingView alloc]init];
+    [self.view addSubview:self.forbidTalkingView];
+    [self.forbidTalkingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(45);
+    }];
     
     self.imInputView = [[IMInputView alloc]init];
     self.imInputView.isChangeBool = YES;
@@ -200,7 +226,8 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.forbidTalkingView.mas_bottom);
         make.bottom.equalTo(self.imInputView.mas_top);
     }];
     
@@ -256,7 +283,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }
 }
 
-- (void)setHasMore:(BOOL)hasMore {                               
+- (void)setHasMore:(BOOL)hasMore {
     _hasMore = hasMore;
     self.tableView.tableHeaderView.hidden = !hasMore;
 }
@@ -344,6 +371,8 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 }
                 self.topic = topic;
                 [self setupTitleWithTopic:topic];
+                BOOL forbid = [topic.personalConfig.speak isEqualToString:@"0"] ? YES : NO;
+                [self updateForbidTalkingState:forbid];
             };
             return;
         }
@@ -488,12 +517,24 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 
 #pragma mark - IMMessageCellDelegate
 - (void)messageCellDidClickAvatarForUser:(IMMember *)user {
-//    [self.view nyx_showToast:@"click avatar to do ..."];
+    //    [self.view nyx_showToast:@"click avatar to do ..."];
     if (self.info.member) {//有member说明是私聊
         return;
     }
-
+    
     if (self.topic && self.topic.type == TopicType_Group) {//有topic的情况下 且是群聊
+        BOOL isContainedMine = NO;
+        for (IMMember *member  in self.topic.members) {
+            if (member.memberID == [IMManager sharedInstance].currentMember.memberID) {
+                isContainedMine = YES;
+                break;
+            }
+        }
+        if (!isContainedMine) {
+            [self.view nyx_showToast:@"您已被移出该班级"];
+            return;
+        }
+        
         BOOL isContainedUser = NO;
         for (IMMember *member  in self.topic.members) {
             if (member.memberID == user.memberID) {
@@ -522,7 +563,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
                 group = self.info.group;
             }else {
                 group = [[ContactMemberContactsRequestItem_Data_Gcontacts_Groups alloc]init];
-                group.groupId = self.topic.groupID ? [NSString stringWithFormat:@"%@",@(self.topic.groupID)] : @"0";
+                group.groupId = [NSString stringWithFormat:@"%@",@(self.topic.topicID)];
                 group.groupName = self.topic.group;
             }
             IMTopicInfoItem *item = [[IMTopicInfoItem alloc]init];
@@ -554,7 +595,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     }
     photoBrowserView.imageMessageArray = array;
     photoBrowserView.currentIndex = [array indexOfObject:model.message];
-
+    
     WEAK_SELF
     [photoBrowserView setPhotoBrowserViewSingleTapActionBlock:^(IMPhotoBrowserView *view) {
         STRONG_SELF
@@ -627,7 +668,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 }
 
 - (void)messageCellLongPress:(IMChatViewModel *)model rect:(CGRect)rect {
-//    DDLogDebug(@"long press to do ...");
+    //    DDLogDebug(@"long press to do ...");
     if (model.message.type != MessageType_Text) {
         return;
     }
@@ -652,10 +693,10 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     model0.type = IMMessageMenuItemType_Copy;
     [array addObject:model0];
     
-//    IMMessageMenuItemModel *model1 = [[IMMessageMenuItemModel alloc]init];
-//    model1.title = @"删除";
-//    model1.type = IMMessageMenuItemType_Delete;
-//    [array addObject:model1];
+    //    IMMessageMenuItemModel *model1 = [[IMMessageMenuItemModel alloc]init];
+    //    model1.title = @"删除";
+    //    model1.type = IMMessageMenuItemType_Delete;
+    //    [array addObject:model1];
     
     IMMessageMenuItemModel *model2 = [[IMMessageMenuItemModel alloc]init];
     model2.title = @"取消";
@@ -668,11 +709,11 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 }
 
 - (void)messageCellDoubleClick:(IMChatViewModel *)mmodel {
-//    [self.view nyx_showToast:@"double click to do ..."];
+    //    [self.view nyx_showToast:@"double click to do ..."];
 }
 
 - (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect {
-//    DDLogDebug(@"click state button to do ...");
+    //    DDLogDebug(@"click state button to do ...");
     if ([self isFirstResponder]) {
         [self resignFirstResponder];
     }
