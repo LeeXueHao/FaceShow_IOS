@@ -20,6 +20,8 @@
 #import "ApnsMessageDetailViewController.h"
 #import "ApnsCourseDetailViewController.h"
 #import "ApnsResourceDisplayViewController.h"
+#import "ApnsHomeworkRequirementViewController.h"
+#import "ApnsChatViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "UserSignInRequest.h"
 #import "SubScanCodeResultViewController.h"
@@ -31,6 +33,7 @@
 #import "IMUserInterface.h"
 #import "UIViewController+VisibleViewController.h"
 #import "TaskListViewController.h"
+#import "GetHomeworkRequest.h"
 
 UIKIT_EXTERN BOOL testFrameworkOn;
 
@@ -38,6 +41,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
 @property (nonatomic, strong) GetResourceDetailRequest *resourceDetailRequest;
 @property (nonatomic, strong) UserSignInRequest *userSignInRequest;
+@property (nonatomic, strong) GetHomeworkRequest *getHomeworkRequest;
 @property (nonatomic, assign) CGFloat notificationViewHeight;
 @end
 
@@ -270,6 +274,10 @@ UIKIT_EXTERN BOOL testFrameworkOn;
         [self goVoteWithData:apns];
     }else if (type == 102) {
         [self goQuestionnaireWithData:apns];
+    }else if (type == 103) {
+        [self goEvaluateWithData:apns];
+    }else if (type == 104) {
+        [self goHomeWorkWithData:apns];
     }else if (type == 120) {
         [self goNoticeDetailWithData:apns];
     }else if (type == 130) {
@@ -278,6 +286,8 @@ UIKIT_EXTERN BOOL testFrameworkOn;
         [self goResourceWithData:apns];
     }else if (type == 140) {
         [self goCourseDetailWithData:apns];
+    }else if (type == 22101){
+        [self goChatWithData:apns];
     }
 }
 
@@ -313,6 +323,35 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     vc.name = data.title;
     FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
     [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)goEvaluateWithData:(YXApnsContentModel *)data{
+    ApnsQuestionnaireViewController *vc = [[ApnsQuestionnaireViewController alloc]initWithStepId:data.objectId interactType:InteractType_Evaluate];
+    vc.name = data.title;
+    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)goHomeWorkWithData:(YXApnsContentModel *)data{
+    [self.getHomeworkRequest stopRequest];
+    self.getHomeworkRequest = [[GetHomeworkRequest alloc]init];
+    self.getHomeworkRequest.stepId = data.objectId;
+    WEAK_SELF
+    [self.getHomeworkRequest startRequestWithRetClass:[GetHomeworkRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        if (error) {
+            [[UIApplication sharedApplication].keyWindow nyx_showToast:error.localizedDescription];
+            return;
+        }
+        GetHomeworkRequestItem *item = (GetHomeworkRequestItem *)retItem;
+        ApnsHomeworkRequirementViewController *vc = [[ApnsHomeworkRequirementViewController alloc]init];
+        vc.homework = item.data.homework;
+        vc.userHomework = item.data.userHomework;
+        vc.isFinished = NO;
+        FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+        [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+    }];
+
 }
 
 - (void)goNoticeDetailWithData:(YXApnsContentModel *)data {
@@ -353,6 +392,25 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     ApnsCourseDetailViewController *vc = [[ApnsCourseDetailViewController alloc]init];
     vc.courseId = data.objectId;
     FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)goChatWithData:(YXApnsContentModel *)data{
+    NSArray *topics =  [IMUserInterface findAllTopics];
+    IMTopic *currentTopic;
+    for (IMTopic *topic in topics) {
+        if (topic.topicID == data.objectId.integerValue) {
+            currentTopic = topic;
+            break;
+        }
+    }
+    if (!currentTopic) {
+        currentTopic = [[IMTopic alloc]init];
+        currentTopic.topicID = atoll([data.objectId UTF8String]);
+    }
+    ApnsChatViewController *chat = [[ApnsChatViewController alloc]init];
+    chat.topic = currentTopic;
+    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:chat];
     [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
 }
 
