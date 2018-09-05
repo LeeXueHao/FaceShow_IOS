@@ -268,13 +268,21 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        IMTopic *topic = self.dataArray[indexPath.row];
-        [self clearChattingTopicUnreadCount:topic];
-        [IMUserInterface clearTheHistoryRecordsInTopic:topic.topicID];
-        [self.dataArray removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [self updatePrivateTopicIndex];
-        [self.view nyx_showToast:@"删除此聊天"];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle: @"删除对话会同时清空聊天记录，确认删除？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *edit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            IMTopic *topic = self.dataArray[indexPath.row];
+            [self clearChattingTopicUnreadCount:topic];
+            [IMUserInterface clearTheHistoryRecordsInTopic:topic.topicID];
+            [self.dataArray removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self updatePrivateTopicIndex];
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:edit];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
