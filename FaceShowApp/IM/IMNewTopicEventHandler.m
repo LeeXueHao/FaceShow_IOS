@@ -23,16 +23,21 @@
         NSLog(@"parse error:%@",error.localizedDescription);
         return;
     }
-    IMTopic *imtopic = [[IMTopic alloc]init];
-    imtopic.topicID = msg.topicId;
-    [[IMDatabaseManager sharedInstance]saveTopic:imtopic];
-    [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:msg.topicId]];
+    IMTopic *dbTopic = [[IMDatabaseManager sharedInstance]findTopicWithID:msg.topicId];
+    if (!dbTopic) {
+        IMTopic *imtopic = [[IMTopic alloc]init];
+        imtopic.topicID = msg.topicId;
+        [[IMDatabaseManager sharedInstance]saveTopic:imtopic];
+        [[IMConnectionManager sharedInstance]subscribeTopic:[IMConfig topicForTopicID:msg.topicId]];
+        
+        IMHistoryFetchRecord *record = [[IMHistoryFetchRecord alloc]init];
+        record.topic = imtopic;
+        record.count = 15;
+        [[IMHistoryMessageFetcher sharedInstance]addRecord:record];
+        
+        [[IMTopicUpdateService sharedInstance] addTopic:imtopic withCompleteBlock:nil];
+    }
     
-    IMHistoryFetchRecord *record = [[IMHistoryFetchRecord alloc]init];
-    record.topic = imtopic;
-    record.count = 15;
-    [[IMHistoryMessageFetcher sharedInstance]addRecord:record];
-    
-    [[IMTopicUpdateService sharedInstance] addTopic:imtopic withCompleteBlock:nil];
+    [[IMTopicUpdateService sharedInstance] addTopic:dbTopic withCompleteBlock:nil];
 }
 @end
