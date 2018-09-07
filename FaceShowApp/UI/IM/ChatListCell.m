@@ -109,7 +109,7 @@
     [self.contentView addSubview:self.messageLabel];
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel);
-        make.right.mas_equalTo(-15.f);
+        make.right.mas_equalTo(-30.f);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(8);
     }];
     
