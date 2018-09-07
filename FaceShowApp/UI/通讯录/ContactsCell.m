@@ -70,6 +70,7 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.avatarImageView.mas_right).offset(10);
 //        make.right.mas_equalTo(self.numberLabel.mas_left).offset(-10);
+        make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(0);
     }];
     
