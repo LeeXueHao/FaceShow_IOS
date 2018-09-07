@@ -478,9 +478,9 @@
 		E997064D205A0A010096DAB0 /* IMPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = E997064C205A0A010096DAB0 /* IMPhotoBrowserView.m */; };
 		E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */; };
 		E9B39A642119B672007ABA54 /* NSObject+LocationPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */; };
-		E9F33E23213FBAF00008EFCD /* IM.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E22213FBAEF0008EFCD /* IM.xcdatamodel */; };
 		E9F33E26213FBD830008EFCD /* UpdatePersonalConfigRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E25213FBD830008EFCD /* UpdatePersonalConfigRequest.m */; };
 		E9F33E29213FC19D0008EFCD /* ForbidTalkingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E28213FC19D0008EFCD /* ForbidTalkingView.m */; };
+		E9F33E2F214226EF0008EFCD /* IM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9F33E2D214226EE0008EFCD /* IM.xcdatamodeld */; };
 		F7524D4C1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */; };
 		F7F982561F9F3F1B00282572 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F982551F9F3F0C00282572 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1398,11 +1398,11 @@
 		E9B39A1E20EE1B2B007ABA54 /* ScheduleDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleDetailViewController.m; sourceTree = "<group>"; };
 		E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LocationPermissions.m"; sourceTree = "<group>"; };
 		E9B39A632119B671007ABA54 /* NSObject+LocationPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LocationPermissions.h"; sourceTree = "<group>"; };
-		E9F33E22213FBAEF0008EFCD /* IM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IM.xcdatamodel; sourceTree = "<group>"; };
 		E9F33E24213FBD830008EFCD /* UpdatePersonalConfigRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePersonalConfigRequest.h; sourceTree = "<group>"; };
 		E9F33E25213FBD830008EFCD /* UpdatePersonalConfigRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePersonalConfigRequest.m; sourceTree = "<group>"; };
 		E9F33E27213FC19D0008EFCD /* ForbidTalkingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForbidTalkingView.h; sourceTree = "<group>"; };
 		E9F33E28213FC19D0008EFCD /* ForbidTalkingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForbidTalkingView.m; sourceTree = "<group>"; };
+		E9F33E2E214226EE0008EFCD /* IM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IM.xcdatamodel; sourceTree = "<group>"; };
 		EDBFDC8E2D8E458B04159396 /* libPods-FaceShowApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceShowApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7524D4A1FA8522100CC6793 /* BlackAndWhiteThresholdFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAndWhiteThresholdFilter.m; sourceTree = "<group>"; };
 		F7524D4B1FA8522200CC6793 /* BlackAndWhiteThresholdFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAndWhiteThresholdFilter.h; sourceTree = "<group>"; };
@@ -2981,7 +2981,7 @@
 		E91E5DBF2047DAFB00052FBA /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				E9F33E22213FBAEF0008EFCD /* IM.xcdatamodel */,
+				E9F33E2D214226EE0008EFCD /* IM.xcdatamodeld */,
 				E91E5DC02047DB2C00052FBA /* IMDatabaseManager.h */,
 				E91E5DC12047DB2C00052FBA /* IMDatabaseManager.m */,
 				7C7A9EC9206363C8003EE15B /* IMTopicOfflineMsgFetchRecord.h */,
@@ -3403,9 +3403,9 @@
 				7C25195D1F68EBA90001B577 /* HttpBaseRequest.m in Sources */,
 				E91E5DA52047B8E300052FBA /* TopicMsgData.m in Sources */,
 				7C212DCE1F6A60900007AE01 /* MainPageTabContainerView.m in Sources */,
-				E9F33E23213FBAF00008EFCD /* IM.xcdatamodel in Sources */,
 				7CB9C8F3201038D1005BE126 /* ClassListCell.m in Sources */,
 				7C212DDD1F6B69010007AE01 /* ResourceDisplayViewController.m in Sources */,
+				E9F33E2F214226EF0008EFCD /* IM.xcdatamodeld in Sources */,
 				922600CA200F47150076AD05 /* ClassMomentUserViewController.m in Sources */,
 				7CBC5B792047E137004ACA04 /* YXDrawerViewController.m in Sources */,
 				9279A6FF1F6A7613004A1E2B /* CircleSpreadTransition.m in Sources */,
@@ -4117,6 +4117,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E9F33E2D214226EE0008EFCD /* IM.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E9F33E2E214226EE0008EFCD /* IM.xcdatamodel */,
+			);
+			currentVersion = E9F33E2E214226EE0008EFCD /* IM.xcdatamodel */;
+			path = IM.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7C25189F1F68E5C70001B577 /* Project object */;
 }

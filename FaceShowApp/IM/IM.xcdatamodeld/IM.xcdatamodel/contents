@@ -6,8 +6,15 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="IMPersonalConfigEntity" representedClassName="IMPersonalConfigEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="quite" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="speak" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topicID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="curMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMMemberEntity" syncable="YES"/>
+    </entity>
     <entity name="IMTopicEntity" representedClassName="IMTopicEntity" syncable="YES" codeGenerationType="class">
         <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="curMemberRole" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isClearedHistory" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -20,6 +27,7 @@
         <attribute name="unreadCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="curMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMMemberEntity" syncable="YES"/>
         <relationship name="latestMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMTopicMessageEntity" syncable="YES"/>
+        <relationship name="personalConfig" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IMPersonalConfigEntity" syncable="YES"/>
     </entity>
     <entity name="IMTopicMessageEntity" representedClassName="IMTopicMessageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,7 +53,8 @@
     </entity>
     <elements>
         <element name="IMMemberEntity" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="IMTopicEntity" positionX="-36" positionY="9" width="128" height="240"/>
+        <element name="IMPersonalConfigEntity" positionX="-45" positionY="117" width="128" height="105"/>
+        <element name="IMTopicEntity" positionX="-36" positionY="9" width="128" height="270"/>
         <element name="IMTopicMessageEntity" positionX="-54" positionY="-9" width="128" height="270"/>
         <element name="IMTopicOfflineMsgFetchEntity" positionX="-54" positionY="108" width="128" height="90"/>
     </elements>
