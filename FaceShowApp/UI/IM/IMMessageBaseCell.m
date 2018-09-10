@@ -168,8 +168,12 @@
         }];
     }
     [self.usernameLabel setText:message.sender.name];
-    [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:[QiniuDataManager resizedUrlStringWithOriString:message.sender.avatar maxLongEdge:100 maxShortEdge:100]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
-    [self setupSendStateWithMessage:message];
+    NSString *url = message.sender.avatar;
+    if ([url containsString:@"?"]) {
+        [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:url] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
+    }else {
+        [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:[QiniuDataManager resizedUrlStringWithOriString:url maxLongEdge:100 maxShortEdge:100]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
+    }
     DDLogDebug(@"内容为:%@-----状态为%@",message.text,@(message.sendState));
     
     TopicType topicType = model.topicType;

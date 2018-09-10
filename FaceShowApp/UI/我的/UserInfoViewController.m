@@ -294,7 +294,7 @@
     if (!image) {
         return;
     }
-    NSData *data = [UIImage compressionImage:image limitSize:2*1024*1024];
+    NSData *data = [UIImage compressionImage:image limitSize:100 * 100];
     [self.view nyx_startLoading];
     WEAK_SELF
     [[QiniuDataManager sharedInstance]uploadData:data withProgressBlock:nil completeBlock:^(NSString *key,NSString *host, NSError *error) {
