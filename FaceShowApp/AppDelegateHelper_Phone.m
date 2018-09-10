@@ -198,7 +198,10 @@ UIKIT_EXTERN BOOL testFrameworkOn;
 
 #pragma mark - Apns
 - (void)handleApnsDataOnForeground:(YXApnsContentModel *)apns {
-    [self showNotificationView:apns];
+    NSInteger type = apns.type.integerValue;
+    if (type != 22101) {
+        [self showNotificationView:apns];
+    }
 }
 
 - (void)showNotificationView:(YXApnsContentModel *)apns {
