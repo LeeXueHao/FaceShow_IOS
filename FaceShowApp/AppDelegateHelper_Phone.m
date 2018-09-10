@@ -199,7 +199,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
 #pragma mark - Apns
 - (void)handleApnsDataOnForeground:(YXApnsContentModel *)apns {
     NSInteger type = apns.type.integerValue;
-    if (type != 22101) {
+    if (type != 221001) {
         [self showNotificationView:apns];
     }
 }
@@ -289,7 +289,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
         [self goResourceWithData:apns];
     }else if (type == 140) {
         [self goCourseDetailWithData:apns];
-    }else if (type == 22101){
+    }else if (type == 221001){
         [self goChatWithData:apns];
     }
 }
