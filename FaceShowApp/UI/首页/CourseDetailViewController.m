@@ -14,6 +14,8 @@
 #import "CourseResourceViewController.h"
 #import "CourseInfoViewController.h"
 
+extern NSString * const kPCCodeResultBackNotification;
+
 @interface CourseDetailViewController ()
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -33,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setupObserver];
     [self setupUI];
     [self setupCourseData];
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -63,6 +66,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kPCCodeResultBackNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self.navigationController popToViewController:self animated:YES];
+    }];
 }
 
 - (void)setupUI {
