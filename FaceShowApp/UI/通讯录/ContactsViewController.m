@@ -281,9 +281,9 @@
 }
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [self.view endEditing:YES];
+//}
 
 - (void)setCurrentSelectedGroupIndex:(NSInteger)currentSelectedGroupIndex {
     _currentSelectedGroupIndex = currentSelectedGroupIndex;
