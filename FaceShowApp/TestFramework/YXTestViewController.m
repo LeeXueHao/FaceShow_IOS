@@ -15,7 +15,6 @@
 #import "TestQiniuViewController.h"
 #import "CompleteUserInfoViewController.h"
 #import "RegisterInfoViewController.h"
-
 @interface YXTestViewController ()
 @end
 

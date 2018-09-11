@@ -130,16 +130,13 @@
     YXApnsContentModel *apns = nil;
     apns = [[YXApnsContentModel alloc] initWithString:content error:&error];
     NSLog(@"[Receive GeTui]:%@\n\n", content);
-    
     SAFE_CALL_OneParam(self.delegate, handleApnsDataOnForeground, apns);  
 }
 
 // 处理来自苹果的推送 App后台或者杀死
 -(void)handleApnsContent:(NSDictionary *)dict {
     [GeTuiSdk handleRemoteNotification:dict];
-    
     self.handleddByAPNS = YES;
-    
     YXApnsContentModel *apns = [[YXApnsContentModel alloc]initWithString:[dict valueForKey:@"payload"] error:nil];
     SAFE_CALL_OneParam(self.delegate, handleApnsData, apns);
 }
