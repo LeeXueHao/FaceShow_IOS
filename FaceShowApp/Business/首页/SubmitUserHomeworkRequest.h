@@ -6,7 +6,7 @@
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "YXGetRequest.h"
+#import "YXPostRequest.h"
 @interface SubmitUserHomeworkRequest_data : JSONModel
 @end
 
@@ -14,7 +14,7 @@
 @property (nonatomic, strong) SubmitUserHomeworkRequest_data<Optional> *data;
 @end
 
-@interface SubmitUserHomeworkRequest : YXGetRequest
+@interface SubmitUserHomeworkRequest : YXPostRequest
 @property (nonatomic, strong) NSString *stepId;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;
