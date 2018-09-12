@@ -169,7 +169,11 @@
         self.timeLabel.text = @"";
     }
     self.tipImageView.hidden = topic.unreadCount==0;
-    self.stateImageView.hidden = [topic.personalConfig.quite isEqualToString:@"1"] ? NO : YES;
+    if (topic.personalConfig.curMember.memberID == [IMManager sharedInstance].currentMember.memberID) {
+        self.stateImageView.hidden = [topic.personalConfig.quite isEqualToString:@"1"] ? NO : YES;
+    }else {
+        self.stateImageView.hidden = YES;
+    }
 }
 
 - (void)setupMockData {

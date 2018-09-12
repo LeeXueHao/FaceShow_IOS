@@ -46,19 +46,22 @@
     topic.groupID = self.fromGroupTopicId.longLongValue;
     topic.topicChange = self.topicChange.longLongValue;
     topic.latestMsgId = self.latestMsgId.longLongValue;
-    NSMutableArray *members = [NSMutableArray array];
-    for (TopicData_member *item in self.members) {
-        [members addObject:[item toIMMember]];
-        if (item.memberId.longLongValue == [IMManager sharedInstance].currentMember.memberID) {
-            topic.curMemberRole = item.memberRole;
-        }
-    }
-    topic.members = members;
+    
     IMPersonalConfig *config = [[IMPersonalConfig alloc]init];
     config.quite = self.personalConfigInfo.quite;
     config.speak = self.speak;
     config.topicID = self.topicId.longLongValue;
     topic.personalConfig = config;
+    
+    NSMutableArray *members = [NSMutableArray array];
+    for (TopicData_member *item in self.members) {
+        [members addObject:[item toIMMember]];
+        if (item.memberId.longLongValue == [IMManager sharedInstance].currentMember.memberID) {
+            topic.curMemberRole = item.memberRole;
+            topic.personalConfig.curMember = [item toIMMember];
+        }
+    }
+    topic.members = members;
     return topic;
 }
 

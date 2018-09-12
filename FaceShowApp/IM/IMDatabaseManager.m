@@ -315,8 +315,8 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         if (!configEntity) {
             configEntity = [IMPersonalConfigEntity MR_createEntityInContext:localContext];
             configEntity.topicID = topic.personalConfig.topicID;
-            configEntity.curMember = topicEntity.curMember;
         }
+        configEntity.curMember = topicEntity.curMember;
         configEntity.quite = topic.personalConfig.quite;
         configEntity.speak = topic.personalConfig.speak;
         topicEntity.personalConfig = configEntity;
@@ -770,6 +770,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
     config.speak = entity.speak;
     config.quite = entity.quite;
     config.topicID = entity.topicID;
+    config.curMember = [self memberFromEntity:entity.curMember];
     return config;
 }
 
@@ -873,7 +874,7 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         entity.isClearedHistory = YES;
     }];
 }
-#pragma mark - 免打扰
+#pragma mark - 禁言/免打扰
 - (void)updateConfigInTopic:(IMTopic *)topic {
     dispatch_barrier_async(self.operationQueue, ^{
         [self updateConfigInQueue:topic];
@@ -892,8 +893,8 @@ NSString * const kIMTopicDidRemoveNotification = @"kIMTopicDidRemoveNotification
         IMPersonalConfigEntity *configEntity = [IMPersonalConfigEntity MR_findFirstWithPredicate:topicPredicate inContext:localContext];
         if (!configEntity) {
             configEntity = [IMPersonalConfigEntity MR_createEntityInContext:localContext];
-            configEntity.curMember = topicEntity.curMember;
         }
+        configEntity.curMember = topicEntity.curMember;
         configEntity.quite = topic.personalConfig.quite;
         configEntity.speak = topic.personalConfig.speak;
         topicEntity.personalConfig = configEntity;
