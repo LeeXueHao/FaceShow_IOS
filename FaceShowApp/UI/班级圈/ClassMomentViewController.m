@@ -162,25 +162,13 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
-    
-//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    rightButton.frame = CGRectMake(0, 0, 40.0f, 40.0f);
-//    [rightButton setImage:[UIImage imageNamed:@"上传内容图标正常态"] forState:UIControlStateNormal];
-//    [rightButton setImage:[UIImage imageNamed:@"上传内容图标点击态"] forState:UIControlStateHighlighted];
-//
-//    [[rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-//        STRONG_SELF
-//        [self showAlertView];
-//    }];
-//    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] init];
-//    gestureRecognizer.minimumPressDuration = 1.0f;
-//    [[gestureRecognizer rac_gestureSignal] subscribeNext:^(UILongPressGestureRecognizer *x) {
-//        if (x.state == UIGestureRecognizerStateBegan) {
-//            [self presentNextPublishViewController:nil];
-//        }
-//    }];
-//    [rightButton addGestureRecognizer:gestureRecognizer];
-//    [self nyx_setupRightWithCustomView:rightButton];
+    NSInteger msgCount = [UserPromptsManager sharedInstance].data.momentMsgNew.promptNum.integerValue;
+    if (msgCount > 0) {
+        self.headerView.hidden = NO;
+        self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f);
+        self.headerView.messageInteger = msgCount;
+        self.tableView.tableHeaderView = self.headerView;
+    }
     
     self.inputView = [[CommentInputView alloc]init];
     self.inputView.isChangeBool = YES;
