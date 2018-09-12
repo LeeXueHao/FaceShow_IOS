@@ -374,6 +374,9 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f + 81.0f);
             self.headerView.messageInteger = msgCount;
             self.tableView.tableHeaderView = self.headerView;
+        }else{
+            self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 157.0f);
+            self.tableView.tableHeaderView = self.headerView;
         }
     }];
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kTabBarDidSelectNotification object:nil]subscribeNext:^(NSNotification *x) {
