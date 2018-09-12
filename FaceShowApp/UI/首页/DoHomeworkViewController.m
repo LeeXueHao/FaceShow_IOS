@@ -426,7 +426,9 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
         publishEnabled = publishEnabled || NO;
     }
     self.submitButton.enabled = publishEnabled && hasTitle;
-    self.draftButton.enabled = self.submitButton.enabled;
+    if (![self.userHomework.finishStatus isEqualToString:@"1"]) {
+        self.draftButton.enabled = self.submitButton.enabled;
+    }    
     DDLogDebug(@"self.publishButton.enabled =%@",@(self.submitButton.enabled));
 }
 
