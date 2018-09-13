@@ -60,7 +60,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [super viewDidLoad];
     self.attachmentViewArray = [NSMutableArray array];
     self.title = self.homework.title;
-    [self setupMock];
+//    [self setupMock];
     [self setupNavView];
     [self setupUI];
     [self setupObservers];
@@ -209,6 +209,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
         make.width.mas_equalTo(self.scrollView.mas_width);
+        make.height.mas_greaterThanOrEqualTo(self.scrollView.mas_height);
     }];
     
     UIView *topView = [[UIView alloc] init];
@@ -428,7 +429,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     self.submitButton.enabled = publishEnabled && hasTitle;
     if (![self.userHomework.finishStatus isEqualToString:@"1"]) {
         self.draftButton.enabled = self.submitButton.enabled;
-    }    
+    }
     DDLogDebug(@"self.publishButton.enabled =%@",@(self.submitButton.enabled));
 }
 
