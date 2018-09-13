@@ -134,47 +134,7 @@
         make.left.top.right.mas_equalTo(0);
         make.bottom.mas_equalTo(changeClassBtn.mas_bottom).mas_offset(20);
     }];
-    
-    UIButton *classHomeBtn = [self optionBtnWithTitle:@"班级首页" normalImage:@"首页icon正常态" highlightedImage:@"首页icon点击态"];
-    [self.view addSubview:classHomeBtn];
-    [classHomeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(backImageView.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(0);
-        make.left.right.mas_equalTo(0);
-    }];
-    
-    UIButton *mineInfoBtn = [self optionBtnWithTitle:@"我的资料" normalImage:@"我的icon正常态" highlightedImage:@"我的icon点击态"];
-    [self.view addSubview:mineInfoBtn];
-    [mineInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(classHomeBtn.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(0);
-        make.left.right.mas_equalTo(0);
-    }];
-    
-    UIButton *signInfoBtn = [self optionBtnWithTitle:@"签到记录" normalImage:@"签到记录正常态" highlightedImage:@"签到记录点击态"];
-    [self.view addSubview:signInfoBtn];
-    [signInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(0);
-        make.left.right.mas_equalTo(0);
-    }];
-    
-    UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈正常态" highlightedImage:@"意见反馈点击态"];
-    [self.view addSubview:feedbackInfoBtn];
-    [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(0);
-        make.left.right.mas_equalTo(0);
-    }];
-    
-    UIButton *passwordBtn = [self optionBtnWithTitle:@"修改密码" normalImage:@"忘记密码icon正常态" highlightedImage:@"忘记密码icon选择态"];
-    [self.view addSubview:passwordBtn];
-    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(feedbackInfoBtn.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(0);
-        make.left.right.mas_equalTo(0);
-    }];
-    
+
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [logoutBtn setTitle:@"退出" forState:UIControlStateNormal];
@@ -193,7 +153,7 @@
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(49);
     }];
-    
+
     UILabel *versionLabel = [[UILabel alloc]init];
     versionLabel.textColor = [UIColor colorWithHexString:@"a4acb8"];
     versionLabel.text = [NSString stringWithFormat:@"版本号：V%@",[ConfigManager sharedInstance].clientVersion];
@@ -201,9 +161,64 @@
     versionLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:versionLabel];
     [versionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(logoutBtn.mas_top).mas_offset(-20);
+        make.bottom.mas_equalTo(logoutBtn.mas_top).offset(-20);
         make.centerX.mas_equalTo(0);
     }];
+
+
+    UIScrollView *scroll = [[UIScrollView alloc]init];
+    scroll.backgroundColor = [UIColor clearColor];
+    scroll.showsVerticalScrollIndicator = NO;
+    scroll.contentSize = CGSizeMake(305*kPhoneWidthRatio, 10000);
+    [self.view addSubview:scroll];
+    [scroll mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backImageView.mas_bottom);
+        make.bottom.mas_equalTo(versionLabel.mas_top);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    UIButton *classHomeBtn = [self optionBtnWithTitle:@"班级首页" normalImage:@"首页icon正常态" highlightedImage:@"首页icon点击态"];
+    [scroll addSubview:classHomeBtn];
+    [classHomeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    UIButton *mineInfoBtn = [self optionBtnWithTitle:@"我的资料" normalImage:@"我的icon正常态" highlightedImage:@"我的icon点击态"];
+    [scroll addSubview:mineInfoBtn];
+    [mineInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(classHomeBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    UIButton *signInfoBtn = [self optionBtnWithTitle:@"签到记录" normalImage:@"签到记录正常态" highlightedImage:@"签到记录点击态"];
+    [scroll addSubview:signInfoBtn];
+    [signInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈正常态" highlightedImage:@"意见反馈点击态"];
+    [scroll addSubview:feedbackInfoBtn];
+    [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    UIButton *passwordBtn = [self optionBtnWithTitle:@"修改密码" normalImage:@"忘记密码icon正常态" highlightedImage:@"忘记密码icon选择态"];
+    [scroll addSubview:passwordBtn];
+    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(feedbackInfoBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-30);
+    }];
+
+
 }
 
 

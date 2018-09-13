@@ -141,7 +141,7 @@
     for (IMTopic *topic in topics) {
         // update topics
         IMTopic *dbTopic = [[IMDatabaseManager sharedInstance]findTopicWithID:topic.topicID];
-        if (topic.topicChange != dbTopic.topicChange) {
+        if (!dbTopic ||(topic.topicChange != dbTopic.topicChange)) {
             topic.topicChange = dbTopic.topicChange;
             [[IMDatabaseManager sharedInstance]saveTopic:topic];
             [[IMTopicUpdateService sharedInstance] addTopic:topic withCompleteBlock:nil];

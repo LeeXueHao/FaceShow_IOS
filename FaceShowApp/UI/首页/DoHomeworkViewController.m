@@ -224,6 +224,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     self.contentTextView.delegate = self;
     self.contentTextView.font = [UIFont systemFontOfSize:15.0f];
     self.contentTextView.textColor = [UIColor colorWithHexString:@"333333"];
+    self.contentTextView.textContainerInset = UIEdgeInsetsMake(14, 0, 11, 0);
     self.contentTextView.placeholder = @"此处编辑内容";
     NSMutableParagraphStyle *paraStyle1 = [[NSMutableParagraphStyle alloc] init];
     paraStyle1.lineHeightMultiple = 1.2;
@@ -237,7 +238,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
         make.top.mas_equalTo(topView.mas_bottom).mas_offset(20);
-        make.height.mas_equalTo(90);
+        make.height.mas_greaterThanOrEqualTo(90);
     }];
 
     self.imageContainerView = [[ImageAttachmentContainerView alloc]init];
