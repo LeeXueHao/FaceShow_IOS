@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSString *prompt;
 @property (nonatomic, assign) BOOL isShowSignInPlace;
 
+- (void)resumeScanning;
 @end

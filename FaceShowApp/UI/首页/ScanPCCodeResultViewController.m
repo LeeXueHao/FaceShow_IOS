@@ -20,7 +20,7 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"登录成功";
+    self.navigationItem.title = self.error? @"登录失败":@"登录成功";
     [self setupUI];
 }
 
@@ -41,7 +41,7 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
     }];
     
     self.signInImageView = [[UIImageView alloc] init];
-    self.signInImageView.image = [UIImage imageNamed:@"签到成功图标"];
+    self.signInImageView.image = [UIImage imageNamed:self.error?@"签到失败图标":@"签到成功图标"];
     [self.view addSubview:self.signInImageView];
     [self.signInImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(headerView.mas_bottom).offset(95 * kPhoneHeightRatio);
@@ -53,7 +53,7 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
     self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.text = @"成功登录网页端，可以在网页端写作业啦";
+    self.titleLabel.text = self.error?self.error.localizedDescription:@"成功登录网页端，可以在网页端写作业啦";
     [self.view addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.signInImageView.mas_bottom).offset(95 * kPhoneHeightRatio);
@@ -62,7 +62,13 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
 }
 
 - (void)backAction {
-    [[NSNotificationCenter defaultCenter]postNotificationName:kPCCodeResultBackNotification object:nil];
+    if (self.error) {
+        BLOCK_EXEC(self.reScanCodeBlock);
+        [super backAction];
+    }else{
+        [[NSNotificationCenter defaultCenter]postNotificationName:kPCCodeResultBackNotification object:nil];
+    }
+    
 }
 
 @end

@@ -20,6 +20,14 @@
 #import "AppUseRecordManager.h"
 #import "BasicDataManager.h"
 
+@interface TestObject:NSObject
+@end
+@implementation TestObject
+- (void)dealloc{
+    NSLog(@"dealloc");
+}
+@end
+
 @interface AppDelegate ()<BMKLocationAuthDelegate>
 @property (nonatomic, strong) AppDelegateHelper *appDelegateHelper;
 @end
@@ -27,6 +35,9 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    for (int i=0; i<3; i++) {
+        TestObject *ob = [[TestObject alloc]init];
+    }
     [GlobalUtils setupCore];
     // Talking Data统计
     [TalkingData setExceptionReportEnabled:YES];

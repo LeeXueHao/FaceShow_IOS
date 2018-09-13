@@ -266,6 +266,11 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     return ret;
 }
 
+- (void)resumeScanning {
+    [self.scanCodeMaskView.scanTimer setFireDate:[NSDate date]];
+    [self->_session startRunning];
+}
+
 - (void)dealWithQrcode:(NSString *)code {
     NSString *stringValue = code;
     printf("%s , %s\n", "我扫到的结果是: ", [stringValue cStringUsingEncoding:kCFStringEncodingUTF8]);

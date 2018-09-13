@@ -231,6 +231,7 @@
 		7C59130D213E20E600CE548F /* MemberOnline.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C59130C213E20E600CE548F /* MemberOnline.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7C591310213E2D5600CE548F /* IMHeartbeatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C59130F213E2D5600CE548F /* IMHeartbeatManager.m */; };
 		7C591313213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C591312213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m */; };
+		7C59131F214A196F00CE548F /* ScanPCLoginCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C59131E214A196E00CE548F /* ScanPCLoginCodeRequest.m */; };
 		7C66B2762027F6050067E242 /* HeadImagePickerOptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */; };
 		7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26C2027F6030067E242 /* HeadImageClipView.m */; };
 		7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */; };
@@ -913,6 +914,8 @@
 		7C59130F213E2D5600CE548F /* IMHeartbeatManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMHeartbeatManager.m; sourceTree = "<group>"; };
 		7C591311213E2F3A00CE548F /* IMOnlineHeartbeatRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMOnlineHeartbeatRequest.h; sourceTree = "<group>"; };
 		7C591312213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMOnlineHeartbeatRequest.m; sourceTree = "<group>"; };
+		7C59131D214A196E00CE548F /* ScanPCLoginCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanPCLoginCodeRequest.h; sourceTree = "<group>"; };
+		7C59131E214A196E00CE548F /* ScanPCLoginCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanPCLoginCodeRequest.m; sourceTree = "<group>"; };
 		7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImagePickerOptionItemView.h; sourceTree = "<group>"; };
 		7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImagePickerOptionItemView.m; sourceTree = "<group>"; };
 		7C66B26C2027F6030067E242 /* HeadImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipView.m; sourceTree = "<group>"; };
@@ -3029,6 +3032,8 @@
 				E94DDE5720D8D8A000729A67 /* GetCommentRecordsRequest.m */,
 				E94DDE5920D8DA3500729A67 /* TaskCommentFetcher.h */,
 				E94DDE5A20D8DA3500729A67 /* TaskCommentFetcher.m */,
+				7C59131D214A196E00CE548F /* ScanPCLoginCodeRequest.h */,
+				7C59131E214A196E00CE548F /* ScanPCLoginCodeRequest.m */,
 			);
 			name = "任务";
 			sourceTree = "<group>";
@@ -3469,6 +3474,7 @@
 				E91E5D472047B22800052FBA /* IMInputView.m in Sources */,
 				43510AA01F6B7CF8006B2645 /* UserMessageManager.m in Sources */,
 				E91E5DA42047B8E300052FBA /* CreateTopicRequest.m in Sources */,
+				7C59131F214A196F00CE548F /* ScanPCLoginCodeRequest.m in Sources */,
 				92C5699A1F738D180025815B /* UploadHeadImgRequest.m in Sources */,
 				E90C513A204949150008F92A /* IMImageMessageLeftCell.m in Sources */,
 				E91E5DAA2047B8E300052FBA /* IMRequestManager.m in Sources */,

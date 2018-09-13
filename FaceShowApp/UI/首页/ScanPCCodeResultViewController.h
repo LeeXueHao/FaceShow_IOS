@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface ScanPCCodeResultViewController : BaseViewController
-
+@property (nonatomic, strong) NSError *error;
+@property (nonatomic, copy) void (^reScanCodeBlock)(void);
 @end
