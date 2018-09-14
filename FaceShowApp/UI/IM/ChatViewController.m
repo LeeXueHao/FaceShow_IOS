@@ -714,49 +714,49 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
 
 - (void)messageCellDidClickStateButton:(IMChatViewModel *)model rect:(CGRect)rect {
     //    DDLogDebug(@"click state button to do ...");
-    if ([self isFirstResponder]) {
-        [self resignFirstResponder];
-    }
-    NSInteger row = [self.dataArray indexOfObject:model];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    CGRect cellRect = [self.tableView rectForRowAtIndexPath:indexPath];
-    rect.origin.y += cellRect.origin.y - self.tableView.contentOffset.y;
-    
-    IMTopicMessage *message = model.message;
-    WEAK_SELF
-    [self.menuView setMenuItemActionBlock:^(IMMessageMenuItemType type) {
-        STRONG_SELF
-        if (type == IMMessageMenuItemType_Resend) {
-            if ([self.dataArray containsObject:model]) {
-                NSUInteger index = [self.dataArray indexOfObject:model];
-                [self.dataArray removeObjectAtIndex:index];
-                [self.dataArray addObject:model];
-                [self handelTimeForDataSource:self.dataArray];
-                [self.tableView reloadData];
-            }
-            if (message.type == MessageType_Text) {
-                [IMUserInterface sendTextMessageWithText:message.text topicID:self.topic.topicID uniqueID:message.uniqueID];
-            }else if (message.type == MessageType_Image) {
-                [IMUserInterface sendImageMessageWithImage:[message imageWaitForSending] topicID:self.topic.topicID uniqueID:message.uniqueID];
-            }
-            [self scrollToBottom];
-        }
-    }];
-    
-    NSMutableArray *array = [NSMutableArray array];
-    IMMessageMenuItemModel *model0 = [[IMMessageMenuItemModel alloc]init];
-    model0.title = @"重试";
-    model0.type = IMMessageMenuItemType_Resend;
-    [array addObject:model0];
-    
-    IMMessageMenuItemModel *model1 = [[IMMessageMenuItemModel alloc]init];
-    model1.title = @"取消";
-    model1.type = IMMessageMenuItemType_Delete;
-    [array addObject:model1];
-    
-    [self.menuView addMenuItemModels:array.copy];
-    
-    [self.menuView showInView:self.tableView  withRect:rect];
+//    if ([self isFirstResponder]) {
+//        [self resignFirstResponder];
+//    }
+//    NSInteger row = [self.dataArray indexOfObject:model];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+//    CGRect cellRect = [self.tableView rectForRowAtIndexPath:indexPath];
+//    rect.origin.y += cellRect.origin.y - self.tableView.contentOffset.y;
+//    
+//    IMTopicMessage *message = model.message;
+//    WEAK_SELF
+//    [self.menuView setMenuItemActionBlock:^(IMMessageMenuItemType type) {
+//        STRONG_SELF
+//        if (type == IMMessageMenuItemType_Resend) {
+//            if ([self.dataArray containsObject:model]) {
+//                NSUInteger index = [self.dataArray indexOfObject:model];
+//                [self.dataArray removeObjectAtIndex:index];
+//                [self.dataArray addObject:model];
+//                [self handelTimeForDataSource:self.dataArray];
+//                [self.tableView reloadData];
+//            }
+//            if (message.type == MessageType_Text) {
+//                [IMUserInterface sendTextMessageWithText:message.text topicID:self.topic.topicID uniqueID:message.uniqueID];
+//            }else if (message.type == MessageType_Image) {
+//                [IMUserInterface sendImageMessageWithImage:[message imageWaitForSending] topicID:self.topic.topicID uniqueID:message.uniqueID];
+//            }
+//            [self scrollToBottom];
+//        }
+//    }];
+//    
+//    NSMutableArray *array = [NSMutableArray array];
+//    IMMessageMenuItemModel *model0 = [[IMMessageMenuItemModel alloc]init];
+//    model0.title = @"重试";
+//    model0.type = IMMessageMenuItemType_Resend;
+//    [array addObject:model0];
+//    
+//    IMMessageMenuItemModel *model1 = [[IMMessageMenuItemModel alloc]init];
+//    model1.title = @"取消";
+//    model1.type = IMMessageMenuItemType_Delete;
+//    [array addObject:model1];
+//    
+//    [self.menuView addMenuItemModels:array.copy];
+//    
+//    [self.menuView showInView:self.tableView  withRect:rect];
 }
 
 - (IMMessageMenuView *)menuView {
