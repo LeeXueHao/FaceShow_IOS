@@ -67,6 +67,16 @@
     BLOCK_EXEC(self.previewAction,self);
 }
 
+- (void)setCanDelete:(BOOL)canDelete {
+    _canDelete = canDelete;
+    if (!canDelete) {
+        self.deleteView.hidden = YES;
+        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-10);
+        }];
+    }
+}
+
 - (void)setData:(GetHomeworkRequestItem_attachmentInfo *)data {
     _data = data;
     self.imageView.image = [UIImage imageNamed:[ResourceTypeMapping resourceTypeWithString:data.ext]];
