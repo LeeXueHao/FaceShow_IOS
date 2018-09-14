@@ -10,7 +10,10 @@
 
 @implementation ScanPCLoginCodeRequest
 - (void)updateRequestUrlAndParams {
-    NSString *completeUrl = [self.url stringByAppendingString:[NSString stringWithFormat:@"&userId=%@&userToken=%@&appKey=ze259mMel5pDFgYLgA3F2EssmUDTVGhn",[UserManager sharedInstance].userModel.userID,[UserManager sharedInstance].userModel.token]];
+    NSString *userId = [UserManager sharedInstance].userModel.userID;
+    NSString *token = [UserManager sharedInstance].userModel.token;
+    NSString *crossParam = [[NSString stringWithFormat:@"clazsId=%@",[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]stringByEscapingForURLArgument];
+    NSString *completeUrl = [self.url stringByAppendingString:[NSString stringWithFormat:@"&userId=%@&userToken=%@&appKey=ze259mMel5pDFgYLgA3F2EssmUDTVGhn&crossParam=%@",userId,token,crossParam]];
     [self request].url = [NSURL URLWithString:completeUrl];
     [self request].requestMethod = @"GET";
 }

@@ -16,10 +16,7 @@
 - (NSString *)httpArgumentsString;
 @end
 
-@interface NSString (UrlArgumentsAdditions)
-- (NSString*)stringByEscapingForURLArgument;
-- (NSString*)stringByUnescapingFromURLArgument;
-@end
+
 
 
 
