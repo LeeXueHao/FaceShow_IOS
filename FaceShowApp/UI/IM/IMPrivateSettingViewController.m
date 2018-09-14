@@ -17,6 +17,7 @@
 
 @interface IMPrivateSettingViewController ()
 @property(nonatomic, strong) IMSwitchSettingView *unremindView;
+@property(nonatomic, strong) IMTitleContentView *classNameView;
 @end
 
 @implementation IMPrivateSettingViewController
@@ -52,16 +53,20 @@
         make.top.mas_equalTo(5);
         make.height.mas_equalTo(75);
     }];
-    IMTitleContentView *classNameView = [[IMTitleContentView alloc]init];
-    classNameView.title = @"来自";
-    classNameView.name = self.topic ? self.topic.group : self.info.group.groupName;
-    [self.view addSubview:classNameView];
-    [classNameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(infoView.mas_bottom).mas_offset(5);
-        make.height.mas_equalTo(45);
-    }];
-    
+
+    NSString *fromName = self.topic ? self.topic.group : self.info.group.groupName;
+    if (fromName) {
+        self.classNameView = [[IMTitleContentView alloc]init];
+        self.classNameView.title = @"来自";
+        self.classNameView.name = fromName;
+        [self.view addSubview:self.classNameView];
+        [self.classNameView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(infoView.mas_bottom).mas_offset(5);
+            make.height.mas_equalTo(45);
+        }];
+    }
+
     IMSwitchSettingView *unremindView = [[IMSwitchSettingView alloc]init];
     unremindView.title = @"消息免打扰";
     unremindView.desc = @"开启后，不会收到消息提醒";
@@ -85,7 +90,11 @@
     [self.view addSubview:unremindView];
     [unremindView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(classNameView.mas_bottom).mas_offset(5);
+        if (fromName) {
+            make.top.mas_equalTo(self.classNameView.mas_bottom).mas_offset(5);
+        }else{
+            make.top.mas_equalTo(infoView.mas_bottom).mas_offset(5);
+        }
     }];
 }
 
