@@ -11,6 +11,10 @@
 #import "HomeworkRequirementViewController.h"
 #import "DoHomeworkViewController.h"
 #import "GetHomeworkRequest.h"
+#import "HomeworkAttachmentView.h"
+#import "ResourceTypeMapping.h"
+#import "YXPlayerViewController.h"
+#import "ResourceDisplayViewController.h"
 
 @interface FinishedHomeworkViewController ()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -116,9 +120,55 @@
     [self.photosView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.contentLabel);
         make.top.equalTo(self.contentLabel.mas_bottom).offset(15.0f);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-15.f);
         make.height.mas_equalTo(0.1);
     }];
+    UIView *attachmentContainerView = [[UIView alloc]init];
+    [self.contentView addSubview:attachmentContainerView];
+    [attachmentContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.photosView.mas_bottom).mas_offset(15);
+        make.bottom.mas_equalTo(-15);
+    }];
+    UIView *titleView = [[UIView alloc]init];
+    [attachmentContainerView addSubview:titleView];
+    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(0);
+        make.height.mas_equalTo(45);
+    }];
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.text = @"作业附件";
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleView addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(0);
+    }];
+    UIView *top = titleView;
+    for (GetHomeworkRequestItem_attachmentInfo *item in self.userHomework.attachmentInfos2) {
+        HomeworkAttachmentView *attach = [[HomeworkAttachmentView alloc]init];
+        attach.data = item;
+        attach.canDelete = NO;
+        WEAK_SELF
+        [attach setPreviewAction:^(HomeworkAttachmentView *attachment) {
+            STRONG_SELF
+            [self previewAttachment:attachment.data];
+        }];
+        [attachmentContainerView addSubview:attach];
+        [attach mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(60);
+            CGFloat t = [self.userHomework.attachmentInfos2 indexOfObject:item]==0? 0:5;
+            make.top.mas_equalTo(top.mas_bottom).mas_offset(t);
+            if (self.userHomework.attachmentInfos2.lastObject == item) {
+                make.bottom.mas_equalTo(0);
+            }
+        }];
+        top = attach;
+    }
+    if (self.userHomework.attachmentInfos2.count==0) {
+        [titleView removeFromSuperview];
+    }
     if (isEmpty(self.userHomework.assess)) {
         self.homeworkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.homeworkButton.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
@@ -147,7 +197,21 @@
 }
 
 - (void)setupData {
-    self.titleLabel.text = self.userHomework.title;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineHeightMultiple = 1.4f;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    NSString *title = [NSString stringWithFormat:@"%@ ",self.userHomework.title];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, title.length)];
+    if (self.userHomework.attachmentInfos2.count > 0) {
+        NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
+        textAttachment.image = [UIImage imageNamed:@"附件"];
+        textAttachment.bounds = CGRectMake(10, 0, 14, 15);
+        NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        [attributedString replaceCharactersInRange:NSMakeRange(title.length , 0) withAttributedString:attrStringWithImage];
+    }
+    self.titleLabel.attributedText = attributedString;
     if (!self.userHomework.assess) {
         self.userHomework.assess = @"暂无";
     }
@@ -184,6 +248,20 @@
         [self setupData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)previewAttachment:(GetHomeworkRequestItem_attachmentInfo *)attach {
+    if ([[ResourceTypeMapping resourceTypeWithString:attach.ext] isEqualToString:@"video"]) {
+        YXPlayerViewController *vc = [[YXPlayerViewController alloc] init];
+        vc.videoUrl = attach.previewUrl;
+        vc.title = attach.resName;
+        [self presentViewController:vc animated:YES completion:nil];
+    }else {
+        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
+        vc.urlString = attach.previewUrl;
+        vc.name = attach.resName;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)setupMockData {

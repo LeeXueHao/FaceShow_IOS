@@ -13,4 +13,5 @@
 @property (nonatomic, strong) void(^deleteAction)(HomeworkAttachmentView *attachment);
 @property (nonatomic, strong) void(^previewAction)(HomeworkAttachmentView *attachment);
 @property (nonatomic, strong) GetHomeworkRequestItem_attachmentInfo *data;
+@property (nonatomic, assign) BOOL canDelete;
 @end

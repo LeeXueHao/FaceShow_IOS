@@ -11,6 +11,11 @@
 
 static NSString *const YXTokenInValidNotification = @"kYXTokenInValidNotification";
 
+@interface NSString (UrlArgumentsAdditions)
+- (NSString*)stringByEscapingForURLArgument;
+- (NSString*)stringByUnescapingFromURLArgument;
+@end
+
 @interface HttpBaseRequestItem : JSONModel
 
 @property (nonatomic, copy) NSString<Optional> *code;
