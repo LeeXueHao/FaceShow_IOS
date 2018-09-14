@@ -161,7 +161,7 @@
             make.height.mas_equalTo(20);
         }];
         self.timeLabel.text = timeString;
-    }else {
+    }else { 
         [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.size.mas_equalTo(CGSizeZero);

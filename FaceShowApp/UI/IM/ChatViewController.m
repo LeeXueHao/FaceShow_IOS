@@ -326,10 +326,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             [indexPathArray addObject:[NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0]];
         }
         [self handelTimeForDataSource:self.dataArray];
-        [UIView performWithoutAnimation:^{
-            STRONG_SELF
-            [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-        }];
+        [self.tableView reloadData];
         if (!self.isPreview) {
             [self scrollToBottom];
         }

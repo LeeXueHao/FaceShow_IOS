@@ -212,7 +212,7 @@
         [attributedString replaceCharactersInRange:NSMakeRange(title.length , 0) withAttributedString:attrStringWithImage];
     }
     self.titleLabel.attributedText = attributedString;
-    if (!self.userHomework.assess) {
+    if (self.userHomework.assess.length == 0) {
         self.userHomework.assess = @"暂无";
     }
     NSString *appraise = [NSString stringWithFormat:@"班主任评价:%@",self.userHomework.assess];
