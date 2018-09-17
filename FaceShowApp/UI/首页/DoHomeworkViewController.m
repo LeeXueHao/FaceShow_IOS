@@ -250,6 +250,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
         [attachArray addObject:item];
     }
     [self.imageContainerView addImages:attachArray];
+    self.imageArray = attachArray;
     WEAK_SELF
     [self.imageContainerView setImagesChangeBlock:^(NSArray *images) {
         STRONG_SELF
