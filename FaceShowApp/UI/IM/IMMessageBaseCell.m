@@ -174,6 +174,8 @@
     }else {
         [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:[QiniuDataManager resizedUrlStringWithOriString:url maxLongEdge:100 maxShortEdge:100]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"我个人头像默认图"]];
     }
+    
+    [self setupSendStateWithMessage:message];
     DDLogDebug(@"内容为:%@-----状态为%@",message.text,@(message.sendState));
     
     TopicType topicType = model.topicType;
