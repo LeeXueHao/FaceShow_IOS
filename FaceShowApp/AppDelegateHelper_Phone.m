@@ -210,7 +210,13 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     self.notificationViewHeight = 0;
     CGFloat width = rootView.frame.size.width;
     CGFloat textWidth = width - 30 - 4;
-    
+    CGFloat y = 0;
+    if (@available(iOS 11.0, *)) {
+        y += rootView.safeAreaInsets.top;
+    } else {
+        // Fallback on earlier versions
+    }
+
     UILabel *alertTitle = [[UILabel alloc] init];
     alertTitle.text = apns.content;
     alertTitle.textColor = [UIColor whiteColor];
@@ -221,17 +227,17 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     self.notificationViewHeight = titleSize.height + 50;
     
     UIView *notificationView = [[UIView alloc] init];
-    notificationView.frame = CGRectMake(0, -self.notificationViewHeight, CGRectGetWidth(rootView.frame), self.notificationViewHeight);
+    notificationView.frame = CGRectMake(0, -self.notificationViewHeight + y, CGRectGetWidth(rootView.frame), self.notificationViewHeight + y);
     notificationView.backgroundColor = [UIColor whiteColor];
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:notificationView.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(6, 6)];    CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.frame = notificationView.bounds;
     maskLayer.path = maskPath.CGPath;
     notificationView.layer.mask = maskLayer;
     [rootView addSubview:notificationView];
-    
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(2, 2, width - 4, self.notificationViewHeight - 4)];
+
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(2, 2 + y, width - 4, self.notificationViewHeight - 4)];
     bgView.backgroundColor = [UIColor colorWithHexString:@"89e00d"];
-    UIBezierPath *bgMaskPath = [UIBezierPath bezierPathWithRoundedRect:bgView.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(6, 6)];    CAShapeLayer *bgMaskLayer = [CAShapeLayer layer];
+    UIBezierPath *bgMaskPath = [UIBezierPath bezierPathWithRoundedRect:bgView.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(6, 6)];    CAShapeLayer *bgMaskLayer = [CAShapeLayer layer];
     bgMaskLayer.frame = bgView.bounds;
     bgMaskLayer.path = bgMaskPath.CGPath;
     bgView.layer.mask = bgMaskLayer;
@@ -239,7 +245,7 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     [notificationView addSubview:bgView];
     
     [notificationView addSubview:alertTitle];
-    alertTitle.frame = CGRectMake(15, 25, textWidth, titleSize.height);
+    alertTitle.frame = CGRectMake(15, 25 + y, textWidth, titleSize.height);
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
     [notificationView addGestureRecognizer:tapRecognizer];

@@ -42,7 +42,7 @@
 }
 
 -(void)backAction {
-    [super backAction];
+
     NSMutableArray *vcArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     for (UIViewController *vc in vcArray) {
         if ([vc isKindOfClass:[DoHomeworkViewController class]]) {
@@ -57,6 +57,13 @@
         }
     }
     self.navigationController.viewControllers = vcArray;
+
+    if (vcArray.count > 1) {
+        [super backAction];
+    }else {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+
 }
 
 - (void)setupUI {
