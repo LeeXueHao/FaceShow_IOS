@@ -9,5 +9,5 @@
 #import "ScanCodeViewController.h"
 
 @interface ScanPCCodeViewController : ScanCodeViewController
-
+@property (nonatomic, copy) NSString *bizType;
 @end

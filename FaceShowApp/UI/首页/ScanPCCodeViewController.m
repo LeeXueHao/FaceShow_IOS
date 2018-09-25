@@ -36,6 +36,7 @@
         [self.request stopRequest];
         self.request = [[ScanPCLoginCodeRequest alloc]init];
         self.request.url = stringValue;
+        self.request.bizType = self.bizType;
         WEAK_SELF
         [self.request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF

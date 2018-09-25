@@ -1,36 +1,27 @@
 //
-//  AttachmentUploadGuideViewController.m
+//  ResourceDownloadMethodTwoView.m
 //  FaceShowApp
 //
-//  Created by niuzhaowang on 2018/8/29.
+//  Created by SRT on 2018/9/22.
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
-#import "AttachmentUploadGuideViewController.h"
-#import "ScanPCCodeViewController.h"
+#import "ResourceDownloadMethodTwoView.h"
 
-@interface AttachmentUploadGuideViewController ()
+@implementation ResourceDownloadMethodTwoView
 
-@end
-
-@implementation AttachmentUploadGuideViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.navigationItem.title = @"上传附件";
-    [self setupUI];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self setupUI];
+    }
+    return self;
 }
 
 - (void)setupUI {
+    self.backgroundColor = [UIColor whiteColor];
     UIView *topLine = [[UIView alloc]init];
     topLine.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self.contentView addSubview:topLine];
+    [self addSubview:topLine];
     [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
         make.height.mas_equalTo(5);
@@ -40,7 +31,7 @@
     step1Label.textColor = [UIColor colorWithHexString:@"999999"];
     step1Label.font = [UIFont boldSystemFontOfSize:13];
     step1Label.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:step1Label];
+    [self addSubview:step1Label];
     [step1Label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(topLine.mas_bottom).mas_offset(80);
         make.left.right.mas_equalTo(0);
@@ -50,7 +41,7 @@
     step1ContentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     step1ContentLabel.font = [UIFont boldSystemFontOfSize:14];
     step1ContentLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:step1ContentLabel];
+    [self addSubview:step1ContentLabel];
     [step1ContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(step1Label.mas_bottom).mas_offset(8);
         make.left.right.mas_equalTo(0);
@@ -60,21 +51,21 @@
     urlLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
     urlLabel.font = [UIFont boldSystemFontOfSize:18];
     urlLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:urlLabel];
+    [self addSubview:urlLabel];
     [urlLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(step1ContentLabel.mas_bottom).mas_offset(35);
         make.left.right.mas_equalTo(0);
     }];
     UILabel *step2Label = [step1Label clone];
     step2Label.text = @"第二步";
-    [self.contentView addSubview:step2Label];
+    [self addSubview:step2Label];
     [step2Label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(urlLabel.mas_bottom).mas_offset(35);
         make.left.right.mas_equalTo(0);
     }];
     UILabel *step2ContentLabel = [step1ContentLabel clone];
     step2ContentLabel.text = @"扫描二维码登录，完成作业";
-    [self.contentView addSubview:step2ContentLabel];
+    [self addSubview:step2ContentLabel];
     [step2ContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(step2Label.mas_bottom).mas_offset(8);
         make.left.right.mas_equalTo(0);
@@ -84,7 +75,7 @@
     scanLabel.textColor = [UIColor colorWithHexString:@"999999"];
     scanLabel.font = [UIFont systemFontOfSize:13];
     scanLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:scanLabel];
+    [self addSubview:scanLabel];
     [scanLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(step2ContentLabel.mas_bottom).mas_offset(60);
         make.left.right.mas_equalTo(0);
@@ -99,11 +90,9 @@
     WEAK_SELF
     [[scanButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         STRONG_SELF
-        ScanPCCodeViewController *vc = [[ScanPCCodeViewController alloc]init];
-        vc.bizType = @"1";//type1 作业
-        [self.navigationController pushViewController:vc animated:YES];
+        BLOCK_EXEC(self.scanBlock);
     }];
-    [self.contentView addSubview:scanButton];
+    [self addSubview:scanButton];
     [scanButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(scanLabel.mas_bottom).mas_offset(20);
         make.centerX.mas_equalTo(0);

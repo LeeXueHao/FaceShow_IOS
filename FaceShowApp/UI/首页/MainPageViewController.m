@@ -49,6 +49,7 @@
     [self setupNavRightView];
     [self setupUI];
     [self requestGameInfo];
+    [self setupObserver];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -185,6 +186,14 @@
             return;
         }
         [self setupGameUIWithItem:retItem];
+    }];
+}
+
+- (void)setupObserver {
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:@"kPCCodeResultBackNotification" object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        [self.navigationController popToViewController:self animated:YES];
     }];
 }
 

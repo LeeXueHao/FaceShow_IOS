@@ -19,6 +19,7 @@
 #import "ClassSelectionViewController.h"
 #import "HuBeiUserInfoViewController.h"
 #import "ForgotPasswordViewController.h"
+#import "MineCertiViewController.h"
 
 @interface MineViewController ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -192,11 +193,19 @@
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
+
+    UIButton *mineCertiBtn = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的证书正常态" highlightedImage:@"我的证书点击态"];
+    [scroll addSubview:mineCertiBtn];
+    [mineCertiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+    }];
     
     UIButton *signInfoBtn = [self optionBtnWithTitle:@"签到记录" normalImage:@"签到记录正常态" highlightedImage:@"签到记录点击态"];
     [scroll addSubview:signInfoBtn];
     [signInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);
+        make.top.mas_equalTo(mineCertiBtn.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
@@ -305,6 +314,9 @@
         vc.isModify = YES;
         vc.phoneNum = [UserManager sharedInstance].userModel.mobilePhone;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if ([sender.titleLabel.text isEqualToString:@"我的证书"]) {
+        MineCertiViewController *mine = [[MineCertiViewController alloc]init];
+        [self.navigationController pushViewController:mine animated:YES];
     }
 }
 

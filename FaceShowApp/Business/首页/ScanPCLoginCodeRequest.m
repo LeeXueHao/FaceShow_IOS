@@ -12,8 +12,11 @@
 - (void)updateRequestUrlAndParams {
     NSString *userId = [UserManager sharedInstance].userModel.userID;
     NSString *token = [UserManager sharedInstance].userModel.token;
-    NSString *crossParam = [[NSString stringWithFormat:@"clazsId=%@",[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]stringByEscapingForURLArgument];
-    NSString *completeUrl = [self.url stringByAppendingString:[NSString stringWithFormat:@"&userId=%@&userToken=%@&appKey=ze259mMel5pDFgYLgA3F2EssmUDTVGhn&crossParam=%@",userId,token,crossParam]];
+    NSDictionary *crossJson = @{
+                                @"clazsId":[NSString stringWithFormat:@"%@",[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId],
+                                @"bizType":self.bizType
+                                };
+    NSString *completeUrl = [self.url stringByAppendingString:[NSString stringWithFormat:@"&userId=%@&userToken=%@&appKey=ze259mMel5pDFgYLgA3F2EssmUDTVGhn&crossJson=%@",userId,token,[[crossJson JsonString]stringByEscapingForURLArgument]]];
     [self request].url = [NSURL URLWithString:completeUrl];
     [self request].requestMethod = @"GET";
 }
