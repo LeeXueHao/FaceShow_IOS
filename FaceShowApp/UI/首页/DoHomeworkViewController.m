@@ -407,6 +407,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 
 - (void)uploadAttachment {
     AttachmentUploadGuideViewController *vc = [[AttachmentUploadGuideViewController alloc]init];
+    vc.bizId = self.homework.stepId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
