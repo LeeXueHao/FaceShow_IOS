@@ -13,9 +13,19 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
 @interface ScanPCCodeResultViewController ()
 @property (nonatomic, strong) UIImageView *signInImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, copy) NSDictionary *descripDict;
 @end
 
 @implementation ScanPCCodeResultViewController
+
+- (NSDictionary *)descripDict {
+    if (!_descripDict) {
+        _descripDict = @{
+                         @"homework":@"成功登录网页端，可以在网页端写作业啦"
+                         };
+    }
+    return _descripDict;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,7 +63,7 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
     self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.text = self.error?self.error.localizedDescription:@"成功登录网页端，可以在网页端写作业啦";
+    self.titleLabel.text = self.error?self.error.localizedDescription:self.descripDict[self.scanType];
     [self.view addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.signInImageView.mas_bottom).offset(95 * kPhoneHeightRatio);

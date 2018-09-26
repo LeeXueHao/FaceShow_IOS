@@ -100,6 +100,10 @@
     [[scanButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         STRONG_SELF
         ScanPCCodeViewController *vc = [[ScanPCCodeViewController alloc]init];
+        vc.crossJson = @{
+                         @"bizType":@"homework",
+                         @"bizId":@([self.bizId integerValue])
+                         };
         [self.navigationController pushViewController:vc animated:YES];
     }];
     [self.contentView addSubview:scanButton];

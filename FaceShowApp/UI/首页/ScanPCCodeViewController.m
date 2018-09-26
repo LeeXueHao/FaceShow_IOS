@@ -36,12 +36,14 @@
         [self.request stopRequest];
         self.request = [[ScanPCLoginCodeRequest alloc]init];
         self.request.url = stringValue;
+        self.request.crossJson = self.crossJson;
         WEAK_SELF
         [self.request startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
             STRONG_SELF
             [self.view nyx_stopLoading];
             ScanPCCodeResultViewController *vc = [[ScanPCCodeResultViewController alloc]init];
             vc.error = error;
+            vc.scanType = [NSString stringWithFormat:@"%@",self.crossJson[@"bizType"]];
             WEAK_SELF
             [vc setReScanCodeBlock:^{
                 STRONG_SELF

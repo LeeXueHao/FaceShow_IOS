@@ -9,5 +9,5 @@
 #import "ScrollBaseViewController.h"
 
 @interface AttachmentUploadGuideViewController : ScrollBaseViewController
-
+@property (nonatomic, copy) NSString *bizId;
 @end
