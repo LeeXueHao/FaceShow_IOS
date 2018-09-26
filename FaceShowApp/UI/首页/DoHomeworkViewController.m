@@ -49,6 +49,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSMutableArray *resIdArray;
 
 @property (nonatomic, strong) NSMutableArray *attachmentViewArray;
+@property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIView *attachTitleView;
 @property (nonatomic, assign) BOOL isDraft;
 @property (nonatomic, strong) UIButton *draftButton;
@@ -344,6 +345,18 @@ typedef enum : NSUInteger {
         [self.attachTitleView removeFromSuperview];
         self.sepView.hidden = YES;
     }
+    self.bottomView = [[UIView alloc] init];
+    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.view addSubview:self.bottomView];
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.mas_equalTo(self.view.mas_bottom);
+        }
+        make.height.mas_equalTo(47);
+    }];
     UIButton *uploadAttachButton = [[UIButton alloc]init];
     [uploadAttachButton setTitle:@"上传附件" forState:UIControlStateNormal];
     [uploadAttachButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
@@ -361,10 +374,10 @@ typedef enum : NSUInteger {
             }
         }
     }];
-    [self.view addSubview:uploadAttachButton];
+    [self.bottomView addSubview:uploadAttachButton];
     [uploadAttachButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.top.mas_equalTo(self.scrollView.mas_bottom);
+        make.left.top.mas_equalTo(0);
+//        make.top.mas_equalTo(self.scrollView.mas_bottom);
         make.height.mas_equalTo(47);
         make.width.mas_equalTo(self.view.mas_width).multipliedBy(0.5);
     }];
@@ -376,10 +389,11 @@ typedef enum : NSUInteger {
         self.saveAction = DraftSaveAction_Default;
         [self saveDraft];
     }];
-    [self.view addSubview:draftButton];
+    [self.bottomView addSubview:draftButton];
     [draftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.scrollView.mas_bottom);
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(uploadAttachButton.mas_right);
+//        make.top.mas_equalTo(self.scrollView.mas_bottom);
         make.height.mas_equalTo(47);
         make.width.mas_equalTo(self.view.mas_width).multipliedBy(0.5);
     }];
@@ -474,6 +488,15 @@ typedef enum : NSUInteger {
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y, 0);
+            [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+
+                if (@available(iOS 11.0, *)) {
+                    make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                } else {
+                    make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
+                }
+            }];
+            [self.view layoutIfNeeded];
         }];
     }];
 }
@@ -593,7 +616,7 @@ typedef enum : NSUInteger {
         if (error) {
             [self nyx_enableRightNavigationItem];
             [self.view nyx_stopLoading];
-            [self.view nyx_showToast:@"提交失败请重试"];
+            [self.view nyx_showToast:error.localizedDescription];
         }else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
                 self.hasSaved = YES;

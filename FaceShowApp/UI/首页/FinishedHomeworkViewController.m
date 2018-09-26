@@ -216,13 +216,14 @@
         make.height.mas_equalTo(45);
     }];
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.text = @"作业附件";
+    titleLabel.text = @"作业附件:";
     titleLabel.font = [UIFont systemFontOfSize:14];
     titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleView addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(0);
+        make.centerY.mas_equalTo(0);
+        make.left.mas_equalTo(15);
     }];
     UIView *top = titleView;
     for (GetHomeworkRequestItem_attachmentInfo *item in self.userHomework.attachmentInfos2) {
