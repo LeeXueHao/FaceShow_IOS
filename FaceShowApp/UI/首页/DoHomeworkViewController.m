@@ -389,6 +389,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
         [self.attachTitleView removeFromSuperview];
         self.sepView.hidden = YES;
     }
+    self.hasSaved = NO;
 }
 
 - (void)previewAttachment:(GetHomeworkRequestItem_attachmentInfo *)attach {
