@@ -433,7 +433,7 @@ typedef enum : NSUInteger {
 
 - (void)uploadAttachment {
     AttachmentUploadGuideViewController *vc = [[AttachmentUploadGuideViewController alloc]init];
-    vc.bizId = self.homework.bizId;
+    vc.bizId = self.homework.stepId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
