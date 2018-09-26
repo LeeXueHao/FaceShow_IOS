@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *projectLabel;
 @property (nonatomic, strong) UILabel *classNameLabel;
-
+@property (nonatomic, strong) UIButton *mineCertiButton;
 @property (nonatomic, strong) GetUserInfoRequest *userInfoRequest;
 
 @end
@@ -44,6 +44,19 @@
     if ([UserManager sharedInstance].userModel == nil) {
         [self requestForUserInfo];
     }
+    [self setRedView];
+}
+
+- (void)setRedView{
+    UIView *redPointView = [[UIView alloc] init];
+    redPointView.layer.cornerRadius = 4.5f;
+    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    [self.mineCertiButton.titleLabel addSubview:redPointView];
+    [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(3.5);
+        make.top.mas_equalTo(-3.5);
+        make.size.mas_equalTo(CGSizeMake(9, 9));
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -194,9 +207,10 @@
         make.left.right.mas_equalTo(0);
     }];
 
-    UIButton *mineCertiBtn = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的证书正常态" highlightedImage:@"我的证书点击态"];
-    [scroll addSubview:mineCertiBtn];
-    [mineCertiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//    self.mineCertiButton = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的证书正常态" highlightedImage:@"我的证书点击态"];
+    self.mineCertiButton = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的icon正常态" highlightedImage:@"我的icon点击态"];
+    [scroll addSubview:self.mineCertiButton];
+    [self.mineCertiButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
@@ -205,7 +219,7 @@
     UIButton *signInfoBtn = [self optionBtnWithTitle:@"签到记录" normalImage:@"签到记录正常态" highlightedImage:@"签到记录点击态"];
     [scroll addSubview:signInfoBtn];
     [signInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(mineCertiBtn.mas_bottom).offset(30);
+        make.top.mas_equalTo(self.mineCertiButton.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
@@ -251,6 +265,22 @@
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"kYXUploadUserPicSuccessNotification" object:nil] subscribeNext:^(id x) {
         STRONG_SELF
         [self reload];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        UIView *redPointView = [[UIView alloc] init];
+        redPointView.layer.cornerRadius = 4.5f;
+        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+        [self.mineCertiButton.titleLabel addSubview:redPointView];
+        [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(3.5);
+            make.top.mas_equalTo(-3.5);
+            make.size.mas_equalTo(CGSizeMake(9, 9));
+        }];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self.mineCertiButton removeSubviews];
     }];
 }
 - (void)reload{

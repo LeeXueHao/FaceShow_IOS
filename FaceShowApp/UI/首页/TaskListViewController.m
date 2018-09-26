@@ -215,6 +215,26 @@ extern NSString * const kPCCodeResultBackNotification;
         STRONG_SELF
         [self.navigationController popToViewController:self animated:YES];
     }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
+        UIButton *customBtn = (UIButton *)navItem.customView;
+        UIView *redPointView = [[UIView alloc] init];
+        redPointView.layer.cornerRadius = 4.5f;
+        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+        [customBtn.imageView addSubview:redPointView];
+        [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-3.5);
+            make.top.mas_equalTo(3.5);
+            make.size.mas_equalTo(CGSizeMake(9, 9));
+        }];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
+        UIButton *customBtn = (UIButton *)navItem.customView;
+        [customBtn.imageView removeSubviews];
+    }];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
