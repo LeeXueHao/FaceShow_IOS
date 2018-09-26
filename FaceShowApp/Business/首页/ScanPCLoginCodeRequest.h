@@ -10,5 +10,5 @@
 
 @interface ScanPCLoginCodeRequest : YXGetRequest
 @property (nonatomic, strong) NSString *url;
-@property (nonatomic, strong) NSString *bizType;
+@property (nonatomic, copy) NSDictionary *crossJson;
 @end

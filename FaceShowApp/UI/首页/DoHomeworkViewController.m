@@ -26,6 +26,12 @@
 
 NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 
+typedef enum : NSUInteger {
+    DraftSaveAction_Default,//默认保存草稿
+    DraftSaveAction_Back,//点击返回保存草稿
+    DraftSaveAction_UploadAttach,//点上传附件保存草稿
+} DraftSaveAction;
+
 @interface DoHomeworkViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -48,6 +54,8 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 @property (nonatomic, assign) BOOL isDraft;
 @property (nonatomic, strong) UIButton *draftButton;
 @property (nonatomic, strong) UIView *sepView;
+@property (nonatomic, assign) DraftSaveAction saveAction;
+@property (nonatomic, assign) BOOL hasSaved;
 @end
 
 @implementation DoHomeworkViewController
@@ -61,6 +69,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [super viewDidLoad];
     self.attachmentViewArray = [NSMutableArray array];
     self.title = self.homework.title;
+    self.hasSaved = YES;
 //    [self setupMock];
     [self setupNavView];
     [self setupUI];
@@ -89,7 +98,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     attach5.ext = @"m3u8";
     attach5.previewUrl = @"http://yuncdn.teacherclub.com.cn/course/cf/ts/xkb/zgxsfzhxsyjg/video/4.1-1_l/4.1-1_l.m3u8";
 //    self.userHomework = [[GetHomeworkRequestItem_userHomework alloc]init];
-    self.userHomework.attachmentInfos2 = @[attach1,attach2,attach3,attach4,attach5];
+    self.userHomework.attachmentInfos2 = (NSArray<GetHomeworkRequestItem_attachmentInfo,Optional>*)@[attach1,attach2,attach3,attach4,attach5];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -126,20 +135,26 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     if (self.imageArray.count == 0 && self.contentTextView.text.length == 0 && self.titleTextView.text.length == 0) {
         [super backAction];
     }else {
-        [self showAlertView];
+        if (self.hasSaved) {
+            [super backAction];
+        }else{
+            [self showAlertView];
+        }
     }
 }
 
 - (void)showAlertView {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退出此次编辑?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"是否要保存草稿?" message:nil preferredStyle:UIAlertControllerStyleAlert];
     WEAK_SELF
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        STRONG_SELF
-    }];
-    [alertVC addAction:cancleAction];
-    UIAlertAction *exitAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"不保存" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         STRONG_SELF
         [super backAction];
+    }];
+    [alertVC addAction:cancleAction];
+    UIAlertAction *exitAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        STRONG_SELF
+        self.saveAction = DraftSaveAction_Back;
+        [self saveDraft];
     }];
     [alertVC addAction:exitAction];
     [[self nyx_visibleViewController] presentViewController:alertVC animated:YES completion:nil];
@@ -255,6 +270,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     WEAK_SELF
     [self.imageContainerView setImagesChangeBlock:^(NSArray *images) {
         STRONG_SELF
+        self.hasSaved = NO;
         self.imageArray = [NSMutableArray arrayWithArray:images];
         [self refreshSubmitButtonEnable];
         [self.imageContainerView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -347,7 +363,16 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     uploadAttachButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [[uploadAttachButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         STRONG_SELF
-        [self uploadAttachment];
+        if (self.imageArray.count == 0 && self.contentTextView.text.length == 0 && self.titleTextView.text.length == 0) {
+            [self uploadAttachment];
+        }else{
+            if (self.hasSaved) {
+                [self uploadAttachment];
+            }else {
+                self.saveAction = DraftSaveAction_UploadAttach;
+                [self saveDraft];
+            }
+        }
     }];
     [self.bottomView addSubview:uploadAttachButton];
     [uploadAttachButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -361,6 +386,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
     [draftButton setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateDisabled];
     [[draftButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
         STRONG_SELF
+        self.saveAction = DraftSaveAction_Default;
         [self saveDraft];
     }];
     [self.bottomView addSubview:draftButton];
@@ -478,6 +504,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
     [self refreshSubmitButtonEnable];
+    self.hasSaved = NO;
     if ([textView isEqual:self.titleTextView]) {
         if ([textView.text length] > 20) {
             textView.text = [textView.text substringToIndex:20];
@@ -592,6 +619,7 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
             [self.view nyx_showToast:error.localizedDescription];
         }else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//图片转换时间
+                self.hasSaved = YES;
                 [self nyx_enableRightNavigationItem];
                 [self.view nyx_stopLoading];
                 [self requestHomework];
@@ -619,7 +647,28 @@ NSString *kHomeworkFinishedNotification = @"kHomeworkFinishedNotification";
         if ([self.userHomework.finishStatus isEqualToString:@"1"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }else if (self.isDraft) {
-            [self.view nyx_showToast:@"保存成功"];
+            switch (self.saveAction) {
+                case DraftSaveAction_Back:
+                {
+                    [self.view nyx_showToast:@"保存成功"];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [super backAction];
+                    });
+                }
+                    break;
+                case DraftSaveAction_UploadAttach:
+                {
+                    [self uploadAttachment];
+                }
+                    break;
+                case DraftSaveAction_Default:
+                {
+                    [self.view nyx_showToast:@"保存成功"];
+                }
+                    break;
+                default:
+                    break;
+            }
         }else {
             FinishedHomeworkViewController *vc = [[FinishedHomeworkViewController alloc]init];
             vc.userHomework = item.data.userHomework;

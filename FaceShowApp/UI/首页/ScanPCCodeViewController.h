@@ -9,5 +9,5 @@
 #import "ScanCodeViewController.h"
 
 @interface ScanPCCodeViewController : ScanCodeViewController
-@property (nonatomic, copy) NSString *bizType;
+@property (nonatomic, copy) NSDictionary *crossJson;
 @end
