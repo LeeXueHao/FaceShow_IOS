@@ -8,6 +8,10 @@
 
 #import "CertificateCell.h"
 
+@interface CertificateCell()
+@property (nonatomic, strong) UIView *bottomLine;
+@end
+
 @implementation CertificateCell
 
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -19,21 +23,23 @@
 
 - (void)setupUI {
 
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+
+    int i = arc4random()%2;
 
     UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.backgroundColor = [UIColor randomColor];
+    imageView.image = i?[UIImage imageNamed:@"结节证书"]:[UIImage imageNamed:@"优秀学员证书"];
     [self.contentView addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
-        make.top.mas_equalTo(10);
         make.left.mas_equalTo(15);
-        make.width.mas_equalTo(60);
-        make.height.mas_equalTo(40);
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
 
     UILabel *label = [[UILabel alloc] init];
-    label.text = arc4random()%2 ? @"结业证书":@"优秀学员证书";
+    label.text = i ? @"结业证书":@"优秀学员证书";
+    label.textColor = [UIColor colorWithHexString:@"333333"];
+    label.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(imageView.mas_right).offset(15);
@@ -48,7 +54,20 @@
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
 
+    self.bottomLine = [[UIView alloc] init];
+    self.bottomLine.backgroundColor = [UIColor colorWithHexString:@"ced3d6"];
+    [self.contentView addSubview:self.bottomLine];
+    [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(1);
+    }];
     
+}
+
+- (void)setIsLastRow:(BOOL)isLastRow{
+    _isLastRow = isLastRow;
+    self.bottomLine.hidden = isLastRow;
 }
 
 - (void)awakeFromNib {

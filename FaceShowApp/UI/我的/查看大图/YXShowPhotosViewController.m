@@ -100,8 +100,7 @@
         }];
         [photoView addGestureRecognizer:tapGestureRecognizer];
         UIButton *downLoad = [[UIButton alloc] init];
-        [downLoad setImage:[UIImage imageNamed:@"聊聊-删除按钮正常态"] forState:UIControlStateNormal];
-        [downLoad setImage:[UIImage imageNamed:@"聊聊-删除按钮点击态"] forState:UIControlStateHighlighted];
+        [downLoad setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
         [photoView addSubview:downLoad];
         [downLoad mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-30);

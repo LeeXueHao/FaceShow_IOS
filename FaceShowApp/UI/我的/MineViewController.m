@@ -207,8 +207,7 @@
         make.left.right.mas_equalTo(0);
     }];
 
-//    self.mineCertiButton = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的证书正常态" highlightedImage:@"我的证书点击态"];
-    self.mineCertiButton = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的icon正常态" highlightedImage:@"我的icon点击态"];
+    self.mineCertiButton = [self optionBtnWithTitle:@"我的证书" normalImage:@"我的证书正常态" highlightedImage:@"我的证书点击态"];
     [scroll addSubview:self.mineCertiButton];
     [self.mineCertiButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(mineInfoBtn.mas_bottom).offset(30);

@@ -29,14 +29,21 @@
 
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = @"方法一：复制链接下载";
-    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    titleLabel.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
     [self addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
-        make.left.mas_equalTo(20);
-        make.right.mas_equalTo(-15);
+        make.top.left.mas_equalTo(22);
+    }];
+
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
+    backgroundView.layer.masksToBounds = YES;
+    backgroundView.layer.cornerRadius = 6;
+    [self insertSubview:backgroundView belowSubview:titleLabel];
+    [backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(titleLabel).offset(-7);
+        make.right.bottom.mas_equalTo(titleLabel).offset(7);
     }];
 
     UILabel *copyLabel = [[UILabel alloc] init];
@@ -47,9 +54,9 @@
     copyLabel.numberOfLines = 0;
     [self addSubview:copyLabel];
     [copyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(titleLabel.mas_bottom).offset(20);
+        make.top.mas_equalTo(backgroundView.mas_bottom).offset(19);
         make.centerX.mas_equalTo(0);
-        make.left.mas_equalTo(45);
+        make.left.mas_equalTo(57);
     }];
 
     UILabel *sourceLabel = [[UILabel alloc]init];
@@ -64,8 +71,7 @@
     [self addSubview:sourceLabel];
     [sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(copyLabel.mas_bottom).mas_offset(20);
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
+        make.left.centerX.mas_equalTo(copyLabel);
         make.bottom.mas_equalTo(-35);
     }];
 

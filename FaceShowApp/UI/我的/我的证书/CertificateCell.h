@@ -7,11 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
 @interface CertificateCell : UITableViewCell
-
+@property (nonatomic, assign) BOOL isLastRow;
 @end
 
-NS_ASSUME_NONNULL_END

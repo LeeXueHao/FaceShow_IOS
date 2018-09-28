@@ -26,6 +26,7 @@
     [self setupUI];
     [self setupObserver];
     [self.view nyx_stopLoading];
+    [self setupMock];
 }
 
 #pragma mark - setupUI
@@ -34,7 +35,8 @@
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
-    self.tableView.estimatedRowHeight = 0;
+    self.tableView.rowHeight = 60;
+    self.tableView.sectionHeaderHeight = 75;
     [self.tableView registerClass:[CertificateCell class] forCellReuseIdentifier:@"CertificateCell"];
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
@@ -42,6 +44,10 @@
 
 }
 
+- (void)setupMock{
+    self.dataArray = [NSMutableArray arrayWithObjects:@(2),@(4),nil];
+    [self.tableView reloadData];
+}
 
 #pragma mark - setupObserver
 - (void)setupObserver {
@@ -58,27 +64,27 @@
 //    GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
 //    cell.hasBottomLine = indexPath.row != element.signIns.count - 1;
 //    cell.signIn = element.signIns[indexPath.row];
+    cell.isLastRow = indexPath.row == [self.dataArray[indexPath.section] integerValue] - 1;
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return self.dataArray.count;
-    return 2;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    GetSignInRecordListRequestItem_Element *element = self.dataArray[section];
 //    return element.signIns.count;
-    return 4 + section;
+    return [self.dataArray[section] integerValue];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return 60;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
-    return 75;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+//    return 60;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
+//    return 75;
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CertificateHeaderView *header = [[CertificateHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 75)];

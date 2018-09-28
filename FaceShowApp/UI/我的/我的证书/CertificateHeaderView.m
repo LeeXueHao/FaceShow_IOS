@@ -8,6 +8,11 @@
 
 #import "CertificateHeaderView.h"
 
+@interface CertificateHeaderView()
+@property (nonatomic, strong) UILabel *projectLabel;
+@property (nonatomic, strong) UILabel *classLabel;
+@end
+
 @implementation CertificateHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -21,19 +26,32 @@
 
     self.backgroundColor = [UIColor whiteColor];
 
-    UILabel *label = [[UILabel alloc] init];
-    [self addSubview:label];
-    label.text = @"终极一班证书";
-    label.textColor = [UIColor orangeColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.centerY.mas_equalTo(0);
-        make.height.mas_equalTo(40);
-        make.top.mas_equalTo(17);
-        make.bottom.mas_equalTo(-17);
+    self.projectLabel = [[UILabel alloc] init];
+    self.projectLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.projectLabel.font = [UIFont boldSystemFontOfSize:16];
+    self.projectLabel.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:self.projectLabel];
+    [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.mas_centerY).offset(-4.5);
     }];
 
+    self.classLabel = [[UILabel alloc] init];
+    [self addSubview:self.classLabel];
+    self.classLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.classLabel.font = [UIFont systemFontOfSize:14];
+    self.classLabel.textAlignment = NSTextAlignmentCenter;
+    [self.classLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.top.mas_equalTo(self.mas_centerY).offset(4.5);
+    }];
 
+    [self setupMock];
+}
+
+- (void)setupMock{
+    [self.projectLabel setText:@"尚睿通团队建设活动"];
+    [self.classLabel setText:@"研修宝年会版团建"];
 }
 
 /*

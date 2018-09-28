@@ -22,14 +22,21 @@
 
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = @"方法二：扫码登录下载";
-    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    titleLabel.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
     [self addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
-        make.left.mas_equalTo(20);
-        make.right.mas_equalTo(-15);
+        make.top.left.mas_equalTo(22);
+    }];
+
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
+    backgroundView.layer.masksToBounds = YES;
+    backgroundView.layer.cornerRadius = 6;
+    [self insertSubview:backgroundView belowSubview:titleLabel];
+    [backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(titleLabel).offset(-7);
+        make.right.bottom.mas_equalTo(titleLabel).offset(7);
     }];
 
     UILabel *step1Label = [[UILabel alloc]init];
@@ -39,7 +46,7 @@
     step1Label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:step1Label];
     [step1Label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(titleLabel.mas_bottom).mas_offset(20);
+        make.top.mas_equalTo(titleLabel.mas_bottom).mas_offset(17);
         make.left.right.mas_equalTo(0);
     }];
     UILabel *step1ContentLabel = [[UILabel alloc]init];
@@ -55,7 +62,7 @@
     UILabel *urlLabel = [[UILabel alloc]init];
     urlLabel.text = [ConfigManager sharedInstance].pcAddress;
     urlLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
-    urlLabel.font = [UIFont boldSystemFontOfSize:18];
+    urlLabel.font = [UIFont boldSystemFontOfSize:14];
     urlLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:urlLabel];
     [urlLabel mas_makeConstraints:^(MASConstraintMaker *make) {
