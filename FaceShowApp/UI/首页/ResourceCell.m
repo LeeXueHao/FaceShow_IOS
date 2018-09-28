@@ -14,7 +14,6 @@
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIButton *downloadButton;
 @property (nonatomic, strong) UIView *lineView;
 
 @end
@@ -60,17 +59,6 @@
         make.right.mas_equalTo(-15);
     }];
 
-    self.downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.downloadButton setImage:[UIImage imageNamed:@"聊聊-删除按钮正常态"] forState:UIControlStateNormal];
-    [self.downloadButton setImage:[UIImage imageNamed:@"聊聊-删除按钮点击态"] forState:UIControlStateHighlighted];
-    [self.downloadButton addTarget:self action:@selector(downloadBtnActiton) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:self.downloadButton];
-    [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(0);
-        make.right.mas_equalTo(-15);
-        make.size.mas_equalTo(CGSizeMake(18, 18));
-    }];
-
     self.lineView = [[UIView alloc] init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"d7dde0"];
     [self.contentView addSubview:self.lineView];
@@ -87,9 +75,4 @@
     self.titleLabel.text = element.resName;
     self.timeLabel.text = [element.createTime omitSecondOfFullDateString];
 }
-
-- (void) downloadBtnActiton{
-    BLOCK_EXEC(self.downloadBlock,_element.resId);
-}
-
 @end

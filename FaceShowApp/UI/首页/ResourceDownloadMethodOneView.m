@@ -25,52 +25,56 @@
 }
 
 - (void)setupUI {
+    self.backgroundColor = [UIColor whiteColor];
 
-    UILabel *methodOneLabel = [[UILabel alloc]init];
-    methodOneLabel.text = @"方法一：复制下方网址，粘贴到浏览器中即可下载";
-    methodOneLabel.textColor = [UIColor colorWithHexString:@"999999"];
-    methodOneLabel.font = [UIFont boldSystemFontOfSize:15];
-    methodOneLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:methodOneLabel];
-    [methodOneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.text = @"方法一：复制链接下载";
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    titleLabel.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
+    [self addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(20);
         make.right.mas_equalTo(-15);
     }];
-    [self addSubview:methodOneLabel];
+
+    UILabel *copyLabel = [[UILabel alloc] init];
+    copyLabel.text = @"点击下方网址复制，粘贴到浏览器中即可下载";
+    copyLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    copyLabel.font = [UIFont boldSystemFontOfSize:14];
+    copyLabel.textAlignment = NSTextAlignmentCenter;
+    copyLabel.numberOfLines = 0;
+    [self addSubview:copyLabel];
+    [copyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(titleLabel.mas_bottom).offset(20);
+        make.centerX.mas_equalTo(0);
+        make.left.mas_equalTo(45);
+    }];
 
     UILabel *sourceLabel = [[UILabel alloc]init];
     sourceLabel.text = self.sourceURL;
     sourceLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
-    sourceLabel.font = [UIFont boldSystemFontOfSize:18];
+    sourceLabel.font = [UIFont boldSystemFontOfSize:14];
     sourceLabel.numberOfLines = 0;
     sourceLabel.textAlignment = NSTextAlignmentCenter;
+    sourceLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(linkTapAction)];
+    [sourceLabel addGestureRecognizer:tap];
     [self addSubview:sourceLabel];
     [sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(methodOneLabel.mas_bottom).mas_offset(35);
+        make.top.mas_equalTo(copyLabel.mas_bottom).mas_offset(20);
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
+        make.bottom.mas_equalTo(-35);
     }];
 
-    UIButton *copyButton = [[UIButton alloc] init];
-    [copyButton setTitle:@"复 制" forState:UIControlStateNormal];
-    [copyButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
-    copyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    copyButton.layer.borderColor = [UIColor colorWithHexString:@"1da1f2"].CGColor;
-    copyButton.layer.borderWidth = 2;
-    copyButton.layer.cornerRadius = 7;
-    [[copyButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [[UIPasteboard generalPasteboard] setString:self.sourceURL];
-        BLOCK_EXEC(self.copyBlock);
-    }];
-    [self addSubview:copyButton];
-    [copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(sourceLabel.mas_bottom).offset(20);
-        make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(112, 40));
-    }];
 }
 
+- (void)linkTapAction{
+    [[UIPasteboard generalPasteboard] setString:self.sourceURL];
+    BLOCK_EXEC(self.copyBlock);
+}
 
 
 @end

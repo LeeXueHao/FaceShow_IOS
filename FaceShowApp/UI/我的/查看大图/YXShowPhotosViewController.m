@@ -102,6 +102,7 @@
         UIButton *downLoad = [[UIButton alloc] init];
         [downLoad setImage:[UIImage imageNamed:@"聊聊-删除按钮正常态"] forState:UIControlStateNormal];
         [downLoad setImage:[UIImage imageNamed:@"聊聊-删除按钮点击态"] forState:UIControlStateHighlighted];
+        [photoView addSubview:downLoad];
         [downLoad mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-30);
             if (@available(iOS 11.0, *)) {

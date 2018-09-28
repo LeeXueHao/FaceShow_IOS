@@ -19,13 +19,19 @@
 
 - (void)setupUI {
     self.backgroundColor = [UIColor whiteColor];
-    UIView *topLine = [[UIView alloc]init];
-    topLine.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-    [self addSubview:topLine];
-    [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(5);
+
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.text = @"方法二：扫码登录下载";
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    titleLabel.backgroundColor = [UIColor colorWithHexString:@"1da1f2"];
+    [self addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(20);
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(-15);
     }];
+
     UILabel *step1Label = [[UILabel alloc]init];
     step1Label.text = @"第一步";
     step1Label.textColor = [UIColor colorWithHexString:@"999999"];
@@ -33,7 +39,7 @@
     step1Label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:step1Label];
     [step1Label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topLine.mas_bottom).mas_offset(80);
+        make.top.mas_equalTo(titleLabel.mas_bottom).mas_offset(20);
         make.left.right.mas_equalTo(0);
     }];
     UILabel *step1ContentLabel = [[UILabel alloc]init];

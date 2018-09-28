@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ResourceDownloadMethodOneView : UIView
-
 - (instancetype)initWithSourceUrl:(NSString *)sourceURL;
 @property (nonatomic, copy) void(^copyBlock)(void);
 @end

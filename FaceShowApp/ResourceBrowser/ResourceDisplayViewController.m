@@ -9,6 +9,7 @@
 #import "ResourceDisplayViewController.h"
 #import "FileDownloadHelper.h"
 #import <WebKit/WebKit.h>
+#import "ResourceDownloadViewController.h"
 
 @interface ResourceDisplayViewController ()<WKNavigationDelegate>
 @property (nonatomic, strong) FileDownloadHelper *downloadHelper;
@@ -16,6 +17,14 @@
 @end
 
 @implementation ResourceDisplayViewController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.showDownloadNavView = NO;
+    }
+    return self;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -45,6 +54,17 @@
         [self downloadFile];
     } else {
         [self setupUI];
+    }
+
+    if (self.showDownloadNavView) {
+        WEAK_SELF
+        [self nyx_setupRightWithTitle:@"下载" action:^{
+            STRONG_SELF
+            ResourceDownloadViewController *downLoad = [[ResourceDownloadViewController alloc] init];
+            downLoad.resourceId = self.resourceId;
+            downLoad.downloadUrl = self.downloadUrl;
+            [self.navigationController pushViewController:downLoad animated:YES];
+        }];
     }
 }
 

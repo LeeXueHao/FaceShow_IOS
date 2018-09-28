@@ -76,7 +76,7 @@
     }];
 }
 
-- (void)requestResourceDetailWithResId:(NSString *)resId isDownload:(BOOL)isDownload{
+- (void)requestResourceDetailWithResId:(NSString *)resId {
     [self.view nyx_startLoading];
     WEAK_SELF
     [self.detailRequest stopRequest];
@@ -92,17 +92,14 @@
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
         BOOL isAttachment = item.data.type.integerValue == 0;
         NSString *sourceURL = isAttachment ? item.data.ai.previewUrl : item.data.url;
-        if (isDownload) {
-            ResourceDownloadViewController *downLoad = [[ResourceDownloadViewController alloc] init];
-            downLoad.sourceUrl = sourceURL;
-            [self.navigationController pushViewController:downLoad animated:YES];
-        }else {
-            ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
-            vc.urlString = sourceURL;
-            vc.name = item.data.resName;
-            vc.needDownload = isAttachment && [FSDataMappingTable ResourceTypeWithKey:item.data.ai.resType] != ResourceType_Image;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
+        vc.urlString = sourceURL;
+        vc.name = item.data.resName;
+        vc.showDownloadNavView = YES;
+        vc.downloadUrl = item.data.ai.downloadUrl;
+        vc.resourceId = item.data.resourceId;
+        vc.needDownload = isAttachment && [FSDataMappingTable ResourceTypeWithKey:item.data.ai.resType] != ResourceType_Image;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 
@@ -143,11 +140,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ResourceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResourceCell"];
     cell.element = self.dataArray[indexPath.row];
-    WEAK_SELF
-    cell.downloadBlock = ^(NSString *resId) {
-        STRONG_SELF
-        [self requestResourceDetailWithResId:resId isDownload:YES];
-    };
     return cell;
 }
 
@@ -162,7 +154,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GetResourceRequestItem_Element *element = self.dataArray[indexPath.row];
-    [self requestResourceDetailWithResId:element.resId isDownload:NO];
+    [self requestResourceDetailWithResId:element.resId];
 }
 
 #pragma mark - RefreshDelegate

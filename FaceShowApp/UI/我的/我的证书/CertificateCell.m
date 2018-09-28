@@ -33,11 +33,19 @@
     }];
 
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"结业证书";
+    label.text = arc4random()%2 ? @"结业证书":@"优秀学员证书";
     [self.contentView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(imageView.mas_right).offset(15);
         make.centerY.mas_equalTo(0);
+    }];
+
+    UIImageView *rightImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"进入页面按钮正常态"] highlightedImage:[UIImage imageNamed:@"进入页面按钮点击态"]];
+    [self.contentView addSubview:rightImageView];
+    [rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(0);
+        make.right.mas_equalTo(-5);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
 
     

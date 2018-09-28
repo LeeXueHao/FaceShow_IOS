@@ -11,5 +11,4 @@
 
 @interface ResourceCell : UITableViewCell
 @property (nonatomic, strong) GetResourceRequestItem_Element *element;
-@property (nonatomic, copy) void(^downloadBlock)(NSString *resId);
 @end

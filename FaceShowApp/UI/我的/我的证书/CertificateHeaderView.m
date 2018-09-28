@@ -19,7 +19,7 @@
 
 - (void)setupUI {
 
-    self.backgroundColor = [UIColor lightGrayColor];
+    self.backgroundColor = [UIColor whiteColor];
 
     UILabel *label = [[UILabel alloc] init];
     [self addSubview:label];

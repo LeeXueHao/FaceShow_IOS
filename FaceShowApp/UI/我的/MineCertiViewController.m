@@ -36,8 +36,12 @@
     self.tableView.tableHeaderView = headerView;
     self.tableView.estimatedRowHeight = 0;
     [self.tableView registerClass:[CertificateCell class] forCellReuseIdentifier:@"CertificateCell"];
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+    }];
 
 }
+
 
 #pragma mark - setupObserver
 - (void)setupObserver {

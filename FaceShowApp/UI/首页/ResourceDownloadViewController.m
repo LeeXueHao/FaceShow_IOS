@@ -10,6 +10,7 @@
 #import "ScanPCCodeViewController.h"
 #import "ResourceDownloadMethodOneView.h"
 #import "ResourceDownloadMethodTwoView.h"
+#import "GetResourceDetailRequest.h"
 @interface ResourceDownloadViewController ()
 
 @end
@@ -23,15 +24,14 @@
 }
 
 - (void)setupUI {
-
-    ResourceDownloadMethodOneView *methodOneView = [[ResourceDownloadMethodOneView alloc] initWithSourceUrl:self.sourceUrl];
+    ResourceDownloadMethodOneView *methodOneView = [[ResourceDownloadMethodOneView alloc] initWithSourceUrl:self.downloadUrl];
     methodOneView.copyBlock = ^{
         [self.view nyx_showToast:@"资源链接已复制"];
     };
     [self.contentView addSubview:methodOneView];
     [methodOneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(200);
+        make.top.mas_equalTo(5);
+        make.left.right.mas_equalTo(0);
     }];
 
     ResourceDownloadMethodTwoView *methodTwoView = [[ResourceDownloadMethodTwoView alloc] init];
@@ -39,18 +39,18 @@
     methodTwoView.scanBlock = ^{
         STRONG_SELF
         ScanPCCodeViewController *vc = [[ScanPCCodeViewController alloc]init];
-        vc.bizType = @"2";//type2 资源
+        vc.crossJson = @{
+                         @"bizType":@"resource",
+                         @"bizId":@(self.resourceId.integerValue)
+                         };
         [self.navigationController pushViewController:vc animated:YES];
     };
     [self.contentView addSubview:methodTwoView];
     [methodTwoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(methodOneView.mas_bottom).offset(5);
-        make.bottom.mas_equalTo(-40);
+        make.bottom.mas_equalTo(0);
     }];
-    
-
-
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "ScrollBaseViewController.h"
 
 @interface ResourceDownloadViewController : ScrollBaseViewController
-@property (nonatomic, strong) NSString *sourceUrl;
+@property (nonatomic, strong) NSString *downloadUrl;
+@property (nonatomic, strong) NSString *resourceId;
 @end
 
