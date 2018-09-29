@@ -103,6 +103,16 @@
 
 }
 
+- (void)requestReadCertificateWithId:(NSString *)resId{
+    //request and post Noti in callback...
+    //
+}
+
+- (void)refreshCertificateNotification{
+    //refresh...
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kHasReadCertificateNotification" object:nil];
+}
+
 
 #pragma mark - RefreshDelegate
 - (void)refreshUI {

@@ -12,6 +12,8 @@
 extern NSString * const kHasNewTaskNotification;
 extern NSString * const kHasNewMomentNotification;
 extern NSString * const kHasNewResourceNotification;
+extern NSString * const kHasNewCertificateNotification;
+extern NSString * const kHasReadCertificateNotification;
 
 @interface UserPromptsManager : NSObject
 @property (nonatomic, strong) UIView *taskNewView;

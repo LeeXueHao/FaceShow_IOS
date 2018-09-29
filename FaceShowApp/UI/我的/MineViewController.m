@@ -20,6 +20,7 @@
 #import "HuBeiUserInfoViewController.h"
 #import "ForgotPasswordViewController.h"
 #import "MineCertiViewController.h"
+#import "UserPromptsManager.h"
 
 @interface MineViewController ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -265,7 +266,7 @@
         STRONG_SELF
         [self reload];
     }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewCertificateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         UIView *redPointView = [[UIView alloc] init];
         redPointView.layer.cornerRadius = 4.5f;
@@ -277,7 +278,7 @@
             make.size.mas_equalTo(CGSizeMake(9, 9));
         }];
     }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil] subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasReadCertificateNotification object:nil] subscribeNext:^(id x) {
         STRONG_SELF
         [self.mineCertiButton removeSubviews];
     }];

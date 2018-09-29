@@ -398,7 +398,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             }
         }];
     }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewCertificateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
         UIButton *customBtn = (UIButton *)navItem.customView;

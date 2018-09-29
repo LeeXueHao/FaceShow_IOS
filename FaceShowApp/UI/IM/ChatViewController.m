@@ -31,6 +31,7 @@
 #import "IMTopicInfoItem.h"
 #import "ContactMemberContactsRequest.h"
 #import "ForbidTalkingView.h"
+#import "UserPromptsManager.h"
 
 NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCountClearNotification";
 
@@ -459,7 +460,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
         STRONG_SELF
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountClearNotification object:self.topic];
     }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil]subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewCertificateNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
         UIButton *customBtn = (UIButton *)navItem.customView;
@@ -473,7 +474,7 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
             make.size.mas_equalTo(CGSizeMake(9, 9));
         }];
     }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"" object:nil] subscribeNext:^(id x) {
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasReadCertificateNotification object:nil] subscribeNext:^(id x) {
         STRONG_SELF
         UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
         UIButton *customBtn = (UIButton *)navItem.customView;

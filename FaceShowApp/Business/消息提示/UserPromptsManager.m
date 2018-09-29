@@ -12,6 +12,8 @@
 NSString * const kHasNewTaskNotification = @"kHasNewTaskNotification";
 NSString * const kHasNewMomentNotification = @"kHasNewMomentNotification";
 NSString * const kHasNewResourceNotification = @"kHasNewResourceNotification";
+NSString * const kHasNewCertificateNotification = @"kHasNewCertificateNotification";
+NSString * const kHasReadCertificateNotification = @"kHasReadCertificateNotification";
 
 @interface UserPromptsManager ()
 @property (nonatomic, strong) YXGCDTimer *timer;
