@@ -252,6 +252,8 @@
 		7C7A9ED4206B5008003EE15B /* IMHistoryMessageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ED3206B5008003EE15B /* IMHistoryMessageFetcher.m */; };
 		7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A9ED6206B50E0003EE15B /* IMHistoryFetchRecord.m */; };
 		7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */; };
+		7C96A899216C500D007AAD82 /* ContactsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A897216C500C007AAD82 /* ContactsDetailViewController.m */; };
+		7C96A89E216C509B007AAD82 /* HubeiContactsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A89D216C509B007AAD82 /* HubeiContactsDetailViewController.m */; };
 		7CA8173C213E5AEE00824589 /* ApnsHomeworkRequirementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8173B213E5AEE00824589 /* ApnsHomeworkRequirementViewController.m */; };
 		7CA8173F213E7CB400824589 /* ApnsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8173E213E7CB400824589 /* ApnsChatViewController.m */; };
 		7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EC2010389F005BE126 /* ClassListRequest.m */; };
@@ -957,6 +959,10 @@
 		7C7A9ED6206B50E0003EE15B /* IMHistoryFetchRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMHistoryFetchRecord.m; sourceTree = "<group>"; };
 		7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseLectureCell.m; sourceTree = "<group>"; };
 		7C7AADE8205A0F8B003C80E4 /* CourseLectureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseLectureCell.h; sourceTree = "<group>"; };
+		7C96A897216C500C007AAD82 /* ContactsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsDetailViewController.m; sourceTree = "<group>"; };
+		7C96A898216C500C007AAD82 /* ContactsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsDetailViewController.h; sourceTree = "<group>"; };
+		7C96A89C216C509B007AAD82 /* HubeiContactsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubeiContactsDetailViewController.h; sourceTree = "<group>"; };
+		7C96A89D216C509B007AAD82 /* HubeiContactsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HubeiContactsDetailViewController.m; sourceTree = "<group>"; };
 		7CA8173A213E5AEE00824589 /* ApnsHomeworkRequirementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsHomeworkRequirementViewController.h; sourceTree = "<group>"; };
 		7CA8173B213E5AEE00824589 /* ApnsHomeworkRequirementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsHomeworkRequirementViewController.m; sourceTree = "<group>"; };
 		7CA8173D213E7CB400824589 /* ApnsChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsChatViewController.h; sourceTree = "<group>"; };
@@ -2460,6 +2466,24 @@
 			name = "发布";
 			sourceTree = "<group>";
 		};
+		7C96A89A216C507C007AAD82 /* Hubei */ = {
+			isa = PBXGroup;
+			children = (
+				7C96A89C216C509B007AAD82 /* HubeiContactsDetailViewController.h */,
+				7C96A89D216C509B007AAD82 /* HubeiContactsDetailViewController.m */,
+			);
+			path = Hubei;
+			sourceTree = "<group>";
+		};
+		7C96A89B216C507C007AAD82 /* YXB */ = {
+			isa = PBXGroup;
+			children = (
+				7C96A898216C500C007AAD82 /* ContactsDetailViewController.h */,
+				7C96A897216C500C007AAD82 /* ContactsDetailViewController.m */,
+			);
+			path = YXB;
+			sourceTree = "<group>";
+		};
 		7CBC5B732047E11D004ACA04 /* 抽屉 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2878,6 +2902,8 @@
 		E91E5D112047B12100052FBA /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
+				7C96A89A216C507C007AAD82 /* Hubei */,
+				7C96A89B216C507C007AAD82 /* YXB */,
 				E91E5DBB2047DA3A00052FBA /* View */,
 				E91E5D142047B17200052FBA /* ContactsViewController.h */,
 				E91E5D132047B17200052FBA /* ContactsViewController.m */,
@@ -3594,6 +3620,7 @@
 				7CEFC7B61F989C1C001D8C84 /* ForgotPasswordViewController.m in Sources */,
 				E95434DB20D2550B00BCF63C /* GetUserClazsScoreRequest.m in Sources */,
 				7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */,
+				7C96A89E216C509B007AAD82 /* HubeiContactsDetailViewController.m in Sources */,
 				7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */,
 				E95434BD20D1380900BCF63C /* TaskFilterItemView.m in Sources */,
 				7CBC5B922049326E004ACA04 /* CourseInfoViewController.m in Sources */,
@@ -3764,6 +3791,7 @@
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
 				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
 				7CBC5BB2204CEBB2004ACA04 /* RegistYxbRequest.m in Sources */,
+				7C96A899216C500D007AAD82 /* ContactsDetailViewController.m in Sources */,
 				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,
 				E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */,
 				7C2518E41F68E68D0001B577 /* NSMutableDictionary+YXDictionarys.m in Sources */,

@@ -19,6 +19,10 @@
 #import "IMMember.h"
 #import "IMUserInterface.h"
 #import "IMTopicInfoItem.h"
+#import "HuBeiUserInfoViewController.h"
+#import "UserInfoViewController.h"
+#import "ContactsDetailViewController.h"
+#import "HubeiContactsDetailViewController.h"
 
 @interface ContactsViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ErrorView *errorView;
@@ -259,25 +263,51 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ChatViewController *chatVC = [[ChatViewController alloc]init];
+//    ChatViewController *chatVC = [[ChatViewController alloc]init];
     IMMember *member = [self.dataArray[indexPath.row] toIMMember];
     //如果是自己则返回
     GetUserInfoRequestItem_imTokenInfo *info = [UserManager sharedInstance].userModel.imInfo;
     if (member.memberID == [info.imMember toIMMember].memberID) {
-        return;
+//        return;
+        //跳转我的个人资料页面
+#ifdef HuBeiApp
+        HuBeiUserInfoViewController *VC = [[HuBeiUserInfoViewController alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+#else
+        UserInfoViewController *VC = [[UserInfoViewController alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+#endif
+    }else{
+        ContactsDetailViewController *vc = [[ContactsDetailViewController alloc] init];
+        vc.userId = [NSString stringWithFormat:@"%lld",member.userID];
+        vc.isAdministrator = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+
+//#ifdef HuBeiApp
+//        HubeiContactsDetailViewController *vc = [[HubeiContactsDetailViewController alloc] init];
+//        vc.userId = [NSString stringWithFormat:@"%lld",member.userID];
+//        vc.isAdministrator = NO;
+//        [self.navigationController pushViewController:vc animated:YES];
+//#else
+//        ContactsDetailViewController *vc = [[ContactsDetailViewController alloc] init];
+//        vc.userId = [NSString stringWithFormat:@"%lld",member.userID];
+//        vc.isAdministrator = NO;
+//        [self.navigationController pushViewController:vc animated:YES];
+//#endif
     }
-    ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group = self.groupsArray[self.currentSelectedGroupIndex];
-    IMTopic *topic = [IMUserInterface findTopicWithMember:member];
-    if (topic) {
-        chatVC.topic = topic;
-    }else {
-        IMTopicInfoItem *item = [[IMTopicInfoItem alloc]init];
-        item.member = member;
-        item.group = group;
-        chatVC.info = item;
-    }
-    [self.navigationController pushViewController:chatVC animated:YES];
-    [TalkingData trackEvent:@"点击通讯录中头像"];
+//    ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group = self.groupsArray[self.currentSelectedGroupIndex];
+//    IMTopic *topic = [IMUserInterface findTopicWithMember:member];
+//    if (topic) {
+//        chatVC.topic = topic;
+//    }else {
+//        IMTopicInfoItem *item = [[IMTopicInfoItem alloc]init];
+//        item.member = member;
+//        item.group = group;
+//        chatVC.info = item;
+//    }
+//    [self.navigationController pushViewController:chatVC animated:YES];
+//    [TalkingData trackEvent:@"点击通讯录中头像"];
+
 }
 
 
