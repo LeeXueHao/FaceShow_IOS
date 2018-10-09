@@ -22,7 +22,7 @@ static NSDictionary *mappingDict = nil;
                         @"ScanCodeResultViewController":@"签到结果",
                         @"MessageViewController":@"通知",
                         @"MessageDetailViewController":@"通知详情",
-//                        @"ContactsViewController":@"通讯录",
+                        @"ContactsViewController":@"通讯录",
 //                        @"ContactsDetailViewController":@"学员详情",
                         @"ClassMomentViewController":@"班级圈",
                         @"PublishMomentViewController":@"发布班级圈",
