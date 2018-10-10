@@ -10,6 +10,8 @@
 #import "IMTitleContentView.h"
 #import "IMSwitchSettingView.h"
 #import "IMUserInterface.h"
+#import "IMGroupMemberView.h"
+#import "IMGroupMemberViewController.h"
 
 @interface IMGroupSettingViewController ()
 @property(nonatomic, strong) IMSwitchSettingView *hushView;
@@ -40,13 +42,28 @@
         make.top.mas_equalTo(5);
         make.height.mas_equalTo(45);
     }];
+
+    IMGroupMemberView *groupMemberView = [[IMGroupMemberView alloc] init];
+    groupMemberView.title = @"群成员";
+    WEAK_SELF
+    groupMemberView.clickContentBlock = ^{
+        STRONG_SELF
+        IMGroupMemberViewController *groupController = [[IMGroupMemberViewController alloc] init];
+        groupController.topicId = [NSString stringWithFormat:@"%lld",self.topic.topicID];
+        [self.navigationController pushViewController:groupController animated:YES];
+    };
+    [self.view addSubview:groupMemberView];
+    [groupMemberView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(classNameView.mas_bottom).offset(5);
+        make.height.mas_equalTo(45);
+    }];
     
     IMSwitchSettingView *hushView = [[IMSwitchSettingView alloc]init];
     hushView.title = @"学员禁言";
     hushView.desc = @"开启后，学员不可以发送消息，只有班主任可以发";
     hushView.isOn = [self.topic.personalConfig.speak isEqualToString:@"0"] ? YES : NO;
     self.hushView = hushView;
-    WEAK_SELF
     [hushView setStateChangeBlock:^(BOOL isOn) {
         STRONG_SELF
     }];
@@ -76,7 +93,7 @@
         [self.view addSubview:unremindView];
         [hushView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(classNameView.mas_bottom).mas_offset(5);
+            make.top.mas_equalTo(groupMemberView.mas_bottom).mas_offset(5);
         }];
         [unremindView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
@@ -86,7 +103,7 @@
         [self.view addSubview:unremindView];
         [unremindView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(classNameView.mas_bottom).mas_offset(5);
+            make.top.mas_equalTo(groupMemberView.mas_bottom).mas_offset(5);
         }];
     }
 }

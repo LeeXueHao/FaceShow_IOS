@@ -65,6 +65,7 @@
 @property (nonatomic, strong) GetUserInfoRequestItem_imTokenInfo<Optional> *imTokenInfo;
 @property (nonatomic, strong) GetUserInfoRequestItem_Data_Aui<Optional> *aui;
 
+- (NSString *)sexString;
 @end
 
 @interface GetUserInfoRequestItem : HttpBaseRequestItem
@@ -72,4 +73,5 @@
 @end
 
 @interface GetUserInfoRequest : YXGetRequest
+@property (nonatomic, strong) NSString<Optional> *userId;
 @end

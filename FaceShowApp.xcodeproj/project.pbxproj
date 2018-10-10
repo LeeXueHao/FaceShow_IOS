@@ -254,6 +254,14 @@
 		7C7AADE9205A0F8C003C80E4 /* CourseLectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7AADE7205A0F8B003C80E4 /* CourseLectureCell.m */; };
 		7C96A899216C500D007AAD82 /* ContactsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A897216C500C007AAD82 /* ContactsDetailViewController.m */; };
 		7C96A89E216C509B007AAD82 /* HubeiContactsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A89D216C509B007AAD82 /* HubeiContactsDetailViewController.m */; };
+		7C96A8A1216C5815007AAD82 /* DetailCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A89F216C5814007AAD82 /* DetailCellView.m */; };
+		7C96A8A4216C59A3007AAD82 /* GetMemberIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8A3216C59A3007AAD82 /* GetMemberIdRequest.m */; };
+		7C96A8A7216C7AA3007AAD82 /* IMGroupMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8A6216C7AA3007AAD82 /* IMGroupMemberView.m */; };
+		7C96A8AA216C8088007AAD82 /* IMGroupMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8A9216C8088007AAD82 /* IMGroupMemberViewController.m */; };
+		7C96A8B0216C8113007AAD82 /* GetContactRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8AC216C8112007AAD82 /* GetContactRequest.m */; };
+		7C96A8BF216CBA16007AAD82 /* ClazsMemberListFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8BB216CBA14007AAD82 /* ClazsMemberListFetcher.m */; };
+		7C96A8C0216CBA16007AAD82 /* ClazsMemberListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8BC216CBA14007AAD82 /* ClazsMemberListRequest.m */; };
+		7C96A8C3216CBA83007AAD82 /* ContactsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C96A8C2216CBA83007AAD82 /* ContactsListCell.m */; };
 		7CA8173C213E5AEE00824589 /* ApnsHomeworkRequirementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8173B213E5AEE00824589 /* ApnsHomeworkRequirementViewController.m */; };
 		7CA8173F213E7CB400824589 /* ApnsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8173E213E7CB400824589 /* ApnsChatViewController.m */; };
 		7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9C8EC2010389F005BE126 /* ClassListRequest.m */; };
@@ -307,6 +315,7 @@
 		7CEBA92820886D5D009754F5 /* UpgradeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92720886D5D009754F5 /* UpgradeConfig.m */; };
 		7CEBA92B2088853D009754F5 /* UpgradePromptHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92A2088853D009754F5 /* UpgradePromptHandler.m */; };
 		7CEBA92E20898454009754F5 /* ModifySchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */; };
+		7CEDC7B7216DB3A900985EBF /* GetUserInfoDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDC7B5216DB3A900985EBF /* GetUserInfoDetailRequest.m */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -972,6 +981,22 @@
 		7C96A898216C500C007AAD82 /* ContactsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsDetailViewController.h; sourceTree = "<group>"; };
 		7C96A89C216C509B007AAD82 /* HubeiContactsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubeiContactsDetailViewController.h; sourceTree = "<group>"; };
 		7C96A89D216C509B007AAD82 /* HubeiContactsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HubeiContactsDetailViewController.m; sourceTree = "<group>"; };
+		7C96A89F216C5814007AAD82 /* DetailCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCellView.m; sourceTree = "<group>"; };
+		7C96A8A0216C5815007AAD82 /* DetailCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCellView.h; sourceTree = "<group>"; };
+		7C96A8A2216C59A2007AAD82 /* GetMemberIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMemberIdRequest.h; sourceTree = "<group>"; };
+		7C96A8A3216C59A3007AAD82 /* GetMemberIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMemberIdRequest.m; sourceTree = "<group>"; };
+		7C96A8A5216C7AA2007AAD82 /* IMGroupMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMGroupMemberView.h; sourceTree = "<group>"; };
+		7C96A8A6216C7AA3007AAD82 /* IMGroupMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMGroupMemberView.m; sourceTree = "<group>"; };
+		7C96A8A8216C8088007AAD82 /* IMGroupMemberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMGroupMemberViewController.h; sourceTree = "<group>"; };
+		7C96A8A9216C8088007AAD82 /* IMGroupMemberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMGroupMemberViewController.m; sourceTree = "<group>"; };
+		7C96A8AC216C8112007AAD82 /* GetContactRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetContactRequest.m; sourceTree = "<group>"; };
+		7C96A8AD216C8112007AAD82 /* GetContactRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetContactRequest.h; sourceTree = "<group>"; };
+		7C96A8BB216CBA14007AAD82 /* ClazsMemberListFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListFetcher.m; sourceTree = "<group>"; };
+		7C96A8BC216CBA14007AAD82 /* ClazsMemberListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClazsMemberListRequest.m; sourceTree = "<group>"; };
+		7C96A8BD216CBA15007AAD82 /* ClazsMemberListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListRequest.h; sourceTree = "<group>"; };
+		7C96A8BE216CBA16007AAD82 /* ClazsMemberListFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClazsMemberListFetcher.h; sourceTree = "<group>"; };
+		7C96A8C1216CBA83007AAD82 /* ContactsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsListCell.h; sourceTree = "<group>"; };
+		7C96A8C2216CBA83007AAD82 /* ContactsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsListCell.m; sourceTree = "<group>"; };
 		7CA8173A213E5AEE00824589 /* ApnsHomeworkRequirementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsHomeworkRequirementViewController.h; sourceTree = "<group>"; };
 		7CA8173B213E5AEE00824589 /* ApnsHomeworkRequirementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApnsHomeworkRequirementViewController.m; sourceTree = "<group>"; };
 		7CA8173D213E7CB400824589 /* ApnsChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApnsChatViewController.h; sourceTree = "<group>"; };
@@ -1076,6 +1101,8 @@
 		7CEBA92C20898454009754F5 /* ModifySchoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifySchoolViewController.h; sourceTree = "<group>"; };
 		7CEBA92D20898454009754F5 /* ModifySchoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifySchoolViewController.m; sourceTree = "<group>"; };
 		7CEBA96220944949009754F5 /* env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
+		7CEDC7B5216DB3A900985EBF /* GetUserInfoDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetUserInfoDetailRequest.m; sourceTree = "<group>"; };
+		7CEDC7B6216DB3A900985EBF /* GetUserInfoDetailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetUserInfoDetailRequest.h; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -2716,6 +2743,15 @@
 			path = "升级";
 			sourceTree = "<group>";
 		};
+		7CEDC7B4216DB3A900985EBF /* HuBei */ = {
+			isa = PBXGroup;
+			children = (
+				7CEDC7B5216DB3A900985EBF /* GetUserInfoDetailRequest.m */,
+				7CEDC7B6216DB3A900985EBF /* GetUserInfoDetailRequest.h */,
+			);
+			path = HuBei;
+			sourceTree = "<group>";
+		};
 		7CEFC7B71F989F41001D8C84 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2769,6 +2805,8 @@
 			children = (
 				7CFA798520AC3E030097A4A7 /* IMTitleContentView.h */,
 				7CFA798620AC3E030097A4A7 /* IMTitleContentView.m */,
+				7C96A8A5216C7AA2007AAD82 /* IMGroupMemberView.h */,
+				7C96A8A6216C7AA3007AAD82 /* IMGroupMemberView.m */,
 				7CFA797F20AC23770097A4A7 /* IMSwitchSettingView.h */,
 				7CFA798020AC23770097A4A7 /* IMSwitchSettingView.m */,
 				7CFA798820AD18D20097A4A7 /* IMMemberInfoView.h */,
@@ -2922,6 +2960,15 @@
 		E91E5D072047B0A600052FBA /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
+				7CEDC7B4216DB3A900985EBF /* HuBei */,
+				7C96A8BE216CBA16007AAD82 /* ClazsMemberListFetcher.h */,
+				7C96A8BB216CBA14007AAD82 /* ClazsMemberListFetcher.m */,
+				7C96A8BD216CBA15007AAD82 /* ClazsMemberListRequest.h */,
+				7C96A8BC216CBA14007AAD82 /* ClazsMemberListRequest.m */,
+				7C96A8AD216C8112007AAD82 /* GetContactRequest.h */,
+				7C96A8AC216C8112007AAD82 /* GetContactRequest.m */,
+				7C96A8A2216C59A2007AAD82 /* GetMemberIdRequest.h */,
+				7C96A8A3216C59A3007AAD82 /* GetMemberIdRequest.m */,
 				E95ED5D8205261FB006ECCEA /* ContactMemberContactsRequest.h */,
 				E95ED5D9205261FB006ECCEA /* ContactMemberContactsRequest.m */,
 				E95ED5DB205291BA006ECCEA /* ContactMemberContactsRequest.json */,
@@ -2959,6 +3006,8 @@
 		E91E5D2B2047B1FE00052FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E91E5D1A2047B1C300052FBA /* ContactsCell.h */,
+				E91E5D192047B1C200052FBA /* ContactsCell.m */,
 				7CFA797820AC146C0097A4A7 /* Setting */,
 				E997064520566DCB0096DAB0 /* Model */,
 				E95ED5D72052236C006ECCEA /* IMMessageCell */,
@@ -3059,8 +3108,10 @@
 		E91E5DBB2047DA3A00052FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E91E5D1A2047B1C300052FBA /* ContactsCell.h */,
-				E91E5D192047B1C200052FBA /* ContactsCell.m */,
+				7C96A8A0216C5815007AAD82 /* DetailCellView.h */,
+				7C96A89F216C5814007AAD82 /* DetailCellView.m */,
+				7C96A8C1216CBA83007AAD82 /* ContactsListCell.h */,
+				7C96A8C2216CBA83007AAD82 /* ContactsListCell.m */,
 				E90C5141204D23DE0008F92A /* ContactsSearchBarView.h */,
 				E90C5142204D23DE0008F92A /* ContactsSearchBarView.m */,
 				E90C5144204D41220008F92A /* ContactsClassFilterView.h */,
@@ -3249,6 +3300,8 @@
 				7CFA798320AC25400097A4A7 /* IMGroupSettingViewController.m */,
 				7CFA798B20AD1C5F0097A4A7 /* IMPrivateSettingViewController.h */,
 				7CFA798C20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m */,
+				7C96A8A8216C8088007AAD82 /* IMGroupMemberViewController.h */,
+				7C96A8A9216C8088007AAD82 /* IMGroupMemberViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3448,6 +3501,7 @@
 				7C2519451F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m in Sources */,
 				7CEFC7C01F999A88001D8C84 /* ModifyNameViewController.m in Sources */,
 				921FF6B5200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m in Sources */,
+				7C96A8B0216C8113007AAD82 /* GetContactRequest.m in Sources */,
 				435F77B61F79F16E00247BD8 /* GetResourceDetailRequest.m in Sources */,
 				7C2519B21F690DB00001B577 /* MessageViewController.m in Sources */,
 				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
@@ -3458,6 +3512,7 @@
 				7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */,
 				7CE143BF21563EAB00A9E20A /* CertificateCell.m in Sources */,
 				7C212DD11F6A75500007AE01 /* ChooseQuestionResultCell.m in Sources */,
+				7C96A8C0216CBA16007AAD82 /* ClazsMemberListRequest.m in Sources */,
 				7C212DE61F6B6DEA0007AE01 /* CourseListHeaderView.m in Sources */,
 				7CBC5BC1204D3325004ACA04 /* CompleteUserInfoViewController.m in Sources */,
 				E91E5DB72047B90E00052FBA /* ImMqtt.pbobjc.m in Sources */,
@@ -3671,6 +3726,7 @@
 				7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */,
 				7C96A89E216C509B007AAD82 /* HubeiContactsDetailViewController.m in Sources */,
 				7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */,
+				7C96A8AA216C8088007AAD82 /* IMGroupMemberViewController.m in Sources */,
 				E95434BD20D1380900BCF63C /* TaskFilterItemView.m in Sources */,
 				7CBC5B922049326E004ACA04 /* CourseInfoViewController.m in Sources */,
 				E91E5D892047B8C900052FBA /* IMEventHandlerFactory.m in Sources */,
@@ -3749,6 +3805,8 @@
 				E94DDE5820D8D8A000729A67 /* GetCommentRecordsRequest.m in Sources */,
 				7C66B2782027F6050067E242 /* HeadImageCameraOverlayView.m in Sources */,
 				E90C514C204D49440008F92A /* ContactsCurrentClassView.m in Sources */,
+				7C96A8A7216C7AA3007AAD82 /* IMGroupMemberView.m in Sources */,
+				7C96A8A4216C59A3007AAD82 /* GetMemberIdRequest.m in Sources */,
 				7C2519171F68EA8A0001B577 /* LogFormatter.m in Sources */,
 				7C2518E21F68E68D0001B577 /* CloneCategory.m in Sources */,
 				922084231F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m in Sources */,
@@ -3784,6 +3842,7 @@
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
 				E93327F020638DF800CED82E /* IMSlideView.m in Sources */,
 				E94DDE5220D8AD2700729A67 /* SaveUserEvaluateRequest.m in Sources */,
+				7C96A8BF216CBA16007AAD82 /* ClazsMemberListFetcher.m in Sources */,
 				E91E5D682047B86B00052FBA /* IMServiceManager.m in Sources */,
 				7C2519611F68EBA90001B577 /* YXGetRequest.m in Sources */,
 				7C212DC71F6A5D120007AE01 /* ResourceListViewController.m in Sources */,
@@ -3795,12 +3854,14 @@
 				7CBC5BA620493F64004ACA04 /* ProfessorDetailViewController.m in Sources */,
 				7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */,
 				7C7A9ED4206B5008003EE15B /* IMHistoryMessageFetcher.m in Sources */,
+				7C96A8A1216C5815007AAD82 /* DetailCellView.m in Sources */,
 				E91E5D8B2047B8C900052FBA /* IMEventHandler.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
 				438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */,
 				432F90B91F74DF4600FCF655 /* UserSignInRequest.m in Sources */,
 				9220842C1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m in Sources */,
 				E95434A520CF683100BCF63C /* DoHomeworkViewController.m in Sources */,
+				7C96A8C3216CBA83007AAD82 /* ContactsListCell.m in Sources */,
 				7CBC5BAF204CEAF2004ACA04 /* GetCheckCodeRequest.m in Sources */,
 				7C212DEE1F6B72540007AE01 /* CourseCommentCell.m in Sources */,
 				9279A7021F6A8468004A1E2B /* PhotosScrollView.m in Sources */,
@@ -3838,6 +3899,7 @@
 				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
 				7C3F759620DA5A0F00F4F418 /* PositionSignInRequest.m in Sources */,
+				7CEDC7B7216DB3A900985EBF /* GetUserInfoDetailRequest.m in Sources */,
 				4369597F1FDE27B5009E5C43 /* ClassEmptyViewController.m in Sources */,
 				4322CA491FD9531600E7B565 /* QASlideItemBaseView.m in Sources */,
 				7CBC5B8F2049326E004ACA04 /* CourseDetailViewController.m in Sources */,

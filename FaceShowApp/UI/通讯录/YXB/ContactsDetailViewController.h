@@ -7,8 +7,7 @@
 //
 
 #import "ScrollBaseViewController.h"
-
 @interface ContactsDetailViewController : ScrollBaseViewController
 @property (nonatomic, strong) NSString *userId;
-@property (nonatomic, assign) BOOL isAdministrator;
+@property (nonatomic, strong) NSString *fromGroupTopicId;
 @end

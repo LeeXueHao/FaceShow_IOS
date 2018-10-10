@@ -7,7 +7,7 @@
 //
 
 #import "ContactsViewController.h"
-#import "ContactsCell.h"
+#import "ContactsListCell.h"
 #import "ChatViewController.h"
 #import "IMDatabaseManager.h"
 #import "ContactsSearchBarView.h"
@@ -15,7 +15,6 @@
 #import "ContactsClassFilterView.h"
 #import "AlertView.h"
 #import "IMConfig.h"
-#import "ContactMemberContactsRequest.h"
 #import "IMMember.h"
 #import "IMUserInterface.h"
 #import "IMTopicInfoItem.h"
@@ -23,20 +22,22 @@
 #import "UserInfoViewController.h"
 #import "ContactsDetailViewController.h"
 #import "HubeiContactsDetailViewController.h"
+#import "ClassListRequest.h"
+#import "ClazsMemberListFetcher.h"
+#import "ClazsMemberListRequest.h"
+
 
 @interface ContactsViewController () <UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) ErrorView *errorView;
-@property (nonatomic, strong) EmptyView *emptyView;
 @property(nonatomic, strong) ContactsSearchBarView *searchView;
-@property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) ContactsCurrentClassView *currentClassView;
 @property(nonatomic, strong) ContactsClassFilterView *classFilterView;
 @property(nonatomic, strong) AlertView *alertView;
-
 @property(nonatomic, assign) NSInteger currentSelectedGroupIndex;
-@property (nonatomic, strong) NSMutableArray <ContactMemberContactsRequestItem_Data_Gcontacts_Groups *> *groupsArray;//通讯录的所有数据
-@property (nonatomic, strong) NSArray <ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *> *dataArray;//当前班级的数据
-@property(nonatomic, strong) ContactMemberContactsRequest *request;
+@property (nonatomic, strong) NSArray<ClassListRequestItem_clazsInfos *> *totalClazsArray;
+@property(nonatomic, strong) ClassListRequest *getClassRequest;
+@property(nonatomic, strong) ClassListRequestItem *clazsListItem;
+@property(nonatomic, strong) ClassListRequestItem_clazsInfos *selectedClass;
+@property(nonatomic, copy) NSString *keywords;
 @end
 
 @implementation ContactsViewController
@@ -45,16 +46,11 @@
     [super viewDidLoad];
     self.title = @"通讯录";
     self.currentSelectedGroupIndex = 0;
-    self.groupsArray = [NSMutableArray array];
-    self.dataArray = [NSArray array];
+    self.keywords = @"";
     self.emptyView = [[EmptyView alloc]init];
     self.errorView = [[ErrorView alloc]init];
-    WEAK_SELF
-    [self.errorView setRetryBlock:^{
-        STRONG_SELF
-        [self requestContacts];
-    }];
-    [self requestContacts];
+    [self requestClasses];
+    [self setupUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,46 +58,128 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)requestContacts {
-    NSString *reqId = [IMConfig generateUniqueID];
-    [self.request stopRequest];
-    self.request = [[ContactMemberContactsRequest alloc]init];
-    self.request.reqId = reqId;
-    WEAK_SELF
+- (void)requestClasses {
+    [self.getClassRequest stopRequest];
+    self.getClassRequest = [[ClassListRequest alloc]init];
+    self.getClassRequest.projectId = [UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.projectId;
+    self.getClassRequest.userId = [UserManager sharedInstance].userModel.userID;
     [self.view nyx_startLoading];
-    [self.request startRequestWithRetClass:[ContactMemberContactsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    WEAK_SELF
+    [self.getClassRequest startRequestWithRetClass:[ClassListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self.view nyx_stopLoading];
         if (error) {
+            [self.view nyx_stopLoading];
             [self.view addSubview:self.errorView];
             [self.errorView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo(@0);
             }];
+            WEAK_SELF
+            [self.errorView setRetryBlock:^{
+                STRONG_SELF
+                [self requestClasses];
+            }];
             return;
         }
-        ContactMemberContactsRequestItem *item = (ContactMemberContactsRequestItem *)retItem;
-        if (!item.data.contacts || item.data.contacts.groups.count <= 0) {
+        self.clazsListItem = (ClassListRequestItem *)retItem;
+        if (self.clazsListItem.data.clazsInfos.count == 0) {
+            [self.view nyx_stopLoading];
             [self.view addSubview:self.emptyView];
             [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo(@0);
             }];
             return;
         }
-        [self.errorView removeFromSuperview];
-        [self.emptyView removeFromSuperview];
-        [self setupUI];
-        ContactMemberContactsRequestItem_Data_Gcontacts *contacts = item.data.contacts;
-        NSMutableArray *array = [NSMutableArray array];
-        for (ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group in contacts.groups) {
-            [self.groupsArray addObject:group];
-            self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;//当前班级的数据源
-            [array addObject:group];
-        }
-        self.classFilterView.selectedRow = self.currentSelectedGroupIndex;
-        self.classFilterView.dataArray = array.copy;//班级筛选的数据
-        [self.classFilterView reloadData];
-        self.currentClassView.title = self.groupsArray[self.currentSelectedGroupIndex].groupName;//当前班级的名字
+        self.classFilterView.clazsArray = self.clazsListItem.data.clazsInfos;
+        self.selectedClass = self.clazsListItem.data.clazsInfos.firstObject;
+        self.totalClazsArray = self.clazsListItem.data.clazsInfos;
+        self.currentClassView.title = self.selectedClass.clazsName;
+        self.currentClassView.selectClassId = self.selectedClass.clazsId;
+        //取第一个进行请求
+        //...
+        [self firstPageFetch];
     }];
+}
+
+- (void)firstPageFetch{
+    [self.dataFetcher stop];
+    if(!self.selectedClass.clazsId){
+        return;
+    }
+    ClazsMemberListFetcher *fetcher = [[ClazsMemberListFetcher alloc] init];
+    fetcher.pagesize = 10;
+    fetcher.keyWords = self.keywords;
+    fetcher.clazsId = self.selectedClass.clazsId;
+    self.dataFetcher = fetcher;
+    @weakify(self);
+    [self.dataFetcher startWithBlock:^(int total, NSArray *retItemArray, NSError *error) {
+        @strongify(self); if (!self) return;
+        [self.view nyx_stopLoading];
+        [self stopAnimation];
+        if (error) {
+            if (isEmpty(self.dataArray)) {  // no cache 强提示, 加载失败界面
+                self->_total = 0;
+                [self showErroView];
+            } else {
+                [self.view nyx_showToast:error.localizedDescription];
+            }
+            [self checkHasMore];
+            return;
+        }
+
+        // 隐藏失败界面
+        [self hideErrorView];
+        [self->_header setLastUpdateTime:[NSDate date]];
+        self.total = total;
+        [self.dataArray removeAllObjects];
+        if (isEmpty(retItemArray.firstObject) && isEmpty(retItemArray.lastObject)) {
+            self.emptyView.hidden = NO;
+        } else {
+            self.emptyView.hidden = YES;
+            [self.dataArray addObjectsFromArray:retItemArray];
+            [self checkHasMore];
+            [self.dataFetcher saveToCache];
+        }
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)morePageFetch {
+    [self.dataFetcher stop];
+    SAFE_CALL(self.requestDelegate, requestWillFetchMore);
+    @weakify(self);
+    [self.dataFetcher startWithBlock:^(int total, NSArray *retItemArray, NSError *error) {
+        @strongify(self); if (!self) return;
+        SAFE_CALL_OneParam(self.requestDelegate, requestEndFetchMoreWithError, error);
+        @weakify(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            @strongify(self); if (!self) return;
+            [self->_footer endRefreshing];
+            if (error) {
+                self.dataFetcher.pageindex--;
+                [self.view nyx_showToast:error.localizedDescription];
+                return;
+            }
+            NSMutableArray *students = [NSMutableArray arrayWithArray:self.dataArray.lastObject];
+            [students addObjectsFromArray:retItemArray.lastObject];
+            self.dataArray[1] = students;
+            self.total = total;
+            [self.tableView reloadData];
+            [self checkHasMore];
+        });
+    }];
+}
+
+- (void)showErroView {
+    self.errorView.hidden = NO;
+    [self.view bringSubviewToFront:self.errorView];
+}
+
+- (void)hideErrorView {
+    self.errorView.hidden = YES;
+}
+
+- (void)checkHasMore {
+    [self setPullupViewHidden:[self.dataArray.lastObject count] >= _total];
 }
 
 #pragma mark - setupUI
@@ -110,7 +188,8 @@
     self.searchView =  [[ContactsSearchBarView alloc]init];
     [self.searchView setSearchBlock:^(NSString *text){
         STRONG_SELF
-        [self searchContanctslWithKeyword:text];
+        self.keywords = text;
+        [self firstPageFetch];
         [TalkingData trackEvent:@"点击聊聊搜索框"];
     }];
     [self.view addSubview:self.searchView];
@@ -133,15 +212,13 @@
         make.top.mas_equalTo(self.searchView.mas_bottom).mas_offset(10);
         make.height.mas_equalTo(50.f);
     }];
-    
-    self.tableView = [[UITableView alloc]init];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.tableView.estimatedSectionHeaderHeight = 0.f;
     self.tableView.estimatedSectionFooterHeight = 0.f;
-    [self.tableView registerClass:[ContactsCell class] forCellReuseIdentifier:@"ContactsCell"];
+    [self.tableView registerClass:[ContactsListCell class] forCellReuseIdentifier:@"ContactsListCell"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
@@ -149,27 +226,6 @@
     }];
     
     self.classFilterView = [[ContactsClassFilterView alloc]init];
-}
-
-- (void)searchContanctslWithKeyword:(NSString *)keyword {
-    self.dataArray = self.groupsArray[self.currentSelectedGroupIndex].contacts;
-    if (self.currentClassView.isFiltering) {
-        [self.alertView hide];
-    }
-    if (keyword.length <= 0) {
-        return;
-    }
-    NSMutableArray *resultArray = [NSMutableArray array];
-    for (int i = 0; i < self.dataArray.count; i++) {
-        ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *contactsInfo = self.dataArray[i];
-        NSString *string = contactsInfo.memberInfo.memberName;
-        if (string.length >= keyword.length) {
-            if ([string rangeOfString:keyword].location != NSNotFound) {
-                [resultArray addObject:contactsInfo];
-            }
-        }
-    }
-    self.dataArray = resultArray;
 }
 
 - (void)showFilterView {
@@ -211,16 +267,16 @@
             [view layoutIfNeeded];
         }];
     }];
-    [filterView setContactsClassFilterCompletedBlock:^(ContactMemberContactsRequestItem_Data_Gcontacts_Groups *selectedGroup, NSInteger selectedRow) {
+    [filterView setClazsFilterCompleteBlock:^(ClassListRequestItem_clazsInfos *selectClass, NSInteger selectedRow) {
         STRONG_SELF
         [alert hide];
-        if (![selectedGroup.groupName isEqualToString:self.currentClassView.title]) {
+        if (![selectClass.clazsId isEqualToString:self.selectedClass.clazsId]) {
             self.currentSelectedGroupIndex = selectedRow;
-            self.currentClassView.title = selectedGroup.groupName;
-            //切换相应的班级的联系人列表
-            self.dataArray = self.groupsArray[selectedRow].contacts;
-            //根据关键字筛选联系人
-            [self searchContanctslWithKeyword:self.searchView.textField.text];
+            ClassListRequestItem_clazsInfos *clazsInfo = self.totalClazsArray[selectedRow];
+            self.selectedClass = clazsInfo;
+            self.currentClassView.title = clazsInfo.clazsName;
+            self.currentClassView.selectClassId = clazsInfo.clazsId;
+            [self firstPageFetch];
         }
         [TalkingData trackEvent:@"点击聊聊切换班级"];
     }];
@@ -241,34 +297,56 @@
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArray.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.dataArray[section] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 51;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    UIView *whiteView = [[UIView alloc] init];
+    whiteView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    [headerView addSubview:whiteView];
+    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-1);
+    }];
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [UIFont systemFontOfSize:16];
+    label.textColor = [UIColor colorWithHexString:@"999999"];
+    label.text = section ? @"学员" : @"班主任";
+    [whiteView addSubview:label];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.centerY.mas_equalTo(0);
+    }];
     return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactsCell" forIndexPath:indexPath];
-    cell.data = self.dataArray[indexPath.row];
-    cell.isShowLine = self.dataArray.count - 1 == indexPath.row ?  NO : YES;
+    ContactsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactsListCell" forIndexPath:indexPath];
+    cell.data = self.dataArray[indexPath.section][indexPath.row];
+    cell.isLastRow = indexPath.row == [self.dataArray[indexPath.section] count] - 1;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ChatViewController *chatVC = [[ChatViewController alloc]init];
-    IMMember *member = [self.dataArray[indexPath.row] toIMMember];
+    GetUserInfoRequestItem_Data *data = self.dataArray[indexPath.section][indexPath.row];
     //如果是自己则返回
-    GetUserInfoRequestItem_imTokenInfo *info = [UserManager sharedInstance].userModel.imInfo;
-    if (member.memberID == [info.imMember toIMMember].memberID) {
-//        return;
+    if ([data.userId isEqualToString:[UserManager sharedInstance].userModel.userID]) {
         //跳转我的个人资料页面
 #ifdef HuBeiApp
         HuBeiUserInfoViewController *VC = [[HuBeiUserInfoViewController alloc] init];
@@ -278,50 +356,18 @@
         [self.navigationController pushViewController:VC animated:YES];
 #endif
     }else{
-        ContactsDetailViewController *vc = [[ContactsDetailViewController alloc] init];
-        vc.userId = [NSString stringWithFormat:@"%lld",member.userID];
-        vc.isAdministrator = NO;
+#ifdef HuBeiApp
+        HubeiContactsDetailViewController *vc = [[HubeiContactsDetailViewController alloc] init];
+        vc.userId = data.userId;
+        vc.fromGroupTopicId = self.selectedClass.topicId;
         [self.navigationController pushViewController:vc animated:YES];
-
-//#ifdef HuBeiApp
-//        HubeiContactsDetailViewController *vc = [[HubeiContactsDetailViewController alloc] init];
-//        vc.userId = [NSString stringWithFormat:@"%lld",member.userID];
-//        vc.isAdministrator = NO;
-//        [self.navigationController pushViewController:vc animated:YES];
-//#else
-//        ContactsDetailViewController *vc = [[ContactsDetailViewController alloc] init];
-//        vc.userId = [NSString stringWithFormat:@"%lld",member.userID];
-//        vc.isAdministrator = NO;
-//        [self.navigationController pushViewController:vc animated:YES];
-//#endif
+#else
+        ContactsDetailViewController *vc = [[ContactsDetailViewController alloc] init];
+        vc.userId = [NSString stringWithFormat:@"%@",data.userId];
+        vc.fromGroupTopicId = self.selectedClass.topicId;
+        [self.navigationController pushViewController:vc animated:YES];
+#endif
     }
-//    ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group = self.groupsArray[self.currentSelectedGroupIndex];
-//    IMTopic *topic = [IMUserInterface findTopicWithMember:member];
-//    if (topic) {
-//        chatVC.topic = topic;
-//    }else {
-//        IMTopicInfoItem *item = [[IMTopicInfoItem alloc]init];
-//        item.member = member;
-//        item.group = group;
-//        chatVC.info = item;
-//    }
-//    [self.navigationController pushViewController:chatVC animated:YES];
-//    [TalkingData trackEvent:@"点击通讯录中头像"];
-
 }
 
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    [self.view endEditing:YES];
-//}
-
-- (void)setCurrentSelectedGroupIndex:(NSInteger)currentSelectedGroupIndex {
-    _currentSelectedGroupIndex = currentSelectedGroupIndex;
-    self.dataArray = self.groupsArray[currentSelectedGroupIndex].contacts;
-}
-
-- (void)setDataArray:(NSArray<ContactMemberContactsRequestItem_Data_Gcontacts_ContactsInfo *> *)dataArray {
-    _dataArray = dataArray;
-    [self.tableView reloadData];
-}
 @end

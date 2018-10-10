@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ContactMemberContactsRequestItem_Data_Gcontacts_Groups;
+@class ClassListRequestItem_clazsInfos;
 
-typedef void(^ContactsClassFilterCompletedBlock) (ContactMemberContactsRequestItem_Data_Gcontacts_Groups *selectedGroup, NSInteger selectedRow);
+typedef void(^ClazsListFilterCompletedBlock)(ClassListRequestItem_clazsInfos *selectClass,NSInteger selectedRow);
 
 @interface ContactsClassFilterView : UIView
 @property(nonatomic, assign) NSInteger selectedRow;
-@property(nonatomic, strong) NSArray *dataArray;
-- (void)setContactsClassFilterCompletedBlock:(ContactsClassFilterCompletedBlock)block;
+@property(nonatomic, strong) NSArray<ClassListRequestItem_clazsInfos *> *clazsArray;
+
+- (void)setClazsFilterCompleteBlock:(ClazsListFilterCompletedBlock)block;
+
 - (CGFloat)heightForContactsClassFilterView;
 - (void)reloadData;
 @end

@@ -28,6 +28,15 @@
 @end
 
 @implementation GetUserInfoRequestItem_Data
+- (NSString *)sexString {
+    return self.sex.integerValue ? @"男" : @"女";
+}
+- (NSString *)stageName {
+    if ([_stageName isEqualToString:@"通识"]) {
+        return @"跨学段";
+    }
+    return _stageName;
+}
 @end
 
 @implementation GetUserInfoRequestItem

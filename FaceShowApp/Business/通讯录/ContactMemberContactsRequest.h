@@ -57,9 +57,6 @@
 @property (nonatomic, strong) NSArray<ContactMemberContactsRequestItem_Data_Gcontacts_Personals, Optional> *personals;
 @end
 
-
-@protocol GetUserInfoRequestItem_Data<NSObject>
-@end
 @interface ContactMemberContactsRequestItem_Data : JSONModel
 @property (nonatomic, strong) ContactMemberContactsRequestItem_Data_Gcontacts<Optional> *contacts;
 @property (nonatomic, strong) NSString<Optional> *imEvent;
