@@ -129,7 +129,8 @@
         make.size.mas_equalTo(CGSizeMake(25, 25));
         make.centerY.mas_equalTo(0);
     }];
-    [self.sendMessageBtn setHidden:isEmpty(self.fromGroupTopicId)];
+    BOOL hideSendMessage = isEmpty(self.fromGroupTopicId) || ([self.userId isEqualToString:[UserManager sharedInstance].userModel.userID]);
+    [self.sendMessageBtn setHidden:hideSendMessage];
     
     UILabel *nameLabel = [[UILabel alloc] init];
     nameLabel.font = [UIFont boldSystemFontOfSize:18];
