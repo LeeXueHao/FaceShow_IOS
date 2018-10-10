@@ -30,6 +30,7 @@
     self.headImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.headImageView.layer.cornerRadius = 6;
     self.headImageView.clipsToBounds = YES;
+    self.headImageView.backgroundColor = [UIColor colorWithHexString:@"dadde0"];
     [self addSubview:self.headImageView];
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);

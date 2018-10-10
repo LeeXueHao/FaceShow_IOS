@@ -21,7 +21,7 @@
 -(ContactMemberContactsRequestItem_Data_Gcontacts_Groups *)toContactsGroup{
     ContactMemberContactsRequestItem_Data_Gcontacts_Groups *group = [[ContactMemberContactsRequestItem_Data_Gcontacts_Groups alloc]init];
     group.groupId = self.topicId;
-    group.groupName = self.topicName;
+    group.groupName = self.topicGroup;
     return group;
 }
 @end
