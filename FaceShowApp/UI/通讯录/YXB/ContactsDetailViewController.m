@@ -9,12 +9,8 @@
 #import "ContactsDetailViewController.h"
 #import "ErrorView.h"
 #import "GetUserInfoRequest.h"
-#import "UserSignInPercentRequest.h"
 #import "GetMemberIdRequest.h"
 #import "DetailCellView.h"
-#import "DetailWithAttachmentCellView.h"
-#import "UserSignInListViewController.h"
-#import "UnsignedMemberListViewController.h"
 #import "ChatViewController.h"
 #import "IMUserInterface.h"
 #import "IMTopicInfoItem.h"
@@ -23,10 +19,7 @@
 @interface ContactsDetailViewController ()
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) MASViewAttribute *lastBottom;
-@property (nonatomic, strong) DetailCellView *percentCell;
-
 @property (nonatomic, strong) GetUserInfoRequest *userInfoRequest;
-@property (nonatomic, strong) UserSignInPercentRequest *percentRequest;
 @property (nonatomic, strong) GetUserInfoRequestItem_Data *data;
 @property (nonatomic, strong) GetMemberIdRequest *memberIdRequest;
 @property (nonatomic, strong) GetMemberIdRequestItem_data *memberData;
@@ -60,16 +53,6 @@
     [self requestMemberIdAndComplete:^(NSError *error) {
 
     }];
-
-    //当前用户包含教师角色 再请求班级列表 看自己当前是否在本班级
-    GetUserRolesRequestItem_data *data = [UserManager sharedInstance].userModel.roleRequestItem.data;
-    BOOL isTeacher = [data roleExists:UserRole_Teacher] || [data roleExists:UserRole_UnknownTeacher];
-    if (isTeacher) {
-        [self requestClassAndComplete:^(NSError *error) {
-            STRONG_SELF
-            [self refreshSendButton];
-        }];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,8 +84,8 @@
 
 - (void)requestMemberIdAndComplete:(void(^)(NSError *error))completeBlock{
     self.memberIdRequest = [[GetMemberIdRequest alloc]init];
-    self.memberIdRequest.userId = self.userId;
-    self.memberIdRequest.fromGroupTopicId = [UserManager sharedInstance].userModel.currentClass.topicId;
+    self.memberIdRequest.userId = self.data.userId;
+    self.memberIdRequest.fromGroupTopicId = self.fromGroupTopicId;
     WEAK_SELF
     [self.memberIdRequest startRequestWithRetClass:[GetMemberIdRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -110,51 +93,6 @@
         self.memberData = item.data;
         BLOCK_EXEC(completeBlock,error);
     }];
-}
-
-- (void)requestClassAndComplete:(void(^)(NSError *error))completeBlock{
-    [self.getClassRequest stopRequest];
-    self.getClassRequest = [[ClassListRequest alloc]init];
-    GetUserPlatformRequestItem_platformInfos *plat = [UserManager sharedInstance].userModel.platformRequestItem.data.platformInfos.firstObject;
-    self.getClassRequest.platId = plat.platformId;
-    WEAK_SELF
-    [self.getClassRequest startRequestWithRetClass:[ClassListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        ClassListRequestItem *item = (ClassListRequestItem *)retItem;
-        self.allClassInfo = [NSArray arrayWithArray:item.data.clazsInfos];
-        BLOCK_EXEC(completeBlock,error);
-    }];
-}
-
-- (void)refreshSendButton {
-    if (!self.allClassInfo) {
-        return;
-    }
-    if (![self.allClassInfo count]) {
-        return;
-    }
-    if (!self.sendMessageBtn) {
-        return;
-    }
-    ClassListRequestItem_clazsInfos *currentInfo = [UserManager sharedInstance].userModel.currentClass;
-    BOOL isInClass = NO;
-    //当前用户在当前的班级里面 才可以聊天
-    for (ClassListRequestItem_clazsInfos *info in self.allClassInfo) {
-        if ([currentInfo.clazsId isEqualToString:info.clazsId]) {
-            isInClass = YES;
-            break;
-        }
-    }
-    if (!isInClass) {
-        return;
-    }
-    [self.sendMessageBtn setHidden:NO];
-    [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(0);
-        make.left.mas_equalTo(self.avatarImageView.mas_right).offset(15);
-        make.right.mas_equalTo(self.sendMessageBtn.mas_left).offset(-15);
-    }];
-
 }
 
 #pragma mark - setupUI
@@ -186,13 +124,18 @@
     self.sendMessageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.sendMessageBtn setImage:[UIImage imageNamed:@"对话"] forState:0];
     [self.sendMessageBtn addTarget:self action:@selector(clickSendMessageAction) forControlEvents:UIControlEventTouchUpInside];
+    WEAK_SELF
+    [[self.sendMessageBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self startChat];
+    }];
     [headWhiteView addSubview:self.sendMessageBtn];
     [self.sendMessageBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
         make.size.mas_equalTo(CGSizeMake(25, 25));
         make.centerY.mas_equalTo(0);
     }];
-    [self.sendMessageBtn setHidden:YES];
+    [self.sendMessageBtn setHidden:isEmpty(self.fromGroupTopicId)];
 
     UILabel *nameLabel = [[UILabel alloc] init];
     nameLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -201,7 +144,7 @@
     [headWhiteView addSubview:nameLabel];
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(avatarImageView.mas_right).offset(15);
-        make.right.mas_equalTo(-15);
+        make.right.mas_equalTo(self.sendMessageBtn.mas_left).offset(-15);
         make.centerY.mas_equalTo(0);
     }];
     self.nameLabel = nameLabel;
@@ -252,74 +195,12 @@
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(46);
             make.top.mas_equalTo(self.lastBottom);
-            if (self.isAdministrator && i == titles.count - 1){
+            if (i == titles.count - 1){
                 make.bottom.mas_equalTo(0);
             }
         }];
         self.lastBottom = detailCell.mas_bottom;
     }
-    if (!self.isAdministrator) {
-        [self setupSignInPercent];
-        [self setupObserver];
-        [self requestSignInPercent];
-    }
-}
-
-- (void)setupSignInPercent {
-    self.percentCell = [[DetailCellView alloc] initWithTitle:@"签到率" content:@""];
-    self.percentCell.contentLabel.textColor = [UIColor colorWithHexString:@"0068bd"];
-    [self.contentView addSubview:self.percentCell];
-    [self.percentCell mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.lastBottom).offset(5);
-        make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(46);
-    }];
-    
-    DetailWithAttachmentCellView *recordCell = [[DetailWithAttachmentCellView alloc] init];
-    recordCell.title = @"签到记录";
-    recordCell.needBottomLine = NO;
-    WEAK_SELF
-    recordCell.clickBlock = ^{
-        STRONG_SELF
-        [TalkingData trackEvent:@"查看学员签到记录"];
-        UserSignInListViewController *vc = [[UserSignInListViewController alloc] init];
-        vc.userId = self.userId;
-        vc.userName = self.data.realName;
-        [self.navigationController pushViewController:vc animated:YES];
-    };
-    [self.contentView addSubview:recordCell];
-    [recordCell mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.percentCell.mas_bottom);
-        make.height.mas_equalTo(45);
-        make.bottom.mas_equalTo(0);
-    }];
-}
-
-- (void)setupObserver {
-    WEAK_SELF
-    [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kReplenishSignInDidSuccessNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        [self requestSignInPercent];
-    }];
-}
-
-- (void)requestSignInPercent {
-    [self.percentRequest stopRequest];
-    self.percentRequest = [[UserSignInPercentRequest alloc] init];
-    self.percentRequest.userId = self.userId;
-    [self.view.window nyx_startLoading];
-    WEAK_SELF
-    [self.percentRequest startRequestWithRetClass:[UserSignInPercentRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [self.view.window nyx_stopLoading];
-        if (error) {
-            [self.view nyx_showToast:error.localizedDescription];
-            return;
-        }
-        UserSignInPercentRequestItem *item = (UserSignInPercentRequestItem *)retItem;
-        self.percentCell.contentLabel.text = [NSString stringWithFormat:@"%.f%%", roundf(item.data.userSigninNum.floatValue/item.data.totalSigninNum.floatValue*100)];
-    }];
 }
 
 -(void)clickSendMessageAction{

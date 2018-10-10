@@ -52,7 +52,7 @@
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     [self addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(0);
+        make.right.bottom.mas_equalTo(0);
         make.left.mas_equalTo(self.titleLabel.mas_left);
         make.height.mas_equalTo(1);
     }];
