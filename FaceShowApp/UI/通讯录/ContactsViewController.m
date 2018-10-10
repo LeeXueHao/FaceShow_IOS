@@ -345,17 +345,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GetUserInfoRequestItem_Data *data = self.dataArray[indexPath.section][indexPath.row];
-    //如果是自己则返回
-    if ([data.userId isEqualToString:[UserManager sharedInstance].userModel.userID]) {
-        //跳转我的个人资料页面
-#ifdef HuBeiApp
-        HuBeiUserInfoViewController *VC = [[HuBeiUserInfoViewController alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-#else
-        UserInfoViewController *VC = [[UserInfoViewController alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-#endif
-    }else{
+//    //如果是自己则返回
+//    if ([data.userId isEqualToString:[UserManager sharedInstance].userModel.userID]) {
+//        //跳转我的个人资料页面
+//#ifdef HuBeiApp
+//        HuBeiUserInfoViewController *VC = [[HuBeiUserInfoViewController alloc] init];
+//        [self.navigationController pushViewController:VC animated:YES];
+//#else
+//        UserInfoViewController *VC = [[UserInfoViewController alloc] init];
+//        [self.navigationController pushViewController:VC animated:YES];
+//#endif
+//    }else{
 #ifdef HuBeiApp
         HubeiContactsDetailViewController *vc = [[HubeiContactsDetailViewController alloc] init];
         vc.userId = data.userId;
@@ -367,7 +367,7 @@
         vc.fromGroupTopicId = self.selectedClass.topicId;
         [self.navigationController pushViewController:vc animated:YES];
 #endif
-    }
+//    }
 }
 
 @end
