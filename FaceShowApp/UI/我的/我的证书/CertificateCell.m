@@ -7,8 +7,11 @@
 //
 
 #import "CertificateCell.h"
-
+#import "MineCertiRequest.h"
 @interface CertificateCell()
+@property (nonatomic, strong) UIView *redPointView;
+@property (nonatomic, strong) UIImageView *certiImageView;
+@property (nonatomic, strong) UILabel *certiNameLabel;
 @property (nonatomic, strong) UIView *bottomLine;
 @end
 
@@ -24,25 +27,32 @@
 - (void)setupUI {
 
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
-
-    int i = arc4random()%2;
-
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.image = i?[UIImage imageNamed:@"结节证书"]:[UIImage imageNamed:@"优秀学员证书"];
-    [self.contentView addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.certiImageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.certiImageView];
+    [self.certiImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
         make.left.mas_equalTo(15);
         make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
 
-    UILabel *label = [[UILabel alloc] init];
-    label.text = i ? @"结业证书":@"优秀学员证书";
-    label.textColor = [UIColor colorWithHexString:@"333333"];
-    label.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(imageView.mas_right).offset(15);
+    UIView *redPointView = [[UIView alloc] init];
+    redPointView.layer.cornerRadius = 4.5f;
+    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    [self.certiImageView addSubview:redPointView];
+    [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(3.5);
+        make.top.mas_equalTo(-3.5);
+        make.size.mas_equalTo(CGSizeMake(9, 9));
+    }];
+    self.redPointView = redPointView;
+    [self.redPointView setHidden:YES];
+
+    self.certiNameLabel = [[UILabel alloc] init];
+    self.certiNameLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.certiNameLabel.font = [UIFont systemFontOfSize:14];
+    [self.contentView addSubview:self.certiNameLabel];
+    [self.certiNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.certiImageView.mas_right).offset(15);
         make.centerY.mas_equalTo(0);
     }];
 
@@ -63,6 +73,13 @@
         make.height.mas_equalTo(1);
     }];
     
+}
+
+- (void)setElements:(MineCertiRequest_Item_userCertList *)elements{
+    _elements = elements;
+    self.certiImageView.image = elements.certType.intValue == 1?[UIImage imageNamed:@"结节证书"]:[UIImage imageNamed:@"优秀学员证书"];
+    self.certiNameLabel.text = elements.certName;
+    [self.redPointView setHidden:elements.hasRead.intValue != 0];
 }
 
 - (void)setIsLastRow:(BOOL)isLastRow{

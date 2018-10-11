@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MineCertiRequest_Item_clazsCertList;
 @interface CertificateHeaderView : UIView
-
+@property (nonatomic, strong) MineCertiRequest_Item_clazsCertList *certList;
 @end
 

@@ -7,7 +7,7 @@
 //
 
 #import "CertificateHeaderView.h"
-
+#import "MineCertiRequest.h"
 @interface CertificateHeaderView()
 @property (nonatomic, strong) UILabel *projectLabel;
 @property (nonatomic, strong) UILabel *classLabel;
@@ -46,12 +46,12 @@
         make.top.mas_equalTo(self.mas_centerY).offset(4.5);
     }];
 
-    [self setupMock];
 }
 
-- (void)setupMock{
-    [self.projectLabel setText:@"尚睿通团队建设活动"];
-    [self.classLabel setText:@"研修宝年会版团建"];
+- (void)setCertList:(MineCertiRequest_Item_clazsCertList *)certList{
+    _certList = certList;
+    [self.projectLabel setText:certList.projectName];
+    [self.classLabel setText:certList.clazsName];
 }
 
 /*

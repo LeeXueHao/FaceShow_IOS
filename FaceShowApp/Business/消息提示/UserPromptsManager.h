@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GetUserPromptsRequest.h"
+#import "GetUserNoReadCertRequest.h"
 
 extern NSString * const kHasNewTaskNotification;
 extern NSString * const kHasNewMomentNotification;

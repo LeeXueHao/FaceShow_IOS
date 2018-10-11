@@ -18,6 +18,7 @@ NSString * const kHasReadCertificateNotification = @"kHasReadCertificateNotifica
 @interface UserPromptsManager ()
 @property (nonatomic, strong) YXGCDTimer *timer;
 @property (nonatomic, strong) GetUserPromptsRequest *promptRequest;
+@property (nonatomic, strong) GetUserNoReadCertRequest *certRequest;
 @end
 
 @implementation UserPromptsManager
@@ -57,12 +58,29 @@ NSString * const kHasReadCertificateNotification = @"kHasReadCertificateNotifica
     }];
 }
 
+- (void)performCertRequest{
+    [self.certRequest stopRequest];
+    self.certRequest = [[GetUserNoReadCertRequest alloc] init];
+    [self.certRequest startRequestWithRetClass:[GetUserNoReadCertRequest_Item class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        if (error) {
+            return;
+        }
+        GetUserNoReadCertRequest_Item *item = (GetUserNoReadCertRequest_Item *)retItem;
+        if(item.data.existNoReadCert.intValue > 0){
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHasNewCertificateNotification object:nil];
+        }else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHasReadCertificateNotification object:nil];
+        }
+    }];
+}
+
 - (void)resumeHeartbeat {
     WEAK_SELF
     if (!self.timer) {
         self.timer = [[YXGCDTimer alloc] initWithInterval:30 repeats:YES triggerBlock:^{
             STRONG_SELF
             [self performRequest];
+            [self performCertRequest];
         }];
     }
     [self.timer resume];

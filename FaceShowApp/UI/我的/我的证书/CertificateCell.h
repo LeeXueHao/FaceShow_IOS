@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MineCertiRequest_Item_userCertList;
 @interface CertificateCell : UITableViewCell
+@property (nonatomic, strong) MineCertiRequest_Item_userCertList *elements;
 @property (nonatomic, assign) BOOL isLastRow;
 @end
 

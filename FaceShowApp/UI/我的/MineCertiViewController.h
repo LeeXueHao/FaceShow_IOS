@@ -7,9 +7,8 @@
 //
 
 #import "PagedListViewControllerBase.h"
-#import "RefreshDelegate.h"
 
-@interface MineCertiViewController : PagedListViewControllerBase<RefreshDelegate>
+@interface MineCertiViewController : PagedListViewControllerBase
 
 @end
 
