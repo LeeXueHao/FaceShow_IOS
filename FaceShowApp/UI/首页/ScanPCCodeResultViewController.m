@@ -21,7 +21,8 @@ NSString * const kPCCodeResultBackNotification = @"kPCCodeResultBackNotification
 - (NSDictionary *)descripDict {
     if (!_descripDict) {
         _descripDict = @{
-                         @"homework":@"成功登录网页端，可以在网页端写作业啦"
+                         @"homework":@"成功登录网页端，可以在网页端写作业啦",
+                         @"resource":@"成功登录网页端，可以在网页端下载资源啦"
                          };
     }
     return _descripDict;

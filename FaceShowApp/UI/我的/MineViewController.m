@@ -45,19 +45,6 @@
     if ([UserManager sharedInstance].userModel == nil) {
         [self requestForUserInfo];
     }
-    [self setRedView];
-}
-
-- (void)setRedView{
-    UIView *redPointView = [[UIView alloc] init];
-    redPointView.layer.cornerRadius = 4.5f;
-    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    [self.mineCertiButton.titleLabel addSubview:redPointView];
-    [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(3.5);
-        make.top.mas_equalTo(-3.5);
-        make.size.mas_equalTo(CGSizeMake(9, 9));
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -215,7 +202,7 @@
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
-    
+
     UIButton *signInfoBtn = [self optionBtnWithTitle:@"签到记录" normalImage:@"签到记录正常态" highlightedImage:@"签到记录点击态"];
     [scroll addSubview:signInfoBtn];
     [signInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -273,7 +260,7 @@
         redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
         [self.mineCertiButton.titleLabel addSubview:redPointView];
         [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(3.5);
+            make.left.mas_equalTo(self.mineCertiButton.titleLabel.mas_right);
             make.top.mas_equalTo(-3.5);
             make.size.mas_equalTo(CGSizeMake(9, 9));
         }];

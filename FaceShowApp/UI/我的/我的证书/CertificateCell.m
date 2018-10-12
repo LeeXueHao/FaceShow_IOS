@@ -79,7 +79,7 @@
 - (void)setElements:(MineCertiRequest_Item_userCertList *)elements{
     _elements = elements;
     self.certiImageView.image = elements.certType.intValue == 1?[UIImage imageNamed:@"结节证书"]:[UIImage imageNamed:@"优秀学员证书"];
-    self.certiNameLabel.text = elements.certName;
+    self.certiNameLabel.text = elements.certType.intValue == 1?@"结节证书":@"优秀学员证书";
     [self.redPointView setHidden:elements.hasRead.intValue != 0];
 }
 
