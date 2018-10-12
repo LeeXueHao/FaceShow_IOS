@@ -77,7 +77,7 @@
         make.left.right.mas_equalTo(0);
     }];
     UILabel *step2ContentLabel = [step1ContentLabel clone];
-    step2ContentLabel.text = @"扫描二维码登录，完成作业";
+    step2ContentLabel.text = @"扫描二维码登录，下载资源";
     [self addSubview:step2ContentLabel];
     [step2ContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(step2Label.mas_bottom).mas_offset(8);

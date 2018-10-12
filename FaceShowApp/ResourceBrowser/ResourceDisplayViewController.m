@@ -14,6 +14,8 @@
 @interface ResourceDisplayViewController ()<WKNavigationDelegate>
 @property (nonatomic, strong) FileDownloadHelper *downloadHelper;
 @property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) WKWebView *webview;
+@property (nonatomic, assign) BOOL needReload;
 @end
 
 @implementation ResourceDisplayViewController
@@ -22,6 +24,7 @@
     self = [super init];
     if (self) {
         self.showDownloadNavView = NO;
+        self.needReload = NO;
     }
     return self;
 }
@@ -29,6 +32,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:self.naviBarHidden animated:NO];
+    if (self.needReload) {
+        [self.webview reload];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.needReload = YES;
 }
 
 - (void)viewDidLoad {
@@ -90,6 +101,7 @@
         make.edges.mas_equalTo(0);
     }];
     [self.view bringSubviewToFront:self.backButton];
+    self.webview = webview;
 }
 
 - (void)downloadFile {
@@ -114,5 +126,7 @@
     [self.view nyx_showToast:@"资源加载失败"];
 }
 
-
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
+    [webView reload];
+}
 @end

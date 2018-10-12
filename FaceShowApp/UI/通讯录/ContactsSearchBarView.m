@@ -56,7 +56,7 @@
     self.textField = [[UITextField alloc]init];
     self.textField.textColor = [UIColor colorWithHexString:@"333333"];
     self.textField.font = [UIFont systemFontOfSize:14];
-    NSString *placeholder = @"搜索";
+    NSString *placeholder = @"搜索姓名或单位";
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc]initWithString:placeholder];
     [attrString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, placeholder.length)];
     [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"999999"] range:NSMakeRange(0, placeholder.length)];
