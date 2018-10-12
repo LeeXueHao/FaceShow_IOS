@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *numberLabel;
+@property (nonatomic, strong) UILabel *schoolLabel;
 @property (nonatomic, strong) UIView *lineView;
 @end
 
@@ -59,7 +60,7 @@
     [self.contentView addSubview:self.numberLabel];
     [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-15);
-        make.centerY.mas_equalTo(0);
+        make.top.mas_equalTo(self.avatarImageView);
         make.width.mas_equalTo(100);
     }];
     
@@ -68,10 +69,22 @@
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.avatarImageView.mas_right).offset(10);
-        make.right.mas_equalTo(self.numberLabel.mas_left).offset(-10);
-        make.centerY.mas_equalTo(0);
+        make.top.mas_equalTo(self.avatarImageView);
+        make.left.mas_equalTo(self.avatarImageView.mas_right).offset(15);
     }];
+
+    self.schoolLabel = [[UILabel alloc] init];
+    self.schoolLabel.font = [UIFont systemFontOfSize:14];
+    self.schoolLabel.textColor = [UIColor colorWithHexString:@"666666"];
+    self.schoolLabel.textAlignment = NSTextAlignmentLeft;
+    self.schoolLabel.numberOfLines = 0;
+    [self.contentView addSubview:self.schoolLabel];
+    [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.avatarImageView);
+        make.right.mas_equalTo(-15);
+        make.left.mas_equalTo(self.nameLabel);
+    }];
+
     
     self.lineView = [[UIView alloc] init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
@@ -94,6 +107,7 @@
     }];
     self.nameLabel.text = data.realName;
     self.numberLabel.text = data.mobilePhone;
+    self.schoolLabel.text = data.school;
 }
 
 - (void)setIsLastRow:(BOOL)isLastRow {

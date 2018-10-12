@@ -317,6 +317,7 @@
 		7CEDC7B7216DB3A900985EBF /* GetUserInfoDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDC7B5216DB3A900985EBF /* GetUserInfoDetailRequest.m */; };
 		7CEDC7BD216EF16300985EBF /* MineCertiReadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDC7BC216EF16300985EBF /* MineCertiReadRequest.m */; };
 		7CEDC7C0216EF65700985EBF /* GetUserNoReadCertRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDC7BF216EF65700985EBF /* GetUserNoReadCertRequest.m */; };
+		7CEDC80B2170747900985EBF /* MineCertiRequest_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CEDC80A2170747800985EBF /* MineCertiRequest_mock.json */; };
 		7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A51F98926A001D8C84 /* MineInputView.m */; };
 		7CEFC7B01F98926B001D8C84 /* MinePhoneInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */; };
 		7CEFC7B11F98926B001D8C84 /* MineVerifyCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEFC7A91F98926A001D8C84 /* MineVerifyCodeInputView.m */; };
@@ -1106,6 +1107,7 @@
 		7CEDC7BC216EF16300985EBF /* MineCertiReadRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCertiReadRequest.m; sourceTree = "<group>"; };
 		7CEDC7BE216EF65700985EBF /* GetUserNoReadCertRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserNoReadCertRequest.h; sourceTree = "<group>"; };
 		7CEDC7BF216EF65700985EBF /* GetUserNoReadCertRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserNoReadCertRequest.m; sourceTree = "<group>"; };
+		7CEDC80A2170747800985EBF /* MineCertiRequest_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MineCertiRequest_mock.json; sourceTree = "<group>"; };
 		7CEFC7A51F98926A001D8C84 /* MineInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineInputView.m; sourceTree = "<group>"; };
 		7CEFC7A61F98926A001D8C84 /* MinePhoneInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePhoneInputView.m; sourceTree = "<group>"; };
 		7CEFC7A71F98926A001D8C84 /* MineInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineInputView.h; sourceTree = "<group>"; };
@@ -2701,6 +2703,7 @@
 			children = (
 				7CE143AA2155DDF600A9E20A /* MineCertiRequest.h */,
 				7CE143AB2155DDF600A9E20A /* MineCertiRequest.m */,
+				7CEDC80A2170747800985EBF /* MineCertiRequest_mock.json */,
 				7CEDC7BB216EF16300985EBF /* MineCertiReadRequest.h */,
 				7CEDC7BC216EF16300985EBF /* MineCertiReadRequest.m */,
 			);
@@ -3400,6 +3403,7 @@
 				43210E631F726DF00049C381 /* GetNoticeList_Mock.json in Resources */,
 				E94DDE4920D50A8C00729A67 /* UpdateHomeworkRequest_mock.json in Resources */,
 				923F73831F7256DB00D7EA6F /* classMomentClickLike_mock.json in Resources */,
+				7CEDC80B2170747900985EBF /* MineCertiRequest_mock.json in Resources */,
 				7C24E2031F736B6E00A6921B /* GetCourseCommentRequest_mock.json in Resources */,
 				7C2519251F68EACF0001B577 /* MJRefresh.bundle in Resources */,
 				923F737E1F7249B000D7EA6F /* classMomentPublish_mock.json in Resources */,

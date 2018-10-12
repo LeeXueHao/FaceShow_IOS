@@ -16,6 +16,7 @@
 @interface MineCertiViewController ()
 @property (nonatomic, strong) MineCertiRequest *certRequest;
 @property (nonatomic, strong) MineCertiReadRequest *readRequest;
+@property (nonatomic, strong) NSMutableArray *unReadArr;
 @end
 
 @implementation MineCertiViewController
@@ -45,6 +46,7 @@
     [self.certRequest stopRequest];
     self.certRequest = [[MineCertiRequest alloc] init];
     self.certRequest.paltId = [UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.platId;
+    self.unReadArr = [NSMutableArray array];
     WEAK_SELF
     [self.certRequest startRequestWithRetClass:[MineCertiRequest_Item class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -66,6 +68,11 @@
         MineCertiRequest_Item *item = (MineCertiRequest_Item *)retItem;
         for (MineCertiRequest_Item_clazsCertList *list in item.data.clazsCertList) {
             count += list.userCertList.count;
+            for (MineCertiRequest_Item_userCertList *cert in list.userCertList) {
+                if ([cert.hasRead isEqualToString:@"0"]) {
+                    [self.unReadArr addObject:cert];
+                }
+            }
         }
         if (count == 0) {
             [self.view addSubview:self.emptyView];
@@ -116,10 +123,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YXShowPhotosViewController *VC = [[YXShowPhotosViewController alloc] init];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    CertificateCell *cell = (CertificateCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    [cell setPointHidden];
     MineCertiRequest_Item_clazsCertList *list = self.dataArray[indexPath.section];
     MineCertiRequest_Item_userCertList *elements = list.userCertList[indexPath.row];
-    VC.imageURLMutableArray = [NSMutableArray arrayWithObjects:elements.certUrl, nil];
+    NSString *imageUrl = [elements.certUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    VC.imageURLMutableArray = [NSMutableArray arrayWithObjects:imageUrl, nil];
     VC.animateRect = [self.view convertRect:cell.frame toView:self.view];
     [self.navigationController presentViewController:VC animated:YES completion:^{
         [self requestReadCertificateWithId:elements.certId];
@@ -134,6 +143,17 @@
     [self.readRequest startRequestWithRetClass:[MineCertiReadRequest_Item class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
 
     }];
+    MineCertiRequest_Item_userCertList *removeCert;
+    for (MineCertiRequest_Item_userCertList *cert in self.unReadArr) {
+        if ([cert.certId isEqualToString:resId]) {
+            removeCert = cert;
+            break;
+        }
+    }
+    [self.unReadArr removeObject:removeCert];
+    if (self.unReadArr.count == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHasReadCertificateNotification object:nil];
+    }
 }
 
 @end

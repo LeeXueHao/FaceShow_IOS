@@ -11,5 +11,6 @@
 @interface CertificateCell : UITableViewCell
 @property (nonatomic, strong) MineCertiRequest_Item_userCertList *elements;
 @property (nonatomic, assign) BOOL isLastRow;
+- (void)setPointHidden;
 @end
 

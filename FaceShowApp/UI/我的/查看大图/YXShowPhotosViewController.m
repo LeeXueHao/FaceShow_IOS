@@ -101,7 +101,7 @@
         [photoView addGestureRecognizer:tapGestureRecognizer];
         UIButton *downLoad = [[UIButton alloc] init];
         [downLoad setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
-        [photoView addSubview:downLoad];
+        [self.view addSubview:downLoad];
         [downLoad mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-30);
             if (@available(iOS 11.0, *)) {

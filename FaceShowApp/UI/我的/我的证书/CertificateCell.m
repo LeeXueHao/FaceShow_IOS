@@ -28,24 +28,13 @@
 
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.certiImageView = [[UIImageView alloc] init];
+    self.certiImageView.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.certiImageView];
     [self.certiImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
         make.left.mas_equalTo(15);
         make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
-
-    UIView *redPointView = [[UIView alloc] init];
-    redPointView.layer.cornerRadius = 4.5f;
-    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    [self.certiImageView addSubview:redPointView];
-    [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(3.5);
-        make.top.mas_equalTo(-3.5);
-        make.size.mas_equalTo(CGSizeMake(9, 9));
-    }];
-    self.redPointView = redPointView;
-    [self.redPointView setHidden:YES];
 
     self.certiNameLabel = [[UILabel alloc] init];
     self.certiNameLabel.textColor = [UIColor colorWithHexString:@"333333"];
@@ -55,6 +44,18 @@
         make.left.mas_equalTo(self.certiImageView.mas_right).offset(15);
         make.centerY.mas_equalTo(0);
     }];
+
+    UIView *redPointView = [[UIView alloc] init];
+    redPointView.layer.cornerRadius = 4.5f;
+    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    [self.contentView insertSubview:redPointView aboveSubview:self.certiImageView];
+    [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.certiImageView).offset(3.5);
+        make.top.mas_equalTo(self.certiImageView).offset(-3.5);
+        make.size.mas_equalTo(CGSizeMake(9, 9));
+    }];
+    self.redPointView = redPointView;
+    [self.redPointView setHidden:YES];
 
     UIImageView *rightImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"进入页面按钮正常态"] highlightedImage:[UIImage imageNamed:@"进入页面按钮点击态"]];
     [self.contentView addSubview:rightImageView];
@@ -96,6 +97,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setPointHidden{
+    [self.redPointView setHidden:YES];
 }
 
 @end

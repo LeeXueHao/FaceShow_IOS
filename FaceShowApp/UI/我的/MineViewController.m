@@ -280,7 +280,7 @@
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasReadCertificateNotification object:nil] subscribeNext:^(id x) {
         STRONG_SELF
-        [self.mineCertiButton removeSubviews];
+        [self.mineCertiButton.titleLabel removeSubviews];
     }];
 }
 - (void)reload{
