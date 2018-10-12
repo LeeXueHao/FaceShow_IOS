@@ -49,12 +49,8 @@
         [[IMManager sharedInstance]setupWithSceneID:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
         [[IMManager sharedInstance] startConnection];
         //使用情况统计
-        GetCurrentClazsRequestItem_clazsInfo *info = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo;
         AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
-        request.platId = info.platId;
-        request.projectId = info.projectId;
-        request.clazsId = info.clazsId;
-        request.methord = @"app.clazs.getCurrentClazs";
+        request.actionType = AppUseRecordActionType_AutoLogin;
         [[AppUseRecordManager sharedInstance]addRecord:request];
     }
     

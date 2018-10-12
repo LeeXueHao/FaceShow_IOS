@@ -73,13 +73,10 @@
         }
         GetCurrentClazsRequestItem *item = retItem;
         //使用情况统计
+        //使用情况统计
         AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
-        request.platId = item.data.clazsInfo.platId;
-        request.projectId = item.data.clazsInfo.projectId;
-        request.clazsId = item.data.clazsInfo.clazsId;
-        request.methord = self.clazsRefreshRequest.method;
+        request.actionType = AppUseRecordActionType_GetStudentClazs;
         [[AppUseRecordManager sharedInstance]addRecord:request];
-        
         [UserManager sharedInstance].userModel.projectClassInfo = item;
         [[UserManager sharedInstance]saveData];
         [UserManager sharedInstance].hasUsedBefore = YES;

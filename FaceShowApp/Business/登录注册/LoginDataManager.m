@@ -62,15 +62,6 @@
                 BLOCK_EXEC(completeBlock, emptyError);
                 return;
             }
-            //使用情况统计
-            AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
-            request.platId = item.data.clazsInfo.platId;
-            request.projectId = item.data.clazsInfo.projectId;
-            request.clazsId = item.data.clazsInfo.clazsId;
-            request.methord = manager.getClassRequest.method;
-            request.token = userModel.token;
-            [[AppUseRecordManager sharedInstance]addRecord:request];
-            
             userModel.projectClassInfo = item;
             
             [manager.getUserInfoRequest stopRequest];
@@ -85,6 +76,10 @@
                 [UserManager sharedInstance].userModel = userModel;
                 [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
                 [[UserManager sharedInstance] saveData];
+                //使用情况统计
+                AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
+                request.actionType = AppUseRecordActionType_AccountLogin;
+                [[AppUseRecordManager sharedInstance]addRecord:request];
                 BLOCK_EXEC(completeBlock, nil);
             }];
         }];
@@ -92,3 +87,4 @@
 }
 
 @end
+

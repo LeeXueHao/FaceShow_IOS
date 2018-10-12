@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString<Ignore> *deviceID;
 @property (nonatomic, strong) NSString<Ignore> *deviceType;
 @property (nonatomic, strong) NSString<Ignore> *deviceName;
+@property (nonatomic, strong) NSString<Ignore> *deviceModelName;
 
 @property (nonatomic, strong) NSString<Ignore> *osType;
 @property (nonatomic, strong) NSString<Ignore> *osVersion;

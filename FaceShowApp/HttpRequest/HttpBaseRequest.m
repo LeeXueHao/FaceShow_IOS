@@ -241,6 +241,10 @@
     if ([deviceModel isEqualToString:@"iPhone10,5"])   return @"iPhone_8_Plus";
     if ([deviceModel isEqualToString:@"iPhone10,3"])   return @"iPhone_X";
     if ([deviceModel isEqualToString:@"iPhone10,6"])   return @"iPhone_X";
+    if ([deviceModel isEqualToString:@"iPhone11,8"])   return @"iPhone XR";
+    if ([deviceModel isEqualToString:@"iPhone11,2"])   return @"iPhone XS";
+    if ([deviceModel isEqualToString:@"iPhone11,6"])   return @"iPhone XS Max";
+    if ([deviceModel isEqualToString:@"iPhone11,4"])   return @"iPhone XS Max";
     if ([deviceModel isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
     if ([deviceModel isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
     if ([deviceModel isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
