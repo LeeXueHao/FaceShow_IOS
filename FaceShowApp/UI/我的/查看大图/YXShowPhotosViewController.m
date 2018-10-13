@@ -95,9 +95,13 @@
         [[tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
             STRONG_SELF
             if (x.state == UIGestureRecognizerStateEnded) {
-                [self dismiss];
+                if (photoView.zoomScale != photoView.minimumZoomScale) {
+                    [photoView setZoomScale:photoView.minimumZoomScale animated:YES];
+                }else{
+                    [self dismiss];
+                }
             }
-        }];
+        }];g
         [photoView addGestureRecognizer:tapGestureRecognizer];
         UIButton *downLoad = [[UIButton alloc] init];
         [downLoad setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
