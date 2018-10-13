@@ -31,7 +31,6 @@
 #import "IMTopicInfoItem.h"
 #import "ContactMemberContactsRequest.h"
 #import "ForbidTalkingView.h"
-#import "UserPromptsManager.h"
 
 NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCountClearNotification";
 
@@ -459,26 +458,6 @@ NSString * const kIMUnreadMessageCountClearNotification = @"kIMUnreadMessageCoun
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:UIApplicationWillResignActiveNotification object:nil]subscribeNext:^(id x) {
         STRONG_SELF
         [[NSNotificationCenter defaultCenter]postNotificationName:kIMUnreadMessageCountClearNotification object:self.topic];
-    }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewCertificateNotification object:nil]subscribeNext:^(id x) {
-        STRONG_SELF
-        UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
-        UIButton *customBtn = (UIButton *)navItem.customView;
-        UIView *redPointView = [[UIView alloc] init];
-        redPointView.layer.cornerRadius = 4.5f;
-        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-        [customBtn.imageView addSubview:redPointView];
-        [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-3.5);
-            make.top.mas_equalTo(3.5);
-            make.size.mas_equalTo(CGSizeMake(9, 9));
-        }];
-    }];
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasReadCertificateNotification object:nil] subscribeNext:^(id x) {
-        STRONG_SELF
-        UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
-        UIButton *customBtn = (UIButton *)navItem.customView;
-        [customBtn.imageView removeSubviews];
     }];
 }
 

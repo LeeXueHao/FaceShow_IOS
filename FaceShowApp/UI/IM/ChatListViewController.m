@@ -14,6 +14,7 @@
 #import "ChatViewController.h"
 #import "IMTimeHandleManger.h"
 #import "YXDrawerController.h"
+#import "UserPromptsManager.h"
 
 @interface ChatListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -224,6 +225,26 @@
         NSNotification *noti = (NSNotification *)x;
         IMTopic *topic = noti.object;
         [self clearChattingTopicUnreadCount:topic];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasNewCertificateNotification object:nil]subscribeNext:^(id x) {
+        STRONG_SELF
+        UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
+        UIButton *customBtn = (UIButton *)navItem.customView;
+        UIView *redPointView = [[UIView alloc] init];
+        redPointView.layer.cornerRadius = 4.5f;
+        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+        [customBtn.imageView addSubview:redPointView];
+        [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-3.5);
+            make.top.mas_equalTo(3.5);
+            make.size.mas_equalTo(CGSizeMake(9, 9));
+        }];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kHasReadCertificateNotification object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        UIBarButtonItem *navItem = self.navigationItem.leftBarButtonItems.lastObject;
+        UIButton *customBtn = (UIButton *)navItem.customView;
+        [customBtn.imageView removeSubviews];
     }];
 }
 

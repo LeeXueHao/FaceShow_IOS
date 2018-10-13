@@ -28,7 +28,6 @@
 
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.certiImageView = [[UIImageView alloc] init];
-    self.certiImageView.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.certiImageView];
     [self.certiImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
@@ -38,7 +37,7 @@
 
     self.certiNameLabel = [[UILabel alloc] init];
     self.certiNameLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.certiNameLabel.font = [UIFont systemFontOfSize:14];
+    self.certiNameLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:self.certiNameLabel];
     [self.certiNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.certiImageView.mas_right).offset(15);
@@ -79,7 +78,7 @@
 - (void)setElements:(MineCertiRequest_Item_userCertList *)elements{
     _elements = elements;
     self.certiImageView.image = elements.certType.intValue == 1?[UIImage imageNamed:@"结节证书"]:[UIImage imageNamed:@"优秀学员证书"];
-    self.certiNameLabel.text = elements.certType.intValue == 1?@"结节证书":@"优秀学员证书";
+    self.certiNameLabel.text = elements.certType.intValue == 1?@"结业证书":@"优秀学员证书";
     [self.redPointView setHidden:elements.hasRead.intValue != 0];
 }
 

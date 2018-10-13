@@ -28,22 +28,24 @@
 
     self.projectLabel = [[UILabel alloc] init];
     self.projectLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.projectLabel.font = [UIFont boldSystemFontOfSize:16];
-    self.projectLabel.textAlignment = NSTextAlignmentCenter;
+    self.projectLabel.font = [UIFont boldSystemFontOfSize:13];
+    self.projectLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.projectLabel];
     [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.bottom.mas_equalTo(self.mas_centerY).offset(-4.5);
+        make.right.mas_equalTo(-15);
+        make.left.mas_equalTo(15);
+        make.top.mas_equalTo(5);
     }];
 
     self.classLabel = [[UILabel alloc] init];
     [self addSubview:self.classLabel];
     self.classLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.classLabel.font = [UIFont systemFontOfSize:14];
-    self.classLabel.textAlignment = NSTextAlignmentCenter;
+    self.classLabel.font = [UIFont systemFontOfSize:12];
+    self.classLabel.textAlignment = NSTextAlignmentLeft;
     [self.classLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.top.mas_equalTo(self.mas_centerY).offset(4.5);
+        make.right.mas_equalTo(-15);
+        make.left.mas_equalTo(15);
+        make.bottom.mas_equalTo(-5);
     }];
 
 }

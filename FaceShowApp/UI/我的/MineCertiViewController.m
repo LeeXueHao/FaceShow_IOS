@@ -37,8 +37,8 @@
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
-    self.tableView.rowHeight = 60;
-    self.tableView.sectionHeaderHeight = 75;
+    self.tableView.rowHeight = 50;
+    self.tableView.sectionHeaderHeight = 40;
     [self.tableView registerClass:[CertificateCell class] forCellReuseIdentifier:@"CertificateCell"];
 }
 
