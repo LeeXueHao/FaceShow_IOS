@@ -101,7 +101,7 @@
                     [self dismiss];
                 }
             }
-        }];g
+        }];
         [photoView addGestureRecognizer:tapGestureRecognizer];
         UIButton *downLoad = [[UIButton alloc] init];
         [downLoad setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
