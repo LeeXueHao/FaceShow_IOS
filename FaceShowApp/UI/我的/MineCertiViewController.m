@@ -64,6 +64,8 @@
             }];
             return;
         }
+        // 隐藏失败界面
+        [self hideErrorView];
         NSInteger count = 0;
         MineCertiRequest_Item *item = (MineCertiRequest_Item *)retItem;
         for (MineCertiRequest_Item_clazsCertList *list in item.data.clazsCertList) {
