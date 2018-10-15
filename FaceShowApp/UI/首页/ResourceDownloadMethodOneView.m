@@ -47,7 +47,7 @@
     }];
 
     UILabel *copyLabel = [[UILabel alloc] init];
-    copyLabel.text = @"点击下方网址复制，粘贴到浏览器中即可下载";
+    copyLabel.text = @"点击复制按钮，粘贴到浏览器中即可下载";
     copyLabel.textColor = [UIColor colorWithHexString:@"333333"];
     copyLabel.font = [UIFont boldSystemFontOfSize:14];
     copyLabel.textAlignment = NSTextAlignmentCenter;
@@ -59,20 +59,25 @@
         make.left.mas_equalTo(57);
     }];
 
-    UILabel *sourceLabel = [[UILabel alloc]init];
-    sourceLabel.text = self.sourceURL;
-    sourceLabel.textColor = [UIColor colorWithHexString:@"1da1f2"];
-    sourceLabel.font = [UIFont boldSystemFontOfSize:14];
-    sourceLabel.numberOfLines = 0;
-    sourceLabel.textAlignment = NSTextAlignmentCenter;
-    sourceLabel.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(linkTapAction)];
-    [sourceLabel addGestureRecognizer:tap];
-    [self addSubview:sourceLabel];
-    [sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *scanButton = [[UIButton alloc]init];
+    [scanButton setTitle:@"复 制" forState:UIControlStateNormal];
+    [scanButton setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    scanButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    scanButton.layer.borderColor = [UIColor colorWithHexString:@"1da1f2"].CGColor;
+    scanButton.layer.borderWidth = 2;
+    scanButton.layer.cornerRadius = 7;
+    WEAK_SELF
+    [[scanButton rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
+        STRONG_SELF
+        [[UIPasteboard generalPasteboard] setString:self.sourceURL];
+        BLOCK_EXEC(self.copyBlock);
+    }];
+    [self addSubview:scanButton];
+    [scanButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(copyLabel.mas_bottom).mas_offset(20);
-        make.left.centerX.mas_equalTo(copyLabel);
-        make.bottom.mas_equalTo(-35);
+        make.centerX.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(112, 40));
+        make.bottom.mas_equalTo(-40);
     }];
 
 }
