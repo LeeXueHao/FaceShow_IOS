@@ -71,7 +71,7 @@
         WEAK_SELF
         [self nyx_setupRightWithTitle:@"下载" action:^{
             STRONG_SELF
-            [TalkingData trackEvent:@"下载"];
+            [TalkingData trackEvent:@"资源下载"];
             ResourceDownloadViewController *downLoad = [[ResourceDownloadViewController alloc] init];
             downLoad.resourceId = self.resourceId;
             downLoad.downloadUrl = self.downloadUrl;
