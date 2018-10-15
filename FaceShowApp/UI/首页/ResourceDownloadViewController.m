@@ -26,6 +26,7 @@
 - (void)setupUI {
     ResourceDownloadMethodOneView *methodOneView = [[ResourceDownloadMethodOneView alloc] initWithSourceUrl:self.downloadUrl];
     methodOneView.copyBlock = ^{
+        [TalkingData trackEvent:@"链接地址下载"];
         [self.view nyx_showToast:@"资源链接已复制"];
     };
     [self.contentView addSubview:methodOneView];
@@ -38,6 +39,7 @@
     WEAK_SELF
     methodTwoView.scanBlock = ^{
         STRONG_SELF
+        [TalkingData trackEvent:@"扫码登录下载"];
         ScanPCCodeViewController *vc = [[ScanPCCodeViewController alloc]init];
         vc.crossJson = @{
                          @"bizType":@"resource",
