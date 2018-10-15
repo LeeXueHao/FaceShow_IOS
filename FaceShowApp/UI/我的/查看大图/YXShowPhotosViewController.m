@@ -92,17 +92,24 @@
             }
         }];
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.numberOfTouchesRequired = 1;
         [[tapGestureRecognizer rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
             STRONG_SELF
             if (x.state == UIGestureRecognizerStateEnded) {
-                if (photoView.zoomScale != photoView.minimumZoomScale) {
-                    [photoView setZoomScale:photoView.minimumZoomScale animated:YES];
-                }else{
-                    [self dismiss];
-                }
+                [self dismiss];
             }
         }];
         [photoView addGestureRecognizer:tapGestureRecognizer];
+        UITapGestureRecognizer *doubleClick = [[UITapGestureRecognizer alloc] init];
+        doubleClick.numberOfTapsRequired = 2;
+        doubleClick.numberOfTouchesRequired = 1;
+        [[doubleClick rac_gestureSignal] subscribeNext:^(id x) {
+            STRONG_SELF
+            [photoView setZoomScale:photoView.minimumZoomScale animated:YES];
+        }];
+        [photoView addGestureRecognizer:doubleClick];
+        [tapGestureRecognizer requireGestureRecognizerToFail:doubleClick];
         UIButton *downLoad = [[UIButton alloc] init];
         [downLoad setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
         [self.view addSubview:downLoad];
