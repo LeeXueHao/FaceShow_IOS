@@ -40,9 +40,17 @@
 @property (nonatomic, strong) NSString<Optional> *desc;
 @end
 
+@protocol GetCurrentClazsRequestItem_userGroup <NSObject>
+@end
+@interface GetCurrentClazsRequestItem_userGroup : JSONModel
+@property (nonatomic, strong) NSString<Optional> *groupId;
+@property (nonatomic, strong) NSString<Optional> *groupName;
+@end
+
 @interface GetCurrentClazsRequestItem_data : JSONModel
 @property (nonatomic, strong) GetCurrentClazsRequestItem_projectInfo<Optional> *projectInfo;
 @property (nonatomic, strong) GetCurrentClazsRequestItem_clazsInfo<Optional> *clazsInfo;
+@property (nonatomic, strong) NSArray<Optional,GetCurrentClazsRequestItem_userGroup> *userGroups;
 @property (nonatomic, strong) NSString<Optional> *taskCompletion;
 @property (nonatomic, strong) NSString<Optional> *userScore;
 @end

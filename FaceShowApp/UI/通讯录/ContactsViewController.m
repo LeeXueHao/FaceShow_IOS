@@ -8,8 +8,6 @@
 
 #import "ContactsViewController.h"
 #import "ContactsListCell.h"
-#import "ChatViewController.h"
-#import "IMDatabaseManager.h"
 #import "ContactsSearchBarView.h"
 #import "ContactsCurrentClassView.h"
 #import "ContactsClassFilterView.h"

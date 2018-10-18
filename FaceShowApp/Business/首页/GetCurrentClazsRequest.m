@@ -26,6 +26,12 @@
 }
 @end
 
+@implementation GetCurrentClazsRequestItem_userGroup
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"groupId"}];
+}
+@end
+
 @implementation GetCurrentClazsRequestItem_data
 
 @end
