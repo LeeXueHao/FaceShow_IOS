@@ -36,6 +36,7 @@
         make.right.mas_equalTo(-5);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
+    [self.enterImageView setHidden:YES];
 
     CGFloat x = SCREEN_WIDTH/4.0;
 
