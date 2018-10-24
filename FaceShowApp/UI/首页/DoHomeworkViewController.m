@@ -489,12 +489,7 @@ typedef enum : NSUInteger {
         [UIView animateWithDuration:duration.floatValue animations:^{
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, [UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y, 0);
             [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-
-                if (@available(iOS 11.0, *)) {
-                    make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).mas_offset(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
-                } else {
-                    make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
-                }
+                make.bottom.mas_equalTo(-([UIScreen mainScreen].bounds.size.height-keyboardFrame.origin.y));
             }];
             [self.view layoutIfNeeded];
         }];
