@@ -36,13 +36,13 @@ NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
 NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
-NSString * const kPCAddress = @"http://hbyxb.ymd.yanxiu.com/sd/101";
+NSString * const kPCAddress = @"http://orz.yanxiu.com/sd/101";
 #else
 NSString * const kServer = @"http://yxb.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://yxb.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://pp.yanxiu.com/uc/appLogin";
 NSString * const kEasygoServer = @"http://b.yanxiu.com/easygo/multiUpload";
-NSString * const kPCAddress = @"http://hbyxb.ymd.yanxiu.com/sd/101";
+NSString * const kPCAddress = @"http://yxb.yanxiu.com/sd/101";
 #endif
 
 #endif

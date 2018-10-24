@@ -4164,10 +4164,10 @@
 					"-weak_framework",
 					"\"Metal\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow.hubei;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
 				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "16c942e8-ba40-42fb-a720-aebeb213a5c2";
-				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Hubei_Dev;
+				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};
@@ -4282,10 +4282,10 @@
 					"-weak_framework",
 					"\"Metal\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow.hubei;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanxiu.faceshow;
 				PRODUCT_NAME = "研修宝";
 				PROVISIONING_PROFILE = "9e3d72a0-21b5-40ec-8ef9-9ad33e6c42b3";
-				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Hubei_Rel;
+				PROVISIONING_PROFILE_SPECIFIER = FaceShow_Rel;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};

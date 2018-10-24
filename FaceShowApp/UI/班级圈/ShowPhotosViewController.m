@@ -124,15 +124,7 @@
 
 - (void)setupLayout {
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (@available(iOS 11.0, *)) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        } else {
-            make.edges.equalTo(self.view);
-            // Fallback on earlier versions
-        }
-        
+        make.edges.equalTo(self.view);
     }];
     [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
