@@ -81,6 +81,8 @@
 		438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6A1FD4E1B9006F3FB3 /* DownloadManager.m */; };
 		438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */; };
 		438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */; };
+		7C17DBF221817959009353A9 /* AboutFaceShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17DBF021817958009353A9 /* AboutFaceShowViewController.m */; };
+		7C17DBF52181796E009353A9 /* AboutItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17DBF32181796E009353A9 /* AboutItemView.m */; };
 		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
 		7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB11F6A11230007AE01 /* ChooseQuestionCell.m */; };
 		7C212DB51F6A1DDA0007AE01 /* QuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DB41F6A1DD90007AE01 /* QuestionnaireViewController.m */; };
@@ -644,6 +646,10 @@
 		438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlDownloader.m; sourceTree = "<group>"; };
 		438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloaderEntity.m; sourceTree = "<group>"; };
 		55DB1C9F3FE29502F1FB6096 /* Pods-FaceShowApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.release.xcconfig"; sourceTree = "<group>"; };
+		7C17DBF021817958009353A9 /* AboutFaceShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutFaceShowViewController.m; sourceTree = "<group>"; };
+		7C17DBF121817958009353A9 /* AboutFaceShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutFaceShowViewController.h; sourceTree = "<group>"; };
+		7C17DBF32181796E009353A9 /* AboutItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutItemView.m; sourceTree = "<group>"; };
+		7C17DBF42181796E009353A9 /* AboutItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutItemView.h; sourceTree = "<group>"; };
 		7C212DAD1F6A0D740007AE01 /* OptionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItemView.h; sourceTree = "<group>"; };
 		7C212DAE1F6A0D740007AE01 /* OptionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItemView.m; sourceTree = "<group>"; };
 		7C212DB01F6A11230007AE01 /* ChooseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseQuestionCell.h; sourceTree = "<group>"; };
@@ -2225,6 +2231,8 @@
 				9276958620F5F48200677ABA /* UpdateTextInfoViewController.m */,
 				7CE143462154CE9000A9E20A /* MineCertiViewController.h */,
 				7CE143472154CE9000A9E20A /* MineCertiViewController.m */,
+				7C17DBF121817958009353A9 /* AboutFaceShowViewController.h */,
+				7C17DBF021817958009353A9 /* AboutFaceShowViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2850,6 +2858,8 @@
 				4322CA3B1FD941F500E7B565 /* StageSubjectCell.m */,
 				929B421420F336810034E608 /* AreaSubjectCell.h */,
 				929B421520F336810034E608 /* AreaSubjectCell.m */,
+				7C17DBF42181796E009353A9 /* AboutItemView.h */,
+				7C17DBF32181796E009353A9 /* AboutItemView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3751,6 +3761,7 @@
 				E95ED5DA205261FB006ECCEA /* ContactMemberContactsRequest.m in Sources */,
 				922084381F6BCE6500F8AAC6 /* YXImagePickerController.m in Sources */,
 				7C33E629200DCD71006704E7 /* TestQiniuViewController.m in Sources */,
+				7C17DBF221817959009353A9 /* AboutFaceShowViewController.m in Sources */,
 				436959871FDE83E7009E5C43 /* FDActionSheetCell.m in Sources */,
 				435DFCF91FD0FABE00CEA9C2 /* ReportTableViewCell.m in Sources */,
 				7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */,
@@ -3888,6 +3899,7 @@
 				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,
 				43578CC51FE2295E00D37B72 /* SubScanCodeResultViewController.m in Sources */,
+				7C17DBF52181796E009353A9 /* AboutItemView.m in Sources */,
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
 				7C5913092137936600CE548F /* LePlayer.m in Sources */,
 				E94DDE5B20D8DA3500729A67 /* TaskCommentFetcher.m in Sources */,

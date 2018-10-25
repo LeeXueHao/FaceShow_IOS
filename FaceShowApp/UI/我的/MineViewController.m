@@ -15,12 +15,12 @@
 #import "UserInfoViewController.h"
 #import "SignInRecordViewController.h"
 #import "UserModel.h"
-#import "FeedbackViewController.h"
 #import "ClassSelectionViewController.h"
 #import "HuBeiUserInfoViewController.h"
 #import "ForgotPasswordViewController.h"
 #import "MineCertiViewController.h"
 #import "UserPromptsManager.h"
+#import "AboutFaceShowViewController.h"
 
 @interface MineViewController ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -210,22 +210,30 @@
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
-    
-    UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈正常态" highlightedImage:@"意见反馈点击态"];
-    [scroll addSubview:feedbackInfoBtn];
-    [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(0);
-        make.left.right.mas_equalTo(0);
-    }];
-    
+
+//    UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈正常态" highlightedImage:@"意见反馈点击态"];
+//    [scroll addSubview:feedbackInfoBtn];
+//    [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
+//        make.centerX.mas_equalTo(0);
+//        make.left.right.mas_equalTo(0);
+//    }];
+
     UIButton *passwordBtn = [self optionBtnWithTitle:@"修改密码" normalImage:@"忘记密码icon正常态" highlightedImage:@"忘记密码icon选择态"];
     [scroll addSubview:passwordBtn];
     [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(feedbackInfoBtn.mas_bottom).offset(30);
+        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
         make.centerX.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
         make.bottom.mas_equalTo(-30);
+    }];
+
+    UIButton *about = [self optionBtnWithTitle:@"关于我们" normalImage:@"关于" highlightedImage:@"关于点击"];
+    [scroll addSubview:about];
+    [about mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(passwordBtn.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
     }];
 
 
@@ -297,11 +305,7 @@
         [TalkingData trackEvent:@"点击签到记录"];
         SignInRecordViewController *signInRecordVC = [[SignInRecordViewController alloc] init];
         [self.navigationController pushViewController:signInRecordVC animated:YES];
-    }else if ([sender.titleLabel.text isEqualToString:@"意见反馈"]) {
-        [TalkingData trackEvent:@"点击意见反馈"];
-        FeedbackViewController *feedbackVC = [[FeedbackViewController alloc] init];
-        [self.navigationController pushViewController:feedbackVC animated:YES];
-    } else if ([sender.titleLabel.text isEqualToString:@"我的资料"]) {
+    }else if ([sender.titleLabel.text isEqualToString:@"我的资料"]) {
 #ifdef HuBeiApp
         HuBeiUserInfoViewController *VC = [[HuBeiUserInfoViewController alloc] init];
         WEAK_SELF
@@ -334,6 +338,9 @@
     }else if ([sender.titleLabel.text isEqualToString:@"我的证书"]) {
         MineCertiViewController *mine = [[MineCertiViewController alloc]init];
         [self.navigationController pushViewController:mine animated:YES];
+    }else if ([sender.titleLabel.text isEqualToString:@"关于我们"]){
+        AboutFaceShowViewController *about = [[AboutFaceShowViewController alloc] init];
+        [self.navigationController pushViewController:about animated:YES];
     }
 }
 
