@@ -32,8 +32,8 @@
     self.isPublish = NO;
     UIViewController *viewController = [((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController nyx_visibleViewController];
     if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-        if (author == kCLAuthorizationStatusRestricted || author ==kCLAuthorizationStatusDenied){
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
             [viewController.view nyx_showToast:@"相册权限受限\n请在设置-隐私-相册中开启"];
             return;
         }
