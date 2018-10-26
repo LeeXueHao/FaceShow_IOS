@@ -77,7 +77,6 @@
     self.schoolLabel.font = [UIFont systemFontOfSize:14];
     self.schoolLabel.textColor = [UIColor colorWithHexString:@"666666"];
     self.schoolLabel.textAlignment = NSTextAlignmentLeft;
-    self.schoolLabel.numberOfLines = 0;
     [self.contentView addSubview:self.schoolLabel];
     [self.schoolLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.avatarImageView);

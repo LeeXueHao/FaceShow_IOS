@@ -124,11 +124,6 @@
     self.sendMessageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.sendMessageBtn setImage:[UIImage imageNamed:@"对话"] forState:0];
     [self.sendMessageBtn addTarget:self action:@selector(clickSendMessageAction) forControlEvents:UIControlEventTouchUpInside];
-    WEAK_SELF
-    [[self.sendMessageBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        STRONG_SELF
-        [self startChat];
-    }];
     [headWhiteView addSubview:self.sendMessageBtn];
     [self.sendMessageBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
