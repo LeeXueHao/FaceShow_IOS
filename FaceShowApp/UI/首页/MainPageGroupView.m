@@ -56,9 +56,12 @@
     self.groupNameLabel.text = @"第一小组";
     self.groupNameLabel.font = [UIFont boldSystemFontOfSize:15];
     self.groupNameLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.groupNameLabel.numberOfLines = 2;
+    self.groupNameLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.groupNameLabel];
     [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(x);
+        make.left.mas_equalTo(self.mas_centerX);
+        make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(0);
     }];
 
@@ -78,7 +81,7 @@
 
 - (void)setGroupName:(NSString *)groupName{
     _groupName = groupName;
-    [self.groupNameLabel setText:groupName];
+    [self.groupNameLabel setText:[NSString stringWithFormat:@"%@",groupName]];
 }
 
 - (void)butonAction:(UIButton *)sender{
