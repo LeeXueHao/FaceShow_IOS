@@ -49,8 +49,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
+    BOOL navHidden = self.navigationController.isNavigationBarHidden;
+    [self.navigationController setNavigationBarHidden:navHidden animated:YES];
     NSString *vcName = NSStringFromClass([self class]);
     NSString *pageName = [PageNameMappingTable pageNameForViewControllerName:vcName];
     if (pageName) {

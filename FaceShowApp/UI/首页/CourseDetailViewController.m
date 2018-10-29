@@ -68,6 +68,13 @@ extern NSString * const kPCCodeResultBackNotification;
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if(self.navigationController.childViewControllers.count != 2){
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+    }
+}
+
 - (void)setupObserver {
     WEAK_SELF
     [[[NSNotificationCenter defaultCenter]rac_addObserverForName:kPCCodeResultBackNotification object:nil]subscribeNext:^(id x) {
