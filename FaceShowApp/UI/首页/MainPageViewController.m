@@ -25,7 +25,6 @@
 #import "MessageViewController.h"
 #import "MainPageTipView.h"
 #import "ScoreDetialViewController.h"
-#import "MainPageGroupView.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -33,7 +32,6 @@
 @property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
 @property (nonatomic, strong) MainPageTopView *topView;
 @property (nonatomic, strong) MainPageTipView *tipView;
-@property (nonatomic, strong) MainPageGroupView *groupView;
 @property (nonatomic, strong) GetToolsRequest *toolsRequest;
 @property (nonatomic, strong) GetToolsRequestItem *toolsItem;
 @end
@@ -106,19 +104,6 @@
         make.height.mas_equalTo(50);
     }];
 
-    NSArray *arr = [UserManager sharedInstance].userModel.projectClassInfo.data.userGroups;
-    if(arr.count > 0){
-        GetCurrentClazsRequestItem_userGroup *group = arr.firstObject;
-        self.groupView = [[MainPageGroupView alloc] init];
-        self.groupView.groupName = group.groupName;
-        [self.view addSubview:self.groupView];
-        [self.groupView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.tipView.mas_bottom).offset(5);
-            make.height.mas_equalTo(50);
-        }];
-    }
-
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     NSArray *tabNames = @[@"课程",@"日程",@"通知",@"资源"];
     tabContainerView.tabNameArray = tabNames;
@@ -136,11 +121,7 @@
     [self.view addSubview:tabContainerView];
     [tabContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        if(arr.count > 0){
-            make.top.mas_equalTo(self.groupView.mas_bottom).offset(5);
-        }else{
-            make.top.mas_equalTo(self.tipView.mas_bottom).offset(5);
-        }
+        make.top.mas_equalTo(self.tipView.mas_bottom).offset(5);
         make.height.mas_equalTo(40);
     }];
     self.tabControllers = [NSMutableArray array];

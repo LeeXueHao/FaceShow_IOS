@@ -296,7 +296,6 @@
 		7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */; };
 		7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BD220522E23004ACA04 /* IMImageMessage.m */; };
 		7CBC5BDC20567184004ACA04 /* SaveImageMsgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */; };
-		7CD97906217826D2008592E2 /* MainPageGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD97905217826D2008592E2 /* MainPageGroupView.m */; };
 		7CE143452154C93500A9E20A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */; };
 		7CE143482154CE9000A9E20A /* MineCertiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143472154CE9000A9E20A /* MineCertiViewController.m */; };
 		7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143AB2155DDF600A9E20A /* MineCertiRequest.m */; };
@@ -1070,8 +1069,6 @@
 		7CBC5BD220522E23004ACA04 /* IMImageMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessage.m; sourceTree = "<group>"; };
 		7CBC5BDA20567184004ACA04 /* SaveImageMsgRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveImageMsgRequest.h; sourceTree = "<group>"; };
 		7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveImageMsgRequest.m; sourceTree = "<group>"; };
-		7CD97904217826D2008592E2 /* MainPageGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageGroupView.h; sourceTree = "<group>"; };
-		7CD97905217826D2008592E2 /* MainPageGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageGroupView.m; sourceTree = "<group>"; };
 		7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		7CE143462154CE9000A9E20A /* MineCertiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineCertiViewController.h; sourceTree = "<group>"; };
 		7CE143472154CE9000A9E20A /* MineCertiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCertiViewController.m; sourceTree = "<group>"; };
@@ -2304,8 +2301,6 @@
 				7CBDAB811F6925B50096C4BA /* 扫一扫 */,
 				7C2519AD1F690DA00001B577 /* MainPageViewController.h */,
 				7C2519AE1F690DA00001B577 /* MainPageViewController.m */,
-				7CD97904217826D2008592E2 /* MainPageGroupView.h */,
-				7CD97905217826D2008592E2 /* MainPageGroupView.m */,
 				7C212DF21F6BA72F0007AE01 /* MainPageTopView.h */,
 				7C212DF31F6BA72F0007AE01 /* MainPageTopView.m */,
 				E95434B520D10DAC00BCF63C /* MainPageTipView.h */,
@@ -3574,7 +3569,6 @@
 				E95434C420D215AD00BCF63C /* StudyScoreViewController.m in Sources */,
 				9220840D1F6BA8CE00F8AAC6 /* PublishMomentViewController.m in Sources */,
 				7CFA798D20AD1C5F0097A4A7 /* IMPrivateSettingViewController.m in Sources */,
-				7CD97906217826D2008592E2 /* MainPageGroupView.m in Sources */,
 				7CB9C8ED2010389F005BE126 /* ClassListRequest.m in Sources */,
 				7C33E633200EF48C006704E7 /* QiniuDataManager.m in Sources */,
 				4378DF9E1F6F6F57005CFE56 /* SignInDetailViewController.m in Sources */,

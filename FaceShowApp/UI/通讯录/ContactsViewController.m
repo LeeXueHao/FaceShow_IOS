@@ -159,6 +159,10 @@
             }
             NSMutableArray *students = [NSMutableArray arrayWithArray:self.dataArray.lastObject];
             [students addObjectsFromArray:retItemArray.lastObject];
+            if (students.count == 0 && self.dataArray.count < 2) {
+                [self checkHasMore];
+                return;
+            }
             self.dataArray[1] = students;
             self.total = total;
             [self.tableView reloadData];
