@@ -69,6 +69,8 @@ extern NSString *const YXInitSuccessNotification;
 
 @interface YXInitHelper : NSObject
 
+@property (nonatomic, readonly, assign) BOOL hasNewVersion;
+
 + (instancetype)sharedHelper;
 
 - (void)requestCompeletion:(void(^)(void))completion;

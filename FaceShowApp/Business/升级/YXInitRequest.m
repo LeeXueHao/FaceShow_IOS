@@ -208,4 +208,10 @@ NSString *const YXInitSuccessNotification = @"kYXInitSuccessNotification";
     }
 }
 
+- (BOOL)hasNewVersion{
+    NSString *currentVersion = [NSString stringWithFormat:@"v%@",[ConfigManager sharedInstance].clientVersion];
+    YXInitRequestItem_Body *body = self.item.data.firstObject;
+    return ![currentVersion isEqualToString:body.version];
+}
+
 @end

@@ -21,6 +21,7 @@
 #import "MineCertiViewController.h"
 #import "UserPromptsManager.h"
 #import "AboutFaceShowViewController.h"
+#import "YXInitRequest.h"
 
 @interface MineViewController ()
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -211,14 +212,6 @@
         make.left.right.mas_equalTo(0);
     }];
 
-//    UIButton *feedbackInfoBtn = [self optionBtnWithTitle:@"意见反馈" normalImage:@"意见反馈正常态" highlightedImage:@"意见反馈点击态"];
-//    [scroll addSubview:feedbackInfoBtn];
-//    [feedbackInfoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(signInfoBtn.mas_bottom).offset(30);
-//        make.centerX.mas_equalTo(0);
-//        make.left.right.mas_equalTo(0);
-//    }];
-
     UIButton *passwordBtn = [self optionBtnWithTitle:@"修改密码" normalImage:@"忘记密码icon正常态" highlightedImage:@"忘记密码icon选择态"];
     [scroll addSubview:passwordBtn];
     [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -229,6 +222,17 @@
     }];
 
     UIButton *about = [self optionBtnWithTitle:@"关于我们" normalImage:@"关于" highlightedImage:@"关于点击"];
+    if ([YXInitHelper sharedHelper].hasNewVersion) {
+        UIView *redPointView = [[UIView alloc] init];
+        redPointView.layer.cornerRadius = 4.5f;
+        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+        [about.titleLabel addSubview:redPointView];
+        [redPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(about.titleLabel.mas_right);
+            make.top.mas_equalTo(-3.5);
+            make.size.mas_equalTo(CGSizeMake(9, 9));
+        }];
+    }
     [scroll addSubview:about];
     [about mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(passwordBtn.mas_bottom).offset(30);
@@ -339,6 +343,7 @@
         MineCertiViewController *mine = [[MineCertiViewController alloc]init];
         [self.navigationController pushViewController:mine animated:YES];
     }else if ([sender.titleLabel.text isEqualToString:@"关于我们"]){
+        [sender.titleLabel removeSubviews];
         AboutFaceShowViewController *about = [[AboutFaceShowViewController alloc] init];
         [self.navigationController pushViewController:about animated:YES];
     }
