@@ -32,10 +32,18 @@
     self.isPublish = NO;
     UIViewController *viewController = [((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController nyx_visibleViewController];
     if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
-            [viewController.view nyx_showToast:@"相册权限受限\n请在设置-隐私-相册中开启"];
-            return;
+        if (sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+            ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+            if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied){
+                [viewController.view nyx_showToast:@"相册权限受限\n请在设置-隐私-相册中开启"];
+                return;
+            }
+        }else if(sourceType == UIImagePickerControllerSourceTypeCamera){
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            if (authStatus == AVAuthorizationStatusDenied || authStatus == AVAuthorizationStatusRestricted) {
+                [viewController.view nyx_showToast:@"相机权限受限\n请在设置-隐私-相册中开启"];
+                return;
+            }
         }
         self.imagePickerController.sourceType = sourceType;
         self.completion = completion;
