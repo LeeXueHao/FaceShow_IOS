@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, copy) PhotoBrowserViewSingleTapActionBlock block;
+@property (nonatomic, strong) UIButton *downloadBtn;
 @end
 
 @implementation IMPhotoBrowserView
@@ -52,6 +53,62 @@
         STRONG_SELF
         BLOCK_EXEC(self.block,self);
     }];
+
+    self.downloadBtn = [[UIButton alloc] init];
+    [self.downloadBtn setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
+    [self addSubview:self.downloadBtn];
+    [self.downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-30);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.mas_safeAreaLayoutGuideBottom).offset(-30);
+        } else {
+
+            make.bottom.mas_equalTo(-30);
+        }
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
+
+    [[self.downloadBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        IMTopicMessage *message = self.imageMessageArray[self.currentIndex];
+        if (![message imageWaitForSending]) {
+            NSString *urlString = message.viewUrl;
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            NSString *key = [manager cacheKeyForURL:[NSURL URLWithString:urlString]];
+            SDImageCache *cache = [SDImageCache sharedImageCache];
+            UIImage *image = [cache imageFromDiskCacheForKey:key];
+            if (image) {
+                [self saveImageToPhotos:image];
+            }else {
+                [self nyx_startLoading];
+                [manager loadImageWithURL:[NSURL URLWithString:urlString] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+
+                } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                    [self nyx_stopLoading];
+                    if (image) {
+                        [self saveImageToPhotos:image];
+                    }else{
+                        [self nyx_showToast:@"保存图片失败"];
+                    }
+
+                }];
+            }
+        }else{
+            [self saveImageToPhotos:[message imageWaitForSending]];
+        }
+    }];
+}
+
+- (void)saveImageToPhotos:(UIImage*)savedImage{
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
+    if(error != NULL){
+        [self nyx_showToast:@"保存图片失败"];
+    }else{
+        [self nyx_showToast:@"已保存到系统相册"];
+    }
 }
 
 #pragma mark - IMSlideViewDataSource & IMSlideViewDelegate

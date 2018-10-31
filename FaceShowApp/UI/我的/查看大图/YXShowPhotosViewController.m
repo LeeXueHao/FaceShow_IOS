@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) BOOL appeared;
+@property (nonatomic, strong) UIButton *downloadBtn;
 @end
 
 @implementation YXShowPhotosViewController
@@ -61,6 +62,37 @@
         BLOCK_EXEC(self.showPhotosCurrentPage ,x.currentPage);
     }];
     [self.view addSubview:self.pageControl];
+
+    self.downloadBtn = [[UIButton alloc] init];
+    [self.downloadBtn setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
+    [self.view addSubview:self.downloadBtn];
+    [self.downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-30);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-30);
+        } else {
+
+            make.bottom.mas_equalTo(-30);
+        }
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
+    [[self.downloadBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        NSInteger index = self.pageControl.currentPage;
+        NSString *urlString = self.imageURLMutableArray[index];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [self.view nyx_startLoading];
+        [manager loadImageWithURL:[NSURL URLWithString:urlString] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+
+        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+            [self.view nyx_stopLoading];
+            if (image) {
+                [self saveImageToPhotos:image];
+            }else{
+                [self.view nyx_showToast:@"保存图片失败"];
+            }
+        }];
+    }];
+
 }
 
 - (void)setupContentScrollView {
@@ -110,25 +142,6 @@
         }];
         [photoView addGestureRecognizer:doubleClick];
         [tapGestureRecognizer requireGestureRecognizerToFail:doubleClick];
-        UIButton *downLoad = [[UIButton alloc] init];
-        [downLoad setImage:[UIImage imageNamed:@"下载"] forState:UIControlStateNormal];
-        [self.view addSubview:downLoad];
-        [downLoad mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-30);
-            if (@available(iOS 11.0, *)) {
-                make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-30);
-            } else {
-
-                make.bottom.mas_equalTo(-30);
-            }
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-        }];
-        [[downLoad rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-            STRONG_SELF
-            if (photoView.zoomView.image != nil) {
-                [self saveImageToPhotos:photoView.zoomView.image];
-            }
-        }];
     }];
 }
 - (void)saveImageToPhotos:(UIImage*)savedImage{
