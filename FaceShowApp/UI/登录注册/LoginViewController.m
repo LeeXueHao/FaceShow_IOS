@@ -57,27 +57,34 @@
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.loginBtn.layer.cornerRadius = 6;
     self.loginBtn.clipsToBounds = YES;
-    [self.loginBtn setBackgroundImage:[UIImage yx_createImageWithColor:[UIColor colorWithHexString:@"ffffff"]] forState:UIControlStateNormal];
-    [self.loginBtn setBackgroundImage:[UIImage yx_createImageWithColor:[[UIColor colorWithHexString:@"ffffff"] colorWithAlphaComponent:.7f]] forState:UIControlStateDisabled];
+    [self.loginBtn setBackgroundImage:[UIImage yx_createImageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateNormal];
+    [self.loginBtn setBackgroundImage:[UIImage yx_createImageWithColor:[[UIColor colorWithHexString:@"1da1f2"] colorWithAlphaComponent:.25f]] forState:UIControlStateDisabled];
     [self.loginBtn setTitle:@"登 录" forState:UIControlStateNormal];
-    [self.loginBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
+    [self.loginBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
     self.loginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [self.loginBtn addTarget:self action:@selector(loginBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-80);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideBottom).offset(-120);
+        } else {
+            // Fallback on earlier versions
+            make.bottom.mas_equalTo(-120);
+        }
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(250, 40));
+        make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
     }];
     
     self.passwordTF = [[UITextField alloc] init];
-    self.passwordTF.tintColor = [UIColor whiteColor];
+    self.passwordTF.backgroundColor = [UIColor colorWithHexString:@"F8F8F8"];
+    self.passwordTF.textColor = [UIColor colorWithHexString:@"333333"];
+    self.passwordTF.tintColor = [UIColor colorWithHexString:@"333333"];
     self.passwordTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
     self.passwordTF.layer.borderWidth = 2;
     self.passwordTF.layer.cornerRadius = 6;
     NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"请输入密码"];
     NSDictionary *attributes = @{
-                                 NSForegroundColorAttributeName : [UIColor colorWithHexString:@"ffffff"],
+                                 NSForegroundColorAttributeName : [UIColor colorWithHexString:@"B5B4B9"],
                                  NSFontAttributeName : [UIFont boldSystemFontOfSize:14]
                                  };
     [attributedStr1 setAttributes:attributes range:NSMakeRange(0, attributedStr1.length)];
@@ -99,7 +106,7 @@
     [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-20);
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(250, 40));
+        make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
     }];
     
     UIButton  *securityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -117,7 +124,9 @@
     }];
 
     self.usernameTF = [[UITextField alloc] init];
-    self.usernameTF.tintColor = [UIColor whiteColor];
+    self.usernameTF.backgroundColor = [UIColor colorWithHexString:@"F8F8F8"];
+    self.usernameTF.textColor = [UIColor colorWithHexString:@"333333"];
+    self.usernameTF.tintColor = [UIColor colorWithHexString:@"333333"];
     self.usernameTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
     self.usernameTF.layer.borderWidth = 2;
     self.usernameTF.layer.cornerRadius = 6;
@@ -135,27 +144,51 @@
     [self.usernameTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.passwordTF.mas_top).offset(-10);
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(250, 40));
+        make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
     }];
-    
+
+    UIButton  *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [deleteBtn setBackgroundImage:[UIImage imageNamed:@"删除按钮"] forState:UIControlStateNormal];
+    [deleteBtn setBackgroundImage:[UIImage imageNamed:@"删除按钮点击态"] forState:UIControlStateHighlighted];
+    [deleteBtn addTarget:self action:@selector(deleteBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    deleteBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:deleteBtn];
+    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.usernameTF.mas_centerY);
+        make.right.mas_equalTo(self.usernameTF.mas_right).offset(-7);
+        make.size.mas_equalTo(CGSizeMake(18, 18));
+    }];
+
+
+
     UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     logoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
-        make.centerY.mas_equalTo(self.usernameTF.mas_top).multipliedBy(.37f);
+        if (@available(iOS 11.0, *)) {
+            make.top.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideTop).offset(19);
+        } else {
+            // Fallback on earlier versions
+            make.top.mas_equalTo(19);
+        }
         make.size.mas_equalTo(CGSizeMake(175, 75));
     }];
     
     UIButton *touristBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     touristBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
     [touristBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [touristBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+    [touristBtn setTitleColor:[UIColor colorWithHexString:@"9D9CA1"] forState:UIControlStateNormal];
     [touristBtn addTarget:self action:@selector(forgetBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:touristBtn];
     [touristBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.loginBtn.mas_right);
-        make.bottom.mas_equalTo(-44);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideBottom).offset(-84);
+        } else {
+            // Fallback on earlier versions
+            make.bottom.mas_equalTo(-84);
+        }
     }];
     
     UIButton *registerBtn = [touristBtn clone];
@@ -164,7 +197,7 @@
     [self.contentView addSubview:registerBtn];
     [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.loginBtn.mas_left);
-        make.bottom.mas_equalTo(-44);
+        make.bottom.mas_equalTo(touristBtn);
     }];
 }
 
@@ -208,6 +241,10 @@
 - (void)securityBtnAction:(UIButton *)sender {
     self.passwordTF.secureTextEntry = !self.passwordTF.secureTextEntry;
     sender.selected = !sender.selected;
+}
+
+- (void)deleteBtnAction:(UIButton *)sender{
+    self.usernameTF.text = @"";
 }
 
 - (void)forgetBtnAction:(UIButton *)sender {
