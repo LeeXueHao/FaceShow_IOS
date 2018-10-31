@@ -34,17 +34,22 @@
         self.navigationItem.title = @"修改密码";
     }
     [self setupUI];
-//    WEAK_SELF
-//    [self nyx_setupLeftWithImageName:@"关闭当前页面icon正常态" highlightImageName:@"关闭当前页面icon点击态" action:^{
-//        STRONG_SELF
-//        [self backAction];
-//    }];
+    WEAK_SELF
+    [self nyx_setupLeftWithImageName:@"返回页面按钮正常态-" highlightImageName:@"返回页面按钮点击态" action:^{
+        STRONG_SELF
+        [self backAction];
+    }];
 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)setupUI {
