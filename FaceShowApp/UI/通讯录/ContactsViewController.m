@@ -88,12 +88,18 @@
             return;
         }
         self.classFilterView.clazsArray = self.clazsListItem.data.clazsInfos;
-        self.selectedClass = self.clazsListItem.data.clazsInfos.firstObject;
         self.totalClazsArray = self.clazsListItem.data.clazsInfos;
+        self.selectedClass = self.clazsListItem.data.clazsInfos.firstObject;
+        self.classFilterView.selectedRow = 0;
+        [self.clazsListItem.data.clazsInfos enumerateObjectsUsingBlock:^(ClassListRequestItem_clazsInfos *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj.clazsId isEqualToString:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]) {
+                self.selectedClass = obj;
+                self.classFilterView.selectedRow = idx;
+                *stop = YES;
+            }
+        }];
         self.currentClassView.title = self.selectedClass.clazsName;
         self.currentClassView.selectClassId = self.selectedClass.clazsId;
-        //取第一个进行请求
-        //...
         [self firstPageFetch];
     }];
 }
