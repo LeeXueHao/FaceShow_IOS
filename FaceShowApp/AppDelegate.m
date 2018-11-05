@@ -137,7 +137,12 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    [[YXGeTuiManager sharedInstance] handleApnsContent:userInfo];
+    //iOS10 之前的 暂不处理, 否则会与 YXGeTuiManager 中的 注册通知代理方法 重叠
+    if (@available(iOS 10.0, *)) {
+
+    }else{
+        [[YXGeTuiManager sharedInstance] handleApnsContent:userInfo];
+    }
     application.applicationIconBadgeNumber -= 1;
     completionHandler(UIBackgroundFetchResultNewData);
 }

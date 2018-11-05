@@ -146,6 +146,7 @@
     self.classLabel.text = [NSString stringWithFormat:@"%@",item.data.clazsInfo.clazsName];
     if (item.data.userGroups.firstObject) {
         GetCurrentClazsRequestItem_userGroup *groupData = item.data.userGroups.firstObject;
+        [self.group setHidden:NO];
         self.groupLabel.text = [NSString stringWithFormat:@"%@",groupData.groupName];
     }else{
         [self.group setHidden:YES];
