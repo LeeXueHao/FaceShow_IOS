@@ -22,6 +22,21 @@
         STRONG_SELF
         [self backAction];
     }];
+    [self removeChildVC];
+}
+
+- (void)removeChildVC{
+    NSMutableArray *childVCS = [NSMutableArray arrayWithArray:self.navigationController.childViewControllers];
+    [childVCS removeLastObject];
+    NSMutableArray *apnsVCS = [NSMutableArray array];
+    for (UIViewController *childVC in childVCS) {
+        if ([childVC isKindOfClass:[ApnsChatViewController class]]) {
+            [apnsVCS addObject:childVC];
+        }
+    }
+    [childVCS removeObjectsInArray:apnsVCS];
+    [childVCS addObject:self];
+    [self.navigationController setViewControllers:childVCS animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

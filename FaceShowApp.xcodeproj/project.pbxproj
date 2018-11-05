@@ -296,6 +296,8 @@
 		7CBC5BD020522E0A004ACA04 /* IMImageMessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BCF20522E0A004ACA04 /* IMImageMessageSender.m */; };
 		7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BD220522E23004ACA04 /* IMImageMessage.m */; };
 		7CBC5BDC20567184004ACA04 /* SaveImageMsgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */; };
+		7CBDFB38218BF60800AA1805 /* YXInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB37218BF60800AA1805 /* YXInputView.m */; };
+		7CBDFB3B218C08FE00AA1805 /* TestLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB3A218C08FE00AA1805 /* TestLoginViewController.m */; };
 		7CE143452154C93500A9E20A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */; };
 		7CE143482154CE9000A9E20A /* MineCertiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143472154CE9000A9E20A /* MineCertiViewController.m */; };
 		7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143AB2155DDF600A9E20A /* MineCertiRequest.m */; };
@@ -1069,6 +1071,10 @@
 		7CBC5BD220522E23004ACA04 /* IMImageMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMImageMessage.m; sourceTree = "<group>"; };
 		7CBC5BDA20567184004ACA04 /* SaveImageMsgRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveImageMsgRequest.h; sourceTree = "<group>"; };
 		7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveImageMsgRequest.m; sourceTree = "<group>"; };
+		7CBDFB36218BF60800AA1805 /* YXInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXInputView.h; sourceTree = "<group>"; };
+		7CBDFB37218BF60800AA1805 /* YXInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXInputView.m; sourceTree = "<group>"; };
+		7CBDFB39218C08FE00AA1805 /* TestLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestLoginViewController.h; sourceTree = "<group>"; };
+		7CBDFB3A218C08FE00AA1805 /* TestLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestLoginViewController.m; sourceTree = "<group>"; };
 		7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		7CE143462154CE9000A9E20A /* MineCertiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineCertiViewController.h; sourceTree = "<group>"; };
 		7CE143472154CE9000A9E20A /* MineCertiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCertiViewController.m; sourceTree = "<group>"; };
@@ -2361,6 +2367,8 @@
 				7CEFC7B71F989F41001D8C84 /* View */,
 				7C2519AA1F690D850001B577 /* LoginViewController.h */,
 				7C2519AB1F690D860001B577 /* LoginViewController.m */,
+				7CBDFB39218C08FE00AA1805 /* TestLoginViewController.h */,
+				7CBDFB3A218C08FE00AA1805 /* TestLoginViewController.m */,
 				7CEFC7B41F989C1C001D8C84 /* ForgotPasswordViewController.h */,
 				7CEFC7B51F989C1C001D8C84 /* ForgotPasswordViewController.m */,
 				4369597D1FDE27B5009E5C43 /* ClassEmptyViewController.h */,
@@ -2781,6 +2789,8 @@
 				7CBC5BB4204CF46C004ACA04 /* MessagePromptView.m */,
 				7CBC5BC2204D365B004ACA04 /* CompleteInfoHeaderView.h */,
 				7CBC5BC3204D365B004ACA04 /* CompleteInfoHeaderView.m */,
+				7CBDFB36218BF60800AA1805 /* YXInputView.h */,
+				7CBDFB37218BF60800AA1805 /* YXInputView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3687,6 +3697,7 @@
 				9279A6EC1F6A5771004A1E2B /* ClassMomentTableHeaderView.m in Sources */,
 				7C2519B51F690EB50001B577 /* ClassMomentViewController.m in Sources */,
 				922600C4200F3CB10076AD05 /* ClassMomentUserListRequest.m in Sources */,
+				7CBDFB38218BF60800AA1805 /* YXInputView.m in Sources */,
 				E91E5D172047B17300052FBA /* ContactsViewController.m in Sources */,
 				E91E5D492047B22800052FBA /* IMTextMessageRightCell.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
@@ -3854,6 +3865,7 @@
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
 				E93327F020638DF800CED82E /* IMSlideView.m in Sources */,
+				7CBDFB3B218C08FE00AA1805 /* TestLoginViewController.m in Sources */,
 				E94DDE5220D8AD2700729A67 /* SaveUserEvaluateRequest.m in Sources */,
 				7C96A8BF216CBA16007AAD82 /* ClazsMemberListFetcher.m in Sources */,
 				E91E5D682047B86B00052FBA /* IMServiceManager.m in Sources */,

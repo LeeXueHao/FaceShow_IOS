@@ -419,8 +419,14 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     }
     ApnsChatViewController *chat = [[ApnsChatViewController alloc]init];
     chat.topic = currentTopic;
-    FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:chat];
-    [[self lastPresentedViewController] presentViewController:navi animated:YES completion:nil];
+    UIViewController *root = [self lastPresentedViewController];
+    if ([root isKindOfClass:[FSNavigationController class]]) {
+        FSNavigationController *nav = (FSNavigationController *)root;
+        [nav pushViewController:chat animated:YES];
+    }else{
+        FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:chat];
+        [root presentViewController:navi animated:YES completion:nil];
+    }
 }
 
 - (UIViewController *)lastPresentedViewController {
