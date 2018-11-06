@@ -18,8 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YXInputView : UIView
 
-@property (nonatomic, readonly, assign) YXInputViewType type;
-
+@property (nonatomic, assign) YXInputViewType type;
+@property (nonatomic, copy) void(^sendVerifyCodeBlock)(NSString *telPhoneNumber);
+@property (nonatomic, copy) void(^btnEnabledBlock)(BOOL enabled);
+@property (nonatomic, copy, readonly) NSString *telPhoneNumber;
+@property (nonatomic, copy, readonly) NSString *password;
+- (void)startTimer;
+- (void)stopTimer;
+- (void)clearPassWord;
+- (void)setFocus;
 @end
 
 NS_ASSUME_NONNULL_END

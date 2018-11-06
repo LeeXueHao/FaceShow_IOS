@@ -19,12 +19,14 @@ BOOL testFrameworkOn = NO;
 NSString * const kServer = @"http://hbyxb.ymd.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://hbyxb.ymd.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://hbyxb.ymd.yanxiu.com/uc/appLogin";
+NSString * const kQuickLoginServer = @"http://hbyxb.ymd.yanxiu.com/uc/AppCodeLogin";
 NSString * const kEasygoServer = @"http://hbyxb.ymd.yanxiu.com/easygo/multiUpload";
 NSString * const kPCAddress = @"http://hbyxb.ymd.yanxiu.com/sd/101";
 #else
 NSString * const kServer = @"http://jspx1.e21.cn/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://jspx1.e21.cn/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://jspx1.e21.cn/uc/appLogin";
+NSString * const kQuickLoginServer = @"http://jspx1.e21.cn/uc/AppCodeLogin";
 NSString * const kEasygoServer = @"http://jspx1.e21.cn/easygo/multiUpload";
 NSString * const kPCAddress = @"http://jspx1.e21.cn/sd/101";
 #endif
@@ -35,12 +37,14 @@ NSString * const kPCAddress = @"http://jspx1.e21.cn/sd/101";
 NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
+NSString * const kQuickLoginServer = @"http://orz.yanxiu.com/uc/AppCodeLogin";
 NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
 NSString * const kPCAddress = @"http://orz.yanxiu.com/sd/1";
 #else
 NSString * const kServer = @"http://yxb.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://yxb.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://pp.yanxiu.com/uc/appLogin";
+NSString * const kQuickLoginServer = @"http://pp.yanxiu.com/uc/AppCodeLogin";
 NSString * const kEasygoServer = @"http://b.yanxiu.com/easygo/multiUpload";
 NSString * const kPCAddress = @"http://yxb.yanxiu.com/sd/100";
 #endif
@@ -69,6 +73,10 @@ NSString * const kPCAddress = @"http://yxb.yanxiu.com/sd/100";
 
 - (NSString *)loginServer {
     return kLoginServer;
+}
+
+- (NSString *)quickLoginServer{
+    return kQuickLoginServer;
 }
 
 - (NSString *)easygo {

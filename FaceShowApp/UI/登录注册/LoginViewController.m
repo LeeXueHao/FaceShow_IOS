@@ -11,13 +11,14 @@
 #import "ForgotPasswordViewController.h"
 #import "ClassEmptyViewController.h"
 #import "ScanCodeViewController.h"
+#import "YXInputView.h"
+#import "GetVerifyCodeRequest.h"
+#import "LoginUtils.h"
 
-@interface LoginViewController ()<UITextFieldDelegate>
-
-@property (nonatomic, strong) UITextField *usernameTF;
-@property (nonatomic, strong) UITextField *passwordTF;
+@interface LoginViewController ()
+@property (nonatomic, strong) YXInputView *inputView;
 @property (nonatomic, strong) UIButton *loginBtn;
-
+@property (nonatomic, strong) GetVerifyCodeRequest *getVerifyCodeRequest;
 @end
 
 @implementation LoginViewController
@@ -26,7 +27,6 @@
     [super viewDidLoad];
     self.bottomHeightWhenKeyboardShows = 20;
     [self setupUI];
-    [self setupObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,92 +74,90 @@
         make.centerX.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
     }];
-    
-    self.passwordTF = [[UITextField alloc] init];
-    self.passwordTF.backgroundColor = [UIColor colorWithHexString:@"F8F8F8"];
-    self.passwordTF.textColor = [UIColor colorWithHexString:@"333333"];
-    self.passwordTF.tintColor = [UIColor colorWithHexString:@"333333"];
-    self.passwordTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
-    self.passwordTF.layer.borderWidth = 2;
-    self.passwordTF.layer.cornerRadius = 6;
-    NSMutableAttributedString *attributedStr1 = [[NSMutableAttributedString alloc] initWithString:@"请输入密码"];
-    NSDictionary *attributes = @{
-                                 NSForegroundColorAttributeName : [UIColor colorWithHexString:@"B5B4B9"],
-                                 NSFontAttributeName : [UIFont boldSystemFontOfSize:14]
-                                 };
-    [attributedStr1 setAttributes:attributes range:NSMakeRange(0, attributedStr1.length)];
-    self.passwordTF.attributedPlaceholder = attributedStr1;
-    self.passwordTF.defaultTextAttributes = attributes;
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-    leftView.backgroundColor = [UIColor clearColor];
-    self.passwordTF.leftView = leftView;
-    self.passwordTF.leftViewMode = UITextFieldViewModeAlways;
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32, 40)];
-    rightView.backgroundColor = [UIColor clearColor];
-    self.passwordTF.rightView = rightView;
-    self.passwordTF.rightViewMode = UITextFieldViewModeAlways;
-    self.passwordTF.secureTextEntry = YES;
-    self.passwordTF.returnKeyType = UIReturnKeyDone;
-    self.passwordTF.delegate = self;
-    self.passwordTF.keyboardType = UIKeyboardTypeASCIICapable;
-    [self.contentView addSubview:self.passwordTF];
-    [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-20);
+    self.loginBtn.enabled = NO;
+
+    self.inputView = [[YXInputView alloc] init];
+    [self.view addSubview:self.inputView];
+    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
+        make.bottom.mas_equalTo(self.loginBtn.mas_top).offset(-30);
+        make.width.mas_equalTo(self.view);
+        make.height.mas_equalTo(120);
     }];
-    
-    UIButton  *securityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [securityBtn setBackgroundImage:[UIImage imageNamed:@"隐藏秘密正常态"] forState:UIControlStateNormal];
-    [securityBtn setBackgroundImage:[UIImage imageNamed:@"隐藏秘密点击态"] forState:UIControlStateHighlighted];
-    [securityBtn setBackgroundImage:[UIImage imageNamed:@"显示密码正常态"] forState:UIControlStateSelected];
-    [securityBtn setBackgroundImage:[UIImage imageNamed:@"显示密码点击态"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [securityBtn addTarget:self action:@selector(securityBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    securityBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:securityBtn];
-    [securityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.passwordTF.mas_centerY);
-        make.right.mas_equalTo(self.passwordTF.mas_right).offset(-7);
-        make.size.mas_equalTo(CGSizeMake(18, 18));
-    }];
+    WEAK_SELF
+    self.inputView.sendVerifyCodeBlock = ^(NSString * _Nonnull telPhoneNumber) {
+        STRONG_SELF
+        [self sendVerifyCodeWithPhoneNumber:telPhoneNumber];
+    };
+    self.inputView.btnEnabledBlock = ^(BOOL enabled) {
+        STRONG_SELF
+        self.loginBtn.enabled = enabled;
+    };
 
-    self.usernameTF = [[UITextField alloc] init];
-    self.usernameTF.backgroundColor = [UIColor colorWithHexString:@"F8F8F8"];
-    self.usernameTF.textColor = [UIColor colorWithHexString:@"333333"];
-    self.usernameTF.tintColor = [UIColor colorWithHexString:@"333333"];
-    self.usernameTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
-    self.usernameTF.layer.borderWidth = 2;
-    self.usernameTF.layer.cornerRadius = 6;
-    NSMutableAttributedString *attributedStr2 = [[NSMutableAttributedString alloc] initWithString:@"请输入账号"];
-    [attributedStr2 setAttributes:attributes range:NSMakeRange(0, attributedStr2.length)];
-    self.usernameTF.attributedPlaceholder = attributedStr2;
-    self.usernameTF.defaultTextAttributes = attributes;
-    leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-    leftView.backgroundColor = [UIColor clearColor];
-    self.usernameTF.leftView = leftView;
-    self.usernameTF.leftViewMode = UITextFieldViewModeAlways;
-    self.usernameTF.returnKeyType = UIReturnKeyDone;
-    self.usernameTF.delegate = self;
-    [self.contentView addSubview:self.usernameTF];
-    [self.usernameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.passwordTF.mas_top).offset(-10);
-        make.centerX.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
+    UIButton *quickbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [quickbtn setTitle:@"快速登录" forState:0];
+    quickbtn.selected = YES;
+    [quickbtn setTitleColor:[UIColor colorWithHexString:@"181928"] forState:UIControlStateSelected];
+    [quickbtn setTitleColor:[UIColor colorWithHexString:@"929699"] forState:UIControlStateNormal];
+    quickbtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:15];
+    [self.view addSubview:quickbtn];
+    [quickbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
+        make.left.mas_equalTo(self.inputView.mas_left).offset(50);
+        make.size.mas_equalTo(CGSizeMake(80, 35));
+    }];
+    UIView *blueView = [[UIView alloc] init];
+    blueView.backgroundColor = [UIColor colorWithHexString:@"4C9EEB"];
+    [self.view addSubview:blueView];
+    [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(quickbtn);
+        make.size.mas_equalTo(CGSizeMake(30, 2));
+        make.top.mas_equalTo(quickbtn.mas_bottom).offset(5);
     }];
 
-    UIButton  *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [deleteBtn setBackgroundImage:[UIImage imageNamed:@"删除按钮"] forState:UIControlStateNormal];
-    [deleteBtn setBackgroundImage:[UIImage imageNamed:@"删除按钮点击态"] forState:UIControlStateHighlighted];
-    [deleteBtn addTarget:self action:@selector(deleteBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    deleteBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:deleteBtn];
-    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.usernameTF.mas_centerY);
-        make.right.mas_equalTo(self.usernameTF.mas_right).offset(-7);
-        make.size.mas_equalTo(CGSizeMake(18, 18));
+    UIButton *login = [quickbtn clone];
+    [login setTitle:@"普通登录" forState:0];
+    [self.view addSubview:login];
+    [login mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
+        make.right.mas_equalTo(self.inputView.mas_right).offset(-50);
+        make.size.mas_equalTo(CGSizeMake(80, 35));
+    }];
+
+    [[quickbtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        quickbtn.selected = YES;
+        login.selected = NO;
+        self.inputView.type = YXInputViewType_QuickLogin;
+        [blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(quickbtn);
+            make.size.mas_equalTo(CGSizeMake(30, 2));
+            make.top.mas_equalTo(quickbtn.mas_bottom).offset(5);
+        }];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        }completion:^(BOOL finished) {
+            [self.inputView setFocus];
+        }];
     }];
 
 
+    [[login rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        STRONG_SELF
+        login.selected = YES;
+        quickbtn.selected = NO;
+        self.inputView.type = YXInputViewType_Default;
+        [blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(login);
+            make.size.mas_equalTo(CGSizeMake(30, 2));
+            make.top.mas_equalTo(login.mas_bottom).offset(5);
+        }];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        }completion:^(BOOL finished) {
+            [self.inputView setFocus];
+        }];
+    }];
 
     UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     logoImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -201,31 +199,22 @@
     }];
 }
 
-#pragma mark - setupObserver
-- (void)setupObserver {
-    WEAK_SELF
-    [[self.usernameTF rac_textSignal] subscribeNext:^(id x) {
-        STRONG_SELF
-        self.loginBtn.enabled = !isEmpty(self.usernameTF.text) && !isEmpty(self.passwordTF.text);
-    }];
-    [[self.passwordTF rac_textSignal] subscribeNext:^(id x) {
-        self.loginBtn.enabled = !isEmpty(self.usernameTF.text) && !isEmpty(self.passwordTF.text);
-    }];
-}
-
 #pragma mark - actions
 - (void)loginBtnAction:(UIButton *)sender {
     [self.view endEditing:YES];
     [self.view nyx_startLoading];
-    self.usernameTF.text = [self.usernameTF.text yx_stringByTrimmingCharacters];
+    NSString *telNumber = [self.inputView.telPhoneNumber yx_stringByTrimmingCharacters];
     WEAK_SELF
-    [LoginDataManager loginWithName:self.usernameTF.text password:self.passwordTF.text completeBlock:^(NSError *error) {
+    AppLoginType type = self.inputView.type == YXInputViewType_Default?AppLoginType_AccountLogin:AppLoginType_AppCodeLogin;
+    [LoginDataManager loginWithName:telNumber password:self.inputView.password loginType:type completeBlock:^(NSError *error) {
         STRONG_SELF
         [self.view nyx_stopLoading];
         if (error) {
             [UserManager sharedInstance].userModel = nil;
-            self.passwordTF.text = @"";
-            self.loginBtn.enabled = NO;
+            if (type ==YXInputViewType_Default) {
+                [self.inputView clearPassWord];
+                self.loginBtn.enabled = NO;
+            }
             if (error.code != 10086) {
                 [self.view nyx_showToast:error.localizedDescription];
                 return;
@@ -236,15 +225,6 @@
         }
         [UserManager sharedInstance].loginStatus = YES;
     }];
-}
-
-- (void)securityBtnAction:(UIButton *)sender {
-    self.passwordTF.secureTextEntry = !self.passwordTF.secureTextEntry;
-    sender.selected = !sender.selected;
-}
-
-- (void)deleteBtnAction:(UIButton *)sender{
-    self.usernameTF.text = @"";
 }
 
 - (void)forgetBtnAction:(UIButton *)sender {
@@ -259,10 +239,27 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.view endEditing:YES];
-    return YES;
+- (void)sendVerifyCodeWithPhoneNumber:(NSString *)phoneNumber{
+    if (![LoginUtils isPhoneNumberValid:phoneNumber]) {
+        [self.view nyx_showToast:@"请输入正确的手机号码"];
+        return;
+    }
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.inputView startTimer];
+    [self.getVerifyCodeRequest stopRequest];
+    self.getVerifyCodeRequest = [[GetVerifyCodeRequest alloc]init];
+    self.getVerifyCodeRequest.mobile = phoneNumber;
+    [self.getVerifyCodeRequest startRequestWithRetClass:[HttpBaseRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.inputView stopTimer];
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        [self.view nyx_showToast:@"验证码已发送，请注意查收"];
+    }];
 }
 
 @end

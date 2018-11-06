@@ -297,7 +297,9 @@
 		7CBC5BD320522E23004ACA04 /* IMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BD220522E23004ACA04 /* IMImageMessage.m */; };
 		7CBC5BDC20567184004ACA04 /* SaveImageMsgRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */; };
 		7CBDFB38218BF60800AA1805 /* YXInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB37218BF60800AA1805 /* YXInputView.m */; };
-		7CBDFB3B218C08FE00AA1805 /* TestLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB3A218C08FE00AA1805 /* TestLoginViewController.m */; };
+		7CBDFB412190566800AA1805 /* QuickLoginContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB402190566800AA1805 /* QuickLoginContainerView.m */; };
+		7CBDFB442190575F00AA1805 /* DefaultLoginContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB432190575F00AA1805 /* DefaultLoginContainerView.m */; };
+		7CBDFB6C2191816000AA1805 /* AppCodeLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB6B2191816000AA1805 /* AppCodeLoginRequest.m */; };
 		7CE143452154C93500A9E20A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */; };
 		7CE143482154CE9000A9E20A /* MineCertiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143472154CE9000A9E20A /* MineCertiViewController.m */; };
 		7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143AB2155DDF600A9E20A /* MineCertiRequest.m */; };
@@ -1073,8 +1075,12 @@
 		7CBC5BDB20567184004ACA04 /* SaveImageMsgRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveImageMsgRequest.m; sourceTree = "<group>"; };
 		7CBDFB36218BF60800AA1805 /* YXInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXInputView.h; sourceTree = "<group>"; };
 		7CBDFB37218BF60800AA1805 /* YXInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXInputView.m; sourceTree = "<group>"; };
-		7CBDFB39218C08FE00AA1805 /* TestLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestLoginViewController.h; sourceTree = "<group>"; };
-		7CBDFB3A218C08FE00AA1805 /* TestLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestLoginViewController.m; sourceTree = "<group>"; };
+		7CBDFB3F2190566800AA1805 /* QuickLoginContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickLoginContainerView.h; sourceTree = "<group>"; };
+		7CBDFB402190566800AA1805 /* QuickLoginContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickLoginContainerView.m; sourceTree = "<group>"; };
+		7CBDFB422190575F00AA1805 /* DefaultLoginContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultLoginContainerView.h; sourceTree = "<group>"; };
+		7CBDFB432190575F00AA1805 /* DefaultLoginContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultLoginContainerView.m; sourceTree = "<group>"; };
+		7CBDFB6A2191816000AA1805 /* AppCodeLoginRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCodeLoginRequest.h; sourceTree = "<group>"; };
+		7CBDFB6B2191816000AA1805 /* AppCodeLoginRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCodeLoginRequest.m; sourceTree = "<group>"; };
 		7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		7CE143462154CE9000A9E20A /* MineCertiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineCertiViewController.h; sourceTree = "<group>"; };
 		7CE143472154CE9000A9E20A /* MineCertiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCertiViewController.m; sourceTree = "<group>"; };
@@ -1548,6 +1554,8 @@
 				7CBC5BB1204CEBB2004ACA04 /* RegistYxbRequest.m */,
 				7CBC5BCB204E33B7004ACA04 /* RegistUnenterAndYxbRequest.h */,
 				7CBC5BCC204E33B7004ACA04 /* RegistUnenterAndYxbRequest.m */,
+				7CBDFB6A2191816000AA1805 /* AppCodeLoginRequest.h */,
+				7CBDFB6B2191816000AA1805 /* AppCodeLoginRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -2367,8 +2375,6 @@
 				7CEFC7B71F989F41001D8C84 /* View */,
 				7C2519AA1F690D850001B577 /* LoginViewController.h */,
 				7C2519AB1F690D860001B577 /* LoginViewController.m */,
-				7CBDFB39218C08FE00AA1805 /* TestLoginViewController.h */,
-				7CBDFB3A218C08FE00AA1805 /* TestLoginViewController.m */,
 				7CEFC7B41F989C1C001D8C84 /* ForgotPasswordViewController.h */,
 				7CEFC7B51F989C1C001D8C84 /* ForgotPasswordViewController.m */,
 				4369597D1FDE27B5009E5C43 /* ClassEmptyViewController.h */,
@@ -2791,6 +2797,10 @@
 				7CBC5BC3204D365B004ACA04 /* CompleteInfoHeaderView.m */,
 				7CBDFB36218BF60800AA1805 /* YXInputView.h */,
 				7CBDFB37218BF60800AA1805 /* YXInputView.m */,
+				7CBDFB3F2190566800AA1805 /* QuickLoginContainerView.h */,
+				7CBDFB402190566800AA1805 /* QuickLoginContainerView.m */,
+				7CBDFB422190575F00AA1805 /* DefaultLoginContainerView.h */,
+				7CBDFB432190575F00AA1805 /* DefaultLoginContainerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3566,6 +3576,7 @@
 				7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */,
 				7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */,
 				E90C515C204FD6DF0008F92A /* IMMessageTableView.m in Sources */,
+				7CBDFB6C2191816000AA1805 /* AppCodeLoginRequest.m in Sources */,
 				7C2518E51F68E68D0001B577 /* NSObject+BackgroundTask.m in Sources */,
 				E91E5DA22047B8E300052FBA /* GetTopicsRequest.m in Sources */,
 				E91E5D442047B22800052FBA /* IMMessageMenuView.m in Sources */,
@@ -3743,6 +3754,7 @@
 				E94DDE3F20D4DD0300729A67 /* TaskRankingFetcher.m in Sources */,
 				7CB9C8F0201038B5005BE126 /* ClassSelectionViewController.m in Sources */,
 				92A7CACF1F6A84FC0038D6D1 /* PreviewPhotosView.m in Sources */,
+				7CBDFB412190566800AA1805 /* QuickLoginContainerView.m in Sources */,
 				E94DDE3920D4C36F00729A67 /* GetUserTaskProgressRequest.m in Sources */,
 				7CEFC7B61F989C1C001D8C84 /* ForgotPasswordViewController.m in Sources */,
 				E95434DB20D2550B00BCF63C /* GetUserClazsScoreRequest.m in Sources */,
@@ -3823,6 +3835,7 @@
 				92AF46A62019955F0076AFA0 /* ClassMomentNotificationCell.m in Sources */,
 				7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */,
 				7C25195F1F68EBA90001B577 /* PostRequest.m in Sources */,
+				7CBDFB442190575F00AA1805 /* DefaultLoginContainerView.m in Sources */,
 				435DFCF61FD0FAAF00CEA9C2 /* ReportViewController.m in Sources */,
 				7C24E1EE1F723C2A00A6921B /* GetCourseListRequest.m in Sources */,
 				E95434CE20D220E200BCF63C /* ScoreTopView.m in Sources */,
@@ -3865,7 +3878,6 @@
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
 				E93327F020638DF800CED82E /* IMSlideView.m in Sources */,
-				7CBDFB3B218C08FE00AA1805 /* TestLoginViewController.m in Sources */,
 				E94DDE5220D8AD2700729A67 /* SaveUserEvaluateRequest.m in Sources */,
 				7C96A8BF216CBA16007AAD82 /* ClazsMemberListFetcher.m in Sources */,
 				E91E5D682047B86B00052FBA /* IMServiceManager.m in Sources */,

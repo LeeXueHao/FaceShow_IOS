@@ -15,13 +15,12 @@
 #import "TestQiniuViewController.h"
 #import "CompleteUserInfoViewController.h"
 #import "RegisterInfoViewController.h"
-#import "TestLoginViewController.h"
 @interface YXTestViewController ()
 @end
 
 @implementation YXTestViewController
 - (void)viewDidLoad {
-    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择",@"qiniu",@"test",@"testLogin"];
+    self.devTestActions = @[@"问卷",@"问卷结果",@"comment", @"上传图片",@"照片选择",@"qiniu",@"test"];
     [super viewDidLoad];
 }
 
@@ -67,11 +66,6 @@
 - (void)test {
     RegisterInfoViewController *vc = [[RegisterInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)testLogin{
-    TestLoginViewController *test = [[TestLoginViewController alloc] init];
-    [self.navigationController pushViewController:test animated:YES];
 }
 
 @end
