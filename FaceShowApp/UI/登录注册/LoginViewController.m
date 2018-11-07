@@ -137,7 +137,9 @@
         [UIView animateWithDuration:0.3 animations:^{
             [self.view layoutIfNeeded];
         }completion:^(BOOL finished) {
-            [self.inputView setFocus];
+            if (self.scrollView.contentInset.bottom > 0) {
+                [self.inputView setFocus];
+            }
         }];
     }];
 
@@ -155,7 +157,9 @@
         [UIView animateWithDuration:0.3 animations:^{
             [self.view layoutIfNeeded];
         }completion:^(BOOL finished) {
-            [self.inputView setFocus];
+            if (self.scrollView.contentInset.bottom > 0) {
+                [self.inputView setFocus];
+            }
         }];
     }];
 
