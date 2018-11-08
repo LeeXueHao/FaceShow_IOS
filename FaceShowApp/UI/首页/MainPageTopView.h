@@ -11,4 +11,5 @@
 
 @interface MainPageTopView : UIView
 @property (nonatomic, strong) GetCurrentClazsRequestItem *item;
+@property (nonatomic, copy) void(^clickGroupBlock)(GetCurrentClazsRequestItem_userGroup *groupData);
 @end

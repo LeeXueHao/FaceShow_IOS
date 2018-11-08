@@ -122,6 +122,15 @@
         make.left.mas_equalTo(self.projectLabel.mas_left);
         make.right.mas_lessThanOrEqualTo(-15);
     }];
+    self.groupLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    WEAK_SELF
+    [[tap rac_gestureSignal] subscribeNext:^(id x) {
+        STRONG_SELF
+        GetCurrentClazsRequestItem_userGroup *groupData = self->_item.data.userGroups.firstObject;
+        BLOCK_EXEC(self.clickGroupBlock,groupData);
+    }];
+    [self.groupLabel addGestureRecognizer:tap];
 
     UIView *containerView = [[UIView alloc] init];
     containerView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.1];

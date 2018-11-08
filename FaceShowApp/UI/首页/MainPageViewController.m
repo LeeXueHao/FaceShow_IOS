@@ -25,6 +25,8 @@
 #import "MessageViewController.h"
 #import "MainPageTipView.h"
 #import "ScoreDetialViewController.h"
+#import "GroupDetailViewController.h"
+#import "GroupDetailForLeaderViewController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -87,11 +89,23 @@
         make.left.top.right.mas_equalTo(0);
         make.height.mas_equalTo(135);
     }];
+    WEAK_SELF
+    topView.clickGroupBlock = ^(GetCurrentClazsRequestItem_userGroup *groupData) {
+        STRONG_SELF
+        UIViewController *vc;
+        BOOL isLeader = [groupData.leaderId isEqualToString:[UserManager sharedInstance].userModel.userID];
+        if (isLeader) {
+            vc = [[GroupDetailForLeaderViewController alloc] init];
+        }else{
+            vc = [[GroupDetailViewController alloc] init];
+        }
+        [vc setValue:groupData forKey:@"groupData"];
+        [self.navigationController pushViewController:vc animated:YES];
+    };
     self.topView = topView;
     
     self.tipView = [[MainPageTipView alloc]init];
     self.tipView.item = [UserManager sharedInstance].userModel.projectClassInfo;
-    WEAK_SELF
     [self.tipView setSelectedTipBlock:^(GetCurrentClazsRequestItem *item) {
         STRONG_SELF
         ScoreDetialViewController *vc = [[ScoreDetialViewController alloc]init];

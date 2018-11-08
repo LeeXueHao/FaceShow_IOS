@@ -95,7 +95,7 @@
     };
 
     UIButton *quickbtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [quickbtn setTitle:@"快速登录" forState:0];
+    [quickbtn setTitle:@"快捷登录" forState:0];
     quickbtn.selected = YES;
     [quickbtn setTitleColor:[UIColor colorWithHexString:@"181928"] forState:UIControlStateSelected];
     [quickbtn setTitleColor:[UIColor colorWithHexString:@"929699"] forState:UIControlStateNormal];
@@ -116,7 +116,7 @@
     }];
 
     UIButton *login = [quickbtn clone];
-    [login setTitle:@"普通登录" forState:0];
+    [login setTitle:@"密码登录" forState:0];
     [self.view addSubview:login];
     [login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);

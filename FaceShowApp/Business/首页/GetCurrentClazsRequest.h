@@ -45,6 +45,7 @@
 @interface GetCurrentClazsRequestItem_userGroup : JSONModel
 @property (nonatomic, strong) NSString<Optional> *groupId;
 @property (nonatomic, strong) NSString<Optional> *groupName;
+@property (nonatomic, strong) NSString<Optional> *leaderId;
 @end
 
 @interface GetCurrentClazsRequestItem_data : JSONModel

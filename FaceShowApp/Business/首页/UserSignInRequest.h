@@ -7,6 +7,7 @@
 //
 
 #import "YXGetRequest.h"
+#import "GetSignInRecordListRequest.h"
 
 @interface UserSignInRequestItem_Data : JSONModel
 @property (nonatomic, strong) NSString<Optional> *userSignInId;
@@ -31,8 +32,10 @@
 @property (nonatomic, strong) NSString<Optional> *position;
 @property (nonatomic, strong) NSString<Optional> *site;
 @property (nonatomic, assign) BOOL positionSignIn;
-@property (nonatomic, strong) NSString<Ignore> *signinPosition;
+//@property (nonatomic, strong) NSString<Ignore> *signinPosition;
 @property (nonatomic, strong) NSString<Ignore> *positionRange;
+@property (nonatomic, strong) NSArray<GetSignInRequest_Item_signInExts,Optional> *signInExts;
+
 @end
 
 #define kStepId @"stepId"

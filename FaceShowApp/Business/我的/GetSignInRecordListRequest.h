@@ -8,6 +8,19 @@
 
 #import "YXGetRequest.h"
 
+@protocol GetSignInRequest_Item_signInExts <NSObject> @end
+@interface GetSignInRequest_Item_signInExts : JSONModel
+@property (nonatomic, strong) NSString<Optional> *signinPosition;
+@property (nonatomic, strong) NSString<Optional> *positionSite;
+@property (nonatomic, strong) NSString<Optional> *title;
+@property (nonatomic, strong) NSString<Optional> *signinId;
+@property (nonatomic, strong) NSString<Optional> *groupId;
+@property (nonatomic, strong) NSString<Optional> *positionRange;
+@property (nonatomic, strong) NSString<Optional> *startTime;
+@property (nonatomic, strong) NSString<Optional> *endTime;
+@property (nonatomic, strong) NSString<Optional> *signInExtId;
+@end
+
 @interface GetSignInRecordListRequestItem_UserSignIn : JSONModel
 @property (nonatomic, strong) NSString<Optional> *userSignInId;
 @property (nonatomic, strong) NSString<Optional> *userId;
@@ -43,6 +56,7 @@
 @property (nonatomic, strong) NSString<Optional> *positionSite;
 @property (nonatomic, strong) NSString<Optional> *positionRange;
 @property (nonatomic, strong) GetSignInRecordListRequestItem_UserSignIn<Optional> *userSignIn;
+@property (nonatomic, strong) NSArray<GetSignInRequest_Item_signInExts,Optional> *signInExts;
 @end
 
 @interface GetSignInRecordListRequestItem_Clazs : JSONModel

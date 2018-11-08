@@ -59,11 +59,25 @@
                 completeBlock(nil,positionErr,NO);
                 return;
             }
-            CLLocation *location1 = [[CLLocation alloc] initWithLatitude:location.location.coordinate.latitude longitude:location.location.coordinate.longitude];
-            NSArray<NSString *> *arr = [self.signinPosition componentsSeparatedByString:@","];
-            CLLocation *location2 = [[CLLocation alloc] initWithLatitude:arr.lastObject.floatValue longitude:arr.firstObject.floatValue];
-            CLLocationDistance distance = [location1 distanceFromLocation:location2];
-            if (distance > self.positionRange.floatValue) {
+            GetCurrentClazsRequestItem_userGroup *userGroup;
+            if ([UserManager sharedInstance].userModel.projectClassInfo.data.userGroups.count > 0) {
+                userGroup = [UserManager sharedInstance].userModel.projectClassInfo.data.userGroups.firstObject;
+            }
+            __block BOOL isInPlaces = NO;
+            [self.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.groupId.integerValue == 0 || [obj.groupId isEqualToString:userGroup.groupId]) {
+                    CLLocation *location1 = [[CLLocation alloc] initWithLatitude:location.location.coordinate.latitude longitude:location.location.coordinate.longitude];
+                    NSArray<NSString *> *arr = [obj.signinPosition componentsSeparatedByString:@","];
+//                    [self.signinPosition componentsSeparatedByString:@","];
+                    CLLocation *location2 = [[CLLocation alloc] initWithLatitude:arr.lastObject.floatValue longitude:arr.firstObject.floatValue];
+                    CLLocationDistance distance = [location1 distanceFromLocation:location2];
+                    if (distance < self.positionRange.floatValue) {
+                        isInPlaces = YES;
+                        *stop = YES;
+                    }
+                }
+            }];
+            if (!isInPlaces) {
                 NSError *positionErr = [NSError errorWithDomain:@"position_domain" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"您不在签到范围内"}];
                 completeBlock(nil,positionErr,NO);
                 return;
