@@ -12,6 +12,7 @@
 
 @interface NBResourceListViewController : BaseViewController<RefreshDelegate>
 @property (nonatomic, strong) NBMainPageViewController *mainVC;
+@property (nonatomic, strong) NSString *tagId;
 @end
 
 

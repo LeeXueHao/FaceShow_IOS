@@ -12,12 +12,14 @@
 #import "GetCurrentClazsRequest.h"
 #import "GetUserInfoRequest.h"
 #import "AppUseRecordManager.h"
+#import "GetClassConfigRequest.h"
 
 @interface LoginDataManager()
 @property (nonatomic, strong) GetCurrentClazsRequest *getClassRequest;
 @property (nonatomic, strong) GetUserInfoRequest *getUserInfoRequest;
 @property (nonatomic, copy) void(^loginBlock)(NSError *error);
 @property (nonatomic, strong) YXGetRequest *loginBaseRequest;
+@property (nonatomic, strong) GetClassConfigRequest *getClassConfigRequest;
 @end
 
 @implementation LoginDataManager
@@ -92,24 +94,58 @@
         }
         userModel.projectClassInfo = item;
 
-        [self.getUserInfoRequest stopRequest];
-        self.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
-        self.getUserInfoRequest.token = userModel.token;
-        [self.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-            if (error) {
-                BLOCK_EXEC(self.loginBlock, error);
-                return;
-            }
-            GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
-            [UserManager sharedInstance].userModel = userModel;
-            [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
-            [[UserManager sharedInstance] saveData];
-            //使用情况统计
-            AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
-            request.actionType = AppUseRecordActionType_AccountLogin;
-            [[AppUseRecordManager sharedInstance]addRecord:request];
-            BLOCK_EXEC(self.loginBlock, nil);
-        }];
+        if([item.data.clazsInfo.modelId isEqualToString:@"0"]){
+            [UserManager sharedInstance].configItem = nil;
+            [self.getUserInfoRequest stopRequest];
+            self.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
+            self.getUserInfoRequest.token = userModel.token;
+            WEAK_SELF
+            [self.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                STRONG_SELF
+                if (error) {
+                    BLOCK_EXEC(self.loginBlock, error);
+                    return;
+                }
+                GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
+                [UserManager sharedInstance].userModel = userModel;
+                [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
+                [[UserManager sharedInstance] saveData];
+                //使用情况统计
+                AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
+                request.actionType = AppUseRecordActionType_AccountLogin;
+                [[AppUseRecordManager sharedInstance]addRecord:request];
+                BLOCK_EXEC(self.loginBlock, nil);
+            }];
+        }else{
+            [self.getClassConfigRequest stopRequest];
+            self.getClassConfigRequest = [[GetClassConfigRequest alloc] init];
+            self.getClassConfigRequest.modleId = item.data.clazsInfo.modelId;
+            WEAK_SELF
+            [self.getClassConfigRequest startRequestWithRetClass:[GetClassConfigRequest_Item class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                STRONG_SELF
+                [UserManager sharedInstance].configItem = (GetClassConfigRequest_Item *)retItem;
+                [self.getUserInfoRequest stopRequest];
+                self.getUserInfoRequest = [[GetUserInfoRequest alloc] init];
+                self.getUserInfoRequest.token = userModel.token;
+                WEAK_SELF
+                [self.getUserInfoRequest startRequestWithRetClass:[GetUserInfoRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                    STRONG_SELF
+                    if (error) {
+                        BLOCK_EXEC(self.loginBlock, error);
+                        return;
+                    }
+                    GetUserInfoRequestItem *userInfo = (GetUserInfoRequestItem *)retItem;
+                    [UserManager sharedInstance].userModel = userModel;
+                    [[UserManager sharedInstance].userModel updateFromUserInfo:userInfo.data];
+                    [[UserManager sharedInstance] saveData];
+                    //使用情况统计
+                    AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
+                    request.actionType = AppUseRecordActionType_AccountLogin;
+                    [[AppUseRecordManager sharedInstance]addRecord:request];
+                    BLOCK_EXEC(self.loginBlock, nil);
+                }];
+            }];
+        }
     }];
 }
 

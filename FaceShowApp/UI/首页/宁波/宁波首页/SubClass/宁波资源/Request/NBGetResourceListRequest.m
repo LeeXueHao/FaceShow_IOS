@@ -16,7 +16,7 @@
 
 @implementation NBGetResourceListRequestItem_tagList
 + (JSONKeyMapper *)keyMapper{
-    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"tagListId"}];
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"taglistId"}];
 }
 @end
 

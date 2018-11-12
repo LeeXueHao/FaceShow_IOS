@@ -54,6 +54,7 @@
     [self.listRequest stopRequest];
     self.listRequest = [[NBGetResourceListRequest alloc] init];
     self.listRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    self.listRequest.tagId = self.tagId;
     WEAK_SELF
     [self.listRequest startRequestWithRetClass:[NBGetResourceListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
@@ -163,8 +164,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < self.item.data.tagList.count) {
         //跳转下级页面
-        BaseViewController *vc = [[BaseViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        NBResourceListViewController *resListVC = [[NBResourceListViewController alloc] init];
+        NBGetResourceListRequestItem_tagList *tag = self.item.data.tagList[indexPath.row];
+        resListVC.tagId = tag.taglistId;
+        resListVC.title = tag.name;
+        [self.navigationController pushViewController:resListVC animated:YES];
     }else{
         NBGetResourceListRequestItem_resList *resList = self.item.data.resList[indexPath.row - self.item.data.tagList.count];
         [self requestResourceDetailWithResId:resList.resId];

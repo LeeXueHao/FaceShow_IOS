@@ -58,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NBGetResourceListRequest : YXGetRequest
 @property (nonatomic, strong) NSString<Optional> *clazsId;
+@property (nonatomic, strong) NSString<Optional> *tagId;
 @end
 
 NS_ASSUME_NONNULL_END
