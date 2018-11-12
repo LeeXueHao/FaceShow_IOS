@@ -72,7 +72,7 @@
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(135);
+        make.height.mas_equalTo(200);
     }];
     WEAK_SELF
 
@@ -81,8 +81,8 @@
     self.tabControllers = [NSMutableArray array];
     [self.tabConf enumerateObjectsUsingBlock:^(GetClassConfigRequest_Item_tabConf  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [titleArr addObject:obj.tabName];
-        UIViewController *vc = [[NBConfigManager sharedInstance]getViewControllerWithType:obj.tabType pageConfig:nil andTabConfigArray:nil];
-        [self.tabControllers addObject:vc];
+        UIViewController *vc = [[NBConfigManager sharedInstance] getViewControllerWithType:obj.tabType pageConfig:nil andTabConfigArray:nil];
+        [self.tabControllers addObject:(UIViewController<RefreshDelegate> *)vc];
         if ([vc isKindOfClass:[NBResourceListViewController class]]) {
             NBResourceListViewController *list = (NBResourceListViewController *)vc;
             list.mainVC = self;

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MeetingListCell : UITableViewCell
 @property (nonatomic, strong) NBGetMeetingListRequestItem_Group *group;
+@property (nonatomic, copy) void(^clickTagBlock)(NSString *courseId);
 @end
 
 NS_ASSUME_NONNULL_END

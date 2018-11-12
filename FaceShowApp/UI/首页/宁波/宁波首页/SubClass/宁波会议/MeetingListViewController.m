@@ -12,6 +12,7 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "NBGetMeetingListRequest.h"
+#import "MeetingDetailViewController.h"
 
 @interface MeetingListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -112,6 +113,13 @@
     NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
     MeetingListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingListCell"];
     cell.group = group;
+    WEAK_SELF
+    cell.clickTagBlock = ^(NSString * _Nonnull courseId) {
+        STRONG_SELF
+        MeetingDetailViewController *meetingDetailVC = [[MeetingDetailViewController alloc] init];
+        meetingDetailVC.courseId = courseId;
+        [self.navigationController pushViewController:meetingDetailVC animated:YES];
+    };
     return cell;
 }
 
@@ -136,14 +144,14 @@
     return 55;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
-//    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[indexPath.section];
-//    GetCourseListRequestItem_coursesList *course = courses.coursesList[indexPath.row];
-//    courseDetailVC.courseId = course.courseId;
-//    [self.navigationController pushViewController:courseDetailVC animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+////    CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
+////    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[indexPath.section];
+////    GetCourseListRequestItem_coursesList *course = courses.coursesList[indexPath.row];
+////    courseDetailVC.courseId = course.courseId;
+////    [self.navigationController pushViewController:courseDetailVC animated:YES];
+//}
 
 
 

@@ -8,10 +8,28 @@
 
 #import "NBGetResourceListRequest.h"
 
+@implementation NBGetResourceListRequestItem_resList
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"reslistId"}];
+}
+@end
+
+@implementation NBGetResourceListRequestItem_tagList
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id":@"tagListId"}];
+}
+@end
+
+@implementation NBGetResourceListRequestItem_data
+@end
+
+@implementation NBGetResourceListRequestItem
+@end
+
 @implementation NBGetResourceListRequest
 - (instancetype)init {
     if (self = [super init]) {
-        self.method = @"app.clazs.courses";
+        self.method = @"app.resource.list";
     }
     return self;
 }

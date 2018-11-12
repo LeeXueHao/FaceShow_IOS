@@ -23,7 +23,8 @@
     return manager;
 }
 
-- (UIViewController *)getViewControllerWithType:(NSString *)type pageConfig:(GetClassConfigRequest_Item_pageConf *)pageConf andTabConfigArray:(NSArray<GetClassConfigRequest_Item_tabConf *> *)tabArray{
+
+- (UIViewController *)getViewControllerWithType:(NSString *)type pageConfig:(GetClassConfigRequest_Item_pageConf  * _Nullable )pageConf andTabConfigArray:(NSArray<GetClassConfigRequest_Item_tabConf *>  * _Nullable )tabArray{
     NSString *vcClassStr = [[self vcDictionary] valueForKey:type];
     Class vcClass = NSClassFromString(vcClassStr);
     UIViewController *vc = (UIViewController *)[[vcClass alloc] init];

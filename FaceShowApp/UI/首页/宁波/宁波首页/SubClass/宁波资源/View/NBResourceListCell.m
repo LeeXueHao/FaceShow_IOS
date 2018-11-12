@@ -7,6 +7,7 @@
 //
 
 #import "NBResourceListCell.h"
+#import "ResourceTypeMapping.h"
 
 @interface NBResourceListCell()
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -54,8 +55,8 @@
     self.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(self.iconImageView.mas_right).offset(10);
-        make.right.mas_offset(-15);
+        make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
+        make.right.mas_equalTo(-15);
         make.top.mas_equalTo(self.iconImageView);
     }];
 
@@ -65,9 +66,30 @@
     [self.contentView addSubview:self.detailLabel];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.titleLabel);
-        make.bottom.mas_offset(self.iconImageView);
+        make.bottom.mas_equalTo(self.iconImageView);
     }];
 
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
+    [self.contentView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(1);
+    }];
+}
+
+- (void)setTagList:(NBGetResourceListRequestItem_tagList *)tagList{
+    _tagList = tagList;
+    self.titleLabel.text = tagList.name;
+    self.iconImageView.image = [UIImage imageNamed:@"folder"];
+    self.detailLabel.text = [NSString stringWithFormat:@"文件数：%@",tagList.state];
+}
+
+- (void)setResList:(NBGetResourceListRequestItem_resList *)resList{
+    _resList = resList;
+    self.iconImageView.image = [UIImage imageNamed:resList.type.integerValue ? @"html" : [ResourceTypeMapping resourceTypeWithString:resList.suffix]];
+    self.titleLabel.text = resList.resName;
+    self.detailLabel.text = [resList.createTime omitSecondOfFullDateString];
 }
 
 @end

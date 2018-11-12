@@ -135,6 +135,14 @@
         MeetingNameLabel *meetLabel = [[MeetingNameLabel alloc] initWithText:coursesList.courseName];
         [self.containerView addSubview:meetLabel];
         [arr addObject:meetLabel];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+        WEAK_SELF
+        [[tap rac_gestureSignal] subscribeNext:^(id x) {
+            STRONG_SELF
+            BLOCK_EXEC(self.clickTagBlock,coursesList.courseId);
+        }];
+        meetLabel.userInteractionEnabled = YES;
+        [meetLabel addGestureRecognizer:tap];
     }
     self.labelArray = arr.copy;
 }

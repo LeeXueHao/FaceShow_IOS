@@ -266,7 +266,7 @@ extern NSString * const kPCCodeResultBackNotification;
     [self.view nyx_startLoading];
     [self.request stopRequest];
     self.request = [[GetCourseRequest alloc] init];
-    self.request.courseId = self.meetingId;
+    self.request.courseId = self.courseId;
     [self.request startRequestWithRetClass:[GetCourseRequestItem class] andCompleteBlock:^(GetCourseRequestItem *retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self.view nyx_stopLoading];
@@ -285,8 +285,10 @@ extern NSString * const kPCCodeResultBackNotification;
     paraStyle.lineHeightMultiple = 1.2;
     NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};
     NSString *project = item.data.course.courseName;
-    NSAttributedString *projectAttributeStr = [[NSAttributedString alloc] initWithString:project attributes:dic];
-    self.titleLabel.attributedText = projectAttributeStr;
+    if (!isEmpty(project)) {
+        NSAttributedString *projectAttributeStr = [[NSAttributedString alloc] initWithString:project attributes:dic];
+        self.titleLabel.attributedText = projectAttributeStr;
+    }
 
     NSArray *startArr = [item.data.course.startTime componentsSeparatedByString:@" "];
     NSString *startDate = startArr.firstObject;

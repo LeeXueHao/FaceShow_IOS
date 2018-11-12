@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MeetingDetailViewController : BaseViewController
-@property (nonatomic, strong) NSString *meetingId;
+@property (nonatomic, strong) NSString *courseId;
 @end
 
 NS_ASSUME_NONNULL_END

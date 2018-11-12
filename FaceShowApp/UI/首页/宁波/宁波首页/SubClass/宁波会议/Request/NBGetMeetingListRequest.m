@@ -8,10 +8,6 @@
 
 #import "NBGetMeetingListRequest.h"
 
-@interface NBGetMeetingListRequestItem_Group()
-//@property (nonatomic, assign) CGFloat cellHeight;
-@end
-
 @implementation NBGetMeetingListRequestItem_Group{
     CGFloat cellHeight;
 }
