@@ -13,6 +13,7 @@
 #import "GetCurrentClazsRequest.h"
 #import "GetStudentClazsRequest.h"
 #import "AppUseRecordManager.h"
+#import "GetClassConfigRequest.h"
 
 @interface ClassSelectionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) EmptyView *emptyView;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) ClassListRequestItem *clazsListItem;
 @property (nonatomic, strong) ClassListRequest *getClassRequest;
 @property (nonatomic, strong) GetStudentClazsRequest *clazsRefreshRequest;
+@property (nonatomic, strong) GetClassConfigRequest *getClassConfigRequest;
 @property (nonatomic, assign) NSInteger selectedIndex;
 @end
 
@@ -59,20 +61,19 @@
 }
 
 - (void)updateClazsInfo {
+
+    [self.view nyx_startLoading];
     [self.clazsRefreshRequest stopRequest];
     self.clazsRefreshRequest = [[GetStudentClazsRequest alloc] init];
     self.clazsRefreshRequest.clazsId = self.selectedClass.clazsId;
     WEAK_SELF
-    [self.view nyx_startLoading];
     [self.clazsRefreshRequest startRequestWithRetClass:[GetCurrentClazsRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
-        [self.view nyx_stopLoading];
         if (error) {
             [self.view nyx_showToast:error.localizedDescription];
             return;
         }
         GetCurrentClazsRequestItem *item = retItem;
-        //使用情况统计
         //使用情况统计
         AddAppUseRecordRequest *request = [[AddAppUseRecordRequest alloc]init];
         request.actionType = AppUseRecordActionType_GetStudentClazs;
@@ -80,7 +81,26 @@
         [UserManager sharedInstance].userModel.projectClassInfo = item;
         [[UserManager sharedInstance]saveData];
         [UserManager sharedInstance].hasUsedBefore = YES;
-        [[NSNotificationCenter defaultCenter]postNotificationName:kClassDidSelectNotification object:nil];
+        if([item.data.clazsInfo.modelId isEqualToString:@"0"]){
+            [self.view nyx_stopLoading];
+            [UserManager sharedInstance].configItem = nil;
+            [[NSNotificationCenter defaultCenter]postNotificationName:kClassDidSelectNotification object:nil];
+        }else{
+            [self.getClassConfigRequest stopRequest];
+            self.getClassConfigRequest = [[GetClassConfigRequest alloc] init];
+            self.getClassConfigRequest.modleId = item.data.clazsInfo.modelId;
+            WEAK_SELF
+            [self.getClassConfigRequest startRequestWithRetClass:[GetClassConfigRequest_Item class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+                STRONG_SELF
+                if (error) {
+                    [self.view nyx_showToast:error.localizedDescription];
+                    return;
+                }
+                [self.view nyx_stopLoading];
+                [UserManager sharedInstance].configItem = (GetClassConfigRequest_Item *)retItem;
+                [[NSNotificationCenter defaultCenter]postNotificationName:kClassDidSelectNotification object:nil];
+            }];
+        }
     }];
 }
 

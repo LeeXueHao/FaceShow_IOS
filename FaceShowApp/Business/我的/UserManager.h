@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UserModel.h"
+#import "GetClassConfigRequest.h"
 
 extern NSString * const kUserDidLoginNotification;
 extern NSString * const kUserDidLogoutNotification;
@@ -18,6 +19,7 @@ extern NSString * const kUserDidLogoutNotification;
 
 @property (nonatomic, strong) NSArray *stages;
 @property (nonatomic, strong) UserModel *userModel;
+@property (nonatomic, strong) GetClassConfigRequest_Item *configItem;
 @property (nonatomic, assign) BOOL loginStatus;
 @property (nonatomic, assign) BOOL hasUsedBefore;
 - (void)saveData ;

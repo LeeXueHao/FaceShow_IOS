@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class NBGetMeetingListRequestItem_Group;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MeetingListCell : UITableViewCell
-
+@property (nonatomic, strong) NBGetMeetingListRequestItem_Group *group;
 @end
 
 NS_ASSUME_NONNULL_END

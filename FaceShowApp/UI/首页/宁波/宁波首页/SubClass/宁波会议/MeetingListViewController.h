@@ -10,6 +10,5 @@
 #import "RefreshDelegate.h"
 
 @interface MeetingListViewController : BaseViewController<RefreshDelegate>
-- (instancetype)initWithClazsId:(NSString *)clazsId;
 @end
 

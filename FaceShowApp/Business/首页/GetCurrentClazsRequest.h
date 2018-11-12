@@ -38,6 +38,7 @@
 @property (nonatomic, strong) NSString<Optional> *startTime;
 @property (nonatomic, strong) NSString<Optional> *endTime;
 @property (nonatomic, strong) NSString<Optional> *desc;
+@property (nonatomic, strong) NSString<Optional> *modelId;
 @end
 
 @protocol GetCurrentClazsRequestItem_userGroup <NSObject>

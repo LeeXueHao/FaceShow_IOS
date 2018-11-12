@@ -34,6 +34,9 @@
 #import "UIViewController+VisibleViewController.h"
 #import "TaskListViewController.h"
 #import "GetHomeworkRequest.h"
+#import "NBConfigManager.h"
+#import "NBEmptyViewController.h"
+//#import "GetClassConfigRequest.h"
 
 UIKIT_EXTERN BOOL testFrameworkOn;
 
@@ -56,7 +59,10 @@ UIKIT_EXTERN BOOL testFrameworkOn;
         if (![UserManager sharedInstance].hasUsedBefore) {
             return [self classSelectionViewController];
         }
-        return [self mainViewController];
+        if([[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.modelId isEqualToString:@"0"]){
+            return [self mainViewController];
+        }
+        return [self NBMainViewController];
     }
 }
 
@@ -75,6 +81,42 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     return [[FSNavigationController alloc] initWithRootViewController:vc];
 }
 
+- (UIViewController *)NBMainViewController{
+
+
+    YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
+    NSArray<GetClassConfigRequest_Item_pageList *> *pageList =[UserManager sharedInstance].configItem.data.pageList;
+    if (!pageList) {
+        NBEmptyViewController *empty = [[NBEmptyViewController alloc] init];
+        FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:empty];
+        drawerVC.paneViewController = navi;
+    }else{
+        NSMutableArray<UIViewController *> *controllers = [NSMutableArray array];
+        [pageList enumerateObjectsUsingBlock:^(GetClassConfigRequest_Item_pageList * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIViewController *vc = [[NBConfigManager sharedInstance]getViewControllerWithType:obj.pageConf.pageType pageConfig:obj.pageConf andTabConfigArray:obj.tabConf];
+            [self configTabbarItem:vc.tabBarItem image:[NSString stringWithFormat:@"%@icon",vc.title] selectedImage:[NSString stringWithFormat:@"%@icon选择",vc.title]];
+            FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
+            [controllers addObject:navi];
+        }];
+        FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
+        tabBarController.viewControllers = controllers;
+        drawerVC.paneViewController = tabBarController;
+        UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2 + 10, 6, 9, 9)];
+        redPointView.layer.cornerRadius = 4.5f;
+        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+        redPointView.hidden = YES;
+        [tabBarController.tabBar addSubview:redPointView];
+        [tabBarController.tabBar bringSubviewToFront:redPointView];
+        [UserPromptsManager sharedInstance].taskNewView = redPointView;
+    }
+
+    MineViewController *mineVC = [[MineViewController alloc]init];
+    drawerVC.drawerViewController = mineVC;
+    drawerVC.drawerWidth = 305*kPhoneWidthRatio;
+    return drawerVC;
+
+}
+
 - (UIViewController *)mainViewController {
     FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
     UIViewController *mainVC = [[MainPageViewController alloc]init];
@@ -84,18 +126,18 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     
     UIViewController *messageVC = [[TaskListViewController alloc]init];
     messageVC.title = @"任务";
-    [self configTabbarItem:messageVC.tabBarItem image:@"任务" selectedImage:@"任务选择"];
+    [self configTabbarItem:messageVC.tabBarItem image:@"任务icon" selectedImage:@"任务icon选择"];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];
     classVC.title = @"班级圈";
-    [self configTabbarItem:classVC.tabBarItem image:@"朋友圈icon" selectedImage:@"朋友圈icon选择"];
+    [self configTabbarItem:classVC.tabBarItem image:@"班级圈icon" selectedImage:@"班级圈icon选择"];
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
     ChatListViewController *chatVC = [[ChatListViewController alloc]init];
 //    ChatPlaceViewController *chatVC = [[ChatPlaceViewController alloc]init];
     chatVC.title = @"聊聊";
-    [self configTabbarItem:chatVC.tabBarItem image:@"聊天icon正常态" selectedImage:@"聊天icon点击态"];
+    [self configTabbarItem:chatVC.tabBarItem image:@"聊聊icon" selectedImage:@"聊聊icon选择"];
     FSNavigationController *chatNavi = [[FSNavigationController alloc] initWithRootViewController:chatVC];
     
     tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, chatNavi];

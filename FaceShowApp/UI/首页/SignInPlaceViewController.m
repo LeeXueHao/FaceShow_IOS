@@ -165,7 +165,7 @@
     self.signInRequest.stepId = data.stepId;
     self.signInRequest.positionSignIn = YES;
     self.signInRequest.positionRange = data.positionRange;
-    self.signInRequest.signinPosition = data.signinPosition;
+    self.signInRequest.signInExts = data.signInExts;
     WEAK_SELF
     [self.signInRequest startRequestWithRetClass:[UserSignInRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF

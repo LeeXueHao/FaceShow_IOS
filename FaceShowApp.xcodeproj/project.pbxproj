@@ -196,6 +196,16 @@
 		7C2519B81F690ECB0001B577 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2519B71F690ECB0001B577 /* MineViewController.m */; };
 		7C29F3141FEA361E007A4076 /* GetUserPromptsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */; };
 		7C29F3171FEA3AA6007A4076 /* UserPromptsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */; };
+		7C2C8E7221941E8C001685FA /* NBMainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E7121941E8C001685FA /* NBMainPageViewController.m */; };
+		7C2C8E7721941F29001685FA /* NBMainPageTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E7621941F29001685FA /* NBMainPageTopView.m */; };
+		7C2C8E7E21942200001685FA /* NBResourceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E7D21942200001685FA /* NBResourceListViewController.m */; };
+		7C2C8E82219424C8001685FA /* NBLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E81219424C8001685FA /* NBLiveViewController.m */; };
+		7C2C8E862194318D001685FA /* NBResourceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E852194318D001685FA /* NBResourceListCell.m */; };
+		7C2C8E8A219437DE001685FA /* NBGetResourceListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E89219437DE001685FA /* NBGetResourceListRequest.m */; };
+		7C2C8E8E21943823001685FA /* NBGetMeetingListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E8D21943823001685FA /* NBGetMeetingListRequest.m */; };
+		7C2C8E91219438CF001685FA /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E90219438CF001685FA /* MeetingDetailViewController.m */; };
+		7C2C8E9521944EA9001685FA /* GetClassConfigRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E9421944EA9001685FA /* GetClassConfigRequest.m */; };
+		7C2C8E9821945FD6001685FA /* MeetingNameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E9721945FD6001685FA /* MeetingNameLabel.m */; };
 		7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E222520E475E10055843D /* RefreshBaseViewController.m */; };
 		7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */; };
 		7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223820E61B380055843D /* AppUseRecordManager.m */; };
@@ -300,6 +310,9 @@
 		7CBDFB412190566800AA1805 /* QuickLoginContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB402190566800AA1805 /* QuickLoginContainerView.m */; };
 		7CBDFB442190575F00AA1805 /* DefaultLoginContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB432190575F00AA1805 /* DefaultLoginContainerView.m */; };
 		7CBDFB6C2191816000AA1805 /* AppCodeLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDFB6B2191816000AA1805 /* AppCodeLoginRequest.m */; };
+		7CC9E4F121969976007D74B8 /* NBConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9E4F021969976007D74B8 /* NBConfigManager.m */; };
+		7CC9E4F521969CF7007D74B8 /* NBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9E4F421969CF7007D74B8 /* NBBaseViewController.m */; };
+		7CC9E5012196A5DE007D74B8 /* NBEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9E5002196A5DE007D74B8 /* NBEmptyViewController.m */; };
 		7CE143452154C93500A9E20A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */; };
 		7CE143482154CE9000A9E20A /* MineCertiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143472154CE9000A9E20A /* MineCertiViewController.m */; };
 		7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143AB2155DDF600A9E20A /* MineCertiRequest.m */; };
@@ -355,7 +368,6 @@
 		7CFC9FDE2192CE0C0084AFCE /* GroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FDD2192CE0B0084AFCE /* GroupMemberCell.m */; };
 		7CFC9FE32193015E0084AFCE /* MeetingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FE22193015E0084AFCE /* MeetingListViewController.m */; };
 		7CFC9FE8219301C50084AFCE /* MeetingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FE7219301C50084AFCE /* MeetingListCell.m */; };
-		7CFC9FEB219301EA0084AFCE /* MeetingListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FEA219301EA0084AFCE /* MeetingListHeaderView.m */; };
 		921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */; };
 		921FF6B5200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */; };
 		921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */; };
@@ -880,6 +892,26 @@
 		7C29F3131FEA361E007A4076 /* GetUserPromptsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserPromptsRequest.m; sourceTree = "<group>"; };
 		7C29F3151FEA3AA6007A4076 /* UserPromptsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPromptsManager.h; sourceTree = "<group>"; };
 		7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPromptsManager.m; sourceTree = "<group>"; };
+		7C2C8E7021941E8C001685FA /* NBMainPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBMainPageViewController.h; sourceTree = "<group>"; };
+		7C2C8E7121941E8C001685FA /* NBMainPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBMainPageViewController.m; sourceTree = "<group>"; };
+		7C2C8E7521941F29001685FA /* NBMainPageTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBMainPageTopView.h; sourceTree = "<group>"; };
+		7C2C8E7621941F29001685FA /* NBMainPageTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBMainPageTopView.m; sourceTree = "<group>"; };
+		7C2C8E7C21942200001685FA /* NBResourceListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBResourceListViewController.h; sourceTree = "<group>"; };
+		7C2C8E7D21942200001685FA /* NBResourceListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBResourceListViewController.m; sourceTree = "<group>"; };
+		7C2C8E80219424C8001685FA /* NBLiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBLiveViewController.h; sourceTree = "<group>"; };
+		7C2C8E81219424C8001685FA /* NBLiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBLiveViewController.m; sourceTree = "<group>"; };
+		7C2C8E842194318D001685FA /* NBResourceListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBResourceListCell.h; sourceTree = "<group>"; };
+		7C2C8E852194318D001685FA /* NBResourceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBResourceListCell.m; sourceTree = "<group>"; };
+		7C2C8E88219437DE001685FA /* NBGetResourceListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGetResourceListRequest.h; sourceTree = "<group>"; };
+		7C2C8E89219437DE001685FA /* NBGetResourceListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGetResourceListRequest.m; sourceTree = "<group>"; };
+		7C2C8E8C21943823001685FA /* NBGetMeetingListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGetMeetingListRequest.h; sourceTree = "<group>"; };
+		7C2C8E8D21943823001685FA /* NBGetMeetingListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGetMeetingListRequest.m; sourceTree = "<group>"; };
+		7C2C8E8F219438CF001685FA /* MeetingDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingDetailViewController.h; sourceTree = "<group>"; };
+		7C2C8E90219438CF001685FA /* MeetingDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingDetailViewController.m; sourceTree = "<group>"; };
+		7C2C8E9321944EA9001685FA /* GetClassConfigRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetClassConfigRequest.h; sourceTree = "<group>"; };
+		7C2C8E9421944EA9001685FA /* GetClassConfigRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetClassConfigRequest.m; sourceTree = "<group>"; };
+		7C2C8E9621945FD6001685FA /* MeetingNameLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingNameLabel.h; sourceTree = "<group>"; };
+		7C2C8E9721945FD6001685FA /* MeetingNameLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingNameLabel.m; sourceTree = "<group>"; };
 		7C2E222420E475E00055843D /* RefreshBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBaseViewController.h; sourceTree = "<group>"; };
 		7C2E222520E475E10055843D /* RefreshBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshBaseViewController.m; sourceTree = "<group>"; };
 		7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAppUseRecordRequest.m; sourceTree = "<group>"; };
@@ -1088,6 +1120,12 @@
 		7CBDFB432190575F00AA1805 /* DefaultLoginContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultLoginContainerView.m; sourceTree = "<group>"; };
 		7CBDFB6A2191816000AA1805 /* AppCodeLoginRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCodeLoginRequest.h; sourceTree = "<group>"; };
 		7CBDFB6B2191816000AA1805 /* AppCodeLoginRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCodeLoginRequest.m; sourceTree = "<group>"; };
+		7CC9E4EF21969976007D74B8 /* NBConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBConfigManager.h; sourceTree = "<group>"; };
+		7CC9E4F021969976007D74B8 /* NBConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBConfigManager.m; sourceTree = "<group>"; };
+		7CC9E4F321969CF7007D74B8 /* NBBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBBaseViewController.h; sourceTree = "<group>"; };
+		7CC9E4F421969CF7007D74B8 /* NBBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBBaseViewController.m; sourceTree = "<group>"; };
+		7CC9E4FF2196A5DE007D74B8 /* NBEmptyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBEmptyViewController.h; sourceTree = "<group>"; };
+		7CC9E5002196A5DE007D74B8 /* NBEmptyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBEmptyViewController.m; sourceTree = "<group>"; };
 		7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		7CE143462154CE9000A9E20A /* MineCertiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineCertiViewController.h; sourceTree = "<group>"; };
 		7CE143472154CE9000A9E20A /* MineCertiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCertiViewController.m; sourceTree = "<group>"; };
@@ -1195,8 +1233,6 @@
 		7CFC9FE22193015E0084AFCE /* MeetingListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingListViewController.m; sourceTree = "<group>"; };
 		7CFC9FE6219301C50084AFCE /* MeetingListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingListCell.h; sourceTree = "<group>"; };
 		7CFC9FE7219301C50084AFCE /* MeetingListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingListCell.m; sourceTree = "<group>"; };
-		7CFC9FE9219301EA0084AFCE /* MeetingListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingListHeaderView.h; sourceTree = "<group>"; };
-		7CFC9FEA219301EA0084AFCE /* MeetingListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingListHeaderView.m; sourceTree = "<group>"; };
 		921FF6B0200DCD8F002CD071 /* ClassMomentDiscardRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDiscardRequest.h; sourceTree = "<group>"; };
 		921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDiscardRequest.m; sourceTree = "<group>"; };
 		921FF6B3200DCDAB002CD071 /* ClassMomentCancelLikeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentCancelLikeRequest.h; sourceTree = "<group>"; };
@@ -2329,7 +2365,7 @@
 		7C25197F1F68FE900001B577 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				7CFC9FE0219300C50084AFCE /* 会议 */,
+				7CC9E4FA21969DF2007D74B8 /* 宁波 */,
 				7CFC9FCF219297590084AFCE /* 小组 */,
 				E95434BE20D2147200BCF63C /* 积分 */,
 				7CBDAB851F6925C30096C4BA /* 日程 */,
@@ -2426,6 +2462,83 @@
 				7C29F3161FEA3AA6007A4076 /* UserPromptsManager.m */,
 			);
 			path = "消息提示";
+			sourceTree = "<group>";
+		};
+		7C2C8E6F21941E5D001685FA /* 宁波首页 */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9E4FD21969EA8007D74B8 /* SubClass */,
+				7C2C8E9221944E7B001685FA /* Request */,
+				7C2C8E7421941F18001685FA /* View */,
+				7C2C8E7021941E8C001685FA /* NBMainPageViewController.h */,
+				7C2C8E7121941E8C001685FA /* NBMainPageViewController.m */,
+			);
+			path = "宁波首页";
+			sourceTree = "<group>";
+		};
+		7C2C8E7421941F18001685FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E7521941F29001685FA /* NBMainPageTopView.h */,
+				7C2C8E7621941F29001685FA /* NBMainPageTopView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7C2C8E7B219421D5001685FA /* 宁波资源 */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E87219437A2001685FA /* Request */,
+				7C2C8E8321943172001685FA /* View */,
+				7C2C8E7C21942200001685FA /* NBResourceListViewController.h */,
+				7C2C8E7D21942200001685FA /* NBResourceListViewController.m */,
+			);
+			path = "宁波资源";
+			sourceTree = "<group>";
+		};
+		7C2C8E7F21942485001685FA /* 宁波直播 */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E80219424C8001685FA /* NBLiveViewController.h */,
+				7C2C8E81219424C8001685FA /* NBLiveViewController.m */,
+			);
+			path = "宁波直播";
+			sourceTree = "<group>";
+		};
+		7C2C8E8321943172001685FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E842194318D001685FA /* NBResourceListCell.h */,
+				7C2C8E852194318D001685FA /* NBResourceListCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7C2C8E87219437A2001685FA /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E88219437DE001685FA /* NBGetResourceListRequest.h */,
+				7C2C8E89219437DE001685FA /* NBGetResourceListRequest.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		7C2C8E8B21943802001685FA /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E8C21943823001685FA /* NBGetMeetingListRequest.h */,
+				7C2C8E8D21943823001685FA /* NBGetMeetingListRequest.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		7C2C8E9221944E7B001685FA /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7C2C8E9321944EA9001685FA /* GetClassConfigRequest.h */,
+				7C2C8E9421944EA9001685FA /* GetClassConfigRequest.m */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		7C2E223420E61B1F0055843D /* 用户使用统计 */ = {
@@ -2744,6 +2857,70 @@
 			name = "日程";
 			sourceTree = "<group>";
 		};
+		7CC9E4EE2196995D007D74B8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9E4EF21969976007D74B8 /* NBConfigManager.h */,
+				7CC9E4F021969976007D74B8 /* NBConfigManager.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		7CC9E4F221969CDE007D74B8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9E4F321969CF7007D74B8 /* NBBaseViewController.h */,
+				7CC9E4F421969CF7007D74B8 /* NBBaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		7CC9E4FA21969DF2007D74B8 /* 宁波 */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9E4FE2196A5C7007D74B8 /* 空页面 */,
+				7CC9E4FC21969E45007D74B8 /* Other */,
+				7CC9E4FB21969E31007D74B8 /* 宁波任务 */,
+				7C2C8E7F21942485001685FA /* 宁波直播 */,
+				7C2C8E6F21941E5D001685FA /* 宁波首页 */,
+			);
+			path = "宁波";
+			sourceTree = "<group>";
+		};
+		7CC9E4FB21969E31007D74B8 /* 宁波任务 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "宁波任务";
+			sourceTree = "<group>";
+		};
+		7CC9E4FC21969E45007D74B8 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9E4EE2196995D007D74B8 /* Config */,
+				7CC9E4F221969CDE007D74B8 /* Base */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		7CC9E4FD21969EA8007D74B8 /* SubClass */ = {
+			isa = PBXGroup;
+			children = (
+				7CFC9FE0219300C50084AFCE /* 宁波会议 */,
+				7C2C8E7B219421D5001685FA /* 宁波资源 */,
+			);
+			path = SubClass;
+			sourceTree = "<group>";
+		};
+		7CC9E4FE2196A5C7007D74B8 /* 空页面 */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9E4FF2196A5DE007D74B8 /* NBEmptyViewController.h */,
+				7CC9E5002196A5DE007D74B8 /* NBEmptyViewController.m */,
+			);
+			path = "空页面";
+			sourceTree = "<group>";
+		};
 		7CE143A82155DDCF00A9E20A /* 我的证书 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2899,14 +3076,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7CFC9FE0219300C50084AFCE /* 会议 */ = {
+		7CFC9FE0219300C50084AFCE /* 宁波会议 */ = {
 			isa = PBXGroup;
 			children = (
+				7C2C8E8B21943802001685FA /* Request */,
 				7CFC9FE5219301B00084AFCE /* View */,
 				7CFC9FE12193015E0084AFCE /* MeetingListViewController.h */,
 				7CFC9FE22193015E0084AFCE /* MeetingListViewController.m */,
+				7C2C8E8F219438CF001685FA /* MeetingDetailViewController.h */,
+				7C2C8E90219438CF001685FA /* MeetingDetailViewController.m */,
 			);
-			path = "会议";
+			path = "宁波会议";
 			sourceTree = "<group>";
 		};
 		7CFC9FE5219301B00084AFCE /* View */ = {
@@ -2914,8 +3094,8 @@
 			children = (
 				7CFC9FE6219301C50084AFCE /* MeetingListCell.h */,
 				7CFC9FE7219301C50084AFCE /* MeetingListCell.m */,
-				7CFC9FE9219301EA0084AFCE /* MeetingListHeaderView.h */,
-				7CFC9FEA219301EA0084AFCE /* MeetingListHeaderView.m */,
+				7C2C8E9621945FD6001685FA /* MeetingNameLabel.h */,
+				7C2C8E9721945FD6001685FA /* MeetingNameLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3614,6 +3794,7 @@
 				924ABA4B1F72403D00ABD453 /* ClassMomentPublishRequest.m in Sources */,
 				7C2519111F68EA820001B577 /* GlobalUtils.m in Sources */,
 				7C2518F11F68E68D0001B577 /* UIViewController+VisibleViewController.m in Sources */,
+				7C2C8E9521944EA9001685FA /* GetClassConfigRequest.m in Sources */,
 				E94DDE2E20D3CAFA00729A67 /* GetTasksByTypeRequest.m in Sources */,
 				438E2A771F739B8800800020 /* GetUserInfoRequest.m in Sources */,
 				7C4D54441F972BEB0053DB12 /* YXGeTuiManager.m in Sources */,
@@ -3648,7 +3829,9 @@
 				7C591313213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m in Sources */,
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
+				7C2C8E9821945FD6001685FA /* MeetingNameLabel.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
+				7C2C8E7221941E8C001685FA /* NBMainPageViewController.m in Sources */,
 				E94DDDEB20D2747B00729A67 /* TaskRankingViewController.m in Sources */,
 				7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */,
 				7C7A9ED7206B50E0003EE15B /* IMHistoryFetchRecord.m in Sources */,
@@ -3662,6 +3845,7 @@
 				921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */,
 				7CEFC7AF1F98926B001D8C84 /* MineInputView.m in Sources */,
 				7CEFC7FE1F9ED0E4001D8C84 /* ApnsQuestionnaireResultViewController.m in Sources */,
+				7CC9E5012196A5DE007D74B8 /* NBEmptyViewController.m in Sources */,
 				7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */,
 				E95434B120CFC74A00BCF63C /* HomeworkTitleView.m in Sources */,
 				E95434C420D215AD00BCF63C /* StudyScoreViewController.m in Sources */,
@@ -3768,12 +3952,14 @@
 				7C2518E31F68E68D0001B577 /* NSDictionary+Dictionarys.m in Sources */,
 				7C5912FC213791BE00CE548F /* YXPlayerBufferingView.m in Sources */,
 				438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */,
+				7C2C8E7E21942200001685FA /* NBResourceListViewController.m in Sources */,
 				E91E5D602047B83C00052FBA /* IMManager.m in Sources */,
 				7C2519101F68EA820001B577 /* ConfigManager.m in Sources */,
 				E94DDDEE20D2748900729A67 /* ScoreRankingViewController.m in Sources */,
 				E91E5D412047B22800052FBA /* IMTextMessageLeftCell.m in Sources */,
 				7C4D54451F972BEF0053DB12 /* YXApnsContentModel.m in Sources */,
 				7CBC5BA2204932BA004ACA04 /* CourseInfoTabContainerView.m in Sources */,
+				7C2C8E82219424C8001685FA /* NBLiveViewController.m in Sources */,
 				7C2519091F68E90C0001B577 /* TestsRootViewController.m in Sources */,
 				E91E5D462047B22800052FBA /* IMMessageMenuItem.m in Sources */,
 				7C66B2772027F6050067E242 /* HeadImageClipView.m in Sources */,
@@ -3790,6 +3976,7 @@
 				E91E5D492047B22800052FBA /* IMTextMessageRightCell.m in Sources */,
 				7C2519991F6901400001B577 /* FSTabBarController.m in Sources */,
 				7C212DB21F6A11230007AE01 /* ChooseQuestionCell.m in Sources */,
+				7CC9E4F521969CF7007D74B8 /* NBBaseViewController.m in Sources */,
 				7CEBA7A0207C6750009754F5 /* MqttServerRequest.m in Sources */,
 				7C5912FE213791BE00CE548F /* PreventHangingCourseView.m in Sources */,
 				7C24E2011F73695B00A6921B /* GetCourseCommentRequest.m in Sources */,
@@ -3839,7 +4026,6 @@
 				7CEBA92520886C92009754F5 /* YXInitRequest.m in Sources */,
 				7C96A89E216C509B007AAD82 /* HubeiContactsDetailViewController.m in Sources */,
 				7CEFC8011F9ED915001D8C84 /* ApnsResourceDisplayViewController.m in Sources */,
-				7CFC9FEB219301EA0084AFCE /* MeetingListHeaderView.m in Sources */,
 				7C96A8AA216C8088007AAD82 /* IMGroupMemberViewController.m in Sources */,
 				E95434BD20D1380900BCF63C /* TaskFilterItemView.m in Sources */,
 				7CBC5B922049326E004ACA04 /* CourseInfoViewController.m in Sources */,
@@ -3949,6 +4135,7 @@
 				7C2519AC1F690D860001B577 /* LoginViewController.m in Sources */,
 				E91E5D482047B22800052FBA /* ChatListCell.m in Sources */,
 				E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */,
+				7C2C8E8A219437DE001685FA /* NBGetResourceListRequest.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
 				7C59130A2137936600CE548F /* LePlayerView.m in Sources */,
@@ -3958,6 +4145,7 @@
 				7CFC9FDE2192CE0C0084AFCE /* GroupMemberCell.m in Sources */,
 				7C33E630200EF3F7006704E7 /* QiniuTokenRequest.m in Sources */,
 				7C24E1F31F72494A00A6921B /* FSDataMappingTable.m in Sources */,
+				7C2C8E8E21943823001685FA /* NBGetMeetingListRequest.m in Sources */,
 				E93327F020638DF800CED82E /* IMSlideView.m in Sources */,
 				E94DDE5220D8AD2700729A67 /* SaveUserEvaluateRequest.m in Sources */,
 				7C96A8BF216CBA16007AAD82 /* ClazsMemberListFetcher.m in Sources */,
@@ -3973,6 +4161,7 @@
 				7CEFC7EE1F9D7CCF001D8C84 /* ResetPasswordRequest.m in Sources */,
 				7C7A9ED4206B5008003EE15B /* IMHistoryMessageFetcher.m in Sources */,
 				7C96A8A1216C5815007AAD82 /* DetailCellView.m in Sources */,
+				7C2C8E862194318D001685FA /* NBResourceListCell.m in Sources */,
 				E91E5D8B2047B8C900052FBA /* IMEventHandler.m in Sources */,
 				7C212DE31F6B6DCB0007AE01 /* CourseListCell.m in Sources */,
 				438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */,
@@ -4001,6 +4190,7 @@
 				7C17DBF52181796E009353A9 /* AboutItemView.m in Sources */,
 				7CBC5B782047E137004ACA04 /* YXDrawerController.m in Sources */,
 				7C5913092137936600CE548F /* LePlayer.m in Sources */,
+				7C2C8E91219438CF001685FA /* MeetingDetailViewController.m in Sources */,
 				E94DDE5B20D8DA3500729A67 /* TaskCommentFetcher.m in Sources */,
 				E91E5DA32047B8E300052FBA /* SaveTextMsgRequest.m in Sources */,
 				4322CA3F1FD9529700E7B565 /* PhotoBrowserController.m in Sources */,
@@ -4011,6 +4201,7 @@
 				92C5699D1F73AF780025815B /* UpdateAvatarRequest.m in Sources */,
 				4378DFA21F6F7C45005CFE56 /* ResourceCell.m in Sources */,
 				E91E5D752047B88600052FBA /* IMMember.m in Sources */,
+				7C2C8E7721941F29001685FA /* NBMainPageTopView.m in Sources */,
 				7C5912ED2136848F00CE548F /* ScanPCCodeResultViewController.m in Sources */,
 				7CFC9FE32193015E0084AFCE /* MeetingListViewController.m in Sources */,
 				7C2518EE1F68E68D0001B577 /* UIView+Loading.m in Sources */,
@@ -4040,6 +4231,7 @@
 				E94DDDE220D2661200729A67 /* TaskTopView.m in Sources */,
 				431D758F1F6E171700E0073B /* MessageCell.m in Sources */,
 				7C212DC41F6A5CF60007AE01 /* CourseListViewController.m in Sources */,
+				7CC9E4F121969976007D74B8 /* NBConfigManager.m in Sources */,
 				43210E661F726E3D0049C381 /* NoticeListFetcher.m in Sources */,
 				7C2519161F68EA8A0001B577 /* FileLogger.m in Sources */,
 				7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */,

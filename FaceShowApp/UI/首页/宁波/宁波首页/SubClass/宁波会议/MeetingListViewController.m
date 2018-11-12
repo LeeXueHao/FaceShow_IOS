@@ -8,25 +8,21 @@
 
 #import "MeetingListViewController.h"
 #import "MeetingListCell.h"
-#import "MeetingListHeaderView.h"
+#import "CourseListHeaderView.h"
 #import "EmptyView.h"
 #import "ErrorView.h"
+#import "NBGetMeetingListRequest.h"
 
 @interface MeetingListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) NSString *clazsId;
+@property (nonatomic, strong) NBGetMeetingListRequest *request;
+@property (nonatomic, strong) NBGetMeetingListRequestItem *requestItem;
 @end
 
 @implementation MeetingListViewController
-
-- (instancetype)initWithClazsId:(NSString *)clazsId {
-    if (self = [super init]) {
-        self.clazsId = clazsId;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,12 +31,35 @@
 }
 
 - (void)requestMeetingInfo{
+    [self.request stopRequest];
+    [self.view nyx_startLoading];
+    self.request = [[NBGetMeetingListRequest alloc] init];
+    self.request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    WEAK_SELF
+    [self.request startRequestWithRetClass:[NBGetMeetingListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        self.errorView.hidden = YES;
+        self.emptyView.hidden = YES;
+        if (error) {
+            self.errorView.hidden = NO;
+            return;
+        }
+        NBGetMeetingListRequestItem *item = (NBGetMeetingListRequestItem *)retItem;
+        if (isEmpty(item.data.courses)) {
+            self.emptyView.hidden = NO;
+            return;
+        }
+        self.requestItem = item;
+        [self.tableView reloadData];
+    }];
 
 }
 
 - (void)setupUI {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.rowHeight = 140;
+    self.tableView.estimatedRowHeight = 300;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.sectionHeaderHeight = 60;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -51,7 +70,7 @@
         make.edges.mas_equalTo(0);
     }];
     [self.tableView registerClass:[MeetingListCell class] forCellReuseIdentifier:@"MeetingListCell"];
-    [self.tableView registerClass:[MeetingListHeaderView class] forHeaderFooterViewReuseIdentifier:@"MeetingListHeaderView"];
+    [self.tableView registerClass:[CourseListHeaderView class] forHeaderFooterViewReuseIdentifier:@"CourseListHeaderView"];
 
     self.emptyView = [[EmptyView alloc]init];
     self.emptyView.title = @"暂无课程";
@@ -80,36 +99,41 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return self.requestItem.data.courses.count;
-    return 1;
+    return self.requestItem.data.courses.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[section];
-//    return courses.coursesList.count;
-    return 2;
+    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[section];
+    return courses.group.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[indexPath.section];
+    NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
     MeetingListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingListCell"];
-//    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[indexPath.section];
-//    cell.item = courses.coursesList[indexPath.row];
+    cell.group = group;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses.firstObject;
+    NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.section];
+    return group.cellHeight + 97;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    MeetingListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MeetingListHeaderView"];
-//    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[section];
-//    header.title = courses.date;
-//    if (courses.isToday.boolValue) {
-//        header.title = [NSString stringWithFormat:@"%@ 今日课程",courses.date];
-//    }
+    CourseListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CourseListHeaderView"];
+    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[section];
+    header.title = courses.date;
+    if (courses.isToday.boolValue) {
+        header.title = [NSString stringWithFormat:@"%@ 今日课程",courses.date];
+    }
     return header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 60;
+    return 55;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

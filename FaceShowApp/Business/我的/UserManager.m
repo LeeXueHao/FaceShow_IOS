@@ -31,6 +31,7 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
         [[NSNotificationCenter defaultCenter]postNotificationName:kUserDidLoginNotification object:nil];
     }else {
         self.userModel = nil;
+        self.configItem = nil;
         [[NSNotificationCenter defaultCenter]postNotificationName:kUserDidLogoutNotification object:nil];
     }
 }
@@ -72,6 +73,17 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
         StageSubjectItem *item = [[StageSubjectItem alloc] initWithData:stageSubjectData error:NULL];
         self.stages = item.data;
     }
+    NSString *configJson = [[NSUserDefaults standardUserDefaults] valueForKey:@"user_class_config"];
+    if (json) {
+        self.configItem = [[GetClassConfigRequest_Item alloc] initWithString:configJson error:nil];
+    }
+}
+
+- (void)setConfigItem:(GetClassConfigRequest_Item *)configItem{
+    _configItem = configItem;
+    NSString *json = [configItem toJSONString];
+    [[NSUserDefaults standardUserDefaults] setValue:json forKey:@"user_class_config"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
