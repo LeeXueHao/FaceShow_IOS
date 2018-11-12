@@ -53,7 +53,7 @@
     [self.view nyx_startLoading];
     [self.listRequest stopRequest];
     self.listRequest = [[NBGetResourceListRequest alloc] init];
-    self.listRequest.clazsId = @"708";
+    self.listRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     WEAK_SELF
     [self.listRequest startRequestWithRetClass:[NBGetResourceListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
