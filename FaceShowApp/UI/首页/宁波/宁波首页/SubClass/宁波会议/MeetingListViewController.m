@@ -8,11 +8,13 @@
 
 #import "MeetingListViewController.h"
 #import "MeetingListCell.h"
+#import "CourseListCell.h"
 #import "CourseListHeaderView.h"
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "NBGetMeetingListRequest.h"
 #import "MeetingDetailViewController.h"
+#import "CourseDetailViewController.h"
 
 @interface MeetingListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -59,8 +61,6 @@
 
 - (void)setupUI {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.estimatedRowHeight = 300;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.sectionHeaderHeight = 60;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -71,10 +71,11 @@
         make.edges.mas_equalTo(0);
     }];
     [self.tableView registerClass:[MeetingListCell class] forCellReuseIdentifier:@"MeetingListCell"];
+    [self.tableView registerClass:[CourseListCell class] forCellReuseIdentifier:@"CourseListCell"];
     [self.tableView registerClass:[CourseListHeaderView class] forHeaderFooterViewReuseIdentifier:@"CourseListHeaderView"];
 
     self.emptyView = [[EmptyView alloc]init];
-    self.emptyView.title = @"暂无课程";
+    self.emptyView.title = @"暂无会议";
     [self.view addSubview:self.emptyView];
     [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -111,23 +112,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[indexPath.section];
     NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
-    MeetingListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingListCell"];
-    cell.group = group;
-    WEAK_SELF
-    cell.clickTagBlock = ^(NSString * _Nonnull courseId) {
-        STRONG_SELF
-        MeetingDetailViewController *meetingDetailVC = [[MeetingDetailViewController alloc] init];
-        meetingDetailVC.courseId = courseId;
-        [self.navigationController pushViewController:meetingDetailVC animated:YES];
-    };
-    return cell;
+    if (group.virtualId.integerValue == 0) {
+        CourseListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"CourseListCell"];
+        listCell.item = group.courses.firstObject;
+        return listCell;
+    }else{
+        MeetingListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"MeetingListCell"];
+        listCell.item = group.courses.firstObject;
+        return listCell;
+    }
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses.firstObject;
-    NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.section];
-    return group.cellHeight + 97;
+    NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
+    return group.virtualId.integerValue == 0?140:100;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -135,7 +135,7 @@
     NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[section];
     header.title = courses.date;
     if (courses.isToday.boolValue) {
-        header.title = [NSString stringWithFormat:@"%@ 今日课程",courses.date];
+        header.title = [NSString stringWithFormat:@"%@ 今日会议",courses.date];
     }
     return header;
 }
@@ -144,14 +144,22 @@
     return 55;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-////    CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
-////    GetCourseListRequestItem_courses *courses = self.requestItem.data.courses[indexPath.section];
-////    GetCourseListRequestItem_coursesList *course = courses.coursesList[indexPath.row];
-////    courseDetailVC.courseId = course.courseId;
-////    [self.navigationController pushViewController:courseDetailVC animated:YES];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[indexPath.section];
+    NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
+    if(![group.virtualId isEqualToString:@"0"]){
+        MeetingDetailViewController *meetDetailVC = [[MeetingDetailViewController alloc] init];
+        GetCourseListRequestItem_coursesList *course = group.courses.firstObject;
+        meetDetailVC.courseId = course.courseId;
+        [self.navigationController pushViewController:meetDetailVC animated:YES];
+    }else{
+        CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
+        GetCourseListRequestItem_coursesList *course = group.courses.firstObject;
+        courseDetailVC.courseId = course.courseId;
+        [self.navigationController pushViewController:courseDetailVC animated:YES];
+    }
+}
 
 
 
