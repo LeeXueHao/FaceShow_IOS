@@ -74,7 +74,7 @@ NSString * const kUserDidLogoutNotification = @"kUserDidLogoutNotification";
         self.stages = item.data;
     }
     NSString *configJson = [[NSUserDefaults standardUserDefaults] valueForKey:@"user_class_config"];
-    if (json) {
+    if (configJson) {
         self.configItem = [[GetClassConfigRequest_Item alloc] initWithString:configJson error:nil];
     }
 }
