@@ -8,6 +8,21 @@
 
 #import "GetScheduleListRequest.h"
 
+@implementation GetScheduleListRequestItem_meetingPlans
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"meetingPlanId"}];
+}
+@end
+
+@implementation GetScheduleListRequestItem_userSeatMsg
+@end
+
+@implementation GetScheduleListRequestItem_Meeting
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id" : @"meetingId"}];
+}
+@end
+
 @implementation GetScheduleListRequestItem_attachmentInfo
 @end
 

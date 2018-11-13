@@ -12,15 +12,18 @@
 #import "ErrorView.h"
 #import "GetScheduleListRequest.h"
 #import "ScheduleDetailViewController.h"
+#import "PersonalScheduleView.h"
 
 @interface NBScheduleViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
+@property (nonatomic, strong) PersonalScheduleView *personalScheduleView;
 @property (nonatomic, strong) UIWebView *webview;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) GetScheduleListRequest *request;
 @property (nonatomic, strong) GetScheduleListRequestItem_Schedule *schedule;
+@property (nonatomic, strong) GetScheduleListRequestItem_Schedule *persionSchedule;
 
 @end
 
@@ -62,6 +65,9 @@
             return;
         }
         self.schedule = item.data.schedules.elements[0];
+        if (item.data.personalSchedules && item.data.personalSchedules.elements.count > 0) {
+            self.persionSchedule = item.data.personalSchedules.elements[0];
+        }
         [self setModel];
     }];
 }
@@ -69,14 +75,31 @@
 #pragma mark - setupUI
 - (void)setupUI {
 
+    self.personalScheduleView = [[PersonalScheduleView alloc] init];
+    [self.view addSubview:self.personalScheduleView];
+    [self.personalScheduleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(44);
+    }];
+    WEAK_SELF
+    self.personalScheduleView.clickEnterBlock = ^{
+        STRONG_SELF
+        ScheduleDetailViewController *vc = [[ScheduleDetailViewController alloc]init];
+        vc.urlStr = [NSString stringWithFormat:@"%@&token=%@",self.persionSchedule.toUrl,[UserManager sharedInstance].userModel.token];
+        vc.name = self.persionSchedule.subject;
+        [self.navigationController pushViewController:vc animated:YES];
+    };
+    [self.personalScheduleView setHidden:YES];
+
     self.webview = [[UIWebView alloc]init];
     self.webview.scalesPageToFit = YES;
     self.webview.delegate = self;
     [self.view addSubview:self.webview];
     [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(15);
-        make.left.mas_equalTo(15);
-        make.right.bottom.mas_equalTo(-15);
+        make.top.mas_equalTo(5);
+        make.left.mas_equalTo(5);
+        make.right.bottom.mas_equalTo(-5);
         make.height.mas_equalTo(self.webview.mas_width).multipliedBy(1.5);
     }];
 
@@ -94,7 +117,6 @@
     }];
     self.emptyView.hidden = YES;
     self.errorView = [[ErrorView alloc]init];
-    WEAK_SELF
     [self.errorView setRetryBlock:^{
         STRONG_SELF
         [self requestScheduleInfo];
@@ -107,6 +129,18 @@
 }
 
 - (void)setModel {
+    if (self.persionSchedule) {
+        [self.webview mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.personalScheduleView.mas_bottom).offset(15);
+            make.left.mas_equalTo(15);
+            make.right.bottom.mas_equalTo(-15);
+            make.height.mas_equalTo(self.webview.mas_width).multipliedBy(1.5);
+        }];
+        [self.personalScheduleView setHidden:NO];
+        [self.view setNeedsLayout];
+    }else{
+        [self.personalScheduleView setHidden:YES];
+    }
     [self loadWebViewWithUrl:self.schedule.imageUrl ? self.schedule.imageUrl : self.schedule.attachmentInfo.previewUrl];
 }
 

@@ -31,7 +31,8 @@
         webview.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     webview.navigationDelegate = self;
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.pageConf.url]];
+    NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.pageConf.url,[UserManager sharedInstance].userModel.token];
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:totalUrl]];
     [webview loadRequest:request];
     [self.view addSubview:webview];
     [webview mas_makeConstraints:^(MASConstraintMaker *make) {

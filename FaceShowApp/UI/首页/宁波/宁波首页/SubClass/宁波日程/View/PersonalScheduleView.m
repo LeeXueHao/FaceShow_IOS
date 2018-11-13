@@ -27,6 +27,7 @@
     self.titleLabel = [[UILabel alloc]init];
     self.titleLabel.font = [UIFont systemFontOfSize:14];
     self.titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    self.titleLabel.text = @"个人日程";
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);

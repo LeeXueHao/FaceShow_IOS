@@ -27,6 +27,7 @@
 #import "ScoreDetialViewController.h"
 #import "GroupDetailViewController.h"
 #import "GroupDetailForLeaderViewController.h"
+#import "NBScheduleViewController.h"
 
 @interface MainPageViewController ()
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
@@ -100,7 +101,7 @@
             vc = [[GroupDetailViewController alloc] init];
         }
         [vc setValue:groupData forKey:@"groupData"];
-        [self.navigationController pushViewController:vc animated:YES];
+//        [self.navigationController pushViewController:vc animated:YES];
     };
     self.topView = topView;
     
@@ -141,6 +142,7 @@
     self.tabControllers = [NSMutableArray array];
     [self.tabControllers addObject:[[CourseListViewController alloc]initWithClazsId:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]];
     [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
+//    [self.tabControllers addObject:[[NBScheduleViewController alloc] init]];
     [self.tabControllers addObject:[[MessageViewController alloc]init]];
     ResourceListViewController *resVC = [[ResourceListViewController alloc]init];
     resVC.mainVC = self;
