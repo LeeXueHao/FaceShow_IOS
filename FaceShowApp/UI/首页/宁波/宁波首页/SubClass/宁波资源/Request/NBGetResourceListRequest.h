@@ -42,6 +42,7 @@
 @property (nonatomic, strong) NSString<Optional> *taglistId;
 @property (nonatomic, strong) NSString<Optional> *createTime;
 @property (nonatomic, strong) NSString<Optional> *name;
+@property (nonatomic, strong) NSString<Optional> *resNum;
 @end
 
 @interface NBGetResourceListRequestItem_data : JSONModel

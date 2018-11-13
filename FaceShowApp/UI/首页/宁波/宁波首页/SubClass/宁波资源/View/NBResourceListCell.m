@@ -82,7 +82,7 @@
     _tagList = tagList;
     self.titleLabel.text = tagList.name;
     self.iconImageView.image = [UIImage imageNamed:@"folder"];
-    self.detailLabel.text = [NSString stringWithFormat:@"文件数：%@",tagList.state];
+    self.detailLabel.text = [NSString stringWithFormat:@"文件数：%@",tagList.resNum];
 }
 
 - (void)setResList:(NBGetResourceListRequestItem_resList *)resList{

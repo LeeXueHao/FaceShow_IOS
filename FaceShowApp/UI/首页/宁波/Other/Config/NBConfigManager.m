@@ -45,7 +45,7 @@
                           @"chat":@"ChatListViewController",
                           @"link":@"NBLiveViewController",
                           @"course":@"MeetingListViewController",
-                          @"schedule":@"ScheduleViewController",
+                          @"schedule":@"NBScheduleViewController",
                           @"notice":@"MessageViewController",
                           @"resource":@"NBResourceListViewController"
                           };

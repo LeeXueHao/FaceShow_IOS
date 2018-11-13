@@ -81,6 +81,8 @@
 		438FFC8A1FD4E1B9006F3FB3 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6A1FD4E1B9006F3FB3 /* DownloadManager.m */; };
 		438FFC8B1FD4E1B9006F3FB3 /* UrlDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */; };
 		438FFC8C1FD4E1B9006F3FB3 /* DownloaderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */; };
+		7C067F4C21998EB5002EA829 /* NBScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C067F4B21998EB5002EA829 /* NBScheduleViewController.m */; };
+		7C067F5021998F99002EA829 /* PersonalScheduleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C067F4F21998F99002EA829 /* PersonalScheduleView.m */; };
 		7C17DBF221817959009353A9 /* AboutFaceShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17DBF021817958009353A9 /* AboutFaceShowViewController.m */; };
 		7C17DBF52181796E009353A9 /* AboutItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17DBF32181796E009353A9 /* AboutItemView.m */; };
 		7C212DAF1F6A0D740007AE01 /* OptionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C212DAE1F6A0D740007AE01 /* OptionItemView.m */; };
@@ -668,6 +670,10 @@
 		438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlDownloader.m; sourceTree = "<group>"; };
 		438FFC6D1FD4E1B9006F3FB3 /* DownloaderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloaderEntity.m; sourceTree = "<group>"; };
 		55DB1C9F3FE29502F1FB6096 /* Pods-FaceShowApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceShowApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-FaceShowApp/Pods-FaceShowApp.release.xcconfig"; sourceTree = "<group>"; };
+		7C067F4A21998EB5002EA829 /* NBScheduleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBScheduleViewController.h; sourceTree = "<group>"; };
+		7C067F4B21998EB5002EA829 /* NBScheduleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBScheduleViewController.m; sourceTree = "<group>"; };
+		7C067F4E21998F99002EA829 /* PersonalScheduleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalScheduleView.h; sourceTree = "<group>"; };
+		7C067F4F21998F99002EA829 /* PersonalScheduleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalScheduleView.m; sourceTree = "<group>"; };
 		7C17DBF021817958009353A9 /* AboutFaceShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutFaceShowViewController.m; sourceTree = "<group>"; };
 		7C17DBF121817958009353A9 /* AboutFaceShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutFaceShowViewController.h; sourceTree = "<group>"; };
 		7C17DBF32181796E009353A9 /* AboutItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutItemView.m; sourceTree = "<group>"; };
@@ -1747,6 +1753,25 @@
 				438FFC6C1FD4E1B9006F3FB3 /* UrlDownloader.m */,
 			);
 			path = Download;
+			sourceTree = "<group>";
+		};
+		7C067F4921998E98002EA829 /* 宁波日程 */ = {
+			isa = PBXGroup;
+			children = (
+				7C067F4D21998F7F002EA829 /* View */,
+				7C067F4A21998EB5002EA829 /* NBScheduleViewController.h */,
+				7C067F4B21998EB5002EA829 /* NBScheduleViewController.m */,
+			);
+			path = "宁波日程";
+			sourceTree = "<group>";
+		};
+		7C067F4D21998F7F002EA829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C067F4E21998F99002EA829 /* PersonalScheduleView.h */,
+				7C067F4F21998F99002EA829 /* PersonalScheduleView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		7C212DB91F6A544C0007AE01 /* View */ = {
@@ -2906,6 +2931,7 @@
 		7CC9E4FD21969EA8007D74B8 /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				7C067F4921998E98002EA829 /* 宁波日程 */,
 				7CFC9FE0219300C50084AFCE /* 宁波会议 */,
 				7C2C8E7B219421D5001685FA /* 宁波资源 */,
 			);
@@ -3771,6 +3797,7 @@
 				7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */,
 				9273C15020EDD67C0035954F /* HuBeiUserInfoViewController.m in Sources */,
 				E90C513D2049493E0008F92A /* IMImageMessageRightCell.m in Sources */,
+				7C067F5021998F99002EA829 /* PersonalScheduleView.m in Sources */,
 				E94DDDF720D2792D00729A67 /* ScoreRankingCell.m in Sources */,
 				7C212DBC1F6A55D70007AE01 /* OptionItemResultView.m in Sources */,
 				7C2519AF1F690DA00001B577 /* MainPageViewController.m in Sources */,
@@ -4037,6 +4064,7 @@
 				7C2519281F68EACF0001B577 /* MJRefreshFooterView.m in Sources */,
 				7CBC5BBB204D2AEF004ACA04 /* MineNameInputView.m in Sources */,
 				E9B39A1F20EE1B2B007ABA54 /* ScheduleDetailViewController.m in Sources */,
+				7C067F4C21998EB5002EA829 /* NBScheduleViewController.m in Sources */,
 				7C5912E42136324600CE548F /* ImageAttachment.m in Sources */,
 				7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */,
 				E900D7A01FEB51F9005B9163 /* FeedbackViewController.m in Sources */,
