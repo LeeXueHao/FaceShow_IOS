@@ -31,7 +31,7 @@
 
 - (void)setupUI{
 
-    self.type = YXInputViewType_QuickLogin;
+    self.type = YXInputViewType_Default;
 
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.pagingEnabled = YES;
