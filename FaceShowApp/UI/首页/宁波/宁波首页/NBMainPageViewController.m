@@ -69,6 +69,7 @@
 - (void)setupUI {
     self.topView = [[NBMainPageTopView alloc]init];
 //    topView.item = [UserManager sharedInstance].userModel.projectClassInfo;
+    self.topView.imageUrl = self.pageConf.head;
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);

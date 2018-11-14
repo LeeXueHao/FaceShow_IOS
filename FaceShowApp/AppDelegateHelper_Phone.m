@@ -83,10 +83,9 @@ UIKIT_EXTERN BOOL testFrameworkOn;
 
 - (UIViewController *)NBMainViewController{
 
-
     YXDrawerViewController *drawerVC = [[YXDrawerViewController alloc]init];
     NSArray<GetClassConfigRequest_Item_pageList *> *pageList =[UserManager sharedInstance].configItem.data.pageList;
-    if (!pageList) {
+    if (isEmpty(pageList)) {
         NBEmptyViewController *empty = [[NBEmptyViewController alloc] init];
         FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:empty];
         FSTabBarController *tabBarController = [[FSTabBarController alloc] init];

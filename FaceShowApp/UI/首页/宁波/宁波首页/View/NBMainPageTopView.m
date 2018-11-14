@@ -25,12 +25,20 @@
 
 - (void)setupUI {
     self.bgImageView = [[UIImageView alloc]init];
-    self.bgImageView.image = [UIImage imageNamed:@"宁波头图"];
+//    self.bgImageView.image = [UIImage imageNamed:@"宁波头图"];
+    self.bgImageView.image = [UIImage imageWithColor:[UIColor colorWithHexString:@"ebef22"]];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.clipsToBounds = YES;
     [self addSubview:self.bgImageView];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
+    }];
+}
+
+- (void)setImageUrl:(NSString *)imageUrl{
+    _imageUrl = imageUrl;
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"宁波头图"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        
     }];
 }
 
