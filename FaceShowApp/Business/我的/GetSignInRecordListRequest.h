@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSString<Optional> *signinTime;
 @property (nonatomic, strong) NSString<Optional> *signinRemark;
 @property (nonatomic, strong) NSString<Optional> *signinDevice;
+@property (nonatomic, strong) NSString<Optional> *signinPosition;
+@property (nonatomic, strong) NSString<Optional> *signinSite;
 @property (nonatomic, strong) NSString<Optional> *userName;
 @property (nonatomic, strong) NSString<Optional> *avatar;
 @end
