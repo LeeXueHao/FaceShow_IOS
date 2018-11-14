@@ -134,7 +134,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses.firstObject;
+    NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[indexPath.section];
     NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
     if (group.virtualId.integerValue == 0) {
         return group.cellHeight + 80;

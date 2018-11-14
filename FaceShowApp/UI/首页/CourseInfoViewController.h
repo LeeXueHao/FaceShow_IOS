@@ -9,6 +9,12 @@
 #import "BaseViewController.h"
 #import "GetCourseRequest.h"
 
+typedef enum : NSUInteger {
+    CourseInfoType_Default,
+    CourseInfoType_NingBoMeeting,
+} CourseInfoType;
+
 @interface CourseInfoViewController : BaseViewController
 @property (nonatomic, strong) GetCourseRequestItem *item;
+@property (nonatomic, assign) CourseInfoType type;
 @end

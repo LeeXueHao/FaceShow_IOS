@@ -247,6 +247,7 @@ extern NSString * const kPCCodeResultBackNotification;
     [TalkingData trackEvent:@"查看课程简介"];
     CourseInfoViewController *vc = [[CourseInfoViewController alloc]init];
     vc.item = self.requestItem;
+    vc.type = CourseInfoType_NingBoMeeting;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

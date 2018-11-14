@@ -18,10 +18,27 @@
 
 @implementation CourseInfoViewController
 
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        self.type = CourseInfoType_Default;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"课程信息";
+    switch (self.type) {
+        case CourseInfoType_Default:
+            self.navigationItem.title = @"课程信息";
+            break;
+        case CourseInfoType_NingBoMeeting:
+            self.navigationItem.title = @"会议信息";
+            break;
+        default:
+            break;
+    }
     [self setupUI];
 }
 
@@ -32,7 +49,7 @@
 
 - (void)setupUI {
     CourseInfoTabContainerView *tabContainerView = [[CourseInfoTabContainerView alloc]init];
-    tabContainerView.tabNameArray = @[@"课程讲师",@"课程简介"];
+    tabContainerView.tabNameArray = @[@"讲师",@"简介"];
     WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
