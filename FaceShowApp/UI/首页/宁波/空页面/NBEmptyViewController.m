@@ -8,13 +8,12 @@
 
 #import "NBEmptyViewController.h"
 #import "YXDrawerController.h"
-
+#import "EmptyView.h"
 #import "GetClassConfigRequest.h"
 
 @interface NBEmptyViewController ()
-
+@property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) GetClassConfigRequest *request;
-
 @end
 
 @implementation NBEmptyViewController
@@ -22,55 +21,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     WEAK_SELF
     [self nyx_setupLeftWithImageName:@"抽屉列表按钮正常态" highlightImageName:@"抽屉列表按钮点击态" action:^{
         STRONG_SELF
         [YXDrawerController showDrawer];
     }];
-
     [self setupUI];
+}
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)setupUI{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"刷新" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.layer.borderColor = [UIColor blueColor].CGColor;
-    btn.layer.borderWidth = 1.0f;
-    btn.layer.cornerRadius = 5.0f;
-    [btn setBackgroundColor:[[UIColor blueColor] colorWithAlphaComponent:0.25]];
-    [self.view addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(100, 30));
+
+    self.emptyView = [[EmptyView alloc] init];
+    self.emptyView.title = @"没有配置信息\n请切换班级或登录其他账号";
+    [self.view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
     }];
 
-    WEAK_SELF
-    [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        STRONG_SELF
-        [self requestClassConfig];
-    }];
-
-}
-
-- (void)requestClassConfig{
-    [self.request stopRequest];
-    [self.view nyx_startLoading];
-    self.request = [[GetClassConfigRequest alloc] init];
-    self.request.modleId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.modelId;
-    WEAK_SELF
-    [self.request startRequestWithRetClass:[GetClassConfigRequest_Item class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
-        STRONG_SELF
-        [self.view nyx_stopLoading];
-        if (error) {
-            [self.view nyx_showToast:error.localizedDescription];
-            return;
-        }
-        [UserManager sharedInstance].configItem = (GetClassConfigRequest_Item *)retItem;
-        [[NSNotificationCenter defaultCenter]postNotificationName:kClassDidSelectNotification object:nil];
-    }];
 }
 
 /*

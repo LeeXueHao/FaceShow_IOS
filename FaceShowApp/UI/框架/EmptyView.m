@@ -39,6 +39,7 @@
     label.textColor = [UIColor colorWithHexString:@"999999"];
     label.font = [UIFont systemFontOfSize:13];
     label.textAlignment = NSTextAlignmentCenter;
+    label.numberOfLines = 0;
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(topImageView.mas_bottom).mas_offset(10);

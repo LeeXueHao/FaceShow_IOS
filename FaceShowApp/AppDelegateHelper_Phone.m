@@ -89,7 +89,9 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     if (!pageList) {
         NBEmptyViewController *empty = [[NBEmptyViewController alloc] init];
         FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:empty];
-        drawerVC.paneViewController = navi;
+        FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
+        tabBarController.viewControllers = @[navi];
+        drawerVC.paneViewController = tabBarController;
     }else{
         NSMutableArray<UIViewController *> *controllers = [NSMutableArray array];
         [pageList enumerateObjectsUsingBlock:^(GetClassConfigRequest_Item_pageList * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
