@@ -20,6 +20,16 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"直播";
     [self setupUI];
+    WEAK_SELF
+    [self nyx_setupRightWithImageName:@"分享" highlightImageName:@"分享" action:^{
+        STRONG_SELF
+        [self shareUrl];
+    }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    BLOCK_EXEC(self.backBlock)
 }
 
 - (void)setupUI {
@@ -59,10 +69,23 @@
     [webView reload];
 }
 
+#pragma mark - action
 
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    BLOCK_EXEC(self.backBlock)
+- (void)shareUrl{
+    NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.webUrl,[UserManager sharedInstance].userModel.token];
+    NSArray *items = @[totalUrl];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+    };
+    if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {
+        UIPopoverPresentationController *popover = activityVC.popoverPresentationController;
+        if (popover) {
+            popover.sourceView = self.webview;
+            popover.permittedArrowDirections = UIPopoverArrowDirectionDown;
+        }
+    }
+    [self presentViewController:activityVC animated:YES completion:NULL];
 }
 
 /*

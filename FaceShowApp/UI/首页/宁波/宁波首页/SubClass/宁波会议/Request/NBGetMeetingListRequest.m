@@ -27,6 +27,8 @@
     _virtualId = virtualId;
     if ([virtualId isEqualToString:@"0"] && self.courses.count > 0) {
         [self calculateCellheight];
+    }else{
+        self->cellHeight = 0;
     }
 }
 
@@ -36,16 +38,16 @@
         CGFloat containerHeight = 33 + 10;
         for (int i = 0; i < self.courses.count; i ++) {
             GetCourseListRequestItem_coursesList *courseList = self.courses[i];
-            CGSize size = [courseList.courseName boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+            CGSize size = [courseList.courseName boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
             if (size.width + 30 > SCREEN_WIDTH) {
                 leftMargin = 15;
                 if (i != 0) {
-                    containerHeight += 33 + 10;
+                    containerHeight += 33 + 15;
                 }
             }
-            if (leftMargin + size.width + 15 > SCREEN_WIDTH) {
+            if (leftMargin + size.width + 26 + 15 > SCREEN_WIDTH) {
                 leftMargin = 15;
-                containerHeight += 33 + 10;
+                containerHeight += 33 + 15;
             }
             leftMargin += size.width + 10;
         }

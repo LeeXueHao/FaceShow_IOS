@@ -85,6 +85,7 @@
         make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(10);
         make.left.right.bottom.mas_equalTo(0);
     }];
+    [self.containerView removeSubviews];
 }
 
 - (void)setItem:(NBGetMeetingListRequestItem_Group *)item{
