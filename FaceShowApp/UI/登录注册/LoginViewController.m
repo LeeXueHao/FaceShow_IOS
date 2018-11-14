@@ -96,12 +96,20 @@
 
     UIButton *quickbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [quickbtn setTitle:@"快捷登录" forState:0];
-    quickbtn.selected = YES;
     [quickbtn setTitleColor:[UIColor colorWithHexString:@"181928"] forState:UIControlStateSelected];
     [quickbtn setTitleColor:[UIColor colorWithHexString:@"929699"] forState:UIControlStateNormal];
     quickbtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:15];
     [self.view addSubview:quickbtn];
     [quickbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
+        make.right.mas_equalTo(self.inputView.mas_right).offset(-50);
+        make.size.mas_equalTo(CGSizeMake(80, 35));
+    }];
+    UIButton *login = [quickbtn clone];
+    login.selected = YES;
+    [login setTitle:@"密码登录" forState:0];
+    [self.view addSubview:login];
+    [login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
         make.left.mas_equalTo(self.inputView.mas_left).offset(50);
         make.size.mas_equalTo(CGSizeMake(80, 35));
@@ -110,18 +118,9 @@
     blueView.backgroundColor = [UIColor colorWithHexString:@"4C9EEB"];
     [self.view addSubview:blueView];
     [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(quickbtn);
+        make.centerX.mas_equalTo(login);
         make.size.mas_equalTo(CGSizeMake(30, 2));
         make.top.mas_equalTo(quickbtn.mas_bottom).offset(5);
-    }];
-
-    UIButton *login = [quickbtn clone];
-    [login setTitle:@"密码登录" forState:0];
-    [self.view addSubview:login];
-    [login mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
-        make.right.mas_equalTo(self.inputView.mas_right).offset(-50);
-        make.size.mas_equalTo(CGSizeMake(80, 35));
     }];
 
     [[quickbtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
@@ -142,7 +141,6 @@
             }
         }];
     }];
-
 
     [[login rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         STRONG_SELF

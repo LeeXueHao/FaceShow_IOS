@@ -51,8 +51,19 @@
         make.height.mas_equalTo(self.scrollView);
     }];
 
-    self.quickContainerView = [[QuickLoginContainerView alloc] init];
     WEAK_SELF
+    self.defaultContainerView = [[DefaultLoginContainerView alloc] init];
+    self.defaultContainerView.loginBtnEnabledBlock = ^(BOOL btnEnabled) {
+        STRONG_SELF
+        BLOCK_EXEC(self.btnEnabledBlock,btnEnabled);
+    };
+    [containerView addSubview:self.defaultContainerView];
+    [self.defaultContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(self.scrollView);
+    }];
+
+    self.quickContainerView = [[QuickLoginContainerView alloc] init];
     self.quickContainerView.verifyCodeBlock = ^(NSString * _Nonnull telPhoneNumber) {
         STRONG_SELF
         BLOCK_EXEC(self.sendVerifyCodeBlock,telPhoneNumber);
@@ -63,28 +74,16 @@
     };
     [containerView addSubview:self.quickContainerView];
     [self.quickContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.mas_equalTo(0);
+        make.top.bottom.right.mas_equalTo(0);
         make.width.mas_equalTo(self.scrollView);
     }];
-
-    self.defaultContainerView = [[DefaultLoginContainerView alloc] init];
-    self.defaultContainerView.loginBtnEnabledBlock = ^(BOOL btnEnabled) {
-        STRONG_SELF
-        BLOCK_EXEC(self.btnEnabledBlock,btnEnabled);
-    };
-    [containerView addSubview:self.defaultContainerView];
-    [self.defaultContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.top.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(self.scrollView);
-    }];
-
 
 }
 
 - (void)setType:(YXInputViewType)type{
     _type = type;
     self.scrollView.scrollEnabled = YES;
-    if (type == YXInputViewType_Default) {
+    if (type == YXInputViewType_QuickLogin) {
         CGFloat width = CGRectGetWidth(self.scrollView.frame);
         [self.scrollView setContentOffset:CGPointMake(width, 0) animated:NO];
         [self.defaultContainerView refreshButton];
