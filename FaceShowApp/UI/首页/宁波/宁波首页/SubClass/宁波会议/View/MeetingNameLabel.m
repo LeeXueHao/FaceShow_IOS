@@ -26,6 +26,7 @@
     self.layer.borderWidth = 1.0f;
     self.layer.borderColor = [UIColor colorWithHexString:@"1EA1F3"].CGColor;
     self.layer.cornerRadius = 4.0f;
+    self.numberOfLines = 1;
     self.font = [UIFont systemFontOfSize:14];
 }
 

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class GetCourseListRequestItem_coursesList;
+@class NBGetMeetingListRequestItem_Group;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MeetingListCell : UITableViewCell
-@property (nonatomic, strong) GetCourseListRequestItem_coursesList *item;
+@property (nonatomic, strong) NBGetMeetingListRequestItem_Group *item;
+@property (nonatomic, copy) void(^clickBlock)(NSString *courseId);
 @end
 
 NS_ASSUME_NONNULL_END

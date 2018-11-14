@@ -16,23 +16,41 @@
 }
 - (void)setCourses:(NSArray<Optional,GetCourseListRequestItem_coursesList> *)courses{
     _courses = courses;
-    if (courses.count) {
-        dispatch_async(dispatch_queue_create("calculateCellHeight", 0), ^{
-            CGFloat lastLeftMargin = 15;
-            CGFloat lastTopMargin = 17 + 16;
-            for (GetCourseListRequestItem_coursesList *courseList in courses) {
-                CGSize size = [courseList.courseName sizeWithFont:[UIFont systemFontOfSize:14]];
-                if (lastLeftMargin + size.width + 26 + 15 > SCREEN_WIDTH) {
-                    lastLeftMargin = 15;
-                    lastTopMargin += size.height + 16;
-                }
-                lastLeftMargin += size.width + 26 + 15;
-            }
-            self->cellHeight = lastTopMargin;
-        });
+    if ([self.virtualId isEqualToString:@"0"] && self.courses.count > 0) {
+        [self calculateCellheight];
     }else{
         self->cellHeight = 0;
     }
+}
+
+- (void)setVirtualId:(NSString<Optional> *)virtualId{
+    _virtualId = virtualId;
+    if ([virtualId isEqualToString:@"0"] && self.courses.count > 0) {
+        [self calculateCellheight];
+    }
+}
+
+- (void)calculateCellheight{
+    dispatch_async(dispatch_queue_create("calculHeightQueue", 0), ^{
+        CGFloat leftMargin = 15;
+        CGFloat containerHeight = 33 + 10;
+        for (int i = 0; i < self.courses.count; i ++) {
+            GetCourseListRequestItem_coursesList *courseList = self.courses[i];
+            CGSize size = [courseList.courseName boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+            if (size.width + 30 > SCREEN_WIDTH) {
+                leftMargin = 15;
+                if (i != 0) {
+                    containerHeight += 33 + 10;
+                }
+            }
+            if (leftMargin + size.width + 15 > SCREEN_WIDTH) {
+                leftMargin = 15;
+                containerHeight += 33 + 10;
+            }
+            leftMargin += size.width + 10;
+        }
+        self->cellHeight = containerHeight + 10;
+    });
 }
 
 - (CGFloat)cellHeight{

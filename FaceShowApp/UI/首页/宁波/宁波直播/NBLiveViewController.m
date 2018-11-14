@@ -7,55 +7,24 @@
 //
 
 #import "NBLiveViewController.h"
-#import <WebKit/WebKit.h>
-
-@interface NBLiveViewController ()<WKNavigationDelegate>
-@property (nonatomic, strong) WKWebView *webview;
-@end
+#import "NBLiveDetailViewController.h"
 
 @implementation NBLiveViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setupUI];
 }
-
-- (void)setupUI {
-    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    config.allowsInlineMediaPlayback = YES;
-    config.mediaPlaybackRequiresUserAction = false;
-
-    WKWebView *webview = [[WKWebView alloc]initWithFrame:CGRectZero configuration:config];
-    if (@available(iOS 11.0, *)) {
-        webview.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    webview.navigationDelegate = self;
-    NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.pageConf.url,[UserManager sharedInstance].userModel.token];
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:totalUrl]];
-    [webview loadRequest:request];
-    [self.view addSubview:webview];
-    [webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    self.webview = webview;
-}
-
-
-#pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    [self.view nyx_startLoading];
-}
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    [self.view nyx_stopLoading];
-}
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
-    [self.view nyx_stopLoading];
-    [self.view nyx_showToast:@"资源加载失败"];
-}
-
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
-    [webView reload];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NBLiveDetailViewController *detail = [[NBLiveDetailViewController alloc] init];
+    detail.webUrl = self.pageConf.url;
+    WEAK_SELF
+    detail.backBlock = ^{
+        STRONG_SELF
+        [self.tabBarController setSelectedIndex:0];
+    };
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 

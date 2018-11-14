@@ -61,6 +61,8 @@
 
 - (void)setupUI {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+//    self.tableView.estimatedRowHeight = 100;
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.sectionHeaderHeight = 60;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -113,11 +115,18 @@
     NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[indexPath.section];
     NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
     if (group.virtualId.integerValue == 0) {
-        CourseListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"CourseListCell"];
-        listCell.item = group.courses.firstObject;
+        MeetingListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"MeetingListCell"];
+        listCell.item = group;
+        WEAK_SELF
+        listCell.clickBlock = ^(NSString * _Nonnull courseId) {
+            STRONG_SELF
+            MeetingDetailViewController *meetDetailVC = [[MeetingDetailViewController alloc] init];
+            meetDetailVC.courseId = courseId;
+            [self.navigationController pushViewController:meetDetailVC animated:YES];
+        };
         return listCell;
     }else{
-        MeetingListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"MeetingListCell"];
+        CourseListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"CourseListCell"];
         listCell.item = group.courses.firstObject;
         return listCell;
     }
@@ -127,7 +136,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses.firstObject;
     NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
-    return group.virtualId.integerValue == 0?140:100;
+    if (group.virtualId.integerValue == 0) {
+        return group.cellHeight + 80;
+    }else{
+        return 140;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -153,11 +166,6 @@
         GetCourseListRequestItem_coursesList *course = group.courses.firstObject;
         meetDetailVC.courseId = course.courseId;
         [self.navigationController pushViewController:meetDetailVC animated:YES];
-    }else{
-        CourseDetailViewController *courseDetailVC = [[CourseDetailViewController alloc] init];
-        GetCourseListRequestItem_coursesList *course = group.courses.firstObject;
-        courseDetailVC.courseId = course.courseId;
-        [self.navigationController pushViewController:courseDetailVC animated:YES];
     }
 }
 

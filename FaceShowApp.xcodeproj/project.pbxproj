@@ -211,6 +211,7 @@
 		7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E222520E475E10055843D /* RefreshBaseViewController.m */; };
 		7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */; };
 		7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223820E61B380055843D /* AppUseRecordManager.m */; };
+		7C301D5F219BF48C00F9F089 /* NBLiveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D5E219BF48C00F9F089 /* NBLiveDetailViewController.m */; };
 		7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6321216D88000705E8 /* BasicDataConfig.m */; };
 		7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6421216D88000705E8 /* AreaManager.m */; };
 		7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6621216D88000705E8 /* BasicDataRequest.m */; };
@@ -924,6 +925,8 @@
 		7C2E223620E61B370055843D /* AppUseRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUseRecordManager.h; sourceTree = "<group>"; };
 		7C2E223720E61B380055843D /* AddAppUseRecordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAppUseRecordRequest.h; sourceTree = "<group>"; };
 		7C2E223820E61B380055843D /* AppUseRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUseRecordManager.m; sourceTree = "<group>"; };
+		7C301D5D219BF48C00F9F089 /* NBLiveDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBLiveDetailViewController.h; sourceTree = "<group>"; };
+		7C301D5E219BF48C00F9F089 /* NBLiveDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBLiveDetailViewController.m; sourceTree = "<group>"; };
 		7C32AD6321216D88000705E8 /* BasicDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataConfig.m; sourceTree = "<group>"; };
 		7C32AD6421216D88000705E8 /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
 		7C32AD6521216D88000705E8 /* BasicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataManager.h; sourceTree = "<group>"; };
@@ -2526,6 +2529,8 @@
 			children = (
 				7C2C8E80219424C8001685FA /* NBLiveViewController.h */,
 				7C2C8E81219424C8001685FA /* NBLiveViewController.m */,
+				7C301D5D219BF48C00F9F089 /* NBLiveDetailViewController.h */,
+				7C301D5E219BF48C00F9F089 /* NBLiveDetailViewController.m */,
 			);
 			path = "宁波直播";
 			sourceTree = "<group>";
@@ -4264,6 +4269,7 @@
 				7C2519161F68EA8A0001B577 /* FileLogger.m in Sources */,
 				7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */,
 				E91E5D422047B22800052FBA /* IMTextMessageBaseCell.m in Sources */,
+				7C301D5F219BF48C00F9F089 /* NBLiveDetailViewController.m in Sources */,
 				922084291F6BC4D200F8AAC6 /* UserInfoHeaderCell.m in Sources */,
 				7C24E1E91F721C7B00A6921B /* HttpBaseRequestItem_Error.m in Sources */,
 				E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */,

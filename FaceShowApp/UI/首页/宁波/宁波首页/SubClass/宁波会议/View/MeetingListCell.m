@@ -7,11 +7,14 @@
 //
 
 #import "MeetingListCell.h"
+#import "MeetingNameLabel.h"
+#import "NBGetMeetingListRequest.h"
 #import "GetCourseListRequest.h"
 
 @interface MeetingListCell()
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIView *containerView;
 @end
 
 @implementation MeetingListCell
@@ -75,16 +78,66 @@
         make.right.mas_equalTo(-15);
         make.centerY.mas_equalTo(timeTagLabel.mas_centerY);
     }];
+
+    self.containerView = [[UIView alloc] init];
+    [self.contentView addSubview:self.containerView];
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(10);
+        make.left.right.bottom.mas_equalTo(0);
+    }];
 }
 
-- (void)setItem:(GetCourseListRequestItem_coursesList *)item{
+- (void)setItem:(NBGetMeetingListRequestItem_Group *)item{
     _item = item;
-    self.titleLabel.text = item.courseName;
+    self.titleLabel.text = item.categoryName;
     NSString *startTime = [item.startTime omitSecondOfFullDateString];
     NSString *endTime = [item.endTime omitSecondOfFullDateString];
     self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",startTime,endTime];
+    [self.containerView removeSubviews];
+    for (GetCourseListRequestItem_coursesList *courseList  in item.courses) {
+        MeetingNameLabel *label = [[MeetingNameLabel alloc] initWithText:courseList.courseName];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+        WEAK_SELF
+        [[tap rac_gestureSignal] subscribeNext:^(id x) {
+            STRONG_SELF
+            BLOCK_EXEC(self.clickBlock,courseList.courseId)
+        }];
+        label.userInteractionEnabled = YES;
+        [label addGestureRecognizer:tap];
+        [self.containerView addSubview:label];
+    }
 }
 
+- (void)setupMock{
+    [self.containerView removeSubviews];
+    NSString *total = [NSString stringWithFormat:@"会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议"];
+    for (int i = 0; i < 9; i ++) {
+        MeetingNameLabel *label = [[MeetingNameLabel alloc] initWithText:[total substringToIndex:i * 3 + 1]];
+        [self.containerView addSubview:label];
+    }
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    CGFloat leftMargin = 15;
+    CGFloat topMargin = 10;
+    for (int i = 0; i < self.containerView.subviews.count; i ++) {
+        MeetingNameLabel *nameLabel = self.containerView.subviews[i];
+        if (nameLabel.width + 30 > SCREEN_WIDTH) {
+            [nameLabel setWidth:SCREEN_WIDTH - 30];
+            leftMargin = 15;
+            if (i != 0) {
+                topMargin += nameLabel.height + 15;
+            }
+        }
+        if (leftMargin + nameLabel.width + 15 > SCREEN_WIDTH) {
+            leftMargin = 15;
+            topMargin += nameLabel.height + 15;
+        }
+        [nameLabel setX:leftMargin andY:topMargin];
+        leftMargin += nameLabel.width + 10;
+    }
+}
 
 
 @end
