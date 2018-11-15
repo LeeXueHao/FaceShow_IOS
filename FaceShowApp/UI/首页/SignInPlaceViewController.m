@@ -65,6 +65,8 @@
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.estimatedRowHeight = 121;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
@@ -147,10 +149,6 @@
         [self signInWithData:data];
     }];
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 121;
 }
 
 #pragma mark - 位置签到

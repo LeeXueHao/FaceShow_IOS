@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeTipLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UILabel *placeTipLabel;
 @property (nonatomic, strong) UILabel *placeLabel;
 @property (nonatomic, strong) UIView *lineView;
 
@@ -56,13 +55,7 @@
         make.right.mas_equalTo(-65);
     }];
     
-    self.timeTipLabel = [[UILabel alloc] init];
-    self.timeTipLabel.font = [UIFont systemFontOfSize:11];
-    self.timeTipLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
-    self.timeTipLabel.text = @"时间";
-    self.timeTipLabel.textAlignment = NSTextAlignmentCenter;
-    self.timeTipLabel.layer.backgroundColor = [UIColor colorWithHexString:@"a6b0bf"].CGColor;
-    self.timeTipLabel.layer.cornerRadius = 3.f;
+    self.timeTipLabel = [self generateTagLabelWithText:@"时间"];
     [self.contentView addSubview:self.timeTipLabel];
     [self.timeTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel.mas_left);
@@ -79,30 +72,7 @@
         make.centerY.mas_equalTo(self.timeTipLabel);
         make.right.mas_equalTo(-65);
     }];
-    
-    self.placeTipLabel = [[UILabel alloc] init];
-    self.placeTipLabel.font = [UIFont systemFontOfSize:11];
-    self.placeTipLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
-    self.placeTipLabel.layer.backgroundColor = [UIColor colorWithHexString:@"a6b0bf"].CGColor;
-    self.placeTipLabel.layer.cornerRadius = 3.f;
-    self.placeTipLabel.text = @"地点";
-    self.placeTipLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:self.placeTipLabel];
-    [self.placeTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.timeTipLabel);
-        make.top.mas_equalTo(self.timeTipLabel.mas_bottom).mas_offset(10);
-        make.size.mas_equalTo(CGSizeMake(33, 15));
-    }];
-    
-    self.placeLabel = [[UILabel alloc] init];
-    self.placeLabel.font = [UIFont systemFontOfSize:13];
-    self.placeLabel.textColor = [UIColor colorWithHexString:@"666666"];
-    [self.contentView addSubview:self.placeLabel];
-    [self.placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.timeLabel);
-        make.centerY.mas_equalTo(self.placeTipLabel);
-    }];
-    
+
     self.signInBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.signInBtn setBackgroundImage:[UIImage imageNamed:@"签到"] forState:UIControlStateNormal];
     self.signInBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -118,7 +88,13 @@
     [self.signInBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(0);
         make.centerY.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(60, 50));
     }];
+
+    self.placeLabel = [[UILabel alloc] init];
+    self.placeLabel.font = [UIFont systemFontOfSize:13];
+    self.placeLabel.numberOfLines = 0;
+    self.placeLabel.textColor = [UIColor colorWithHexString:@"666666"];
     
     self.lineView = [[UIView alloc] init];
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
@@ -134,10 +110,45 @@
     NSString *endTime = [data.endTime omitSecondOfFullDateString];
     endTime = [endTime componentsSeparatedByString:@" "].lastObject;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ - %@",[data.startTime omitSecondOfFullDateString],endTime];
-    self.placeLabel.text = data.positionSite;
+
+    __block MASViewAttribute *bottom = self.timeLabel.mas_bottom;
+    [data.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UILabel *tag = [self generateTagLabelWithText:@"地点"];
+        [self.contentView addSubview:tag];
+        [tag mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.timeTipLabel);
+            make.top.mas_equalTo(bottom).mas_offset(10);
+            make.size.mas_equalTo(CGSizeMake(33, 15));
+        }];
+
+        UILabel *placeLabel = [self.placeLabel clone];
+        [placeLabel setText:obj.positionSite];
+        [self.contentView addSubview:placeLabel];
+        [placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.timeLabel);
+            make.centerY.mas_equalTo(tag);
+            make.right.mas_equalTo(self.signInBtn.mas_left).offset(-10);
+            if (idx == data.signInExts.count - 1) {
+                make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
+            }
+        }];
+        bottom = placeLabel.mas_bottom;
+    }];
+
 }
 
 - (void)setSignInPlaceBlock:(SignInPlaceBlock)block {
     self.block = block;
+}
+
+- (UILabel *)generateTagLabelWithText:(NSString *)text{
+    UILabel *tagLabel = [[UILabel alloc] init];
+    tagLabel.font = [UIFont systemFontOfSize:11];
+    tagLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
+    tagLabel.layer.backgroundColor = [UIColor colorWithHexString:@"a6b0bf"].CGColor;
+    tagLabel.layer.cornerRadius = 3.f;
+    tagLabel.text = text;
+    tagLabel.textAlignment = NSTextAlignmentCenter;
+    return tagLabel;
 }
 @end
