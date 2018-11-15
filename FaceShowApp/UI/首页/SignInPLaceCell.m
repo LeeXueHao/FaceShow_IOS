@@ -126,7 +126,7 @@
         [self.contentView addSubview:placeLabel];
         [placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.timeLabel);
-            make.centerY.mas_equalTo(tag);
+            make.top.mas_equalTo(tag);
             make.right.mas_equalTo(self.signInBtn.mas_left).offset(-10);
             if (idx == data.signInExts.count - 1) {
                 make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
