@@ -11,5 +11,5 @@
 extern NSString * const kTabBarDidSelectNotification;
 
 @interface FSTabBarController : UITabBarController
-
+@property (nonatomic, readonly, assign) NSInteger lastSelectIndex;
 @end

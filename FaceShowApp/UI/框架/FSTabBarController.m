@@ -12,7 +12,7 @@
 NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
 
 @interface FSTabBarController ()<UITabBarControllerDelegate>
-
+@property (nonatomic, assign) NSInteger lastSelectIndex;
 @end
 
 @implementation FSTabBarController
@@ -21,6 +21,7 @@ NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
     [super viewDidLoad];
     self.delegate = self;
     // Do any additional setup after loading the view.
+    self.lastSelectIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,8 +52,11 @@ NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
 //            [[NSNotificationCenter defaultCenter]postNotificationName:kHasNewMomentNotification object:nil];
 //        }
 //    }
-    if (self.selectedIndex == self.viewControllers.count - 1) {//聊聊
+    if ([viewController.title isEqualToString:@"聊聊"]) {
         [TalkingData trackEvent:@"点击聊聊"];
+    }
+    if (![viewController.title isEqualToString:@"直播"]) {
+        self.lastSelectIndex = [self.childViewControllers indexOfObject:viewController];
     }
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabBarDidSelectNotification object:viewController];
 }

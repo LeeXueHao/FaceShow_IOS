@@ -8,6 +8,7 @@
 
 #import "NBLiveViewController.h"
 #import "NBLiveDetailViewController.h"
+#import "FSTabBarController.h"
 
 @implementation NBLiveViewController
 
@@ -22,7 +23,8 @@
     WEAK_SELF
     detail.backBlock = ^{
         STRONG_SELF
-        [self.tabBarController setSelectedIndex:0];
+        FSTabBarController *tabbar = (FSTabBarController *)self.tabBarController;
+        [self.tabBarController setSelectedIndex:tabbar.lastSelectIndex];
     };
     [self.navigationController pushViewController:detail animated:YES];
 }
