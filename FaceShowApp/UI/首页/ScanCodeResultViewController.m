@@ -8,6 +8,8 @@
 
 #import "ScanCodeResultViewController.h"
 #import "SignInDetailViewController.h"
+#import "GetInteractAfterStepRequest.h"
+#import "ScheduleDetailViewController.h"
 
 typedef NS_ENUM(NSUInteger, SignInError) {
     SignInErrorInvaildQRcode = 210411, // 签到不存在或已停用（二维码非法）
@@ -24,7 +26,8 @@ typedef NS_ENUM(NSUInteger, SignInError) {
 @property (nonatomic, strong) UILabel *blackLabel;
 @property (nonatomic, strong) UILabel *grayLabel;
 @property (nonatomic, strong) UIButton *confirmBtn;
-
+@property (nonatomic, strong) GetInteractAfterStepRequest *afterRequest;
+@property (nonatomic, strong) GetInteractAfterStepRequestItem *item;
 @end
 
 @implementation ScanCodeResultViewController
@@ -33,6 +36,7 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     [super viewDidLoad];
     [self setupUI];
     [self setModel];
+    [self requestAfterInfo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,6 +151,10 @@ typedef NS_ENUM(NSUInteger, SignInError) {
 
 - (void)backAction {
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
+        if (self.item.data && self.item.data.afterSteps.count != 0) {
+            [self goScheduleDetail];
+            return;
+        }
         if (self.currentIndexPath) {
             if ([self.navigationController.viewControllers[1] isKindOfClass:[SignInDetailViewController class]]) {
                 [self.navigationController popToRootViewControllerAnimated:YES];
@@ -172,6 +180,22 @@ typedef NS_ENUM(NSUInteger, SignInError) {
         [super backAction];
         BLOCK_EXEC(self.reScanCodeBlock);
     }
+}
+
+- (void)requestAfterInfo{
+    [self.afterRequest stopRequest];
+    self.afterRequest = [[GetInteractAfterStepRequest alloc] init];
+    self.afterRequest.stepId = self.stepId;
+    [self.afterRequest startRequestWithRetClass:[GetInteractAfterStepRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        self.item = retItem;
+    }];
+}
+
+- (void)goScheduleDetail{
+    ScheduleDetailViewController *vc = [[ScheduleDetailViewController alloc]init];
+    GetInteractAfterStepRequestItem_afterSteps *afterStep = self.item.data.afterSteps.firstObject;
+    vc.urlStr = afterStep.url;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

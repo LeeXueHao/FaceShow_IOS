@@ -15,4 +15,5 @@
 @property (nonatomic, strong) HttpBaseRequestItem_Error *error;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, assign) BOOL positionSignIn;
+@property (nonatomic, strong) NSString *stepId;
 @end

@@ -11,4 +11,5 @@
 
 @interface CourseListCell : UITableViewCell
 @property (nonatomic, strong) GetCourseListRequestItem_coursesList *item;
+@property (nonatomic, copy) NSString *tagString;
 @end

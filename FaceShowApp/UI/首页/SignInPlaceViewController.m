@@ -176,6 +176,7 @@
         }
         UserSignInRequestItem *item = (UserSignInRequestItem *)retItem;
         ScanCodeResultViewController *scanCodeResultVC = [[ScanCodeResultViewController alloc] init];
+        scanCodeResultVC.stepId = data.stepId;
         scanCodeResultVC.data = error ? nil : item.data;
         scanCodeResultVC.error = error ? item.error : nil;
         scanCodeResultVC.positionSignIn = YES;

@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *teacherLabel;
+@property (nonatomic, strong) UILabel *teacherTagLabel;
 @property (nonatomic, strong) UILabel *placeLabel;
 @end
 
@@ -82,6 +83,8 @@
         make.top.mas_equalTo(timeTagLabel.mas_bottom).mas_offset(9);
         make.size.mas_equalTo(CGSizeMake(34, 15));
     }];
+    self.teacherTagLabel = teacherTagLabel;
+
     self.teacherLabel = [self.timeLabel clone];
     [self.contentView addSubview:self.teacherLabel];
     [self.teacherLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,6 +128,11 @@
         [lecturesName appendString:[NSString stringWithFormat:@"%@",  info.lecturerName]];
     }
     return lecturesName;
+}
+
+- (void)setTagString:(NSString *)tagString{
+    _tagString = tagString;
+    self.teacherTagLabel.text = tagString;
 }
 
 @end

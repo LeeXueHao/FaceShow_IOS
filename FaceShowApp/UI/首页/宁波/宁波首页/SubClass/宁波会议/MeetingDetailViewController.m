@@ -148,7 +148,7 @@ extern NSString * const kPCCodeResultBackNotification;
         make.centerY.mas_equalTo(timeTagLabel.mas_centerY);
     }];
     UILabel *teacherTagLabel = [timeTagLabel clone];
-    teacherTagLabel.text = @"讲师";
+    teacherTagLabel.text = @"专家";
     [scrollView addSubview:teacherTagLabel];
     [teacherTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(timeTagLabel.mas_left);
