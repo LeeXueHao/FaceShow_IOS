@@ -61,8 +61,6 @@
 
 - (void)setupUI {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-//    self.tableView.estimatedRowHeight = 100;
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.sectionHeaderHeight = 60;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -137,7 +135,7 @@
     NBGetMeetingListRequestItem_Courses *courses = self.requestItem.data.courses[indexPath.section];
     NBGetMeetingListRequestItem_Group *group = courses.group[indexPath.row];
     if (group.virtualId.integerValue == 0) {
-        return group.cellHeight + 80;
+        return group.cellHeight + 110;
     }else{
         return 140;
     }

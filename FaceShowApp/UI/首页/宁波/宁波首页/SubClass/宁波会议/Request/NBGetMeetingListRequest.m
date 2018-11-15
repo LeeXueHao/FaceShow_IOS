@@ -16,7 +16,7 @@
 }
 - (void)setCourses:(NSArray<Optional,GetCourseListRequestItem_coursesList> *)courses{
     _courses = courses;
-    if ([self.virtualId isEqualToString:@"0"] && self.courses.count > 0) {
+    if (self.courses.count > 0 && [self.virtualId isEqualToString:@"0"]) {
         [self calculateCellheight];
     }else{
         self->cellHeight = 0;
@@ -35,23 +35,17 @@
 - (void)calculateCellheight{
     dispatch_async(dispatch_queue_create("calculHeightQueue", 0), ^{
         CGFloat leftMargin = 15;
-        CGFloat containerHeight = 33 + 10;
+        CGFloat containerHeight = 30;
         for (int i = 0; i < self.courses.count; i ++) {
             GetCourseListRequestItem_coursesList *courseList = self.courses[i];
             CGSize size = [courseList.courseName boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-            if (size.width + 30 > SCREEN_WIDTH) {
-                leftMargin = 15;
-                if (i != 0) {
-                    containerHeight += 33 + 15;
-                }
-            }
             if (leftMargin + size.width + 26 + 15 > SCREEN_WIDTH) {
                 leftMargin = 15;
-                containerHeight += 33 + 15;
+                containerHeight += size.height + 16 + 8;
             }
-            leftMargin += size.width + 10;
+            leftMargin += size.width + 26 + 4;
         }
-        self->cellHeight = containerHeight + 10;
+        self->cellHeight = containerHeight;
     });
 }
 

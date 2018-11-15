@@ -128,15 +128,15 @@
             [nameLabel setWidth:SCREEN_WIDTH - 30];
             leftMargin = 15;
             if (i != 0) {
-                topMargin += nameLabel.height + 15;
+                topMargin += nameLabel.height + 8;
             }
         }
         if (leftMargin + nameLabel.width + 15 > SCREEN_WIDTH) {
             leftMargin = 15;
-            topMargin += nameLabel.height + 15;
+            topMargin += nameLabel.height + 8;
         }
         [nameLabel setX:leftMargin andY:topMargin];
-        leftMargin += nameLabel.width + 10;
+        leftMargin += nameLabel.width + 4;
     }
 }
 
