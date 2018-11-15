@@ -70,7 +70,6 @@
 }
 
 #pragma mark - action
-
 - (void)shareUrl{
     NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.webUrl,[UserManager sharedInstance].userModel.token];
     NSArray *items = @[totalUrl];
