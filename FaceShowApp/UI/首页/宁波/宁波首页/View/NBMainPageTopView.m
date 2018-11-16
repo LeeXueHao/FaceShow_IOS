@@ -36,8 +36,10 @@
 
 - (void)setImageUrl:(NSString *)imageUrl{
     _imageUrl = imageUrl;
+    WEAK_SELF
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"宁波头图"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-
+        STRONG_SELF
+        self.bgImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
     }];
 }
 

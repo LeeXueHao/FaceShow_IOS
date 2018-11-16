@@ -29,7 +29,7 @@
     NSTimeInterval time=[date timeIntervalSince1970]*1000;
     NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
     if (![originUrl containsString:@"?"]) {
-        totalUrl = [NSString stringWithFormat:@"%@?userID=%@&shareTime=%@",originUrl,[UserManager sharedInstance].userModel.userID,timeString];
+        totalUrl = [NSString stringWithFormat:@"%@?userId=%@&shareTime=%@",originUrl,[UserManager sharedInstance].userModel.userID,timeString];
     }else{
         if ([originUrl hasSuffix:@"?"]) {
             totalUrl = [NSString stringWithFormat:@"%@userID=%@&shareTime=%@",originUrl,[UserManager sharedInstance].userModel.userID,timeString];
