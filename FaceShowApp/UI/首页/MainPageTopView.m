@@ -40,7 +40,7 @@
     UIImageView *leftImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"首页班级图标"]];
     [self addSubview:leftImageView];
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(0);
+        make.top.mas_equalTo(30);
         make.left.mas_equalTo(30);
         make.size.mas_equalTo(CGSizeMake(64, 64));
     }];
@@ -56,8 +56,6 @@
     [self addSubview:project];
     CGSize size = [@"项目" sizeWithFont:[UIFont systemFontOfSize:8]];
     [project mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(0);
-        make.left.mas_equalTo(leftImageView.mas_right).offset(10);
         make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
@@ -66,17 +64,6 @@
     self.projectLabel.numberOfLines = 2;
     self.projectLabel.font = [UIFont systemFontOfSize:12];
     [self addSubview:self.projectLabel];
-    [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(0);
-        make.left.mas_equalTo(project.mas_right).offset(2);
-        make.right.mas_lessThanOrEqualTo(-30);
-    }];
-
-    [project mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.projectLabel.mas_top).offset(2);
-        make.left.mas_equalTo(leftImageView.mas_right).offset(10);
-        make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
-    }];
 
     UILabel *class = [[UILabel alloc] init];
     class.text = @"班级";
@@ -89,8 +76,6 @@
     [self addSubview:class];
     size = [@"班级" sizeWithFont:[UIFont systemFontOfSize:10]];
     [class mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftImageView.mas_top).offset(2);
-        make.left.mas_equalTo(project);
         make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
@@ -99,17 +84,6 @@
     self.classLabel.numberOfLines = 2;
     self.classLabel.font = [UIFont boldSystemFontOfSize:16];
     [self addSubview:self.classLabel];
-    [self.classLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_lessThanOrEqualTo(self.projectLabel.mas_top).offset(-5);
-        make.left.mas_equalTo(self.projectLabel.mas_left).offset(5);
-        make.right.mas_lessThanOrEqualTo(-20);
-    }];
-
-    [class mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.classLabel.mas_top).offset(3);
-        make.left.mas_equalTo(project);
-        make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
-    }];
 
     self.group = [project clone];
     [self.group setText:@"小组"];
@@ -118,23 +92,37 @@
     [self addSubview:self.group];
     size = [@"班级" sizeWithFont:[UIFont systemFontOfSize:8]];
     [self.group mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(leftImageView.mas_bottom).offset(-2);
-        make.left.mas_equalTo(project);
         make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
     self.groupLabel = [self.projectLabel clone];
     [self addSubview:self.groupLabel];
-    [self.groupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_greaterThanOrEqualTo(self.projectLabel.mas_bottom).offset(5);
-        make.left.mas_equalTo(self.projectLabel.mas_left);
-        make.right.mas_lessThanOrEqualTo(-30);
+    [class mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(leftImageView);
+        make.left.mas_equalTo(leftImageView.mas_right).offset(10);
+    }];
+    [self.classLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(class.mas_top).offset(-2);
+        make.left.mas_equalTo(class.mas_right).offset(5);
+        make.right.mas_equalTo(-35);
     }];
 
-    [self.group mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.groupLabel.mas_top).offset(2);
+    [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.classLabel.mas_bottom).offset(5);
+        make.left.right.mas_equalTo(self.classLabel);
+    }];
+    [project mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(class);
+        make.top.mas_equalTo(self.projectLabel.mas_top).offset(2);
+    }];
+
+    [self.groupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.projectLabel.mas_bottom).offset(5);
+        make.left.right.mas_equalTo(self.projectLabel);
+    }];
+    [self.group mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.groupLabel.mas_top).offset(2);
         make.left.mas_equalTo(project);
-        make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
     self.groupLabel.userInteractionEnabled = YES;
@@ -159,6 +147,7 @@
         make.top.mas_lessThanOrEqualTo(self.classLabel.mas_top).offset(-15);
         make.bottom.mas_greaterThanOrEqualTo(leftImageView.mas_bottom).offset(15);
         make.bottom.mas_greaterThanOrEqualTo(self.groupLabel.mas_bottom).offset(11);
+        make.bottom.mas_equalTo(-10);
     }];
     self.container = containerView;
 

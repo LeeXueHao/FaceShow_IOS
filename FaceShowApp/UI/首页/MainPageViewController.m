@@ -37,6 +37,7 @@
 @property (nonatomic, strong) MainPageTipView *tipView;
 @property (nonatomic, strong) GetToolsRequest *toolsRequest;
 @property (nonatomic, strong) GetToolsRequestItem *toolsItem;
+@property (nonatomic, assign) CGFloat topViewHeight;
 @end
 
 @implementation MainPageViewController
@@ -58,6 +59,16 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self updateClazsInfo];
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    if (!self.topViewHeight) {
+        self.topViewHeight = CGRectGetHeight(self.topView.frame);
+        [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.topViewHeight);
+        }];
+    }
 }
 
 - (void)setupNavRightView {
@@ -83,12 +94,12 @@
 }
 
 - (void)setupUI {
+    self.topViewHeight = 0;
     MainPageTopView *topView = [[MainPageTopView alloc]init];
     topView.item = [UserManager sharedInstance].userModel.projectClassInfo;
     [self.view addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(135);
     }];
     WEAK_SELF
     topView.clickGroupBlock = ^(GetCurrentClazsRequestItem_userGroup *groupData) {
