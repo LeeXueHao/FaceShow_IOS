@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *placeLabel;
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) NSArray<UILabel *> *labelArr;
 
 @property (nonatomic, copy) SignInPlaceBlock block;
 @end
@@ -111,7 +112,12 @@
     endTime = [endTime componentsSeparatedByString:@" "].lastObject;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ - %@",[data.startTime omitSecondOfFullDateString],endTime];
 
+    for (UILabel *label in self.labelArr) {
+        [label removeFromSuperview];
+    }
+
     __block MASViewAttribute *bottom = self.timeLabel.mas_bottom;
+    __block NSMutableArray *labelArr = [NSMutableArray array];
     [data.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UILabel *tag = [self generateTagLabelWithText:@"地点"];
         [self.contentView addSubview:tag];
@@ -133,8 +139,10 @@
             }
         }];
         bottom = placeLabel.mas_bottom;
+        [labelArr addObject:tag];
+        [labelArr addObject:placeLabel];
     }];
-
+    self.labelArr = [labelArr copy];
 }
 
 - (void)setSignInPlaceBlock:(SignInPlaceBlock)block {

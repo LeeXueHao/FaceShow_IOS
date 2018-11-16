@@ -42,6 +42,7 @@
 - (void)setupUI {
     self.backgroundImageView = [[UIImageView alloc] init];
     self.backgroundImageView.image = [UIImage imageNamed:@"背景图片"];
+    self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:self.backgroundImageView];
     UIView *view = [[UIView alloc] init];
     view.layer.cornerRadius = 5.0f;

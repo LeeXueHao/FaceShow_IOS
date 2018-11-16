@@ -215,6 +215,7 @@
 		7C301D62219D16D100F9F089 /* GetInteractAfterStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D61219D16D100F9F089 /* GetInteractAfterStepRequest.m */; };
 		7C301D68219E788200F9F089 /* YXResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */; };
 		7C301D6C219EA39900F9F089 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D6B219EA39900F9F089 /* ShareManager.m */; };
+		7C301D72219EF9BE00F9F089 /* YXTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D71219EF9BE00F9F089 /* YXTabBar.m */; };
 		7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6321216D88000705E8 /* BasicDataConfig.m */; };
 		7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6421216D88000705E8 /* AreaManager.m */; };
 		7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6621216D88000705E8 /* BasicDataRequest.m */; };
@@ -936,6 +937,8 @@
 		7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXResourceDisplayViewController.m; sourceTree = "<group>"; };
 		7C301D6A219EA39900F9F089 /* ShareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
 		7C301D6B219EA39900F9F089 /* ShareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
+		7C301D70219EF9BE00F9F089 /* YXTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXTabBar.h; sourceTree = "<group>"; };
+		7C301D71219EF9BE00F9F089 /* YXTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXTabBar.m; sourceTree = "<group>"; };
 		7C32AD6321216D88000705E8 /* BasicDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataConfig.m; sourceTree = "<group>"; };
 		7C32AD6421216D88000705E8 /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
 		7C32AD6521216D88000705E8 /* BasicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataManager.h; sourceTree = "<group>"; };
@@ -1963,6 +1966,8 @@
 				7C2518E11F68E68D0001B577 /* UIViewController+VisibleViewController.m */,
 				E9B39A632119B671007ABA54 /* NSObject+LocationPermissions.h */,
 				E9B39A622119B671007ABA54 /* NSObject+LocationPermissions.m */,
+				7C301D70219EF9BE00F9F089 /* YXTabBar.h */,
+				7C301D71219EF9BE00F9F089 /* YXTabBar.m */,
 			);
 			path = Categoty;
 			sourceTree = "<group>";
@@ -4239,6 +4244,7 @@
 				E91E5D4A2047B22800052FBA /* IMMessageCellFactory.m in Sources */,
 				4378DF941F6F62F9005CFE56 /* SignInRecordViewController.m in Sources */,
 				7C2519631F68EBA90001B577 /* YXUploadRequest.m in Sources */,
+				7C301D72219EF9BE00F9F089 /* YXTabBar.m in Sources */,
 				7CEFC7BD1F9990CF001D8C84 /* ModifySexViewController.m in Sources */,
 				4376E7441F711A2D003E2057 /* QAFileUploadSecondStepRequest.m in Sources */,
 				438E2A711F73762D00800020 /* MessageHasUnViewRequest.m in Sources */,

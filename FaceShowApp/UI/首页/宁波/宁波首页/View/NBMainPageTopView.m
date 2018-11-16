@@ -25,7 +25,7 @@
 
 - (void)setupUI {
     self.bgImageView = [[UIImageView alloc]init];
-    self.bgImageView.image = [UIImage imageWithColor:[UIColor colorWithHexString:@"ebef22"]];
+    self.bgImageView.image = [UIImage imageNamed:@"宁波头图"];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.clipsToBounds = YES;
     [self addSubview:self.bgImageView];
