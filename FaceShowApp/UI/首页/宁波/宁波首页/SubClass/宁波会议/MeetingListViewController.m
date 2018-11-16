@@ -125,6 +125,7 @@
         return listCell;
     }else{
         CourseListCell *listCell = [tableView dequeueReusableCellWithIdentifier:@"CourseListCell"];
+        [listCell setTagString:@"专家"];
         listCell.item = group.courses.firstObject;
         return listCell;
     }
