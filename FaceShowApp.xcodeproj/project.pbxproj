@@ -214,6 +214,7 @@
 		7C301D5F219BF48C00F9F089 /* NBLiveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D5E219BF48C00F9F089 /* NBLiveDetailViewController.m */; };
 		7C301D62219D16D100F9F089 /* GetInteractAfterStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D61219D16D100F9F089 /* GetInteractAfterStepRequest.m */; };
 		7C301D68219E788200F9F089 /* YXResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */; };
+		7C301D6C219EA39900F9F089 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D6B219EA39900F9F089 /* ShareManager.m */; };
 		7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6321216D88000705E8 /* BasicDataConfig.m */; };
 		7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6421216D88000705E8 /* AreaManager.m */; };
 		7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6621216D88000705E8 /* BasicDataRequest.m */; };
@@ -933,6 +934,8 @@
 		7C301D61219D16D100F9F089 /* GetInteractAfterStepRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetInteractAfterStepRequest.m; sourceTree = "<group>"; };
 		7C301D66219E788200F9F089 /* YXResourceDisplayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXResourceDisplayViewController.h; sourceTree = "<group>"; };
 		7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXResourceDisplayViewController.m; sourceTree = "<group>"; };
+		7C301D6A219EA39900F9F089 /* ShareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
+		7C301D6B219EA39900F9F089 /* ShareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
 		7C32AD6321216D88000705E8 /* BasicDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataConfig.m; sourceTree = "<group>"; };
 		7C32AD6421216D88000705E8 /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
 		7C32AD6521216D88000705E8 /* BasicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataManager.h; sourceTree = "<group>"; };
@@ -2117,6 +2120,7 @@
 		7C2519641F68EBCD0001B577 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				7C301D69219EA38400F9F089 /* 分享 */,
 				7C32AD6221216D88000705E8 /* 基础数据 */,
 				7C2E223420E61B1F0055843D /* 用户使用统计 */,
 				7CEBA91F20886C30009754F5 /* 升级 */,
@@ -2588,6 +2592,15 @@
 				7C2E223820E61B380055843D /* AppUseRecordManager.m */,
 			);
 			path = "用户使用统计";
+			sourceTree = "<group>";
+		};
+		7C301D69219EA38400F9F089 /* 分享 */ = {
+			isa = PBXGroup;
+			children = (
+				7C301D6A219EA39900F9F089 /* ShareManager.h */,
+				7C301D6B219EA39900F9F089 /* ShareManager.m */,
+			);
+			path = "分享";
 			sourceTree = "<group>";
 		};
 		7C32AD6221216D88000705E8 /* 基础数据 */ = {
@@ -4260,6 +4273,7 @@
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
 				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
 				7CBC5BB2204CEBB2004ACA04 /* RegistYxbRequest.m in Sources */,
+				7C301D6C219EA39900F9F089 /* ShareManager.m in Sources */,
 				7C96A899216C500D007AAD82 /* ContactsDetailViewController.m in Sources */,
 				43210E611F726A070049C381 /* GetNoticeListRequest.m in Sources */,
 				E997064A205900070096DAB0 /* TopicMsg.pbobjc.m in Sources */,

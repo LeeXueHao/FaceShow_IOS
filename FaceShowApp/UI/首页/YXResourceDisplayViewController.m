@@ -8,6 +8,7 @@
 
 #import "YXResourceDisplayViewController.h"
 #import "ResourceDownloadViewController.h"
+#import "ShareManager.h"
 
 @interface YXResourceDisplayViewController ()
 @property (nonatomic, assign) BOOL needReload;
@@ -61,7 +62,9 @@
 }
 
 - (void)shareUrl{
-    NSArray *items = @[self.urlString];
+
+    NSString *shareUrl = [[ShareManager sharedInstance] generateShareUrlWithOriginUrl:self.urlString];
+    NSArray *items = @[shareUrl];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {

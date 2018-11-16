@@ -7,6 +7,7 @@
 //
 
 #import "ScheduleDetailViewController.h"
+#import "ShareManager.h"
 
 @interface ScheduleDetailViewController ()<UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView *webview;
@@ -35,7 +36,13 @@
     self.webview = [[UIWebView alloc]init];
     self.webview.scalesPageToFit = YES;
     self.webview.delegate = self;
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.urlStr]];
+    NSString *totalUrl;
+    if ([self.urlStr containsString:@"?"]) {
+        totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.urlStr,[UserManager sharedInstance].userModel.token];
+    }else{
+        totalUrl = [NSString stringWithFormat:@"%@?token=%@",self.urlStr,[UserManager sharedInstance].userModel.token];
+    }
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:totalUrl]];
     [self.webview loadRequest:request];
     [self.view addSubview:self.webview];
     [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,7 +70,9 @@
 }
 
 - (void)shareUrl{
-    NSArray *items = @[self.urlStr];
+
+    NSString *shareUrl = [[ShareManager sharedInstance] generateShareUrlWithOriginUrl:self.urlStr];
+    NSArray *items = @[shareUrl];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {

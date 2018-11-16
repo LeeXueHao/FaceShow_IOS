@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *clientSysInfo;
 @property (nonatomic, strong) NSString *clientDeviceInfo;
 @property (nonatomic, strong) NSString *osType;
+@property (nonatomic, strong) NSString *imei;
 @end
 
 @implementation AddAppUseRecordRequest
@@ -38,6 +39,7 @@
         self.osType = @"iOS";
         self.clientDeviceInfo = [NSString stringWithFormat:@"iOS %@",[UIDevice currentDevice].systemVersion];
         self.clientSysInfo = [ConfigManager sharedInstance].deviceModelName;
+        self.imei = [ConfigManager sharedInstance].deviceID;
 
     }
     return self;

@@ -151,7 +151,7 @@ typedef NS_ENUM(NSUInteger, SignInError) {
 
 - (void)backAction {
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
-        if (self.item.data && self.item.data.afterSteps.count != 0) {
+        if (self.item && self.item.data.afterSteps.count != 0) {
             [self goScheduleDetail];
             return;
         }

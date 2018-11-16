@@ -86,11 +86,7 @@
     self.personalScheduleView.clickEnterBlock = ^{
         STRONG_SELF
         ScheduleDetailViewController *vc = [[ScheduleDetailViewController alloc]init];
-        if ([self.persionSchedule.toUrl containsString:@"?"]) {
-            vc.urlStr = [NSString stringWithFormat:@"%@?token=%@",self.persionSchedule.toUrl,[UserManager sharedInstance].userModel.token];
-        }else{
-            vc.urlStr = [NSString stringWithFormat:@"%@&token=%@",self.persionSchedule.toUrl,[UserManager sharedInstance].userModel.token];
-        }
+        vc.urlStr = self.persionSchedule.toUrl;
         vc.name = self.persionSchedule.subject;
         [self.navigationController pushViewController:vc animated:YES];
     };

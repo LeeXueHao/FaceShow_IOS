@@ -18,11 +18,11 @@
 
 @implementation UserSignInRequestItem
 @end
-
+//http://wiki.yanxiu.com/pages/viewpage.action?pageId=12322974#id-服务-互动工具接口-3.3用户签到
 @interface UserSignInRequest ()<BMKLocationManagerDelegate>
 @property (nonatomic, strong) NSString *device;
 @property (nonatomic, strong) NSString *from;
-
+@property (nonatomic, strong) NSString *deviceInfo;
 @property (nonatomic, strong) BMKLocationManager<Ignore> *locationManager;
 @end
 
@@ -33,10 +33,21 @@
         self.method = @"interact.userSignIn";
         self.device = @"ios";
         self.from = @"yxbApp";
-        
+        self.deviceInfo = [self getDeviceInfo];
         [self setupLocationManager];
     }
     return self;
+}
+
+- (NSString *)getDeviceInfo{
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    NSDictionary *dict = @{
+                           @"os":@"ios",
+                           @"osVersion":[NSString stringWithFormat:@"ios %@",version],
+                           @"deviceMode":[ConfigManager sharedInstance].deviceModelName,
+                           @"deviceId":[ConfigManager sharedInstance].deviceID
+                           };
+    return [dict JsonString];
 }
 
 - (void)setupLocationManager {

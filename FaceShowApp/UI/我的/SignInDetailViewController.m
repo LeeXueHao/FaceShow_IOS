@@ -258,11 +258,16 @@
     if (placeSignin) {
         self.typeNameLabel.text = @"位置签到";
         if (isEmpty(self.signIn.userSignIn)) {
-            __block NSMutableString *signPlace = [NSMutableString string];
-            [self.signIn.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [signPlace appendString:[NSString stringWithFormat:@"%lu.%@\n",(unsigned long)idx + 1,obj.positionSite]];
-            }];
-            self.placeNameLabel.text = signPlace;
+            if (self.signIn.signInExts.count > 1) {
+                __block NSMutableString *signPlace = [NSMutableString string];
+                [self.signIn.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [signPlace appendString:[NSString stringWithFormat:@"%lu.%@\n",(unsigned long)idx + 1,obj.positionSite]];
+                }];
+                self.placeNameLabel.text = signPlace;
+            }else{
+                GetSignInRequest_Item_signInExts *obj = self.signIn.signInExts.firstObject;
+                self.placeNameLabel.text = obj.positionSite;
+            }
         }else{
             self.placeNameLabel.text = self.signIn.userSignIn.signinSite;
         }
