@@ -19,4 +19,5 @@
 
 @property (nonatomic, strong) NSString *downloadUrl;
 @property (nonatomic, strong) NSString *resourceId;
+- (void)reloadWebview;
 @end

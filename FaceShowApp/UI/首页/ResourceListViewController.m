@@ -11,7 +11,7 @@
 #import "ErrorView.h"
 #import "ResourceCell.h"
 #import "GetResourceRequest.h"
-#import "ResourceDisplayViewController.h"
+#import "YXResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "UserPromptsManager.h"
 #import "FSDataMappingTable.h"
@@ -92,7 +92,7 @@
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
         BOOL isAttachment = item.data.type.integerValue == 0;
         NSString *sourceURL = isAttachment ? item.data.ai.previewUrl : item.data.url;
-        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
+        YXResourceDisplayViewController *vc = [[YXResourceDisplayViewController alloc] init];
         vc.urlString = sourceURL;
         vc.name = item.data.resName;
         vc.downloadUrl = item.data.ai.downloadUrl;

@@ -9,7 +9,7 @@
 #import "CourseResourceViewController.h"
 #import "EmptyView.h"
 #import "CourseCatalogCell.h"
-#import "ResourceDisplayViewController.h"
+#import "YXResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "ResourceTypeMapping.h"
 #import "AppDelegate.h"
@@ -106,7 +106,7 @@
             return;
         }
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
-        ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc]init];
+        YXResourceDisplayViewController *vc = [[YXResourceDisplayViewController alloc]init];
         if (item.data.type.integerValue > 0) {
             vc.urlString = item.data.url;
             vc.name = item.data.resName;

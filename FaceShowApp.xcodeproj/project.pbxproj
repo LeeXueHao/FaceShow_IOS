@@ -213,6 +213,7 @@
 		7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223820E61B380055843D /* AppUseRecordManager.m */; };
 		7C301D5F219BF48C00F9F089 /* NBLiveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D5E219BF48C00F9F089 /* NBLiveDetailViewController.m */; };
 		7C301D62219D16D100F9F089 /* GetInteractAfterStepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D61219D16D100F9F089 /* GetInteractAfterStepRequest.m */; };
+		7C301D68219E788200F9F089 /* YXResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */; };
 		7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6321216D88000705E8 /* BasicDataConfig.m */; };
 		7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6421216D88000705E8 /* AreaManager.m */; };
 		7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6621216D88000705E8 /* BasicDataRequest.m */; };
@@ -930,6 +931,8 @@
 		7C301D5E219BF48C00F9F089 /* NBLiveDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBLiveDetailViewController.m; sourceTree = "<group>"; };
 		7C301D60219D16D100F9F089 /* GetInteractAfterStepRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetInteractAfterStepRequest.h; sourceTree = "<group>"; };
 		7C301D61219D16D100F9F089 /* GetInteractAfterStepRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetInteractAfterStepRequest.m; sourceTree = "<group>"; };
+		7C301D66219E788200F9F089 /* YXResourceDisplayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXResourceDisplayViewController.h; sourceTree = "<group>"; };
+		7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXResourceDisplayViewController.m; sourceTree = "<group>"; };
 		7C32AD6321216D88000705E8 /* BasicDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataConfig.m; sourceTree = "<group>"; };
 		7C32AD6421216D88000705E8 /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
 		7C32AD6521216D88000705E8 /* BasicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataManager.h; sourceTree = "<group>"; };
@@ -2847,6 +2850,8 @@
 				7CE143B42155F2B300A9E20A /* ResourceDownloadViewController.m */,
 				435F77B71F7A61C400247BD8 /* ResourceTypeMapping.h */,
 				435F77B81F7A61C400247BD8 /* ResourceTypeMapping.m */,
+				7C301D66219E788200F9F089 /* YXResourceDisplayViewController.h */,
+				7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */,
 			);
 			name = "资源";
 			sourceTree = "<group>";
@@ -4280,6 +4285,7 @@
 				7C24E1E91F721C7B00A6921B /* HttpBaseRequestItem_Error.m in Sources */,
 				E91E5DC22047DB2C00052FBA /* IMDatabaseManager.m in Sources */,
 				7CEBA91E20886B39009754F5 /* BMKLocationConfig.m in Sources */,
+				7C301D68219E788200F9F089 /* YXResourceDisplayViewController.m in Sources */,
 				7CFA798120AC23770097A4A7 /* IMSwitchSettingView.m in Sources */,
 				7CBC5B902049326E004ACA04 /* CourseTaskViewController.m in Sources */,
 				438E2A741F738CAB00800020 /* GetSignInRecordListFetcher.m in Sources */,
