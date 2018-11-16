@@ -34,7 +34,6 @@
     self.usernameTF.backgroundColor = [UIColor colorWithHexString:@"F8F8F8"];
     self.usernameTF.userInteractionEnabled = YES;
     self.usernameTF.textColor = [UIColor colorWithHexString:@"333333"];
-    self.usernameTF.tintColor = [UIColor colorWithHexString:@"333333"];
     self.usernameTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
     self.usernameTF.layer.borderWidth = 2;
     self.usernameTF.layer.cornerRadius = 6;
@@ -79,7 +78,6 @@
     self.passwordTF.userInteractionEnabled = YES;
     self.passwordTF.backgroundColor = [UIColor colorWithHexString:@"F8F8F8"];
     self.passwordTF.textColor = [UIColor colorWithHexString:@"333333"];
-    self.passwordTF.tintColor = [UIColor colorWithHexString:@"333333"];
     self.passwordTF.layer.borderColor = [UIColor colorWithHexString:@"ffffff"].CGColor;
     self.passwordTF.layer.borderWidth = 2;
     self.passwordTF.layer.cornerRadius = 6;
