@@ -41,7 +41,7 @@
     [self addSubview:leftImageView];
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
-        make.left.mas_equalTo(33);
+        make.left.mas_equalTo(30);
         make.size.mas_equalTo(CGSizeMake(64, 64));
     }];
 
@@ -69,7 +69,13 @@
     [self.projectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(0);
         make.left.mas_equalTo(project.mas_right).offset(2);
-        make.right.mas_lessThanOrEqualTo(-15);
+        make.right.mas_lessThanOrEqualTo(-30);
+    }];
+    
+    [project mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.projectLabel.mas_top).offset(2);
+        make.left.mas_equalTo(leftImageView.mas_right).offset(10);
+        make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
 
@@ -96,9 +102,14 @@
     [self addSubview:self.classLabel];
     [self.classLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_lessThanOrEqualTo(self.projectLabel.mas_top).offset(-5);
-        make.centerY.mas_lessThanOrEqualTo(class);
         make.left.mas_equalTo(self.projectLabel.mas_left).offset(5);
-        make.right.mas_lessThanOrEqualTo(-15);
+        make.right.mas_lessThanOrEqualTo(-20);
+    }];
+    
+    [class mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.classLabel.mas_top).offset(3);
+        make.left.mas_equalTo(project);
+        make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
     self.group = [project clone];
@@ -113,15 +124,20 @@
         make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
 
-
     self.groupLabel = [self.projectLabel clone];
     [self addSubview:self.groupLabel];
     [self.groupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_greaterThanOrEqualTo(self.projectLabel.mas_bottom).offset(5);
-        make.centerY.mas_lessThanOrEqualTo(self.group);
         make.left.mas_equalTo(self.projectLabel.mas_left);
-        make.right.mas_lessThanOrEqualTo(-15);
+        make.right.mas_lessThanOrEqualTo(-30);
     }];
+    
+    [self.group mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.groupLabel.mas_top).offset(2);
+        make.left.mas_equalTo(project);
+        make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
+    }];
+    
     self.groupLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
     WEAK_SELF
