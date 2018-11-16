@@ -7,7 +7,7 @@
 //
 
 #import "MeetingListCell.h"
-#import "MeetingNameLabel.h"
+#import "MeetingLabelView.h"
 #import "NBGetMeetingListRequest.h"
 #import "GetCourseListRequest.h"
 
@@ -96,25 +96,16 @@
     self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",startTime,endTime];
     [self.containerView removeSubviews];
     for (GetCourseListRequestItem_coursesList *courseList  in item.courses) {
-        MeetingNameLabel *label = [[MeetingNameLabel alloc] initWithText:courseList.courseName];
+        MeetingLabelView *view = [[MeetingLabelView alloc] initWithText:courseList.courseName];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
         WEAK_SELF
         [[tap rac_gestureSignal] subscribeNext:^(id x) {
             STRONG_SELF
             BLOCK_EXEC(self.clickBlock,courseList.courseId)
         }];
-        label.userInteractionEnabled = YES;
-        [label addGestureRecognizer:tap];
-        [self.containerView addSubview:label];
-    }
-}
-
-- (void)setupMock{
-    [self.containerView removeSubviews];
-    NSString *total = [NSString stringWithFormat:@"会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议会议"];
-    for (int i = 0; i < 9; i ++) {
-        MeetingNameLabel *label = [[MeetingNameLabel alloc] initWithText:[total substringToIndex:i * 3 + 1]];
-        [self.containerView addSubview:label];
+        view.userInteractionEnabled = YES;
+        [view addGestureRecognizer:tap];
+        [self.containerView addSubview:view];
     }
 }
 
@@ -123,7 +114,7 @@
     CGFloat leftMargin = 15;
     CGFloat topMargin = 10;
     for (int i = 0; i < self.containerView.subviews.count; i ++) {
-        MeetingNameLabel *nameLabel = self.containerView.subviews[i];
+        MeetingLabelView *nameLabel = self.containerView.subviews[i];
         if (nameLabel.width + 30 > SCREEN_WIDTH) {
             [nameLabel setWidth:SCREEN_WIDTH - 30];
             leftMargin = 15;

@@ -207,7 +207,6 @@
 		7C2C8E8E21943823001685FA /* NBGetMeetingListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E8D21943823001685FA /* NBGetMeetingListRequest.m */; };
 		7C2C8E91219438CF001685FA /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E90219438CF001685FA /* MeetingDetailViewController.m */; };
 		7C2C8E9521944EA9001685FA /* GetClassConfigRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E9421944EA9001685FA /* GetClassConfigRequest.m */; };
-		7C2C8E9821945FD6001685FA /* MeetingNameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E9721945FD6001685FA /* MeetingNameLabel.m */; };
 		7C2E222620E475E10055843D /* RefreshBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E222520E475E10055843D /* RefreshBaseViewController.m */; };
 		7C2E223920E61B380055843D /* AddAppUseRecordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */; };
 		7C2E223A20E61B380055843D /* AppUseRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E223820E61B380055843D /* AppUseRecordManager.m */; };
@@ -216,6 +215,7 @@
 		7C301D68219E788200F9F089 /* YXResourceDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D67219E788200F9F089 /* YXResourceDisplayViewController.m */; };
 		7C301D6C219EA39900F9F089 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D6B219EA39900F9F089 /* ShareManager.m */; };
 		7C301D72219EF9BE00F9F089 /* YXTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D71219EF9BE00F9F089 /* YXTabBar.m */; };
+		7C301D75219F4AA600F9F089 /* MeetingLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C301D74219F4AA500F9F089 /* MeetingLabelView.m */; };
 		7C32AD6B21216D88000705E8 /* BasicDataConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6321216D88000705E8 /* BasicDataConfig.m */; };
 		7C32AD6C21216D88000705E8 /* AreaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6421216D88000705E8 /* AreaManager.m */; };
 		7C32AD6D21216D88000705E8 /* BasicDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C32AD6621216D88000705E8 /* BasicDataRequest.m */; };
@@ -921,8 +921,6 @@
 		7C2C8E90219438CF001685FA /* MeetingDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingDetailViewController.m; sourceTree = "<group>"; };
 		7C2C8E9321944EA9001685FA /* GetClassConfigRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetClassConfigRequest.h; sourceTree = "<group>"; };
 		7C2C8E9421944EA9001685FA /* GetClassConfigRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetClassConfigRequest.m; sourceTree = "<group>"; };
-		7C2C8E9621945FD6001685FA /* MeetingNameLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingNameLabel.h; sourceTree = "<group>"; };
-		7C2C8E9721945FD6001685FA /* MeetingNameLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingNameLabel.m; sourceTree = "<group>"; };
 		7C2E222420E475E00055843D /* RefreshBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBaseViewController.h; sourceTree = "<group>"; };
 		7C2E222520E475E10055843D /* RefreshBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshBaseViewController.m; sourceTree = "<group>"; };
 		7C2E223520E61B370055843D /* AddAppUseRecordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAppUseRecordRequest.m; sourceTree = "<group>"; };
@@ -939,6 +937,8 @@
 		7C301D6B219EA39900F9F089 /* ShareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
 		7C301D70219EF9BE00F9F089 /* YXTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXTabBar.h; sourceTree = "<group>"; };
 		7C301D71219EF9BE00F9F089 /* YXTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXTabBar.m; sourceTree = "<group>"; };
+		7C301D73219F4AA500F9F089 /* MeetingLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingLabelView.h; sourceTree = "<group>"; };
+		7C301D74219F4AA500F9F089 /* MeetingLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingLabelView.m; sourceTree = "<group>"; };
 		7C32AD6321216D88000705E8 /* BasicDataConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicDataConfig.m; sourceTree = "<group>"; };
 		7C32AD6421216D88000705E8 /* AreaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaManager.m; sourceTree = "<group>"; };
 		7C32AD6521216D88000705E8 /* BasicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDataManager.h; sourceTree = "<group>"; };
@@ -3153,8 +3153,8 @@
 			children = (
 				7CFC9FE6219301C50084AFCE /* MeetingListCell.h */,
 				7CFC9FE7219301C50084AFCE /* MeetingListCell.m */,
-				7C2C8E9621945FD6001685FA /* MeetingNameLabel.h */,
-				7C2C8E9721945FD6001685FA /* MeetingNameLabel.m */,
+				7C301D73219F4AA500F9F089 /* MeetingLabelView.h */,
+				7C301D74219F4AA500F9F089 /* MeetingLabelView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3889,7 +3889,6 @@
 				7C591313213E2F3A00CE548F /* IMOnlineHeartbeatRequest.m in Sources */,
 				92AF46A3201992BB0076AFA0 /* ClassMomentUserMomentMsgRequest.m in Sources */,
 				4378DFA61F6F8217005CFE56 /* TaskCell.m in Sources */,
-				7C2C8E9821945FD6001685FA /* MeetingNameLabel.m in Sources */,
 				928386251F7124F300205028 /* ClassMomentListFetcher.m in Sources */,
 				7C2C8E7221941E8C001685FA /* NBMainPageViewController.m in Sources */,
 				E94DDDEB20D2747B00729A67 /* TaskRankingViewController.m in Sources */,
@@ -4060,6 +4059,7 @@
 				7C212DE01F6B699A0007AE01 /* CourseCommentViewController.m in Sources */,
 				4322CA3C1FD941F500E7B565 /* StageSubjectCell.m in Sources */,
 				7C2519891F69002F0001B577 /* SimpleAlertView.m in Sources */,
+				7C301D75219F4AA600F9F089 /* MeetingLabelView.m in Sources */,
 				7CEBA91820884F76009754F5 /* GeTuiConfig.m in Sources */,
 				92A7CAD01F6A84FC0038D6D1 /* ShowPhotosViewController.m in Sources */,
 				7CBC5BC7204E298C004ACA04 /* SysUserItem.m in Sources */,

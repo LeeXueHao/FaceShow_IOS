@@ -35,7 +35,7 @@
 - (void)calculateCellheight{
     dispatch_async(dispatch_queue_create("calculHeightQueue", 0), ^{
         CGFloat leftMargin = 15;
-        CGFloat containerHeight = 30;
+        CGFloat containerHeight = 32;
         for (int i = 0; i < self.courses.count; i ++) {
             GetCourseListRequestItem_coursesList *courseList = self.courses[i];
             CGSize size = [courseList.courseName boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;

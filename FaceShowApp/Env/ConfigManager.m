@@ -34,19 +34,33 @@ NSString * const kPCAddress = @"http://jspx1.e21.cn/sd/101";
 #else
 
 #ifdef DEBUG
-NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
-NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
-NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
-NSString * const kQuickLoginServer = @"http://orz.yanxiu.com/uc/AppCodeLogin";
-NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
-NSString * const kPCAddress = @"http://orz.yanxiu.com/sd/1";
-#else
 NSString * const kServer = @"http://yxb.yanxiu.com/pxt/platform/data.api";
 NSString * const kServer1_1 = @"http://yxb.yanxiu.com/pxt/v1.1/platform/data.api";
 NSString * const kLoginServer = @"http://pp.yanxiu.com/uc/appLogin";
 NSString * const kQuickLoginServer = @"http://pp.yanxiu.com/uc/AppCodeLogin";
 NSString * const kEasygoServer = @"http://b.yanxiu.com/easygo/multiUpload";
 NSString * const kPCAddress = @"http://yxb.yanxiu.com/sd/100";
+
+//NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
+//NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
+//NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
+//NSString * const kQuickLoginServer = @"http://orz.yanxiu.com/uc/AppCodeLogin";
+//NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
+//NSString * const kPCAddress = @"http://orz.yanxiu.com/sd/1";
+#else
+//NSString * const kServer = @"http://yxb.yanxiu.com/pxt/platform/data.api";
+//NSString * const kServer1_1 = @"http://yxb.yanxiu.com/pxt/v1.1/platform/data.api";
+//NSString * const kLoginServer = @"http://pp.yanxiu.com/uc/appLogin";
+//NSString * const kQuickLoginServer = @"http://pp.yanxiu.com/uc/AppCodeLogin";
+//NSString * const kEasygoServer = @"http://b.yanxiu.com/easygo/multiUpload";
+//NSString * const kPCAddress = @"http://yxb.yanxiu.com/sd/100";
+NSString * const kServer = @"http://orz.yanxiu.com/pxt/platform/data.api";
+NSString * const kServer1_1 = @"http://orz.yanxiu.com/pxt/v1.1/platform/data.api";
+NSString * const kLoginServer = @"http://orz.yanxiu.com/uc/appLogin";
+NSString * const kQuickLoginServer = @"http://orz.yanxiu.com/uc/AppCodeLogin";
+NSString * const kEasygoServer = @"http://orz.yanxiu.com/easygo/multiUpload";
+NSString * const kPCAddress = @"http://orz.yanxiu.com/sd/1";
+
 #endif
 
 #endif

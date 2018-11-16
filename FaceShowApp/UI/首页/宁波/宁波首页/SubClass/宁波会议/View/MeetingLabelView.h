@@ -1,8 +1,8 @@
 //
-//  MeetingNameLabel.h
+//  MeetingLabelView.h
 //  FaceShowApp
 //
-//  Created by SRT on 2018/11/8.
+//  Created by SRT on 2018/11/17.
 //  Copyright © 2018年 niuzhaowang. All rights reserved.
 //
 
@@ -10,9 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MeetingNameLabel : UILabel
-@property (nonatomic, assign) UIEdgeInsets edgeInsets;
+@interface MeetingLabelView : UIView
+
 - (instancetype)initWithText:(NSString *)text;
+
 @end
 
 NS_ASSUME_NONNULL_END
