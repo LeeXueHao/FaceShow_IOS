@@ -94,11 +94,9 @@
         ResourceDisplayViewController *vc = [[ResourceDisplayViewController alloc] init];
         vc.urlString = sourceURL;
         vc.name = item.data.resName;
-        vc.showDownloadNavView = isAttachment;
         vc.downloadUrl = item.data.ai.downloadUrl;
         vc.resourceId = item.data.ai.resId;
         vc.needDownload = isAttachment && [FSDataMappingTable ResourceTypeWithKey:item.data.ai.resType] != ResourceType_Image;
-        vc.showDownloadNavView = [UserManager sharedInstance].configItem.data.resourceDown;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }

@@ -23,7 +23,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.showDownloadNavView = NO;
         self.needReload = NO;
     }
     return self;
@@ -60,22 +59,25 @@
         [self.view addSubview:backButton];
         self.backButton = backButton;
     }
-    
+
+    WEAK_SELF
     if (self.needDownload) {
         [self downloadFile];
+        if ([UserManager sharedInstance].configItem.data.resourceDown) {
+            [self nyx_setupRightWithTitle:@"下载" action:^{
+                STRONG_SELF
+                [TalkingData trackEvent:@"资源下载"];
+                ResourceDownloadViewController *downLoad = [[ResourceDownloadViewController alloc] init];
+                downLoad.resourceId = self.resourceId;
+                downLoad.downloadUrl = self.downloadUrl;
+                [self.navigationController pushViewController:downLoad animated:YES];
+            }];
+        }
     } else {
         [self setupUI];
-    }
-
-    if (self.showDownloadNavView) {
-        WEAK_SELF
-        [self nyx_setupRightWithTitle:@"下载" action:^{
+        [self nyx_setupRightWithImageName:@"分享" highlightImageName:@"分享" action:^{
             STRONG_SELF
-            [TalkingData trackEvent:@"资源下载"];
-            ResourceDownloadViewController *downLoad = [[ResourceDownloadViewController alloc] init];
-            downLoad.resourceId = self.resourceId;
-            downLoad.downloadUrl = self.downloadUrl;
-            [self.navigationController pushViewController:downLoad animated:YES];
+            [self shareUrl];
         }];
     }
 }
@@ -130,4 +132,22 @@
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
     [webView reload];
 }
+
+#pragma mark - action
+- (void)shareUrl{
+    NSArray *items = @[self.urlString];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+    };
+    if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {
+        UIPopoverPresentationController *popover = activityVC.popoverPresentationController;
+        if (popover) {
+            popover.sourceView = self.webview;
+            popover.permittedArrowDirections = UIPopoverArrowDirectionDown;
+        }
+    }
+    [self presentViewController:activityVC animated:YES completion:NULL];
+}
+
 @end

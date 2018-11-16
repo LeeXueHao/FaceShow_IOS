@@ -71,7 +71,21 @@
 
 #pragma mark - action
 - (void)shareUrl{
-    NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.webUrl,[UserManager sharedInstance].userModel.token];
+
+    NSString *totalUrl;
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss SS "];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    if (![self.webUrl containsString:@"?"]) {
+        totalUrl = [NSString stringWithFormat:@"%@?userID=%@&shareTime=%@",self.webUrl,[UserManager sharedInstance].userModel.userID,dateString];
+    }else{
+        if ([self.webUrl hasSuffix:@"?"]) {
+            totalUrl = [NSString stringWithFormat:@"%@userID=%@&shareTime=%@",self.webUrl,[UserManager sharedInstance].userModel.userID,dateString];
+        }else{
+            totalUrl = [NSString stringWithFormat:@"%@&userID=%@&shareTime=%@",self.webUrl,[UserManager sharedInstance].userModel.userID,dateString];
+        }
+    }
     NSArray *items = @[totalUrl];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
