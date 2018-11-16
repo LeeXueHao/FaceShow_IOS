@@ -6,7 +6,7 @@
 //  Copyright © 2017年 niuzhaowang. All rights reserved.
 //
 
-#import "YXGetRequest.h"
+#import "YXPostRequest.h"
 #import "GetSignInRecordListRequest.h"
 
 @interface UserSignInRequestItem_Data : JSONModel
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UserSignInRequestItem_Data<Optional> *data;
 @end
 
-@interface UserSignInRequest : YXGetRequest
+@interface UserSignInRequest : YXPostRequest
 @property (nonatomic, strong) NSString<Optional> *stepId;
 @property (nonatomic, strong) NSString<Optional> *timestamp;
 @property (nonatomic, strong) NSString<Optional> *position;
