@@ -71,13 +71,12 @@
         make.left.mas_equalTo(project.mas_right).offset(2);
         make.right.mas_lessThanOrEqualTo(-30);
     }];
-    
+
     [project mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.projectLabel.mas_top).offset(2);
         make.left.mas_equalTo(leftImageView.mas_right).offset(10);
         make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
-
 
     UILabel *class = [[UILabel alloc] init];
     class.text = @"班级";
@@ -105,7 +104,7 @@
         make.left.mas_equalTo(self.projectLabel.mas_left).offset(5);
         make.right.mas_lessThanOrEqualTo(-20);
     }];
-    
+
     [class mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.classLabel.mas_top).offset(3);
         make.left.mas_equalTo(project);
@@ -131,13 +130,13 @@
         make.left.mas_equalTo(self.projectLabel.mas_left);
         make.right.mas_lessThanOrEqualTo(-30);
     }];
-    
+
     [self.group mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.groupLabel.mas_top).offset(2);
         make.left.mas_equalTo(project);
         make.size.mas_equalTo(CGSizeMake(size.width + 4, size.height));
     }];
-    
+
     self.groupLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
     WEAK_SELF
