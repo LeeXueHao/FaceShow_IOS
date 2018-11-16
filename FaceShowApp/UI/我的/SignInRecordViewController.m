@@ -12,8 +12,10 @@
 #import "SignInDetailViewController.h"
 #import "GetSignInRecordListFetcher.h"
 #import "GetSignInRecordListRequest.h"
+#import "GetSigninRequest.h"
 
 @interface SignInRecordViewController ()
+@property (nonatomic, strong) GetSigninRequest *getSigninRequest;
 @end
 
 @implementation SignInRecordViewController
@@ -96,11 +98,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SignInDetailViewController *signInDetailVC = [[SignInDetailViewController alloc] init];
     GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
-    signInDetailVC.signIn = element.signIns[indexPath.row];
-    signInDetailVC.currentIndexPath = indexPath;
-    [self.navigationController pushViewController:signInDetailVC animated:YES];
+    GetSignInRecordListRequestItem_SignIn *signIn = element.signIns[indexPath.row];
+    [self getSignInDetailWithStepId:signIn.stepId indexPath:indexPath];
+}
+
+- (void)getSignInDetailWithStepId:(NSString *)stepId indexPath:(NSIndexPath *)indexPath{
+    [self.getSigninRequest stopRequest];
+    self.getSigninRequest = [[GetSigninRequest alloc]init];
+    self.getSigninRequest.stepId = stepId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.getSigninRequest startRequestWithRetClass:[GetSigninRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        GetSigninRequestItem *item = retItem;
+        item.data.signIn.stepId = stepId;
+        SignInDetailViewController *signInDetailVC = [[SignInDetailViewController alloc] init];
+        signInDetailVC.signIn = item.data.signIn;
+        signInDetailVC.currentIndexPath = indexPath;
+        [self.navigationController pushViewController:signInDetailVC animated:YES];
+    }];
 }
 
 @end
