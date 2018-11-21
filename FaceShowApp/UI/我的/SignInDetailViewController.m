@@ -195,6 +195,10 @@
         scanCodeVC.currentIndexPath = self.currentIndexPath;
         [self.navigationController pushViewController:scanCodeVC animated:YES];
     }else {
+        if (isEmpty(self.signIn.signInExts)) {
+            [self.view nyx_showToast:@"未设置签到位置，请联系班主任"];
+            return;
+        }
         [self signInWithData:self.signIn];
     }    
 }
