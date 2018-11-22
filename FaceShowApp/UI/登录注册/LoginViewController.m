@@ -199,6 +199,7 @@
         make.left.mas_equalTo(self.loginBtn.mas_left);
         make.bottom.mas_equalTo(touristBtn);
     }];
+    [registerBtn setHidden:YES];
 }
 
 #pragma mark - actions
