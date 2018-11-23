@@ -186,7 +186,9 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     [self.afterRequest stopRequest];
     self.afterRequest = [[GetInteractAfterStepRequest alloc] init];
     self.afterRequest.stepId = self.stepId;
+    WEAK_SELF
     [self.afterRequest startRequestWithRetClass:[GetInteractAfterStepRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
         self.item = retItem;
     }];
 }

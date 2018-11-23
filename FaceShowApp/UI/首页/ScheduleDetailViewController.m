@@ -38,9 +38,9 @@
     self.webview.delegate = self;
     NSString *totalUrl;
     if ([self.urlStr containsString:@"?"]) {
-        totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.urlStr,[UserManager sharedInstance].userModel.token];
+        totalUrl = [NSString stringWithFormat:@"%@&userId=%@",self.urlStr,[UserManager sharedInstance].userModel.userID];
     }else{
-        totalUrl = [NSString stringWithFormat:@"%@?token=%@",self.urlStr,[UserManager sharedInstance].userModel.token];
+        totalUrl = [NSString stringWithFormat:@"%@?userId=%@",self.urlStr,[UserManager sharedInstance].userModel.userID];
     }
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:totalUrl]];
     [self.webview loadRequest:request];
