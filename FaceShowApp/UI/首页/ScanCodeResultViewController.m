@@ -36,7 +36,6 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     [super viewDidLoad];
     [self setupUI];
     [self setModel];
-    [self requestAfterInfo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,7 +95,7 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     [self.confirmBtn setBackgroundImage:[UIImage yx_createImageWithColor:[UIColor colorWithHexString:@"1da1f2"]] forState:UIControlStateHighlighted];
     [self.confirmBtn setTitleColor:[UIColor colorWithHexString:@"1da1f2"] forState:UIControlStateNormal];
     [self.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self.confirmBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.confirmBtn];
 }
 
@@ -122,6 +121,7 @@ typedef NS_ENUM(NSUInteger, SignInError) {
             make.size.mas_equalTo(CGSizeMake(112, 40));
             make.bottom.mas_equalTo(-215 * kPhoneHeightRatio);
         }];
+        [self requestAfterInfo];
     } else if (!isEmpty(self.error)) {
         self.signInImageView.image = [UIImage imageNamed:@"签到失败图标"];
         self.titleLabel.text = @"签到失败";
@@ -149,12 +149,17 @@ typedef NS_ENUM(NSUInteger, SignInError) {
     }
 }
 
+- (void)clickConfirmBtn{
+    if (self.item && self.item.data.afterSteps.count != 0) {
+        [self goScheduleDetail];
+        return;
+    }else{
+        [self backAction];
+    }
+}
+
 - (void)backAction {
     if ([self.confirmBtn.titleLabel.text isEqualToString:@"确 定"]) {
-        if (self.item && self.item.data.afterSteps.count != 0) {
-            [self goScheduleDetail];
-            return;
-        }
         if (self.currentIndexPath) {
             if ([self.navigationController.viewControllers[1] isKindOfClass:[SignInDetailViewController class]]) {
                 [self.navigationController popToRootViewControllerAnimated:YES];

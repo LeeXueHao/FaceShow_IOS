@@ -63,10 +63,15 @@
 
 - (void)shareUrl{
 
-    NSString *shareUrl = [[ShareManager sharedInstance] generateShareUrlWithOriginUrl:self.urlString];
-    NSArray *items = @[shareUrl];
+    NSURL *fileUrl = [NSURL fileURLWithPath:self.urlString];
+    NSArray *items;
+    if (isEmpty(self.name)) {
+        items = @[@"来自研修宝的分享",fileUrl];
+    }else{
+        items = @[self.name,fileUrl];
+    }
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeCopyToPasteboard];
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
     };
     if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {

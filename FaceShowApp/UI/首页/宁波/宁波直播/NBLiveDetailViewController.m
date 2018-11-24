@@ -12,14 +12,20 @@
 
 @interface NBLiveDetailViewController ()<WKNavigationDelegate>
 @property (nonatomic, strong) WKWebView *webview;
+@property (nonatomic, copy) NSString *webTitle;
 @end
 
 @implementation NBLiveDetailViewController
+
+- (void)dealloc{
+    [self.webview removeObserver:self forKeyPath:@"title"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"直播";
+    self.webTitle = @"来自研修宝的分享";
     [self setupUI];
     WEAK_SELF
     [self nyx_setupRightWithImageName:@"分享" highlightImageName:@"分享" action:^{
@@ -50,9 +56,18 @@
     [webview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
+    [webview addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
     self.webview = webview;
 }
 
+#pragma mark - Observer
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"title"]) {
+        if ([self.webTitle isEqualToString:@"来自研修宝的分享"]) {
+            self.webTitle = self.webview.title;
+        }
+    }
+}
 
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
@@ -73,11 +88,17 @@
 #pragma mark - action
 - (void)shareUrl{
 
-    NSString *shareUrl = [[ShareManager sharedInstance] generateShareUrlWithOriginUrl:self.webUrl];
-    NSArray *items = @[shareUrl];
+    NSArray *items = @[self.webTitle,[NSURL URLWithString:self.webUrl]];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];
+    WEAK_SELF
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        STRONG_SELF
+        if (activityType == UIActivityTypeCopyToPasteboard) {
+            [self.view nyx_showToast:@"已复制到剪切板上"];
+        }else if (activityType == UIActivityTypeAddToReadingList){
+            [self.view nyx_showToast:@"已添加到阅读列表"];
+        }
     };
     if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {
         UIPopoverPresentationController *popover = activityVC.popoverPresentationController;

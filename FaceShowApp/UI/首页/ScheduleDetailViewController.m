@@ -11,6 +11,7 @@
 
 @interface ScheduleDetailViewController ()<UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView *webview;
+@property (nonatomic, copy) NSString *webTitle;
 @end
 
 @implementation ScheduleDetailViewController
@@ -18,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.name;
+    self.webTitle = @"来自研修宝的分享";
     [self setupUI];
     // Do any additional setup after loading the view.
     WEAK_SELF
@@ -63,6 +65,9 @@
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.view nyx_stopLoading];
+    if ([self.webTitle isEqualToString:@"来自研修宝的分享"]) {
+        self.webTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    }
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [self.view nyx_stopLoading];
@@ -72,10 +77,17 @@
 - (void)shareUrl{
 
     NSString *shareUrl = [[ShareManager sharedInstance] generateShareUrlWithOriginUrl:self.urlStr];
-    NSArray *items = @[shareUrl];
+    NSArray *items = @[self.webTitle,[NSURL URLWithString:shareUrl]];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard];
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];
+    WEAK_SELF
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        STRONG_SELF
+        if (activityType == UIActivityTypeCopyToPasteboard) {
+            [self.view nyx_showToast:@"已复制到剪切板上"];
+        }else if (activityType == UIActivityTypeAddToReadingList){
+            [self.view nyx_showToast:@"已添加到阅读列表"];
+        }
     };
     if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {
         UIPopoverPresentationController *popover = activityVC.popoverPresentationController;
