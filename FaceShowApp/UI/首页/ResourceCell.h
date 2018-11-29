@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GetResourceRequest.h"
+#import "GetResourceListRequest.h"
 
 @interface ResourceCell : UITableViewCell
-@property (nonatomic, strong) GetResourceRequestItem_Element *element;
+@property (nonatomic, strong) GetResourceListRequestItem_tagList *tagList;
+@property (nonatomic, strong) GetResourceListRequestItem_resList *resList;
 @end

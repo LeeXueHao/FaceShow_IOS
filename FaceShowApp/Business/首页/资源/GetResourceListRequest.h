@@ -1,5 +1,5 @@
 //
-//  NBGetResourceListRequest.h
+//  GetResourceListRequest.h
 //  FaceShowApp
 //
 //  Created by SRT on 2018/11/8.
@@ -8,8 +8,8 @@
 
 #import "YXGetRequest.h"
 
-@protocol NBGetResourceListRequestItem_resList <NSObject> @end
-@interface NBGetResourceListRequestItem_resList : JSONModel
+@protocol GetResourceListRequestItem_resList <NSObject> @end
+@interface GetResourceListRequestItem_resList : JSONModel
 @property (nonatomic, strong) NSString<Optional> *publisherName;
 @property (nonatomic, strong) NSString<Optional> *suffix;
 @property (nonatomic, strong) NSString<Optional> *clazzId;
@@ -35,8 +35,8 @@
 @property (nonatomic, strong) NSString<Optional> *resourceKey;
 @end
 
-@protocol NBGetResourceListRequestItem_tagList <NSObject> @end
-@interface NBGetResourceListRequestItem_tagList : JSONModel
+@protocol GetResourceListRequestItem_tagList <NSObject> @end
+@interface GetResourceListRequestItem_tagList : JSONModel
 @property (nonatomic, strong) NSString<Optional> *state;
 @property (nonatomic, strong) NSString<Optional> *updateTime;
 @property (nonatomic, strong) NSString<Optional> *taglistId;
@@ -45,19 +45,19 @@
 @property (nonatomic, strong) NSString<Optional> *resNum;
 @end
 
-@interface NBGetResourceListRequestItem_data : JSONModel
-@property (nonatomic, strong) NSArray<NBGetResourceListRequestItem_resList,Optional> *resList;
+@interface GetResourceListRequestItem_data : JSONModel
+@property (nonatomic, strong) NSArray<GetResourceListRequestItem_resList,Optional> *resList;
 @property (nonatomic, strong) NSString<Optional> *level;
-@property (nonatomic, strong) NSArray<NBGetResourceListRequestItem_tagList,Optional> *tagList;
+@property (nonatomic, strong) NSArray<GetResourceListRequestItem_tagList,Optional> *tagList;
 @end
 
-@interface NBGetResourceListRequestItem : HttpBaseRequestItem
-@property (nonatomic, strong) NBGetResourceListRequestItem_data<Optional> *data;
+@interface GetResourceListRequestItem : HttpBaseRequestItem
+@property (nonatomic, strong) GetResourceListRequestItem_data<Optional> *data;
 @end
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NBGetResourceListRequest : YXGetRequest
+@interface GetResourceListRequest : YXGetRequest
 @property (nonatomic, strong) NSString<Optional> *clazsId;
 @property (nonatomic, strong) NSString<Optional> *tagId;
 @end

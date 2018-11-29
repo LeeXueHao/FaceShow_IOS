@@ -10,7 +10,7 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "NBResourceListCell.h"
-#import "NBGetResourceListRequest.h"
+#import "GetResourceListRequest.h"
 #import "YXResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "UserPromptsManager.h"
@@ -21,8 +21,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
-@property (nonatomic, strong) NBGetResourceListRequest *listRequest;
-@property (nonatomic, strong) NBGetResourceListRequestItem *item;
+@property (nonatomic, strong) GetResourceListRequest *listRequest;
+@property (nonatomic, strong) GetResourceListRequestItem *item;
 @property (nonatomic, strong) GetResourceDetailRequest *detailRequest;
 @property (nonatomic, strong) NSArray *dataArray;
 @end
@@ -52,11 +52,11 @@
 - (void)requestResourceInfo{
     [self.view nyx_startLoading];
     [self.listRequest stopRequest];
-    self.listRequest = [[NBGetResourceListRequest alloc] init];
+    self.listRequest = [[GetResourceListRequest alloc] init];
     self.listRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
     self.listRequest.tagId = self.tagId;
     WEAK_SELF
-    [self.listRequest startRequestWithRetClass:[NBGetResourceListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [self.listRequest startRequestWithRetClass:[GetResourceListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self.view nyx_stopLoading];
         self.errorView.hidden = YES;
@@ -65,7 +65,7 @@
             self.errorView.hidden = NO;
             return ;
         }
-        NBGetResourceListRequestItem *item = (NBGetResourceListRequestItem *)retItem;
+        GetResourceListRequestItem *item = (GetResourceListRequestItem *)retItem;
         if (isEmpty(item.data.tagList) && isEmpty(item.data.resList)) {
             self.emptyView.hidden = NO;
             return;
@@ -164,12 +164,12 @@
     if (indexPath.row < self.item.data.tagList.count) {
         //跳转下级页面
         NBResourceListViewController *resListVC = [[NBResourceListViewController alloc] init];
-        NBGetResourceListRequestItem_tagList *tag = self.item.data.tagList[indexPath.row];
+        GetResourceListRequestItem_tagList *tag = self.item.data.tagList[indexPath.row];
         resListVC.tagId = tag.taglistId;
         resListVC.title = tag.name;
         [self.navigationController pushViewController:resListVC animated:YES];
     }else{
-        NBGetResourceListRequestItem_resList *resList = self.item.data.resList[indexPath.row - self.item.data.tagList.count];
+        GetResourceListRequestItem_resList *resList = self.item.data.resList[indexPath.row - self.item.data.tagList.count];
         [self requestResourceDetailWithResId:resList.resId];
     }
 }

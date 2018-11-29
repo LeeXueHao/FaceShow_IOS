@@ -78,14 +78,14 @@
     }];
 }
 
-- (void)setTagList:(NBGetResourceListRequestItem_tagList *)tagList{
+- (void)setTagList:(GetResourceListRequestItem_tagList *)tagList{
     _tagList = tagList;
     self.titleLabel.text = tagList.name;
     self.iconImageView.image = [UIImage imageNamed:@"folder"];
     self.detailLabel.text = [NSString stringWithFormat:@"文件数：%@",tagList.resNum];
 }
 
-- (void)setResList:(NBGetResourceListRequestItem_resList *)resList{
+- (void)setResList:(GetResourceListRequestItem_resList *)resList{
     _resList = resList;
     self.iconImageView.image = [UIImage imageNamed:resList.type.integerValue ? @"html" : [ResourceTypeMapping resourceTypeWithString:resList.suffix]];
     self.titleLabel.text = resList.resName;

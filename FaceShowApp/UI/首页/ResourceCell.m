@@ -69,10 +69,18 @@
     }];
 }
 
-- (void)setElement:(GetResourceRequestItem_Element *)element {
-    _element = element;
-    self.iconImageView.image = [UIImage imageNamed:element.type.integerValue ? @"html" : [ResourceTypeMapping resourceTypeWithString:element.suffix]];
-    self.titleLabel.text = element.resName;
-    self.timeLabel.text = [element.createTime omitSecondOfFullDateString];
+- (void)setTagList:(GetResourceListRequestItem_tagList *)tagList{
+    _tagList = tagList;
+    self.titleLabel.text = tagList.name;
+    self.iconImageView.image = [UIImage imageNamed:@"folder"];
+    self.timeLabel.text = [NSString stringWithFormat:@"文件数：%@",tagList.resNum];
 }
+
+- (void)setResList:(GetResourceListRequestItem_resList *)resList{
+    _resList = resList;
+    self.iconImageView.image = [UIImage imageNamed:resList.type.integerValue ? @"html" : [ResourceTypeMapping resourceTypeWithString:resList.suffix]];
+    self.titleLabel.text = resList.resName;
+    self.timeLabel.text = [resList.createTime omitSecondOfFullDateString];
+}
+
 @end

@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NBGetResourceListRequest.h"
+#import "GetResourceListRequest.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NBResourceListCell : UITableViewCell
-@property (nonatomic, strong) NBGetResourceListRequestItem_tagList *tagList;
-@property (nonatomic, strong) NBGetResourceListRequestItem_resList *resList;
+@property (nonatomic, strong) GetResourceListRequestItem_tagList *tagList;
+@property (nonatomic, strong) GetResourceListRequestItem_resList *resList;
 @end
 
 NS_ASSUME_NONNULL_END

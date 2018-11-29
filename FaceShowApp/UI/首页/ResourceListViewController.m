@@ -10,7 +10,7 @@
 #import "EmptyView.h"
 #import "ErrorView.h"
 #import "ResourceCell.h"
-#import "GetResourceRequest.h"
+#import "GetResourceListRequest.h"
 #import "YXResourceDisplayViewController.h"
 #import "GetResourceDetailRequest.h"
 #import "UserPromptsManager.h"
@@ -21,9 +21,9 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EmptyView *emptyView;
 @property (nonatomic, strong) ErrorView *errorView;
-@property (nonatomic, strong) GetResourceRequest *request;
+@property (nonatomic, strong) GetResourceListRequest *listRequest;
+@property (nonatomic, strong) GetResourceListRequestItem *item;
 @property (nonatomic, strong) GetResourceDetailRequest *detailRequest;
-@property (nonatomic, strong) NSArray *dataArray;
 @end
 
 @implementation ResourceListViewController
@@ -53,25 +53,26 @@
 
 - (void)requestResourceInfo {
     [self.view nyx_startLoading];
+    [self.listRequest stopRequest];
+    self.listRequest = [[GetResourceListRequest alloc] init];
+    self.listRequest.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
+    self.listRequest.tagId = self.tagId;
     WEAK_SELF
-    [self.request stopRequest];
-    self.request = [[GetResourceRequest alloc] init];
-    self.request.clazsId = [UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId;
-    [self.request startRequestWithRetClass:[GetResourceRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+    [self.listRequest startRequestWithRetClass:[GetResourceListRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
         STRONG_SELF
         [self.view nyx_stopLoading];
         self.errorView.hidden = YES;
         self.emptyView.hidden = YES;
         if (error) {
             self.errorView.hidden = NO;
-            return;
+            return ;
         }
-        GetResourceRequestItem *item = (GetResourceRequestItem *)retItem;
-        if (isEmpty(item.data.elements)) {
+        GetResourceListRequestItem *item = (GetResourceListRequestItem *)retItem;
+        if (isEmpty(item.data.tagList) && isEmpty(item.data.resList)) {
             self.emptyView.hidden = NO;
             return;
         }
-        self.dataArray = [NSArray arrayWithArray:item.data.elements];
+        self.item = item;
         [self.tableView reloadData];
     }];
 }
@@ -110,6 +111,7 @@
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"ebeff2"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[ResourceCell class] forCellReuseIdentifier:@"ResourceCell"];
+    self.tableView.rowHeight = 60;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -136,24 +138,34 @@
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.item.data.tagList.count + self.item.data.resList.count;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ResourceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResourceCell"];
-    cell.element = self.dataArray[indexPath.row];
+    if (indexPath.row < self.item.data.tagList.count) {
+        cell.tagList = self.item.data.tagList[indexPath.row];
+    }else{
+        cell.resList = self.item.data.resList[indexPath.row - self.item.data.tagList.count];
+    }
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    GetResourceRequestItem_Element *element = self.dataArray[indexPath.row];
-    [self requestResourceDetailWithResId:element.resId];
+    if (indexPath.row < self.item.data.tagList.count) {
+        //跳转下级页面
+        ResourceListViewController *resListVC = [[ResourceListViewController alloc] init];
+        GetResourceListRequestItem_tagList *tag = self.item.data.tagList[indexPath.row];
+        resListVC.tagId = tag.taglistId;
+        resListVC.title = tag.name;
+        [self.navigationController pushViewController:resListVC animated:YES];
+    }else{
+        GetResourceListRequestItem_resList *resList = self.item.data.resList[indexPath.row - self.item.data.tagList.count];
+        [self requestResourceDetailWithResId:resList.resId];
+    }
 }
 
 #pragma mark - RefreshDelegate

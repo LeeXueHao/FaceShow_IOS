@@ -203,7 +203,7 @@
 		7C2C8E7E21942200001685FA /* NBResourceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E7D21942200001685FA /* NBResourceListViewController.m */; };
 		7C2C8E82219424C8001685FA /* NBLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E81219424C8001685FA /* NBLiveViewController.m */; };
 		7C2C8E862194318D001685FA /* NBResourceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E852194318D001685FA /* NBResourceListCell.m */; };
-		7C2C8E8A219437DE001685FA /* NBGetResourceListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E89219437DE001685FA /* NBGetResourceListRequest.m */; };
+		7C2C8E8A219437DE001685FA /* GetResourceListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E89219437DE001685FA /* GetResourceListRequest.m */; };
 		7C2C8E8E21943823001685FA /* NBGetMeetingListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E8D21943823001685FA /* NBGetMeetingListRequest.m */; };
 		7C2C8E91219438CF001685FA /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E90219438CF001685FA /* MeetingDetailViewController.m */; };
 		7C2C8E9521944EA9001685FA /* GetClassConfigRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C8E9421944EA9001685FA /* GetClassConfigRequest.m */; };
@@ -913,8 +913,8 @@
 		7C2C8E81219424C8001685FA /* NBLiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBLiveViewController.m; sourceTree = "<group>"; };
 		7C2C8E842194318D001685FA /* NBResourceListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBResourceListCell.h; sourceTree = "<group>"; };
 		7C2C8E852194318D001685FA /* NBResourceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBResourceListCell.m; sourceTree = "<group>"; };
-		7C2C8E88219437DE001685FA /* NBGetResourceListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGetResourceListRequest.h; sourceTree = "<group>"; };
-		7C2C8E89219437DE001685FA /* NBGetResourceListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGetResourceListRequest.m; sourceTree = "<group>"; };
+		7C2C8E88219437DE001685FA /* GetResourceListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetResourceListRequest.h; sourceTree = "<group>"; };
+		7C2C8E89219437DE001685FA /* GetResourceListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetResourceListRequest.m; sourceTree = "<group>"; };
 		7C2C8E8C21943823001685FA /* NBGetMeetingListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGetMeetingListRequest.h; sourceTree = "<group>"; };
 		7C2C8E8D21943823001685FA /* NBGetMeetingListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGetMeetingListRequest.m; sourceTree = "<group>"; };
 		7C2C8E8F219438CF001685FA /* MeetingDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingDetailViewController.h; sourceTree = "<group>"; };
@@ -2245,6 +2245,7 @@
 		7C2519701F68EBCD0001B577 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				7C2C8E87219437A2001685FA /* 资源 */,
 				7CFC9FDA21929C700084AFCE /* 小组 */,
 				E94DDE2520D3C7FB00729A67 /* 任务 */,
 				E95434D520D253E000BCF63C /* 积分 */,
@@ -2285,10 +2286,6 @@
 				432F90B71F74DF4600FCF655 /* UserSignInRequest.h */,
 				432F90B81F74DF4600FCF655 /* UserSignInRequest.m */,
 				435550701F78DBCD00264C5B /* UserSignIn_Mock.json */,
-				432F90BA1F74FDB700FCF655 /* GetResourceRequest.h */,
-				432F90BB1F74FDB700FCF655 /* GetResourceRequest.m */,
-				435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */,
-				435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */,
 				432F90BD1F75050700FCF655 /* GetScheduleListRequest.h */,
 				432F90BE1F75050700FCF655 /* GetScheduleListRequest.m */,
 				7C3F759420DA5A0F00F4F418 /* PositionSignInRequest.h */,
@@ -2533,7 +2530,6 @@
 		7C2C8E7B219421D5001685FA /* 宁波资源 */ = {
 			isa = PBXGroup;
 			children = (
-				7C2C8E87219437A2001685FA /* Request */,
 				7C2C8E8321943172001685FA /* View */,
 				7C2C8E7C21942200001685FA /* NBResourceListViewController.h */,
 				7C2C8E7D21942200001685FA /* NBResourceListViewController.m */,
@@ -2561,13 +2557,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7C2C8E87219437A2001685FA /* Request */ = {
+		7C2C8E87219437A2001685FA /* 资源 */ = {
 			isa = PBXGroup;
 			children = (
-				7C2C8E88219437DE001685FA /* NBGetResourceListRequest.h */,
-				7C2C8E89219437DE001685FA /* NBGetResourceListRequest.m */,
+				432F90BA1F74FDB700FCF655 /* GetResourceRequest.h */,
+				432F90BB1F74FDB700FCF655 /* GetResourceRequest.m */,
+				435F77B41F79F16E00247BD8 /* GetResourceDetailRequest.h */,
+				435F77B51F79F16E00247BD8 /* GetResourceDetailRequest.m */,
+				7C2C8E88219437DE001685FA /* GetResourceListRequest.h */,
+				7C2C8E89219437DE001685FA /* GetResourceListRequest.m */,
 			);
-			path = Request;
+			path = "资源";
 			sourceTree = "<group>";
 		};
 		7C2C8E8B21943802001685FA /* Request */ = {
@@ -4196,7 +4196,7 @@
 				7C2519AC1F690D860001B577 /* LoginViewController.m in Sources */,
 				E91E5D482047B22800052FBA /* ChatListCell.m in Sources */,
 				E90C5151204E792E0008F92A /* UIImage+GIF.m in Sources */,
-				7C2C8E8A219437DE001685FA /* NBGetResourceListRequest.m in Sources */,
+				7C2C8E8A219437DE001685FA /* GetResourceListRequest.m in Sources */,
 				7C2518EC1F68E68D0001B577 /* UIImage+YXImage.m in Sources */,
 				9283861D1F6FCD2B00205028 /* ClassMomentFloatingView.m in Sources */,
 				7C59130A2137936600CE548F /* LePlayerView.m in Sources */,
