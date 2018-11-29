@@ -102,7 +102,7 @@
     [self.view addSubview:quickbtn];
     [quickbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
-        make.right.mas_equalTo(self.inputView.mas_right).offset(-50);
+        make.right.mas_equalTo(-90);
         make.size.mas_equalTo(CGSizeMake(80, 35));
     }];
     UIButton *login = [quickbtn clone];
@@ -111,7 +111,7 @@
     [self.view addSubview:login];
     [login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
-        make.left.mas_equalTo(self.inputView.mas_left).offset(50);
+        make.left.mas_equalTo(90);
         make.size.mas_equalTo(CGSizeMake(80, 35));
     }];
     UIView *blueView = [[UIView alloc] init];
@@ -120,7 +120,7 @@
     [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(login);
         make.size.mas_equalTo(CGSizeMake(30, 2));
-        make.top.mas_equalTo(quickbtn.mas_bottom).offset(5);
+        make.top.mas_equalTo(quickbtn.mas_bottom).offset(-5);
     }];
 
     [[quickbtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
@@ -131,7 +131,7 @@
         [blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(quickbtn);
             make.size.mas_equalTo(CGSizeMake(30, 2));
-            make.top.mas_equalTo(quickbtn.mas_bottom).offset(5);
+            make.top.mas_equalTo(quickbtn.mas_bottom).offset(-5);
         }];
         [UIView animateWithDuration:0.3 animations:^{
             [self.view layoutIfNeeded];
@@ -150,7 +150,7 @@
         [blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(login);
             make.size.mas_equalTo(CGSizeMake(30, 2));
-            make.top.mas_equalTo(login.mas_bottom).offset(5);
+            make.top.mas_equalTo(login.mas_bottom).offset(-5);
         }];
         [UIView animateWithDuration:0.3 animations:^{
             [self.view layoutIfNeeded];
