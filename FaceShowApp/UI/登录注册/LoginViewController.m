@@ -53,6 +53,21 @@
         make.edges.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
     }];
+
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    logoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.contentView addSubview:logoImageView];
+    [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        if (@available(iOS 11.0, *)) {
+            make.top.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideTop).offset(38);
+        } else {
+            // Fallback on earlier versions
+            make.top.mas_equalTo(38);
+        }
+        make.size.mas_equalTo(CGSizeMake(175, 75));
+    }];
+
     
     self.loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.loginBtn.layer.cornerRadius = 6;
@@ -66,10 +81,10 @@
     [self.contentView addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
-            make.bottom.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideBottom).offset(-120);
+            make.bottom.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideBottom).offset(-120 * kPhoneWidthRatio);
         } else {
             // Fallback on earlier versions
-            make.bottom.mas_equalTo(-120);
+            make.bottom.mas_equalTo(-120 * kPhoneWidthRatio);
         }
         make.centerX.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(300 * kPhoneWidthRatio, 46));
@@ -102,7 +117,7 @@
     [self.view addSubview:quickbtn];
     [quickbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
-        make.right.mas_equalTo(-90);
+        make.right.mas_equalTo(logoImageView).offset(10);
         make.size.mas_equalTo(CGSizeMake(80, 35));
     }];
     UIButton *login = [quickbtn clone];
@@ -111,7 +126,7 @@
     [self.view addSubview:login];
     [login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.inputView.mas_top).offset(-20);
-        make.left.mas_equalTo(90);
+        make.left.mas_equalTo(logoImageView).offset(-10);
         make.size.mas_equalTo(CGSizeMake(80, 35));
     }];
     UIView *blueView = [[UIView alloc] init];
@@ -161,20 +176,6 @@
         }];
     }];
 
-    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    logoImageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.contentView addSubview:logoImageView];
-    [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        if (@available(iOS 11.0, *)) {
-            make.top.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideTop).offset(19);
-        } else {
-            // Fallback on earlier versions
-            make.top.mas_equalTo(19);
-        }
-        make.size.mas_equalTo(CGSizeMake(175, 75));
-    }];
-    
     UIButton *touristBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     touristBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
     [touristBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
@@ -183,12 +184,7 @@
     [self.contentView addSubview:touristBtn];
     [touristBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.loginBtn.mas_right);
-        if (@available(iOS 11.0, *)) {
-            make.bottom.mas_equalTo(self.contentView.mas_safeAreaLayoutGuideBottom).offset(-84);
-        } else {
-            // Fallback on earlier versions
-            make.bottom.mas_equalTo(-84);
-        }
+        make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(15);
     }];
     
     UIButton *registerBtn = [touristBtn clone];
