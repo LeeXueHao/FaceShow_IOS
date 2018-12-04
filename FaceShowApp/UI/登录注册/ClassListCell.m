@@ -72,9 +72,10 @@
     self.nameLabel.font = [UIFont boldSystemFontOfSize:16];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    self.nameLabel.numberOfLines = 2;
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topBandView.mas_bottom).offset(28);
+        make.top.mas_equalTo(topBandView.mas_bottom).offset(25);
         make.left.mas_equalTo(30);
         make.right.mas_equalTo(-30);
     }];
@@ -94,7 +95,7 @@
     self.titleLabel.numberOfLines = 2;
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(13);
+        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(10);
         make.left.mas_equalTo(30);
         make.right.mas_equalTo(-30);
     }];
