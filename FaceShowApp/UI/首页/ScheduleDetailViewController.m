@@ -48,14 +48,7 @@
     [self.webview loadRequest:request];
     [self.view addSubview:self.webview];
     [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15.0f);
-        make.right.mas_equalTo(-15.0f);
-        make.top.mas_equalTo(15);
-        if (@available(iOS 11.0, *)) {
-            make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-15);
-        } else {
-            make.bottom.mas_equalTo(-15);
-        }
+        make.edges.mas_equalTo(0);
     }];
 }
 
