@@ -163,6 +163,7 @@
         self.groupLabel.text = [NSString stringWithFormat:@"%@",groupData.groupName];
     }else{
         [self.group setHidden:YES];
+        [self.groupLabel setText:@""];
     }
     [self.container setNeedsLayout];
 }
