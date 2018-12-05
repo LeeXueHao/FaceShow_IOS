@@ -24,7 +24,6 @@
 @property (nonatomic, strong) GetScheduleListRequest *request;
 @property (nonatomic, strong) GetScheduleListRequestItem_Schedule *schedule;
 @property (nonatomic, strong) GetScheduleListRequestItem_Schedule *persionSchedule;
-
 @end
 
 @implementation NBScheduleViewController
@@ -60,13 +59,11 @@
             self.errorView.hidden = NO;
             return;
         }
-        if (isEmpty(item.data.schedules.elements)) {
-            self.emptyView.hidden = NO;
-            return;
+        if (!isEmpty(item.data.schedules.elements)) {
+            self.schedule = item.data.schedules.elements.firstObject;
         }
-        self.schedule = item.data.schedules.elements[0];
-        if (item.data.personalSchedules && item.data.personalSchedules.elements.count > 0) {
-            self.persionSchedule = item.data.personalSchedules.elements[0];
+        if (!isEmpty(item.data.personalSchedules.elements)) {
+            self.persionSchedule = item.data.personalSchedules.elements.firstObject;
         }
         [self setModel];
     }];
@@ -90,16 +87,15 @@
         vc.name = self.persionSchedule.subject;
         [self.navigationController pushViewController:vc animated:YES];
     };
-    [self.personalScheduleView setHidden:YES];
 
     self.webview = [[UIWebView alloc]init];
     self.webview.scalesPageToFit = YES;
     self.webview.delegate = self;
     [self.view addSubview:self.webview];
     [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
-        make.left.mas_equalTo(5);
-        make.right.bottom.mas_equalTo(-5);
+        make.top.mas_equalTo(self.personalScheduleView.mas_bottom).offset(5);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-5);
         make.height.mas_equalTo(self.webview.mas_width).multipliedBy(1.5);
     }];
 
@@ -129,17 +125,30 @@
 }
 
 - (void)setModel {
-    if (self.persionSchedule) {
+
+    if (isEmpty(self.persionSchedule) && isEmpty(self.schedule)) {
+        [self.emptyView setHidden:YES];
+        return;
+    }
+
+    if (isEmpty(self.schedule) && !isEmpty(self.persionSchedule)) {
+        [self.emptyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.top.mas_equalTo(self.personalScheduleView.mas_bottom).offset(5);
+        }];
+        [self.emptyView setHidden:NO];
+        [self.view setNeedsLayout];
+        return;
+    }
+
+    if (isEmpty(self.persionSchedule)) {
         [self.webview mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.personalScheduleView.mas_bottom).offset(15);
-            make.left.mas_equalTo(15);
-            make.right.bottom.mas_equalTo(-15);
+            make.top.mas_equalTo(5);
+            make.left.right.mas_equalTo(0);
+            make.bottom.mas_equalTo(-5);
             make.height.mas_equalTo(self.webview.mas_width).multipliedBy(1.5);
         }];
-        [self.personalScheduleView setHidden:NO];
         [self.view setNeedsLayout];
-    }else{
-        [self.personalScheduleView setHidden:YES];
     }
     [self loadWebViewWithUrl:self.schedule.imageUrl ? self.schedule.imageUrl : self.schedule.attachmentInfo.previewUrl];
 }

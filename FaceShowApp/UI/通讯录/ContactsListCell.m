@@ -71,6 +71,7 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.avatarImageView);
         make.left.mas_equalTo(self.avatarImageView.mas_right).offset(15);
+        make.right.mas_lessThanOrEqualTo(self.numberLabel.mas_left).offset(-15);
     }];
 
     self.schoolLabel = [[UILabel alloc] init];
