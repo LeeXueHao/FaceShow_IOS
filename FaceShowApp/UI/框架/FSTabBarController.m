@@ -8,6 +8,7 @@
 
 #import "FSTabBarController.h"
 #import "UserPromptsManager.h"
+#import "NBLiveViewController.h"
 
 NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
 
@@ -55,7 +56,9 @@ NSString * const kTabBarDidSelectNotification = @"kTabBarDidSelectNotification";
     if ([viewController.title isEqualToString:@"聊聊"]) {
         [TalkingData trackEvent:@"点击聊聊"];
     }
-    if (![viewController.title isEqualToString:@"直播"]) {
+
+    UIViewController *vc = viewController.childViewControllers.firstObject;
+    if (![vc isKindOfClass:[NBLiveViewController class]]) {
         self.lastSelectIndex = [self.childViewControllers indexOfObject:viewController];
     }
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabBarDidSelectNotification object:viewController];

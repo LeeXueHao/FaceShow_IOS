@@ -375,6 +375,7 @@
 		7CFC9FDE2192CE0C0084AFCE /* GroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FDD2192CE0B0084AFCE /* GroupMemberCell.m */; };
 		7CFC9FE32193015E0084AFCE /* MeetingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FE22193015E0084AFCE /* MeetingListViewController.m */; };
 		7CFC9FE8219301C50084AFCE /* MeetingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC9FE7219301C50084AFCE /* MeetingListCell.m */; };
+		7CFDF75E21B8D8F700005E67 /* LiveNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFDF75D21B8D8F700005E67 /* LiveNavigationView.m */; };
 		921FF6B2200DCD8F002CD071 /* ClassMomentDiscardRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */; };
 		921FF6B5200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B4200DCDAB002CD071 /* ClassMomentCancelLikeRequest.m */; };
 		921FF6B8200DCDF5002CD071 /* ClassMomentReplyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 921FF6B7200DCDF5002CD071 /* ClassMomentReplyRequest.m */; };
@@ -1254,6 +1255,8 @@
 		7CFC9FE22193015E0084AFCE /* MeetingListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingListViewController.m; sourceTree = "<group>"; };
 		7CFC9FE6219301C50084AFCE /* MeetingListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingListCell.h; sourceTree = "<group>"; };
 		7CFC9FE7219301C50084AFCE /* MeetingListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingListCell.m; sourceTree = "<group>"; };
+		7CFDF75C21B8D8F700005E67 /* LiveNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveNavigationView.h; sourceTree = "<group>"; };
+		7CFDF75D21B8D8F700005E67 /* LiveNavigationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveNavigationView.m; sourceTree = "<group>"; };
 		921FF6B0200DCD8F002CD071 /* ClassMomentDiscardRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentDiscardRequest.h; sourceTree = "<group>"; };
 		921FF6B1200DCD8F002CD071 /* ClassMomentDiscardRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMomentDiscardRequest.m; sourceTree = "<group>"; };
 		921FF6B3200DCDAB002CD071 /* ClassMomentCancelLikeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMomentCancelLikeRequest.h; sourceTree = "<group>"; };
@@ -2540,6 +2543,7 @@
 		7C2C8E7F21942485001685FA /* 宁波直播 */ = {
 			isa = PBXGroup;
 			children = (
+				7CFDF75B21B8D8D600005E67 /* view */,
 				7C2C8E80219424C8001685FA /* NBLiveViewController.h */,
 				7C2C8E81219424C8001685FA /* NBLiveViewController.m */,
 				7C301D5D219BF48C00F9F089 /* NBLiveDetailViewController.h */,
@@ -3157,6 +3161,15 @@
 				7C301D74219F4AA500F9F089 /* MeetingLabelView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7CFDF75B21B8D8D600005E67 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7CFDF75C21B8D8F700005E67 /* LiveNavigationView.h */,
+				7CFDF75D21B8D8F700005E67 /* LiveNavigationView.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		9220840E1F6BB6A700F8AAC6 /* view */ = {
@@ -4277,6 +4290,7 @@
 				4322CA491FD9531600E7B565 /* QASlideItemBaseView.m in Sources */,
 				7CBC5B8F2049326E004ACA04 /* CourseDetailViewController.m in Sources */,
 				7C2519271F68EACF0001B577 /* MJRefreshConst.m in Sources */,
+				7CFDF75E21B8D8F700005E67 /* LiveNavigationView.m in Sources */,
 				7C24E20C1F7390FE00A6921B /* SaveUserQuestionnaireRequest.m in Sources */,
 				7CBC5BB2204CEBB2004ACA04 /* RegistYxbRequest.m in Sources */,
 				7C301D6C219EA39900F9F089 /* ShareManager.m in Sources */,

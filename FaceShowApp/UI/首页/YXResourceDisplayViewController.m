@@ -54,7 +54,7 @@
             }];
         }
     }else{
-        [self nyx_setupRightWithImageName:@"分享" highlightImageName:@"分享" action:^{
+        [self nyx_setupRightWithImageName:@"分享" highlightImageName:@"分享点击态" action:^{
             STRONG_SELF
             [self shareUrl];
         }];

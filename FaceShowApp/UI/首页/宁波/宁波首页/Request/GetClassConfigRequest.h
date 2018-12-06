@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSString<Optional> *pageName;
 @property (nonatomic, strong) NSString<Optional> *pageType;
 @property (nonatomic, strong) NSString<Optional> *pageConfId;
+@property (nonatomic, strong) NSString<Optional> *icon;
 @end
 
 

@@ -94,8 +94,9 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     }else{
         NSMutableArray<UIViewController *> *controllers = [NSMutableArray array];
         [pageList enumerateObjectsUsingBlock:^(GetClassConfigRequest_Item_pageList * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
             UIViewController *vc = [[NBConfigManager sharedInstance]getViewControllerWithType:obj.pageConf.pageType pageConfig:obj.pageConf andTabConfigArray:obj.tabConf];
-            [self configTabbarItem:vc.tabBarItem image:[NSString stringWithFormat:@"%@icon",vc.title] selectedImage:[NSString stringWithFormat:@"%@icon选择",vc.title]];
+            [self configTabbarItem:vc.tabBarItem image:[NSString stringWithFormat:@"%@_icon",obj.pageConf.icon] selectedImage:[NSString stringWithFormat:@"%@_icon_selected",obj.pageConf.icon]];
             FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
             [controllers addObject:navi];
         }];
@@ -122,23 +123,23 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
     UIViewController *mainVC = [[MainPageViewController alloc]init];
     mainVC.title = @"首页";
-    [self configTabbarItem:mainVC.tabBarItem image:@"首页icon" selectedImage:@"首页icon选择"];
+    [self configTabbarItem:mainVC.tabBarItem image:@"index_icon" selectedImage:@"index_icon_selected"];
     FSNavigationController *mainNavi = [[FSNavigationController alloc] initWithRootViewController:mainVC];
     
     UIViewController *messageVC = [[TaskListViewController alloc]init];
     messageVC.title = @"任务";
-    [self configTabbarItem:messageVC.tabBarItem image:@"任务icon" selectedImage:@"任务icon选择"];
+    [self configTabbarItem:messageVC.tabBarItem image:@"task_icon" selectedImage:@"task_icon_selected"];
     FSNavigationController *messageNavi = [[FSNavigationController alloc] initWithRootViewController:messageVC];
     
     UIViewController *classVC = [[ClassMomentViewController alloc]init];
     classVC.title = @"班级圈";
-    [self configTabbarItem:classVC.tabBarItem image:@"班级圈icon" selectedImage:@"班级圈icon选择"];
+    [self configTabbarItem:classVC.tabBarItem image:@"circle_icon" selectedImage:@"circle_icon_selected"];
     FSNavigationController *classNavi = [[FSNavigationController alloc] initWithRootViewController:classVC];
     
     ChatListViewController *chatVC = [[ChatListViewController alloc]init];
 //    ChatPlaceViewController *chatVC = [[ChatPlaceViewController alloc]init];
     chatVC.title = @"聊聊";
-    [self configTabbarItem:chatVC.tabBarItem image:@"聊聊icon" selectedImage:@"聊聊icon选择"];
+    [self configTabbarItem:chatVC.tabBarItem image:@"chat_icon" selectedImage:@"chat_icon_selected"];
     FSNavigationController *chatNavi = [[FSNavigationController alloc] initWithRootViewController:chatVC];
     
     tabBarController.viewControllers = @[mainNavi, messageNavi, classNavi, chatNavi];
