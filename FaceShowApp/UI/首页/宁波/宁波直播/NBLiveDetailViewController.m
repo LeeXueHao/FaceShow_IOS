@@ -100,6 +100,7 @@
     if ([keyPath isEqualToString:@"title"]) {
         if ([self.shareTitle isEqualToString:@"来自研修宝的分享"]) {
             self.shareTitle = self.webview.title;
+            self.navigationItem.title = self.shareTitle;
         }
     }
 }

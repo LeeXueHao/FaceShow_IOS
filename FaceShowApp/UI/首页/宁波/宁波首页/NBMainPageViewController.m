@@ -75,7 +75,10 @@
         make.left.top.right.mas_equalTo(0);
         make.height.mas_equalTo(200);
     }];
-    WEAK_SELF
+
+    if (self.tabConf.count == 0) {
+        return;
+    }
 
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     __block NSMutableArray *titleArr = [NSMutableArray array];
@@ -91,6 +94,7 @@
     }];
 //    NSArray *tabNames = @[@"会议",@"日程",@"通知",@"资源"];
     tabContainerView.tabNameArray = titleArr;
+    WEAK_SELF
     [tabContainerView setTabClickBlock:^(NSInteger index){
         STRONG_SELF
         [TalkingData trackEvent:[NSString stringWithFormat:@"点击%@", titleArr[index]]];
@@ -130,6 +134,9 @@
 
 
 - (void)switchToVCWithIndex:(NSInteger)index {
+    if (self.tabControllers.count == 0) {
+        return;
+    }
     for (UIView *v in self.tabContentView.subviews) {
         [v removeFromSuperview];
     }

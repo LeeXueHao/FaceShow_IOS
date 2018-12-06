@@ -30,6 +30,9 @@
 }
 
 - (void)setTabNameArray:(NSArray *)tabNameArray {
+    if (tabNameArray.count == 0) {
+        return;
+    }
     _tabNameArray = tabNameArray;
     for (UIView *v in self.subviews) {
         [v removeFromSuperview];

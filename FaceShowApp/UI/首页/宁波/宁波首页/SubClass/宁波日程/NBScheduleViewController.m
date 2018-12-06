@@ -127,7 +127,7 @@
 - (void)setModel {
 
     if (isEmpty(self.persionSchedule) && isEmpty(self.schedule)) {
-        [self.emptyView setHidden:YES];
+        [self.emptyView setHidden:NO];
         return;
     }
 
@@ -162,7 +162,6 @@
 
 #pragma mark - RefreshDelegate
 - (void)refreshUI {
-    NSLog(@"refresh called!");
     [self requestScheduleInfo];
 }
 
