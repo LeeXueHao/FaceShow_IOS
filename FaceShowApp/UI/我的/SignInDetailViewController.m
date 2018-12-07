@@ -11,6 +11,7 @@
 #import "GetSignInRecordListRequest.h"
 #import "UserSignInRequest.h"
 #import "ScanCodeResultViewController.h"
+#import "GetSigninRequest.h"
 
 @interface SignInDetailViewController ()
 
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) UILabel *placeNameLabel;
 @property (nonatomic, strong) UILabel *statusTitleLabel;
 @property (nonatomic, strong) UserSignInRequest *signInRequest;
+@property (nonatomic, strong) GetSigninRequest *getSigninRequest;
 @end
 
 @implementation SignInDetailViewController
@@ -34,6 +36,7 @@
     [super viewDidLoad];
     [self setupUI];
     [self setModel];
+    [self setupObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -289,6 +292,34 @@
         self.placeLabel.hidden = YES;
         self.placeNameLabel.hidden = YES;
     }
+}
+
+- (void)setupObserver{
+    WEAK_SELF
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"SignInDetailReloadNotification" object:nil] subscribeNext:^(id x) {
+        STRONG_SELF
+        [self requestSignInDetail];
+    }];
+}
+
+- (void)requestSignInDetail{
+    [self.getSigninRequest stopRequest];
+    self.getSigninRequest = [[GetSigninRequest alloc]init];
+    self.getSigninRequest.stepId = self.signIn.stepId;
+    WEAK_SELF
+    [self.view nyx_startLoading];
+    [self.getSigninRequest startRequestWithRetClass:[GetSigninRequestItem class] andCompleteBlock:^(id retItem, NSError *error, BOOL isMock) {
+        STRONG_SELF
+        [self.view nyx_stopLoading];
+        if (error) {
+            [self.view nyx_showToast:error.localizedDescription];
+            return;
+        }
+        GetSigninRequestItem *item = retItem;
+        item.data.signIn.stepId = self.signIn.stepId;
+        self.signIn = item.data.signIn;
+        [self setModel];
+    }];
 }
 
 @end

@@ -33,6 +33,7 @@
 - (void)backAction{
     for (UIViewController *vc in self.navigationController.childViewControllers) {
         if ([vc isKindOfClass:[SignInDetailViewController class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SignInDetailReloadNotification" object:nil];
             [self.navigationController popToViewController:vc animated:YES];
             return;
         }
@@ -80,8 +81,9 @@
 
 - (void)shareUrl{
 
+    UIImage *image = [UIImage imageNamed:@"AppIcon"];
     NSString *shareUrl = [[ShareManager sharedInstance] generateShareUrlWithOriginUrl:self.urlStr];
-    NSArray *items = @[self.webTitle,[NSURL URLWithString:shareUrl]];
+    NSArray *items = @[self.webTitle,[NSURL URLWithString:shareUrl],image];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];
     WEAK_SELF
