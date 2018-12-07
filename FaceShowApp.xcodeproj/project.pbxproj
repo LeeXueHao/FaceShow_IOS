@@ -320,6 +320,7 @@
 		7CC9E4F121969976007D74B8 /* NBConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9E4F021969976007D74B8 /* NBConfigManager.m */; };
 		7CC9E4F521969CF7007D74B8 /* NBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9E4F421969CF7007D74B8 /* NBBaseViewController.m */; };
 		7CC9E5012196A5DE007D74B8 /* NBEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9E5002196A5DE007D74B8 /* NBEmptyViewController.m */; };
+		7CDBEB5921BA492000FEC89A /* EmptySignInRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBEB5821BA492000FEC89A /* EmptySignInRecordCell.m */; };
 		7CE143452154C93500A9E20A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */; };
 		7CE143482154CE9000A9E20A /* MineCertiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143472154CE9000A9E20A /* MineCertiViewController.m */; };
 		7CE143AC2155DDF600A9E20A /* MineCertiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE143AB2155DDF600A9E20A /* MineCertiRequest.m */; };
@@ -1148,6 +1149,8 @@
 		7CC9E4F421969CF7007D74B8 /* NBBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBBaseViewController.m; sourceTree = "<group>"; };
 		7CC9E4FF2196A5DE007D74B8 /* NBEmptyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBEmptyViewController.h; sourceTree = "<group>"; };
 		7CC9E5002196A5DE007D74B8 /* NBEmptyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBEmptyViewController.m; sourceTree = "<group>"; };
+		7CDBEB5721BA492000FEC89A /* EmptySignInRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptySignInRecordCell.h; sourceTree = "<group>"; };
+		7CDBEB5821BA492000FEC89A /* EmptySignInRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptySignInRecordCell.m; sourceTree = "<group>"; };
 		7CE143442154C93400A9E20A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		7CE143462154CE9000A9E20A /* MineCertiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineCertiViewController.h; sourceTree = "<group>"; };
 		7CE143472154CE9000A9E20A /* MineCertiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCertiViewController.m; sourceTree = "<group>"; };
@@ -2711,18 +2714,18 @@
 		7C66B2692027F5DA0067E242 /* 图像选取 */ = {
 			isa = PBXGroup;
 			children = (
-				7C66B2732027F6040067E242 /* HeadImageHandler.h */,
-				7C66B26F2027F6030067E242 /* HeadImageHandler.m */,
 				7C66B2742027F6040067E242 /* HeadImageCameraOverlayView.h */,
 				7C66B26D2027F6030067E242 /* HeadImageCameraOverlayView.m */,
-				7C66B26E2027F6030067E242 /* HeadImageClipViewController.h */,
-				7C66B2752027F6050067E242 /* HeadImageClipViewController.m */,
-				7C66B2722027F6040067E242 /* HeadImagePickerOptionView.h */,
-				7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */,
-				7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */,
-				7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */,
 				7C66B2702027F6040067E242 /* HeadImageClipView.h */,
 				7C66B26C2027F6030067E242 /* HeadImageClipView.m */,
+				7C66B26E2027F6030067E242 /* HeadImageClipViewController.h */,
+				7C66B2752027F6050067E242 /* HeadImageClipViewController.m */,
+				7C66B2732027F6040067E242 /* HeadImageHandler.h */,
+				7C66B26F2027F6030067E242 /* HeadImageHandler.m */,
+				7C66B26A2027F6030067E242 /* HeadImagePickerOptionItemView.h */,
+				7C66B26B2027F6030067E242 /* HeadImagePickerOptionItemView.m */,
+				7C66B2722027F6040067E242 /* HeadImagePickerOptionView.h */,
+				7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */,
 				7C66B27D2027F8510067E242 /* QAPhotoClipBottomView.h */,
 				7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */,
 			);
@@ -3176,32 +3179,34 @@
 			isa = PBXGroup;
 			children = (
 				7CE143C32159CF1C00A9E20A /* 查看大图 */,
-				7CE143BC21563E7500A9E20A /* 我的证书 */,
 				7C66B2692027F5DA0067E242 /* 图像选取 */,
-				4378DFA71F6FA4CB005CFE56 /* SignInRecordCell.h */,
-				4378DFA81F6FA4CB005CFE56 /* SignInRecordCell.m */,
-				4378DFA91F6FA4CB005CFE56 /* SignInRecordHeaderView.h */,
-				4378DFAA1F6FA4CB005CFE56 /* SignInRecordHeaderView.m */,
-				922084181F6BB8D200F8AAC6 /* MineUserHeaderCell.h */,
-				922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */,
+				7CE143BC21563E7500A9E20A /* 我的证书 */,
+				7C17DBF42181796E009353A9 /* AboutItemView.h */,
+				7C17DBF32181796E009353A9 /* AboutItemView.m */,
+				929B421420F336810034E608 /* AreaSubjectCell.h */,
+				929B421520F336810034E608 /* AreaSubjectCell.m */,
+				7CDBEB5721BA492000FEC89A /* EmptySignInRecordCell.h */,
+				7CDBEB5821BA492000FEC89A /* EmptySignInRecordCell.m */,
+				922084211F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.h */,
+				922084221F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m */,
 				9220841B1F6BB91400F8AAC6 /* MineDefaultCell.h */,
 				9220841C1F6BB91400F8AAC6 /* MineDefaultCell.m */,
 				9220841E1F6BBEB800F8AAC6 /* MineTableFooterView.h */,
 				9220841F1F6BBEB800F8AAC6 /* MineTableFooterView.m */,
-				922084211F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.h */,
-				922084221F6BC09C00F8AAC6 /* FSDefaultHeaderFooterView.m */,
-				922084271F6BC4D200F8AAC6 /* UserInfoHeaderCell.h */,
-				922084281F6BC4D200F8AAC6 /* UserInfoHeaderCell.m */,
-				9220842A1F6BC4F000F8AAC6 /* UserInfoDefaultCell.h */,
-				9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */,
+				922084181F6BB8D200F8AAC6 /* MineUserHeaderCell.h */,
+				922084191F6BB8D200F8AAC6 /* MineUserHeaderCell.m */,
 				7CEFC7B81F998E20001D8C84 /* SexItemView.h */,
 				7CEFC7B91F998E20001D8C84 /* SexItemView.m */,
+				4378DFA71F6FA4CB005CFE56 /* SignInRecordCell.h */,
+				4378DFA81F6FA4CB005CFE56 /* SignInRecordCell.m */,
+				4378DFA91F6FA4CB005CFE56 /* SignInRecordHeaderView.h */,
+				4378DFAA1F6FA4CB005CFE56 /* SignInRecordHeaderView.m */,
 				4322CA3A1FD941F500E7B565 /* StageSubjectCell.h */,
 				4322CA3B1FD941F500E7B565 /* StageSubjectCell.m */,
-				929B421420F336810034E608 /* AreaSubjectCell.h */,
-				929B421520F336810034E608 /* AreaSubjectCell.m */,
-				7C17DBF42181796E009353A9 /* AboutItemView.h */,
-				7C17DBF32181796E009353A9 /* AboutItemView.m */,
+				9220842A1F6BC4F000F8AAC6 /* UserInfoDefaultCell.h */,
+				9220842B1F6BC4F000F8AAC6 /* UserInfoDefaultCell.m */,
+				922084271F6BC4D200F8AAC6 /* UserInfoHeaderCell.h */,
+				922084281F6BC4D200F8AAC6 /* UserInfoHeaderCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -4284,6 +4289,7 @@
 				7C24E1F61F72514C00A6921B /* QuestionRequestItem.m in Sources */,
 				7C212DD41F6A78850007AE01 /* QuestionnaireResultViewController.m in Sources */,
 				7C25195C1F68EBA90001B577 /* GetRequest.m in Sources */,
+				7CDBEB5921BA492000FEC89A /* EmptySignInRecordCell.m in Sources */,
 				7C3F759620DA5A0F00F4F418 /* PositionSignInRequest.m in Sources */,
 				7CEDC7B7216DB3A900985EBF /* GetUserInfoDetailRequest.m in Sources */,
 				4369597F1FDE27B5009E5C43 /* ClassEmptyViewController.m in Sources */,

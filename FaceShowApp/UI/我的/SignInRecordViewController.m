@@ -13,6 +13,7 @@
 #import "GetSignInRecordListFetcher.h"
 #import "GetSignInRecordListRequest.h"
 #import "GetSigninRequest.h"
+#import "EmptySignInRecordCell.h"
 
 @interface SignInRecordViewController ()
 @property (nonatomic, strong) GetSigninRequest *getSigninRequest;
@@ -43,6 +44,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = headerView;
     [self.tableView registerClass:[SignInRecordCell class] forCellReuseIdentifier:@"SignInRecordCell"];
+    [self.tableView registerClass:[EmptySignInRecordCell class] forCellReuseIdentifier:NSStringFromClass([EmptySignInRecordCell class])];
 }
 
 #pragma mark - setupObserver
@@ -64,10 +66,15 @@
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SignInRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SignInRecordCell"];
     GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
-    cell.hasBottomLine = indexPath.row != element.signIns.count - 1;
-    cell.signIn = element.signIns[indexPath.row];
+    if (element.signIns.count > 0) {
+        SignInRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SignInRecordCell"];
+        cell.hasBottomLine = indexPath.row != element.signIns.count - 1;
+        cell.signIn = element.signIns[indexPath.row];
+        return cell;
+    }
+    
+    EmptySignInRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EmptySignInRecordCell class])];
     return cell;
 }
 
@@ -77,10 +84,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     GetSignInRecordListRequestItem_Element *element = self.dataArray[section];
-    return element.signIns.count;
+    return element.signIns.count > 0 ? element.signIns.count : 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
 
@@ -99,8 +106,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GetSignInRecordListRequestItem_Element *element = self.dataArray[indexPath.section];
-    GetSignInRecordListRequestItem_SignIn *signIn = element.signIns[indexPath.row];
-    [self getSignInDetailWithStepId:signIn.stepId indexPath:indexPath];
+    if (element.signIns.count > 0) {
+        GetSignInRecordListRequestItem_SignIn *signIn = element.signIns[indexPath.row];
+        [self getSignInDetailWithStepId:signIn.stepId indexPath:indexPath];
+    }
 }
 
 - (void)getSignInDetailWithStepId:(NSString *)stepId indexPath:(NSIndexPath *)indexPath{
