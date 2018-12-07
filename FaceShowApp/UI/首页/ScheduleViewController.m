@@ -139,7 +139,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [self.view nyx_stopLoading];
-    [self.view nyx_showToast:@"加载失败"];
+//    [self.view nyx_showToast:@"加载失败"];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
