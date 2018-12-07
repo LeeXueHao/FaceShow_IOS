@@ -17,7 +17,7 @@
 @property (nonatomic, strong) LiveNavigationView *naviView;
 @property (nonatomic, copy) NSString *shareTitle;
 @property (nonatomic, strong) NSURL *shareUrl;
-@property (nonatomic, assign) CGFloat contentOffsetY;
+//@property (nonatomic, assign) CGFloat contentOffsetY;
 @end
 
 @implementation NBLiveDetailViewController
@@ -25,6 +25,7 @@
 - (void)dealloc{
     [self.webview removeObserver:self forKeyPath:@"title"];
     [self.webview removeObserver:self forKeyPath:@"URL"];
+    [self.webview removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
 - (void)viewDidLoad {
@@ -91,7 +92,7 @@
     [self.naviView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.left.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(self.view.mas_bottom).offset(40);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
     }];
     WEAK_SELF
     self.naviView.forwardActionBlock = ^{
@@ -164,17 +165,17 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (self.contentOffsetY > scrollView.contentOffset.y) {
-        //向上滑 若未显示 显示
-        [self showBottomNavView];
-    }else{
-        //向下滑  若已显示 隐藏
-        [self hideBottomNavView];
-    }
-
-    self.contentOffsetY = scrollView.contentOffset.y;
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    if (self.contentOffsetY > scrollView.contentOffset.y) {
+//        //向上滑 若未显示 显示
+//        [self showBottomNavView];
+//    }else{
+//        //向下滑  若已显示 隐藏
+//        [self hideBottomNavView];
+//    }
+//
+//    self.contentOffsetY = scrollView.contentOffset.y;
+//}
 
 #pragma mark - action
 - (void)startShare{
@@ -202,12 +203,12 @@
 }
 
 - (void)refreshBottom{
-    if (!self.webview.canGoBack) {
-        [self hideBottomNavView];
-    }else{
-        [self showBottomNavView];
+//    if (!self.webview.canGoBack) {
+//        [self hideBottomNavView];
+//    }else{
+//        [self showBottomNavView];
         [self.naviView refreshForwardEnabled:self.webview.canGoForward backEnabled:self.webview.canGoBack];
-    }
+//    }
 }
 
 - (void)hideBottomNavView{
