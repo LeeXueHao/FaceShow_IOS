@@ -294,6 +294,7 @@
         self.placeLabel.hidden = YES;
         self.placeNameLabel.hidden = YES;
     }
+    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, SCREEN_WIDTH, 10) animated:NO];
 }
 
 - (void)setupObserver{
