@@ -92,24 +92,35 @@ UIKIT_EXTERN BOOL testFrameworkOn;
         tabBarController.viewControllers = @[navi];
         drawerVC.paneViewController = tabBarController;
     }else{
+        FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
         NSMutableArray<UIViewController *> *controllers = [NSMutableArray array];
+        NSMutableArray<UIView *> *redViews = [NSMutableArray array];
         [pageList enumerateObjectsUsingBlock:^(GetClassConfigRequest_Item_pageList * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
             UIViewController *vc = [[NBConfigManager sharedInstance]getViewControllerWithType:obj.pageConf.pageType pageConfig:obj.pageConf andTabConfigArray:obj.tabConf];
             [self configTabbarItem:vc.tabBarItem image:[NSString stringWithFormat:@"%@_icon",obj.pageConf.icon] selectedImage:[NSString stringWithFormat:@"%@_icon_selected",obj.pageConf.icon]];
             FSNavigationController *navi = [[FSNavigationController alloc] initWithRootViewController:vc];
             [controllers addObject:navi];
+            UIView *redView = [self generateRedPointView];
+            redView.frame = CGRectMake(SCREEN_WIDTH * (1 + 2 * idx)/(pageList.count * 2) + 2, 6, 9, 9);
+            if ([vc isKindOfClass:[TaskListViewController class]]) {
+                [UserPromptsManager sharedInstance].taskNewView = redView;
+                [redViews addObject:redView];
+            }else if ([vc isKindOfClass:[ClassMomentViewController class]]){
+                [UserPromptsManager sharedInstance].momentNewView = redView;
+                [redViews addObject:redView];
+            }else if ([vc isKindOfClass:[ChatListViewController class]]){
+                ChatListViewController *chatvc = (ChatListViewController *)vc;
+                chatvc.unreadPromptView = redView;
+                [redViews addObject:redView];
+            }
         }];
-        FSTabBarController *tabBarController = [[FSTabBarController alloc] init];
         tabBarController.viewControllers = controllers;
+        for (UIView *redView in redViews) {
+            [tabBarController.tabBar addSubview:redView];
+            [tabBarController.tabBar bringSubviewToFront:redView];
+        }
         drawerVC.paneViewController = tabBarController;
-        UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH /2 + 10, 6, 9, 9)];
-        redPointView.layer.cornerRadius = 4.5f;
-        redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-        redPointView.hidden = YES;
-        [tabBarController.tabBar addSubview:redPointView];
-        [tabBarController.tabBar bringSubviewToFront:redPointView];
-        [UserPromptsManager sharedInstance].taskNewView = redPointView;
     }
 
     MineViewController *mineVC = [[MineViewController alloc]init];
@@ -150,31 +161,33 @@ UIKIT_EXTERN BOOL testFrameworkOn;
     drawerVC.drawerViewController = mineVC;
     drawerVC.drawerWidth = 305*kPhoneWidthRatio;
     
-    UIView *redPointView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 2, 6, 9, 9)];
-    redPointView.layer.cornerRadius = 4.5f;
-    redPointView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    redPointView.hidden = YES;
+    UIView *redPointView = [self generateRedPointView];
+    [redPointView setFrame:CGRectMake(SCREEN_WIDTH * 3 / 8 + 2, 6, 9, 9)];
     [tabBarController.tabBar addSubview:redPointView];
     [tabBarController.tabBar bringSubviewToFront:redPointView];
     [UserPromptsManager sharedInstance].taskNewView = redPointView;
     
-    UIView *momentNewView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 2, 6, 9, 9)];
-    momentNewView.layer.cornerRadius = 4.5f;
-    momentNewView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    momentNewView.hidden = YES;
+    UIView *momentNewView = [self generateRedPointView];
+    [momentNewView setFrame:CGRectMake(SCREEN_WIDTH * 5 / 8 + 2, 6, 9, 9)];
     [tabBarController.tabBar addSubview:momentNewView];
     [tabBarController.tabBar bringSubviewToFront:momentNewView];
     [UserPromptsManager sharedInstance].momentNewView = momentNewView;
     
-    UIView *unreadView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 7 / 8 + 2, 6, 9, 9)];
-    unreadView.layer.cornerRadius = 4.5f;
-    unreadView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
-    unreadView.hidden = YES;
+    UIView *unreadView = [self generateRedPointView];
+    [unreadView setFrame:CGRectMake(SCREEN_WIDTH * 7 / 8 + 2, 6, 9, 9)];
     [tabBarController.tabBar addSubview:unreadView];
     [tabBarController.tabBar bringSubviewToFront:unreadView];
     chatVC.unreadPromptView = unreadView;
     
     return drawerVC;
+}
+
+- (UIView *)generateRedPointView{
+    UIView *unreadView = [[UIView alloc] init];
+    unreadView.backgroundColor = [UIColor colorWithHexString:@"ff0000"];
+    unreadView.layer.cornerRadius = 4.5f;
+    unreadView.hidden = YES;
+    return unreadView;
 }
 
 - (void)configTabbarItem:(UITabBarItem *)tabBarItem image:(NSString *)image selectedImage:(NSString *)selectedImage {
