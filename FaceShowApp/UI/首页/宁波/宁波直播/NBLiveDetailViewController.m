@@ -12,14 +12,12 @@
 #import "LiveNavigationView.h"
 
 @interface NBLiveDetailViewController ()<WKNavigationDelegate,UIScrollViewDelegate>
+@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) WKWebView *webview;
 @property (nonatomic, strong) LiveNavigationView *naviView;
 @property (nonatomic, copy) NSString *shareTitle;
 @property (nonatomic, strong) NSURL *shareUrl;
 @property (nonatomic, assign) CGFloat contentOffsetY;
-@property (nonatomic, assign) BOOL isFirstLoad;
-@property (nonatomic, assign) BOOL hasShowNavi;
-@property (nonatomic, assign) BOOL isShowNavi;
 @end
 
 @implementation NBLiveDetailViewController
@@ -40,6 +38,10 @@
         STRONG_SELF
         [self startShare];
     }];
+    [self nyx_setupLeftWithImageName:@"关闭" highlightImageName:@"关闭" action:^{
+        STRONG_SELF
+        [super backAction];
+    }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -48,6 +50,16 @@
 }
 
 - (void)setupUI {
+
+    self.progressView = [[UIProgressView alloc] init];
+    self.progressView.tintColor = [UIColor colorWithHexString:@"1da1f2"];
+    self.progressView.trackTintColor = [UIColor whiteColor];
+    [self.view addSubview:self.progressView];
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.height.mas_equalTo(3);
+    }];
+
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.allowsInlineMediaPlayback = YES;
     config.mediaPlaybackRequiresUserAction = false;
@@ -63,10 +75,13 @@
     [webview loadRequest:request];
     [self.view addSubview:webview];
     [webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.top.mas_equalTo(self.progressView.mas_bottom);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-40);
     }];
     [webview addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
     [webview addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:NULL];
+    [webview addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
     
     self.webview = webview;
 
@@ -92,51 +107,32 @@
             [self.webview goBack];
         }
     };
-    self.isFirstLoad = NO;
-    self.hasShowNavi = NO;
 
 }
 
 #pragma mark - Observer
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"title"]) {
-        if ([self.shareTitle isEqualToString:@"来自研修宝的分享"]) {
-            self.shareTitle = self.webview.title;
-            self.navigationItem.title = self.shareTitle;
-        }
+        self.shareTitle = self.webview.title;
+        self.navigationItem.title = self.shareTitle;
     }else if ([keyPath isEqualToString:@"URL"]){
-        [self refreshSubviews];
-    }
-}
-
-- (void)refreshSubviews{
-    if (!self.isFirstLoad) {
-        self.isFirstLoad = YES;
-    }else{
-        if (self.hasShowNavi) {
-            if (!self.webview.canGoBack) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.bottom.mas_equalTo(self.view.mas_bottom).offset(40);
-                    }];
-                } completion:^(BOOL finished) {
-                    self.hasShowNavi = NO;
-                }];
-            }else{
-
-            }
-        }else{
-            [UIView animateWithDuration:0.5 animations:^{
-                [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.bottom.mas_equalTo(self.view.mas_bottom);
-                }];
-            }completion:^(BOOL finished) {
-                self.hasShowNavi = YES;
-            }];
+        self.shareUrl = change[NSKeyValueChangeNewKey];
+    }else if ([keyPath isEqualToString:@"estimatedProgress"]){
+        CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+        self.progressView.alpha = 1.0f;
+        [self.progressView setProgress:newprogress animated:YES];
+        if (newprogress >= 1.0f) {
+            [UIView animateWithDuration:0.3f
+                                  delay:0.3f
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:^{
+                                 self.progressView.alpha = 0.0f;
+                             }
+                             completion:^(BOOL finished) {
+                                 [self.progressView setProgress:0 animated:NO];
+                             }];
         }
-        [self.naviView refreshForwardEnabled:self.webview.canGoForward backEnabled:self.webview.canGoBack];
     }
-
 }
 
 #pragma mark - WKNavigationDelegate
@@ -155,6 +151,7 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self.view nyx_stopLoading];
+    [self refreshBottom];
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
@@ -168,35 +165,14 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (self.hasShowNavi) {
-        if (self.contentOffsetY > scrollView.contentOffset.y) {
-            //向上滑 若未显示 显示
-            if (!self.isShowNavi) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.bottom.mas_equalTo(self.view.mas_bottom);
-                    }];
-
-                } completion:^(BOOL finished) {
-                    self.isShowNavi = YES;
-                }];
-            }
-        }else{
-            //向下滑  若已显示 隐藏
-            if (self.isShowNavi) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.bottom.mas_equalTo(self.view.mas_bottom).offset(40);
-                    }];
-                    [self.webview mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.bottom.mas_equalTo(self.view.mas_bottom);
-                    }];
-                } completion:^(BOOL finished) {
-                    self.isShowNavi = NO;
-                }];
-            }
-        }
+    if (self.contentOffsetY > scrollView.contentOffset.y) {
+        //向上滑 若未显示 显示
+        [self showBottomNavView];
+    }else{
+        //向下滑  若已显示 隐藏
+        [self hideBottomNavView];
     }
+
     self.contentOffsetY = scrollView.contentOffset.y;
 }
 
@@ -223,6 +199,37 @@
         }
     }
     [self presentViewController:activityVC animated:YES completion:NULL];
+}
+
+- (void)refreshBottom{
+    if (!self.webview.canGoBack) {
+        [self hideBottomNavView];
+    }else{
+        [self showBottomNavView];
+        [self.naviView refreshForwardEnabled:self.webview.canGoForward backEnabled:self.webview.canGoBack];
+    }
+}
+
+- (void)hideBottomNavView{
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.view.mas_bottom).offset(40);
+        }];
+        [self.webview mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.view.mas_bottom);
+        }];
+    }];
+}
+
+- (void)showBottomNavView{
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.view.mas_bottom);
+        }];
+        [self.webview mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.view.mas_bottom).offset(-40);
+        }];
+    }];
 }
 
 /*
