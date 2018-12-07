@@ -9,8 +9,11 @@
 #import "NBMainPageViewController.h"
 #import "RefreshDelegate.h"
 #import "NBMainPageTopView.h"
+#import "MainPageTopView.h"
+#import "MainPageTipView.h"
 #import "MainPageTabContainerView.h"
 
+#import "ScoreDetialViewController.h"
 #import "YXDrawerController.h"
 #import "ScanCodeViewController.h"
 #import "MeetingListViewController.h"
@@ -25,6 +28,10 @@
 @property (nonatomic, strong) NSMutableArray<UIViewController<RefreshDelegate> *> *tabControllers;
 @property (nonatomic, strong) UIView *tabContentView;
 @property (nonatomic, strong) NBMainPageTopView *topView;
+@property (nonatomic, strong) MainPageTopView *mainTopView;
+@property (nonatomic, strong) MainPageTipView *mainTipView;
+@property (nonatomic, assign) CGFloat topViewHeight;
+@property (nonatomic, strong) MASViewAttribute *lastAttr;
 @end
 
 @implementation NBMainPageViewController
@@ -42,6 +49,17 @@
     [self setupObserver];
 
 }
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    if (!self.topViewHeight) {
+        self.topViewHeight = CGRectGetHeight(self.mainTopView.frame);
+        [self.mainTopView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.topViewHeight);
+        }];
+    }
+}
+
 
 - (void)setupNavRightView {
     UIButton *navRightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -67,14 +85,41 @@
 
 
 - (void)setupUI {
-    self.topView = [[NBMainPageTopView alloc]init];
-//    topView.item = [UserManager sharedInstance].userModel.projectClassInfo;
-    self.topView.imageUrl = self.pageConf.head;
-    [self.view addSubview:self.topView];
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(200);
-    }];
+
+    if (self.pageConf.headShow.integerValue == 0) {
+        self.lastAttr = self.view.mas_top;
+    }else if (self.pageConf.headShow.integerValue == 1){
+        self.mainTopView = [[MainPageTopView alloc] init];
+        self.mainTopView.item = [UserManager sharedInstance].userModel.projectClassInfo;
+        [self.view addSubview:self.mainTopView];
+        [self.mainTopView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.mas_equalTo(0);
+        }];
+        self.mainTipView = [[MainPageTipView alloc]init];
+        self.mainTipView.item = [UserManager sharedInstance].userModel.projectClassInfo;
+        WEAK_SELF
+        [self.mainTipView setSelectedTipBlock:^(GetCurrentClazsRequestItem *item) {
+            STRONG_SELF
+            ScoreDetialViewController *vc = [[ScoreDetialViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        [self.view addSubview:self.mainTipView];
+        [self.mainTipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.mainTopView.mas_bottom);
+            make.height.mas_equalTo(50);
+        }];
+        self.lastAttr = self.mainTipView.mas_bottom;
+    }else if (self.pageConf.headShow.integerValue == 2){
+        self.topView = [[NBMainPageTopView alloc]init];
+        self.topView.imageUrl = self.pageConf.head;
+        [self.view addSubview:self.topView];
+        [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.mas_equalTo(0);
+            make.height.mas_equalTo(200);
+        }];
+        self.lastAttr = self.topView.mas_bottom;
+    }
 
     if (self.tabConf.count == 0) {
         return;
@@ -109,16 +154,10 @@
     [self.view addSubview:tabContainerView];
     [tabContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.topView.mas_bottom).offset(5);
+        make.top.mas_equalTo(self.lastAttr).offset(5);
         make.height.mas_equalTo(40);
     }];
 
-//    [self.tabControllers addObject:[[MeetingListViewController alloc]initWithClazsId:[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId]];
-//    [self.tabControllers addObject:[[ScheduleViewController alloc]init]];
-//    [self.tabControllers addObject:[[MessageViewController alloc]init]];
-//    NBResourceListViewController *resVC = [[NBResourceListViewController alloc]init];
-//    resVC.mainVC = self;
-//    [self.tabControllers addObject:resVC];
     for (UIViewController *vc in self.tabControllers) {
         [self addChildViewController:vc];
     }

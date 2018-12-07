@@ -34,7 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"聊聊";
     [self setupNavView];
     [self setupUI];
     [self setupData];

@@ -25,7 +25,7 @@
 
 - (void)setupUI {
     self.bgImageView = [[UIImageView alloc]init];
-    self.bgImageView.image = [UIImage imageNamed:@"宁波头图"];
+    self.bgImageView.image = [UIImage imageNamed:@"加载中"];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.clipsToBounds = YES;
     [self addSubview:self.bgImageView];
@@ -37,7 +37,7 @@
 - (void)setImageUrl:(NSString *)imageUrl{
     _imageUrl = imageUrl;
     WEAK_SELF
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"宁波头图"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"加载中"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         STRONG_SELF
         self.bgImageView.contentMode = isEmpty(image) ? UIViewContentModeCenter : UIViewContentModeScaleToFill;
     }];

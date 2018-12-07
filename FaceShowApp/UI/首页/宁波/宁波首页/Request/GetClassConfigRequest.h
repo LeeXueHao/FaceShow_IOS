@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSString<Optional> *url;
 @property (nonatomic, strong) NSString<Optional> *pageSort;
 @property (nonatomic, strong) NSString<Optional> *tabShow;
-@property (nonatomic, strong) NSString<Optional> *headShow;
+@property (nonatomic, strong) NSString<Optional> *headShow;//0:不显示 1:显示之前页面 2:只显示一张图的
 @property (nonatomic, strong) NSString<Optional> *pageName;
 @property (nonatomic, strong) NSString<Optional> *pageType;
 @property (nonatomic, strong) NSString<Optional> *pageConfId;

@@ -129,7 +129,7 @@
         make.top.mas_equalTo(self.topView.mas_bottom);
         make.height.mas_equalTo(50);
     }];
-
+    
     MainPageTabContainerView *tabContainerView = [[MainPageTabContainerView alloc]init];
     NSArray *tabNames = @[@"课程",@"日程",@"通知",@"资源"];
     tabContainerView.tabNameArray = tabNames;

@@ -26,6 +26,7 @@
 
 - (void)dealloc{
     [self.webview removeObserver:self forKeyPath:@"title"];
+    [self.webview removeObserver:self forKeyPath:@"URL"];
 }
 
 - (void)viewDidLoad {
@@ -65,6 +66,7 @@
         make.edges.mas_equalTo(0);
     }];
     [webview addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+    [webview addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:NULL];
     
     self.webview = webview;
 
@@ -102,30 +104,17 @@
             self.shareTitle = self.webview.title;
             self.navigationItem.title = self.shareTitle;
         }
+    }else if ([keyPath isEqualToString:@"URL"]){
+        [self refreshSubviews];
     }
 }
 
-#pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
-    decisionHandler(WKNavigationResponsePolicyAllow);
-    self.shareUrl = navigationResponse.response.URL;
-}
-
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    [self.view nyx_startLoading];
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    [self.view nyx_stopLoading];
+- (void)refreshSubviews{
     if (!self.isFirstLoad) {
         self.isFirstLoad = YES;
     }else{
         if (self.hasShowNavi) {
-            if (!webView.canGoBack) {
+            if (!self.webview.canGoBack) {
                 [UIView animateWithDuration:0.5 animations:^{
                     [self.naviView mas_updateConstraints:^(MASConstraintMaker *make) {
                         make.bottom.mas_equalTo(self.view.mas_bottom).offset(40);
@@ -145,8 +134,27 @@
                 self.hasShowNavi = YES;
             }];
         }
-        [self.naviView refreshForwardEnabled:webView.canGoForward backEnabled:webView.canGoBack];
+        [self.naviView refreshForwardEnabled:self.webview.canGoForward backEnabled:self.webview.canGoBack];
     }
+
+}
+
+#pragma mark - WKNavigationDelegate
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    decisionHandler(WKNavigationResponsePolicyAllow);
+    self.shareUrl = navigationResponse.response.URL;
+}
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    [self.view nyx_startLoading];
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    [self.view nyx_stopLoading];
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {

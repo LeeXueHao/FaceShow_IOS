@@ -8,6 +8,7 @@
 
 #import "ScheduleDetailViewController.h"
 #import "ShareManager.h"
+#import "SignInDetailViewController.h"
 
 @interface ScheduleDetailViewController ()<UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView *webview;
@@ -27,6 +28,16 @@
         STRONG_SELF
         [self shareUrl];
     }];
+}
+
+- (void)backAction{
+    for (UIViewController *vc in self.navigationController.childViewControllers) {
+        if ([vc isKindOfClass:[SignInDetailViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            return;
+        }
+    }
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
