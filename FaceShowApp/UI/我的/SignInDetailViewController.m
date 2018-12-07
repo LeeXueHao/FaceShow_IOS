@@ -257,6 +257,8 @@
             self.signInBtn.hidden = YES;
         }
     } else {
+        self.tipsLabel.hidden = YES;
+        self.signInBtn.hidden = YES;
         self.timeTitleLabel.hidden = NO;
         self.signedInTimeLabel.hidden = NO;
         self.signedInTimeLabel.text = [self.signIn.userSignIn.signinTime omitSecondOfFullDateString];
