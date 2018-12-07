@@ -33,7 +33,7 @@
 - (void)resetCellContent {
     [self.titleLab mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
-        make.height.mas_equalTo(59);
+        make.height.mas_equalTo(60);
     }];
     
     [self.lineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
