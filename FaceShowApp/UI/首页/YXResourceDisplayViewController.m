@@ -69,7 +69,7 @@
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         [manager loadImageWithURL:[NSURL URLWithString:self.urlString] options:SDWebImageRetryFailed progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
             NSArray *items;
-            if (error) {
+            if (!error) {
                 items = @[image];
             }else{
                 if (isEmpty(self.name)) {
@@ -81,7 +81,12 @@
             [self shareWithItems:items];
         }];
     }else{
-        NSURL *fileUrl = [NSURL fileURLWithPath:self.urlString];
+        NSURL *fileUrl;
+        if (self.needDownload) {
+            fileUrl = [NSURL fileURLWithPath:self.urlString];
+        }else{
+            fileUrl = [NSURL URLWithString:self.urlString];
+        }
         NSArray *items;
         if (isEmpty(self.name)) {
             items = @[@"来自研修宝的分享",fileUrl];
