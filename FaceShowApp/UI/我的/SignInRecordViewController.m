@@ -75,6 +75,7 @@
     }
     
     EmptySignInRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EmptySignInRecordCell class])];
+    [cell resetCellContent];
     return cell;
 }
 
@@ -87,7 +88,7 @@
     return element.signIns.count > 0 ? element.signIns.count : 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
 
