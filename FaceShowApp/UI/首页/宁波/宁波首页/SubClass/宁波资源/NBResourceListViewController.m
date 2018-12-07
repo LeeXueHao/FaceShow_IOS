@@ -96,6 +96,7 @@
         vc.name = item.data.resName;
         vc.downloadUrl = item.data.ai.downloadUrl;
         vc.resourceId = item.data.ai.resId;
+        vc.suffix = item.data.suffix;
         vc.needDownload = isAttachment && [FSDataMappingTable ResourceTypeWithKey:item.data.ai.resType] != ResourceType_Image;
         [self.navigationController pushViewController:vc animated:YES];
     }];

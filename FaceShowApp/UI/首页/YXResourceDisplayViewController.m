@@ -9,6 +9,7 @@
 #import "YXResourceDisplayViewController.h"
 #import "ResourceDownloadViewController.h"
 #import "ShareManager.h"
+#import "ResourceTypeMapping.h"
 
 @interface YXResourceDisplayViewController ()
 @property (nonatomic, assign) BOOL needReload;
@@ -63,13 +64,36 @@
 
 - (void)shareUrl{
 
-    NSURL *fileUrl = [NSURL fileURLWithPath:self.urlString];
-    NSArray *items;
-    if (isEmpty(self.name)) {
-        items = @[@"来自研修宝的分享",fileUrl];
+    NSString *sourceType = [ResourceTypeMapping resourceTypeWithString:self.suffix];
+    if ([sourceType isEqualToString:@"image"]) {
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager loadImageWithURL:[NSURL URLWithString:self.urlString] options:SDWebImageRetryFailed progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+            NSArray *items;
+            if (error) {
+                items = @[image];
+            }else{
+                if (isEmpty(self.name)) {
+                    items = @[@"来自研修宝的分享",imageURL];
+                }else{
+                    items = @[self.name,imageURL];
+                }
+            }
+            [self shareWithItems:items];
+        }];
     }else{
-        items = @[self.name,fileUrl];
+        NSURL *fileUrl = [NSURL fileURLWithPath:self.urlString];
+        NSArray *items;
+        if (isEmpty(self.name)) {
+            items = @[@"来自研修宝的分享",fileUrl];
+        }else{
+            items = @[self.name,fileUrl];
+        }
+        [self shareWithItems:items];
     }
+
+}
+
+- (void)shareWithItems:(NSArray *)items{
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeCopyToPasteboard];
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
@@ -82,6 +106,7 @@
         }
     }
     [self presentViewController:activityVC animated:YES completion:NULL];
+
 }
 
 

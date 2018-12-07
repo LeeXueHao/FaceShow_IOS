@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YXResourceDisplayViewController : ResourceDisplayViewController
 
+/**
+ ResourceTypeMapping 根据此字段判断资源类型
+ */
+@property (nonatomic, copy) NSString *suffix;
 @end
 
 NS_ASSUME_NONNULL_END

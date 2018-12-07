@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString<Optional> *pcAddress;
 
 @property (nonatomic, strong) NSString<Ignore> *appName;
+@property (nonatomic, strong) NSString<Ignore> *appIconName;
 @property (nonatomic, strong) NSString<Ignore> *clientVersion;
 
 @property (nonatomic, strong) NSString<Ignore> *deviceID;

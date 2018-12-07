@@ -107,6 +107,7 @@
         }
         GetResourceDetailRequestItem *item = (GetResourceDetailRequestItem *)retItem;
         YXResourceDisplayViewController *vc = [[YXResourceDisplayViewController alloc]init];
+        vc.suffix = item.data.suffix;
         if (item.data.type.integerValue > 0) {
             vc.urlString = item.data.url;
             vc.name = item.data.resName;

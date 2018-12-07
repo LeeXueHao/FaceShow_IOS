@@ -95,6 +95,14 @@ NSString * const kPCAddress = @"http://yxb.yanxiu.com/sd/100";
     return _appName;
 }
 
+- (NSString *)appIconName{
+    if (!_appIconName) {
+        NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+        _appIconName = [[infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"] lastObject];
+    }
+    return _appIconName;
+}
+
 - (NSString *)clientVersion {
     if (!_clientVersion) {
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
