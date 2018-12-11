@@ -82,16 +82,21 @@
         }];
     }else{
         NSURL *fileUrl;
+        NSMutableArray *items = [NSMutableArray array];
+        if (isEmpty(self.name)) {
+            [items addObject:@"来自研修宝的分享"];
+        }else{
+            [items addObject:self.name];
+        }
         if (self.needDownload) {
             fileUrl = [NSURL fileURLWithPath:self.urlString];
+            [items addObject:fileUrl];
+            if (!isEmpty(self.originUrlStr)) {
+                [items addObject:[NSURL URLWithString:self.originUrlStr]];
+            }
         }else{
             fileUrl = [NSURL URLWithString:self.urlString];
-        }
-        NSArray *items;
-        if (isEmpty(self.name)) {
-            items = @[@"来自研修宝的分享",fileUrl];
-        }else{
-            items = @[self.name,fileUrl];
+            [items addObject:fileUrl];
         }
         [self shareWithItems:items];
     }

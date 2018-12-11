@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 
 @interface ResourceDisplayViewController : BaseViewController
+@property (nonatomic, strong) NSString *originUrlStr;
 @property (nonatomic, strong) NSString *urlString;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) BOOL needDownload;

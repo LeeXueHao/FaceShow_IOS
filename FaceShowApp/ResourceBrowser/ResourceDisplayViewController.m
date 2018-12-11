@@ -75,6 +75,7 @@
     WEAK_SELF
     [self.downloadHelper startDownloadWithCompleteBlock:^(NSString *path) {
         STRONG_SELF
+        self.originUrlStr = self.urlString;
         self.urlString = path;
         [self setupUI];
     }];
