@@ -118,6 +118,7 @@
         self.navigationItem.title = self.shareTitle;
     }else if ([keyPath isEqualToString:@"URL"]){
         self.shareUrl = change[NSKeyValueChangeNewKey];
+        [self refreshBottom];
     }else if ([keyPath isEqualToString:@"estimatedProgress"]){
         CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
         self.progressView.alpha = 1.0f;
@@ -152,7 +153,6 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self.view nyx_stopLoading];
-    [self refreshBottom];
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
@@ -203,12 +203,7 @@
 }
 
 - (void)refreshBottom{
-//    if (!self.webview.canGoBack) {
-//        [self hideBottomNavView];
-//    }else{
-//        [self showBottomNavView];
-        [self.naviView refreshForwardEnabled:self.webview.canGoForward backEnabled:self.webview.canGoBack];
-//    }
+    [self.naviView refreshForwardEnabled:self.webview.canGoForward backEnabled:self.webview.canGoBack];
 }
 
 - (void)hideBottomNavView{
