@@ -97,8 +97,8 @@
 
 /*
  * ^[1]，首字母必须是1
- * [3-8]，第二个数字为3-8之间
- * +，表示至少一个[3-8]
+ * [3-9]，第二个数字为3-9之间
+ * +，表示至少一个[3-9]
  * \\d，表示数字
  * {9}，表示后面包含9个数字
  * $，结束符
@@ -107,7 +107,7 @@
 {
     NSString *phoneNum = [self yx_stringByTrimmingCharacters];
     phoneNum = [phoneNum stringByReplacingOccurrencesOfString:@" " withString:@""];
-    return (phoneNum.length == 11) && [phoneNum yx_textCheckingWithPattern:@"^[1][3-8]+\\d{9}$"];
+    return (phoneNum.length == 11) && [phoneNum yx_textCheckingWithPattern:@"^[1][3-9]+\\d{9}$"];
 }
 
 - (BOOL)yx_isHttpLink
