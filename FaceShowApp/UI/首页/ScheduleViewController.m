@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) GetScheduleListRequest *request;
 @property (nonatomic, strong) GetScheduleListRequestItem_Schedule *schedule;
+@property (nonatomic, assign) BOOL isCompletedLoad;
 
 @end
 
@@ -135,11 +136,14 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.view nyx_stopLoading];
+    self.isCompletedLoad = YES;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [self.view nyx_stopLoading];
-//    [self.view nyx_showToast:@"加载失败"];
+    if (!self.isCompletedLoad) {
+        [self.view nyx_showToast:@"加载失败"];
+    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
