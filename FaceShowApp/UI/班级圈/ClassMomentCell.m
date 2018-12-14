@@ -7,8 +7,9 @@
 //
 
 #import "ClassMomentCell.h"
+#import "YXMenuLabel.h"
 @interface ClassMomentCell ()
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) YXMenuLabel *contentLabel;
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) CAShapeLayer *bottomLayer;
@@ -46,7 +47,7 @@
     self.bottomLayer.path = bottomPath.CGPath;
     self.bottomView.layer.mask = self.bottomLayer;
     
-    self.contentLabel = [[UILabel alloc] init];
+    self.contentLabel = [[YXMenuLabel alloc] init];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.numberOfLines = 0;

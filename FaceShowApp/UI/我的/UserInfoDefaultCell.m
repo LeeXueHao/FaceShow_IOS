@@ -7,9 +7,10 @@
 //
 
 #import "UserInfoDefaultCell.h"
+#import "YXMenuLabel.h"
 @interface UserInfoDefaultCell ()
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) YXMenuLabel *contentLabel;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIImageView *nextImageView;
 @end
@@ -26,6 +27,11 @@
 - (void)setContenDictionary:(NSDictionary *)contenDictionary {
     _contenDictionary = contenDictionary;
     self.titleLabel.text = _contenDictionary[@"title"];
+    if ([self.titleLabel.text isEqualToString:@"联系电话"]) {
+        [self.contentLabel allowLongPress];
+    } else {
+        [self.contentLabel forbidLongPress];
+    }
     self.contentLabel.text = _contenDictionary[@"content"];
     id next = [_contenDictionary valueForKey:@"next"];
     if (next) {
@@ -57,7 +63,7 @@
 
     [self.contentView addSubview:self.titleLabel];
     
-    self.contentLabel = [[UILabel alloc] init];
+    self.contentLabel = [[YXMenuLabel alloc] init];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
     self.contentLabel.textAlignment = NSTextAlignmentRight;
     self.contentLabel.textColor = [UIColor colorWithHexString:@"999999"];

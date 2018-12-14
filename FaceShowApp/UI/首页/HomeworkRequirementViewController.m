@@ -11,11 +11,12 @@
 #import "DoHomeworkViewController.h"
 #import "GetAllTasksRequest.h"
 #import "GetHomeworkRequest.h"
+#import "YXMenuLabel.h"
 
 static const CGFloat kHomeworkButtonHeight = 45.f;
 
 @interface HomeworkRequirementViewController ()
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) YXMenuLabel *contentLabel;
 @property (nonatomic, strong) PreviewPhotosView *photosView;
 @property (nonatomic, strong) UIButton *homeworkButton;
 @end
@@ -45,7 +46,7 @@ static const CGFloat kHomeworkButtonHeight = 45.f;
         make.bottom.mas_equalTo(kHomeworkButtonHeight);
     }];
     
-    self.contentLabel = [[UILabel alloc]init];
+    self.contentLabel = [[YXMenuLabel alloc]init];
     self.contentLabel.font = [UIFont systemFontOfSize:15];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.numberOfLines = 0;

@@ -12,13 +12,14 @@
 #import "ShowPhotosViewController.h"
 #import "UserMessageManager.h"
 #import "UIViewController+VisibleViewController.h"
+#import "YXMenuLabel.h"
 
 @interface MessageDetailViewController ()
 
 @property (nonatomic, strong) ErrorView *errorView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UILabel *detailLabel;
+@property (nonatomic, strong) YXMenuLabel *detailLabel;
 @property (nonatomic, strong) UIImageView *detailImageView;
 @property (nonatomic, strong) GetNoticeDetailRequest *request;
 @property (nonatomic, strong) GetNoticeDetailRequestItem_Data *data;
@@ -120,7 +121,7 @@
         make.centerX.mas_equalTo(0);
     }];
     
-    self.detailLabel = [[UILabel alloc] init];
+    self.detailLabel = [[YXMenuLabel alloc] init];
     self.detailLabel.numberOfLines = 0;
     [self.contentView addSubview:self.detailLabel];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {

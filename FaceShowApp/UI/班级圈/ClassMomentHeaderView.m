@@ -9,10 +9,11 @@
 #import "ClassMomentHeaderView.h"
 #import "PreviewPhotosView.h"
 #import "ClassMomentLikeView.h"
+#import "YXMenuLabel.h"
 @interface ClassMomentHeaderView ()
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *userButton;
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) YXMenuLabel *contentLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIButton *reportButton;
 @property (nonatomic, strong) UIButton *commentButton;
@@ -160,7 +161,7 @@
     self.nameLabel.text = @"葛晓萍";
     [self.contentView addSubview:self.nameLabel];
     
-    self.contentLabel = [[UILabel alloc] init];
+    self.contentLabel = [[YXMenuLabel alloc] init];
     self.contentLabel.font = [UIFont systemFontOfSize:14.0f];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"333333"];
     self.contentLabel.numberOfLines = 0;

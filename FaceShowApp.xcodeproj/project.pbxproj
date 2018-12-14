@@ -258,6 +258,7 @@
 		7C66B27A2027F6050067E242 /* HeadImagePickerOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B2712027F6040067E242 /* HeadImagePickerOptionView.m */; };
 		7C66B27B2027F6050067E242 /* HeadImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B2752027F6050067E242 /* HeadImageClipViewController.m */; };
 		7C66B27E2027F8510067E242 /* QAPhotoClipBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */; };
+		7C6C639A21C28C0C008C1858 /* YXMenuLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C639921C28C0C008C1858 /* YXMenuLabel.m */; };
 		7C6ECFC52057CD82008D0E8A /* ChatPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6ECFC42057CD82008D0E8A /* ChatPlaceViewController.m */; };
 		7C6EE547200736D200B47892 /* ImageAttachmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE546200736D200B47892 /* ImageAttachmentView.m */; };
 		7C6EE54A2007396000B47892 /* ImageAttachmentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EE5492007396000B47892 /* ImageAttachmentContainerView.m */; };
@@ -1025,6 +1026,8 @@
 		7C66B2752027F6050067E242 /* HeadImageClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageClipViewController.m; sourceTree = "<group>"; };
 		7C66B27C2027F8510067E242 /* QAPhotoClipBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAPhotoClipBottomView.m; sourceTree = "<group>"; };
 		7C66B27D2027F8510067E242 /* QAPhotoClipBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAPhotoClipBottomView.h; sourceTree = "<group>"; };
+		7C6C639821C28C0C008C1858 /* YXMenuLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXMenuLabel.h; sourceTree = "<group>"; };
+		7C6C639921C28C0C008C1858 /* YXMenuLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXMenuLabel.m; sourceTree = "<group>"; };
 		7C6ECFC32057CD82008D0E8A /* ChatPlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPlaceViewController.h; sourceTree = "<group>"; };
 		7C6ECFC42057CD82008D0E8A /* ChatPlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatPlaceViewController.m; sourceTree = "<group>"; };
 		7C6EE545200736D200B47892 /* ImageAttachmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAttachmentView.h; sourceTree = "<group>"; };
@@ -2076,18 +2079,20 @@
 		7C2519371F68EB780001B577 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				4322CA441FD9531500E7B565 /* QASlideItemBaseView.h */,
-				4322CA411FD9531500E7B565 /* QASlideItemBaseView.m */,
-				4322CA451FD9531500E7B565 /* QASlideView.h */,
-				4322CA471FD9531600E7B565 /* QASlideView.m */,
-				922084361F6BCE6500F8AAC6 /* YXImagePickerController.h */,
-				922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */,
 				7C2519381F68EB780001B577 /* CollectionViewEqualSpaceFlowLayout.h */,
 				7C2519391F68EB780001B577 /* CollectionViewEqualSpaceFlowLayout.m */,
 				7C25193A1F68EB780001B577 /* ExtendTextField.h */,
 				7C25193B1F68EB780001B577 /* ExtendTextField.m */,
+				4322CA441FD9531500E7B565 /* QASlideItemBaseView.h */,
+				4322CA411FD9531500E7B565 /* QASlideItemBaseView.m */,
+				4322CA451FD9531500E7B565 /* QASlideView.h */,
+				4322CA471FD9531600E7B565 /* QASlideView.m */,
 				7C25193C1F68EB780001B577 /* YXGradientView.h */,
 				7C25193D1F68EB780001B577 /* YXGradientView.m */,
+				922084361F6BCE6500F8AAC6 /* YXImagePickerController.h */,
+				922084371F6BCE6500F8AAC6 /* YXImagePickerController.m */,
+				7C6C639821C28C0C008C1858 /* YXMenuLabel.h */,
+				7C6C639921C28C0C008C1858 /* YXMenuLabel.m */,
 				7C25193E1F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.h */,
 				7C25193F1F68EB780001B577 /* YXNoFloatingHeaderFooterTableView.m */,
 				7C2519401F68EB780001B577 /* YXSmartDashLineView.h */,
@@ -3981,6 +3986,7 @@
 				E932CD9220BFE050009F5BC6 /* SignInPlaceViewController.m in Sources */,
 				7C5912EA2136806E00CE548F /* ScanPCCodeViewController.m in Sources */,
 				7C6EE55620074DC000B47892 /* PhotoListViewController.m in Sources */,
+				7C6C639A21C28C0C008C1858 /* YXMenuLabel.m in Sources */,
 				7CBC5BC4204D365B004ACA04 /* CompleteInfoHeaderView.m in Sources */,
 				7CBC5BA1204932BA004ACA04 /* CourseDetailTabContainerView.m in Sources */,
 				7C2519921F6900610001B577 /* PagedListViewControllerBase.m in Sources */,

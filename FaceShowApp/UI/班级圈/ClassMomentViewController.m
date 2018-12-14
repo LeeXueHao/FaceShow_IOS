@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 @property (nonatomic, strong) ClassMomentTableHeaderView *headerView;
 @property (nonatomic, strong) ClassMomentFloatingView *floatingView;
 @property (nonatomic, strong) YXImagePickerController *imagePickerController;
-@property (nonatomic, strong) CommentInputView *inputView;
+@property (nonatomic, strong) CommentInputView *comInputView;
 @property (nonatomic, strong) AlertView *alertView;
 @property (nonatomic, strong) UIView *footerView;
 
@@ -170,10 +170,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         self.tableView.tableHeaderView = self.headerView;
     }
     
-    self.inputView = [[CommentInputView alloc]init];
-    self.inputView.isChangeBool = YES;
-    self.inputView.textView.returnKeyType = UIReturnKeySend;
-    self.inputView.completeBlock = ^(NSString *text) {
+    self.comInputView = [[CommentInputView alloc]init];
+    self.comInputView.isChangeBool = YES;
+    self.comInputView.textView.returnKeyType = UIReturnKeySend;
+    self.comInputView.completeBlock = ^(NSString *text) {
         STRONG_SELF
         if (text.length != 0) {
             if (self.commentType == ClassMomentComment_Comment) {
@@ -183,14 +183,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             }
         }
     };
-    self.inputView.textHeightChangeBlock = ^(CGFloat textHeight) {
+    self.comInputView.textHeightChangeBlock = ^(CGFloat textHeight) {
         STRONG_SELF
-        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.comInputView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(textHeight + 12.0f);
         }];
     };
-    [self.view addSubview:self.inputView];
-    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.comInputView];
+    [self.comInputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(45.0f);
         make.bottom.mas_equalTo(100.0f);
@@ -219,14 +219,14 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
 - (void)hiddenInputTextView {
     if (self.commentType == ClassMomentComment_Comment) {
         ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.commtentInteger];
-        moment.draftModel = self.inputView.textView.text;
+        moment.draftModel = self.comInputView.textView.text;
     }else if (self.commentType == ClassMomentComment_Reply){
         ClassMomentListRequestItem_Data_Moment *moment = self.dataArray[self.replyIndexPath.section];
         ClassMomentListRequestItem_Data_Moment_Comment *comment = moment.comments[self.replyIndexPath.row];
-        comment.draftModel = self.inputView.textView.text;
+        comment.draftModel = self.comInputView.textView.text;
     }
-    self.inputView.textString = nil;
-    [self.inputView.textView resignFirstResponder];
+    self.comInputView.textString = nil;
+    [self.comInputView.textView resignFirstResponder];
     self.commentType = ClassMomentComment_Normal;
 }
 - (void)stopAnimation {
@@ -329,7 +329,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         CGRect keyboardFrame = keyboardFrameValue.CGRectValue;
         NSNumber *duration = [dic valueForKey:UIKeyboardAnimationDurationUserInfoKey];
         [UIView animateWithDuration:duration.floatValue animations:^{
-            [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+            [self.comInputView mas_updateConstraints:^(MASConstraintMaker *make) {
                 if (SCREEN_HEIGHT == keyboardFrame.origin.y) {
                     make.bottom.mas_equalTo(-(SCREEN_HEIGHT -keyboardFrame.origin.y) + 100.0f);
                 }else {
@@ -348,7 +348,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             if (bottomView != nil) {
                 CGRect rect = [bottomView convertRect:bottomView.bounds toView:self.tableView];
                 CGFloat bottomY = CGRectGetMaxY(rect);
-                CGFloat offset = bottomY - (keyboardFrame.origin.y - self.inputView.height) + CGRectGetMaxY(self.navigationController.navigationBar.frame) - self.tableView.contentOffset.y;
+                CGFloat offset = bottomY - (keyboardFrame.origin.y - self.comInputView.height) + CGRectGetMaxY(self.navigationController.navigationBar.frame) - self.tableView.contentOffset.y;
                 if (offset > 0) {
                     [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y+offset) animated:YES];
                 }
@@ -500,10 +500,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
             self.commentType = ClassMomentComment_Comment;
             self.commtentInteger = section;
             if (moment.draftModel != nil) {
-                self.inputView.textString = moment.draftModel;
+                self.comInputView.textString = moment.draftModel;
             }
-            self.inputView.placeHolder = @"评论";
-            [self.inputView.textView becomeFirstResponder];
+            self.comInputView.placeHolder = @"评论";
+            [self.comInputView.textView becomeFirstResponder];
         }else if(status == ClassMomentClickStatus_Like){
             [self requestForClickLike:section];
         }else if(status == ClassMomentClickStatus_Cancel){
@@ -640,10 +640,10 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
         self.commentType = ClassMomentComment_Reply;
         self.replyIndexPath = indexPath;
         if (comment.draftModel != nil) {
-            self.inputView.textString = moment.draftModel;
+            self.comInputView.textString = moment.draftModel;
         }
-        self.inputView.placeHolder = [NSString stringWithFormat:@"回复%@:",comment.publisher.realName];
-        [self.inputView.textView becomeFirstResponder];
+        self.comInputView.placeHolder = [NSString stringWithFormat:@"回复%@:",comment.publisher.realName];
+        [self.comInputView.textView becomeFirstResponder];
     }
 
 }
@@ -734,7 +734,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 [moment.comments addObject:item.data];
             }
             moment.draftModel = nil;
-            self.inputView.textString = nil;
+            self.comInputView.textString = nil;
             [self.tableView reloadData];
         }else {
             [self.view nyx_showToast:item.message];
@@ -798,7 +798,7 @@ typedef NS_ENUM(NSUInteger,ClassMomentCommentType) {
                 [moment.comments addObject:item.data];
             }
             comment.draftModel = nil;
-            self.inputView.textString = nil;
+            self.comInputView.textString = nil;
             [self.tableView reloadData];
         }else {
             [self.view nyx_showToast:item.message];
