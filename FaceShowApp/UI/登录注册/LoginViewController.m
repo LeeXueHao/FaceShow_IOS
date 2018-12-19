@@ -196,6 +196,14 @@
         make.bottom.mas_equalTo(touristBtn);
     }];
     [registerBtn setHidden:YES];
+#ifdef HuBeiApp
+    [login setHidden:YES];
+    [quickbtn setHidden:YES];
+    [blueView setHidden:YES];
+#else
+
+#endif
+
 }
 
 #pragma mark - actions
