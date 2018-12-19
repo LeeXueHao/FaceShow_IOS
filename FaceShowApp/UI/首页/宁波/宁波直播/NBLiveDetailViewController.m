@@ -32,7 +32,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"直播";
+#ifdef HuBeiApp
+    self.shareTitle = @"来自湖北师训的分享";
+#else
     self.shareTitle = @"来自研修宝的分享";
+#endif
     [self setupUI];
     WEAK_SELF
     [self nyx_setupRightWithImageName:@"分享" highlightImageName:@"分享点击态" action:^{

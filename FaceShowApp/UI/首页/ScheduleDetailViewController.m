@@ -20,7 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.name;
+#ifdef HuBeiApp
+    self.webTitle = @"来自湖北师训的分享";
+#else
     self.webTitle = @"来自研修宝的分享";
+#endif
     [self setupUI];
     // Do any additional setup after loading the view.
     WEAK_SELF

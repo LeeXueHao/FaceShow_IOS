@@ -64,6 +64,12 @@
 
 - (void)shareUrl{
 
+    NSString *str;
+#ifdef HuBeiApp
+    str = @"来自湖北师训的分享";
+#else
+    str = @"来自研修宝的分享";
+#endif
     NSString *sourceType = [ResourceTypeMapping resourceTypeWithString:self.suffix];
     if ([sourceType isEqualToString:@"image"]) {
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -73,7 +79,7 @@
                 items = @[image];
             }else{
                 if (isEmpty(self.name)) {
-                    items = @[@"来自研修宝的分享",imageURL];
+                    items = @[str,imageURL];
                 }else{
                     items = @[self.name,imageURL];
                 }
@@ -84,7 +90,7 @@
         NSURL *fileUrl;
         NSMutableArray *items = [NSMutableArray array];
         if (isEmpty(self.name)) {
-            [items addObject:@"来自研修宝的分享"];
+            [items addObject:str];
         }else{
             [items addObject:self.name];
         }
