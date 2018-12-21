@@ -42,6 +42,12 @@
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
+
+    NSString *key = [NSString stringWithFormat:@"v%@_user_need_login",[ConfigManager sharedInstance].clientVersion];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:key]){
+        [UserManager sharedInstance].loginStatus = NO;
+    }
+
     if ([UserManager sharedInstance].loginStatus) {
         [[UserMessageManager sharedInstance] resumeHeartbeat];
         [[UserPromptsManager sharedInstance] resumeHeartbeat];

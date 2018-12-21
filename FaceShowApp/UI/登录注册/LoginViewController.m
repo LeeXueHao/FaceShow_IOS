@@ -230,6 +230,8 @@
             [self.navigationController pushViewController:vc animated:YES];
             return;
         }
+        NSString *key = [NSString stringWithFormat:@"v%@_user_need_login",[ConfigManager sharedInstance].clientVersion];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
         [UserManager sharedInstance].loginStatus = YES;
     }];
 }
