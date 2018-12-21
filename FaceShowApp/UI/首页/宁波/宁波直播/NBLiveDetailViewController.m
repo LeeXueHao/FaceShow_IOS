@@ -75,7 +75,7 @@
     }
     webview.navigationDelegate = self;
     webview.scrollView.delegate = self;
-    NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@",self.webUrl,[UserManager sharedInstance].userModel.token];
+    NSString *totalUrl = [NSString stringWithFormat:@"%@&token=%@&platId=%@&projectId=%@&classID=%@",self.webUrl,[UserManager sharedInstance].userModel.token,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.platId,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.projectId,[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:totalUrl]];
     [webview loadRequest:request];
     [self.view addSubview:webview];
