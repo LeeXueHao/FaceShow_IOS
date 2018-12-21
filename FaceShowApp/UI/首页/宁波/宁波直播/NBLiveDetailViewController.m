@@ -184,6 +184,8 @@
 #pragma mark - action
 - (void)startShare{
 
+    NSString *urlStr = [[ShareManager sharedInstance] generateLiveShareUrlWithOriginUrl:self.shareUrl.absoluteString];
+    self.shareUrl = [NSURL URLWithString:urlStr];
     NSArray *items = @[self.shareTitle,self.shareUrl];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];

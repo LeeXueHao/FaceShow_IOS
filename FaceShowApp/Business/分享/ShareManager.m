@@ -40,5 +40,18 @@
     return totalUrl;
 }
 
+- (NSString *)generateLiveShareUrlWithOriginUrl:(NSString *)originUrl{
+    NSString *totalUrl;
+    if (![originUrl containsString:@"?"]) {
+        totalUrl = [NSString stringWithFormat:@"%@?platId=%@&projectId=%@&classID=%@",originUrl,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.platId,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.projectId,[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
+    }else{
+        if ([originUrl hasSuffix:@"?"]) {
+            totalUrl = [NSString stringWithFormat:@"%@platId=%@&projectId=%@&classID=%@",originUrl,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.platId,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.projectId,[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
+        }else{
+            totalUrl = [NSString stringWithFormat:@"%@?platId=%@&projectId=%@&classID=%@",originUrl,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.platId,[UserManager sharedInstance].userModel.projectClassInfo.data.projectInfo.projectId,[UserManager sharedInstance].userModel.projectClassInfo.data.clazsInfo.clazsId];
+        }
+    }
+    return totalUrl;
+}
 
 @end

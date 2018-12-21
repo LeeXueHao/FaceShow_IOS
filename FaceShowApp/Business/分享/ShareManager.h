@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)generateShareUrlWithOriginUrl:(NSString *)originUrl;
 
+- (NSString *)generateLiveShareUrlWithOriginUrl:(NSString *)originUrl;
+
 @end
 
 NS_ASSUME_NONNULL_END
