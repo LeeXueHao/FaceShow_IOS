@@ -118,30 +118,56 @@
 
     __block MASViewAttribute *bottom = self.timeLabel.mas_bottom;
     __block NSMutableArray *labelArr = [NSMutableArray array];
-    [data.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UILabel *tag = [self generateTagLabelWithText:@"地点"];
-        [self.contentView addSubview:tag];
-        [tag mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (data.signInExts.count == 0) {
+
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"发送失败"]];
+        [self.contentView addSubview:image];
+        [image mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.timeTipLabel);
-            make.top.mas_equalTo(bottom).mas_offset(10);
-            make.size.mas_equalTo(CGSizeMake(33, 15));
+            make.top.mas_equalTo(bottom).mas_offset(15);
+            make.size.mas_equalTo(CGSizeMake(20, 20));
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-15);
         }];
 
-        UILabel *placeLabel = [self.placeLabel clone];
-        [placeLabel setText:obj.positionSite];
-        [self.contentView addSubview:placeLabel];
-        [placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.timeLabel);
-            make.top.mas_equalTo(tag);
-            make.right.mas_equalTo(self.signInBtn.mas_left).offset(-10);
-            if (idx == data.signInExts.count - 1) {
-                make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
-            }
+        UILabel *tag = [self.placeLabel clone];
+        [tag setText:@"未设置签到位置，请联系班主任"];
+        [self.contentView addSubview:tag];
+        [tag mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(image.mas_right).offset(10);
+            make.centerY.mas_equalTo(image);
+            make.right.mas_equalTo(-20);
         }];
-        bottom = placeLabel.mas_bottom;
+        [self.signInBtn setEnabled:NO];
         [labelArr addObject:tag];
-        [labelArr addObject:placeLabel];
-    }];
+        [labelArr addObject:image];
+        return;
+    }else{
+        [data.signInExts enumerateObjectsUsingBlock:^(GetSignInRequest_Item_signInExts  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UILabel *tag = [self generateTagLabelWithText:@"地点"];
+            [self.contentView addSubview:tag];
+            [tag mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.timeTipLabel);
+                make.top.mas_equalTo(bottom).mas_offset(10);
+                make.size.mas_equalTo(CGSizeMake(33, 15));
+            }];
+
+            UILabel *placeLabel = [self.placeLabel clone];
+            [placeLabel setText:obj.positionSite];
+            [self.contentView addSubview:placeLabel];
+            [placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.timeLabel);
+                make.top.mas_equalTo(tag);
+                make.right.mas_equalTo(self.signInBtn.mas_left).offset(-10);
+                if (idx == data.signInExts.count - 1) {
+                    make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
+                }
+            }];
+            bottom = placeLabel.mas_bottom;
+            [labelArr addObject:tag];
+            [labelArr addObject:placeLabel];
+        }];
+        [self.signInBtn setEnabled:YES];
+    }
     self.labelArr = [labelArr copy];
 }
 
