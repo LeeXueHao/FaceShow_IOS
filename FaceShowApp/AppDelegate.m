@@ -42,9 +42,9 @@
     [self registerNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
-
+    //该版本强制用户重新登录
     NSString *key = [NSString stringWithFormat:@"v%@_user_need_login",[ConfigManager sharedInstance].clientVersion];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:key]){
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:key]){
         [UserManager sharedInstance].loginStatus = NO;
     }
 
